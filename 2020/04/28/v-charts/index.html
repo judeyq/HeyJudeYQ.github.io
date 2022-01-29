@@ -1,0 +1,113 @@
+<!DOCTYPE html><html class="appearance-auto" lang="zh-CN"><head><meta charset="UTF-8"><title>v-charts的options</title><meta name="description" content="May the Force be with you"><meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, initial-scale=1"><!-- Google Analytics --><!-- End Google Analytics -->
+<!-- Baidu Analytics --><!-- End Baidu Analytics --><link rel="icon" href="/images/favicon.png"><link rel="stylesheet" href="/style/common/bulma.css"><link rel="stylesheet" href="/style/base.css"><link rel="stylesheet" href="/style/common/helper.css"><script src="/js/common.js"></script><link rel="stylesheet" href="/style/post.css"><link rel="stylesheet" href="/style/themes/highlight-theme-light.css"><script src="/js/highlight.pack.js"></script><meta name="description" content="v-charts 的 options 使用 getOptions()而不是使用一个变量
+
+
+
+
+使用 getOptions()是为了获取数据之后才进行渲染数据，v-chart 的 options 可以直接绑定一个变量,在请求数据的时候，更新变量，图表需要进行重新渲染
+
+这里的 getOptions()也可以写在 computed 里面的。
+&amp;lt;template&amp;gt;
+    &amp;lt;v-charts :options=&amp;quot;getOptions()&amp;quot;&amp;gt;
+&amp;lt;/template&amp;gt;
+
+
+
+点我展示js代码
+
+ getOptions() &amp;#123;
+        return &amp;#123;
+          grid: &amp;#123;
+            left: .."><meta name="generator" content="Hexo 6.0.0"></head><body class="is-flex is-flex-direction-column"><header class="header-widget is-flex-shrink-0 is-hidden-mobile"><div class="container is-fullhd is-flex is-justify-content-space-between is-align-items-center is-full-height"><section class="is-hidden-mobile is-flex-shrink-0"><h2><a href="/">HeyJudeYQ's blog</a></h2></section><h3 class="is-hidden-mobile is-family-serif is-full-height is-flex is-align-items-center is-flex-shrink-0"><div class="is-full-height" id="postTopic"><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">v-charts的options</p><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">点击返回顶部</p></div></h3><aside class="is-flex-shrink-0"><h3 class="is-inline-block"><a href="/">首页</a></h3><h3 class="is-inline-block"><a href="/about">关于</a></h3><h3 class="is-inline-block"><a href="/archives">归档</a></h3></aside></div></header><header class="is-flex header-widget is-flex-shrink-0 is-align-items-center is-justify-content-center is-hidden-tablet"><h3 class="is-inline-block"><a href="/">首页</a></h3><h3 class="is-inline-block"><a href="/about">关于</a></h3><h3 class="is-inline-block"><a href="/archives">归档</a></h3></header><main><main class="container is-max-widescreen content section post-page pt-4 px-4"><div class="columns is-flex-desktop is-justify-content-center is-flex-direction-row-reverse"><div class="column is-3 is-hidden-mobile is-hidden"></div><div class="column is-9"><header class="my-4"><a href="/tags/v-charts"><i class="tag post-item-tag">v-charts</i></a></header><h1 class="mt-0 mb-1 is-family-serif" id="postTitle">v-charts的options</h1><time class="has-text-grey" datetime="2020-04-28T12:00:00.000Z">2020-04-28</time><article class="mt-2 post-content"><p>v-charts 的 options 使用 getOptions()而不是使用一个变量</p>
+<span id="more"></span>
+
+
+<blockquote>
+<p>使用 getOptions()是为了获取数据之后才进行渲染数据，v-chart 的 options 可以直接绑定一个变量,在请求数据的时候，更新变量，图表需要进行重新渲染</p>
+</blockquote>
+<p>这里的 getOptions()也可以写在 computed 里面的。</p>
+<pre><code class="html">&lt;template&gt;
+    &lt;v-charts :options=&quot;getOptions()&quot;&gt;
+&lt;/template&gt;
+</code></pre>
+<details>
+
+<summary>点我展示js代码</summary>
+
+<pre><code class="js"> getOptions() &#123;
+        return &#123;
+          grid: &#123;
+            left: 0,
+            right: 0,
+            top: 0,
+            bottom: 0
+          &#125;,
+          xAxis: &#123;
+            type: &#39;value&#39;,
+            show: false
+          &#125;,
+          yAxis: &#123;
+            type: &#39;category&#39;,
+            show: false
+          &#125;,
+          series: [&#123;
+            name: &#39;上月平台用户数&#39;,
+            type: &#39;bar&#39;,
+            stack: &#39;总量&#39;,
+            data: [this.userLastMonth],
+            barWidth: 10,
+            itemStyle: &#123;
+              color: &#39;#45c946&#39;
+            &#125;
+          &#125;, &#123;
+            name: &#39;今日平台用户数&#39;,
+            type: &#39;bar&#39;,
+            stack: &#39;总量&#39;,
+            data: [this.userTodayNumber],
+            itemStyle: &#123;
+              color: &#39;#eee&#39;
+            &#125;
+          &#125;, &#123;
+            type: &#39;custom&#39;,
+            stack: &#39;总量&#39;,
+            data: [this.userLastMonth],
+            renderItem: (params, api) =&gt; &#123;
+              const value = api.value(0)
+              const endPoint = api.coord([value, 0])
+              return &#123;
+                type: &#39;group&#39;,
+                position: endPoint,
+                children: [&#123;
+                  type: &#39;path&#39;,
+                  shape: &#123;
+                    d: &#39;M1024 255.996 511.971 767.909 0 255.996 1024 255.996z&#39;,
+                    x: -5,
+                    y: -20,
+                    width: 10,
+                    height: 10,
+                    layout: &#39;cover&#39;
+                  &#125;,
+                  style: &#123;
+                    fill: &#39;#45c946&#39;
+                  &#125;
+                &#125;, &#123;
+                  type: &#39;path&#39;,
+                  shape: &#123;
+                    d: &#39;M0 767.909l512.029-511.913L1024 767.909 0 767.909z&#39;,
+                    x: -5,
+                    y: 10,
+                    width: 10,
+                    height: 10,
+                    layout: &#39;cover&#39;
+                  &#125;,
+                  style: &#123;
+                    fill: &#39;#45c946&#39;
+                  &#125;
+                &#125;]
+              &#125;
+            &#125;
+          &#125;]
+        &#125;
+      &#125;
+</code></pre>
+</article><section class="jump-container is-flex is-justify-content-space-between my-6"><!-- em is empty placeholder--><a class="button is-default" href="/2020/04/29/bmap-animate/" title="百度地图动画（轨迹动画）"><i class="iconfont icon-prev mr-2 has-text-grey"></i><span class="has-text-weight-semibold">上一页: 百度地图动画（轨迹动画）</span></a><a class="button is-default" href="/2020/04/28/time/" title="时间格式化"><span class="has-text-weight-semibold">下一页: 时间格式化</span><i class="iconfont icon-next ml-2 has-text-grey"></i></a></section></div></div></main></main><footer class="is-flex is-flex-direction-column is-align-items-center is-flex-shrink-0 is-family-serif"><section class="sns-container"><!-- Github--><a title="github" target="_blank" rel="noopener nofollow" href="//github.com/HeyJudeYQ"><i class="iconfont icon-github"></i></a><!-- Ins--><!-- RSS--><!-- 知乎--><!-- 领英--><!-- 脸书--></section><p><span>Copyright ©</span><span> HeyJudeYQ 2022</span></p><div class="is-flex is-justify-content-center is-flex-wrap-wrap"><p>Powered by Hexo &verbar;&nbsp;</p><p class="is-flex is-justify-content-center"><a title="Hexo theme author" target="_blank" rel="noopener" href="//github.com/haojen">Theme by Haojen&nbsp;</a></p><div style="margin-top: 2px"><a class="github-button" title="github-button" target="_blank" rel="noopener" href="https://github.com/haojen/hexo-theme-Claudia" data-color-scheme="no-preference: light; light: light; dark: dark;" data-show-count="true"></a></div></div><div><span></span></div></footer><script async defer src="https://buttons.github.io/buttons.js"></script><script src="/js/post.js"></script></body></html>

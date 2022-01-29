@@ -1,0 +1,81 @@
+<!DOCTYPE html><html class="appearance-auto" lang="zh-CN"><head><meta charset="UTF-8"><title>h5扫码功能</title><meta name="description" content="May the Force be with you"><meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, initial-scale=1"><!-- Google Analytics --><!-- End Google Analytics -->
+<!-- Baidu Analytics --><!-- End Baidu Analytics --><link rel="icon" href="/images/favicon.png"><link rel="stylesheet" href="/style/common/bulma.css"><link rel="stylesheet" href="/style/base.css"><link rel="stylesheet" href="/style/common/helper.css"><script src="/js/common.js"></script><link rel="stylesheet" href="/style/post.css"><link rel="stylesheet" href="/style/themes/highlight-theme-light.css"><script src="/js/highlight.pack.js"></script><meta name="description" content="使用H5 API barcode实现扫码。
+
+
+&amp;lt;template&amp;gt;
+    &amp;lt;div&amp;gt;
+        &amp;lt;div @click=&amp;quot;handleCloseScan&amp;quot;&amp;gt;X&amp;lt;/div&amp;gt;
+        &amp;lt;div class=&amp;quot;scan&amp;quot;&amp;gt;
+            &amp;lt;div id=&amp;quot;bcid&amp;quot;&amp;gt;&amp;lt;/div&amp;gt;
+            &amp;lt;div&amp;gt;
+                &amp;lt;button @click=&amp;quot;handleStartScan&amp;quot;&amp;gt;扫 码&amp;lt;/button&amp;gt;
+            &amp;lt;/div&amp;gt;
+ .."><meta name="generator" content="Hexo 6.0.0"></head><body class="is-flex is-flex-direction-column"><header class="header-widget is-flex-shrink-0 is-hidden-mobile"><div class="container is-fullhd is-flex is-justify-content-space-between is-align-items-center is-full-height"><section class="is-hidden-mobile is-flex-shrink-0"><h2><a href="/">HeyJudeYQ's blog</a></h2></section><h3 class="is-hidden-mobile is-family-serif is-full-height is-flex is-align-items-center is-flex-shrink-0"><div class="is-full-height" id="postTopic"><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">h5扫码功能</p><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">点击返回顶部</p></div></h3><aside class="is-flex-shrink-0"><h3 class="is-inline-block"><a href="/">首页</a></h3><h3 class="is-inline-block"><a href="/about">关于</a></h3><h3 class="is-inline-block"><a href="/archives">归档</a></h3></aside></div></header><header class="is-flex header-widget is-flex-shrink-0 is-align-items-center is-justify-content-center is-hidden-tablet"><h3 class="is-inline-block"><a href="/">首页</a></h3><h3 class="is-inline-block"><a href="/about">关于</a></h3><h3 class="is-inline-block"><a href="/archives">归档</a></h3></header><main><main class="container is-max-widescreen content section post-page pt-4 px-4"><div class="columns is-flex-desktop is-justify-content-center is-flex-direction-row-reverse"><div class="column is-3 is-hidden-mobile is-hidden"></div><div class="column is-9"><header class="my-4"><a href="/tags/h5"><i class="tag post-item-tag">h5</i></a></header><h1 class="mt-0 mb-1 is-family-serif" id="postTitle">h5扫码功能</h1><time class="has-text-grey" datetime="2021-01-20T12:00:00.000Z">2021-01-20</time><article class="mt-2 post-content"><p>使用H5 API barcode实现扫码。</p>
+<span id="more"></span>
+
+<pre><code class="html">&lt;template&gt;
+    &lt;div&gt;
+        &lt;div @click=&quot;handleCloseScan&quot;&gt;X&lt;/div&gt;
+        &lt;div class=&quot;scan&quot;&gt;
+            &lt;div id=&quot;bcid&quot;&gt;&lt;/div&gt;
+            &lt;div&gt;
+                &lt;button @click=&quot;handleStartScan&quot;&gt;扫 码&lt;/button&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/template&gt;
+</code></pre>
+<details>
+<summary>点击展示js代码</summary>
+
+<pre><code class="js">    &lt;script&gt;
+        // 扫描对象
+        var scan = null;
+        methods:&#123;
+            // 开始扫描
+            handleStartScan()&#123;
+                const that = this;
+                if(!window.plus) return;
+                scan = new plus.barcode.Barcode(&#39;bcid&#39;);
+                // 开始扫描
+                scan.start();
+                // 扫码成功之后的回调函数 type是类型 result 结果
+                scan.onmarked = function(type,result)&#123;
+                    const text = &#39;&#39;;
+                    switch(type)&#123;
+                        case plus.barcode.QR:
+                            type = &#39;QR&#39;;
+                            break;
+                        case plus.barcode.EAN13:
+                            type = &quot;EAN13&quot;;
+                            break;
+                        case plus.barcode.EAN8:
+                            type = &quot;EAN8&quot;;
+                            break;
+                        default:
+                            type = &quot;其它&quot; + type;
+                            break;
+                    &#125;
+                    result = result.replace(/\n/g,&quot;&quot;);
+                    const id = result.match(/\d+/)[0];
+                    that.$router.push(&#123;
+                        name:&#39;ComponentName&#39;,
+                        params: &#123;
+                            id:id
+                        &#125;
+                    &#125;);
+                    scan.close();
+                &#125;
+            &#125;,
+            // 关闭扫描控件
+            handleCloseScan()&#123;
+                 if(!window.plus) return;
+                 scan.close();
+                 this.$router.push(&#39;/&#39;);
+            &#125;
+        &#125;
+&#125;
+    &lt;/script&gt;
+</code></pre>
+</details>
+</article><section class="jump-container is-flex is-justify-content-space-between my-6"><!-- em is empty placeholder--><a class="button is-default" href="/2021/01/20/vue-simple/" title="vue基础知识"><i class="iconfont icon-prev mr-2 has-text-grey"></i><span class="has-text-weight-semibold">上一页: vue基础知识</span></a><a class="button is-default" href="/2020/04/29/bmap/" title="百度地图LBS云检索"><span class="has-text-weight-semibold">下一页: 百度地图LBS云检索</span><i class="iconfont icon-next ml-2 has-text-grey"></i></a></section></div></div></main></main><footer class="is-flex is-flex-direction-column is-align-items-center is-flex-shrink-0 is-family-serif"><section class="sns-container"><!-- Github--><a title="github" target="_blank" rel="noopener nofollow" href="//github.com/HeyJudeYQ"><i class="iconfont icon-github"></i></a><!-- Ins--><!-- RSS--><!-- 知乎--><!-- 领英--><!-- 脸书--></section><p><span>Copyright ©</span><span> HeyJudeYQ 2022</span></p><div class="is-flex is-justify-content-center is-flex-wrap-wrap"><p>Powered by Hexo &verbar;&nbsp;</p><p class="is-flex is-justify-content-center"><a title="Hexo theme author" target="_blank" rel="noopener" href="//github.com/haojen">Theme by Haojen&nbsp;</a></p><div style="margin-top: 2px"><a class="github-button" title="github-button" target="_blank" rel="noopener" href="https://github.com/haojen/hexo-theme-Claudia" data-color-scheme="no-preference: light; light: light; dark: dark;" data-show-count="true"></a></div></div><div><span></span></div></footer><script async defer src="https://buttons.github.io/buttons.js"></script><script src="/js/post.js"></script></body></html>

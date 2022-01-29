@@ -1,0 +1,86 @@
+<!DOCTYPE html><html class="appearance-auto" lang="zh-CN"><head><meta charset="UTF-8"><title>vue使用装饰器descriptor</title><meta name="description" content="May the Force be with you"><meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, initial-scale=1"><!-- Google Analytics --><!-- End Google Analytics -->
+<!-- Baidu Analytics --><!-- End Baidu Analytics --><link rel="icon" href="/images/favicon.png"><link rel="stylesheet" href="/style/common/bulma.css"><link rel="stylesheet" href="/style/base.css"><link rel="stylesheet" href="/style/common/helper.css"><script src="/js/common.js"></script><link rel="stylesheet" href="/style/post.css"><link rel="stylesheet" href="/style/themes/highlight-theme-light.css"><script src="/js/highlight.pack.js"></script><meta name="description" content="decorator装饰器通过对类、对象、方法、属性进行修饰，对其添加一些其他行为，即对一段代码进行二次包装。
+
+
+使用方法：
+const decorator = (target,name,descriptor) =&amp;gt; &amp;#123;
+  var oldValue = descriptor.value
+  descriptor.value = function()&amp;#123;
+    return oldValue.apply(this,arguments)
+  &amp;#125;
+  return descriptor
+&amp;#125;
+
+然后直接@descriptor到函数、类或者对象上即可。使用装饰器可以不需要关注代码内部的实现，增强了代码的可读性。
+vue中使用装饰器：
+项目中使用eslint，需要开启装饰.."><meta name="generator" content="Hexo 6.0.0"></head><body class="is-flex is-flex-direction-column"><header class="header-widget is-flex-shrink-0 is-hidden-mobile"><div class="container is-fullhd is-flex is-justify-content-space-between is-align-items-center is-full-height"><section class="is-hidden-mobile is-flex-shrink-0"><h2><a href="/">HeyJudeYQ's blog</a></h2></section><h3 class="is-hidden-mobile is-family-serif is-full-height is-flex is-align-items-center is-flex-shrink-0"><div class="is-full-height" id="postTopic"><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">vue使用装饰器descriptor</p><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">点击返回顶部</p></div></h3><aside class="is-flex-shrink-0"><h3 class="is-inline-block"><a href="/">首页</a></h3><h3 class="is-inline-block"><a href="/about">关于</a></h3><h3 class="is-inline-block"><a href="/archives">归档</a></h3></aside></div></header><header class="is-flex header-widget is-flex-shrink-0 is-align-items-center is-justify-content-center is-hidden-tablet"><h3 class="is-inline-block"><a href="/">首页</a></h3><h3 class="is-inline-block"><a href="/about">关于</a></h3><h3 class="is-inline-block"><a href="/archives">归档</a></h3></header><main><main class="container is-max-widescreen content section post-page pt-4 px-4"><div class="columns is-flex-desktop is-justify-content-center is-flex-direction-row-reverse"><div class="column is-3 is-hidden-mobile is-hidden"></div><div class="column is-9"><header class="my-4"><a href="/tags/vue"><i class="tag post-item-tag">vue</i></a></header><h1 class="mt-0 mb-1 is-family-serif" id="postTitle">vue使用装饰器descriptor</h1><time class="has-text-grey" datetime="2022-01-20T12:00:00.000Z">2022-01-20</time><article class="mt-2 post-content"><p>decorator装饰器通过对类、对象、方法、属性进行修饰，对其添加一些其他行为，即对一段代码进行二次包装。</p>
+<span id="more"></span>
+
+<p>使用方法：</p>
+<pre><code class="js">const decorator = (target,name,descriptor) =&gt; &#123;
+  var oldValue = descriptor.value
+  descriptor.value = function()&#123;
+    return oldValue.apply(this,arguments)
+  &#125;
+  return descriptor
+&#125;
+</code></pre>
+<p>然后直接@descriptor到函数、类或者对象上即可。使用装饰器可以不需要关注代码内部的实现，增强了代码的可读性。</p>
+<p>vue中使用装饰器：</p>
+<p>项目中使用eslint，需要开启装饰器相关语法的检测。</p>
+<pre><code class="js">// .eslintrc.js
+  parserOptions: &#123;
+    parser: &#39;babel-eslint&#39;,
+    ecmaFeatures:&#123;
+      legacyDecorators: true
+    &#125;
+  &#125;,
+</code></pre>
+<p>Vue项目二次弹窗进行删除操作：</p>
+<p>1、工具函数decorator.js</p>
+<pre><code class="js">// 需安装element-ui
+import &#123; MessageBox, Message &#125; from &#39;element-ui&#39;
+
+export function confirm (title, content, confirmButtonText = &#39;确定&#39;) &#123;
+  return function(target, name, descriptor) &#123;
+    const originValue = descriptor.value
+    descriptor.value = function(...args) &#123;
+      MessageBox.confirm(content, title, &#123;
+        dangerouslyUseHTMLString: true,
+        distinguishCancelAndClose: true,
+        confirmButtonText: confirmButtonText
+      &#125;).then(originValue.bind(this, ...args)).catch(error =&gt; &#123;
+        if (error === &#39;close&#39; || error === &#39;cancel&#39;) &#123;
+          Message.info(&#39;用户取消操作&#39;)
+        &#125; else &#123;
+          Message.info(error)
+        &#125;
+      &#125;)
+    &#125;
+    return descriptor
+  &#125;
+&#125;
+</code></pre>
+<p>2、页面引入装饰器函数</p>
+<pre><code class="html">&lt;template&gt;
+  &lt;div class=&quot;about&quot;&gt;
+    &lt;h1&gt;This is an about page&lt;/h1&gt;
+    &lt;p&gt;装饰器&lt;/p&gt;
+    &lt;button @click=&#39;test&#39;&gt;confirm&lt;/button&gt;&lt;button&gt;cancel&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/template&gt;
+</code></pre>
+<pre><code class="js">import &#123; confirm &#125; from &#39;./decorator.js&#39;
+
+export default &#123;
+  name: &#39;about&#39;,
+  methods: &#123;
+    @confirm(&#39;删除&#39;, &#39;确认删除?&#39;)
+    test () &#123;
+      this.$message.success(&#39;success!!&#39;)
+    &#125;
+
+  &#125;
+&#125;
+</code></pre>
+</article><section class="jump-container is-flex is-justify-content-space-between my-6"><!-- em is empty placeholder--><em></em><a class="button is-default" href="/2022/01/20/DOMContentLoaded/" title="DOMContentLoaded"><span class="has-text-weight-semibold">下一页: DOMContentLoaded</span><i class="iconfont icon-next ml-2 has-text-grey"></i></a></section></div></div></main></main><footer class="is-flex is-flex-direction-column is-align-items-center is-flex-shrink-0 is-family-serif"><section class="sns-container"><!-- Github--><a title="github" target="_blank" rel="noopener nofollow" href="//github.com/HeyJudeYQ"><i class="iconfont icon-github"></i></a><!-- Ins--><!-- RSS--><!-- 知乎--><!-- 领英--><!-- 脸书--></section><p><span>Copyright ©</span><span> HeyJudeYQ 2022</span></p><div class="is-flex is-justify-content-center is-flex-wrap-wrap"><p>Powered by Hexo &verbar;&nbsp;</p><p class="is-flex is-justify-content-center"><a title="Hexo theme author" target="_blank" rel="noopener" href="//github.com/haojen">Theme by Haojen&nbsp;</a></p><div style="margin-top: 2px"><a class="github-button" title="github-button" target="_blank" rel="noopener" href="https://github.com/haojen/hexo-theme-Claudia" data-color-scheme="no-preference: light; light: light; dark: dark;" data-show-count="true"></a></div></div><div><span></span></div></footer><script async defer src="https://buttons.github.io/buttons.js"></script><script src="/js/post.js"></script></body></html>
