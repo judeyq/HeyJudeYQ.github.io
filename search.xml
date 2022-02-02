@@ -42,275 +42,9 @@
     
     
     <entry>
-      <title>移动端300ms延迟在IOS11中的bug</title>
-      <link href="/2022/01/20/mobile/"/>
-      <url>/2022/01/20/mobile/</url>
-      
-        <content type="html"><![CDATA[<p>在移动端点击一个元素触发事件的顺序为：touchstart –&gt; touchmove –&gt; touchend –&gt; click</p><span id="more"></span><h2 id="移动端300ms延迟在IOS11中的bug"><a href="#移动端300ms延迟在IOS11中的bug" class="headerlink" title="移动端300ms延迟在IOS11中的bug"></a>移动端300ms延迟在IOS11中的bug</h2><blockquote><p>解决方案</p></blockquote><p>1、禁用缩放 更改默认视口宽度</p><pre><code class="js">&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1&quot;&gt;</code></pre><p>2、fastclick解决300ms延迟问题<br>        首先，需要安装fastclick插件</p><pre><code class="js">npm install fastclick</code></pre><p>3、在main.js文件中引入fastclick，绑定到body上</p><pre><code class="js">import FastClick from &quot;fastclick&quot;FastClick.attach(document.body);</code></pre><p>这就是常用来解决移动端300ms延迟的方法。但是这种方法在iOS11的系统中存在bug。</p><p>4、iOS11系统中出现的bug<br>    在iOS11系统下，点击input输入框的时候会出现不灵敏的现象。</p><blockquote><p>解决方案:</p></blockquote><details><summary>点我展示代码</summary><pre><code class="js">&lt;script&gt;FastClick.prototype.focus = function (targetElement) &#123;  var length;  var deviceIsWindowsPhone = navigator.userAgent.indexOf(&quot;Windows Phone&quot;) &gt;= 0;  var deviceIsIos = /iP(ad|hone|od)/.test(navigator.userAgent) &amp;&amp; !deviceIsWindowsPhone;  //兼容处理:在iOS7中，有一些元素（如date、datetime、month等）在setSelectionRange会出现TypeError  //这是因为这些元素并没有selectionStart和selectionEnd的整型数字属性，所以一旦引用就会报错，因此排除这些属性才使用setSelectionRange方法  if (deviceIsIOS &amp;&amp; targetElement.setSelectionRange &amp;&amp; targetElement.type.indexOf(&#39;date&#39;) !== 0 &amp;&amp; targetElement.type !== &#39;time&#39; &amp;&amp; targetElement.type !== &#39;month&#39;) &#123;    length = targetElement.value.length;    // 修复bug ios 11.3不弹出键盘，这里加上聚焦代码，让其强制聚焦弹出键盘    targetElement.setSelectionRange(length, length);  &#125; else &#123;    targetElement.focus();  &#125;&#125;&lt;/script&gt;</code></pre></details><blockquote><p>注意：<br>setSelectionRange是HTMLInputElement的一个方法,用来设定input textare的当前文本的起始位置和结束位置。<br>(<a href="https://developer.mozilla.org/zh-CN/docs/Web/API/HTMLInputElement/setSelectionRange">MDN文档</a>）<br>对setSelectionRange方法只能用于类型为文本、搜索、连接、电话号码、密码的输入，以及在Chrome33开始访问其余类型的属性和方法抛出异常。<br>输入类型为数字时会抛出：“不能从’HTMLInputElement’中读取’selectionStart’属性：输入元素的类型(‘number’)不支持选择（Failed to read the ‘selectionStart’ property from ‘HTMLInputElement’: The input element’s type (‘number’) does not support selection）”。</p></blockquote>]]></content>
-      
-      
-      
-        <tags>
-            
-            <tag> dev </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>微信公众号网页使用popstate事件</title>
-      <link href="/2022/01/20/popstate/"/>
-      <url>/2022/01/20/popstate/</url>
-      
-        <content type="html"><![CDATA[<p>如何在h5移动端禁止某一些页面使用虚拟返回键。</p><span id="more"></span><h3 id="1、popstate事件"><a href="#1、popstate事件" class="headerlink" title="1、popstate事件"></a>1、popstate事件</h3><p>MDN上是这样介绍popstate的：<br>    当活动历史记录条目更改时，将触发popstate事件。如果被激活的历史记录条目是通过对history.pushState（）的调用创建的，或者受到对history.replaceState（）的调用的影响，popstate事件的state属性包含历史条目的状态对象的副本。<br>    需要注意的是调用history.pushState()或history.replaceState()不会触发popstate事件。只有在做出浏览器动作时，才会触发该事件，如用户点击浏览器的回退按钮（或者在Javascript代码中调用history.back()或者history.forward()方法）<br>    不同的浏览器在加载页面时处理popstate事件的形式存在差异。页面加载时Chrome和Safari通常会触发(emit )popstate事件，但Firefox则不会。<br>    我负责的一个项目中，在微信公众号网页的某一个页面需要禁止使用微信浏览器的返回键。</p><h3 id="2、解决方式："><a href="#2、解决方式：" class="headerlink" title="2、解决方式："></a>2、解决方式：</h3><details><summary>点我展示代码</summary><pre><code class="js">// 在禁止返回的组件的methods中写一个方法forbidBackforbidBack()&#123;    window.history.pushState(&quot;forward&quot;,null,&quot;#&quot;);    window.history.forward(1);&#125;// 监听返回键，禁止返回之前的路由if(window.history &amp;&amp; window.history.pushState)&#123;    window.addEventListener(&quot;popstate&quot;,this.forbidBack,false);    this.forbidBack();&#125;//离开页面需要销毁监听window.removeEventListener(&quot;popstate&quot;,this.forbidBack,fasle);</code></pre></details>]]></content>
-      
-      
-      
-        <tags>
-            
-            <tag> dev </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>二维码的生成</title>
-      <link href="/2022/01/20/qrcode/"/>
-      <url>/2022/01/20/qrcode/</url>
-      
-        <content type="html"><![CDATA[<p>使用 qrcode 生成二维码</p><span id="more"></span><p>一、下载插件 qrcode 插件</p><pre><code class="js">    npm install qrcode --save</code></pre><p>二、在 main.js 中引用</p><pre><code class="js">import QRCode from &quot;qrcode&quot;;Vue.use(QRCode);</code></pre><p>三、组件中引入 QRCode</p> <details> <summary>点我展示代码</summary> <pre><code class="html">    &lt;template&gt;        &lt;div&gt;            &lt;div id=&quot;qrcode&quot;&gt;&lt;/div&gt;        &lt;/div&gt;    &lt;/template&gt;</code></pre><pre><code class="js">    &lt;script&gt;      import QRCode from &#39;qrcode&#39;;      mounted()&#123;          this.CreateQrcode();      &#125;,      method:&#123;          setTimeout(() =&gt; &#123;              // 获取DOM节点              let dom = document.getElementById(&#39;qrcode);              // 路由传参              const res = this.$route.params;              const lbsid = res.id;              // 二维码包含的URL 需要将URL和id做一下字符串的拼接              let url = &#39;http://*********&#39;;              let URL = url.concat(lbsid);              let qrCode = new QRCode(dom,&#123;                  width:260, // 图像宽度                  height:260,  // 图像高度                  colorDark:&quot;#000000&quot;,  // 前景色                  colorLight:&quot;#ffffff&quot;, // 背景色                  correctLevel: QRCode.CorrectLevel.H  // 容错等级              &#125;);              qrCode.clear();              qrCode.makeCode(URL);          &#125;,100)      &#125;    &lt;/script&gt;    &lt;style lang=&quot;less&quot; scoped&gt;        #qrcode &#123;            display: inline-block;            margin-top: 6rem;            img &#123;                width: 60%;                height: 60%;                background-color: #fff; //设置白色背景色                padding: 6px; // 利用padding的特性，挤出白边  &#125;&#125;    &lt;/style&gt;</code></pre></details>]]></content>
-      
-      
-      
-        <tags>
-            
-            <tag> dev </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>自定义input唤起键盘</title>
-      <link href="/2022/01/20/input/"/>
-      <url>/2022/01/20/input/</url>
-      
-        <content type="html"><![CDATA[<p>自定义 input 唤起键盘。移动端页面自定义 input 唤起键盘 return，有时需要将换行键改为搜索，为了达到更好的用户体验。<br>在 html5 中，我们可以将 input 的 type 修改为 search，这样修改之后，我们的安卓手机会变成搜索或者搜索符号、IOS 则会变成换行。</p><span id="more"></span><p>1、安卓手机</p><pre><code class="html">&lt;input type=&quot;search&quot; placeholder=&quot;请输入你要搜索的内容&quot; v-model=&quot;value&quot; /&gt;</code></pre><p>2、苹果 IOS 手机</p><p>与安卓手机不同的是，我们需要在外层包裹一个 form</p><pre><code class="html">    &lt;from action=&quot;javascript:return true&quot;&gt;        &lt;input type=&quot;search&quot; placeholder=&quot;请输入你要搜索的内容&quot; v-model=&quot;value&quot;&gt;    &lt;/form&gt;</code></pre><p>3、修改 search 的默认样式</p><pre><code class="css">input[type=&quot;search&quot;] &#123;  -webkit-appearance: none;&#125;input::-webkit-search-cancel-button &#123;  display: none; // 关闭按钮&#125;</code></pre><p>4、禁止输入法弹出的方法</p><blockquote><p>readonly 属性的使用</p></blockquote><p>点击输入框触发 focus 事件弹出时间 picker，将选择的开始时间、结束时间都显示在输入框里，这里加入只读 readonly 属性可以避免输入法的弹出。</p><pre><code class="html">&lt;input v-model=&quot;startDate&quot; readonly @focus=&quot;openStartPicker&quot; /&gt;&lt;input v-model=&quot;endDate&quot; readonly @focus=&quot;openEndPicker&quot; /&gt;</code></pre>]]></content>
-      
-      
-      
-        <tags>
-            
-            <tag> dev </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>下拉框select的option</title>
-      <link href="/2022/01/20/select/"/>
-      <url>/2022/01/20/select/</url>
-      
-        <content type="html"><![CDATA[<p>下拉的选项是从后台获取的数据,如何获取选定项的值?</p><span id="more"></span><p>以选择银行卡为例：</p><pre><code class="js">    &lt;select v-model=&quot;selected&quot; class=&quot;selected&quot;&gt;        &lt;option disabled value v-show=&quot;showBankCard&quot;&gt;请选择提现到账的银行卡&lt;/option&gt;        &lt;option            v-for=&quot;item in BankCardList&quot;            :key=&quot;item.id&quot;            v-bind:value=&quot;item.id&quot;        &gt;            &#123;&#123; item.card_no &#125;&#125;        &lt;/option&gt;    &lt;/select&gt;</code></pre><pre><code class="js">item.card_no ? item.card_no.replace(/^(\d&#123;4&#125;)\d+(\d&#123;4&#125;)$/,&quot;$1****$2&quot;):&quot;&quot;// 银行卡号显示为 6217 **** 0000 的格式。</code></pre>]]></content>
-      
-      
-      
-        <tags>
-            
-            <tag> dev </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>解决Vue项目热更新打包时间过长</title>
-      <link href="/2022/01/20/hot/"/>
-      <url>/2022/01/20/hot/</url>
-      
-        <content type="html"><![CDATA[<p>维护公司一个项目的时候，发现在项目启动、热更新和打包项目的时候，时间长的“感人”。</p><span id="more"></span><p>当你改动项目的一些地方想要立即看到效果的时候，却发现热更新的编译过程却花了你很长时间，“心态崩了。。。”。</p><h3 id="1、解决Vue项目热更新打包时间过长"><a href="#1、解决Vue项目热更新打包时间过长" class="headerlink" title="1、解决Vue项目热更新打包时间过长"></a>1、解决Vue项目热更新打包时间过长</h3><p>解决方法：</p><p>1、使用html-webpack-plugin-for-multihtml插件</p><p>2、在build-webpack.dev.conf.js文件中</p><pre><code class="js">    const HtmlWebpackPlugin = require(&#39;html-webpack-plugin&#39;);    // 替换成    const HtmlWebpackPlugin = require(&#39;html-webpack-plugin-for-multihtml&#39;);</code></pre><p>3、multihtmlCache:true  解决多页热部署的关键</p><pre><code class="js">for (var pathname in pages) &#123;  // 配置生成的html文件，定义路径等  var conf = &#123;    filename: pathname + &#39;.html&#39;,    template: pages[pathname],   // 模板路径    inject: true,              // js插入位置    multihtmlCache: true,    // 解决多页热部署的关键 这里这里这里这里这里很重要！！！    // necessary to consistently work with multiple chunks via CommonsChunkPlugin    chunksSortMode: &#39;dependency&#39;  &#125;;  if (pathname in devWebpackConfig.entry) &#123;    conf.chunks = [&#39;manifest&#39;,&#39;vendor&#39;, pathname];    conf.hash = false;  &#125;  devWebpackConfig.plugins.push(new HtmlWebpackPlugin(conf));&#125;</code></pre><p>4、router.js中使用路由懒加载</p><p>这时候再启动项目，热更新、编译和打包的速度会大大提升。</p><h3 id="2、项目打包由4M变为1M"><a href="#2、项目打包由4M变为1M" class="headerlink" title="2、项目打包由4M变为1M"></a>2、项目打包由4M变为1M</h3><p>公司有一个H5微信公众号网页的项目，项目打包之后文件有4M；</p><p>修改webpack.prod.conf.js里的UglifyJsPlugin，这里的意思是打包后不产生后缀名为.map的文件。</p><pre><code class="javascript">webpack.prod.conf.js    new UglifyJsPlugin(&#123;      uglifyOptions: &#123;        compress: &#123;          warnings: false        &#125;      &#125;,      // sourceMap: config.build.productionSourceMap, 将这行代码注释掉。      parallel: true    &#125;)</code></pre><p>处理后打包的文件的大小为1M</p>]]></content>
-      
-      
-      
-        <tags>
-            
-            <tag> dev </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>如何使用CSS画三角形?</title>
-      <link href="/2022/01/20/css/"/>
-      <url>/2022/01/20/css/</url>
-      
-        <content type="html"><![CDATA[<p>三角形的画法,一般经常使用三角形作为提示框、下拉菜单等功能。</p><span id="more"></span><p>实现方式：</p><p>1、HTML结构</p><pre><code class="html">&lt;div class=&quot;item0&quot;&gt;&lt;/div&gt;&lt;div class=&quot;item1&quot;&gt;&lt;/div&gt;&lt;div class=&quot;item2&quot;&gt;&lt;/div&gt;&lt;div class=&quot;item3&quot;&gt;&lt;/div&gt;</code></pre><p>2、将类名为item的块级元素的width、height设置为0</p><pre><code class="css">.item0&#123;    width:0;    height:0;&#125;</code></pre><p>3、将类名为item的元素的3个border的颜色设置为transparent，箭头指向的对面border设置颜色；</p><pre><code class="css">.item0&#123;    width: 0px;    height: 0px;    border-left: 50px solid transparent;    border-right: 50px solid transparent;    border-top: 50px solid transparent;    border-bottom: 80px solid blue;    background: white;&#125;</code></pre><p>上面的为方向向上的三角形<br>4、依次类推可以画出方向向左、右、下的三角形</p><pre><code class="css">.item1&#123;    width: 0px;    height: 0px;    border-left: 50px solid transparent;    border-right: 50px solid transparent;    border-top: 80px solid green;    border-bottom: 50px solid transparent;    background: white;&#125;.item2&#123;    width: 0px;    height: 0px;    border-left: 50px solid transparent;    border-right: 80px solid violet;    border-top: 50px solid transparent;    border-bottom: 50px solid transparent;    background: white;&#125;.item3&#123;    width: 0px;    height: 0px;    border-left: 80px solid purple;    border-right: 50px solid transparent;    border-top: 50px solid transparent;    border-bottom: 50px solid transparent;    background: white;&#125;</code></pre>]]></content>
-      
-      
-      
-        <tags>
-            
-            <tag> dev </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>解决点击手机虚拟返回键退出应用</title>
-      <link href="/2022/01/20/back/"/>
-      <url>/2022/01/20/back/</url>
-      
-        <content type="html"><![CDATA[<p>如何解决安卓手机点击虚拟返回键退出当前应用。</p><span id="more"></span><p>一、问题描述：</p><p>最近的项目是使用Vue全家桶+HBuilder打包开发一个移动端APP。<br>在测试的时候发现，当安卓手机使用虚拟按钮的时候，点击虚拟按钮的返回键，APP会直接退出。<br>这是因为安卓手机自带back虚拟按键，如果不修改其默认事件，点一下app就退出了，<br>所以需要修改这个按键默认事件事件的代码。</p><p>二、解决办法：</p><p>在index.html中加入一个script，加上如下代码：</p><details><summary>点我展示代码</summary><pre><code class="javascript">&lt;script&gt;    document.addEventListener(&#39;plusready&#39;, function () &#123;        var first = null;        var webview = plus.webview.currentWebview();        plus.key.addEventListener(&#39;backbutton&#39;, function () &#123;            webview.canBack(function (e) &#123;                if (e.canBack) &#123;                    webview.back(); //这里不建议修改自己跳转的路径                  &#125; else &#123;                    //首次按键，提示‘再按一次退出应用’                      if (!first) &#123;                      first = new Date().getTime(); //获取第一次点击的时间戳                        plus.nativeUI.toast(&quot;再按一次退出应用&quot;, &#123;                        duration: &#39;short&#39;                      &#125;); //通过H5+ API 调用Android 上的toast 提示框                        setTimeout(function () &#123;                        first = null;                      &#125;, 1000);                    &#125; else &#123;                        // 获取第二次点击的时间戳, 两次之差 小于 1000ms 说明1s点击了两次,                       if (new Date().getTime() - first &lt; 1000) &#123;                          plus.runtime.quit(); //退出应用                &#125;            &#125;          &#125;        &#125;)      &#125;);    &#125;);    &lt;/script&gt;</code></pre></details>]]></content>
-      
-      
-      
-        <tags>
-            
-            <tag> dev </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>用hook处理组件内定时器</title>
-      <link href="/2022/01/20/hook/"/>
-      <url>/2022/01/20/hook/</url>
-      
-        <content type="html"><![CDATA[<p>vue 项目使用 hook 处理组件内定时器的方式。</p><span id="more"></span><blockquote><p>通常处理组件内定时器的步骤是：</p></blockquote><pre><code class="js">export default&#123;    mounted()&#123;        this.timer = setInterval（() =&gt;&#123;            // do something        &#125;,1000）    &#125;,    beforeDestory()&#123;        clearInterval(this.timer);    &#125;&#125;</code></pre><blockquote><p>使用 hook 可以更好的处理</p></blockquote><pre><code class="js">export default&#123;    mounted()&#123;        const timer = setInterval(() =&gt; &#123;            // do something        &#125;,1000);        this.$once(&#39;hook:beforeDestory&#39;,()=&gt; clearInterval(timer);)    &#125;&#125;</code></pre><blockquote><p>适用场景:</p></blockquote><p>处理可视化图表的时候，我们需要在数据渲染到页面之前让页面有 loading 动画，mounted 挂载之后停止 loading，beforeUpdate 时开始 loading，updated 之后停止 loading。</p><p>使用 hook 处理:</p><pre><code class="js">&lt;v-chart&gt;  @hook:mounted=&quot;loading = false&quot; @hook:beforeUpdated=&quot;loading = true&quot;  @hook:updated=&quot;loading = false&quot; :data=&quot;data&quot;&lt;/v-chart&gt;</code></pre>]]></content>
-      
-      
-      
-        <tags>
-            
-            <tag> vue </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>微信小程序checkbox-group</title>
-      <link href="/2022/01/20/check-group/"/>
-      <url>/2022/01/20/check-group/</url>
-      
-        <content type="html"><![CDATA[<p>checkbox-group多项选择器，内部由多个checkbox组成；<br>主要的属性bindchange   说明checkbox-group中选中项发生改变时触发 change 事件，detail = {value:[选中的checkbox的value的数组]};</p><span id="more"></span><pre><code class="html">&lt;checkbox-group  class=&quot;checkbox_group&quot; bindchange=&quot;checkboxChange&quot;&gt;    &lt;label class=&quot;checkbox&quot; wx:for=&quot;&#123;&#123;items&#125;&#125;&quot; wx:key=&quot;item&quot;&gt;        &lt;checkbox value=&quot;&#123;&#123;item.value&#125;&#125;&quot;  checked=&quot;&#123;&#123;item.checked&#125;&#125;&quot; /&gt;        &#123;&#123;item.value&#125;&#125;    &lt;/label&gt;&lt;/checkbox-group&gt;</code></pre><p>每一次修改选中项，都需要一个空数组去存放选中项。</p><details><summary>点我展示代码</summary><pre><code class="js">  checkboxChange(e) &#123;    const items = this.data.items;     const values = e.detail.value;    // 设置选中的数组为空  选中的id push到数组里面    this.data.vehicle_arr = [];    for (let i = 0, lenI = items.length; i &lt; lenI; ++i) &#123;      items[i].checked = false // 遍历items，让所有的选中状态都为false      for (let j = 0, lenJ = values.length; j &lt; lenJ; ++j) &#123;        if (items[i].value === values[j]) &#123;          items[i].checked = true;          const List = items[i].name.toString().split();          for (let k in List) &#123;            this.data.vehicle_arr.push(List[k]);          &#125;        &#125;      &#125;    &#125;    // 选中的id    this.data.unique = [...new Set(this.data.vehicle_arr)];    this.setData(&#123;      driverarr: e.detail.value.join(&quot;,&quot;), // 多选的数组      items,    &#125;);  &#125;,</code></pre></details>]]></content>
-      
-      
-      
-        <tags>
-            
-            <tag> dev </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>Vue实现模糊搜索</title>
-      <link href="/2022/01/20/mohu-search/"/>
-      <url>/2022/01/20/mohu-search/</url>
-      
-        <content type="html"><![CDATA[<p>利用computed计算属性实现模糊搜索</p><span id="more"></span><pre><code class="html">  &lt;div id=&quot;app&quot;&gt;    &lt;input type=&quot;text&quot; placeholder=&quot;搜索&quot; v-model=&quot;sousuo&quot;&gt;    &lt;table border=&quot;1&quot;&gt;      &lt;th&gt;编号&lt;/th&gt;      &lt;th&gt;英雄&lt;/th&gt;      &lt;th&gt;技能&lt;/th&gt;      &lt;tr v-for=&quot;(item,index) in sousuo1()&quot; :key=&quot;item.id&quot;&gt;        &lt;td&gt;&#123;&#123;item.id&#125;&#125;&lt;/td&gt;        &lt;td&gt;&#123;&#123;item.name&#125;&#125;&lt;/td&gt;        &lt;td&gt;&#123;&#123;item.jn&#125;&#125;&lt;/td&gt;      &lt;/tr&gt;    &lt;/table&gt;  &lt;/div&gt;</code></pre><p>利用computed计算属性</p><details><summary>点我展示代码</summary><pre><code class="javascript">var app = new Vue(&#123;  el: &#39;#app&#39;,  data: &#123;    sousuo: &#39;&#39;,    list: [&#123;        &quot;id&quot;: 1,        &quot;name&quot;: &quot;艾希&quot;,        &quot;jn&quot;: &quot;射箭&quot;      &#125;, &#123;        &quot;id&quot;: 2,        &quot;name&quot;: &quot;狐狸&quot;,        &quot;jn&quot;: &quot;魅惑&quot;      &#125;, &#123;        &quot;id&quot;: 3,        &quot;name&quot;: &quot;猴子&quot;,        &quot;jn&quot;: &quot;棍子&quot;      &#125;, &#123;        &quot;id&quot;: 4,        &quot;name&quot;: &quot;盖伦&quot;,        &quot;jn&quot;: &quot;大宝剑&quot;      &#125;, &#123;        &quot;id&quot;: 5,        &quot;name&quot;: &quot;德邦&quot;,        &quot;jn&quot;: &quot;尖枪&quot;      &#125;, &#123;        &quot;id&quot;: 6,        &quot;name&quot;: &quot;皇子&quot;,        &quot;jn&quot;: &quot;旗子&quot;      &#125;,    ]  &#125;,  computed: &#123; //设置计算属性    Search() &#123;      if (this.sousuo) &#123;        return this.list.filter((value) =&gt; &#123; //过滤数组元素  this.list就是上面的那个死数据          return value.name.includes(this.sousuo); // 查看value.name里面包含不包含输入的字体          &#125;); //this.sousuo跟上面的输入框是双重绑定      &#125;    &#125;  &#125;,  methods: &#123;    sousuo1() &#123;      if (!this.sousuo) &#123;        return this.list;      &#125;      return this.Search    &#125;  &#125;,&#125;)</code></pre></details>]]></content>
-      
-      
-      
-        <tags>
-            
-            <tag> dev </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>v-cloak解决页面闪烁问题</title>
-      <link href="/2022/01/20/v-cloak/"/>
-      <url>/2022/01/20/v-cloak/</url>
-      
-        <content type="html"><![CDATA[<p>这个指令保持在元素上直到关联实例结束编译。和CSS规则如[v-cloak]{ display: none }一起用时，这个指令可以隐藏未编译的 Mustache 标签直到实例准备完毕。</p><span id="more"></span><p>很多时候，我们页面模板中的数据是异步获取的，在网络不好的情况下，渲染页面的时候会出现页面闪烁的效果，影响用户体验，v-cloak 指令保持在元素上直到关联实例结束编译，利用它的特性，结合 CSS 的规则 [v-cloak] { display: none } 一起使用就可以隐藏掉未编译好的 Mustache 标签，直到实例准备完毕。</p><pre><code class="html">&lt;div class=&quot;#app&quot; v-cloak&gt;    &lt;p&gt;&#123;&#123;value.name&#125;&#125;&lt;/p&gt;&lt;/div&gt;</code></pre><pre><code class="css">[v-cloak] &#123;    display: none;&#125;</code></pre><blockquote><p>需要注意，虽然解决了闪烁的问题，但这段时间内如果什么都不处理的话，会直接白屏，这并不是我们想要的效果，我们应该加一个loading动画或者骨架屏的效果，提升用户体验。</p></blockquote>]]></content>
-      
-      
-      
-        <tags>
-            
-            <tag> dev </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>Vue实现模糊搜索</title>
-      <link href="/2022/01/20/websocket/"/>
-      <url>/2022/01/20/websocket/</url>
-      
-        <content type="html"><![CDATA[<p>利用computed计算属性实现模糊搜索</p><span id="more"></span><p>传统的http协议，通信只能由客户端发起。websocket实现了客户端和服务端的双向平等对话，websocket最大的特点：服务器可以主动向用户推送信息，客户端也可以主动向服务端发送信息。</p><p>初始化websocket<br>1、创建websocket实例，参数为url<br>2、连接 websocket.onopen<br>3、server响应数据触发 websocket.onmessage<br>4、关闭websocket，websocket.onclose</p><pre><code class="js">// 构造函数 参数为urlconst wsurl = &quot;ws://localhost:8080&quot;;var ws = new Websocket(wsurl);// 连接状态readState 1  准备好发送和接受数据了ws.onopen = function()&#123;  ws.send(&#39;hello server! websocket is open now!&#39;)&#125;// 通过客户端的事件   发送信息给服务端ws.send(&#39;hello websocket&#39;);// 发生错误ws.onerror = function(event)&#123;  console.log(&quot;websocket error observed&quot;,event)&#125;// readState CLOSED  关闭websocketws.onclose = function(event)&#123;  let status_code = event.status;  let msg = event.msg;  console.log(&quot;websocket is closed now&quot;)&#125;// 响应数据的接收ws.onmessage = function(event)&#123;  let data = event.data;&#125;</code></pre><ul><li>路由改变，需要断开websocket连接，节省服务器开支。</li></ul>]]></content>
-      
-      
-      
-        <tags>
-            
-            <tag> dev </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>vue使用hls.js处理m3u8格式的视频</title>
-      <link href="/2022/01/20/hls/"/>
-      <url>/2022/01/20/hls/</url>
-      
-        <content type="html"><![CDATA[<p>m3u8文件是指UTF-8编码格式的m3u文件。m3u文件是记录了一个索引纯文本文件,打开它时播放软件并不是播放它,而是根据它的索引找到对应的音视频文件的网络地址进行在线播放。</p><span id="more"></span><blockquote><p>HLS 与 M3U8 HLS(全称:Http Live Streaming)是由Apple公司定义的用于实时流传输的协议</p></blockquote><p>1、安装hls.js插件或者使用CDN引入</p><pre><code class="bash">npm install hls.js --save</code></pre><pre><code class="js">&lt;script src=&quot;https://cdn.jsdelivr.net/npm/hls.js@latest&quot;&gt;&lt;/script&gt;2、业务代码```html        &lt;video          ref=&quot;video&quot;          id=&quot;myVideo2&quot;          class=&quot;video-js vjs-default-skin vjs-big-play-centered&quot;          autoplay=&quot;autoplay&quot;          controls          style=&quot;width: 100%; height: 280px; margin-top: 5px&quot;        &gt;&lt;/video&gt;</code></pre><pre><code class="js">import Hls from &quot;hls.js&quot;export default&#123;  data()&#123;    return&#123;      hls:null    &#125;  &#125;,  methods:&#123;    getStream(source)&#123;      if(Hls.isSupported())&#123;        this.hls = new Hls()        this.hls.loadSource(source);        this.hls.attachMedia(this.$refs.video);        this.hls.on(Hls.Events.MANIFEST_PARSED, () =&gt; &#123;          this.$refs.video.play();        &#125;);        this.hls.on(Hls.Events.ERROR, (event, data) =&gt; &#123;          this.$message(&quot;视频加载失败&quot;);        &#125;);      &#125;    &#125;  &#125;,  // 从接口获取的视频资源应当写在mounted里面，否则容易出现进入视频页面的时候，视频加载不出来的现象  mounted()&#123;    this.$service.get(&quot;demo/test&quot;).then(res =&gt;&#123;      this.getStream(res.data[1].hls);    &#125;)  &#125;&#125;</code></pre>]]></content>
-      
-      
-      
-        <tags>
-            
-            <tag> dev </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>CountTo:数字动态滚动</title>
-      <link href="/2022/01/20/count-to/"/>
-      <url>/2022/01/20/count-to/</url>
+      <link href="/2022/01/13/count-to/"/>
+      <url>/2022/01/13/count-to/</url>
       
         <content type="html"><![CDATA[<p>vue使用vue-count-to实现数字的动态滚动功能。</p><span id="more"></span><pre><code class="js">npm isntall vue-count-to// 2、组件内引入、注册 startVal endVal 类型为Number</code></pre><pre><code class="html">&lt;template&gt;  &lt;countTo :startVal=&#39;startVal&#39; :endVal=&#39;number&#39; :duration=&#39;3000&#39; :decimals=&#39;0&#39;  :autoplay=true&gt;&lt;/countTo&gt;&lt;/template&gt;&lt;script&gt;import countTo from &#39;vue-count-to&#39;;  export default&#123;    components:&#123;countTo&#125;,    props:&#123;      number: [Number, String],      startVal:&#123;        type:Number,        default:0      &#125;    &#125;  &#125;&lt;/script&gt;</code></pre>]]></content>
       
@@ -327,17 +61,106 @@
     
     
     <entry>
-      <title>DOMContentLoaded</title>
-      <link href="/2022/01/18/DOMContentLoaded/"/>
-      <url>/2022/01/18/DOMContentLoaded/</url>
+      <title>vue使用hls.js处理m3u8格式的视频</title>
+      <link href="/2022/01/08/hls/"/>
+      <url>/2022/01/08/hls/</url>
       
-        <content type="html"><![CDATA[<p>DOMContentLoaded顾名思义就是DOM内容加载完毕。</p><span id="more"></span><p>当初始的 HTML 文档被完全加载和解析完成之后，DOMContentLoaded 事件被触发，而无需等待样式表、图像和子框架的完全加载。另一个不同的事件 load 应该仅用于检测一个完全加载的页面。 这里有一个常见的错误，就是在本应使用 DOMContentLoaded 会更加合适的情况下，却选择使用 load，所以要谨慎。<br>注意：DOMContentLoaded 事件必须等待其所属script之前的样式表加载解析完成才会触发。</p><p>在Vue项目的App.vue中，我们可以这样设置字体。</p><p>1、获取HTML元素；</p><p>2、根据屏幕宽度动态计算fontSize</p><p>3、当fontSize大于50时，设置最大值为50</p><p>4、设置HTML的fontSize属性，使rem生效，1rem = fontSize + “px”</p><pre><code class="js">&lt;script&gt;// DOMContentLoaded 事件必须等待其所属script之前的样式表加载解析完成才会触发。  document.addEventListener(&#39;DOMContentLoaded&#39;, () =&gt; &#123;    // 获取html元素    const html = document.querySelector(&#39;html&#39;)    // 根据屏幕宽度动态计算fontSize    let fontSize = window.innerWidth / 10    // 当fontSize大于50时，设置最大值为50    fontSize = fontSize &gt; 50 ? 50 : fontSize    // 设置html的fontSize属性，使rem生效，1rem = fontSize + &#39;px&#39;    html.style.fontSize = fontSize + &#39;px&#39;  &#125;)&lt;/script&gt;</code></pre>]]></content>
+        <content type="html"><![CDATA[<p>m3u8文件是指UTF-8编码格式的m3u文件。m3u文件是记录了一个索引纯文本文件,打开它时播放软件并不是播放它,而是根据它的索引找到对应的音视频文件的网络地址进行在线播放。</p><span id="more"></span><blockquote><p>HLS 与 M3U8 HLS(全称:Http Live Streaming)是由Apple公司定义的用于实时流传输的协议</p></blockquote><p>1、安装hls.js插件或者使用CDN引入</p><pre><code class="bash">npm install hls.js --save</code></pre><pre><code class="js">&lt;script src=&quot;https://cdn.jsdelivr.net/npm/hls.js@latest&quot;&gt;&lt;/script&gt;2、业务代码```html        &lt;video          ref=&quot;video&quot;          id=&quot;myVideo2&quot;          class=&quot;video-js vjs-default-skin vjs-big-play-centered&quot;          autoplay=&quot;autoplay&quot;          controls          style=&quot;width: 100%; height: 280px; margin-top: 5px&quot;        &gt;&lt;/video&gt;</code></pre><pre><code class="js">import Hls from &quot;hls.js&quot;export default&#123;  data()&#123;    return&#123;      hls:null    &#125;  &#125;,  methods:&#123;    getStream(source)&#123;      if(Hls.isSupported())&#123;        this.hls = new Hls()        this.hls.loadSource(source);        this.hls.attachMedia(this.$refs.video);        this.hls.on(Hls.Events.MANIFEST_PARSED, () =&gt; &#123;          this.$refs.video.play();        &#125;);        this.hls.on(Hls.Events.ERROR, (event, data) =&gt; &#123;          this.$message(&quot;视频加载失败&quot;);        &#125;);      &#125;    &#125;  &#125;,  // 从接口获取的视频资源应当写在mounted里面，否则容易出现进入视频页面的时候，视频加载不出来的现象  mounted()&#123;    this.$service.get(&quot;demo/test&quot;).then(res =&gt;&#123;      this.getStream(res.data[1].hls);    &#125;)  &#125;&#125;</code></pre>]]></content>
       
       
       
         <tags>
             
             <tag> dev </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>用hook处理组件内定时器</title>
+      <link href="/2022/01/01/hook/"/>
+      <url>/2022/01/01/hook/</url>
+      
+        <content type="html"><![CDATA[<p>vue 项目使用 hook 处理组件内定时器的方式。</p><span id="more"></span><blockquote><p>通常处理组件内定时器的步骤是：</p></blockquote><pre><code class="js">export default&#123;    mounted()&#123;        this.timer = setInterval（() =&gt;&#123;            // do something        &#125;,1000）    &#125;,    beforeDestory()&#123;        clearInterval(this.timer);    &#125;&#125;</code></pre><blockquote><p>使用 hook 可以更好的处理</p></blockquote><pre><code class="js">export default&#123;    mounted()&#123;        const timer = setInterval(() =&gt; &#123;            // do something        &#125;,1000);        this.$once(&#39;hook:beforeDestory&#39;,()=&gt; clearInterval(timer);)    &#125;&#125;</code></pre><blockquote><p>适用场景:</p></blockquote><p>处理可视化图表的时候，我们需要在数据渲染到页面之前让页面有 loading 动画，mounted 挂载之后停止 loading，beforeUpdate 时开始 loading，updated 之后停止 loading。</p><p>使用 hook 处理:</p><pre><code class="js">&lt;v-chart&gt;  @hook:mounted=&quot;loading = false&quot; @hook:beforeUpdated=&quot;loading = true&quot;  @hook:updated=&quot;loading = false&quot; :data=&quot;data&quot;&lt;/v-chart&gt;</code></pre>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> vue </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>git提交规范</title>
+      <link href="/2021/12/22/git/"/>
+      <url>/2021/12/22/git/</url>
+      
+        <content type="html"><![CDATA[<p>使用commitizen和cz-customizable规范代码提交</p><span id="more"></span><h3 id="1-安装commitizen和cz-customizable"><a href="#1-安装commitizen和cz-customizable" class="headerlink" title="1.安装commitizen和cz-customizable"></a>1.安装commitizen和cz-customizable</h3><pre><code class="js">npm install -g commitizen@4.2.4npm i cz-customizable@6.3.0 --save-dev</code></pre><h3 id="2-在package-json中进行新增"><a href="#2-在package-json中进行新增" class="headerlink" title="2.在package.json中进行新增"></a>2.在package.json中进行新增</h3><pre><code class="js">&quot;config&quot;: &#123;  &quot;commitizen&quot;: &#123;    &quot;path&quot;: &quot;node_modules/cz-customizable&quot;  &#125;&#125;</code></pre><h3 id="3-在根目录下新建-cz-config-js文件并写入配置-之后就可以用-git-cz-来代替-git-commit"><a href="#3-在根目录下新建-cz-config-js文件并写入配置-之后就可以用-git-cz-来代替-git-commit" class="headerlink" title="3.在根目录下新建.cz-config.js文件并写入配置 之后就可以用 git cz 来代替 git commit"></a>3.在根目录下新建.cz-config.js文件并写入配置 之后就可以用 git cz 来代替 git commit</h3><h3 id="4-使用husky进行强制git代码提交规范"><a href="#4-使用husky进行强制git代码提交规范" class="headerlink" title="4.使用husky进行强制git代码提交规范"></a>4.使用husky进行强制git代码提交规范</h3><pre><code class="js">npm install --save-dev @commitlint/config-conventional@12.1.4 @commitlint/cli@12.1.4npm install husky@7.0.1 --save-devnpx husky install</code></pre><h3 id="5-在package-json中新增指令"><a href="#5-在package-json中新增指令" class="headerlink" title="5.在package.json中新增指令"></a>5.在package.json中新增指令</h3><pre><code class="js">&quot;prepare&quot;: &quot;husky install&quot;</code></pre><h3 id="6-并执行"><a href="#6-并执行" class="headerlink" title="6.并执行"></a>6.并执行</h3><pre><code class="js">npm run prepare</code></pre><h3 id="7-新增husky配置文件-并往里面写入"><a href="#7-新增husky配置文件-并往里面写入" class="headerlink" title="7.新增husky配置文件 并往里面写入"></a>7.新增husky配置文件 并往里面写入</h3><pre><code class="js">npx husky add .husky/commit-msgnpx --no-install commitlint --edit</code></pre><h3 id="8、husky规范"><a href="#8、husky规范" class="headerlink" title="8、husky规范"></a>8、husky规范</h3><pre><code class="js">// commitlint.config.jsmodule.exports = &#123;  // 继承的规则  extends: [&#39;@commitlint/config-conventional&#39;],  // 定义规则类型  rules: &#123;    // type 类型定义，表示 git 提交的 type 必须在以下类型范围内    &#39;type-enum&#39;: [      2,      &#39;always&#39;,      [        &#39;feat&#39;, // 新功能 feature        &#39;fix&#39;, // 修复 bug        &#39;docs&#39;, // 文档注释        &#39;style&#39;, // 代码格式(不影响代码运行的变动)        &#39;refactor&#39;, // 重构(既不增加新功能，也不是修复bug)        &#39;perf&#39;, // 性能优化        &#39;test&#39;, // 增加测试        &#39;chore&#39;, // 构建过程或辅助工具的变动        &#39;revert&#39;, // 回退        &#39;build&#39; // 打包      ]    ],    // subject 大小写不做校验    &#39;subject-case&#39;: [0]  &#125;&#125;</code></pre>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>自定义input唤起键盘</title>
+      <link href="/2021/10/20/input/"/>
+      <url>/2021/10/20/input/</url>
+      
+        <content type="html"><![CDATA[<p>自定义 input 唤起键盘。移动端页面自定义 input 唤起键盘 return，有时需要将换行键改为搜索，为了达到更好的用户体验。<br>在 html5 中，我们可以将 input 的 type 修改为 search，这样修改之后，我们的安卓手机会变成搜索或者搜索符号、IOS 则会变成换行。</p><span id="more"></span><p>1、安卓手机</p><pre><code class="html">&lt;input type=&quot;search&quot; placeholder=&quot;请输入你要搜索的内容&quot; v-model=&quot;value&quot; /&gt;</code></pre><p>2、苹果 IOS 手机</p><p>与安卓手机不同的是，我们需要在外层包裹一个 form</p><pre><code class="html">    &lt;from action=&quot;javascript:return true&quot;&gt;        &lt;input type=&quot;search&quot; placeholder=&quot;请输入你要搜索的内容&quot; v-model=&quot;value&quot;&gt;    &lt;/form&gt;</code></pre><p>3、修改 search 的默认样式</p><pre><code class="css">input[type=&quot;search&quot;] &#123;  -webkit-appearance: none;&#125;input::-webkit-search-cancel-button &#123;  display: none; // 关闭按钮&#125;</code></pre><p>4、禁止输入法弹出的方法</p><blockquote><p>readonly 属性的使用</p></blockquote><p>点击输入框触发 focus 事件弹出时间 picker，将选择的开始时间、结束时间都显示在输入框里，这里加入只读 readonly 属性可以避免输入法的弹出。</p><pre><code class="html">&lt;input v-model=&quot;startDate&quot; readonly @focus=&quot;openStartPicker&quot; /&gt;&lt;input v-model=&quot;endDate&quot; readonly @focus=&quot;openEndPicker&quot; /&gt;</code></pre>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> dev </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>websocket实现客户端和服务端的通信</title>
+      <link href="/2021/09/20/websocket/"/>
+      <url>/2021/09/20/websocket/</url>
+      
+        <content type="html"><![CDATA[<p>传统的http协议，通信只能由客户端发起。websocket实现了客户端和服务端的双向平等对话，websocket最大的特点：服务器可以主动向用户推送信息，客户端也可以主动向服务端发送信息。</p><span id="more"></span><p>初始化websocket<br>1、创建websocket实例，参数为url<br>2、连接 websocket.onopen<br>3、server响应数据触发 websocket.onmessage<br>4、关闭websocket，websocket.onclose</p><pre><code class="js">// 构造函数 参数为urlconst wsurl = &quot;ws://localhost:8080&quot;;var ws = new Websocket(wsurl);// 连接状态readState 1  准备好发送和接受数据了ws.onopen = function()&#123;  ws.send(&#39;hello server! websocket is open now!&#39;)&#125;// 通过客户端的事件   发送信息给服务端ws.send(&#39;hello websocket&#39;);// 发生错误ws.onerror = function(event)&#123;  console.log(&quot;websocket error observed&quot;,event)&#125;// readState CLOSED  关闭websocketws.onclose = function(event)&#123;  let status_code = event.status;  let msg = event.msg;  console.log(&quot;websocket is closed now&quot;)&#125;// 响应数据的接收ws.onmessage = function(event)&#123;  let data = event.data;&#125;</code></pre><ul><li>路由改变，需要断开websocket连接，节省服务器开支。</li></ul>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> dev </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>初识egg.js</title>
+      <link href="/2021/06/20/egg/"/>
+      <url>/2021/06/20/egg/</url>
+      
+        <content type="html"><![CDATA[<p>egg.js的使用</p><span id="more"></span><h3 id="1、创建-启动项目"><a href="#1、创建-启动项目" class="headerlink" title="1、创建/启动项目"></a>1、创建/启动项目</h3><p>直接使用下面的方式，无法创建项目</p><pre><code class="js">// 无法创建项目npm init egg --type=simple// 需要在后面指定淘宝源npm init egg --type=simple -r=https://registry.npm.taobao.orgnpm run dev</code></pre><h3 id="2、内置的ctx对象"><a href="#2、内置的ctx对象" class="headerlink" title="2、内置的ctx对象"></a>2、内置的ctx对象</h3><blockquote><p>ctx这个对象非常重要，请求来的参数，返回去的消息都需要通过ctx这个对象获取或者设置</p></blockquote><blockquote><p>ctx是继承koa的context对象通过设置ctx.body， 可以改变返回信息</p></blockquote><pre><code class="js">ctx &#123; request:    &#123; method: &#39;GET&#39;,     url: &#39;/&#39;,     header:       &#123; host: &#39;127.0.0.1:7001&#39;,        connection: &#39;keep-alive&#39;,        pragma: &#39;no-cache&#39;,        &#39;cache-control&#39;: &#39;no-cache&#39;,        &#39;sec-ch-ua&#39;: &#39;&quot; Not;A Brand&quot;;v=&quot;99&quot;, &quot;Google Chrome&quot;;v=&quot;97&quot;, &quot;Chromium&quot;;v=&quot;97&quot;&#39;,        &#39;sec-ch-ua-mobile&#39;: &#39;?0&#39;,        &#39;sec-ch-ua-platform&#39;: &#39;&quot;macOS&quot;&#39;,        &#39;upgrade-insecure-requests&#39;: &#39;1&#39;,        &#39;user-agent&#39;: &#39;Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.71 Safari/537.36&#39;,        accept: &#39;text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9&#39;,        &#39;sec-fetch-site&#39;: &#39;none&#39;,        &#39;sec-fetch-mode&#39;: &#39;navigate&#39;,        &#39;sec-fetch-user&#39;: &#39;?1&#39;,        &#39;sec-fetch-dest&#39;: &#39;document&#39;,        &#39;accept-encoding&#39;: &#39;gzip, deflate, br&#39;,        &#39;accept-language&#39;: &#39;zh-CN,zh;q=0.9,en;q=0.8&#39;,        cookie: &#39;csrfToken=DpyybUjAh9JRzrCgx3itQifi&#39; &#125; &#125;,  response: &#123; status: 404, message: &#39;Not Found&#39;, header: &#123;&#125; &#125;,  app:    &#123; env: &#39;local&#39;,     name: &#39;eggjs&#39;,     baseDir: &#39;/Users/yq/Desktop/express&#39;,     subdomainOffset: 2,     config: &#39;&lt;egg config&gt;&#39;,     controller: &#39;&lt;egg controller&gt;&#39;,     httpclient: &#39;&lt;egg httpclient&gt;&#39;,     loggers: &#39;&lt;egg loggers&gt;&#39;,     middlewares: &#39;&lt;egg middlewares&gt;&#39;,     router: &#39;&lt;egg router&gt;&#39;,     serviceClasses: &#39;&lt;egg serviceClasses&gt;&#39; &#125;,  originalUrl: &#39;/&#39;,  req: &#39;&lt;original node req&gt;&#39;,  res: &#39;&lt;original node res&gt;&#39;,  socket: &#39;&lt;original node socket&gt;&#39; &#125;</code></pre><h3 id="3、路由"><a href="#3、路由" class="headerlink" title="3、路由"></a>3、路由</h3><p>在controller的home.js中写一个新的路由,</p><pre><code class="js">    async list()&#123;        const &#123; ctx &#125; = this        ctx.body = &#123;            code:200,            data:[                &#123;                    id:&#39;1&#39;,                    name:&#39;jude&#39;                &#125;,                &#123;                    id:&#39;2&#39;,                    name:&#39;summer&#39;                &#125;            ],            msg:&#39;success&#39;        &#125;    &#125;</code></pre><p>在router.js中匹配新写的路由</p><pre><code class="js">    router.get(&#39;/list&#39;,controller.home.list)</code></pre><p>打开127.0.0.1:7001/list即可看到效果</p><h3 id="4、Controller控制层"><a href="#4、Controller控制层" class="headerlink" title="4、Controller控制层"></a>4、Controller控制层</h3><p>在controller新建一个user.js</p><pre><code class="js">&#39;use strict&#39;const Controller = require(&#39;egg&#39;).Controllerclass UserController extends Controller &#123;    async info()&#123;        const &#123;ctx&#125; = this        ctx.body = &#123;            code:200,            data:&#123;                id:&#39;1&#39;,                name:&quot;jude&quot;                age:29,                gender:&quot;man&quot;            &#125;            msg::&quot;success&quot;        &#125;    &#125;&#125;module.exports = UserController</code></pre><p>配置新的路由</p><pre><code class="js">router.get(&#39;/user/info&#39;,controller.user.info)</code></pre><p>打开127.0.0.1:7001/user/info 即可看到效果</p><h3 id="5、post请求及配置CSRF跨域"><a href="#5、post请求及配置CSRF跨域" class="headerlink" title="5、post请求及配置CSRF跨域"></a>5、post请求及配置CSRF跨域</h3><p>安装跨域插件</p><pre><code class="js">npm install egg-cors --save</code></pre><p>配置config下的plugin.js和config.default.js</p><pre><code>// plugin.jsmoduel.exports = &#123;    cors:&#123;        enable:true,        package:&#39;egg-cors&#39;    &#125;&#125;// config.default.jsconfig.security = &#123;    csrf:&#123;        enable:true    &#125;,    domainWhiteList:[]&#125;config.cors = &#123;    origin:&quot;*&quot;,    allowMethods:&#39;GET,PUT,POST,DELETE.PATCH&#39;&#125;</code></pre><h3 id="6、创建post请求"><a href="#6、创建post请求" class="headerlink" title="6、创建post请求"></a>6、创建post请求</h3><pre><code class="js">// user.jsasync createUser()&#123;    const &#123;ctx &#125; = this    const result = &#123;        username:ctx.request.body.username,        age:ctx.request.body.age    &#125;    ctx.body = &#123;        code:200,        data:result,        msg:&#39;success&#39;    &#125;&#125;</code></pre><p>此时，打开ApiPost工具，选择post请求，输入请求地址+参数信息，即可看到响应信息。</p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> egg </tag>
             
         </tags>
       
@@ -357,25 +180,6 @@
         <tags>
             
             <tag> typescript </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>markdown语法</title>
-      <link href="/2021/05/05/markdown/"/>
-      <url>/2021/05/05/markdown/</url>
-      
-        <content type="html"><![CDATA[<p>markdown语法整理</p><span id="more"></span><p>Markdown标题</p><p>使用#号标记，使用 # 号可表示 1-6 级标题，一级标题对应一个 # 号，二级标题对应两个 # 号，以此类推。</p><p>1、Markdown段落</p><p>段落的换行是使用两个以上空格加上回车。</p><blockquote><p>字体:</p></blockquote><pre><code>*斜体文本*</code></pre><pre><code>_斜体文本_</code></pre><pre><code>**粗体文本**</code></pre><pre><code>__粗体文本__</code></pre><pre><code>***粗斜体文本***</code></pre><pre><code>___粗斜体文本___</code></pre><blockquote><p>分割线</p></blockquote><pre><code>**** * ******- - -----------</code></pre><blockquote><p>删除线、下划线、脚注</p></blockquote><pre><code>~~删除线~~&lt;u&gt;下划线&lt;/u&gt;[^Vue]:Vuejs是目前最流行的web开发框架之一。</code></pre><p>2、Markdown列表</p><p>Markdown 支持有序列表和无序列表。</p><p>（1）、无序列表使用星号(*)、加号(+)或是减号(-)作为列表标记，这些标记后面要添加一个空格，然后再填写内容：</p><pre><code>* 第一项* 第二项* 第三项+ 第一项+ 第二项+ 第三项- 第一项- 第二项- 第三项</code></pre><p>（2）、有序列表：有序列表使用数字并加上 . 号来表示。</p><pre><code>1. 第一项2. 第二项3. 第三项</code></pre><p>（3）、列表嵌套：列表嵌套只需在子列表中的选项前面添加四个空格即可</p><pre><code>1. 第一项：    - 第一项嵌套的第一个元素    - 第一项嵌套的第二个元素2. 第二项：    - 第二项嵌套的第一个元素    - 第二项嵌套的第二个元素</code></pre><p>4、Markdown区块</p><p>Markdown 区块引用是在段落开头使用 &gt; 符号 ，然后后面紧跟一个空格符号</p><blockquote><p>区块的嵌套</p></blockquote><pre><code>&gt; 最外层&gt; &gt; 第一层嵌套&gt; &gt; &gt; 第二层嵌套</code></pre><blockquote><p>区块中使用列表</p></blockquote><pre><code>&gt; 区块中使用列表&gt; 1. 第一项&gt; 2. 第二项&gt; + 第一项&gt; + 第二项&gt; + 第三项</code></pre><blockquote><p>列表中使用区块</p></blockquote><p>如果要在列表项目内放进区块，那么就需要在 &gt; 前添加四个空格的缩进</p><pre><code>* 第一项    &gt; vuejs    &gt; JavaScript框架* 第二项</code></pre><p>5、Markdown链接和图片</p><blockquote><p>链接</p></blockquote><pre><code>[链接名称](链接地址)或者&lt;链接地址&gt;</code></pre><blockquote><p>图片</p></blockquote><pre><code>![alt 属性文本](图片地址)![alt 属性文本](图片地址 &quot;可选标题&quot;)![RUNOOB 图标](http://static.runoob.com/images/runoob-logo.png)![RUNOOB 图标](http://static.runoob.com/images/runoob-logo.png &quot;RUNOOB&quot;)</code></pre><p>6、Markdown表格</p><pre><code>|  表头   | 表头  ||  ----  | ----  || 单元格  | 单元格 || 单元格  | 单元格 |</code></pre><p>我们可以设置表格的对齐方式：</p><pre><code>-: 设置内容和标题栏居右对齐。:- 设置内容和标题栏居左对齐。:-: 设置内容和标题栏居中对齐。</code></pre>]]></content>
-      
-      
-      
-        <tags>
-            
-            <tag> markdown </tag>
             
         </tags>
       
@@ -422,55 +226,17 @@
     
     
     <entry>
-      <title>初识egg.js</title>
-      <link href="/2021/01/20/egg/"/>
-      <url>/2021/01/20/egg/</url>
+      <title>解决点击手机虚拟返回键退出应用</title>
+      <link href="/2021/03/23/back/"/>
+      <url>/2021/03/23/back/</url>
       
-        <content type="html"><![CDATA[<p>egg.js的使用</p><span id="more"></span><h3 id="1、创建-启动项目"><a href="#1、创建-启动项目" class="headerlink" title="1、创建/启动项目"></a>1、创建/启动项目</h3><p>直接使用下面的方式，无法创建项目</p><pre><code class="js">// 无法创建项目npm init egg --type=simple// 需要在后面指定淘宝源npm init egg --type=simple -r=https://registry.npm.taobao.orgnpm run dev</code></pre><h3 id="2、内置的ctx对象"><a href="#2、内置的ctx对象" class="headerlink" title="2、内置的ctx对象"></a>2、内置的ctx对象</h3><blockquote><p>ctx这个对象非常重要，请求来的参数，返回去的消息都需要通过ctx这个对象获取或者设置</p></blockquote><blockquote><p>ctx是继承koa的context对象通过设置ctx.body， 可以改变返回信息</p></blockquote><pre><code class="js">ctx &#123; request:    &#123; method: &#39;GET&#39;,     url: &#39;/&#39;,     header:       &#123; host: &#39;127.0.0.1:7001&#39;,        connection: &#39;keep-alive&#39;,        pragma: &#39;no-cache&#39;,        &#39;cache-control&#39;: &#39;no-cache&#39;,        &#39;sec-ch-ua&#39;: &#39;&quot; Not;A Brand&quot;;v=&quot;99&quot;, &quot;Google Chrome&quot;;v=&quot;97&quot;, &quot;Chromium&quot;;v=&quot;97&quot;&#39;,        &#39;sec-ch-ua-mobile&#39;: &#39;?0&#39;,        &#39;sec-ch-ua-platform&#39;: &#39;&quot;macOS&quot;&#39;,        &#39;upgrade-insecure-requests&#39;: &#39;1&#39;,        &#39;user-agent&#39;: &#39;Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.71 Safari/537.36&#39;,        accept: &#39;text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9&#39;,        &#39;sec-fetch-site&#39;: &#39;none&#39;,        &#39;sec-fetch-mode&#39;: &#39;navigate&#39;,        &#39;sec-fetch-user&#39;: &#39;?1&#39;,        &#39;sec-fetch-dest&#39;: &#39;document&#39;,        &#39;accept-encoding&#39;: &#39;gzip, deflate, br&#39;,        &#39;accept-language&#39;: &#39;zh-CN,zh;q=0.9,en;q=0.8&#39;,        cookie: &#39;csrfToken=DpyybUjAh9JRzrCgx3itQifi&#39; &#125; &#125;,  response: &#123; status: 404, message: &#39;Not Found&#39;, header: &#123;&#125; &#125;,  app:    &#123; env: &#39;local&#39;,     name: &#39;eggjs&#39;,     baseDir: &#39;/Users/yq/Desktop/express&#39;,     subdomainOffset: 2,     config: &#39;&lt;egg config&gt;&#39;,     controller: &#39;&lt;egg controller&gt;&#39;,     httpclient: &#39;&lt;egg httpclient&gt;&#39;,     loggers: &#39;&lt;egg loggers&gt;&#39;,     middlewares: &#39;&lt;egg middlewares&gt;&#39;,     router: &#39;&lt;egg router&gt;&#39;,     serviceClasses: &#39;&lt;egg serviceClasses&gt;&#39; &#125;,  originalUrl: &#39;/&#39;,  req: &#39;&lt;original node req&gt;&#39;,  res: &#39;&lt;original node res&gt;&#39;,  socket: &#39;&lt;original node socket&gt;&#39; &#125;</code></pre><h3 id="3、路由"><a href="#3、路由" class="headerlink" title="3、路由"></a>3、路由</h3><p>在controller的home.js中写一个新的路由,</p><pre><code class="js">    async list()&#123;        const &#123; ctx &#125; = this        ctx.body = &#123;            code:200,            data:[                &#123;                    id:&#39;1&#39;,                    name:&#39;jude&#39;                &#125;,                &#123;                    id:&#39;2&#39;,                    name:&#39;summer&#39;                &#125;            ],            msg:&#39;success&#39;        &#125;    &#125;</code></pre><p>在router.js中匹配新写的路由</p><pre><code class="js">    router.get(&#39;/list&#39;,controller.home.list)</code></pre><p>打开127.0.0.1:7001/list即可看到效果</p><h3 id="4、Controller控制层"><a href="#4、Controller控制层" class="headerlink" title="4、Controller控制层"></a>4、Controller控制层</h3><p>在controller新建一个user.js</p><pre><code class="js">&#39;use strict&#39;const Controller = require(&#39;egg&#39;).Controllerclass UserController extends Controller &#123;    async info()&#123;        const &#123;ctx&#125; = this        ctx.body = &#123;            code:200,            data:&#123;                id:&#39;1&#39;,                name:&quot;jude&quot;                age:29,                gender:&quot;man&quot;            &#125;            msg::&quot;success&quot;        &#125;    &#125;&#125;module.exports = UserController</code></pre><p>配置新的路由</p><pre><code class="js">router.get(&#39;/user/info&#39;,controller.user.info)</code></pre><p>打开127.0.0.1:7001/user/info 即可看到效果</p><h3 id="5、post请求及配置CSRF跨域"><a href="#5、post请求及配置CSRF跨域" class="headerlink" title="5、post请求及配置CSRF跨域"></a>5、post请求及配置CSRF跨域</h3><p>安装跨域插件</p><pre><code class="js">npm install egg-cors --save</code></pre><p>配置config下的plugin.js和config.default.js</p><pre><code>// plugin.jsmoduel.exports = &#123;    cors:&#123;        enable:true,        package:&#39;egg-cors&#39;    &#125;&#125;// config.default.jsconfig.security = &#123;    csrf:&#123;        enable:true    &#125;,    domainWhiteList:[]&#125;config.cors = &#123;    origin:&quot;*&quot;,    allowMethods:&#39;GET,PUT,POST,DELETE.PATCH&#39;&#125;</code></pre><h3 id="6、创建post请求"><a href="#6、创建post请求" class="headerlink" title="6、创建post请求"></a>6、创建post请求</h3><pre><code class="js">// user.jsasync createUser()&#123;    const &#123;ctx &#125; = this    const result = &#123;        username:ctx.request.body.username,        age:ctx.request.body.age    &#125;    ctx.body = &#123;        code:200,        data:result,        msg:&#39;success&#39;    &#125;&#125;</code></pre><p>此时，打开ApiPost工具，选择post请求，输入请求地址+参数信息，即可看到响应信息。</p>]]></content>
-      
-      
-      
-        <tags>
-            
-            <tag> egg </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>vue基础知识</title>
-      <link href="/2021/01/20/vue-simple/"/>
-      <url>/2021/01/20/vue-simple/</url>
-      
-        <content type="html"><![CDATA[<p>Vue基础知识点，包括常用指令、计算属性、侦听属性等。</p><span id="more"></span><h2 id="Vuejs响应式原理"><a href="#Vuejs响应式原理" class="headerlink" title="Vuejs响应式原理"></a>Vuejs响应式原理</h2><pre><code>编译组件：对特殊标记的部分（比如双大括号部分）进行替换为相应的数据值。收集依赖：对于编译阶段依赖的数据进行监听（这个都是通过 watcher 对象实现的）通知更新：当步骤2中监听的数据发生变化时，会通知 watcher 进行重新计算，触发关联视图更新。</code></pre><h2 id="vue优点"><a href="#vue优点" class="headerlink" title="vue优点"></a>vue优点</h2><p>轻量级框架：只关注视图层，是一个构建数据的视图集合，大小只有几十kb；</p><p>简单易学：国人开发，中文文档，不存在语言障碍 ，易于理解和学习；</p><p>双向数据绑定：保留了angular的特点，在数据操作方面更为简单；</p><p>组件化：保留了react的优点，实现了html的封装和重用，在构建单页面应用方面有着独特的优势；</p><p>视图，数据，结构分离：使数据的更改更为简单，不需要进行逻辑代码的修改，只需要操作数据就能完成相关操作；</p><p>虚拟DOM：dom操作是非常耗费性能的，不再使用原生的dom操作节点，极大解放dom操作，但具体操作的还是dom不过是换了另一种方式；</p><p>运行速度更快: 相比较与react而言，同样是操作虚拟dom，就性能而言，vue存在很大的优势。</p><h2 id="vue生命周期"><a href="#vue生命周期" class="headerlink" title="vue生命周期"></a>vue生命周期</h2><p>在beforeCreate阶段，vue实例的挂载元素el和数据对象data都为undefined，还未初始化。在created阶段，vue实例的数据对象data有了，el和数据对象data都为undefined，还未初始化。</p><p>载入前/后：在beforeMount阶段，vue实例的$el和data都初始化了，但还是挂载之前为虚拟的dom节点，data.message还未替换。在mounted阶段，vue实例挂载完成，data.message成功渲染。</p><p>更新前/后：当data变化时，会触发beforeUpdate和updated方法</p><p>销毁前/后：在执行destroy方法后，对data的改变不会再触发周期函数，说明此时vue实例已经解除了事件监听以及和dom的绑定，但是dom结构依然存在</p><h2 id="vue组件中data必须是一个函数？"><a href="#vue组件中data必须是一个函数？" class="headerlink" title="vue组件中data必须是一个函数？"></a>vue组件中data必须是一个函数？</h2><p>官网上是这样写的：</p><blockquote><p>一个组件的 data 选项必须是一个函数，因此每个实例可以维护一份被返回对象的独立的拷贝，如果 Vue 没有这条规则，可能会影响到其它所有实例。</p></blockquote><p>当创建Vue实例时，data必须声明为返回一个初始数据对象的函数，因为组件可能被用来创建多个实例。如果 data 仍然是一个纯粹的对象，则所有的实例将共享引用同一个数据对象！通过提供 data 函数，每次创建一个新实例后，我们能够调用 data 函数，从而返回初始数据的一个全新副本数据对象。</p><h2 id="v-if和v-show有什么区别？"><a href="#v-if和v-show有什么区别？" class="headerlink" title="v-if和v-show有什么区别？"></a>v-if和v-show有什么区别？</h2><p>v-if和v-show看起来似乎差不多，当条件不成立时，其所对应的标签元素都不可见，但是这两个选项是有区别的:</p><p>1、v-if在条件切换时，会对标签进行适当的创建和销毁，而v-show则仅在初始化时加载一次，因此v-if的开销相对来说会比v-show大。</p><p>2、v-if是惰性的，只有当条件为真时才会真正渲染标签；如果初始条件不为真，则v-if不会去渲染标签。v-show则无论初始条件是否成立，都会渲染标签，它仅仅做的只是简单的CSS切换。</p><h2 id="computed和watch的区别"><a href="#computed和watch的区别" class="headerlink" title="computed和watch的区别"></a>computed和watch的区别</h2><p>计算属性computed：</p><p>支持缓存，只有依赖数据发生改变，才会重新进行计算不支持异步，当computed内有异步操作时无效，无法监听数据的变化computed 属性值会默认走缓存，计算属性是基于它们的响应式依赖进行缓存的，也就是基于data中声明过或者父组件传递的props中的数据通过计算得到的值如果一个属性是由其他属性计算而来的，这个属性依赖其他属性，是一个多对一或者一对一，一般用computed如果computed属性属性值是函数，那么默认会走get方法；函数的返回值就是属性的属性值；在computed中的，属性都有一个get和一个set方法，当数据变化时，调用set方法。</p><p>侦听属性watch：</p><p>不支持缓存，数据变，直接会触发相应的操作；watch支持异步；监听的函数接收两个参数，第一个参数是最新的值；第二个参数是输入之前的值；当一个属性发生变化时，需要执行对应的操作；一对多；监听数据必须是data中声明过或者父组件传递过来的props中的数据，当数据变化时，触发其他操作，函数有两个参数：<br>immediate：组件加载立即触发回调函数执行</p><pre><code class="js">watch: &#123;  firstName: &#123;    handler(newName, oldName) &#123;      this.fullName = newName + &#39; &#39; + this.lastName;    &#125;,    // 代表在wacth里声明了firstName这个方法之后立即执行handler方法    immediate: true  &#125;&#125;</code></pre><p>deep: deep的意思就是深入观察，监听器会一层层的往下遍历，给对象的所有属性都加上这个监听器，但是这样性能开销就会非常大了，任何修改obj里面任何一个属性都会触发这个监听器里的 handler</p><pre><code class="js">watch: &#123;  obj: &#123;    handler(newName, oldName) &#123;      console.log(&#39;obj.a changed&#39;);    &#125;,    immediate: true,    deep: true  &#125;&#125;</code></pre><p>优化：我们可以使用字符串的形式监听</p><pre><code class="js">watch: &#123;  &#39;obj.a&#39;: &#123;    handler(newName, oldName) &#123;      console.log(&#39;obj.a changed&#39;);    &#125;,    immediate: true,    // deep: true  &#125;&#125;</code></pre><p>这样Vue.js才会一层一层解析下去，直到遇到属性a，然后才给a设置监听函数。</p><h2 id="nextTick是什么？"><a href="#nextTick是什么？" class="headerlink" title="$nextTick是什么？"></a>$nextTick是什么？</h2><p>vue实现响应式并不是数据发生变化后dom立即变化，而是按照一定的策略来进行dom更新。<br>nextTick 是在下次 DOM 更新循环结束之后执行延迟回调，在修改数据之后使用nextTick，则可以在回调中获取更新后的 DOM</p><h2 id="v-for-key的作用"><a href="#v-for-key的作用" class="headerlink" title="v-for key的作用"></a>v-for key的作用</h2><p>当Vue用 v-for 正在更新已渲染过的元素列表是，它默认用“就地复用”策略。如果数据项的顺序被改变，Vue将不是移动DOM元素来匹配数据项的改变，而是简单复用此处每个元素，并且确保它在特定索引下显示已被渲染过的每个元素。<br>为了给Vue一个提示，以便它能跟踪每个节点的身份，从而重用和重新排序现有元素，你需要为每项提供一个唯一 key 属性。key属性的类型只能为 string或者number类型。</p><blockquote><p>key 的特殊属性主要用在Vue的虚拟DOM算法，在新旧nodes对比时辨识VNodes。如果不使用 key，Vue会使用一种最大限度减少动态元素并且尽可能的尝试修复/再利用相同类型元素的算法。使用key，它会基于key的变化重新排列元素顺序，并且会移除 key 不存在的元素。</p></blockquote><p>v-for提升性能的原因:</p><p>key相同时，两个VNode会相同，可以避免不必要的DOM更新；而且在diff内部，也会根据key来跟踪VNode。</p><h2 id="双向数据绑定原理是什么？"><a href="#双向数据绑定原理是什么？" class="headerlink" title="双向数据绑定原理是什么？"></a>双向数据绑定原理是什么？</h2><blockquote><p>vue.js 是采用数据劫持结合发布者-订阅者模式的方式，通过Object.defineProperty()来劫持各个属性的setter，getter，在数据变动时发布消息给订阅者，触发相应的监听回调。</p></blockquote><p>主要分为以下几个步骤：</p><p>1、需要observe的数据对象进行递归遍历，包括子属性对象的属性，都加上setter和getter这样的话，给这个对象的某个值赋值，就会触发setter，那么就能监听到了数据变化</p><p>2、compile解析模板指令，将模板中的变量替换成数据，然后初始化渲染页面视图，并将每个指令对应的节点绑定更新函数，添加监听数据的订阅者，一旦数据有变动，收到通知，更新视图</p><p>3、Watcher订阅者是Observer和Compile之间通信的桥梁，主要做的事情是:<br>①在自身实例化时往属性订阅器(dep)里面添加自己<br>②自身必须有一个update()方法<br>③待属性变动dep.notice()通知时，能调用自身的update()方法，并触发Compile中绑定的回调，则功成身退。</p><p>4、MVVM作为数据绑定的入口，整合Observer、Compile和Watcher三者，通过Observer来监听自己的model数据变化，通过Compile来解析编译模板指令，最终利用Watcher搭起Observer和Compile之间的通信桥梁，达到数据变化 -&gt; 视图更新；视图交互变化(input) -&gt; 数据model变更的双向绑定效果。</p><h2 id="vue-router路由页面管理"><a href="#vue-router路由页面管理" class="headerlink" title="vue-router路由页面管理"></a>vue-router路由页面管理</h2><blockquote><p>Vue Router 是 Vue.js 官方的路由管理器。它和 Vue.js 的核心深度集成，让构建单页面应用变得易如反掌。</p></blockquote><p>包含的功能有：</p><p>1、嵌套的路由/视图表</p><p>2、模块化的、基于组件的路由配置</p><p>3、路由参数、查询、通配符</p><p>4、基于 Vue.js 过渡系统的视图过渡效果</p><p>5、细粒度的导航控制</p><p>6、带有自动激活的 CSS class 的链接</p><p>7、HTML5 历史模式或 hash 模式，在 IE9 中自动降级</p><p>8、自定义的滚动条行为</p><blockquote><p>1、动态路由匹配</p></blockquote><p>例如：对不同ID的用户，使用同一个组件来渲染。</p><pre><code class="js">const User = &#123;  template: &quot;&lt;div&gt;User&lt;/div&gt;&quot;&#125;const router = new VueRouter(&#123;  routes: [    // 动态路径参数 以冒号开头    &#123; path: &#39;/user/:id&#39;, component: User &#125;  ]&#125;)</code></pre><p>这样/user/foo 和 /user/bar 都将映射到相同的路由User。</p><p>一个“路径参数”使用冒号 : 标记。当匹配到一个路由时，参数值会被设置到 this.$route.params，可以在每个组件内使用。于是，我们可以更新 User 的模板，输出当前用户的 ID：</p><pre><code class="js">const User = &#123;  template: &#39;&lt;div&gt;User &#123;&#123; $route.params.id &#125;&#125;&lt;/div&gt;&#39;&#125;</code></pre><blockquote><p>2、编程式的导航<br>router.push({name:””,params:{}})</p></blockquote><pre><code class="js">  （1）this.$router.push  // 带参数  this.$router.push(&#123;    name:&quot;User&quot;,    params:&#123;      userId:&quot;123&quot;    &#125;  &#125;)</code></pre><p>router.push({path:””,query:””})</p><pre><code class="js">  (2) this.$router.push(&#123;    path:&quot;/user&quot;,    query:&#123;      plan:&quot;private&quot;    &#125;  &#125;)</code></pre><p>router.replace()使用方法跟router.push()很像，不会向history添加新纪录，替换掉当前的history记录。<br>router.go()在history记录中向前或者向后多少步。正数为向前多少步，负数为向后多少步</p><blockquote><p>3、滚动行为</p></blockquote><p>使用前端路由，当切换到新路由时，想要页面滚到顶部，或者是保持原先的滚动位置，就像重新加载页面那样。 vue-router 能做到，而且更好，它让你可以自定义路由切换时页面如何滚动。</p><blockquote><p>注意：这个功能只在支持 history.pushState 的浏览器中可用。</p></blockquote><pre><code class="js">scrollBehavior (to, from, savedPosition) &#123;  if (savedPosition) &#123;    return savedPosition  &#125; else &#123;    return &#123; x: 0, y: 0 &#125;  &#125;&#125;</code></pre><blockquote><p>4、路由懒加载</p></blockquote><p>有时候我们想把某个路由下的所有组件都打包在同个异步块 (chunk) 中。只需要使用命名chunk，一个特殊的注释语法来提供chunk name(需要 Webpack &gt; 2.4)。</p><pre><code class="js">const Foo = () =&gt; import(/* webpackChunkName: &quot;group-foo&quot; */ &#39;./Foo.vue&#39;)const Bar = () =&gt; import(/* webpackChunkName: &quot;group-foo&quot; */ &#39;./Bar.vue&#39;)const Baz = () =&gt; import(/* webpackChunkName: &quot;group-foo&quot; */ &#39;./Baz.vue&#39;)</code></pre><h2 id="表单输入控制"><a href="#表单输入控制" class="headerlink" title="表单输入控制"></a>表单输入控制</h2><blockquote><p>表单修饰符：如果是简单的控制输入一定是数字或者去掉用户输入的收尾空白符，可以直接使用 Vue 提供的表单修饰符 .number 和 .trim</p></blockquote><p>1、如果想自动将用户的输入值转为数值类型，可以给 v-model 添加 number 修饰符：</p><pre><code class="vue">&lt;input v-model.number=&quot;age&quot; type=&quot;number&quot;&gt;</code></pre><p>2、如果要自动过滤用户输入的首尾空白字符，可以给 v-model 添加 trim 修饰符：</p><pre><code class="vue">&lt;input v-model.trim=&quot;msg&quot;&gt;</code></pre><blockquote><p>change事件:给表单绑定事件，在事件处理中进行表单输入控制</p></blockquote><pre><code class="html">&lt;input v-model=&quot;value2&quot; type=&quot;text&quot; @change=&quot;inputChange(value2)&quot; /&gt;</code></pre><pre><code class="js">methods: &#123;  inputChange: function(val) &#123;    if (!val) return &#39;&#39;    val = val.toString()    this.value2 = val.charAt(0).toUpperCase() + val.slice(1)  &#125;&#125;</code></pre><blockquote><p>filter过滤器</p></blockquote><pre><code class="html">&lt;input v-model=&quot;value1&quot;  type=&quot;text&quot; /&gt;</code></pre><pre><code class="js">Vue.filter(&#39;capitalize&#39;, function (value) &#123;  if (!value) return &#39;&#39;  value = value.toString()  return value.charAt(0).toUpperCase() + value.slice(1)&#125;)</code></pre><pre><code class="js">watch: &#123;  value1(val) &#123;     this.value1 = this.$options.filters.capitalize(val);  &#125;&#125;</code></pre><blockquote><p>指令:声明一个全局指令</p></blockquote><details><summary>点击展示代码</summary><pre><code class="js">// 只能输入正整数,0-9的数字Vue.directive(&#39;enterIntNumber&#39;, &#123;  inserted: function (el) &#123;    let trigger = (el, type) =&gt; &#123;      const e = document.createEvent(&#39;HTMLEvents&#39;)      e.initEvent(type, true, true)      el.dispatchEvent(e)    &#125;    el.addEventListener(&quot;keyup&quot;, function (e) &#123;      let input = e.target;      let reg = new RegExp(&#39;^\\d&#123;1&#125;\\d*$&#39;);  //正则验证是否是数字      let correctReg = new RegExp(&#39;\\d&#123;1&#125;\\d*&#39;);  //正则获取是数字的部分      let matchRes = input.value.match(reg);      if (matchRes === null) &#123;        // 若不是纯数字 把纯数字部分用正则获取出来替换掉        let correctMatchRes = input.value.match(correctReg);        if (correctMatchRes) &#123;          input.value = correctMatchRes[0];        &#125; else &#123;          input.value = &quot;&quot;;        &#125;      &#125;      trigger(input, &#39;input&#39;)    &#125;);  &#125;&#125;);</code></pre></details><pre><code class="html">&lt;!--限制输入正整数--&gt;&lt;input v-enterIntNumber placeholder=&quot;0&quot; type=&quot;number&quot;&gt;</code></pre><h1 id="Vue渲染目标元素的6种方法"><a href="#Vue渲染目标元素的6种方法" class="headerlink" title="Vue渲染目标元素的6种方法"></a>Vue渲染目标元素的6种方法</h1><p>1、直接创建Vue实例</p><details><summary>点击展示代码</summary><pre><code class="html">&lt;!DOCTYPE html&gt;&lt;html lang=&quot;en&quot;&gt;&lt;head&gt;  &lt;meta charset=&quot;UTF-8&quot;&gt;  &lt;title&gt;vue&lt;/title&gt;&lt;/head&gt;&lt;body&gt;  &lt;div id=&quot;app&quot;&gt;&lt;/div&gt;    &lt;!-- 这里直接引入cdn源码 --&gt;  &lt;script src=&quot;https://cdn.jsdelivr.net/npm/vue&quot;&gt;&lt;/script&gt;  &lt;script&gt;  var app = new Vue(&#123;    el: &quot;#app&quot;,    template: &quot;&lt;h1&gt;&#123;&#123;message&#125;&#125;&lt;/h1&gt;&quot;,    data()&#123;      return&#123;        message:&#39;Hello Vue.js!&#39;      &#125;    &#125;  &#125;);  &lt;/script&gt;&lt;/body&gt;&lt;/html&gt;</code></pre></details><p>2、Vue.extend</p><blockquote><p>Vue.extend(options) 方式是使用Vue构造器的一个“子类”，其参数同Vue(options)一模一样，唯一的不同是没有 el 属性来指定挂载的DOM元素，所以这里需要通过 $mount() 方法，来手动实现挂载。</p></blockquote><details><summary>点击展示代码</summary><pre><code class="html">  &lt;div id=&quot;app&quot;&gt;&lt;/div&gt;  &lt;script&gt;  var app = Vue.extend(&#123;    el: &quot;#app&quot;,    template: &#39;&lt;h1&gt;&#123;&#123;msg&#125;&#125;&lt;/h1&gt;&#39;,    data() &#123;      return &#123;        msg: &#39;hello extend&#39;      &#125;    &#125;  &#125;)  // 注意这里 Vue.extend 方式是生成了一个 Vue 子类，所以需要 new关键字来重新创建，然后手动挂载。  new app().$mount(&#39;#app&#39;);  &lt;/script&gt;</code></pre></details><p>3.Vue.component</p><blockquote><p>Vue.component(id, [definition])方式是注册一个名称为id的全局组件，然后我们可以通过使用该组件来，实现目标元素渲染。其中definition 参数同 Vue.extend 中的参数一模一样，方法一样，需要使用$mount()方法手动挂载。</p></blockquote><details><summary>点击展示代码</summary><pre><code class="html">  &lt;div id=&quot;app&quot;&gt;&lt;/div&gt;  &lt;script&gt;  // var app = Vue.component(&#39;hello&#39;, &#123;  //     template:&#39;&lt;h1&gt;&#123;&#123;msg&#125;&#125;&lt;/h1&gt;&#39;,  //   data() &#123;  //     return &#123;  //       msg: &#39;hello component&#39;  //     &#125;  //   &#125;  // &#125;)  // new app().$mount(&#39;#app&#39;)  //1、 注册组件  Vue.component(&#39;hello&#39;, &#123;    template: &#39;&lt;h1&gt;&#123;&#123;msg&#125;&#125;&lt;/h1&gt;&#39;,    data() &#123;      return &#123;        msg: &#39;hello component&#39;      &#125;    &#125;  &#125;)  // 2、创建Vue实例  new Vue(&#123;    el: &quot;#app&quot;,    template: &#39;&lt;hello /&gt;&#39;  &#125;)  &lt;/script&gt;</code></pre><blockquote><p>仅仅注册组件式不够的，我们还要通过创建一个Vue实例，才能使用该组件。</p></blockquote></details><p>4、Vue.directive自定义指令</p><details><summary>点击展示代码</summary><pre><code class="html">  &lt;div id=&quot;app&quot;&gt;    &lt;div v-hello=&quot;msg&quot;&gt;&lt;/div&gt;  &lt;/div&gt;  &lt;script&gt;  Vue.directive(&#39;hello&#39;, &#123;    bind: function(el, binding) &#123;      el.innerHTML = &quot;&lt;h1&gt;&quot; + binding.value + &quot;&lt;/h1&gt;&quot;    &#125;  &#125;)  new Vue(&#123;    el: &quot;#app&quot;,    data() &#123;      return &#123;        msg: &quot;hello directive 自定义指令&quot;      &#125;    &#125;  &#125;)  &lt;/script&gt;</code></pre></details><p>5、Vue.compile</p><blockquote><p>Vue.compile(template) 参数也就是 template 模板字符串属性，然后通过替换 Vue实例的 render 函数，来实现渲染。</p></blockquote><details><summary>点击展示代码</summary><pre><code class="html">  &lt;div id=&quot;app&quot;&gt;&lt;/div&gt;  &lt;script&gt;      // 参数就是template模板字符串  然后通过替换Vue实例的render函数来实现渲染  var tpl = Vue.compile(&#39;&lt;h1&gt;&#123;&#123;msg&#125;&#125;&lt;h1&gt;&#39;)  new Vue(&#123;    el: &quot;#app&quot;,    data() &#123;      return &#123;        msg: &quot;hello,compile&quot;      &#125;    &#125;,    render: tpl.render  &#125;)  &lt;/script&gt;</code></pre></details><p>6、render</p><blockquote><p>Vue实例在创建的过程中也会调用 render 函数，render 函数默认会传递一个参数,我们可以通过 createElement 来动态创建一个 VNode，以此来渲染目标元素</p></blockquote><details><summary>点击展示代码</summary><pre><code class="html">  &lt;div id=&quot;app&quot;&gt;&lt;/div&gt;  &lt;script&gt;  new Vue(&#123;    el: &quot;#app&quot;,    data() &#123;      return &#123;        msg: &#39;hello,render&#39;      &#125;    &#125;,    render: function(createElement) &#123;      return createElement(&#39;h1&#39;, this.msg)    &#125;  &#125;)  &lt;/script&gt;</code></pre></details><h1 id="data-computed-watch"><a href="#data-computed-watch" class="headerlink" title="data/computed/watch"></a>data/computed/watch</h1><p>1、data</p><details><summary>点击展示代码</summary><pre><code class="html">  &lt;div id=&quot;app&quot;&gt;    &lt;button @click=&quot;addItem&quot;&gt;添加&lt;/button&gt;    &lt;ul&gt;      &lt;li v-for=&quot;(item,index) in list&quot; :key=&quot;index&quot;&gt;        &lt;a :href=&quot;item.url&quot;&gt;&#123;&#123;item.name&#125;&#125;&lt;/a&gt;      &lt;/li&gt;    &lt;/ul&gt;  &lt;/div&gt;  &lt;script&gt;  var app = new Vue(&#123;    el: &quot;#app&quot;,    data() &#123;      return &#123;        count: 1,        list: [&#123;          name: &#39;vue js&#39;,          url: &#39;https://cn.vuejs.org&#39;        &#125;, &#123;          name: &#39;github&#39;,          url: &#39;https://github.com&#39;        &#125;, &#123;          name: &#39;blog&#39;,          url: &#39;issummer.cn&#39;        &#125;]      &#125;    &#125;,    methods: &#123;      addItem() &#123;        this.count++        this.list.push(&#123;          name: &#39;baidu&#39; + this.count,          url: &#39;https://www.baidu.com&#39;        &#125;)      &#125;    &#125;  &#125;)  &lt;/script&gt;</code></pre></details><p>2、computed</p><blockquote><p>computed 中的属性是需要先进行计算，然后再返回想要的数据的。当我们输出某个属性，必须依赖另外一个 data 中的属性来动态计算获得的，此时使用 computed 就非常简单了。</p></blockquote><details><summary>点击展示代码</summary><pre><code class="html">  &lt;div id=&quot;app&quot;&gt;      &lt;button @click=&quot;addItem&quot;&gt;添加&lt;/button&gt;      &lt;ul&gt;          &lt;li v-for=&quot;(item,index) in list&quot; :key=&quot;index&quot;&gt;              &lt;a :href=&quot;item.url&quot;&gt;&#123;&#123;item.name&#125;&#125;&lt;/a&gt;          &lt;/li&gt;      &lt;/ul&gt;  &lt;/div&gt;  &lt;script&gt;  var app = new Vue(&#123;    el: &quot;#app&quot;,    data() &#123;      return &#123;        count: 1,        // 这里是后台数据        requestList: [          &#39;vuejs https://cn.vuejs.org&#39;,          &#39;github https://github.com&#39;,          &#39;blog https://issummer.cn&#39;        ]      &#125;    &#125;,    computed: &#123;      list: function() &#123;        var list = []        this.requestList.map(function(item, index) &#123;          var tempArr = item.split(&#39;-&#39;)          list.push(&#123;            name: tempArr[0],            url: tempArr[1]          &#125;)        &#125;)        return list      &#125;    &#125;,    methods: &#123;      addItem() &#123;        this.count++        this.requestList.push(&#39;blog&#39; + this.count + &#39;issummer.cn&#39;)      &#125;    &#125;  &#125;)  &lt;/script&gt;</code></pre></details><blockquote><p>计算是可以修改的,计算属性不仅可以定义为一个函数，也可以定义为一个含有 get/set 属性的对象。当我们定义为一个函数是，Vue 内部会默认将这个函数赋值给 get 属性，一般 set 是未定义的。当我们定义 set 属性后，就可以对它进行修改了。</p></blockquote><details><summary>点击展示代码</summary><pre><code class="html">  &lt;div id=&quot;app&quot;&gt;    &lt;button @click=&quot;changeName&quot;&gt;改变姓名&lt;/button&gt;    &lt;h2&gt;&#123;&#123; username &#125;&#125;&lt;/h2&gt;  &lt;/div&gt;  &lt;script&gt;  var app = new Vue(&#123;    el: &quot;#app&quot;,    data() &#123;      return &#123;        firstName: &#39;Jude&#39;,        lastName: &#39;Summer&#39;      &#125;    &#125;,    computed: &#123;      username: &#123;        get: function() &#123;          return this.firstName + &#39; &#39; + this.lastName        &#125;,        set: function(newVal) &#123;          var names = newVal.split(&#39; &#39;);          this.firstName = names[0];          this.lastName = names[1];        &#125;      &#125;    &#125;,    methods:&#123;        changeName()&#123;            if(this.username === &#39;Jude Summer&#39;)&#123;                this.username = &quot;YQ&quot;            &#125;else&#123;                this.username = &#39;Jude Summer&#39;            &#125;        &#125;    &#125;  &#125;)  &lt;/script&gt;</code></pre></details><p>3、watch侦听器</p><blockquote><p>创建 Vue 应用时，我们还提到过 watch 这个属性，它其实是个对象，键是需要观察的表达式，值是对应的回调函数。值也可以是方法名，或者包含选项的对象。和上面的计算属性类似，他可以监听 值/表达式 的变化来执行回调函数。</p></blockquote><details><summary>点击展示代码</summary><pre><code class="html">    &lt;div id=&quot;app&quot;&gt;        &lt;button @click=&quot;changeName&quot;&gt;改变姓名&lt;/button&gt;        &lt;h2&gt;&#123;&#123; username &#125;&#125;&lt;/h2&gt;    &lt;/div&gt;    &lt;script&gt;        var app = new Vue(&#123;            el: &quot;#app&quot;,            data() &#123;                return &#123;                    firstName: &#39;Jude&#39;,                    lastName: &#39;Summer&#39;,                    username: &#39;Jude Summer&#39;                &#125;            &#125;,            watch: &#123;                firstName: function (val, oldVal) &#123;                    this.username = val + &#39; &#39; + this.lastName;                &#125;,                lastName: function (val, oldVal) &#123;                    this.username = this.firstName + &#39; &#39; + val;                &#125;            &#125;,            methods: &#123;                changeName() &#123;                    if (this.username === &#39;Jude Summer&#39;) &#123;                        this.firstName = &quot;Y&quot;;                        this.lastName = &quot;Q&quot;;                    &#125; else &#123;                        this.firstName = &quot;Jude&quot;;                        this.lastName = &quot;Summer&quot;;                    &#125;                &#125;            &#125;,        &#125;)    &lt;/script&gt;    // 监听对象属性    &lt;script&gt;        var app = new Vue(&#123;            el: &quot;#app&quot;,            data() &#123;                return &#123;                    userinfo: &#123;                        firstName: &#39;Jude&#39;,                        lastName: &#39;Summer&#39;                    &#125;,                    username: &quot;Jude Summer&quot;                &#125;            &#125;,            watch: &#123;                // 此时无论我们如何点击按钮，都无法改变 username 的值，因为 watch 侦听器默认只是侦听该对象本身的赋值操作，也就是直接对 this.userinfo 进行赋值操作时的变化，并未对其内部属性进行侦听                userinfo: function (val, oldVal) &#123;                    this.username = val.firstName + &#39; &#39; + val.lastName;                &#125;            &#125;,            methods: &#123;                changeName: function () &#123;                    if (this.username === &#39;Jude Summer&#39;) &#123;                        this.userinfo.firstName = &#39;Y&#39;                        this.userinfo.lastName = &#39;Q&#39;                    &#125; else &#123;                        this.userinfo.firstName = &quot;Jude&quot;                        this.userinfo.lastName = &quot;Summer&quot;                    &#125;                &#125;            &#125;,        &#125;)    &lt;/script&gt;    // 上面的方法是无法修改username的值 因为 watch 侦听器默认只是侦听该对象本身的赋值操作，也就是直接对 this.userinfo 进行赋值操作时的变化，并未对其内部属性进行侦听。实际上对于侦听的值是可以为一个对象的，它还有个 deep 属性，用来设置是否侦听内部属性的变化，而回调函数是通过 handler 来设置的     &lt;script&gt;        var app = new Vue(&#123;            el: &quot;#app&quot;,            data() &#123;                return &#123;                    userinfo: &#123;                        firstName: &#39;Jude&#39;,                        lastName: &#39;Summer&#39;                    &#125;,                    username: &quot;Jude Summer&quot;                &#125;            &#125;,            watch: &#123;                // depp属性用来侦听内部属性变化，回调函数是通过hander来设置                // 适用于非整体赋值  也就是适用于局部修改属性，这个时候通过设置deep属性为true，来达到侦听目的。                userinfo: &#123;                    deep: true,                    handler: function (val, oldVal) &#123;                        this.username = val.firstName + &quot; &quot; + val.lastName;                    &#125;                &#125;            &#125;,            methods: &#123;                // 修改名字                changeName: function () &#123;                    if (this.username === &#39;Jude Summer&#39;) &#123;                        this.userinfo.firstName = &#39;Y&#39;                        this.userinfo.lastName = &#39;Q&#39;                    &#125; else &#123;                        this.userinfo.firstName = &quot;Jude&quot;                        this.userinfo.lastName = &quot;Summer&quot;                    &#125;                &#125;            &#125;,        &#125;)    &lt;/script&gt;    // 写成对象属性访问表达式的    当侦听对象包含很多属性，而我们只是需要监听其中的一个或某几个属性，这时如果我们通过这种方式侦听所有内部属性的变化，自然就会造成内存的浪费。那么我们可以只侦听单一内部属性的变化    &lt;script&gt;        var app = new Vue(&#123;            el: &quot;#app&quot;,            data() &#123;                return &#123;                    userinfo: &#123;                        firstName: &#39;Jude&#39;,                        lastName: &#39;Summer&#39;                    &#125;,                    username: &quot;Jude Summer&quot;                &#125;            &#125;,            watch: &#123;                // 侦听对象的某个属性                &#39;userinfo.lastName&#39;:function(val,oldVal)&#123;                    this.username = this.userinfo.firstName + &#39; &#39; + val;                &#125;            &#125;,            methods: &#123;                // 修改名字                changeName: function () &#123;                    if (this.username === &#39;Jude Summer&#39;) &#123;                        // this.userinfo.firstName = &#39;Y&#39;                        this.userinfo.lastName = &#39;Q&#39;                    &#125; else &#123;                        // this.userinfo.firstName = &quot;Jude&quot;                        this.userinfo.lastName = &quot;Summer&quot;                    &#125;                &#125;            &#125;,        &#125;)    &lt;/script&gt;</code></pre></details><h1 id="v-on对象语法"><a href="#v-on对象语法" class="headerlink" title="v-on对象语法"></a>v-on对象语法</h1><blockquote><p>绑定事件监听器。事件类型由参数指定。表达式可以是一个方法的名字或一个内联语句，如果没有修饰符也可以省略。</p></blockquote><p>通常的写法：</p><pre><code class="html">&lt;button @click=&quot;handleClick&quot;&gt;&lt;/button&gt;</code></pre><p>对象语法: </p><pre><code class="html">&lt;div v-on=&quot;&#123; mouseenter: ShowInfo, mouseleave: HideInfo &#125;&quot;&gt;  &lt;div&gt;我是title&lt;/div&gt;  &lt;div v-show=&quot;ShowWrapper&quot;&gt;我是显示的内容！&lt;/div&gt;&lt;/div&gt;</code></pre><h1 id="axios的封装"><a href="#axios的封装" class="headerlink" title="axios的封装"></a>axios的封装</h1><h1 id="router-link"><a href="#router-link" class="headerlink" title="router-link"></a>router-link</h1><blockquote><p>有时候，我们需要将router-link渲染成某种标签，例如<code>&lt;li&gt;&lt;/li&gt;</code>使用 tag prop 类指定何种标签，同样它还是会监听点击，触发导航</p></blockquote><p>示例:</p><pre><code class="html">&lt;ul class=&quot;nav-list&quot;&gt;  &lt;router-link tag=&quot;li&quot; to=&quot;home&quot;&gt;home&lt;/router-link&gt;&lt;/ul&gt;&lt;!-- 渲染的结果为 --&gt;&lt;li&gt;home&lt;/li&gt;</code></pre><h1 id="v-slot"><a href="#v-slot" class="headerlink" title="v-slot"></a>v-slot</h1><blockquote><p>可放置在函数参数位置的 JavaScript 表达式 (在支持的环境下可使用解构)。可选，即只需要在为插槽传入 prop 的时候使用。提供具名插槽或需要接收 prop 的插槽。</p></blockquote><pre><code class="html">&lt;!-- 父组件 --&gt;&lt;template&gt;    &lt;div class=&quot;common-card&quot;&gt;    &lt;div class=&quot;title&quot;&gt;&#123;&#123; title &#125;&#125;&lt;/div&gt;    &lt;div class=&quot;value&quot;&gt;&#123;&#123; value &#125;&#125;&lt;/div&gt;    &lt;div class=&quot;chart&quot;&gt;      &lt;slot&gt;&lt;/slot&gt;    &lt;/div&gt;    &lt;div class=&quot;line&quot;&gt;&lt;/div&gt;    &lt;div class=&quot;total&quot;&gt;      &lt;slot name=&quot;footer&quot;&gt;&lt;/slot&gt;    &lt;/div&gt;  &lt;/div&gt;&lt;/template&gt;</code></pre><pre><code class="html">&lt;!-- 子组件 --&gt;  &lt;common-card title=&quot;今日交易用户数&quot; :value=&quot;1234567890&quot;&gt;    &lt;template&gt;      &lt;v-chart :options=&quot;getOptions()&quot; /&gt;    &lt;/template&gt;    &lt;template v-slot:footer&gt;      &lt;span&gt;退货率&lt;/span&gt;      &lt;span class=&quot;emphasis&quot;&gt;12%&lt;/span&gt;    &lt;/template&gt;  &lt;/common-card&gt;</code></pre><h1 id="props"><a href="#props" class="headerlink" title="props"></a>props</h1><blockquote><p>props 可以是数组或对象，用于接收来自父组件的数据。props 可以是简单的数组，或者使用对象作为替代，对象允许配置高级选项，如类型检测、自定义验证和设置默认值。</p></blockquote><blockquote><p>常用于父组件与子组件的通信<br>对象语法选项包括:</p></blockquote><p>1、type：原生构造函数的一种：String、Number、Boolean、Array、Object、Date、Function、Symbol、任何自定义构造函数。</p><p>2、default: any 默认值</p><p>3、required:Boolean 该prop是否是必填项</p><p>4、validator: Function 校验函数</p><pre><code class="js">  props: &#123;    // 检测类型    title: String,    // 检测类型 + 其他验证    age: &#123;      type: Number, //类型      default: 0,// 默认值      required: true,// 是否是必填项      // 校验函数      validator: function (value) &#123;        return value &gt;= 0      &#125;    &#125;  &#125;</code></pre><h1 id="mixin-混入"><a href="#mixin-混入" class="headerlink" title="mixin 混入"></a>mixin 混入</h1><blockquote><p>混入 (mixin) 提供了一种非常灵活的方式，来分发 Vue 组件中的可复用功能。一个混入对象可以包含任意组件选项。当组件使用混入对象时，所有混入对象的选项将被“混合”进入该组件本身的选项。</p></blockquote><p>1、实现原理</p><blockquote><p>将用户传入的对象与 Vue 自身的options属性合并，合并后的对象将会覆盖原来的Vue.options。因为 mixin 方法修改了Vue.options属性，之后创建的每个实例都会用到该属性，所以会影响创建的每个实例。</p></blockquote><p>注意：如果用户传入的对象与组件有相同的数据对象，将会发生合并，并且遵循组件数据优先的原则。对于钩子函数来说，如果相同，将会合并为一个数组，所以都会被调用，只是混入对象的钩子会被先调用。值为对象的选项，例如 methods、components 和 directives，将被合并为同一个对象。两个对象键名冲突时，取组件对象的键值对。</p><pre><code class="js">// vue源码 vue/src/core/global-api/mixin.jsimport &#123; mergeOptions &#125; from &#39;../util/index&#39;export function initMixin (Vue: GlobalAPI) &#123;  Vue.mixin = function (mixin: Object) &#123;    this.options = mergeOptions(this.options, mixin)    return this  &#125;&#125;</code></pre><p>2、如何理解mixin?</p><p>可以将mixin理解为数组，数组中有单个或者多个mixin，mixin的本质就是js对象，拥有Vue实例的所有属性，例如：data,created,methods等，还可以在mixin中再次嵌套mixin</p><p>注意：在组件中引入的方式为 <code>mixins:[myMixin]</code></p><p>3、mixin的实现</p><blockquote><p>当Vue在实例的时候，会调用mergeOptions函数进行options的合并</p></blockquote><details><summary>点击展示代码</summary><pre><code class="js">// vue源码 core/util/options.jsexport function mergeOptions(  parent: Object,  child: Object,  vm?: Component): Object &#123;  ...  // 如果有 child.extends 递归调用 mergeOptions 实现属性拷贝  const extendsFrom = child.extends  if (extendsFrom) &#123;    parent = mergeOptions(parent, extendsFrom, vm)  &#125;  // 如果有 child.mixins 递归调用 mergeOptions 实现属性拷贝  if (child.mixins) &#123;    for (let i = 0, l = child.mixins.length; i &lt; l; i++) &#123;      parent = mergeOptions(parent, child.mixins[i], vm)    &#125;  &#125;  // 申明 options 空对象，用来保存属性拷贝结果  const options = &#123;&#125;  let key  // 遍历 parent 对象，调用 mergeField 进行属性拷贝  for (key in parent) &#123;    mergeField(key)  &#125;  // 遍历 child 对象，调用 mergeField 进行属性拷贝  for (key in child) &#123;    if (!hasOwn(parent, key)) &#123;      mergeField(key)    &#125;  &#125;  // 属性拷贝实现方法 mergeField 函数接收一个 key，首先会申明 strat 变量，如果 strats[key] 为真，就将 strats[key] 赋值给 strat。  function mergeField(key) &#123;    // 穿透赋值，默认为 defaultStrat    const strat = strats[key] || defaultStrat    options[key] = strat(parent[key], child[key], vm, key)  &#125;  return options&#125;</code></pre></details><blockquote><p>vue 中 mixins 的优先级，component &gt; mixins &gt; extends。</p></blockquote><h1 id="边界处理：inject-provide"><a href="#边界处理：inject-provide" class="headerlink" title="边界处理：inject/provide"></a>边界处理：inject/provide</h1><p>类型：</p><blockquote><p>provide：Object | () =&gt; Object</p></blockquote><blockquote><p>inject：Array<string> | { [key: string]: string | Symbol | Object }</p></blockquote><p>provide和inject需要一起使用，可以允许一个祖先组件向其所有子孙后代注入一个依赖，不管组件的层次有多深，并在其上下游关系成立的时间里始终生效。</p><p>同react的上下文特性相似</p><details><summary>点击展示代码</summary><pre><code class="js">// 父级组件提供 &#39;foo&#39;var Provider = &#123;  provide: &#123;    foo: &#39;bar&#39;  &#125;,  // ...&#125;// 子组件注入 &#39;foo&#39;var Child = &#123;  inject: [&#39;foo&#39;],  created () &#123;    console.log(this.foo) // =&gt; &quot;bar&quot;  &#125;  // ...&#125;</code></pre></details><h1 id="vuex"><a href="#vuex" class="headerlink" title="vuex"></a>vuex</h1><blockquote><p>Vuex 是一个专为 Vue.js 应用程序开发的状态管理模式。它采用集中式存储管理应用的所有组件的状态，并以相应的规则保证状态以一种可预测的方式发生变化。简单的说，vuex就是一个状态管理器。</p></blockquote><p>开发过程，通常会遇到多个视图依赖同一个状态，不同视图的行为需要变更为同一状态（例如：后台管理系统的侧边栏的收缩功能。）</p><p>Vuex的核心就是store，它就是一个仓库容器，包含了驱动应用的数据源（state），不同于单纯的全局对象，vuex的状态存储是响应式的，当 Vue组件从 store 中读取状态的时候，若 store 中的状态发生变化，那么相应的组件也会相应地得到高效更新。</p><p>不能直接改变 store 中的状态，改变 store 中的状态的唯一途径就是显式地提交 (commit) mutation。这样使得我们可以方便地跟踪每一个状态的变化，从而让我们能够实现一些工具帮助我们更好地了解我们的应用。</p><h1 id="vue装饰器的使用"><a href="#vue装饰器的使用" class="headerlink" title="vue装饰器的使用"></a>vue装饰器的使用</h1><blockquote><p>decorator装饰器通过对类、对象、方法、属性进行修饰，对其添加一些其他行为，即对一段代码进行二次包装。</p></blockquote><p>使用方法：</p><pre><code class="js">const decorator = (target,name,descriptor) =&gt; &#123;  var oldValue = descriptor.value  descriptor.value = function()&#123;    return oldValue.apply(this,arguments)  &#125;  return descriptor&#125;</code></pre><p>然后直接@descriptor到函数、类或者对象上即可。使用装饰器可以不需要关注代码内部的实现，增强了代码的可读性。</p><p>vue中使用装饰器：</p><p>项目中使用eslint，需要开启装饰器相关语法的检测。</p><pre><code class="js">// .eslintrc.js  parserOptions: &#123;    parser: &#39;babel-eslint&#39;,    ecmaFeatures:&#123;      legacyDecorators: true    &#125;  &#125;,</code></pre><p>Vue项目二次弹窗进行删除操作：</p><p>1、工具函数decorator.js</p><pre><code class="js">// 需安装element-uiimport &#123; MessageBox, Message &#125; from &#39;element-ui&#39;export function confirm(title, content, confirmButtonText = &#39;确定&#39;) &#123;  return function(target, name, descriptor) &#123;    const originValue = descriptor.value    descriptor.value = function(...args) &#123;      MessageBox.confirm(content, title, &#123;        dangerouslyUseHTMLString: true,        distinguishCancelAndClose: true,        confirmButtonText: confirmButtonText      &#125;).then(originValue.bind(this, ...args)).catch(error =&gt; &#123;        if (error === &#39;close&#39; || error === &#39;cancel&#39;) &#123;          Message.info(&#39;用户取消操作&#39;)        &#125; else &#123;          Message.info(error)        &#125;      &#125;)    &#125;    return descriptor  &#125;&#125;</code></pre><p>2、页面引入装饰器函数</p><pre><code class="html">&lt;template&gt;  &lt;div class=&quot;about&quot;&gt;    &lt;h1&gt;This is an about page&lt;/h1&gt;    &lt;p&gt;装饰器&lt;/p&gt;    &lt;button @click=&#39;test&#39;&gt;confirm&lt;/button&gt;&lt;button&gt;cancel&lt;/button&gt;  &lt;/div&gt;&lt;/template&gt;</code></pre><pre><code class="js">import &#123; confirm &#125; from &#39;./decorator.js&#39;export default &#123;  name: &#39;about&#39;,  methods: &#123;    @confirm(&#39;删除&#39;, &#39;确认删除?&#39;)    test () &#123;      this.$message.success(&#39;success!!&#39;)    &#125;  &#125;&#125;</code></pre>]]></content>
+        <content type="html"><![CDATA[<p>如何解决安卓手机点击虚拟返回键退出当前应用。</p><span id="more"></span><p>一、问题描述：</p><p>最近的项目是使用Vue全家桶+HBuilder打包开发一个移动端APP。<br>在测试的时候发现，当安卓手机使用虚拟按钮的时候，点击虚拟按钮的返回键，APP会直接退出。<br>这是因为安卓手机自带back虚拟按键，如果不修改其默认事件，点一下app就退出了，<br>所以需要修改这个按键默认事件事件的代码。</p><p>二、解决办法：</p><p>在index.html中加入一个script，加上如下代码：</p><details><summary>点我展示代码</summary><pre><code class="javascript">&lt;script&gt;    document.addEventListener(&#39;plusready&#39;, function () &#123;        var first = null;        var webview = plus.webview.currentWebview();        plus.key.addEventListener(&#39;backbutton&#39;, function () &#123;            webview.canBack(function (e) &#123;                if (e.canBack) &#123;                    webview.back(); //这里不建议修改自己跳转的路径                  &#125; else &#123;                    //首次按键，提示‘再按一次退出应用’                      if (!first) &#123;                      first = new Date().getTime(); //获取第一次点击的时间戳                        plus.nativeUI.toast(&quot;再按一次退出应用&quot;, &#123;                        duration: &#39;short&#39;                      &#125;); //通过H5+ API 调用Android 上的toast 提示框                        setTimeout(function () &#123;                        first = null;                      &#125;, 1000);                    &#125; else &#123;                        // 获取第二次点击的时间戳, 两次之差 小于 1000ms 说明1s点击了两次,                       if (new Date().getTime() - first &lt; 1000) &#123;                          plus.runtime.quit(); //退出应用                &#125;            &#125;          &#125;        &#125;)      &#125;);    &#125;);    &lt;/script&gt;</code></pre></details>]]></content>
       
       
       
         <tags>
             
-            <tag> vue </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>h5扫码功能</title>
-      <link href="/2021/01/20/h5-scan/"/>
-      <url>/2021/01/20/h5-scan/</url>
-      
-        <content type="html"><![CDATA[<p>使用H5 API barcode实现扫码。</p><span id="more"></span><pre><code class="html">&lt;template&gt;    &lt;div&gt;        &lt;div @click=&quot;handleCloseScan&quot;&gt;X&lt;/div&gt;        &lt;div class=&quot;scan&quot;&gt;            &lt;div id=&quot;bcid&quot;&gt;&lt;/div&gt;            &lt;div&gt;                &lt;button @click=&quot;handleStartScan&quot;&gt;扫 码&lt;/button&gt;            &lt;/div&gt;        &lt;/div&gt;    &lt;/div&gt;&lt;/template&gt;</code></pre><details><summary>点击展示js代码</summary><pre><code class="js">    &lt;script&gt;        // 扫描对象        var scan = null;        methods:&#123;            // 开始扫描            handleStartScan()&#123;                const that = this;                if(!window.plus) return;                scan = new plus.barcode.Barcode(&#39;bcid&#39;);                // 开始扫描                scan.start();                // 扫码成功之后的回调函数 type是类型 result 结果                scan.onmarked = function(type,result)&#123;                    const text = &#39;&#39;;                    switch(type)&#123;                        case plus.barcode.QR:                            type = &#39;QR&#39;;                            break;                        case plus.barcode.EAN13:                            type = &quot;EAN13&quot;;                            break;                        case plus.barcode.EAN8:                            type = &quot;EAN8&quot;;                            break;                        default:                            type = &quot;其它&quot; + type;                            break;                    &#125;                    result = result.replace(/\n/g,&quot;&quot;);                    const id = result.match(/\d+/)[0];                    that.$router.push(&#123;                        name:&#39;ComponentName&#39;,                        params: &#123;                            id:id                        &#125;                    &#125;);                    scan.close();                &#125;            &#125;,            // 关闭扫描控件            handleCloseScan()&#123;                 if(!window.plus) return;                 scan.close();                 this.$router.push(&#39;/&#39;);            &#125;        &#125;&#125;    &lt;/script&gt;</code></pre></details>]]></content>
-      
-      
-      
-        <tags>
-            
-            <tag> h5 </tag>
+            <tag> dev </tag>
             
         </tags>
       
@@ -612,6 +378,196 @@
     
     
     <entry>
+      <title>移动端300ms延迟在IOS11中的bug</title>
+      <link href="/2020/02/20/mobile/"/>
+      <url>/2020/02/20/mobile/</url>
+      
+        <content type="html"><![CDATA[<p>在移动端点击一个元素触发事件的顺序为：touchstart –&gt; touchmove –&gt; touchend –&gt; click</p><span id="more"></span><h2 id="移动端300ms延迟在IOS11中的bug"><a href="#移动端300ms延迟在IOS11中的bug" class="headerlink" title="移动端300ms延迟在IOS11中的bug"></a>移动端300ms延迟在IOS11中的bug</h2><blockquote><p>解决方案</p></blockquote><p>1、禁用缩放 更改默认视口宽度</p><pre><code class="js">&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1&quot;&gt;</code></pre><p>2、fastclick解决300ms延迟问题<br>        首先，需要安装fastclick插件</p><pre><code class="js">npm install fastclick</code></pre><p>3、在main.js文件中引入fastclick，绑定到body上</p><pre><code class="js">import FastClick from &quot;fastclick&quot;FastClick.attach(document.body);</code></pre><p>这就是常用来解决移动端300ms延迟的方法。但是这种方法在iOS11的系统中存在bug。</p><p>4、iOS11系统中出现的bug<br>    在iOS11系统下，点击input输入框的时候会出现不灵敏的现象。</p><blockquote><p>解决方案:</p></blockquote><details><summary>点我展示代码</summary><pre><code class="js">&lt;script&gt;FastClick.prototype.focus = function (targetElement) &#123;  var length;  var deviceIsWindowsPhone = navigator.userAgent.indexOf(&quot;Windows Phone&quot;) &gt;= 0;  var deviceIsIos = /iP(ad|hone|od)/.test(navigator.userAgent) &amp;&amp; !deviceIsWindowsPhone;  //兼容处理:在iOS7中，有一些元素（如date、datetime、month等）在setSelectionRange会出现TypeError  //这是因为这些元素并没有selectionStart和selectionEnd的整型数字属性，所以一旦引用就会报错，因此排除这些属性才使用setSelectionRange方法  if (deviceIsIOS &amp;&amp; targetElement.setSelectionRange &amp;&amp; targetElement.type.indexOf(&#39;date&#39;) !== 0 &amp;&amp; targetElement.type !== &#39;time&#39; &amp;&amp; targetElement.type !== &#39;month&#39;) &#123;    length = targetElement.value.length;    // 修复bug ios 11.3不弹出键盘，这里加上聚焦代码，让其强制聚焦弹出键盘    targetElement.setSelectionRange(length, length);  &#125; else &#123;    targetElement.focus();  &#125;&#125;&lt;/script&gt;</code></pre></details><blockquote><p>注意：<br>setSelectionRange是HTMLInputElement的一个方法,用来设定input textare的当前文本的起始位置和结束位置。<br>(<a href="https://developer.mozilla.org/zh-CN/docs/Web/API/HTMLInputElement/setSelectionRange">MDN文档</a>）<br>对setSelectionRange方法只能用于类型为文本、搜索、连接、电话号码、密码的输入，以及在Chrome33开始访问其余类型的属性和方法抛出异常。<br>输入类型为数字时会抛出：“不能从’HTMLInputElement’中读取’selectionStart’属性：输入元素的类型(‘number’)不支持选择（Failed to read the ‘selectionStart’ property from ‘HTMLInputElement’: The input element’s type (‘number’) does not support selection）”。</p></blockquote>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> dev </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>v-cloak解决页面闪烁问题</title>
+      <link href="/2020/02/12/v-cloak/"/>
+      <url>/2020/02/12/v-cloak/</url>
+      
+        <content type="html"><![CDATA[<p>这个指令保持在元素上直到关联实例结束编译。和CSS规则如[v-cloak]{ display: none }一起用时，这个指令可以隐藏未编译的 Mustache 标签直到实例准备完毕。</p><span id="more"></span><p>很多时候，我们页面模板中的数据是异步获取的，在网络不好的情况下，渲染页面的时候会出现页面闪烁的效果，影响用户体验，v-cloak 指令保持在元素上直到关联实例结束编译，利用它的特性，结合 CSS 的规则 [v-cloak] { display: none } 一起使用就可以隐藏掉未编译好的 Mustache 标签，直到实例准备完毕。</p><pre><code class="html">&lt;div class=&quot;#app&quot; v-cloak&gt;    &lt;p&gt;&#123;&#123;value.name&#125;&#125;&lt;/p&gt;&lt;/div&gt;</code></pre><pre><code class="css">[v-cloak] &#123;    display: none;&#125;</code></pre><blockquote><p>需要注意，虽然解决了闪烁的问题，但这段时间内如果什么都不处理的话，会直接白屏，这并不是我们想要的效果，我们应该加一个loading动画或者骨架屏的效果，提升用户体验。</p></blockquote>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> dev </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>下拉框select的option</title>
+      <link href="/2019/12/29/select/"/>
+      <url>/2019/12/29/select/</url>
+      
+        <content type="html"><![CDATA[<p>下拉的选项是从后台获取的数据,如何获取选定项的值?</p><span id="more"></span><p>以选择银行卡为例：</p><pre><code class="js">    &lt;select v-model=&quot;selected&quot; class=&quot;selected&quot;&gt;        &lt;option disabled value v-show=&quot;showBankCard&quot;&gt;请选择提现到账的银行卡&lt;/option&gt;        &lt;option            v-for=&quot;item in BankCardList&quot;            :key=&quot;item.id&quot;            v-bind:value=&quot;item.id&quot;        &gt;            &#123;&#123; item.card_no &#125;&#125;        &lt;/option&gt;    &lt;/select&gt;</code></pre><pre><code class="js">item.card_no ? item.card_no.replace(/^(\d&#123;4&#125;)\d+(\d&#123;4&#125;)$/,&quot;$1****$2&quot;):&quot;&quot;// 银行卡号显示为 6217 **** 0000 的格式。</code></pre>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> dev </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>二维码的生成</title>
+      <link href="/2019/12/28/qrcode/"/>
+      <url>/2019/12/28/qrcode/</url>
+      
+        <content type="html"><![CDATA[<p>使用 qrcode 生成二维码</p><span id="more"></span><p>一、下载插件 qrcode 插件</p><pre><code class="js">    npm install qrcode --save</code></pre><p>二、在 main.js 中引用</p><pre><code class="js">import QRCode from &quot;qrcode&quot;;Vue.use(QRCode);</code></pre><p>三、组件中引入 QRCode</p> <details> <summary>点我展示代码</summary> <pre><code class="html">    &lt;template&gt;        &lt;div&gt;            &lt;div id=&quot;qrcode&quot;&gt;&lt;/div&gt;        &lt;/div&gt;    &lt;/template&gt;</code></pre><pre><code class="js">    &lt;script&gt;      import QRCode from &#39;qrcode&#39;;      mounted()&#123;          this.CreateQrcode();      &#125;,      method:&#123;          setTimeout(() =&gt; &#123;              // 获取DOM节点              let dom = document.getElementById(&#39;qrcode);              // 路由传参              const res = this.$route.params;              const lbsid = res.id;              // 二维码包含的URL 需要将URL和id做一下字符串的拼接              let url = &#39;http://*********&#39;;              let URL = url.concat(lbsid);              let qrCode = new QRCode(dom,&#123;                  width:260, // 图像宽度                  height:260,  // 图像高度                  colorDark:&quot;#000000&quot;,  // 前景色                  colorLight:&quot;#ffffff&quot;, // 背景色                  correctLevel: QRCode.CorrectLevel.H  // 容错等级              &#125;);              qrCode.clear();              qrCode.makeCode(URL);          &#125;,100)      &#125;    &lt;/script&gt;    &lt;style lang=&quot;less&quot; scoped&gt;        #qrcode &#123;            display: inline-block;            margin-top: 6rem;            img &#123;                width: 60%;                height: 60%;                background-color: #fff; //设置白色背景色                padding: 6px; // 利用padding的特性，挤出白边  &#125;&#125;    &lt;/style&gt;</code></pre></details>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> dev </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>微信公众号网页使用popstate事件</title>
+      <link href="/2019/12/23/popstate/"/>
+      <url>/2019/12/23/popstate/</url>
+      
+        <content type="html"><![CDATA[<p>如何在h5移动端禁止某一些页面使用虚拟返回键。</p><span id="more"></span><h3 id="1、popstate事件"><a href="#1、popstate事件" class="headerlink" title="1、popstate事件"></a>1、popstate事件</h3><p>MDN上是这样介绍popstate的：<br>    当活动历史记录条目更改时，将触发popstate事件。如果被激活的历史记录条目是通过对history.pushState（）的调用创建的，或者受到对history.replaceState（）的调用的影响，popstate事件的state属性包含历史条目的状态对象的副本。<br>    需要注意的是调用history.pushState()或history.replaceState()不会触发popstate事件。只有在做出浏览器动作时，才会触发该事件，如用户点击浏览器的回退按钮（或者在Javascript代码中调用history.back()或者history.forward()方法）<br>    不同的浏览器在加载页面时处理popstate事件的形式存在差异。页面加载时Chrome和Safari通常会触发(emit )popstate事件，但Firefox则不会。<br>    我负责的一个项目中，在微信公众号网页的某一个页面需要禁止使用微信浏览器的返回键。</p><h3 id="2、解决方式："><a href="#2、解决方式：" class="headerlink" title="2、解决方式："></a>2、解决方式：</h3><details><summary>点我展示代码</summary><pre><code class="js">// 在禁止返回的组件的methods中写一个方法forbidBackforbidBack()&#123;    window.history.pushState(&quot;forward&quot;,null,&quot;#&quot;);    window.history.forward(1);&#125;// 监听返回键，禁止返回之前的路由if(window.history &amp;&amp; window.history.pushState)&#123;    window.addEventListener(&quot;popstate&quot;,this.forbidBack,false);    this.forbidBack();&#125;//离开页面需要销毁监听window.removeEventListener(&quot;popstate&quot;,this.forbidBack,fasle);</code></pre></details>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> dev </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>h5扫码功能</title>
+      <link href="/2019/12/20/h5-scan/"/>
+      <url>/2019/12/20/h5-scan/</url>
+      
+        <content type="html"><![CDATA[<p>使用H5 API barcode实现扫码。</p><span id="more"></span><pre><code class="html">&lt;template&gt;    &lt;div&gt;        &lt;div @click=&quot;handleCloseScan&quot;&gt;X&lt;/div&gt;        &lt;div class=&quot;scan&quot;&gt;            &lt;div id=&quot;bcid&quot;&gt;&lt;/div&gt;            &lt;div&gt;                &lt;button @click=&quot;handleStartScan&quot;&gt;扫 码&lt;/button&gt;            &lt;/div&gt;        &lt;/div&gt;    &lt;/div&gt;&lt;/template&gt;</code></pre><details><summary>点击展示js代码</summary><pre><code class="js">    &lt;script&gt;        // 扫描对象        var scan = null;        methods:&#123;            // 开始扫描            handleStartScan()&#123;                const that = this;                if(!window.plus) return;                scan = new plus.barcode.Barcode(&#39;bcid&#39;);                // 开始扫描                scan.start();                // 扫码成功之后的回调函数 type是类型 result 结果                scan.onmarked = function(type,result)&#123;                    const text = &#39;&#39;;                    switch(type)&#123;                        case plus.barcode.QR:                            type = &#39;QR&#39;;                            break;                        case plus.barcode.EAN13:                            type = &quot;EAN13&quot;;                            break;                        case plus.barcode.EAN8:                            type = &quot;EAN8&quot;;                            break;                        default:                            type = &quot;其它&quot; + type;                            break;                    &#125;                    result = result.replace(/\n/g,&quot;&quot;);                    const id = result.match(/\d+/)[0];                    that.$router.push(&#123;                        name:&#39;ComponentName&#39;,                        params: &#123;                            id:id                        &#125;                    &#125;);                    scan.close();                &#125;            &#125;,            // 关闭扫描控件            handleCloseScan()&#123;                 if(!window.plus) return;                 scan.close();                 this.$router.push(&#39;/&#39;);            &#125;        &#125;&#125;    &lt;/script&gt;</code></pre></details>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> h5 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>解决Vue项目热更新打包时间过长</title>
+      <link href="/2019/12/11/hot/"/>
+      <url>/2019/12/11/hot/</url>
+      
+        <content type="html"><![CDATA[<p>维护公司一个项目的时候，发现在项目启动、热更新和打包项目的时候，时间长的“感人”。</p><span id="more"></span><p>当你改动项目的一些地方想要立即看到效果的时候，却发现热更新的编译过程却花了你很长时间，“心态崩了。。。”。</p><h3 id="1、解决Vue项目热更新打包时间过长"><a href="#1、解决Vue项目热更新打包时间过长" class="headerlink" title="1、解决Vue项目热更新打包时间过长"></a>1、解决Vue项目热更新打包时间过长</h3><p>解决方法：</p><p>1、使用html-webpack-plugin-for-multihtml插件</p><p>2、在build-webpack.dev.conf.js文件中</p><pre><code class="js">    const HtmlWebpackPlugin = require(&#39;html-webpack-plugin&#39;);    // 替换成    const HtmlWebpackPlugin = require(&#39;html-webpack-plugin-for-multihtml&#39;);</code></pre><p>3、multihtmlCache:true  解决多页热部署的关键</p><pre><code class="js">for (var pathname in pages) &#123;  // 配置生成的html文件，定义路径等  var conf = &#123;    filename: pathname + &#39;.html&#39;,    template: pages[pathname],   // 模板路径    inject: true,              // js插入位置    multihtmlCache: true,    // 解决多页热部署的关键 这里这里这里这里这里很重要！！！    // necessary to consistently work with multiple chunks via CommonsChunkPlugin    chunksSortMode: &#39;dependency&#39;  &#125;;  if (pathname in devWebpackConfig.entry) &#123;    conf.chunks = [&#39;manifest&#39;,&#39;vendor&#39;, pathname];    conf.hash = false;  &#125;  devWebpackConfig.plugins.push(new HtmlWebpackPlugin(conf));&#125;</code></pre><p>4、router.js中使用路由懒加载</p><p>这时候再启动项目，热更新、编译和打包的速度会大大提升。</p><h3 id="2、项目打包由4M变为1M"><a href="#2、项目打包由4M变为1M" class="headerlink" title="2、项目打包由4M变为1M"></a>2、项目打包由4M变为1M</h3><p>公司有一个H5微信公众号网页的项目，项目打包之后文件有4M；</p><p>修改webpack.prod.conf.js里的UglifyJsPlugin，这里的意思是打包后不产生后缀名为.map的文件。</p><pre><code class="javascript">webpack.prod.conf.js    new UglifyJsPlugin(&#123;      uglifyOptions: &#123;        compress: &#123;          warnings: false        &#125;      &#125;,      // sourceMap: config.build.productionSourceMap, 将这行代码注释掉。      parallel: true    &#125;)</code></pre><p>处理后打包的文件的大小为1M</p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> dev </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>markdown语法</title>
+      <link href="/2019/12/05/markdown/"/>
+      <url>/2019/12/05/markdown/</url>
+      
+        <content type="html"><![CDATA[<p>markdown语法整理</p><span id="more"></span><p>Markdown标题</p><p>使用#号标记，使用 # 号可表示 1-6 级标题，一级标题对应一个 # 号，二级标题对应两个 # 号，以此类推。</p><p>1、Markdown段落</p><p>段落的换行是使用两个以上空格加上回车。</p><blockquote><p>字体:</p></blockquote><pre><code>*斜体文本*</code></pre><pre><code>_斜体文本_</code></pre><pre><code>**粗体文本**</code></pre><pre><code>__粗体文本__</code></pre><pre><code>***粗斜体文本***</code></pre><pre><code>___粗斜体文本___</code></pre><blockquote><p>分割线</p></blockquote><pre><code>**** * ******- - -----------</code></pre><blockquote><p>删除线、下划线、脚注</p></blockquote><pre><code>~~删除线~~&lt;u&gt;下划线&lt;/u&gt;[^Vue]:Vuejs是目前最流行的web开发框架之一。</code></pre><p>2、Markdown列表</p><p>Markdown 支持有序列表和无序列表。</p><p>（1）、无序列表使用星号(*)、加号(+)或是减号(-)作为列表标记，这些标记后面要添加一个空格，然后再填写内容：</p><pre><code>* 第一项* 第二项* 第三项+ 第一项+ 第二项+ 第三项- 第一项- 第二项- 第三项</code></pre><p>（2）、有序列表：有序列表使用数字并加上 . 号来表示。</p><pre><code>1. 第一项2. 第二项3. 第三项</code></pre><p>（3）、列表嵌套：列表嵌套只需在子列表中的选项前面添加四个空格即可</p><pre><code>1. 第一项：    - 第一项嵌套的第一个元素    - 第一项嵌套的第二个元素2. 第二项：    - 第二项嵌套的第一个元素    - 第二项嵌套的第二个元素</code></pre><p>4、Markdown区块</p><p>Markdown 区块引用是在段落开头使用 &gt; 符号 ，然后后面紧跟一个空格符号</p><blockquote><p>区块的嵌套</p></blockquote><pre><code>&gt; 最外层&gt; &gt; 第一层嵌套&gt; &gt; &gt; 第二层嵌套</code></pre><blockquote><p>区块中使用列表</p></blockquote><pre><code>&gt; 区块中使用列表&gt; 1. 第一项&gt; 2. 第二项&gt; + 第一项&gt; + 第二项&gt; + 第三项</code></pre><blockquote><p>列表中使用区块</p></blockquote><p>如果要在列表项目内放进区块，那么就需要在 &gt; 前添加四个空格的缩进</p><pre><code>* 第一项    &gt; vuejs    &gt; JavaScript框架* 第二项</code></pre><p>5、Markdown链接和图片</p><blockquote><p>链接</p></blockquote><pre><code>[链接名称](链接地址)或者&lt;链接地址&gt;</code></pre><blockquote><p>图片</p></blockquote><pre><code>![alt 属性文本](图片地址)![alt 属性文本](图片地址 &quot;可选标题&quot;)![RUNOOB 图标](http://static.runoob.com/images/runoob-logo.png)![RUNOOB 图标](http://static.runoob.com/images/runoob-logo.png &quot;RUNOOB&quot;)</code></pre><p>6、Markdown表格</p><pre><code>|  表头   | 表头  ||  ----  | ----  || 单元格  | 单元格 || 单元格  | 单元格 |</code></pre><p>我们可以设置表格的对齐方式：</p><pre><code>-: 设置内容和标题栏居右对齐。:- 设置内容和标题栏居左对齐。:-: 设置内容和标题栏居中对齐。</code></pre>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> markdown </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Vue实现模糊搜索</title>
+      <link href="/2019/11/13/mohu-search/"/>
+      <url>/2019/11/13/mohu-search/</url>
+      
+        <content type="html"><![CDATA[<p>利用computed计算属性实现模糊搜索</p><span id="more"></span><pre><code class="html">  &lt;div id=&quot;app&quot;&gt;    &lt;input type=&quot;text&quot; placeholder=&quot;搜索&quot; v-model=&quot;sousuo&quot;&gt;    &lt;table border=&quot;1&quot;&gt;      &lt;th&gt;编号&lt;/th&gt;      &lt;th&gt;英雄&lt;/th&gt;      &lt;th&gt;技能&lt;/th&gt;      &lt;tr v-for=&quot;(item,index) in sousuo1()&quot; :key=&quot;item.id&quot;&gt;        &lt;td&gt;&#123;&#123;item.id&#125;&#125;&lt;/td&gt;        &lt;td&gt;&#123;&#123;item.name&#125;&#125;&lt;/td&gt;        &lt;td&gt;&#123;&#123;item.jn&#125;&#125;&lt;/td&gt;      &lt;/tr&gt;    &lt;/table&gt;  &lt;/div&gt;</code></pre><p>利用computed计算属性</p><details><summary>点我展示代码</summary><pre><code class="javascript">var app = new Vue(&#123;  el: &#39;#app&#39;,  data: &#123;    sousuo: &#39;&#39;,    list: [&#123;        &quot;id&quot;: 1,        &quot;name&quot;: &quot;艾希&quot;,        &quot;jn&quot;: &quot;射箭&quot;      &#125;, &#123;        &quot;id&quot;: 2,        &quot;name&quot;: &quot;狐狸&quot;,        &quot;jn&quot;: &quot;魅惑&quot;      &#125;, &#123;        &quot;id&quot;: 3,        &quot;name&quot;: &quot;猴子&quot;,        &quot;jn&quot;: &quot;棍子&quot;      &#125;, &#123;        &quot;id&quot;: 4,        &quot;name&quot;: &quot;盖伦&quot;,        &quot;jn&quot;: &quot;大宝剑&quot;      &#125;, &#123;        &quot;id&quot;: 5,        &quot;name&quot;: &quot;德邦&quot;,        &quot;jn&quot;: &quot;尖枪&quot;      &#125;, &#123;        &quot;id&quot;: 6,        &quot;name&quot;: &quot;皇子&quot;,        &quot;jn&quot;: &quot;旗子&quot;      &#125;,    ]  &#125;,  computed: &#123; //设置计算属性    Search() &#123;      if (this.sousuo) &#123;        return this.list.filter((value) =&gt; &#123; //过滤数组元素  this.list就是上面的那个死数据          return value.name.includes(this.sousuo); // 查看value.name里面包含不包含输入的字体          &#125;); //this.sousuo跟上面的输入框是双重绑定      &#125;    &#125;  &#125;,  methods: &#123;    sousuo1() &#123;      if (!this.sousuo) &#123;        return this.list;      &#125;      return this.Search    &#125;  &#125;,&#125;)</code></pre></details>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> dev </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>vue基础知识</title>
+      <link href="/2019/09/26/vue-simple/"/>
+      <url>/2019/09/26/vue-simple/</url>
+      
+        <content type="html"><![CDATA[<p>Vue基础知识点，包括常用指令、计算属性、侦听属性等。</p><span id="more"></span><h2 id="Vuejs响应式原理"><a href="#Vuejs响应式原理" class="headerlink" title="Vuejs响应式原理"></a>Vuejs响应式原理</h2><pre><code>编译组件：对特殊标记的部分（比如双大括号部分）进行替换为相应的数据值。收集依赖：对于编译阶段依赖的数据进行监听（这个都是通过 watcher 对象实现的）通知更新：当步骤2中监听的数据发生变化时，会通知 watcher 进行重新计算，触发关联视图更新。</code></pre><h2 id="vue优点"><a href="#vue优点" class="headerlink" title="vue优点"></a>vue优点</h2><p>轻量级框架：只关注视图层，是一个构建数据的视图集合，大小只有几十kb；</p><p>简单易学：国人开发，中文文档，不存在语言障碍 ，易于理解和学习；</p><p>双向数据绑定：保留了angular的特点，在数据操作方面更为简单；</p><p>组件化：保留了react的优点，实现了html的封装和重用，在构建单页面应用方面有着独特的优势；</p><p>视图，数据，结构分离：使数据的更改更为简单，不需要进行逻辑代码的修改，只需要操作数据就能完成相关操作；</p><p>虚拟DOM：dom操作是非常耗费性能的，不再使用原生的dom操作节点，极大解放dom操作，但具体操作的还是dom不过是换了另一种方式；</p><p>运行速度更快: 相比较与react而言，同样是操作虚拟dom，就性能而言，vue存在很大的优势。</p><h2 id="vue生命周期"><a href="#vue生命周期" class="headerlink" title="vue生命周期"></a>vue生命周期</h2><p>在beforeCreate阶段，vue实例的挂载元素el和数据对象data都为undefined，还未初始化。在created阶段，vue实例的数据对象data有了，el和数据对象data都为undefined，还未初始化。</p><p>载入前/后：在beforeMount阶段，vue实例的$el和data都初始化了，但还是挂载之前为虚拟的dom节点，data.message还未替换。在mounted阶段，vue实例挂载完成，data.message成功渲染。</p><p>更新前/后：当data变化时，会触发beforeUpdate和updated方法</p><p>销毁前/后：在执行destroy方法后，对data的改变不会再触发周期函数，说明此时vue实例已经解除了事件监听以及和dom的绑定，但是dom结构依然存在</p><h2 id="vue组件中data必须是一个函数？"><a href="#vue组件中data必须是一个函数？" class="headerlink" title="vue组件中data必须是一个函数？"></a>vue组件中data必须是一个函数？</h2><p>官网上是这样写的：</p><blockquote><p>一个组件的 data 选项必须是一个函数，因此每个实例可以维护一份被返回对象的独立的拷贝，如果 Vue 没有这条规则，可能会影响到其它所有实例。</p></blockquote><p>当创建Vue实例时，data必须声明为返回一个初始数据对象的函数，因为组件可能被用来创建多个实例。如果 data 仍然是一个纯粹的对象，则所有的实例将共享引用同一个数据对象！通过提供 data 函数，每次创建一个新实例后，我们能够调用 data 函数，从而返回初始数据的一个全新副本数据对象。</p><h2 id="v-if和v-show有什么区别？"><a href="#v-if和v-show有什么区别？" class="headerlink" title="v-if和v-show有什么区别？"></a>v-if和v-show有什么区别？</h2><p>v-if和v-show看起来似乎差不多，当条件不成立时，其所对应的标签元素都不可见，但是这两个选项是有区别的:</p><p>1、v-if在条件切换时，会对标签进行适当的创建和销毁，而v-show则仅在初始化时加载一次，因此v-if的开销相对来说会比v-show大。</p><p>2、v-if是惰性的，只有当条件为真时才会真正渲染标签；如果初始条件不为真，则v-if不会去渲染标签。v-show则无论初始条件是否成立，都会渲染标签，它仅仅做的只是简单的CSS切换。</p><h2 id="computed和watch的区别"><a href="#computed和watch的区别" class="headerlink" title="computed和watch的区别"></a>computed和watch的区别</h2><p>计算属性computed：</p><p>支持缓存，只有依赖数据发生改变，才会重新进行计算不支持异步，当computed内有异步操作时无效，无法监听数据的变化computed 属性值会默认走缓存，计算属性是基于它们的响应式依赖进行缓存的，也就是基于data中声明过或者父组件传递的props中的数据通过计算得到的值如果一个属性是由其他属性计算而来的，这个属性依赖其他属性，是一个多对一或者一对一，一般用computed如果computed属性属性值是函数，那么默认会走get方法；函数的返回值就是属性的属性值；在computed中的，属性都有一个get和一个set方法，当数据变化时，调用set方法。</p><p>侦听属性watch：</p><p>不支持缓存，数据变，直接会触发相应的操作；watch支持异步；监听的函数接收两个参数，第一个参数是最新的值；第二个参数是输入之前的值；当一个属性发生变化时，需要执行对应的操作；一对多；监听数据必须是data中声明过或者父组件传递过来的props中的数据，当数据变化时，触发其他操作，函数有两个参数：<br>immediate：组件加载立即触发回调函数执行</p><pre><code class="js">watch: &#123;  firstName: &#123;    handler(newName, oldName) &#123;      this.fullName = newName + &#39; &#39; + this.lastName;    &#125;,    // 代表在wacth里声明了firstName这个方法之后立即执行handler方法    immediate: true  &#125;&#125;</code></pre><p>deep: deep的意思就是深入观察，监听器会一层层的往下遍历，给对象的所有属性都加上这个监听器，但是这样性能开销就会非常大了，任何修改obj里面任何一个属性都会触发这个监听器里的 handler</p><pre><code class="js">watch: &#123;  obj: &#123;    handler(newName, oldName) &#123;      console.log(&#39;obj.a changed&#39;);    &#125;,    immediate: true,    deep: true  &#125;&#125;</code></pre><p>优化：我们可以使用字符串的形式监听</p><pre><code class="js">watch: &#123;  &#39;obj.a&#39;: &#123;    handler(newName, oldName) &#123;      console.log(&#39;obj.a changed&#39;);    &#125;,    immediate: true,    // deep: true  &#125;&#125;</code></pre><p>这样Vue.js才会一层一层解析下去，直到遇到属性a，然后才给a设置监听函数。</p><h2 id="nextTick是什么？"><a href="#nextTick是什么？" class="headerlink" title="$nextTick是什么？"></a>$nextTick是什么？</h2><p>vue实现响应式并不是数据发生变化后dom立即变化，而是按照一定的策略来进行dom更新。<br>nextTick 是在下次 DOM 更新循环结束之后执行延迟回调，在修改数据之后使用nextTick，则可以在回调中获取更新后的 DOM</p><h2 id="v-for-key的作用"><a href="#v-for-key的作用" class="headerlink" title="v-for key的作用"></a>v-for key的作用</h2><p>当Vue用 v-for 正在更新已渲染过的元素列表是，它默认用“就地复用”策略。如果数据项的顺序被改变，Vue将不是移动DOM元素来匹配数据项的改变，而是简单复用此处每个元素，并且确保它在特定索引下显示已被渲染过的每个元素。<br>为了给Vue一个提示，以便它能跟踪每个节点的身份，从而重用和重新排序现有元素，你需要为每项提供一个唯一 key 属性。key属性的类型只能为 string或者number类型。</p><blockquote><p>key 的特殊属性主要用在Vue的虚拟DOM算法，在新旧nodes对比时辨识VNodes。如果不使用 key，Vue会使用一种最大限度减少动态元素并且尽可能的尝试修复/再利用相同类型元素的算法。使用key，它会基于key的变化重新排列元素顺序，并且会移除 key 不存在的元素。</p></blockquote><p>v-for提升性能的原因:</p><p>key相同时，两个VNode会相同，可以避免不必要的DOM更新；而且在diff内部，也会根据key来跟踪VNode。</p><h2 id="双向数据绑定原理是什么？"><a href="#双向数据绑定原理是什么？" class="headerlink" title="双向数据绑定原理是什么？"></a>双向数据绑定原理是什么？</h2><blockquote><p>vue.js 是采用数据劫持结合发布者-订阅者模式的方式，通过Object.defineProperty()来劫持各个属性的setter，getter，在数据变动时发布消息给订阅者，触发相应的监听回调。</p></blockquote><p>主要分为以下几个步骤：</p><p>1、需要observe的数据对象进行递归遍历，包括子属性对象的属性，都加上setter和getter这样的话，给这个对象的某个值赋值，就会触发setter，那么就能监听到了数据变化</p><p>2、compile解析模板指令，将模板中的变量替换成数据，然后初始化渲染页面视图，并将每个指令对应的节点绑定更新函数，添加监听数据的订阅者，一旦数据有变动，收到通知，更新视图</p><p>3、Watcher订阅者是Observer和Compile之间通信的桥梁，主要做的事情是:<br>①在自身实例化时往属性订阅器(dep)里面添加自己<br>②自身必须有一个update()方法<br>③待属性变动dep.notice()通知时，能调用自身的update()方法，并触发Compile中绑定的回调，则功成身退。</p><p>4、MVVM作为数据绑定的入口，整合Observer、Compile和Watcher三者，通过Observer来监听自己的model数据变化，通过Compile来解析编译模板指令，最终利用Watcher搭起Observer和Compile之间的通信桥梁，达到数据变化 -&gt; 视图更新；视图交互变化(input) -&gt; 数据model变更的双向绑定效果。</p><h2 id="vue-router路由页面管理"><a href="#vue-router路由页面管理" class="headerlink" title="vue-router路由页面管理"></a>vue-router路由页面管理</h2><blockquote><p>Vue Router 是 Vue.js 官方的路由管理器。它和 Vue.js 的核心深度集成，让构建单页面应用变得易如反掌。</p></blockquote><p>包含的功能有：</p><p>1、嵌套的路由/视图表</p><p>2、模块化的、基于组件的路由配置</p><p>3、路由参数、查询、通配符</p><p>4、基于 Vue.js 过渡系统的视图过渡效果</p><p>5、细粒度的导航控制</p><p>6、带有自动激活的 CSS class 的链接</p><p>7、HTML5 历史模式或 hash 模式，在 IE9 中自动降级</p><p>8、自定义的滚动条行为</p><blockquote><p>1、动态路由匹配</p></blockquote><p>例如：对不同ID的用户，使用同一个组件来渲染。</p><pre><code class="js">const User = &#123;  template: &quot;&lt;div&gt;User&lt;/div&gt;&quot;&#125;const router = new VueRouter(&#123;  routes: [    // 动态路径参数 以冒号开头    &#123; path: &#39;/user/:id&#39;, component: User &#125;  ]&#125;)</code></pre><p>这样/user/foo 和 /user/bar 都将映射到相同的路由User。</p><p>一个“路径参数”使用冒号 : 标记。当匹配到一个路由时，参数值会被设置到 this.$route.params，可以在每个组件内使用。于是，我们可以更新 User 的模板，输出当前用户的 ID：</p><pre><code class="js">const User = &#123;  template: &#39;&lt;div&gt;User &#123;&#123; $route.params.id &#125;&#125;&lt;/div&gt;&#39;&#125;</code></pre><blockquote><p>2、编程式的导航<br>router.push({name:””,params:{}})</p></blockquote><pre><code class="js">  （1）this.$router.push  // 带参数  this.$router.push(&#123;    name:&quot;User&quot;,    params:&#123;      userId:&quot;123&quot;    &#125;  &#125;)</code></pre><p>router.push({path:””,query:””})</p><pre><code class="js">  (2) this.$router.push(&#123;    path:&quot;/user&quot;,    query:&#123;      plan:&quot;private&quot;    &#125;  &#125;)</code></pre><p>router.replace()使用方法跟router.push()很像，不会向history添加新纪录，替换掉当前的history记录。<br>router.go()在history记录中向前或者向后多少步。正数为向前多少步，负数为向后多少步</p><blockquote><p>3、滚动行为</p></blockquote><p>使用前端路由，当切换到新路由时，想要页面滚到顶部，或者是保持原先的滚动位置，就像重新加载页面那样。 vue-router 能做到，而且更好，它让你可以自定义路由切换时页面如何滚动。</p><blockquote><p>注意：这个功能只在支持 history.pushState 的浏览器中可用。</p></blockquote><pre><code class="js">scrollBehavior (to, from, savedPosition) &#123;  if (savedPosition) &#123;    return savedPosition  &#125; else &#123;    return &#123; x: 0, y: 0 &#125;  &#125;&#125;</code></pre><blockquote><p>4、路由懒加载</p></blockquote><p>有时候我们想把某个路由下的所有组件都打包在同个异步块 (chunk) 中。只需要使用命名chunk，一个特殊的注释语法来提供chunk name(需要 Webpack &gt; 2.4)。</p><pre><code class="js">const Foo = () =&gt; import(/* webpackChunkName: &quot;group-foo&quot; */ &#39;./Foo.vue&#39;)const Bar = () =&gt; import(/* webpackChunkName: &quot;group-foo&quot; */ &#39;./Bar.vue&#39;)const Baz = () =&gt; import(/* webpackChunkName: &quot;group-foo&quot; */ &#39;./Baz.vue&#39;)</code></pre><h2 id="表单输入控制"><a href="#表单输入控制" class="headerlink" title="表单输入控制"></a>表单输入控制</h2><blockquote><p>表单修饰符：如果是简单的控制输入一定是数字或者去掉用户输入的收尾空白符，可以直接使用 Vue 提供的表单修饰符 .number 和 .trim</p></blockquote><p>1、如果想自动将用户的输入值转为数值类型，可以给 v-model 添加 number 修饰符：</p><pre><code class="vue">&lt;input v-model.number=&quot;age&quot; type=&quot;number&quot;&gt;</code></pre><p>2、如果要自动过滤用户输入的首尾空白字符，可以给 v-model 添加 trim 修饰符：</p><pre><code class="vue">&lt;input v-model.trim=&quot;msg&quot;&gt;</code></pre><blockquote><p>change事件:给表单绑定事件，在事件处理中进行表单输入控制</p></blockquote><pre><code class="html">&lt;input v-model=&quot;value2&quot; type=&quot;text&quot; @change=&quot;inputChange(value2)&quot; /&gt;</code></pre><pre><code class="js">methods: &#123;  inputChange: function(val) &#123;    if (!val) return &#39;&#39;    val = val.toString()    this.value2 = val.charAt(0).toUpperCase() + val.slice(1)  &#125;&#125;</code></pre><blockquote><p>filter过滤器</p></blockquote><pre><code class="html">&lt;input v-model=&quot;value1&quot;  type=&quot;text&quot; /&gt;</code></pre><pre><code class="js">Vue.filter(&#39;capitalize&#39;, function (value) &#123;  if (!value) return &#39;&#39;  value = value.toString()  return value.charAt(0).toUpperCase() + value.slice(1)&#125;)</code></pre><pre><code class="js">watch: &#123;  value1(val) &#123;     this.value1 = this.$options.filters.capitalize(val);  &#125;&#125;</code></pre><blockquote><p>指令:声明一个全局指令</p></blockquote><details><summary>点击展示代码</summary><pre><code class="js">// 只能输入正整数,0-9的数字Vue.directive(&#39;enterIntNumber&#39;, &#123;  inserted: function (el) &#123;    let trigger = (el, type) =&gt; &#123;      const e = document.createEvent(&#39;HTMLEvents&#39;)      e.initEvent(type, true, true)      el.dispatchEvent(e)    &#125;    el.addEventListener(&quot;keyup&quot;, function (e) &#123;      let input = e.target;      let reg = new RegExp(&#39;^\\d&#123;1&#125;\\d*$&#39;);  //正则验证是否是数字      let correctReg = new RegExp(&#39;\\d&#123;1&#125;\\d*&#39;);  //正则获取是数字的部分      let matchRes = input.value.match(reg);      if (matchRes === null) &#123;        // 若不是纯数字 把纯数字部分用正则获取出来替换掉        let correctMatchRes = input.value.match(correctReg);        if (correctMatchRes) &#123;          input.value = correctMatchRes[0];        &#125; else &#123;          input.value = &quot;&quot;;        &#125;      &#125;      trigger(input, &#39;input&#39;)    &#125;);  &#125;&#125;);</code></pre></details><pre><code class="html">&lt;!--限制输入正整数--&gt;&lt;input v-enterIntNumber placeholder=&quot;0&quot; type=&quot;number&quot;&gt;</code></pre><h1 id="Vue渲染目标元素的6种方法"><a href="#Vue渲染目标元素的6种方法" class="headerlink" title="Vue渲染目标元素的6种方法"></a>Vue渲染目标元素的6种方法</h1><p>1、直接创建Vue实例</p><details><summary>点击展示代码</summary><pre><code class="html">&lt;!DOCTYPE html&gt;&lt;html lang=&quot;en&quot;&gt;&lt;head&gt;  &lt;meta charset=&quot;UTF-8&quot;&gt;  &lt;title&gt;vue&lt;/title&gt;&lt;/head&gt;&lt;body&gt;  &lt;div id=&quot;app&quot;&gt;&lt;/div&gt;    &lt;!-- 这里直接引入cdn源码 --&gt;  &lt;script src=&quot;https://cdn.jsdelivr.net/npm/vue&quot;&gt;&lt;/script&gt;  &lt;script&gt;  var app = new Vue(&#123;    el: &quot;#app&quot;,    template: &quot;&lt;h1&gt;&#123;&#123;message&#125;&#125;&lt;/h1&gt;&quot;,    data()&#123;      return&#123;        message:&#39;Hello Vue.js!&#39;      &#125;    &#125;  &#125;);  &lt;/script&gt;&lt;/body&gt;&lt;/html&gt;</code></pre></details><p>2、Vue.extend</p><blockquote><p>Vue.extend(options) 方式是使用Vue构造器的一个“子类”，其参数同Vue(options)一模一样，唯一的不同是没有 el 属性来指定挂载的DOM元素，所以这里需要通过 $mount() 方法，来手动实现挂载。</p></blockquote><details><summary>点击展示代码</summary><pre><code class="html">  &lt;div id=&quot;app&quot;&gt;&lt;/div&gt;  &lt;script&gt;  var app = Vue.extend(&#123;    el: &quot;#app&quot;,    template: &#39;&lt;h1&gt;&#123;&#123;msg&#125;&#125;&lt;/h1&gt;&#39;,    data() &#123;      return &#123;        msg: &#39;hello extend&#39;      &#125;    &#125;  &#125;)  // 注意这里 Vue.extend 方式是生成了一个 Vue 子类，所以需要 new关键字来重新创建，然后手动挂载。  new app().$mount(&#39;#app&#39;);  &lt;/script&gt;</code></pre></details><p>3.Vue.component</p><blockquote><p>Vue.component(id, [definition])方式是注册一个名称为id的全局组件，然后我们可以通过使用该组件来，实现目标元素渲染。其中definition 参数同 Vue.extend 中的参数一模一样，方法一样，需要使用$mount()方法手动挂载。</p></blockquote><details><summary>点击展示代码</summary><pre><code class="html">  &lt;div id=&quot;app&quot;&gt;&lt;/div&gt;  &lt;script&gt;  // var app = Vue.component(&#39;hello&#39;, &#123;  //     template:&#39;&lt;h1&gt;&#123;&#123;msg&#125;&#125;&lt;/h1&gt;&#39;,  //   data() &#123;  //     return &#123;  //       msg: &#39;hello component&#39;  //     &#125;  //   &#125;  // &#125;)  // new app().$mount(&#39;#app&#39;)  //1、 注册组件  Vue.component(&#39;hello&#39;, &#123;    template: &#39;&lt;h1&gt;&#123;&#123;msg&#125;&#125;&lt;/h1&gt;&#39;,    data() &#123;      return &#123;        msg: &#39;hello component&#39;      &#125;    &#125;  &#125;)  // 2、创建Vue实例  new Vue(&#123;    el: &quot;#app&quot;,    template: &#39;&lt;hello /&gt;&#39;  &#125;)  &lt;/script&gt;</code></pre><blockquote><p>仅仅注册组件式不够的，我们还要通过创建一个Vue实例，才能使用该组件。</p></blockquote></details><p>4、Vue.directive自定义指令</p><details><summary>点击展示代码</summary><pre><code class="html">  &lt;div id=&quot;app&quot;&gt;    &lt;div v-hello=&quot;msg&quot;&gt;&lt;/div&gt;  &lt;/div&gt;  &lt;script&gt;  Vue.directive(&#39;hello&#39;, &#123;    bind: function(el, binding) &#123;      el.innerHTML = &quot;&lt;h1&gt;&quot; + binding.value + &quot;&lt;/h1&gt;&quot;    &#125;  &#125;)  new Vue(&#123;    el: &quot;#app&quot;,    data() &#123;      return &#123;        msg: &quot;hello directive 自定义指令&quot;      &#125;    &#125;  &#125;)  &lt;/script&gt;</code></pre></details><p>5、Vue.compile</p><blockquote><p>Vue.compile(template) 参数也就是 template 模板字符串属性，然后通过替换 Vue实例的 render 函数，来实现渲染。</p></blockquote><details><summary>点击展示代码</summary><pre><code class="html">  &lt;div id=&quot;app&quot;&gt;&lt;/div&gt;  &lt;script&gt;      // 参数就是template模板字符串  然后通过替换Vue实例的render函数来实现渲染  var tpl = Vue.compile(&#39;&lt;h1&gt;&#123;&#123;msg&#125;&#125;&lt;h1&gt;&#39;)  new Vue(&#123;    el: &quot;#app&quot;,    data() &#123;      return &#123;        msg: &quot;hello,compile&quot;      &#125;    &#125;,    render: tpl.render  &#125;)  &lt;/script&gt;</code></pre></details><p>6、render</p><blockquote><p>Vue实例在创建的过程中也会调用 render 函数，render 函数默认会传递一个参数,我们可以通过 createElement 来动态创建一个 VNode，以此来渲染目标元素</p></blockquote><details><summary>点击展示代码</summary><pre><code class="html">  &lt;div id=&quot;app&quot;&gt;&lt;/div&gt;  &lt;script&gt;  new Vue(&#123;    el: &quot;#app&quot;,    data() &#123;      return &#123;        msg: &#39;hello,render&#39;      &#125;    &#125;,    render: function(createElement) &#123;      return createElement(&#39;h1&#39;, this.msg)    &#125;  &#125;)  &lt;/script&gt;</code></pre></details><h1 id="data-computed-watch"><a href="#data-computed-watch" class="headerlink" title="data/computed/watch"></a>data/computed/watch</h1><p>1、data</p><details><summary>点击展示代码</summary><pre><code class="html">  &lt;div id=&quot;app&quot;&gt;    &lt;button @click=&quot;addItem&quot;&gt;添加&lt;/button&gt;    &lt;ul&gt;      &lt;li v-for=&quot;(item,index) in list&quot; :key=&quot;index&quot;&gt;        &lt;a :href=&quot;item.url&quot;&gt;&#123;&#123;item.name&#125;&#125;&lt;/a&gt;      &lt;/li&gt;    &lt;/ul&gt;  &lt;/div&gt;  &lt;script&gt;  var app = new Vue(&#123;    el: &quot;#app&quot;,    data() &#123;      return &#123;        count: 1,        list: [&#123;          name: &#39;vue js&#39;,          url: &#39;https://cn.vuejs.org&#39;        &#125;, &#123;          name: &#39;github&#39;,          url: &#39;https://github.com&#39;        &#125;, &#123;          name: &#39;blog&#39;,          url: &#39;issummer.cn&#39;        &#125;]      &#125;    &#125;,    methods: &#123;      addItem() &#123;        this.count++        this.list.push(&#123;          name: &#39;baidu&#39; + this.count,          url: &#39;https://www.baidu.com&#39;        &#125;)      &#125;    &#125;  &#125;)  &lt;/script&gt;</code></pre></details><p>2、computed</p><blockquote><p>computed 中的属性是需要先进行计算，然后再返回想要的数据的。当我们输出某个属性，必须依赖另外一个 data 中的属性来动态计算获得的，此时使用 computed 就非常简单了。</p></blockquote><details><summary>点击展示代码</summary><pre><code class="html">  &lt;div id=&quot;app&quot;&gt;      &lt;button @click=&quot;addItem&quot;&gt;添加&lt;/button&gt;      &lt;ul&gt;          &lt;li v-for=&quot;(item,index) in list&quot; :key=&quot;index&quot;&gt;              &lt;a :href=&quot;item.url&quot;&gt;&#123;&#123;item.name&#125;&#125;&lt;/a&gt;          &lt;/li&gt;      &lt;/ul&gt;  &lt;/div&gt;  &lt;script&gt;  var app = new Vue(&#123;    el: &quot;#app&quot;,    data() &#123;      return &#123;        count: 1,        // 这里是后台数据        requestList: [          &#39;vuejs https://cn.vuejs.org&#39;,          &#39;github https://github.com&#39;,          &#39;blog https://issummer.cn&#39;        ]      &#125;    &#125;,    computed: &#123;      list: function() &#123;        var list = []        this.requestList.map(function(item, index) &#123;          var tempArr = item.split(&#39;-&#39;)          list.push(&#123;            name: tempArr[0],            url: tempArr[1]          &#125;)        &#125;)        return list      &#125;    &#125;,    methods: &#123;      addItem() &#123;        this.count++        this.requestList.push(&#39;blog&#39; + this.count + &#39;issummer.cn&#39;)      &#125;    &#125;  &#125;)  &lt;/script&gt;</code></pre></details><blockquote><p>计算是可以修改的,计算属性不仅可以定义为一个函数，也可以定义为一个含有 get/set 属性的对象。当我们定义为一个函数是，Vue 内部会默认将这个函数赋值给 get 属性，一般 set 是未定义的。当我们定义 set 属性后，就可以对它进行修改了。</p></blockquote><details><summary>点击展示代码</summary><pre><code class="html">  &lt;div id=&quot;app&quot;&gt;    &lt;button @click=&quot;changeName&quot;&gt;改变姓名&lt;/button&gt;    &lt;h2&gt;&#123;&#123; username &#125;&#125;&lt;/h2&gt;  &lt;/div&gt;  &lt;script&gt;  var app = new Vue(&#123;    el: &quot;#app&quot;,    data() &#123;      return &#123;        firstName: &#39;Jude&#39;,        lastName: &#39;Summer&#39;      &#125;    &#125;,    computed: &#123;      username: &#123;        get: function() &#123;          return this.firstName + &#39; &#39; + this.lastName        &#125;,        set: function(newVal) &#123;          var names = newVal.split(&#39; &#39;);          this.firstName = names[0];          this.lastName = names[1];        &#125;      &#125;    &#125;,    methods:&#123;        changeName()&#123;            if(this.username === &#39;Jude Summer&#39;)&#123;                this.username = &quot;YQ&quot;            &#125;else&#123;                this.username = &#39;Jude Summer&#39;            &#125;        &#125;    &#125;  &#125;)  &lt;/script&gt;</code></pre></details><p>3、watch侦听器</p><blockquote><p>创建 Vue 应用时，我们还提到过 watch 这个属性，它其实是个对象，键是需要观察的表达式，值是对应的回调函数。值也可以是方法名，或者包含选项的对象。和上面的计算属性类似，他可以监听 值/表达式 的变化来执行回调函数。</p></blockquote><details><summary>点击展示代码</summary><pre><code class="html">    &lt;div id=&quot;app&quot;&gt;        &lt;button @click=&quot;changeName&quot;&gt;改变姓名&lt;/button&gt;        &lt;h2&gt;&#123;&#123; username &#125;&#125;&lt;/h2&gt;    &lt;/div&gt;    &lt;script&gt;        var app = new Vue(&#123;            el: &quot;#app&quot;,            data() &#123;                return &#123;                    firstName: &#39;Jude&#39;,                    lastName: &#39;Summer&#39;,                    username: &#39;Jude Summer&#39;                &#125;            &#125;,            watch: &#123;                firstName: function (val, oldVal) &#123;                    this.username = val + &#39; &#39; + this.lastName;                &#125;,                lastName: function (val, oldVal) &#123;                    this.username = this.firstName + &#39; &#39; + val;                &#125;            &#125;,            methods: &#123;                changeName() &#123;                    if (this.username === &#39;Jude Summer&#39;) &#123;                        this.firstName = &quot;Y&quot;;                        this.lastName = &quot;Q&quot;;                    &#125; else &#123;                        this.firstName = &quot;Jude&quot;;                        this.lastName = &quot;Summer&quot;;                    &#125;                &#125;            &#125;,        &#125;)    &lt;/script&gt;    // 监听对象属性    &lt;script&gt;        var app = new Vue(&#123;            el: &quot;#app&quot;,            data() &#123;                return &#123;                    userinfo: &#123;                        firstName: &#39;Jude&#39;,                        lastName: &#39;Summer&#39;                    &#125;,                    username: &quot;Jude Summer&quot;                &#125;            &#125;,            watch: &#123;                // 此时无论我们如何点击按钮，都无法改变 username 的值，因为 watch 侦听器默认只是侦听该对象本身的赋值操作，也就是直接对 this.userinfo 进行赋值操作时的变化，并未对其内部属性进行侦听                userinfo: function (val, oldVal) &#123;                    this.username = val.firstName + &#39; &#39; + val.lastName;                &#125;            &#125;,            methods: &#123;                changeName: function () &#123;                    if (this.username === &#39;Jude Summer&#39;) &#123;                        this.userinfo.firstName = &#39;Y&#39;                        this.userinfo.lastName = &#39;Q&#39;                    &#125; else &#123;                        this.userinfo.firstName = &quot;Jude&quot;                        this.userinfo.lastName = &quot;Summer&quot;                    &#125;                &#125;            &#125;,        &#125;)    &lt;/script&gt;    // 上面的方法是无法修改username的值 因为 watch 侦听器默认只是侦听该对象本身的赋值操作，也就是直接对 this.userinfo 进行赋值操作时的变化，并未对其内部属性进行侦听。实际上对于侦听的值是可以为一个对象的，它还有个 deep 属性，用来设置是否侦听内部属性的变化，而回调函数是通过 handler 来设置的     &lt;script&gt;        var app = new Vue(&#123;            el: &quot;#app&quot;,            data() &#123;                return &#123;                    userinfo: &#123;                        firstName: &#39;Jude&#39;,                        lastName: &#39;Summer&#39;                    &#125;,                    username: &quot;Jude Summer&quot;                &#125;            &#125;,            watch: &#123;                // depp属性用来侦听内部属性变化，回调函数是通过hander来设置                // 适用于非整体赋值  也就是适用于局部修改属性，这个时候通过设置deep属性为true，来达到侦听目的。                userinfo: &#123;                    deep: true,                    handler: function (val, oldVal) &#123;                        this.username = val.firstName + &quot; &quot; + val.lastName;                    &#125;                &#125;            &#125;,            methods: &#123;                // 修改名字                changeName: function () &#123;                    if (this.username === &#39;Jude Summer&#39;) &#123;                        this.userinfo.firstName = &#39;Y&#39;                        this.userinfo.lastName = &#39;Q&#39;                    &#125; else &#123;                        this.userinfo.firstName = &quot;Jude&quot;                        this.userinfo.lastName = &quot;Summer&quot;                    &#125;                &#125;            &#125;,        &#125;)    &lt;/script&gt;    // 写成对象属性访问表达式的    当侦听对象包含很多属性，而我们只是需要监听其中的一个或某几个属性，这时如果我们通过这种方式侦听所有内部属性的变化，自然就会造成内存的浪费。那么我们可以只侦听单一内部属性的变化    &lt;script&gt;        var app = new Vue(&#123;            el: &quot;#app&quot;,            data() &#123;                return &#123;                    userinfo: &#123;                        firstName: &#39;Jude&#39;,                        lastName: &#39;Summer&#39;                    &#125;,                    username: &quot;Jude Summer&quot;                &#125;            &#125;,            watch: &#123;                // 侦听对象的某个属性                &#39;userinfo.lastName&#39;:function(val,oldVal)&#123;                    this.username = this.userinfo.firstName + &#39; &#39; + val;                &#125;            &#125;,            methods: &#123;                // 修改名字                changeName: function () &#123;                    if (this.username === &#39;Jude Summer&#39;) &#123;                        // this.userinfo.firstName = &#39;Y&#39;                        this.userinfo.lastName = &#39;Q&#39;                    &#125; else &#123;                        // this.userinfo.firstName = &quot;Jude&quot;                        this.userinfo.lastName = &quot;Summer&quot;                    &#125;                &#125;            &#125;,        &#125;)    &lt;/script&gt;</code></pre></details><h1 id="v-on对象语法"><a href="#v-on对象语法" class="headerlink" title="v-on对象语法"></a>v-on对象语法</h1><blockquote><p>绑定事件监听器。事件类型由参数指定。表达式可以是一个方法的名字或一个内联语句，如果没有修饰符也可以省略。</p></blockquote><p>通常的写法：</p><pre><code class="html">&lt;button @click=&quot;handleClick&quot;&gt;&lt;/button&gt;</code></pre><p>对象语法: </p><pre><code class="html">&lt;div v-on=&quot;&#123; mouseenter: ShowInfo, mouseleave: HideInfo &#125;&quot;&gt;  &lt;div&gt;我是title&lt;/div&gt;  &lt;div v-show=&quot;ShowWrapper&quot;&gt;我是显示的内容！&lt;/div&gt;&lt;/div&gt;</code></pre><h1 id="axios的封装"><a href="#axios的封装" class="headerlink" title="axios的封装"></a>axios的封装</h1><h1 id="router-link"><a href="#router-link" class="headerlink" title="router-link"></a>router-link</h1><blockquote><p>有时候，我们需要将router-link渲染成某种标签，例如<code>&lt;li&gt;&lt;/li&gt;</code>使用 tag prop 类指定何种标签，同样它还是会监听点击，触发导航</p></blockquote><p>示例:</p><pre><code class="html">&lt;ul class=&quot;nav-list&quot;&gt;  &lt;router-link tag=&quot;li&quot; to=&quot;home&quot;&gt;home&lt;/router-link&gt;&lt;/ul&gt;&lt;!-- 渲染的结果为 --&gt;&lt;li&gt;home&lt;/li&gt;</code></pre><h1 id="v-slot"><a href="#v-slot" class="headerlink" title="v-slot"></a>v-slot</h1><blockquote><p>可放置在函数参数位置的 JavaScript 表达式 (在支持的环境下可使用解构)。可选，即只需要在为插槽传入 prop 的时候使用。提供具名插槽或需要接收 prop 的插槽。</p></blockquote><pre><code class="html">&lt;!-- 父组件 --&gt;&lt;template&gt;    &lt;div class=&quot;common-card&quot;&gt;    &lt;div class=&quot;title&quot;&gt;&#123;&#123; title &#125;&#125;&lt;/div&gt;    &lt;div class=&quot;value&quot;&gt;&#123;&#123; value &#125;&#125;&lt;/div&gt;    &lt;div class=&quot;chart&quot;&gt;      &lt;slot&gt;&lt;/slot&gt;    &lt;/div&gt;    &lt;div class=&quot;line&quot;&gt;&lt;/div&gt;    &lt;div class=&quot;total&quot;&gt;      &lt;slot name=&quot;footer&quot;&gt;&lt;/slot&gt;    &lt;/div&gt;  &lt;/div&gt;&lt;/template&gt;</code></pre><pre><code class="html">&lt;!-- 子组件 --&gt;  &lt;common-card title=&quot;今日交易用户数&quot; :value=&quot;1234567890&quot;&gt;    &lt;template&gt;      &lt;v-chart :options=&quot;getOptions()&quot; /&gt;    &lt;/template&gt;    &lt;template v-slot:footer&gt;      &lt;span&gt;退货率&lt;/span&gt;      &lt;span class=&quot;emphasis&quot;&gt;12%&lt;/span&gt;    &lt;/template&gt;  &lt;/common-card&gt;</code></pre><h1 id="props"><a href="#props" class="headerlink" title="props"></a>props</h1><blockquote><p>props 可以是数组或对象，用于接收来自父组件的数据。props 可以是简单的数组，或者使用对象作为替代，对象允许配置高级选项，如类型检测、自定义验证和设置默认值。</p></blockquote><blockquote><p>常用于父组件与子组件的通信<br>对象语法选项包括:</p></blockquote><p>1、type：原生构造函数的一种：String、Number、Boolean、Array、Object、Date、Function、Symbol、任何自定义构造函数。</p><p>2、default: any 默认值</p><p>3、required:Boolean 该prop是否是必填项</p><p>4、validator: Function 校验函数</p><pre><code class="js">  props: &#123;    // 检测类型    title: String,    // 检测类型 + 其他验证    age: &#123;      type: Number, //类型      default: 0,// 默认值      required: true,// 是否是必填项      // 校验函数      validator: function (value) &#123;        return value &gt;= 0      &#125;    &#125;  &#125;</code></pre><h1 id="mixin-混入"><a href="#mixin-混入" class="headerlink" title="mixin 混入"></a>mixin 混入</h1><blockquote><p>混入 (mixin) 提供了一种非常灵活的方式，来分发 Vue 组件中的可复用功能。一个混入对象可以包含任意组件选项。当组件使用混入对象时，所有混入对象的选项将被“混合”进入该组件本身的选项。</p></blockquote><p>1、实现原理</p><blockquote><p>将用户传入的对象与 Vue 自身的options属性合并，合并后的对象将会覆盖原来的Vue.options。因为 mixin 方法修改了Vue.options属性，之后创建的每个实例都会用到该属性，所以会影响创建的每个实例。</p></blockquote><p>注意：如果用户传入的对象与组件有相同的数据对象，将会发生合并，并且遵循组件数据优先的原则。对于钩子函数来说，如果相同，将会合并为一个数组，所以都会被调用，只是混入对象的钩子会被先调用。值为对象的选项，例如 methods、components 和 directives，将被合并为同一个对象。两个对象键名冲突时，取组件对象的键值对。</p><pre><code class="js">// vue源码 vue/src/core/global-api/mixin.jsimport &#123; mergeOptions &#125; from &#39;../util/index&#39;export function initMixin (Vue: GlobalAPI) &#123;  Vue.mixin = function (mixin: Object) &#123;    this.options = mergeOptions(this.options, mixin)    return this  &#125;&#125;</code></pre><p>2、如何理解mixin?</p><p>可以将mixin理解为数组，数组中有单个或者多个mixin，mixin的本质就是js对象，拥有Vue实例的所有属性，例如：data,created,methods等，还可以在mixin中再次嵌套mixin</p><p>注意：在组件中引入的方式为 <code>mixins:[myMixin]</code></p><p>3、mixin的实现</p><blockquote><p>当Vue在实例的时候，会调用mergeOptions函数进行options的合并</p></blockquote><details><summary>点击展示代码</summary><pre><code class="js">// vue源码 core/util/options.jsexport function mergeOptions(  parent: Object,  child: Object,  vm?: Component): Object &#123;  ...  // 如果有 child.extends 递归调用 mergeOptions 实现属性拷贝  const extendsFrom = child.extends  if (extendsFrom) &#123;    parent = mergeOptions(parent, extendsFrom, vm)  &#125;  // 如果有 child.mixins 递归调用 mergeOptions 实现属性拷贝  if (child.mixins) &#123;    for (let i = 0, l = child.mixins.length; i &lt; l; i++) &#123;      parent = mergeOptions(parent, child.mixins[i], vm)    &#125;  &#125;  // 申明 options 空对象，用来保存属性拷贝结果  const options = &#123;&#125;  let key  // 遍历 parent 对象，调用 mergeField 进行属性拷贝  for (key in parent) &#123;    mergeField(key)  &#125;  // 遍历 child 对象，调用 mergeField 进行属性拷贝  for (key in child) &#123;    if (!hasOwn(parent, key)) &#123;      mergeField(key)    &#125;  &#125;  // 属性拷贝实现方法 mergeField 函数接收一个 key，首先会申明 strat 变量，如果 strats[key] 为真，就将 strats[key] 赋值给 strat。  function mergeField(key) &#123;    // 穿透赋值，默认为 defaultStrat    const strat = strats[key] || defaultStrat    options[key] = strat(parent[key], child[key], vm, key)  &#125;  return options&#125;</code></pre></details><blockquote><p>vue 中 mixins 的优先级，component &gt; mixins &gt; extends。</p></blockquote><h1 id="边界处理：inject-provide"><a href="#边界处理：inject-provide" class="headerlink" title="边界处理：inject/provide"></a>边界处理：inject/provide</h1><p>类型：</p><blockquote><p>provide：Object | () =&gt; Object</p></blockquote><blockquote><p>inject：Array<string> | { [key: string]: string | Symbol | Object }</p></blockquote><p>provide和inject需要一起使用，可以允许一个祖先组件向其所有子孙后代注入一个依赖，不管组件的层次有多深，并在其上下游关系成立的时间里始终生效。</p><p>同react的上下文特性相似</p><details><summary>点击展示代码</summary><pre><code class="js">// 父级组件提供 &#39;foo&#39;var Provider = &#123;  provide: &#123;    foo: &#39;bar&#39;  &#125;,  // ...&#125;// 子组件注入 &#39;foo&#39;var Child = &#123;  inject: [&#39;foo&#39;],  created () &#123;    console.log(this.foo) // =&gt; &quot;bar&quot;  &#125;  // ...&#125;</code></pre></details><h1 id="vuex"><a href="#vuex" class="headerlink" title="vuex"></a>vuex</h1><blockquote><p>Vuex 是一个专为 Vue.js 应用程序开发的状态管理模式。它采用集中式存储管理应用的所有组件的状态，并以相应的规则保证状态以一种可预测的方式发生变化。简单的说，vuex就是一个状态管理器。</p></blockquote><p>开发过程，通常会遇到多个视图依赖同一个状态，不同视图的行为需要变更为同一状态（例如：后台管理系统的侧边栏的收缩功能。）</p><p>Vuex的核心就是store，它就是一个仓库容器，包含了驱动应用的数据源（state），不同于单纯的全局对象，vuex的状态存储是响应式的，当 Vue组件从 store 中读取状态的时候，若 store 中的状态发生变化，那么相应的组件也会相应地得到高效更新。</p><p>不能直接改变 store 中的状态，改变 store 中的状态的唯一途径就是显式地提交 (commit) mutation。这样使得我们可以方便地跟踪每一个状态的变化，从而让我们能够实现一些工具帮助我们更好地了解我们的应用。</p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> vue </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Hexo</title>
       <link href="/2019/08/22/hello-world/"/>
       <url>/2019/08/22/hello-world/</url>
@@ -619,6 +575,63 @@
         <content type="html"><![CDATA[<p>hexo常用命令</p><span id="more"></span><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><pre><code class="js">$ hexo new &quot;My New Post&quot;</code></pre><p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><pre><code class="js">$ hexo server</code></pre><p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><pre><code class="js">$ hexo generate</code></pre><p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><pre><code class="bash">$ hexo deploy</code></pre><p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>]]></content>
       
       
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>DOMContentLoaded</title>
+      <link href="/2019/08/18/DOMContentLoaded/"/>
+      <url>/2019/08/18/DOMContentLoaded/</url>
+      
+        <content type="html"><![CDATA[<p>DOMContentLoaded顾名思义就是DOM内容加载完毕。</p><span id="more"></span><p>当初始的 HTML 文档被完全加载和解析完成之后，DOMContentLoaded 事件被触发，而无需等待样式表、图像和子框架的完全加载。另一个不同的事件 load 应该仅用于检测一个完全加载的页面。 这里有一个常见的错误，就是在本应使用 DOMContentLoaded 会更加合适的情况下，却选择使用 load，所以要谨慎。<br>注意：DOMContentLoaded 事件必须等待其所属script之前的样式表加载解析完成才会触发。</p><p>在Vue项目的App.vue中，我们可以这样设置字体。</p><p>1、获取HTML元素；</p><p>2、根据屏幕宽度动态计算fontSize</p><p>3、当fontSize大于50时，设置最大值为50</p><p>4、设置HTML的fontSize属性，使rem生效，1rem = fontSize + “px”</p><pre><code class="js">&lt;script&gt;// DOMContentLoaded 事件必须等待其所属script之前的样式表加载解析完成才会触发。  document.addEventListener(&#39;DOMContentLoaded&#39;, () =&gt; &#123;    // 获取html元素    const html = document.querySelector(&#39;html&#39;)    // 根据屏幕宽度动态计算fontSize    let fontSize = window.innerWidth / 10    // 当fontSize大于50时，设置最大值为50    fontSize = fontSize &gt; 50 ? 50 : fontSize    // 设置html的fontSize属性，使rem生效，1rem = fontSize + &#39;px&#39;    html.style.fontSize = fontSize + &#39;px&#39;  &#125;)&lt;/script&gt;</code></pre>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> dev </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>如何使用CSS画三角形?</title>
+      <link href="/2019/06/20/css/"/>
+      <url>/2019/06/20/css/</url>
+      
+        <content type="html"><![CDATA[<p>三角形的画法,一般经常使用三角形作为提示框、下拉菜单等功能。</p><span id="more"></span><p>实现方式：</p><p>1、HTML结构</p><pre><code class="html">&lt;div class=&quot;item0&quot;&gt;&lt;/div&gt;&lt;div class=&quot;item1&quot;&gt;&lt;/div&gt;&lt;div class=&quot;item2&quot;&gt;&lt;/div&gt;&lt;div class=&quot;item3&quot;&gt;&lt;/div&gt;</code></pre><p>2、将类名为item的块级元素的width、height设置为0</p><pre><code class="css">.item0&#123;    width:0;    height:0;&#125;</code></pre><p>3、将类名为item的元素的3个border的颜色设置为transparent，箭头指向的对面border设置颜色；</p><pre><code class="css">.item0&#123;    width: 0px;    height: 0px;    border-left: 50px solid transparent;    border-right: 50px solid transparent;    border-top: 50px solid transparent;    border-bottom: 80px solid blue;    background: white;&#125;</code></pre><p>上面的为方向向上的三角形<br>4、依次类推可以画出方向向左、右、下的三角形</p><pre><code class="css">.item1&#123;    width: 0px;    height: 0px;    border-left: 50px solid transparent;    border-right: 50px solid transparent;    border-top: 80px solid green;    border-bottom: 50px solid transparent;    background: white;&#125;.item2&#123;    width: 0px;    height: 0px;    border-left: 50px solid transparent;    border-right: 80px solid violet;    border-top: 50px solid transparent;    border-bottom: 50px solid transparent;    background: white;&#125;.item3&#123;    width: 0px;    height: 0px;    border-left: 80px solid purple;    border-right: 50px solid transparent;    border-top: 50px solid transparent;    border-bottom: 50px solid transparent;    background: white;&#125;</code></pre>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> dev </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>微信小程序checkbox-group</title>
+      <link href="/2019/01/20/check-group/"/>
+      <url>/2019/01/20/check-group/</url>
+      
+        <content type="html"><![CDATA[<p>checkbox-group多项选择器，内部由多个checkbox组成；<br>主要的属性bindchange   说明checkbox-group中选中项发生改变时触发 change 事件，detail = {value:[选中的checkbox的value的数组]};</p><span id="more"></span><pre><code class="html">&lt;checkbox-group  class=&quot;checkbox_group&quot; bindchange=&quot;checkboxChange&quot;&gt;    &lt;label class=&quot;checkbox&quot; wx:for=&quot;&#123;&#123;items&#125;&#125;&quot; wx:key=&quot;item&quot;&gt;        &lt;checkbox value=&quot;&#123;&#123;item.value&#125;&#125;&quot;  checked=&quot;&#123;&#123;item.checked&#125;&#125;&quot; /&gt;        &#123;&#123;item.value&#125;&#125;    &lt;/label&gt;&lt;/checkbox-group&gt;</code></pre><p>每一次修改选中项，都需要一个空数组去存放选中项。</p><details><summary>点我展示代码</summary><pre><code class="js">  checkboxChange(e) &#123;    const items = this.data.items;     const values = e.detail.value;    // 设置选中的数组为空  选中的id push到数组里面    this.data.vehicle_arr = [];    for (let i = 0, lenI = items.length; i &lt; lenI; ++i) &#123;      items[i].checked = false // 遍历items，让所有的选中状态都为false      for (let j = 0, lenJ = values.length; j &lt; lenJ; ++j) &#123;        if (items[i].value === values[j]) &#123;          items[i].checked = true;          const List = items[i].name.toString().split();          for (let k in List) &#123;            this.data.vehicle_arr.push(List[k]);          &#125;        &#125;      &#125;    &#125;    // 选中的id    this.data.unique = [...new Set(this.data.vehicle_arr)];    this.setData(&#123;      driverarr: e.detail.value.join(&quot;,&quot;), // 多选的数组      items,    &#125;);  &#125;,</code></pre></details>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> dev </tag>
+            
+        </tags>
       
     </entry>
     
