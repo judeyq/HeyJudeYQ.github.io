@@ -1,0 +1,476 @@
+<!DOCTYPE html><html class="appearance-auto" lang="zh-CN"><head><meta charset="UTF-8"><title>Vue项目中前端导出/导入Excel表格的实现</title><meta name="description" content="🐯年"><meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, initial-scale=1"><!-- Google Analytics --><!-- End Google Analytics -->
+<!-- Baidu Analytics --><!-- End Baidu Analytics --><link rel="icon" href="/images/favicon.png"><link rel="stylesheet" href="/style/common/bulma.css"><link rel="stylesheet" href="/style/base.css"><link rel="stylesheet" href="/style/common/helper.css"><script src="/js/common.js"></script><link rel="stylesheet" href="/style/post.css"><link rel="stylesheet" href="/style/themes/highlight-theme-light.css"><script src="/js/highlight.pack.js"></script><meta name="description" content="后台管理系统中，通常有这样的需求:将当前 table 表格导出/导入 Excel 表格，实现方式通常为后端主导（后端使用插件，前端通过点击事件生成一个 a 标签，导出 Excel 表格）、前端主导（使用 xlsx、file-saver、script-loader 插件封装工具函数，通过点击事件，获取当前页面后台返回的表格数据)。
+
+
+一、前端导出 Excel 表格的实现1、安装 pluginnpm install file-saver script-loader xlsx --save
+
+2、Export2Excel 工具函数
+点我展示代码
+
+import &amp;#123; saveAs &amp;#125; from &amp;quot;file-saver&amp;quot;;
+import XLSX from &amp;quot;xls.."><meta name="generator" content="Hexo 6.0.0"></head><body class="is-flex is-flex-direction-column"><header class="header-widget is-flex-shrink-0 is-hidden-mobile"><div class="container is-fullhd is-flex is-justify-content-space-between is-align-items-center is-full-height"><section class="is-hidden-mobile is-flex-shrink-0"><h2><a href="/">Jude's blog</a></h2></section><h3 class="is-hidden-mobile is-family-serif is-full-height is-flex is-align-items-center is-flex-shrink-0"><div class="is-full-height" id="postTopic"><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">Vue项目中前端导出/导入Excel表格的实现</p><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">点击返回顶部</p></div></h3><aside class="is-flex-shrink-0"><h3 class="is-inline-block"><a href="/">首页</a></h3><h3 class="is-inline-block"><a href="/about">关于</a></h3><h3 class="is-inline-block"><a href="/archives">归档</a></h3></aside></div></header><header class="is-flex header-widget is-flex-shrink-0 is-align-items-center is-justify-content-center is-hidden-tablet"><h3 class="is-inline-block"><a href="/">首页</a></h3><h3 class="is-inline-block"><a href="/about">关于</a></h3><h3 class="is-inline-block"><a href="/archives">归档</a></h3></header><main><main class="container is-max-widescreen content section post-page pt-4 px-4"><div class="columns is-flex-desktop is-justify-content-center is-flex-direction-row-reverse"><div class="column is-3 is-hidden-mobile"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E5%89%8D%E7%AB%AF%E5%AF%BC%E5%87%BA-Excel-%E8%A1%A8%E6%A0%BC%E7%9A%84%E5%AE%9E%E7%8E%B0"><span class="toc-text">一、前端导出 Excel 表格的实现</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1%E3%80%81%E5%AE%89%E8%A3%85-plugin"><span class="toc-text">1、安装 plugin</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2%E3%80%81Export2Excel-%E5%B7%A5%E5%85%B7%E5%87%BD%E6%95%B0"><span class="toc-text">2、Export2Excel 工具函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3%E3%80%81%E5%AF%BC%E5%87%BA%E5%87%BD%E6%95%B0"><span class="toc-text">3、导出函数</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E5%89%8D%E7%AB%AF%E5%AF%BC%E5%85%A5-Excel-%E7%9A%84%E5%AE%9E%E7%8E%B0"><span class="toc-text">二、前端导入 Excel 的实现</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1%E3%80%81ant-design-vue-%E4%B8%8A%E4%BC%A0%E7%BB%84%E4%BB%B6%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="toc-text">1、ant-design-vue 上传组件的使用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2%E3%80%81%E5%AF%BC%E5%85%A5%E5%87%BD%E6%95%B0"><span class="toc-text">2、导入函数</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E3%80%81table-%E5%AD%90%E7%BB%84%E4%BB%B6"><span class="toc-text">三、table 子组件</span></a></li></ol></div><div class="column is-9"><header class="my-4"></header><h1 class="mt-0 mb-1 is-family-serif" id="postTitle">Vue项目中前端导出/导入Excel表格的实现</h1><time class="has-text-grey" datetime="2022-01-14T16:00:00.000Z">2022-01-15</time><article class="mt-2 post-content"><p>后台管理系统中，通常有这样的需求:将当前 table 表格导出/导入 Excel 表格，实现方式通常为后端主导（后端使用插件，前端通过点击事件生成一个 a 标签，导出 Excel 表格）、前端主导（使用 xlsx、file-saver、script-loader 插件封装工具函数，通过点击事件，获取当前页面后台返回的表格数据)。</p>
+<span id="more"></span>
+
+<h2 id="一、前端导出-Excel-表格的实现"><a href="#一、前端导出-Excel-表格的实现" class="headerlink" title="一、前端导出 Excel 表格的实现"></a>一、前端导出 Excel 表格的实现</h2><h3 id="1、安装-plugin"><a href="#1、安装-plugin" class="headerlink" title="1、安装 plugin"></a>1、安装 plugin</h3><pre><code class="shell">npm install file-saver script-loader xlsx --save
+</code></pre>
+<h3 id="2、Export2Excel-工具函数"><a href="#2、Export2Excel-工具函数" class="headerlink" title="2、Export2Excel 工具函数"></a>2、Export2Excel 工具函数</h3><details>
+<summary>点我展示代码</summary>
+
+<pre><code class="js">import &#123; saveAs &#125; from &quot;file-saver&quot;;
+import XLSX from &quot;xlsx&quot;;
+
+function generateArray(table) &#123;
+  var out = [];
+  var rows = table.querySelectorAll(&quot;tr&quot;);
+  var ranges = [];
+  for (var R = 0; R &lt; rows.length; ++R) &#123;
+    var outRow = [];
+    var row = rows[R];
+    var columns = row.querySelectorAll(&quot;td&quot;);
+    for (var C = 0; C &lt; columns.length; ++C) &#123;
+      var cell = columns[C];
+      var colspan = cell.getAttribute(&quot;colspan&quot;);
+      var rowspan = cell.getAttribute(&quot;rowspan&quot;);
+      var cellValue = cell.innerText;
+      if (cellValue !== &quot;&quot; &amp;&amp; cellValue == +cellValue) cellValue = +cellValue;
+
+      //Skip ranges
+      ranges.forEach(function (range) &#123;
+        if (
+          R &gt;= range.s.r &amp;&amp;
+          R &lt;= range.e.r &amp;&amp;
+          outRow.length &gt;= range.s.c &amp;&amp;
+          outRow.length &lt;= range.e.c
+        ) &#123;
+          for (var i = 0; i &lt;= range.e.c - range.s.c; ++i) outRow.push(null);
+        &#125;
+      &#125;);
+
+      //Handle Row Span
+      if (rowspan || colspan) &#123;
+        rowspan = rowspan || 1;
+        colspan = colspan || 1;
+        ranges.push(&#123;
+          s: &#123;
+            r: R,
+            c: outRow.length,
+          &#125;,
+          e: &#123;
+            r: R + rowspan - 1,
+            c: outRow.length + colspan - 1,
+          &#125;,
+        &#125;);
+      &#125;
+
+      //Handle Value
+      outRow.push(cellValue !== &quot;&quot; ? cellValue : null);
+
+      //Handle Colspan
+      if (colspan) for (var k = 0; k &lt; colspan - 1; ++k) outRow.push(null);
+    &#125;
+    out.push(outRow);
+  &#125;
+  return [out, ranges];
+&#125;
+
+function datenum(v, date1904) &#123;
+  if (date1904) v += 1462;
+  var epoch = Date.parse(v);
+  return (epoch - new Date(Date.UTC(1899, 11, 30))) / (24 * 60 * 60 * 1000);
+&#125;
+
+function sheet_from_array_of_arrays(data, opts) &#123;
+  var ws = &#123;&#125;;
+  var range = &#123;
+    s: &#123;
+      c: 10000000,
+      r: 10000000,
+    &#125;,
+    e: &#123;
+      c: 0,
+      r: 0,
+    &#125;,
+  &#125;;
+  for (var R = 0; R != data.length; ++R) &#123;
+    for (var C = 0; C != data[R].length; ++C) &#123;
+      if (range.s.r &gt; R) range.s.r = R;
+      if (range.s.c &gt; C) range.s.c = C;
+      if (range.e.r &lt; R) range.e.r = R;
+      if (range.e.c &lt; C) range.e.c = C;
+      var cell = &#123;
+        v: data[R][C],
+      &#125;;
+      if (cell.v == null) continue;
+      var cell_ref = XLSX.utils.encode_cell(&#123;
+        c: C,
+        r: R,
+      &#125;);
+
+      if (typeof cell.v === &quot;number&quot;) cell.t = &quot;n&quot;;
+      else if (typeof cell.v === &quot;boolean&quot;) cell.t = &quot;b&quot;;
+      else if (cell.v instanceof Date) &#123;
+        cell.t = &quot;n&quot;;
+        cell.z = XLSX.SSF._table[14];
+        cell.v = datenum(cell.v);
+      &#125; else cell.t = &quot;s&quot;;
+
+      ws[cell_ref] = cell;
+    &#125;
+  &#125;
+  if (range.s.c &lt; 10000000) ws[&quot;!ref&quot;] = XLSX.utils.encode_range(range);
+  return ws;
+&#125;
+
+function Workbook() &#123;
+  if (!(this instanceof Workbook)) return new Workbook();
+  this.SheetNames = [];
+  this.Sheets = &#123;&#125;;
+&#125;
+
+function s2ab(s) &#123;
+  var buf = new ArrayBuffer(s.length);
+  var view = new Uint8Array(buf);
+  for (var i = 0; i != s.length; ++i) view[i] = s.charCodeAt(i) &amp; 0xff;
+  return buf;
+&#125;
+
+export function export_table_to_excel(id) &#123;
+  var theTable = document.getElementById(id);
+  var oo = generateArray(theTable);
+  var ranges = oo[1];
+
+  /* original data */
+  var data = oo[0];
+  var ws_name = &quot;SheetJS&quot;;
+
+  var wb = new Workbook(),
+    ws = sheet_from_array_of_arrays(data);
+
+  /* add ranges to worksheet */
+  // ws[&#39;!cols&#39;] = [&#39;apple&#39;, &#39;banan&#39;];
+  ws[&quot;!merges&quot;] = ranges;
+
+  /* add worksheet to workbook */
+  wb.SheetNames.push(ws_name);
+  wb.Sheets[ws_name] = ws;
+
+  var wbout = XLSX.write(wb, &#123;
+    bookType: &quot;xlsx&quot;,
+    bookSST: false,
+    type: &quot;binary&quot;,
+  &#125;);
+
+  saveAs(
+    new Blob([s2ab(wbout)], &#123;
+      type: &quot;application/octet-stream&quot;,
+    &#125;),
+    &quot;test.xlsx&quot;
+  );
+&#125;
+
+export function export_json_to_excel(&#123;
+  multiHeader = [],
+  header,
+  data,
+  filename,
+  merges = [],
+  autoWidth = true,
+  bookType = &quot;xlsx&quot;,
+&#125; = &#123;&#125;) &#123;
+  /* original data */
+  filename = filename || &quot;excel-list&quot;;
+  data = [...data];
+  data.unshift(header);
+
+  for (let i = multiHeader.length - 1; i &gt; -1; i--) &#123;
+    data.unshift(multiHeader[i]);
+  &#125;
+
+  var ws_name = &quot;SheetJS&quot;;
+  var wb = new Workbook(),
+    ws = sheet_from_array_of_arrays(data);
+
+  if (merges.length &gt; 0) &#123;
+    if (!ws[&quot;!merges&quot;]) ws[&quot;!merges&quot;] = [];
+    merges.forEach((item) =&gt; &#123;
+      ws[&quot;!merges&quot;].push(XLSX.utils.decode_range(item));
+    &#125;);
+  &#125;
+
+  if (autoWidth) &#123;
+    /*设置worksheet每列的最大宽度*/
+    const colWidth = data.map((row) =&gt;
+      row.map((val) =&gt; &#123;
+        /*先判断是否为null/undefined*/
+        if (val == null) &#123;
+          return &#123;
+            wch: 10,
+          &#125;;
+        &#125; else if (val.toString().charCodeAt(0) &gt; 255) &#123;
+          /*再判断是否为中文*/
+          return &#123;
+            wch: val.toString().length * 2,
+          &#125;;
+        &#125; else &#123;
+          return &#123;
+            wch: val.toString().length,
+          &#125;;
+        &#125;
+      &#125;)
+    );
+    /*以第一行为初始值*/
+    let result = colWidth[0];
+    for (let i = 1; i &lt; colWidth.length; i++) &#123;
+      for (let j = 0; j &lt; colWidth[i].length; j++) &#123;
+        if (result[j][&quot;wch&quot;] &lt; colWidth[i][j][&quot;wch&quot;]) &#123;
+          result[j][&quot;wch&quot;] = colWidth[i][j][&quot;wch&quot;];
+        &#125;
+      &#125;
+    &#125;
+    ws[&quot;!cols&quot;] = result;
+  &#125;
+
+  /* add worksheet to workbook */
+  wb.SheetNames.push(ws_name);
+  wb.Sheets[ws_name] = ws;
+
+  var wbout = XLSX.write(wb, &#123;
+    bookType: bookType,
+    bookSST: false,
+    type: &quot;binary&quot;,
+  &#125;);
+  saveAs(
+    new Blob([s2ab(wbout)], &#123;
+      type: &quot;application/octet-stream&quot;,
+    &#125;),
+    `$&#123;filename&#125;.$&#123;bookType&#125;`
+  );
+&#125;
+</code></pre>
+</details>
+
+<h3 id="3、导出函数"><a href="#3、导出函数" class="headerlink" title="3、导出函数"></a>3、导出函数</h3><p>a-button 为 ant-design-vue 的 button 组件</p>
+<pre><code class="html">&lt;a-button
+  type=&quot;primary&quot;
+  icon=&quot;export&quot;
+  class=&quot;select-bottom&quot;
+  :loading=&quot;exportLoading&quot;
+  @click=&quot;handleExport&quot;
+  &gt;导出
+&lt;/a-button&gt;
+</code></pre>
+<p>handleExport 导出函数</p>
+<blockquote>
+<p>1、点击导出按钮，去加载在 vendor 文件夹中的 Export2Excel 模块<br>2、import 方法执行完毕返回一个 promise 对象，在 then 方法中我们可以拿到使用的模块对象（excel）<br>3、Excel 导出参数部分的 data，是一个严格的二维数组，header 为导出的数据表头，filename 为导出的文件名，bookType 为导出文件类型，autoWidth 为单元格是否要自适应宽度。</p>
+</blockquote>
+<pre><code class="js">handleExport() &#123;
+    //由于是前端导出，所以只能导出当前页的数据
+    this.exportLoading = true;
+      import(&#39;@/vendor/Export2Excel&#39;).then(excel =&gt; &#123;
+        const header = [],
+          filterVal = [];
+        this.tableHead.forEach(item =&gt; &#123;
+          if (item.title != &#39;操作&#39; &amp;&amp; item.title != &#39;序号&#39;) &#123;
+            header.push(item.title);
+            filterVal.push(item.dataIndex);
+          &#125;
+        &#125;);
+        const data = formatJson(this.tableData, filterVal);
+
+        excel.export_json_to_excel(&#123;
+          header,
+          data,
+          filename: &#39;表单统计&#39;
+        &#125;);
+        this.exportLoading = false;
+      &#125;);
+    &#125;
+</code></pre>
+<h2 id="二、前端导入-Excel-的实现"><a href="#二、前端导入-Excel-的实现" class="headerlink" title="二、前端导入 Excel 的实现"></a>二、前端导入 Excel 的实现</h2><h3 id="1、ant-design-vue-上传组件的使用"><a href="#1、ant-design-vue-上传组件的使用" class="headerlink" title="1、ant-design-vue 上传组件的使用"></a>1、ant-design-vue 上传组件的使用</h3><pre><code class="html">&lt;div class=&quot;file-wrapper relative&quot;&gt;
+  &lt;input
+    ref=&quot;excel-upload&quot;
+    type=&quot;file&quot;
+    accept=&quot;.xlsx, .xls&quot;
+    @change=&quot;handleChange&quot;
+    style=&quot;display:none&quot;
+  /&gt;
+  &lt;a-button
+    type=&quot;primary&quot;
+    icon=&quot;file-excel&quot;
+    size=&quot;large&quot;
+    style=&quot;z-index:99&quot;
+    @click=&quot;handleUpload&quot;
+    :loading=&quot;loading&quot;
+  &gt;
+    上传Excel
+  &lt;/a-button&gt;
+  &lt;p class=&quot;text&quot;&gt;请选择Excel上传 支持(xlsx,xls)格式&lt;/p&gt;
+&lt;/div&gt;
+&lt;!-- table组件 tableData:[]  tableHead:[] --&gt;
+&lt;a-card
+  :hoverable=&quot;true&quot;
+  :bordered=&quot;false&quot;
+  v-if=&quot;tableHead.length &gt; 0&quot;
+  style=&quot;margin-top:30px&quot;
+&gt;
+  &lt;standard-table
+    :pagination=&quot;false&quot;
+    :tableData=&quot;tableData&quot;
+    :tableHead=&quot;tableHead&quot;
+  /&gt;
+&lt;/a-card&gt;
+</code></pre>
+<!-- 样式 -->
+
+<pre><code class="css">.file-wrapper &#123;
+  width: 100%;
+  height: 350px;
+  line-height: 350px;
+  text-align: center;
+  background: #e6ecf4;
+  .text &#123;
+    position: absolute;
+    top: 50px;
+    left: 50%;
+    transform: translateX(-50%);
+  &#125;
+&#125;
+</code></pre>
+<h3 id="2、导入函数"><a href="#2、导入函数" class="headerlink" title="2、导入函数"></a>2、导入函数</h3><pre><code class="js">// 引入xlsx table组件
+import XLSX from &quot;xlsx&quot;;
+import standardTable from &quot;@/components/standardTable/index&quot;;
+</code></pre>
+<details>
+<summary>点我展示代码</summary>
+
+<pre><code class="js">    handleChange(e) &#123;
+      const file = e.target.files[0];
+      if (!file) return;
+      //判断格式
+      if (!this.isExcel(file)) &#123;
+        this.$message.warning(&#39;只能选择xlxs,xls文件&#39;);
+        return;
+      &#125;
+      //判断大小
+      if (file.size / 1024 / 1024 &gt; 1) &#123;
+        this.$message.warning(&#39;上传文件大小不能超过1M&#39;);
+        return;
+      &#125;
+      this.loading = true;
+
+      const reader = new FileReader();
+      reader.readAsArrayBuffer(file);
+      reader.onload = e =&gt; &#123;
+        const data = e.target.result;
+        const workbook = XLSX.read(data, &#123; type: &#39;array&#39; &#125;);
+        const firstSheetName = workbook.SheetNames[0];
+        const worksheet = workbook.Sheets[firstSheetName];
+
+        setTimeout(() =&gt; &#123;
+          this.loading = false;
+          const head = this.getHeaderRow(worksheet);
+          this.tableHead = head.map(item =&gt; &#123;
+            return &#123;
+              title: item,
+              dataIndex: item
+            &#125;;
+          &#125;);
+          const tableData = XLSX.utils.sheet_to_json(worksheet);
+          tableData.forEach(item =&gt; &#123;
+            item.id = parseInt(Math.random(0, 1) * 10000);
+          &#125;);
+          this.tableData = tableData;
+        &#125;, 500);
+      &#125;;
+    &#125;,
+
+    generateData(&#123; header, results &#125;) &#123;
+      this.excelData.header = header;
+      this.excelData.results = results;
+      this.onSuccess &amp;&amp; this.onSuccess(this.excelData);
+    &#125;,
+
+    //获取表头
+    getHeaderRow(sheet) &#123;
+      const headers = [];
+      const range = XLSX.utils.decode_range(sheet[&#39;!ref&#39;]);
+      let C;
+      const R = range.s.r;
+
+      for (C = range.s.c; C &lt;= range.e.c; ++C) &#123;
+        const cell = sheet[XLSX.utils.encode_cell(&#123; c: C, r: R &#125;)];
+        let hdr = &#39;UNKNOWN &#39; + C;
+        if (cell &amp;&amp; cell.t) hdr = XLSX.utils.format_cell(cell);
+        headers.push(hdr);
+      &#125;
+      return headers;
+    &#125;,
+
+    handleUpload() &#123;
+      this.$refs[&#39;excel-upload&#39;].click();
+    &#125;,
+    // 文件类型
+    isExcel(file) &#123;
+      return /\.(xlsx|xls|csv)$/.test(file.name);
+    &#125;
+</code></pre>
+</details>
+
+<h2 id="三、table-子组件"><a href="#三、table-子组件" class="headerlink" title="三、table 子组件"></a>三、table 子组件</h2><details>
+<summary>点我展示代码</summary>
+
+<pre><code class="html">&lt;div class=&quot;tableCommon-wrapper&quot;&gt;
+  &lt;a-table
+    :columns=&quot;tableHead&quot;
+    :dataSource=&quot;tableData&quot;
+    :loading=&quot;loading&quot;
+    :pagination=&quot;pagination&quot;
+    :row-selection=&quot;rowSelection&quot;
+    @change=&quot;handleTableChange&quot;
+    rowKey=&quot;id&quot;
+    :scroll=&quot;scroll&quot;
+  &gt;
+    &lt;template
+      slot-scope=&quot;text, record, index&quot;
+      :slot=&quot;slot&quot;
+      v-for=&quot;slot in Object.keys($scopedSlots).filter(key =&gt; key !== &#39;expandedRowRender&#39;)&quot;
+    &gt;
+      &lt;slot :name=&quot;slot&quot; v-bind=&quot;&#123; text, record, index &#125;&quot;&gt;&lt;/slot&gt;
+    &lt;/template&gt;
+  &lt;/a-table&gt;
+&lt;/div&gt;
+</code></pre>
+<pre><code class="js">export default &#123;
+  name: &quot;standardTable&quot;,
+  props: &#123;
+    tableHead: &#123;
+      type: Array,
+      required: true,
+    &#125;,
+    tableData: &#123;
+      type: Array,
+      required: true,
+    &#125;,
+    loading: &#123;
+      type: Boolean,
+      default: false,
+    &#125;,
+    pagination: &#123;
+      type: Boolean | Object,
+    &#125;,
+    rowSelection: &#123;
+      type: Object,
+    &#125;,
+    scroll: &#123;
+      type: Object,
+    &#125;,
+  &#125;,
+  methods: &#123;
+    handleTableChange(val) &#123;
+      this.$emit(&quot;changeCurrent&quot;, val.current);
+    &#125;,
+  &#125;,
+&#125;;
+</code></pre>
+</details>
+</article><section class="jump-container is-flex is-justify-content-space-between my-6"><!-- em is empty placeholder--><a class="button is-default" href="/2022/01/19/webrtc/" title="WebRTC实现视频聊天室(服务端：Koa，客户端：vue)"><i class="iconfont icon-prev mr-2 has-text-grey"></i><span class="has-text-weight-semibold">上一页: WebRTC实现视频聊天室(服务端：Koa，客户端：vue)</span></a><a class="button is-default" href="/2022/01/13/count-to/" title="CountTo:数字动态滚动"><span class="has-text-weight-semibold">下一页: CountTo:数字动态滚动</span><i class="iconfont icon-next ml-2 has-text-grey"></i></a></section></div></div></main></main><footer class="is-flex is-flex-direction-column is-align-items-center is-flex-shrink-0 is-family-serif"><section class="sns-container"><!-- Github--><a title="github" target="_blank" rel="noopener nofollow" href="//github.com/Jude"><i class="iconfont icon-github"></i></a><!-- Ins--><!-- RSS--><!-- 知乎--><!-- 领英--><!-- 脸书--></section><p><span>Copyright ©</span><span> Jude 2022</span></p><div class="is-flex is-justify-content-center is-flex-wrap-wrap"><p>Powered by Hexo &verbar;&nbsp;</p><p class="is-flex is-justify-content-center"><a title="Hexo theme author" target="_blank" rel="noopener" href="//github.com/haojen">Theme by Haojen&nbsp;</a></p><div style="margin-top: 2px"><a class="github-button" title="github-button" target="_blank" rel="noopener" href="https://github.com/haojen/hexo-theme-Claudia" data-color-scheme="no-preference: light; light: light; dark: dark;" data-show-count="true"></a></div></div><div><span></span></div></footer><script async defer src="https://buttons.github.io/buttons.js"></script><script src="/js/post.js"></script></body></html>
