@@ -13,7 +13,7 @@ console.log(fruits); // &amp;quot;Banana&amp;quot;, &amp;quot;Orange&amp;quot;, 
 var x = fruits.pop(); // Mango
 
 // 2、数组结尾添加一个新元素  push()
-var fruits = [&amp;quot;B.."><meta name="generator" content="Hexo 6.0.0"></head><body class="is-flex is-flex-direction-column"><header class="header-widget is-flex-shrink-0 is-hidden-mobile"><div class="container is-fullhd is-flex is-justify-content-space-between is-align-items-center is-full-height"><section class="is-hidden-mobile is-flex-shrink-0"><h2><a href="/">Jude's blog</a></h2></section><h3 class="is-hidden-mobile is-family-serif is-full-height is-flex is-align-items-center is-flex-shrink-0"><div class="is-full-height" id="postTopic"><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">数组方法</p><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">点击返回顶部</p></div></h3><aside class="is-flex-shrink-0"><h3 class="is-inline-block"><a href="/">首页</a></h3><h3 class="is-inline-block"><a href="/about">关于</a></h3><h3 class="is-inline-block"><a href="/archives">归档</a></h3></aside></div></header><header class="is-flex header-widget is-flex-shrink-0 is-align-items-center is-justify-content-center is-hidden-tablet"><h3 class="is-inline-block"><a href="/">首页</a></h3><h3 class="is-inline-block"><a href="/about">关于</a></h3><h3 class="is-inline-block"><a href="/archives">归档</a></h3></header><main><main class="container is-max-widescreen content section post-page pt-4 px-4"><div class="columns is-flex-desktop is-justify-content-center is-flex-direction-row-reverse"><div class="column is-3 is-hidden-mobile"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1%E3%80%81%E5%B8%B8%E7%94%A8%E6%95%B0%E7%BB%84%E6%96%B9%E6%B3%95"><span class="toc-text">1、常用数组方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2%E3%80%81%E9%AB%98%E9%98%B6%E5%87%BD%E6%95%B0"><span class="toc-text">2、高阶函数</span></a></li></ol></div><div class="column is-9"><header class="my-4"><a href="/tags/array"><i class="tag post-item-tag">array</i></a></header><h1 class="mt-0 mb-1 is-family-serif" id="postTitle">数组方法</h1><time class="has-text-grey" datetime="2021-05-02T12:00:00.000Z">2021-05-02</time><article class="mt-2 post-content"><p>js 常用数组方法整理,包括常用的数组常用方法、高阶函数 forEach、filter、map。</p>
+var fruits = [&amp;quot;B.."><meta name="generator" content="Hexo 6.0.0"></head><body class="is-flex is-flex-direction-column"><header class="header-widget is-flex-shrink-0 is-hidden-mobile"><div class="container is-fullhd is-flex is-justify-content-space-between is-align-items-center is-full-height"><section class="is-hidden-mobile is-flex-shrink-0"><h2><a href="/">Jude's blog</a></h2></section><h3 class="is-hidden-mobile is-family-serif is-full-height is-flex is-align-items-center is-flex-shrink-0"><div class="is-full-height" id="postTopic"><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">数组方法</p><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">点击返回顶部</p></div></h3><aside class="is-flex-shrink-0"><h3 class="is-inline-block"><a href="/">首页</a></h3><h3 class="is-inline-block"><a href="/about">关于</a></h3><h3 class="is-inline-block"><a href="/archives">归档</a></h3></aside></div></header><header class="is-flex header-widget is-flex-shrink-0 is-align-items-center is-justify-content-center is-hidden-tablet"><h3 class="is-inline-block"><a href="/">首页</a></h3><h3 class="is-inline-block"><a href="/about">关于</a></h3><h3 class="is-inline-block"><a href="/archives">归档</a></h3></header><main><main class="container is-max-widescreen content section post-page pt-4 px-4"><div class="columns is-flex-desktop is-justify-content-center is-flex-direction-row-reverse"><div class="column is-3 is-hidden-mobile"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1%E3%80%81%E5%B8%B8%E7%94%A8%E6%95%B0%E7%BB%84%E6%96%B9%E6%B3%95"><span class="toc-text">1、常用数组方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2%E3%80%81%E9%AB%98%E9%98%B6%E5%87%BD%E6%95%B0"><span class="toc-text">2、高阶函数</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1%E3%80%81forEach"><span class="toc-text">1、forEach</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%EF%BC%881%EF%BC%89%E7%A8%80%E7%96%8F%E6%95%B0%E7%BB%84"><span class="toc-text">（1）稀疏数组</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-for-%E5%BE%AA%E7%8E%AF%E8%BD%AC%E6%8D%A2%E6%88%90-forEach"><span class="toc-text">(2)for 循环转换成 forEach</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-thisArg-%E4%BD%BF%E7%94%A8%E7%AE%AD%E5%A4%B4%E5%87%BD%E6%95%B0-thisArg-%E5%8F%82%E6%95%B0%E4%BC%9A%E8%A2%AB%E5%BF%BD%E7%95%A5%EF%BC%8C%E5%9B%A0%E4%B8%BA%E7%AE%AD%E5%A4%B4%E5%87%BD%E6%95%B0%E7%BB%91%E5%AE%9A%E4%BA%86-this-%E5%80%BC"><span class="toc-text">(3)thisArg 使用箭头函数 thisArg 参数会被忽略，因为箭头函数绑定了 this 值</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#4-%E5%AF%B9%E8%B1%A1%E5%A4%8D%E5%88%B6%E5%99%A8%E5%87%BD%E6%95%B0"><span class="toc-text">(4)对象复制器函数</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#5-%E6%95%B0%E7%BB%84%E5%9C%A8%E8%BF%AD%E4%BB%A3%E6%97%B6%E8%A2%AB%E4%BF%AE%E6%94%B9%E4%BA%86%EF%BC%8C%E5%88%99%E5%85%B6%E4%BB%96%E5%85%83%E7%B4%A0%E4%BC%9A%E8%A2%AB%E8%B7%B3%E8%BF%87"><span class="toc-text">(5)数组在迭代时被修改了，则其他元素会被跳过</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#6-promise-%E6%88%96-async-%E5%87%BD%E6%95%B0%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="toc-text">(6)promise 或 async 函数的使用</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2%E3%80%81filter"><span class="toc-text">2、filter</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%EF%BC%881-%E7%AD%9B%E9%80%89%E6%8E%92%E9%99%A4%E6%89%80%E6%9C%89%E8%BE%83%E5%B0%8F%E7%9A%84%E5%80%BC"><span class="toc-text">（1)筛选排除所有较小的值</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E8%BF%87%E6%BB%A4-JSON-%E4%B8%AD%E7%9A%84%E6%97%A0%E6%95%88%E6%9D%A1%E7%9B%AE"><span class="toc-text">(2)过滤 JSON 中的无效条目</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-%E5%9C%A8%E6%95%B0%E7%BB%84%E4%B8%AD%E6%90%9C%E7%B4%A2%EF%BC%9A%E6%A0%B9%E6%8D%AE%E6%90%9C%E7%B4%A2%E6%9D%A1%E4%BB%B6%E6%9D%A5%E8%BF%87%E6%BB%A4%E6%95%B0%E7%BB%84%E5%86%85%E5%AE%B9"><span class="toc-text">(3)在数组中搜索：根据搜索条件来过滤数组内容</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3%E3%80%81map"><span class="toc-text">3、map</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E6%A0%BC%E5%BC%8F%E5%8C%96%E6%95%B0%E7%BB%84%E4%B8%AD%E7%9A%84%E5%AF%B9%E8%B1%A1"><span class="toc-text">(1)格式化数组中的对象</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E4%BD%BF%E7%94%A8%E5%8C%85%E5%90%AB%E4%B8%80%E4%B8%AA%E5%8F%82%E6%95%B0%E7%9A%84%E5%87%BD%E6%95%B0%E6%9D%A5%E6%9E%84%E5%BB%BA%E4%B8%80%E4%B8%AA%E6%95%B0%E5%AD%97%E6%95%B0%E7%BB%84"><span class="toc-text">(2)使用包含一个参数的函数来构建一个数字数组</span></a></li></ol></li></ol></div><div class="column is-9"><header class="my-4"><a href="/tags/array"><i class="tag post-item-tag">array</i></a></header><h1 class="mt-0 mb-1 is-family-serif" id="postTitle">数组方法</h1><time class="has-text-grey" datetime="2021-05-02T12:00:00.000Z">2021-05-02</time><article class="mt-2 post-content"><p>js 常用数组方法整理,包括常用的数组常用方法、高阶函数 forEach、filter、map。</p>
 <span id="more"></span>
 
 <h3 id="1、常用数组方法"><a href="#1、常用数组方法" class="headerlink" title="1、常用数组方法"></a>1、常用数组方法</h3><details>
@@ -72,8 +72,7 @@ fruits.toString(); // Banana,Orange,Apple,Mango
 </code></pre>
 </details>
 
-<h3 id="2、高阶函数"><a href="#2、高阶函数" class="headerlink" title="2、高阶函数"></a>2、高阶函数</h3><p>1、forEach</p>
-<blockquote>
+<h3 id="2、高阶函数"><a href="#2、高阶函数" class="headerlink" title="2、高阶函数"></a>2、高阶函数</h3><h4 id="1、forEach"><a href="#1、forEach" class="headerlink" title="1、forEach"></a>1、forEach</h4><blockquote>
 <p>forEach()方法对数组的每个元素执行一次给定的函数。</p>
 </blockquote>
 <p>for example：</p>
@@ -95,7 +94,9 @@ array: forEach()正在操作的数组   数组对象本身
 thisArg：可选参数。当执行回调函数callback时，用作this的值。
 </code></pre>
 <p>常见用法：</p>
-<p>（1）、稀疏数组：不对未初始化的值进行任何操作</p>
+<h5 id="（1）稀疏数组"><a href="#（1）稀疏数组" class="headerlink" title="（1）稀疏数组"></a>（1）稀疏数组</h5><blockquote>
+<p>不对未初始化的值进行任何操作</p>
+</blockquote>
 <pre><code class="js">const arratSpace = [1, 3, , 7];
 let numCallbackRuns = 0;
 arratSpace.forEach(function (e) &#123;
@@ -105,23 +106,20 @@ arratSpace.forEach(function (e) &#123;
 
 console.log(&quot;numCallbackRuns:&quot;, numCallbackRuns);
 </code></pre>
-<p>(2)for 循环转换成 forEach</p>
-<pre><code class="js">const items = [&quot;1&quot;, &quot;2&quot;, &quot;3&quot;, &quot;4&quot;];
+<h5 id="2-for-循环转换成-forEach"><a href="#2-for-循环转换成-forEach" class="headerlink" title="(2)for 循环转换成 forEach"></a>(2)for 循环转换成 forEach</h5><pre><code class="js">const items = [&quot;1&quot;, &quot;2&quot;, &quot;3&quot;, &quot;4&quot;];
 const copy = [];
 
 //for循环
 for (let i = 0; i &lt; items.length; i++) &#123;
-  copey.push(itmes[i]);
+  copey.push(items[i]);
 &#125;
 
-// foeEach
+// forEach
 items.forEach(function (itme) &#123;
   copy.push(item);
 &#125;);
 </code></pre>
-<p>(3)thisArg 使用箭头函数 thisArg 参数会被忽略，因为箭头函数绑定了 this 值</p>
-<p>(4)对象复制器函数</p>
-<pre><code class="js">function copy(obj) &#123;
+<h5 id="3-thisArg-使用箭头函数-thisArg-参数会被忽略，因为箭头函数绑定了-this-值"><a href="#3-thisArg-使用箭头函数-thisArg-参数会被忽略，因为箭头函数绑定了-this-值" class="headerlink" title="(3)thisArg 使用箭头函数 thisArg 参数会被忽略，因为箭头函数绑定了 this 值"></a>(3)thisArg 使用箭头函数 thisArg 参数会被忽略，因为箭头函数绑定了 this 值</h5><h5 id="4-对象复制器函数"><a href="#4-对象复制器函数" class="headerlink" title="(4)对象复制器函数"></a>(4)对象复制器函数</h5><pre><code class="js">function copy(obj) &#123;
   const copy = Object.create(Object.getPrototypeOf(obj));
   const propNames = Object.getOwnPropertyNames(obj);
 
@@ -137,8 +135,7 @@ const obj1 = &#123; a: 1, b: 2 &#125;;
 
 const obj2 = copy(obj1); // obj2看起来和obj1一模一样
 </code></pre>
-<p>(5)数组在迭代时被修改了，则其他元素会被跳过</p>
-<pre><code class="js">var words = [&quot;one&quot;, &quot;two&quot;, &quot;three&quot;, &quot;four&quot;];
+<h5 id="5-数组在迭代时被修改了，则其他元素会被跳过"><a href="#5-数组在迭代时被修改了，则其他元素会被跳过" class="headerlink" title="(5)数组在迭代时被修改了，则其他元素会被跳过"></a>(5)数组在迭代时被修改了，则其他元素会被跳过</h5><pre><code class="js">var words = [&quot;one&quot;, &quot;two&quot;, &quot;three&quot;, &quot;four&quot;];
 words.forEach(function (word) &#123;
   console.log(word);
   if (word === &quot;two&quot;) &#123;
@@ -146,8 +143,7 @@ words.forEach(function (word) &#123;
   &#125;
 &#125;);
 </code></pre>
-<p>(6)promise 或 async 函数的使用</p>
-<pre><code class="js">let ratings = [5, 4, 5];
+<h5 id="6-promise-或-async-函数的使用"><a href="#6-promise-或-async-函数的使用" class="headerlink" title="(6)promise 或 async 函数的使用"></a>(6)promise 或 async 函数的使用</h5><pre><code class="js">let ratings = [5, 4, 5];
 
 let sum = 0;
 
@@ -161,8 +157,7 @@ ratings.forEach(async function (rating) &#123;
 
 console.log(sum); // 0
 </code></pre>
-<p>2、filter</p>
-<blockquote>
+<h3 id="2、filter"><a href="#2、filter" class="headerlink" title="2、filter"></a>2、filter</h3><blockquote>
 <p>filter()创建一个新数组，其包含通过所提供函数实现的测试的所有元素。 返回满足条件的新数组，不满足则返回空数组。</p>
 </blockquote>
 <p>for example</p>
@@ -187,15 +182,13 @@ thisArg:执行callback时，用于this的值
 <pre><code>一个新的、由通过测试的元素组成的数组，如果没有任何数组元素通过测试，则返回空数组。
 </code></pre>
 <p>用法：</p>
-<p>（1）筛选排除所有较小的值</p>
-<pre><code class="js">function isBig(e) &#123;
+<h4 id="（1-筛选排除所有较小的值"><a href="#（1-筛选排除所有较小的值" class="headerlink" title="（1)筛选排除所有较小的值"></a>（1)筛选排除所有较小的值</h4><pre><code class="js">function isBig(e) &#123;
   return e &gt;= 10;
 &#125;
 var filterd = [3, 6, 9, 14, 32].filter(isBig);
 // [14,32]
 </code></pre>
-<p>(2)过滤 JSON 中的无效条目</p>
-<pre><code class="js">var arr = [
+<h4 id="2-过滤-JSON-中的无效条目"><a href="#2-过滤-JSON-中的无效条目" class="headerlink" title="(2)过滤 JSON 中的无效条目"></a>(2)过滤 JSON 中的无效条目</h4><pre><code class="js">var arr = [
   &#123; id: 12 &#125;,
   &#123; id: -1 &#125;,
   &#123; id: 0 &#125;,
@@ -221,8 +214,7 @@ var arrId = arr.filter(filterID);
 console.log(arrId); // [&#123;id:12&#125;,&#123;id:-1&#125;,&#123;id:3&#125;,&#123;id:14.4&#125;]
 console.log(entries); // 5
 </code></pre>
-<p>(3)在数组中搜索：根据搜索条件来过滤数组内容</p>
-<pre><code class="js">var fruits [&#39;apple&#39;,&#39;banana&#39;,&#39;grapes&#39;,&#39;mango&#39;,&#39;orange&#39;]
+<h4 id="3-在数组中搜索：根据搜索条件来过滤数组内容"><a href="#3-在数组中搜索：根据搜索条件来过滤数组内容" class="headerlink" title="(3)在数组中搜索：根据搜索条件来过滤数组内容"></a>(3)在数组中搜索：根据搜索条件来过滤数组内容</h4><pre><code class="js">var fruits [&#39;apple&#39;,&#39;banana&#39;,&#39;grapes&#39;,&#39;mango&#39;,&#39;orange&#39;]
 function filterItems(query)&#123;
     return fruits.filter(function(e)&#123;
         return e.toLowerCase().indexOf(query.toLowerCase()) &gt; -1
@@ -242,8 +234,7 @@ const filterItems = (query) =&gt;&#123;
 console.log(filterItem(&#39;ap&#39;))   // [&#39;apple&#39;,&#39;grapes&#39;]
 console.log(filterItem(&#39;an&#39;))   // [&#39;banana&#39;,&#39;mango&#39;,&#39;orange&#39;]
 </code></pre>
-<p>3、map</p>
-<blockquote>
+<h3 id="3、map"><a href="#3、map" class="headerlink" title="3、map"></a>3、map</h3><blockquote>
 <p>map()方法创建一个新数组，其结果是该数组中的每个元素是调用一次提供的函数后的返回值。 原数组不会改变</p>
 </blockquote>
 <pre><code class="js">const array = [1, 2, 3, 4];
@@ -251,8 +242,7 @@ const maps = array.map((x) =&gt; x * 2);
 console.log(maps); // 2 4 6 8
 </code></pre>
 <p>用法：</p>
-<p>(1)格式化数组中的对象</p>
-<pre><code class="js">var array = [
+<h4 id="1-格式化数组中的对象"><a href="#1-格式化数组中的对象" class="headerlink" title="(1)格式化数组中的对象"></a>(1)格式化数组中的对象</h4><pre><code class="js">var array = [
   &#123; key: 1, value: 10 &#125;,
   &#123; key: 2, value: 20 &#125;,
   &#123; key: 3, value: 30 &#125;,
@@ -265,8 +255,7 @@ var formatterArray = array.map(function (obj) &#123;
 &#125;);
 console.log(formatterArray); // [&#123;1:10&#125;,&#123;2:20&#125;,&#123;3:30&#125;]
 </code></pre>
-<p>(2)使用包含一个参数的函数来构建一个数字数组</p>
-<pre><code class="js">var numbers = [1, 4, 9];
+<h4 id="2-使用包含一个参数的函数来构建一个数字数组"><a href="#2-使用包含一个参数的函数来构建一个数字数组" class="headerlink" title="(2)使用包含一个参数的函数来构建一个数字数组"></a>(2)使用包含一个参数的函数来构建一个数字数组</h4><pre><code class="js">var numbers = [1, 4, 9];
 var double = numbers.map(function (item) &#123;
   return item * 2;
 &#125;);
