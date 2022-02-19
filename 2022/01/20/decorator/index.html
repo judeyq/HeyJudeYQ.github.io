@@ -1,5 +1,5 @@
 <!DOCTYPE html><html class="appearance-auto" lang="zh-CN"><head><meta charset="UTF-8"><title>vue使用装饰器descriptor</title><meta name="description" content="🐯年"><meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, initial-scale=1"><!-- Google Analytics --><!-- End Google Analytics -->
-<!-- Baidu Analytics --><!-- End Baidu Analytics --><link rel="icon" href="/images/favicon.png"><link rel="stylesheet" href="/style/common/bulma.css"><link rel="stylesheet" href="/style/base.css"><link rel="stylesheet" href="/style/common/helper.css"><script src="/js/common.js"></script><link rel="stylesheet" href="/style/post.css"><link rel="stylesheet" href="/style/themes/highlight-theme-light.css"><script src="/js/highlight.pack.js"></script><meta name="description" content="decorator装饰器通过对类、对象、方法、属性进行修饰，对其添加一些其他行为，即对一段代码进行二次包装。
+<!-- Baidu Analytics --><!-- End Baidu Analytics --><link rel="icon" href="/images/favicon.png"><link rel="stylesheet" href="/style/common/bulma.css"><link rel="stylesheet" href="/style/base.css"><link rel="stylesheet" href="/style/common/helper.css"><script src="/js/common.js"></script><link rel="stylesheet" href="/style/post.css"><link rel="stylesheet" href="/style/themes/highlight-theme-light.css"><script src="/js/highlight.pack.js"></script><meta name="description" content="decorator装饰器通过对类、对象、方法、属性进行修饰，对其添加一些其他行为，即对一段代码进行二次包装。装饰器只能用于类和类的方法，不能用于函数，因为存在函数提升。
 
 
 使用方法：
@@ -11,9 +11,9 @@ const decorator = (target,name,descriptor) =&amp;gt; &amp;#123;
   return descriptor
 &amp;#125;
 
-然后直接@descriptor到函数、类或者对象上即可。使用装饰器可以不需要关注代码内部的实现，增强了代码的可读性。
+使用装饰器可以不需要关注代码内部的实现，增强了代码的可读性。
 vue中使用装饰器：
-项目中使用eslint，需要开启装饰.."><meta name="generator" content="Hexo 6.0.0"></head><body class="is-flex is-flex-direction-column"><header class="header-widget is-flex-shrink-0 is-hidden-mobile"><div class="container is-fullhd is-flex is-justify-content-space-between is-align-items-center is-full-height"><section class="is-hidden-mobile is-flex-shrink-0"><h2><a href="/">Jude's blog</a></h2></section><h3 class="is-hidden-mobile is-family-serif is-full-height is-flex is-align-items-center is-flex-shrink-0"><div class="is-full-height" id="postTopic"><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">vue使用装饰器descriptor</p><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">点击返回顶部</p></div></h3><aside class="is-flex-shrink-0"><h3 class="is-inline-block"><a href="/">首页</a></h3><h3 class="is-inline-block"><a href="/about">关于</a></h3><h3 class="is-inline-block"><a href="/archives">归档</a></h3></aside></div></header><header class="is-flex header-widget is-flex-shrink-0 is-align-items-center is-justify-content-center is-hidden-tablet"><h3 class="is-inline-block"><a href="/">首页</a></h3><h3 class="is-inline-block"><a href="/about">关于</a></h3><h3 class="is-inline-block"><a href="/archives">归档</a></h3></header><main><main class="container is-max-widescreen content section post-page pt-4 px-4"><div class="columns is-flex-desktop is-justify-content-center is-flex-direction-row-reverse"><div class="column is-3 is-hidden-mobile is-hidden"></div><div class="column is-9"><header class="my-4"><a href="/tags/vue"><i class="tag post-item-tag">vue</i></a></header><h1 class="mt-0 mb-1 is-family-serif" id="postTitle">vue使用装饰器descriptor</h1><time class="has-text-grey" datetime="2022-01-20T12:00:00.000Z">2022-01-20</time><article class="mt-2 post-content"><p>decorator装饰器通过对类、对象、方法、属性进行修饰，对其添加一些其他行为，即对一段代码进行二次包装。</p>
+项目中使用eslint，需要开启.."><meta name="generator" content="Hexo 6.0.0"></head><body class="is-flex is-flex-direction-column"><header class="header-widget is-flex-shrink-0 is-hidden-mobile"><div class="container is-fullhd is-flex is-justify-content-space-between is-align-items-center is-full-height"><section class="is-hidden-mobile is-flex-shrink-0"><h2><a href="/">Jude's blog</a></h2></section><h3 class="is-hidden-mobile is-family-serif is-full-height is-flex is-align-items-center is-flex-shrink-0"><div class="is-full-height" id="postTopic"><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">vue使用装饰器descriptor</p><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">点击返回顶部</p></div></h3><aside class="is-flex-shrink-0"><h3 class="is-inline-block"><a href="/">首页</a></h3><h3 class="is-inline-block"><a href="/about">关于</a></h3><h3 class="is-inline-block"><a href="/archives">归档</a></h3></aside></div></header><header class="is-flex header-widget is-flex-shrink-0 is-align-items-center is-justify-content-center is-hidden-tablet"><h3 class="is-inline-block"><a href="/">首页</a></h3><h3 class="is-inline-block"><a href="/about">关于</a></h3><h3 class="is-inline-block"><a href="/archives">归档</a></h3></header><main><main class="container is-max-widescreen content section post-page pt-4 px-4"><div class="columns is-flex-desktop is-justify-content-center is-flex-direction-row-reverse"><div class="column is-3 is-hidden-mobile is-hidden"></div><div class="column is-9"><header class="my-4"><a href="/tags/vue"><i class="tag post-item-tag">vue</i></a></header><h1 class="mt-0 mb-1 is-family-serif" id="postTitle">vue使用装饰器descriptor</h1><time class="has-text-grey" datetime="2022-01-20T12:00:00.000Z">2022-01-20</time><article class="mt-2 post-content"><p>decorator装饰器通过对类、对象、方法、属性进行修饰，对其添加一些其他行为，即对一段代码进行二次包装。<br>装饰器只能用于类和类的方法，不能用于函数，因为存在函数提升。</p>
 <span id="more"></span>
 
 <p>使用方法：</p>
@@ -25,7 +25,7 @@ vue中使用装饰器：
   return descriptor
 &#125;
 </code></pre>
-<p>然后直接@descriptor到函数、类或者对象上即可。使用装饰器可以不需要关注代码内部的实现，增强了代码的可读性。</p>
+<p>使用装饰器可以不需要关注代码内部的实现，增强了代码的可读性。</p>
 <p>vue中使用装饰器：</p>
 <p>项目中使用eslint，需要开启装饰器相关语法的检测。</p>
 <pre><code class="js">// .eslintrc.js
@@ -53,6 +53,13 @@ import &#123; MessageBox, Message &#125; from &#39;element-ui&#39;
 
 export function confirm (title, content, confirmButtonText = &#39;确定&#39;) &#123;
   return function(target, name, descriptor) &#123;
+    // target:test（）  
+    // name:test1   
+    // descriptor: 装饰器属性 
+    // 包括 ：configurable: true 
+    // umerable: true
+    // value: ƒ () 
+    // writable: true
     const originValue = descriptor.value
     descriptor.value = function(...args) &#123;
       MessageBox.confirm(content, title, &#123;
@@ -87,6 +94,8 @@ export default &#123;
   methods: &#123;
     @confirm(&#39;删除&#39;, &#39;确认删除?&#39;)
     test () &#123;
+      // do something  调用接口
+
       this.$message.success(&#39;success!!&#39;)
     &#125;
 
