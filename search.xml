@@ -14,7 +14,26 @@
       
         <tags>
             
-            <tag> tool </tag>
+            <tag> ant-design-vue </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>ant-design-vue v-model.trim不生效</title>
+      <link href="/2022/04/06/ant-design-vue-trim/"/>
+      <url>/2022/04/06/ant-design-vue-trim/</url>
+      
+        <content type="html"><![CDATA[<p>同element-ui一样，el-input和a-input  均不支持v-model修饰符。</p><span id="more"></span><p>解决办法：</p><p>element-ui示例代码：</p><pre><code class="html">&lt;el-form-item&gt;    &lt;el-input        placeholder=&quot;请输入内容&quot;        v-model=&quot;queryInfo.name&quot;        @blur=&quot;queryInfo.name=$event.target.value.trim()&quot;        clearable        maxlength=&quot;11&quot;    &gt;        &lt;/el-input&gt;&lt;/el-form-item&gt;</code></pre><p>ant-design-vue示例代码：</p><pre><code class="html">&lt;a-form-item label=&quot;租户名称&quot;&gt;   &lt;a-input placeholder=&quot;请输入租户名称&quot; v-model=&quot;queryInfo.name&quot; allowClear /&gt;&lt;/a-form-item&gt;</code></pre><p>去空格函数</p><pre><code class="js">methods:&#123;    tirmHandler(target, prop)&#123;        if (target &amp;&amp; target[prop] &amp;&amp; target[prop].trim) &#123;            target[prop] = target[prop].trim()        &#125;    &#125;,    handleCnfirm()&#123;        this.trimHandler(this.queryInfo.name)    &#125;   &#125;</code></pre>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> ant-design-vue </tag>
             
         </tags>
       
@@ -27,13 +46,13 @@
       <link href="/2022/03/01/base64To16/"/>
       <url>/2022/03/01/base64To16/</url>
       
-        <content type="html"><![CDATA[<p>需求：将base64密文解密成16进制。</p><span id="more"></span><p>1、原生js的编码(btoa)和解码(atob)</p><pre><code class="js">var baseStr = &quot;http://www.baidu.com&quot;var encodedData = window.btoa(baseStr)console.log(encodedData) //aHR0cDovL3d3dy5iYWlkdS5jb20=var decodedData = window.atob(encodedData)console.log(decodedData) // http://www.baidu.com</code></pre><p>2、base64转16进制</p><pre><code class="js">    stringToHex(base64) &#123;      var raw = atob(base64)      var HEX = &#39;&#39;      for (var i = 0; i &lt; raw.length; i++) &#123;        var _hex = raw.charCodeAt(i).toString(16)        HEX += _hex.length == 2 ? _hex : &#39;0&#39; + _hex      &#125;      return HEX    &#125;</code></pre>]]></content>
+        <content type="html"><![CDATA[<p>需求：将base64密文解密成16进制。</p><span id="more"></span><p>1、原生js的编码(btoa)和解码(atob)</p><pre><code class="js">var baseStr = &quot;http://www.baidu.com&quot;var encodedData = window.btoa(baseStr)console.log(encodedData) //aHR0cDovL3d3dy5iYWlkdS5jb20=var decodedData = window.atob(encodedData)console.log(decodedData) // http://www.baidu.com</code></pre><p>2、base64转16进制</p><pre><code class="js">    stringToHex(base64)&#123;      var raw = atob(base64)      var HEX = &#39;&#39;      for (var i = 0; i &lt; raw.length; i++) &#123;        var _hex = raw.charCodeAt(i).toString(16)        HEX += _hex.length == 2 ? _hex : &#39;0&#39; + _hex      &#125;      return HEX      // return HEX.toUpperCase()  将字符串转换成大写格式    &#125;</code></pre>]]></content>
       
       
       
         <tags>
             
-            <tag> tool </tag>
+            <tag> js </tag>
             
         </tags>
       
@@ -42,7 +61,7 @@
     
     
     <entry>
-      <title>上位机、下位机</title>
+      <title>什么是上位机、下位机?</title>
       <link href="/2022/02/28/Upper-Lower/"/>
       <url>/2022/02/28/Upper-Lower/</url>
       
