@@ -4,6 +4,25 @@
   
     
     <entry>
+      <title>Mac系统升级后桌面文件夹及文件消失</title>
+      <link href="/2022/04/19/mac-finder/"/>
+      <url>/2022/04/19/mac-finder/</url>
+      
+        <content type="html"><![CDATA[<p>解决方式：终端输入如下命令即可</p><pre><code class="shell">defaults write com.apple.finder CreateDesktop -bool true; killall Finder</code></pre>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> other </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>ant-design-vue-picker</title>
       <link href="/2022/04/06/ant-design-vue-picker/"/>
       <url>/2022/04/06/ant-design-vue-picker/</url>
