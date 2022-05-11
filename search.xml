@@ -4,11 +4,30 @@
   
     
     <entry>
+      <title>ant-design-vue-table</title>
+      <link href="/2022/05/10/ant-design-vue-table/"/>
+      <url>/2022/05/10/ant-design-vue-table/</url>
+      
+        <content type="html"><![CDATA[<p>column列描述数据对象，customRender:生成复杂数据的渲染函数，参数分别为当前行的值，当前行数据，行索引，@return 里面可以设置表格行/列合并。</p><span id="more"></span><p>将列表里后端返回的空数据使用”-“填充。</p><pre><code class="js">const columns = [&#123;    title:&#39;开始时间&#39;，    dataIndex:&#39;start_date&#39;,    key:&#39;start_date&#39;,    align:&#39;center&#39;,    ellipsis:true,    width:250,    customRender: function (text, row, index) &#123;        if (row.start_date == null) &#123;            return &#39;-&#39;        &#125; else &#123;            return row.start_date        &#125;    &#125;,&#125;]</code></pre>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> ant-design-vue </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Mac系统升级后桌面文件夹及文件消失</title>
       <link href="/2022/04/19/mac-finder/"/>
       <url>/2022/04/19/mac-finder/</url>
       
-        <content type="html"><![CDATA[<p>解决方式：终端输入如下命令即可</p><pre><code class="shell">defaults write com.apple.finder CreateDesktop -bool true; killall Finder</code></pre>]]></content>
+        <content type="html"><![CDATA[<p>解决方式：终端输入如下命令即可</p><pre><code class="shell">defaults write com.apple.finder CreateDesktop -bool true; killall Finder// 显示/隐藏  隐藏文件command shift + .</code></pre>]]></content>
       
       
       
@@ -27,7 +46,7 @@
       <link href="/2022/04/06/ant-design-vue-picker/"/>
       <url>/2022/04/06/ant-design-vue-picker/</url>
       
-        <content type="html"><![CDATA[]]></content>
+        <content type="html"><![CDATA[<p>ant-design-vue 限制时间选择框,展示2天内数据且只能选择7日范围内（截止时间不得超过当日）</p><span id="more"></span><p>1、template</p><pre><code class="html">&lt;a-form-item label=&quot;时间&quot;&gt;  &lt;a-range-picker    v-model=&quot;rangeTime&quot;    :allowClear=&quot;false&quot;    :disabled-date=&quot;disableDate&quot;    @change=&quot;onChange&quot;    @openChange=&quot;openChange&quot;    :placeholder=&quot;[&#39;开始时间&#39;, &#39;结束时间&#39;]&quot;  /&gt;&lt;/a-form-item&gt;</code></pre><p>2、js</p><pre><code class="js">// datarangeTime: [moment(Date.now() - 1 * 24 * 3600 * 1000), moment(Date.now())],firstSelectTime: null,//  methods// 日期校验disableDate(current) &#123;  let nowDate = new Date()  nowDate.setMilliseconds(0)  nowDate.setSeconds(0)  nowDate.setMinutes(0)  nowDate.setHours(0)  let isOut30 = false  if (this.firstSelectTime) &#123;    if (      current &gt; this.firstSelectTime + 6 * 24 * 3600 * 1000 ||      current &lt; this.firstSelectTime - 6 * 24 * 3600 * 1000    ) &#123;      isOut30 = true    &#125;  &#125;  return current &amp;&amp; (current &gt; Date.now() || isOut30)&#125;,calendarChange(dates, dateStrings) &#123;  this.firstSelectTime = moment(Date.now() - 1 * 24 * 3600 * 1000)&#125;,openChange(status) &#123;  this.firstSelectTime = moment(Date.now() - 1 * 24 * 3600 * 1000)&#125;,</code></pre>]]></content>
       
       
       
@@ -46,7 +65,7 @@
       <link href="/2022/04/06/ant-design-vue-trim/"/>
       <url>/2022/04/06/ant-design-vue-trim/</url>
       
-        <content type="html"><![CDATA[<p>同element-ui一样，el-input和a-input  均不支持v-model修饰符。</p><span id="more"></span><p>解决办法：</p><p>element-ui示例代码：</p><pre><code class="html">&lt;el-form-item&gt;    &lt;el-input        placeholder=&quot;请输入内容&quot;        v-model=&quot;queryInfo.name&quot;        @blur=&quot;queryInfo.name=$event.target.value.trim()&quot;        clearable        maxlength=&quot;11&quot;    &gt;        &lt;/el-input&gt;&lt;/el-form-item&gt;</code></pre><p>ant-design-vue示例代码：</p><pre><code class="html">&lt;a-form-item label=&quot;租户名称&quot;&gt;   &lt;a-input placeholder=&quot;请输入租户名称&quot; v-model=&quot;queryInfo.name&quot; allowClear /&gt;&lt;/a-form-item&gt;</code></pre><p>去空格函数</p><pre><code class="js">methods:&#123;    tirmHandler(target, prop)&#123;        if (target &amp;&amp; target[prop] &amp;&amp; target[prop].trim) &#123;            target[prop] = target[prop].trim()        &#125;    &#125;,    handleCnfirm()&#123;        this.trimHandler(this.queryInfo.name)    &#125;   &#125;</code></pre>]]></content>
+        <content type="html"><![CDATA[<p>同element-ui一样，el-input和a-input  均不支持v-model修饰符。</p><span id="more"></span><p>解决办法：</p><p>element-ui示例代码：</p><pre><code class="html">&lt;el-form-item&gt;    &lt;el-input        placeholder=&quot;请输入内容&quot;        v-model=&quot;queryInfo.name&quot;        @blur=&quot;queryInfo.name=$event.target.value.trim()&quot;        clearable        maxlength=&quot;11&quot;    &gt;    &lt;/el-input&gt;&lt;/el-form-item&gt;</code></pre><p>ant-design-vue示例代码：</p><pre><code class="html">&lt;a-form-item label=&quot;租户名称&quot;&gt;   &lt;a-input placeholder=&quot;请输入租户名称&quot; v-model=&quot;queryInfo.name&quot; allowClear /&gt;&lt;/a-form-item&gt;</code></pre><p>去空格函数</p><pre><code class="js">methods:&#123;    tirmHandler(target, prop)&#123;        if (target &amp;&amp; target[prop] &amp;&amp; target[prop].trim) &#123;            target[prop] = target[prop].trim()        &#125;    &#125;,    handleCnfirm()&#123;        this.trimHandler(this.queryInfo.name,&#39;name&#39;)    &#125;   &#125;</code></pre>]]></content>
       
       
       

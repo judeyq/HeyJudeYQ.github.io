@@ -1,0 +1,34 @@
+<!DOCTYPE html><html class="appearance-auto" lang="zh-CN"><head><meta charset="UTF-8"><title>ant-design-vue-table</title><meta name="description" content="🐯 🐯 🐯 🐯 🐯"><meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, initial-scale=1"><!-- Google Analytics --><!-- End Google Analytics -->
+<!-- Baidu Analytics --><!-- End Baidu Analytics --><link rel="icon" href="/images/favicon.png"><link rel="stylesheet" href="/style/common/bulma.css"><link rel="stylesheet" href="/style/base.css"><link rel="stylesheet" href="/style/common/helper.css"><script src="/js/common.js"></script><link rel="stylesheet" href="/style/post.css"><link rel="stylesheet" href="/style/themes/highlight-theme-light.css"><script src="/js/highlight.pack.js"></script><meta name="description" content="column列描述数据对象，customRender:生成复杂数据的渲染函数，参数分别为当前行的值，当前行数据，行索引，@return 里面可以设置表格行/列合并。
+
+
+将列表里后端返回的空数据使用”-“填充。
+const columns = [&amp;#123;
+    title:&amp;#39;开始时间&amp;#39;，
+    dataIndex:&amp;#39;start_date&amp;#39;,
+    key:&amp;#39;start_date&amp;#39;,
+    align:&amp;#39;center&amp;#39;,
+    ellipsis:true,
+    width:250,
+    customRender: function (text, row, index) &amp;#123;
+        if (row.start.."><meta name="generator" content="Hexo 5.4.1"></head><body class="is-flex is-flex-direction-column"><header class="header-widget is-flex-shrink-0 is-hidden-mobile"><div class="container is-fullhd is-flex is-justify-content-space-between is-align-items-center is-full-height"><section class="is-hidden-mobile is-flex-shrink-0"><h2><a href="/">Jude's blog</a></h2></section><h3 class="is-hidden-mobile is-family-serif is-full-height is-flex is-align-items-center is-flex-shrink-0"><div class="is-full-height" id="postTopic"><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">ant-design-vue-table</p><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">点击返回顶部</p></div></h3><aside class="is-flex-shrink-0"><h3 class="is-inline-block"><a href="/">首页</a></h3><h3 class="is-inline-block"><a href="/about">关于</a></h3><h3 class="is-inline-block"><a href="/archives">归档</a></h3></aside></div></header><header class="is-flex header-widget is-flex-shrink-0 is-align-items-center is-justify-content-center is-hidden-tablet"><h3 class="is-inline-block"><a href="/">首页</a></h3><h3 class="is-inline-block"><a href="/about">关于</a></h3><h3 class="is-inline-block"><a href="/archives">归档</a></h3></header><main><main class="container is-max-widescreen content section post-page pt-4 px-4"><div class="columns is-flex-desktop is-justify-content-center is-flex-direction-row-reverse"><div class="column is-3 is-hidden-mobile is-hidden"></div><div class="column is-9"><header class="my-4"><a href="/tags/ant-design-vue"><i class="tag post-item-tag">ant-design-vue</i></a></header><h1 class="mt-0 mb-1 is-family-serif" id="postTitle">ant-design-vue-table</h1><time class="has-text-grey" datetime="2022-05-10T12:00:00.000Z">2022-05-10</time><article class="mt-2 post-content"><p>column列描述数据对象，customRender:生成复杂数据的渲染函数，参数分别为当前行的值，当前行数据，行索引，@return 里面可以设置表格行/列合并。</p>
+<span id="more"></span>
+
+<p>将列表里后端返回的空数据使用”-“填充。</p>
+<pre><code class="js">const columns = [&#123;
+    title:&#39;开始时间&#39;，
+    dataIndex:&#39;start_date&#39;,
+    key:&#39;start_date&#39;,
+    align:&#39;center&#39;,
+    ellipsis:true,
+    width:250,
+    customRender: function (text, row, index) &#123;
+        if (row.start_date == null) &#123;
+            return &#39;-&#39;
+        &#125; else &#123;
+            return row.start_date
+        &#125;
+    &#125;,
+&#125;]
+</code></pre>
+</article><section class="jump-container is-flex is-justify-content-space-between my-6"><!-- em is empty placeholder--><em></em><a class="button is-default" href="/2022/04/19/mac-finder/" title="Mac系统升级后桌面文件夹及文件消失"><span class="has-text-weight-semibold">下一页: Mac系统升级后桌面文件夹及文件消失</span><i class="iconfont icon-next ml-2 has-text-grey"></i></a></section></div></div></main></main><footer class="is-flex is-flex-direction-column is-align-items-center is-flex-shrink-0 is-family-serif"><section class="sns-container"><!-- Github--><a title="github" target="_blank" rel="noopener nofollow" href="//github.com/Jude"><i class="iconfont icon-github"></i></a><!-- Ins--><!-- RSS--><!-- 知乎--><!-- 领英--><!-- 脸书--></section><p><span>Copyright ©</span><span> Jude 2022</span></p><div class="is-flex is-justify-content-center is-flex-wrap-wrap"><p>Powered by Hexo &verbar;&nbsp;</p><p class="is-flex is-justify-content-center"><a title="Hexo theme author" target="_blank" rel="noopener" href="//github.com/haojen">Theme by Haojen&nbsp;</a></p><div style="margin-top: 2px"><a class="github-button" title="github-button" target="_blank" rel="noopener" href="https://github.com/haojen/hexo-theme-Claudia" data-color-scheme="no-preference: light; light: light; dark: dark;" data-show-count="true"></a></div></div><div><span></span></div></footer><script async defer src="https://buttons.github.io/buttons.js"></script><script src="/js/post.js"></script></body></html>
