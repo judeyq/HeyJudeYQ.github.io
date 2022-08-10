@@ -14,7 +14,26 @@
       
         <tags>
             
-            <tag> vue3 </tag>
+            <tag> element-ui </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>关于使用element-ui的el-select组件下拉框错位问题</title>
+      <link href="/2022/07/11/el-select/"/>
+      <url>/2022/07/11/el-select/</url>
+      
+        <content type="html"><![CDATA[<p>使用 element-ui的el-form组件里使用el-selcet组件时，下拉框的el-select-item会出现向右偏移的问题。有2种方法可以解决下拉框错位的问题。</p><span id="more"></span><h2 id="一、方法一：margin-left-0px-important"><a href="#一、方法一：margin-left-0px-important" class="headerlink" title="一、方法一：margin-left:0px !important"></a>一、方法一：margin-left:0px !important</h2><p>在el-select添加一个类名：select-item</p><pre><code class="css">.select-item .el-form-item__content&#123;  margin-left:0px !important;&#125;</code></pre><h2 id="二、方法二：position-initial"><a href="#二、方法二：position-initial" class="headerlink" title="二、方法二：position:initial;"></a>二、方法二：position:initial;</h2><pre><code class="css">.select-item .el-form-item__content&#123;  position:initial;&#125;</code></pre>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> element-ui </tag>
             
         </tags>
       
@@ -33,7 +52,7 @@
       
         <tags>
             
-            <tag> vue3 </tag>
+            <tag> element-ui </tag>
             
         </tags>
       
