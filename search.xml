@@ -4,6 +4,25 @@
   
     
     <entry>
+      <title>关于使用element-ui的el-table组件：带分页打印表头</title>
+      <link href="/2022/07/25/print/"/>
+      <url>/2022/07/25/print/</url>
+      
+        <content type="html"><![CDATA[<p>使用 command（win : control） + p 打印时，如果页面的 table 分页后，想要将第二页之后的每个页面都加上表头，可以封装一个可复用的组件。</p><span id="more"></span><h2 id="一、编写可复用的组件"><a href="#一、编写可复用的组件" class="headerlink" title="一、编写可复用的组件"></a>一、编写可复用的组件</h2><p>代码如下：</p><p>ElTableHeader.vue</p><pre><code class="js">import &#123; Table &#125; from &quot;element-ui&quot;;export default &#123;  extends: Table,  mounted() &#123;    this.$nextTick(function () &#123;      let thead = this.$el.querySelector(&quot;.el-table__header-wrapper thead&quot;);      let theadNew = thead.cloneNode(true);      this.$el        .querySelector(&quot;.el-table__body-wrapper table&quot;)        .appendChild(theadNew);    &#125;);  &#125;,&#125;;</code></pre><pre><code class="css"> .el-table &gt;&gt;&gt; .el-table__body-wrapper thead &#123;        display: none;    &#125;    @media print &#123;        .el-table &gt;&gt;&gt; .el-table__header-wrapper &#123;            display: none;        &#125;        .el-table &gt;&gt;&gt; .el-table__body-wrapper thead &#123;            display: table-header-group;        &#125;    &#125;</code></pre><h2 id="二、全局注册及使用"><a href="#二、全局注册及使用" class="headerlink" title="二、全局注册及使用"></a>二、全局注册及使用</h2><h4 id="1、main-js引入"><a href="#1、main-js引入" class="headerlink" title="1、main.js引入"></a>1、main.js引入</h4><pre><code>import ElTableHeader from &quot;./components/ElTableHeader.vue&quot;Vue.component(&quot;el-table-header&quot;,ElTableHeader)</code></pre><h4 id="2、使用"><a href="#2、使用" class="headerlink" title="2、使用"></a>2、使用</h4><pre><code class="html">&lt;template&gt;  &lt;el-table-header :data=&quot;tableData&quot;&gt;  &lt;/el-table-header&gt;&lt;/template&gt;</code></pre>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> vue3 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>headerSearch组件</title>
       <link href="/2022/06/25/headerSearch/"/>
       <url>/2022/06/25/headerSearch/</url>
