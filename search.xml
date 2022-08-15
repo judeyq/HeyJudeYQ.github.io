@@ -549,6 +549,63 @@
     
     
     <entry>
+      <title>vue3-emits</title>
+      <link href="/2021/10/11/vue3-3-emits/"/>
+      <url>/2021/10/11/vue3-3-emits/</url>
+      
+        <content type="html"><![CDATA[<p>自定义事件不使用 emit:[‘event name’],会出现连续执行 2 次的一个 bug。</p><span id="more"></span><h2 id="一、问题复现"><a href="#一、问题复现" class="headerlink" title="一、问题复现"></a>一、问题复现</h2><p>Emits.vue</p><pre><code class="html">&lt;template&gt;  &lt;div @click=&quot;$emit(&#39;click&#39;)&quot;&gt;    &lt;p&gt;自定义事件&lt;/p&gt;  &lt;/div&gt;&lt;/template&gt;</code></pre><p>使用 Emits.vue</p><pre><code class="html">&lt;Emits @click=&quot;handleClick&quot;&gt;&lt;/Emits&gt;</code></pre><pre><code class="js">import Emits from &quot;./Emits.vue&quot;;export default &#123;  components: &#123;    Emits,  &#125;,  methods: &#123;    handleClick()&#123;      console.log(&quot;click me&quot;);    &#125;  &#125;,&#125;;</code></pre><p>点击自定义事件，会打印2次click me</p><h2 id="二、解决方法："><a href="#二、解决方法：" class="headerlink" title="二、解决方法："></a>二、解决方法：</h2><h4 id="方法1、在Emits-vue中加入以下代码"><a href="#方法1、在Emits-vue中加入以下代码" class="headerlink" title="方法1、在Emits.vue中加入以下代码"></a>方法1、在Emits.vue中加入以下代码</h4><pre><code class="js">emits:[&#39;click&#39;]</code></pre><h4 id="方法2、不要使用原生事件名称"><a href="#方法2、不要使用原生事件名称" class="headerlink" title="方法2、不要使用原生事件名称"></a>方法2、不要使用原生事件名称</h4><p>Emits.vue</p><pre><code class="html">&lt;template&gt;  &lt;div @click=&quot;$emit(&#39;my-click&#39;)&quot;&gt;    &lt;p &gt;自定义事件&lt;/p&gt;  &lt;/div&gt;&lt;/template&gt;</code></pre><pre><code class="js">&lt;script&gt;  export default &#123;    emits:[&#39;my-click&#39;]  &#125;&lt;/script&gt;&lt;style scoped&gt;&lt;/style&gt;</code></pre><p>引用处：</p><pre><code class="html">  &lt;Emits @my-click=&quot;handleClick&quot;&gt;&lt;/Emits&gt;</code></pre>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> vue3 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>vue3-传送门：teleport</title>
+      <link href="/2021/10/02/vue3-2-teleport/"/>
+      <url>/2021/10/02/vue3-2-teleport/</url>
+      
+        <content type="html"><![CDATA[<p>teleport: 是一个内置组件，它可以将一个组件内部的一部分模板“传送”到该组件的 DOM 结构外层的位置去。</p><span id="more"></span><h2 id="一、teleport应用场景"><a href="#一、teleport应用场景" class="headerlink" title="一、teleport应用场景"></a>一、teleport应用场景</h2><p>一个组件模板的一部分在逻辑上从属于该组件，但从整个应用视图的角度来看，它在 DOM 中应该被渲染在整个 Vue 应用外部的其他地方，最常见的例子就是全屏的模态框。</p><h2 id="二、模态框弹窗组件"><a href="#二、模态框弹窗组件" class="headerlink" title="二、模态框弹窗组件"></a>二、模态框弹窗组件</h2><p>新建ModalButton.vue组件</p><pre><code class="html">&lt;template&gt;  &lt;div&gt;    &lt;button @click=&quot;modalOpen = true&quot;&gt;弹出窗口&lt;/button&gt;    &lt;teleport to=&#39;body&#39;&gt;      &lt;div v-if=&quot;modalOpen&quot; class=&quot;modal&quot;&gt;        &lt;div&gt;我是弹窗          父元素为body          &lt;button @click=&quot;modalOpen=false&quot;&gt;关闭窗口&lt;/button&gt;        &lt;/div&gt;      &lt;/div&gt;    &lt;/teleport&gt;  &lt;/div&gt;&lt;/template&gt;</code></pre><pre><code class="js">export default &#123;  // vue3兼容data写法  data() &#123;    return &#123;      modalOpen:true    &#125;  &#125;,&#125;</code></pre><pre><code class="css">.modal&#123;  position: absolute;  top: 0;  left:0;  right:0;  bottom: 0;  background-color: rgba(0,0,0,0.5);  display: flex;  flex-direction: column;  align-items: center;  justify-content: center;&#125;.modal div&#123;  display: flex;  flex-direction: column;  align-items: center;  justify-content: center;  background-color: #fff;  width: 300px;  height: 300px;  padding: 5px;&#125;</code></pre><h2 id="三、ModalButton组件的应用"><a href="#三、ModalButton组件的应用" class="headerlink" title="三、ModalButton组件的应用"></a>三、ModalButton组件的应用</h2><pre><code class="html">  &lt;ModalButton&gt;&lt;/ModalButton&gt;</code></pre><pre><code class="js">// 加上文件类型后缀，不然会出现404 NOT FOUNDimport ModalButton from &quot;./ModalButton.vue&quot;;components:&#123;    ModalButton&#125;,  </code></pre><p>当弹窗显示的时候，审查元素.modal与#app位于body下的同一层级</p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> vue3 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>vue3-起始和新特性</title>
+      <link href="/2021/09/25/vue3-1-start/"/>
+      <url>/2021/09/25/vue3-1-start/</url>
+      
+        <content type="html"><![CDATA[<p>使用 vite 创建项目，以及 vue3 的 composition API 的使用</p><span id="more"></span><h2 id="一、创建项目（vue-cli-vite）"><a href="#一、创建项目（vue-cli-vite）" class="headerlink" title="一、创建项目（vue-cli + vite）"></a>一、创建项目（vue-cli + vite）</h2><p>使用 vite 可以更加快速的启动项目</p><pre><code class="js">npm init vite-app &lt;project-name&gt;cd project-namenpm install &amp;&amp; npm run dev</code></pre><h2 id="二、main-js"><a href="#二、main-js" class="headerlink" title="二、main.js"></a>二、main.js</h2><pre><code class="js">import &#123; createApp &#125; from &quot;vue&quot;;import App from &quot;./App.vue&quot;;import &quot;./index.css&quot;;createApp(App).mount(&quot;#app&quot;);</code></pre><h2 id="三、组合式-API：composition-API"><a href="#三、组合式-API：composition-API" class="headerlink" title="三、组合式 API：composition API"></a>三、组合式 API：composition API</h2><blockquote><p>composition api 为 Vue 应用提供更好的逻辑复用和代码组织。</p></blockquote><p>setup()钩子是在组件中使用组合式 API 的入口，通常只在以下情况下使用：</p><p>1、需要在非单文件组件中使用组合式 API 时。</p><p>2、需要在基于选项式 API 的组件中集成基于组合式 API 的代码时。</p><h4 id="（一）、基本使用"><a href="#（一）、基本使用" class="headerlink" title="（一）、基本使用"></a>（一）、基本使用</h4><pre><code class="js">&lt;script&gt;import &#123; ref &#125; from &#39;vue&#39;export default &#123;  setup() &#123;    const count = ref(0)    // 返回值会暴露给模板和其他的选项式 API 钩子    return &#123;      count    &#125;  &#125;,  mounted() &#123;    console.log(this.count) // 0  &#125;&#125;&lt;/script&gt;</code></pre><pre><code class="html">&lt;template&gt;  &lt;button @click=&quot;count++&quot;&gt;&#123;&#123; count &#125;&#125;&lt;/button&gt;&lt;/template&gt;</code></pre><blockquote><blockquote><p>Tip： setup() 自身并不含对组件实例的访问权，即在 setup() 中访问 this 会是 undefined。你可以在选项式 API 中访问组合式 API 暴露的值，但反过来则不行。</p></blockquote></blockquote><h4 id="（二）、创建响应式对象"><a href="#（二）、创建响应式对象" class="headerlink" title="（二）、创建响应式对象"></a>（二）、创建响应式对象</h4><p>方法1、</p><pre><code class="html">&lt;p&gt;&#123;&#123; data.counter &#125;&#125;&lt;/p&gt;&lt;p&gt;&#123;&#123; data.doubleCounter &#125;&#125;&lt;/p&gt;</code></pre><pre><code class="js">import &#123; computed,reactive,onMounted,onUnmounted,ref,toRefs,watch&#125; from &quot;vue&quot;;export default &#123;  setup() &#123;    const data = reactive(&#123;      counter: 1,      doubleCounter: computed(() =&gt; data.counter * 2),    &#125;);    const msg1 = ref(&quot;some message&quot;);    // setup 最早有onMounted 无created beforeCreate    &#125;,    let timer;    onMounted(() =&gt; &#123;      timer = setInterval(() =&gt; &#123;        data.counter++;      &#125;, 1000);    &#125;);    onUnmounted(() =&gt; &#123;      clearInterval(timer);    &#125;);    return &#123; data, msg1 &#125;;  &#125;,&#125;;</code></pre><p>方法 2：toRefs:解构/展开返回响应式对象</p><pre><code class="html">  &lt;p&gt;&#123;&#123; msg1 &#125;&#125;&lt;/p&gt;  &lt;p&gt;&#123;&#123; counter &#125;&#125;&lt;/p&gt;  &lt;p&gt;&#123;&#123; doubleCounter &#125;&#125;&lt;/p&gt;  &lt;p ref=&quot;desc&quot;&gt;&lt;/p&gt;</code></pre><pre><code class="js">import &#123; computed,reactive,onMounted,onUnmounted,ref,toRefs,watch&#125; from &quot;vue&quot;;export default &#123;  setup() &#123;    // useCounter函数使用了toRefs  所以我们可以展开使用counter doubleCounter    const &#123; counter, doubleCounter &#125; = useCounter();    // 单值响应式    const msg1 = ref(&quot;some message&quot;);    // 使用元素    const desc = ref(null);    // watch 侦听器    watch(counter, (val, oldVal) =&gt; &#123;      // 这里需要加上desc.value      const p = desc.value;      p.textContent = `counter change from $&#123;oldVal&#125; to $&#123;val&#125;`;    &#125;);    return &#123; counter, doubleCounter, msg1, desc &#125;;  &#125;,&#125;;function useCounter() &#123;  const data = reactive(&#123;    counter: 1,    doubleCounter: computed(() =&gt; data.counter * 2),  &#125;);  // setup 最早有onMounted 无created  let timer;  onMounted(() =&gt; &#123;    timer = setInterval(() =&gt; &#123;      data.counter++;    &#125;, 1000);  &#125;);  onUnmounted(() =&gt; &#123;    clearInterval(timer);  &#125;);  return toRefs(data);&#125;</code></pre><h5 id="三-、单值响应式声明：ref"><a href="#三-、单值响应式声明：ref" class="headerlink" title="(三)、单值响应式声明：ref"></a>(三)、单值响应式声明：ref</h5><pre><code class="js">const msg1 = ref(&quot;some msg&quot;);</code></pre>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> vue3 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>初识egg.js</title>
       <link href="/2021/06/20/egg/"/>
       <url>/2021/06/20/egg/</url>

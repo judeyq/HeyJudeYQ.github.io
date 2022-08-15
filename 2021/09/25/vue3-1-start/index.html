@@ -1,0 +1,147 @@
+<!DOCTYPE html><html class="appearance-auto" lang="zh-CN"><head><meta charset="UTF-8"><title>vue3-起始和新特性</title><meta name="description" content="🐯 🐯 🐯 🐯 🐯"><meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, initial-scale=1"><!-- Google Analytics --><!-- End Google Analytics -->
+<!-- Baidu Analytics --><!-- End Baidu Analytics --><link rel="icon" href="/images/favicon.png"><link rel="stylesheet" href="/style/common/bulma.css"><link rel="stylesheet" href="/style/base.css"><link rel="stylesheet" href="/style/common/helper.css"><script src="/js/common.js"></script><link rel="stylesheet" href="/style/post.css"><link rel="stylesheet" href="/style/themes/highlight-theme-light.css"><script src="/js/highlight.pack.js"></script><meta name="description" content="使用 vite 创建项目，以及 vue3 的 composition API 的使用
+
+
+一、创建项目（vue-cli + vite）使用 vite 可以更加快速的启动项目
+npm init vite-app &amp;lt;project-name&amp;gt;
+
+cd project-name
+
+npm install &amp;amp;&amp;amp; npm run dev
+
+二、main.jsimport &amp;#123; createApp &amp;#125; from &amp;quot;vue&amp;quot;;
+import App from &amp;quot;./App.vue&amp;quot;;
+import &amp;quot;./index.css&amp;quot;;
+
+createApp(App).mount(&amp;quot;#app&amp;quot;);
+
+三、组.."><meta name="generator" content="Hexo 5.4.1"></head><body class="is-flex is-flex-direction-column"><header class="header-widget is-flex-shrink-0 is-hidden-mobile"><div class="container is-fullhd is-flex is-justify-content-space-between is-align-items-center is-full-height"><section class="is-hidden-mobile is-flex-shrink-0"><h2><a href="/">Jude's blog</a></h2></section><h3 class="is-hidden-mobile is-family-serif is-full-height is-flex is-align-items-center is-flex-shrink-0"><div class="is-full-height" id="postTopic"><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">vue3-起始和新特性</p><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">点击返回顶部</p></div></h3><aside class="is-flex-shrink-0"><h3 class="is-inline-block"><a href="/">首页</a></h3><h3 class="is-inline-block"><a href="/about">关于</a></h3><h3 class="is-inline-block"><a href="/archives">归档</a></h3></aside></div></header><header class="is-flex header-widget is-flex-shrink-0 is-align-items-center is-justify-content-center is-hidden-tablet"><h3 class="is-inline-block"><a href="/">首页</a></h3><h3 class="is-inline-block"><a href="/about">关于</a></h3><h3 class="is-inline-block"><a href="/archives">归档</a></h3></header><main><main class="container is-max-widescreen content section post-page pt-4 px-4"><div class="columns is-flex-desktop is-justify-content-center is-flex-direction-row-reverse"><div class="column is-3 is-hidden-mobile"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E5%88%9B%E5%BB%BA%E9%A1%B9%E7%9B%AE%EF%BC%88vue-cli-vite%EF%BC%89"><span class="toc-text">一、创建项目（vue-cli + vite）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81main-js"><span class="toc-text">二、main.js</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E7%BB%84%E5%90%88%E5%BC%8F-API%EF%BC%9Acomposition-API"><span class="toc-text">三、组合式 API：composition API</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%EF%BC%88%E4%B8%80%EF%BC%89%E3%80%81%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8"><span class="toc-text">（一）、基本使用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%EF%BC%88%E4%BA%8C%EF%BC%89%E3%80%81%E5%88%9B%E5%BB%BA%E5%93%8D%E5%BA%94%E5%BC%8F%E5%AF%B9%E8%B1%A1"><span class="toc-text">（二）、创建响应式对象</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E4%B8%89-%E3%80%81%E5%8D%95%E5%80%BC%E5%93%8D%E5%BA%94%E5%BC%8F%E5%A3%B0%E6%98%8E%EF%BC%9Aref"><span class="toc-text">(三)、单值响应式声明：ref</span></a></li></ol></li></ol></li></ol></li></ol></div><div class="column is-9"><header class="my-4"><a href="/tags/vue3"><i class="tag post-item-tag">vue3</i></a></header><h1 class="mt-0 mb-1 is-family-serif" id="postTitle">vue3-起始和新特性</h1><time class="has-text-grey" datetime="2021-09-25T02:00:00.000Z">2021-09-25</time><article class="mt-2 post-content"><p>使用 vite 创建项目，以及 vue3 的 composition API 的使用</p>
+<span id="more"></span>
+
+<h2 id="一、创建项目（vue-cli-vite）"><a href="#一、创建项目（vue-cli-vite）" class="headerlink" title="一、创建项目（vue-cli + vite）"></a>一、创建项目（vue-cli + vite）</h2><p>使用 vite 可以更加快速的启动项目</p>
+<pre><code class="js">npm init vite-app &lt;project-name&gt;
+
+cd project-name
+
+npm install &amp;&amp; npm run dev
+</code></pre>
+<h2 id="二、main-js"><a href="#二、main-js" class="headerlink" title="二、main.js"></a>二、main.js</h2><pre><code class="js">import &#123; createApp &#125; from &quot;vue&quot;;
+import App from &quot;./App.vue&quot;;
+import &quot;./index.css&quot;;
+
+createApp(App).mount(&quot;#app&quot;);
+</code></pre>
+<h2 id="三、组合式-API：composition-API"><a href="#三、组合式-API：composition-API" class="headerlink" title="三、组合式 API：composition API"></a>三、组合式 API：composition API</h2><blockquote>
+<p>composition api 为 Vue 应用提供更好的逻辑复用和代码组织。</p>
+</blockquote>
+<p>setup()钩子是在组件中使用组合式 API 的入口，通常只在以下情况下使用：</p>
+<p>1、需要在非单文件组件中使用组合式 API 时。</p>
+<p>2、需要在基于选项式 API 的组件中集成基于组合式 API 的代码时。</p>
+<h4 id="（一）、基本使用"><a href="#（一）、基本使用" class="headerlink" title="（一）、基本使用"></a>（一）、基本使用</h4><pre><code class="js">&lt;script&gt;
+import &#123; ref &#125; from &#39;vue&#39;
+
+export default &#123;
+  setup() &#123;
+    const count = ref(0)
+
+    // 返回值会暴露给模板和其他的选项式 API 钩子
+    return &#123;
+      count
+    &#125;
+  &#125;,
+
+  mounted() &#123;
+    console.log(this.count) // 0
+  &#125;
+&#125;
+&lt;/script&gt;
+</code></pre>
+<pre><code class="html">&lt;template&gt;
+  &lt;button @click=&quot;count++&quot;&gt;&#123;&#123; count &#125;&#125;&lt;/button&gt;
+&lt;/template&gt;
+</code></pre>
+<blockquote>
+<blockquote>
+<p>Tip： setup() 自身并不含对组件实例的访问权，即在 setup() 中访问 this 会是 undefined。你可以在选项式 API 中访问组合式 API 暴露的值，但反过来则不行。</p>
+</blockquote>
+</blockquote>
+<h4 id="（二）、创建响应式对象"><a href="#（二）、创建响应式对象" class="headerlink" title="（二）、创建响应式对象"></a>（二）、创建响应式对象</h4><p>方法1、</p>
+<pre><code class="html">&lt;p&gt;&#123;&#123; data.counter &#125;&#125;&lt;/p&gt;
+&lt;p&gt;&#123;&#123; data.doubleCounter &#125;&#125;&lt;/p&gt;
+</code></pre>
+<pre><code class="js">import &#123; computed,reactive,onMounted,onUnmounted,ref,toRefs,watch&#125; from &quot;vue&quot;;
+
+export default &#123;
+  setup() &#123;
+    const data = reactive(&#123;
+      counter: 1,
+      doubleCounter: computed(() =&gt; data.counter * 2),
+    &#125;);
+
+    const msg1 = ref(&quot;some message&quot;);
+    // setup 最早有onMounted 无created beforeCreate
+
+    &#125;,
+    let timer;
+    onMounted(() =&gt; &#123;
+      timer = setInterval(() =&gt; &#123;
+        data.counter++;
+      &#125;, 1000);
+    &#125;);
+    onUnmounted(() =&gt; &#123;
+      clearInterval(timer);
+    &#125;);
+    return &#123; data, msg1 &#125;;
+  &#125;,
+&#125;;
+</code></pre>
+<p>方法 2：toRefs:解构/展开返回响应式对象</p>
+<pre><code class="html">  &lt;p&gt;&#123;&#123; msg1 &#125;&#125;&lt;/p&gt;
+  &lt;p&gt;&#123;&#123; counter &#125;&#125;&lt;/p&gt;
+  &lt;p&gt;&#123;&#123; doubleCounter &#125;&#125;&lt;/p&gt;
+  &lt;p ref=&quot;desc&quot;&gt;&lt;/p&gt;
+</code></pre>
+<pre><code class="js">import &#123; computed,reactive,onMounted,onUnmounted,ref,toRefs,watch&#125; from &quot;vue&quot;;
+export default &#123;
+  setup() &#123;
+    // useCounter函数使用了toRefs  所以我们可以展开使用counter doubleCounter
+    const &#123; counter, doubleCounter &#125; = useCounter();
+
+    // 单值响应式
+    const msg1 = ref(&quot;some message&quot;);
+
+    // 使用元素
+    const desc = ref(null);
+
+    // watch 侦听器
+    watch(counter, (val, oldVal) =&gt; &#123;
+      // 这里需要加上desc.value
+      const p = desc.value;
+      p.textContent = `counter change from $&#123;oldVal&#125; to $&#123;val&#125;`;
+    &#125;);
+    return &#123; counter, doubleCounter, msg1, desc &#125;;
+  &#125;,
+&#125;;
+
+function useCounter() &#123;
+  const data = reactive(&#123;
+    counter: 1,
+    doubleCounter: computed(() =&gt; data.counter * 2),
+  &#125;);
+
+  // setup 最早有onMounted 无created
+  let timer;
+  onMounted(() =&gt; &#123;
+    timer = setInterval(() =&gt; &#123;
+      data.counter++;
+    &#125;, 1000);
+  &#125;);
+  onUnmounted(() =&gt; &#123;
+    clearInterval(timer);
+  &#125;);
+  return toRefs(data);
+&#125;
+</code></pre>
+<h5 id="三-、单值响应式声明：ref"><a href="#三-、单值响应式声明：ref" class="headerlink" title="(三)、单值响应式声明：ref"></a>(三)、单值响应式声明：ref</h5><pre><code class="js">const msg1 = ref(&quot;some msg&quot;);
+</code></pre>
+</article><section class="jump-container is-flex is-justify-content-space-between my-6"><!-- em is empty placeholder--><a class="button is-default" href="/2021/10/02/vue3-2-teleport/" title="vue3-传送门：teleport"><i class="iconfont icon-prev mr-2 has-text-grey"></i><span class="has-text-weight-semibold">上一页: vue3-传送门：teleport</span></a><a class="button is-default" href="/2021/06/20/egg/" title="初识egg.js"><span class="has-text-weight-semibold">下一页: 初识egg.js</span><i class="iconfont icon-next ml-2 has-text-grey"></i></a></section></div></div></main></main><footer class="is-flex is-flex-direction-column is-align-items-center is-flex-shrink-0 is-family-serif"><section class="sns-container"><!-- Github--><a title="github" target="_blank" rel="noopener nofollow" href="//github.com/Jude"><i class="iconfont icon-github"></i></a><!-- Ins--><!-- RSS--><!-- 知乎--><!-- 领英--><!-- 脸书--></section><p><span>Copyright ©</span><span> Jude 2022</span></p><div class="is-flex is-justify-content-center is-flex-wrap-wrap"><p>Powered by Hexo &verbar;&nbsp;</p><p class="is-flex is-justify-content-center"><a title="Hexo theme author" target="_blank" rel="noopener" href="//github.com/haojen">Theme by Haojen&nbsp;</a></p><div style="margin-top: 2px"><a class="github-button" title="github-button" target="_blank" rel="noopener" href="https://github.com/haojen/hexo-theme-Claudia" data-color-scheme="no-preference: light; light: light; dark: dark;" data-show-count="true"></a></div></div><div><span></span></div></footer><script async defer src="https://buttons.github.io/buttons.js"></script><script src="/js/post.js"></script></body></html>
