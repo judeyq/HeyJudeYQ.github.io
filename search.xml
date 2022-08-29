@@ -4,6 +4,25 @@
   
     
     <entry>
+      <title>options-api &amp; composition-api</title>
+      <link href="/2022/07/26/composition-api&amp;options-api/"/>
+      <url>/2022/07/26/composition-api&amp;options-api/</url>
+      
+        <content type="html"><![CDATA[<p>在Vue2中，我们使用的是Options Api语法，而在Vue3中，编程语法方面改变的最大亮点应该就是Composition Api了。</p><span id="more"></span><h2 id="一、options-api"><a href="#一、options-api" class="headerlink" title="一、options api"></a>一、options api</h2><blockquote><p>options api 即选项式api,也就是组件的各个选项，例如：data、methods、computed、watch等等，对应的选项做对应的事情。</p></blockquote><p>在实际项目的开发过程中，数据定义在data中，方法定义在methods中，当我们的代码多起来，比如达到四、五百行的时候，如果我们想改动某个功能，就要去data中改数据，再去methods中改方法，来回地寻找。</p><p>相同功能的代码被分割，对后期的改动很不友好，如果换了一个新人接手，或者自己过一段时间再去看这段代码，估计没注释的话，那是相当费劲。 而且因为所有的数据都是挂载在this下面，typescript的类型推导也很麻烦，代码的复用、公共组件的导入导出也都很困难。Vue3新增了Composition Api来解决这些痛点。</p><h2 id="二、composition-api"><a href="#二、composition-api" class="headerlink" title="二、composition api"></a>二、composition api</h2><blockquote><p>Composition Api:组合式api,支持将相同的功能模块代码写在一起，甚至可以将某个功能单独的封装成函数，随意导入引用；也可以将任意的数据定义成响应式，再也不用局限于data中，我们只需要将每个实现的功能组合起来就可以了。</p></blockquote><p>watch：侦听一个或多个响应式数据源，并在数据源变化时调用所给的回调函数。</p><blockquote><p>watch() 默认是懒侦听的，即仅在侦听源发生变化时才执行回调函数。(immediate:true 立即执行)，包含3个参数：侦听器的源、发生变化的回调函数（这个回调函数接受3个参数：新值、旧值、用于注册副作用清理的回调函数。）、可选参数（immediate：true/false 立即触发侦听器回调函数、deep:源是对象，强制深度遍历，flush:调整回调的刷新时机、onTrack/onTrigger:调试侦听器的依赖）</p></blockquote><p>注意：1、watchEffect是立即执行的，不需要添加immediate属性。<br>2、watchEffect不需要指定对某个具体的数据监听，watchEffect会根据内容自动去感知，所以我们也可以在一个watchEffect中添加多个数据的监听处理（如果watchEffect中没有任何响应式数据，会不会执行呢？大家可以试一下）。<br>3、watchEffect不能获取数据改变之前的值。</p><p>ref和reactive的区别是什么呢，我们可以这样简单理解，它们都是用来定义响应式数据的，但是ref是用来给简单的数据类型定义响应式数据的，比如number、string、boolean等，而reactive是针对复杂的数据结构的，比如一个对象。</p><p>ref定义的数据，修改的时候是需改xxx.value的，而reactive定义的不用</p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> vue3 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>关于使用element-ui的el-table组件：带分页打印表头</title>
       <link href="/2022/07/25/print/"/>
       <url>/2022/07/25/print/</url>
