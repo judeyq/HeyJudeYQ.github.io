@@ -4,7 +4,20 @@
   
     
     <entry>
-      <title>options-api &amp; composition-api</title>
+      <title>75、vue.$data页面暂存</title>
+      <link href="/2022/07/28/localStorage/"/>
+      <url>/2022/07/28/localStorage/</url>
+      
+        <content type="html"><![CDATA[<span id="more"></span><pre><code class="html">&lt;template&gt;  &lt;div&gt;    &lt;el-form ref=&quot;form&quot; :model=&quot;form&quot; label-width=&quot;80px&quot;&gt;      &lt;el-form-item label=&quot;活动名称&quot;&gt;        &lt;el-input v-model=&quot;form.name&quot;&gt;&lt;/el-input&gt;      &lt;/el-form-item&gt;      &lt;el-form-item label=&quot;活动区域&quot;&gt;        &lt;el-select v-model=&quot;form.region&quot; placeholder=&quot;请选择活动区域&quot;&gt;          &lt;el-option label=&quot;区域一&quot; value=&quot;shanghai&quot;&gt;&lt;/el-option&gt;          &lt;el-option label=&quot;区域二&quot; value=&quot;beijing&quot;&gt;&lt;/el-option&gt;        &lt;/el-select&gt;      &lt;/el-form-item&gt;      &lt;el-form-item label=&quot;活动时间&quot;&gt;        &lt;el-col :span=&quot;11&quot;&gt;          &lt;el-date-picker            type=&quot;date&quot;            placeholder=&quot;选择日期&quot;            v-model=&quot;form.date1&quot;            style=&quot;width: 100%;&quot;          &gt;&lt;/el-date-picker&gt;        &lt;/el-col&gt;        &lt;el-col class=&quot;line&quot; :span=&quot;2&quot;&gt;-&lt;/el-col&gt;        &lt;el-col :span=&quot;11&quot;&gt;          &lt;el-time-picker            placeholder=&quot;选择时间&quot;            v-model=&quot;form.date2&quot;            style=&quot;width: 100%;&quot;          &gt;&lt;/el-time-picker&gt;        &lt;/el-col&gt;      &lt;/el-form-item&gt;      &lt;el-form-item label=&quot;即时配送&quot;&gt;        &lt;el-switch v-model=&quot;form.delivery&quot;&gt;&lt;/el-switch&gt;      &lt;/el-form-item&gt;      &lt;el-form-item label=&quot;活动性质&quot;&gt;        &lt;el-checkbox-group v-model=&quot;form.type&quot;&gt;          &lt;el-checkbox label=&quot;美食/餐厅线上活动&quot; name=&quot;type&quot;&gt;&lt;/el-checkbox&gt;          &lt;el-checkbox label=&quot;地推活动&quot; name=&quot;type&quot;&gt;&lt;/el-checkbox&gt;          &lt;el-checkbox label=&quot;线下主题活动&quot; name=&quot;type&quot;&gt;&lt;/el-checkbox&gt;          &lt;el-checkbox label=&quot;单纯品牌曝光&quot; name=&quot;type&quot;&gt;&lt;/el-checkbox&gt;        &lt;/el-checkbox-group&gt;      &lt;/el-form-item&gt;      &lt;el-form-item label=&quot;特殊资源&quot;&gt;        &lt;el-radio-group v-model=&quot;form.resource&quot;&gt;          &lt;el-radio label=&quot;线上品牌商赞助&quot;&gt;&lt;/el-radio&gt;          &lt;el-radio label=&quot;线下场地免费&quot;&gt;&lt;/el-radio&gt;        &lt;/el-radio-group&gt;      &lt;/el-form-item&gt;      &lt;el-form-item label=&quot;活动形式&quot;&gt;        &lt;el-input type=&quot;textarea&quot; v-model=&quot;form.desc&quot;&gt;&lt;/el-input&gt;      &lt;/el-form-item&gt;      &lt;el-form-item&gt;        &lt;el-button type=&quot;primary&quot; @click=&quot;onSubmit&quot;&gt;立即创建&lt;/el-button&gt;        &lt;el-button @click=&quot;stash&quot;&gt;暂存&lt;/el-button&gt;      &lt;/el-form-item&gt;    &lt;/el-form&gt;  &lt;/div&gt;&lt;/template&gt;</code></pre><pre><code class="js">&lt;script&gt;export default &#123;    data() &#123;        const stashStr = localStorage.getItem(&#39;stash&#39;)        const stash = stashStr ? JSON.parse(stashStr) : &#123;&#125;        return Object.assign(&#123;            form: &#123;                name: &#39;&#39;,                region: &#39;&#39;,                date1: &#39;&#39;,                date2: &#39;&#39;,                delivery: false,                type: [],                resource: &#39;&#39;,                desc: &#39;&#39;            &#125;        &#125;, stash)    &#125;,    methods: &#123;        onSubmit() &#123;            console.log(&#39;submit!&#39;);        &#125;,        stash() &#123;            localStorage.setItem(&#39;stash&#39;, JSON.stringify(this.$data));        &#125;    &#125;&#125;&lt;/script&gt;</code></pre>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>74、options-api &amp; composition-api</title>
       <link href="/2022/07/26/composition-api&amp;options-api/"/>
       <url>/2022/07/26/composition-api&amp;options-api/</url>
       
@@ -23,7 +36,7 @@
     
     
     <entry>
-      <title>关于使用element-ui的el-table组件：带分页打印表头</title>
+      <title>73、关于使用element-ui的el-table组件：带分页打印表头</title>
       <link href="/2022/07/25/print/"/>
       <url>/2022/07/25/print/</url>
       
@@ -42,7 +55,7 @@
     
     
     <entry>
-      <title>关于使用element-ui的el-select组件下拉框错位问题</title>
+      <title>72、关于使用element-ui的el-select组件下拉框错位问题</title>
       <link href="/2022/07/11/el-select/"/>
       <url>/2022/07/11/el-select/</url>
       
@@ -61,7 +74,7 @@
     
     
     <entry>
-      <title>headerSearch组件</title>
+      <title>71、headerSearch组件</title>
       <link href="/2022/06/25/headerSearch/"/>
       <url>/2022/06/25/headerSearch/</url>
       
@@ -80,7 +93,7 @@
     
     
     <entry>
-      <title>功能引导组件</title>
+      <title>70、功能引导组件</title>
       <link href="/2022/06/20/guide/"/>
       <url>/2022/06/20/guide/</url>
       
@@ -99,7 +112,7 @@
     
     
     <entry>
-      <title>screenfull组件</title>
+      <title>69、screenfull组件</title>
       <link href="/2022/06/15/screenfull/"/>
       <url>/2022/06/15/screenfull/</url>
       
@@ -118,7 +131,7 @@
     
     
     <entry>
-      <title>ESlint+Prettier+VSCode代码格式规范、git提交规范</title>
+      <title>68、ESlint+Prettier+VSCode代码格式规范、git提交规范</title>
       <link href="/2022/06/07/eslint/"/>
       <url>/2022/06/07/eslint/</url>
       
@@ -137,7 +150,7 @@
     
     
     <entry>
-      <title>ant-design-vue-table</title>
+      <title>67、ant-design-vue-table</title>
       <link href="/2022/05/10/ant-design-vue-table/"/>
       <url>/2022/05/10/ant-design-vue-table/</url>
       
@@ -156,7 +169,7 @@
     
     
     <entry>
-      <title>Mac系统升级后桌面文件夹及文件消失</title>
+      <title>66、Mac系统升级后桌面文件夹及文件消失</title>
       <link href="/2022/04/19/mac-finder/"/>
       <url>/2022/04/19/mac-finder/</url>
       
@@ -175,7 +188,7 @@
     
     
     <entry>
-      <title>响应式原理</title>
+      <title>65、响应式原理</title>
       <link href="/2022/04/12/reactive/"/>
       <url>/2022/04/12/reactive/</url>
       
@@ -194,7 +207,7 @@
     
     
     <entry>
-      <title>ant-design-vue-picker</title>
+      <title>64、ant-design-vue-picker</title>
       <link href="/2022/04/06/ant-design-vue-picker/"/>
       <url>/2022/04/06/ant-design-vue-picker/</url>
       
@@ -213,7 +226,7 @@
     
     
     <entry>
-      <title>ant-design-vue v-model.trim不生效</title>
+      <title>63、ant-design-vue v-model.trim不生效</title>
       <link href="/2022/04/06/ant-design-vue-trim/"/>
       <url>/2022/04/06/ant-design-vue-trim/</url>
       
@@ -232,7 +245,7 @@
     
     
     <entry>
-      <title>权限管理</title>
+      <title>62、权限管理</title>
       <link href="/2022/03/12/permmsion/"/>
       <url>/2022/03/12/permmsion/</url>
       
@@ -251,7 +264,7 @@
     
     
     <entry>
-      <title>js如何将base64转成16进制</title>
+      <title>61、js如何将base64转成16进制</title>
       <link href="/2022/03/01/base64To16/"/>
       <url>/2022/03/01/base64To16/</url>
       
@@ -270,7 +283,7 @@
     
     
     <entry>
-      <title>什么是上位机、下位机?</title>
+      <title>60、什么是上位机、下位机?</title>
       <link href="/2022/02/28/Upper-Lower/"/>
       <url>/2022/02/28/Upper-Lower/</url>
       
@@ -289,7 +302,7 @@
     
     
     <entry>
-      <title>ant-design-vue select下拉框组件</title>
+      <title>59、ant-design-vue select下拉框组件</title>
       <link href="/2022/02/26/ant-design-vue/"/>
       <url>/2022/02/26/ant-design-vue/</url>
       
@@ -308,7 +321,7 @@
     
     
     <entry>
-      <title>解决Homebrew安装失败</title>
+      <title>58、解决Homebrew安装失败</title>
       <link href="/2022/02/25/homebrew/"/>
       <url>/2022/02/25/homebrew/</url>
       
@@ -327,7 +340,7 @@
     
     
     <entry>
-      <title>Vue2/Vue3 响应式原理</title>
+      <title>57、Vue2/Vue3 响应式原理</title>
       <link href="/2022/02/24/vue2-defineProperty/"/>
       <url>/2022/02/24/vue2-defineProperty/</url>
       
@@ -346,7 +359,7 @@
     
     
     <entry>
-      <title>HTTP的请求方法、状态码</title>
+      <title>56、HTTP的请求方法、状态码</title>
       <link href="/2022/02/23/http/"/>
       <url>/2022/02/23/http/</url>
       
@@ -365,7 +378,7 @@
     
     
     <entry>
-      <title>大文件断点续传</title>
+      <title>55、大文件断点续传</title>
       <link href="/2022/02/21/file-upload/"/>
       <url>/2022/02/21/file-upload/</url>
       
@@ -384,7 +397,7 @@
     
     
     <entry>
-      <title>个人GitHub图床使用webp格式的图片</title>
+      <title>54、个人GitHub图床使用webp格式的图片</title>
       <link href="/2022/01/24/image-host/"/>
       <url>/2022/01/24/image-host/</url>
       
@@ -403,7 +416,7 @@
     
     
     <entry>
-      <title>vue使用装饰器descriptor</title>
+      <title>53、vue使用装饰器descriptor</title>
       <link href="/2022/01/20/decorator/"/>
       <url>/2022/01/20/decorator/</url>
       
@@ -422,7 +435,7 @@
     
     
     <entry>
-      <title>WebRTC音视频</title>
+      <title>52、WebRTC音视频</title>
       <link href="/2022/01/19/webrtc/"/>
       <url>/2022/01/19/webrtc/</url>
       
@@ -441,7 +454,7 @@
     
     
     <entry>
-      <title>Vue项目中前端导出/导入Excel表格的实现</title>
+      <title>51、Vue项目中前端导出/导入Excel表格的实现</title>
       <link href="/2022/01/15/export-excel/"/>
       <url>/2022/01/15/export-excel/</url>
       
@@ -460,7 +473,7 @@
     
     
     <entry>
-      <title>CountTo:数字动态滚动</title>
+      <title>50、CountTo:数字动态滚动</title>
       <link href="/2022/01/13/count-to/"/>
       <url>/2022/01/13/count-to/</url>
       
@@ -479,7 +492,7 @@
     
     
     <entry>
-      <title>websocket实现客户端和服务端的通信</title>
+      <title>49、websocket实现客户端和服务端的通信</title>
       <link href="/2022/01/03/websocket/"/>
       <url>/2022/01/03/websocket/</url>
       
@@ -498,7 +511,7 @@
     
     
     <entry>
-      <title>用hook处理组件内定时器</title>
+      <title>48、用hook处理组件内定时器</title>
       <link href="/2022/01/01/hook/"/>
       <url>/2022/01/01/hook/</url>
       
@@ -517,7 +530,7 @@
     
     
     <entry>
-      <title>git提交规范</title>
+      <title>47、git提交规范</title>
       <link href="/2021/12/22/git/"/>
       <url>/2021/12/22/git/</url>
       
@@ -530,7 +543,7 @@
     
     
     <entry>
-      <title>解决GitHub Pages绑定阿里域名CNAME消失</title>
+      <title>46、解决GitHub Pages绑定阿里域名CNAME消失</title>
       <link href="/2021/10/28/url/"/>
       <url>/2021/10/28/url/</url>
       
@@ -549,7 +562,7 @@
     
     
     <entry>
-      <title>自定义input唤起键盘</title>
+      <title>45、自定义input唤起键盘</title>
       <link href="/2021/10/20/input/"/>
       <url>/2021/10/20/input/</url>
       
@@ -568,7 +581,7 @@
     
     
     <entry>
-      <title>vue3-v-model</title>
+      <title>44、vue3-v-model</title>
       <link href="/2021/10/14/vue3-4-v-model/"/>
       <url>/2021/10/14/vue3-4-v-model/</url>
       
@@ -587,7 +600,7 @@
     
     
     <entry>
-      <title>vue3-emits</title>
+      <title>43、vue3-emits</title>
       <link href="/2021/10/11/vue3-3-emits/"/>
       <url>/2021/10/11/vue3-3-emits/</url>
       
@@ -606,7 +619,7 @@
     
     
     <entry>
-      <title>vue3-传送门：teleport</title>
+      <title>42、vue3-传送门：teleport</title>
       <link href="/2021/10/02/vue3-2-teleport/"/>
       <url>/2021/10/02/vue3-2-teleport/</url>
       
@@ -625,7 +638,7 @@
     
     
     <entry>
-      <title>vue3-起始和新特性</title>
+      <title>41、vue3-起始和新特性</title>
       <link href="/2021/09/25/vue3-1-start/"/>
       <url>/2021/09/25/vue3-1-start/</url>
       
@@ -644,7 +657,7 @@
     
     
     <entry>
-      <title>初识egg.js</title>
+      <title>40、初识egg.js</title>
       <link href="/2021/06/20/egg/"/>
       <url>/2021/06/20/egg/</url>
       
@@ -663,7 +676,7 @@
     
     
     <entry>
-      <title>堆和栈、变量复制、深拷贝与浅拷贝</title>
+      <title>39、堆和栈、变量复制、深拷贝与浅拷贝</title>
       <link href="/2021/05/25/stack-heap/"/>
       <url>/2021/05/25/stack-heap/</url>
       
@@ -682,7 +695,7 @@
     
     
     <entry>
-      <title>Vue项目中的window.resize</title>
+      <title>38、Vue项目中的window.resize</title>
       <link href="/2021/05/19/resize/"/>
       <url>/2021/05/19/resize/</url>
       
@@ -701,7 +714,7 @@
     
     
     <entry>
-      <title>typescript基础</title>
+      <title>37、typescript基础</title>
       <link href="/2021/05/15/typescript/"/>
       <url>/2021/05/15/typescript/</url>
       
@@ -720,7 +733,7 @@
     
     
     <entry>
-      <title>父子组件的创建和挂载顺序</title>
+      <title>36、父子组件的创建和挂载顺序</title>
       <link href="/2021/05/09/component-mounted/"/>
       <url>/2021/05/09/component-mounted/</url>
       
@@ -739,7 +752,7 @@
     
     
     <entry>
-      <title>数组方法</title>
+      <title>35、数组方法</title>
       <link href="/2021/05/02/array/"/>
       <url>/2021/05/02/array/</url>
       
@@ -758,7 +771,7 @@
     
     
     <entry>
-      <title>iTerms、Node版本管理工具、nrm等的使用方法</title>
+      <title>34、iTerms、Node版本管理工具、nrm等的使用方法</title>
       <link href="/2021/05/02/tool/"/>
       <url>/2021/05/02/tool/</url>
       
@@ -777,7 +790,7 @@
     
     
     <entry>
-      <title>时间格式化</title>
+      <title>33、时间格式化</title>
       <link href="/2021/04/28/time/"/>
       <url>/2021/04/28/time/</url>
       
@@ -796,7 +809,7 @@
     
     
     <entry>
-      <title>javascript -- 对象</title>
+      <title>32、javascript -- 对象</title>
       <link href="/2021/04/14/javascript-simple3/"/>
       <url>/2021/04/14/javascript-simple3/</url>
       
@@ -815,7 +828,7 @@
     
     
     <entry>
-      <title>解决点击手机虚拟返回键退出应用</title>
+      <title>31、解决点击手机虚拟返回键退出应用</title>
       <link href="/2021/03/23/back/"/>
       <url>/2021/03/23/back/</url>
       
@@ -834,7 +847,7 @@
     
     
     <entry>
-      <title>v-for 和 v-if 优先级</title>
+      <title>30、v-for 和 v-if 优先级</title>
       <link href="/2021/03/16/v-for-v-if/"/>
       <url>/2021/03/16/v-for-v-if/</url>
       
@@ -853,7 +866,7 @@
     
     
     <entry>
-      <title>Vue-虚拟DOM</title>
+      <title>29、Vue-虚拟DOM</title>
       <link href="/2021/03/12/vdom/"/>
       <url>/2021/03/12/vdom/</url>
       
@@ -872,7 +885,7 @@
     
     
     <entry>
-      <title>vue组件化实践之插槽（二）</title>
+      <title>28、vue组件化实践之插槽（二）</title>
       <link href="/2021/02/24/vue-component2/"/>
       <url>/2021/02/24/vue-component2/</url>
       
@@ -891,7 +904,7 @@
     
     
     <entry>
-      <title>vue组件化实践之组件通信（一）</title>
+      <title>27、vue组件化实践之组件通信（一）</title>
       <link href="/2021/02/20/vue-component/"/>
       <url>/2021/02/20/vue-component/</url>
       
@@ -910,7 +923,7 @@
     
     
     <entry>
-      <title>关于v-for的key值为什么不能是index？</title>
+      <title>26、关于v-for的key值为什么不能是index？</title>
       <link href="/2021/02/14/v-for-index/"/>
       <url>/2021/02/14/v-for-index/</url>
       
@@ -929,7 +942,7 @@
     
     
     <entry>
-      <title>vue使用hls.js处理m3u8格式的视频</title>
+      <title>25、vue使用hls.js处理m3u8格式的视频</title>
       <link href="/2021/01/08/hls/"/>
       <url>/2021/01/08/hls/</url>
       
@@ -948,7 +961,7 @@
     
     
     <entry>
-      <title>CSS3：linear-gradient线性渐变和radial-gradient径向渐变的使用</title>
+      <title>24、CSS3：linear-gradient线性渐变和radial-gradient径向渐变的使用</title>
       <link href="/2020/08/12/css3-linear-gradient/"/>
       <url>/2020/08/12/css3-linear-gradient/</url>
       
@@ -967,7 +980,7 @@
     
     
     <entry>
-      <title>百度地图动画（轨迹动画）</title>
+      <title>23、百度地图动画（轨迹动画）</title>
       <link href="/2020/04/29/bmap-animate/"/>
       <url>/2020/04/29/bmap-animate/</url>
       
@@ -986,7 +999,7 @@
     
     
     <entry>
-      <title>百度地图LBS云检索</title>
+      <title>22、百度地图LBS云检索</title>
       <link href="/2020/04/29/bmap/"/>
       <url>/2020/04/29/bmap/</url>
       
@@ -1005,7 +1018,7 @@
     
     
     <entry>
-      <title>v-charts的options</title>
+      <title>21、v-charts的options</title>
       <link href="/2020/04/28/v-charts/"/>
       <url>/2020/04/28/v-charts/</url>
       
@@ -1024,7 +1037,7 @@
     
     
     <entry>
-      <title>axios的封装</title>
+      <title>20、axios的封装</title>
       <link href="/2020/04/23/axios/"/>
       <url>/2020/04/23/axios/</url>
       
@@ -1043,7 +1056,7 @@
     
     
     <entry>
-      <title>关于echarts官方的一个bug -- sublink跳转问题</title>
+      <title>19、关于echarts官方的一个bug -- sublink跳转问题</title>
       <link href="/2020/04/20/echarts/"/>
       <url>/2020/04/20/echarts/</url>
       
@@ -1062,7 +1075,7 @@
     
     
     <entry>
-      <title>如何使用canvas压缩图片？</title>
+      <title>18、如何使用canvas压缩图片？</title>
       <link href="/2020/04/10/canvas/"/>
       <url>/2020/04/10/canvas/</url>
       
@@ -1081,7 +1094,7 @@
     
     
     <entry>
-      <title>移动端300ms延迟在IOS11中的bug</title>
+      <title>17、移动端300ms延迟在IOS11中的bug</title>
       <link href="/2020/02/20/mobile/"/>
       <url>/2020/02/20/mobile/</url>
       
@@ -1100,7 +1113,7 @@
     
     
     <entry>
-      <title>v-cloak解决页面闪烁问题</title>
+      <title>16、v-cloak解决页面闪烁问题</title>
       <link href="/2020/02/12/v-cloak/"/>
       <url>/2020/02/12/v-cloak/</url>
       
@@ -1119,7 +1132,7 @@
     
     
     <entry>
-      <title>解决oh-my-zsh启动时出现多行提示</title>
+      <title>15、解决oh-my-zsh启动时出现多行提示</title>
       <link href="/2020/02/09/oh-my-zsh/"/>
       <url>/2020/02/09/oh-my-zsh/</url>
       
@@ -1138,7 +1151,7 @@
     
     
     <entry>
-      <title>整理javascript知识(二)</title>
+      <title>14、整理javascript知识(二)</title>
       <link href="/2020/01/15/javascript-simple2/"/>
       <url>/2020/01/15/javascript-simple2/</url>
       
@@ -1157,7 +1170,7 @@
     
     
     <entry>
-      <title>整理javascript知识(一)</title>
+      <title>13、整理javascript知识(一)</title>
       <link href="/2020/01/12/javascript-simple/"/>
       <url>/2020/01/12/javascript-simple/</url>
       
@@ -1176,11 +1189,11 @@
     
     
     <entry>
-      <title>下拉框select的option</title>
+      <title>12、下拉框select银行卡号格式处理</title>
       <link href="/2019/12/29/select/"/>
       <url>/2019/12/29/select/</url>
       
-        <content type="html"><![CDATA[<p>下拉的选项是从后台获取的数据,如何获取选定项的值?</p><span id="more"></span><p>以选择银行卡为例：</p><pre><code class="js">    &lt;select v-model=&quot;selected&quot; class=&quot;selected&quot;&gt;        &lt;option disabled value v-show=&quot;showBankCard&quot;&gt;请选择提现到账的银行卡&lt;/option&gt;        &lt;option            v-for=&quot;item in BankCardList&quot;            :key=&quot;item.id&quot;            v-bind:value=&quot;item.id&quot;        &gt;            &#123;&#123; item.card_no &#125;&#125;        &lt;/option&gt;    &lt;/select&gt;</code></pre><pre><code class="js">item.card_no ? item.card_no.replace(/^(\d&#123;4&#125;)\d+(\d&#123;4&#125;)$/,&quot;$1****$2&quot;):&quot;&quot;// 银行卡号显示为 6217 **** 0000 的格式。</code></pre>]]></content>
+        <content type="html"><![CDATA[<p>银行卡号显示为 6217 **** 0000 的格式</p><span id="more"></span><p>以选择银行卡为例：</p><pre><code class="js">    &lt;select v-model=&quot;selected&quot; class=&quot;selected&quot;&gt;        &lt;option disabled value v-show=&quot;showBankCard&quot;&gt;请选择提现到账的银行卡&lt;/option&gt;        &lt;option            v-for=&quot;item in BankCardList&quot;            :key=&quot;item.id&quot;            v-bind:value=&quot;item.id&quot;        &gt;            &#123;&#123; item.card_no &#125;&#125;        &lt;/option&gt;    &lt;/select&gt;</code></pre><pre><code class="js">item.card_no ? item.card_no.replace(/^(\d&#123;4&#125;)\d+(\d&#123;4&#125;)$/,&quot;$1****$2&quot;):&quot;&quot;// 银行卡号显示为 6217 **** 0000 的格式。</code></pre>]]></content>
       
       
       
@@ -1195,7 +1208,7 @@
     
     
     <entry>
-      <title>二维码的生成</title>
+      <title>11、二维码的生成</title>
       <link href="/2019/12/28/qrcode/"/>
       <url>/2019/12/28/qrcode/</url>
       
@@ -1214,7 +1227,7 @@
     
     
     <entry>
-      <title>微信公众号网页使用popstate事件</title>
+      <title>10、微信公众号网页使用popstate事件</title>
       <link href="/2019/12/23/popstate/"/>
       <url>/2019/12/23/popstate/</url>
       
@@ -1233,7 +1246,7 @@
     
     
     <entry>
-      <title>h5扫码功能</title>
+      <title>9、h5扫码功能的实现</title>
       <link href="/2019/12/20/h5-scan/"/>
       <url>/2019/12/20/h5-scan/</url>
       
@@ -1252,7 +1265,7 @@
     
     
     <entry>
-      <title>解决Vue项目热更新打包时间过长</title>
+      <title>8、解决Vue项目热更新打包时间过长</title>
       <link href="/2019/12/11/hot/"/>
       <url>/2019/12/11/hot/</url>
       
@@ -1271,7 +1284,7 @@
     
     
     <entry>
-      <title>markdown语法</title>
+      <title>7、markdown语法</title>
       <link href="/2019/12/05/markdown/"/>
       <url>/2019/12/05/markdown/</url>
       
@@ -1290,7 +1303,7 @@
     
     
     <entry>
-      <title>Vue实现模糊搜索</title>
+      <title>6、Vue实现模糊搜索</title>
       <link href="/2019/11/13/mohu-search/"/>
       <url>/2019/11/13/mohu-search/</url>
       
@@ -1309,7 +1322,7 @@
     
     
     <entry>
-      <title>vue基础知识</title>
+      <title>5、Vue2基础知识</title>
       <link href="/2019/09/26/vue-simple/"/>
       <url>/2019/09/26/vue-simple/</url>
       
@@ -1328,7 +1341,7 @@
     
     
     <entry>
-      <title>DOMContentLoaded</title>
+      <title>4、DOMContentLoaded</title>
       <link href="/2019/08/18/DOMContentLoaded/"/>
       <url>/2019/08/18/DOMContentLoaded/</url>
       
@@ -1347,7 +1360,7 @@
     
     
     <entry>
-      <title>如何使用CSS画三角形?</title>
+      <title>3、如何使用CSS画三角形?</title>
       <link href="/2019/06/20/css/"/>
       <url>/2019/06/20/css/</url>
       
@@ -1366,11 +1379,11 @@
     
     
     <entry>
-      <title>微信小程序checkbox-group</title>
+      <title>2、微信小程序checkbox-group</title>
       <link href="/2019/01/20/check-group/"/>
       <url>/2019/01/20/check-group/</url>
       
-        <content type="html"><![CDATA[<p>checkbox-group多项选择器，内部由多个checkbox组成；<br>主要的属性bindchange   说明checkbox-group中选中项发生改变时触发 change 事件，detail = {value:[选中的checkbox的value的数组]};</p><span id="more"></span><pre><code class="html">&lt;checkbox-group  class=&quot;checkbox_group&quot; bindchange=&quot;checkboxChange&quot;&gt;    &lt;label class=&quot;checkbox&quot; wx:for=&quot;&#123;&#123;items&#125;&#125;&quot; wx:key=&quot;item&quot;&gt;        &lt;checkbox value=&quot;&#123;&#123;item.value&#125;&#125;&quot;  checked=&quot;&#123;&#123;item.checked&#125;&#125;&quot; /&gt;        &#123;&#123;item.value&#125;&#125;    &lt;/label&gt;&lt;/checkbox-group&gt;</code></pre><p>每一次修改选中项，都需要一个空数组去存放选中项。</p><details><summary>点我展示代码</summary><pre><code class="js">  checkboxChange(e) &#123;    const items = this.data.items;     const values = e.detail.value;    // 设置选中的数组为空  选中的id push到数组里面    this.data.vehicle_arr = [];    for (let i = 0, lenI = items.length; i &lt; lenI; ++i) &#123;      items[i].checked = false // 遍历items，让所有的选中状态都为false      for (let j = 0, lenJ = values.length; j &lt; lenJ; ++j) &#123;        if (items[i].value === values[j]) &#123;          items[i].checked = true;          const List = items[i].name.toString().split();          for (let k in List) &#123;            this.data.vehicle_arr.push(List[k]);          &#125;        &#125;      &#125;    &#125;    // 选中的id    this.data.unique = [...new Set(this.data.vehicle_arr)];    this.setData(&#123;      driverarr: e.detail.value.join(&quot;,&quot;), // 多选的数组      items,    &#125;);  &#125;,</code></pre></details>]]></content>
+        <content type="html"><![CDATA[<p>checkbox-group多项选择器，内部由多个checkbox组成；<br>属性bindchange   说明checkbox-group中选中项发生改变时触发 change 事件，detail = {value:[选中的checkbox的value的数组]};</p><span id="more"></span><pre><code class="html">&lt;checkbox-group  class=&quot;checkbox_group&quot; bindchange=&quot;checkboxChange&quot;&gt;    &lt;label class=&quot;checkbox&quot; wx:for=&quot;&#123;&#123;items&#125;&#125;&quot; wx:key=&quot;item&quot;&gt;        &lt;checkbox value=&quot;&#123;&#123;item.value&#125;&#125;&quot;  checked=&quot;&#123;&#123;item.checked&#125;&#125;&quot; /&gt;        &#123;&#123;item.value&#125;&#125;    &lt;/label&gt;&lt;/checkbox-group&gt;</code></pre><p>每一次修改选中项，都需要一个空数组去存放选中项。</p><details><summary>点我展示代码</summary><pre><code class="js">  checkboxChange(e) &#123;    const items = this.data.items;     const values = e.detail.value;    // 设置选中的数组为空  选中的id push到数组里面    this.data.vehicle_arr = [];    for (let i = 0, lenI = items.length; i &lt; lenI; ++i) &#123;      items[i].checked = false // 遍历items，让所有的选中状态都为false      for (let j = 0, lenJ = values.length; j &lt; lenJ; ++j) &#123;        if (items[i].value === values[j]) &#123;          items[i].checked = true;          const List = items[i].name.toString().split();          for (let k in List) &#123;            this.data.vehicle_arr.push(List[k]);          &#125;        &#125;      &#125;    &#125;    // 选中的id    this.data.unique = [...new Set(this.data.vehicle_arr)];    this.setData(&#123;      driverarr: e.detail.value.join(&quot;,&quot;), // 多选的数组      items,    &#125;);  &#125;,</code></pre></details>]]></content>
       
       
       
@@ -1385,7 +1398,7 @@
     
     
     <entry>
-      <title>Hexo</title>
+      <title>1、Hexo常用命令</title>
       <link href="/2019/01/02/hello-world/"/>
       <url>/2019/01/02/hello-world/</url>
       

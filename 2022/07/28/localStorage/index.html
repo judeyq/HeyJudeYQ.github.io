@@ -1,0 +1,102 @@
+<!DOCTYPE html><html class="appearance-auto" lang="zh-CN"><head><meta charset="UTF-8"><title>75、vue.$data页面暂存</title><meta name="description" content="🐯 🐯 🐯 🐯 🐯"><meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, initial-scale=1"><!-- Google Analytics --><!-- End Google Analytics -->
+<!-- Baidu Analytics --><!-- End Baidu Analytics --><link rel="icon" href="/images/favicon.png"><link rel="stylesheet" href="/style/common/bulma.css"><link rel="stylesheet" href="/style/base.css"><link rel="stylesheet" href="/style/common/helper.css"><script src="/js/common.js"></script><link rel="stylesheet" href="/style/post.css"><link rel="stylesheet" href="/style/themes/highlight-theme-light.css"><script src="/js/highlight.pack.js"></script><meta name="description" content="
+
+&amp;lt;template&amp;gt;
+  &amp;lt;div&amp;gt;
+    &amp;lt;el-form ref=&amp;quot;form&amp;quot; :model=&amp;quot;form&amp;quot; label-width=&amp;quot;80px&amp;quot;&amp;gt;
+      &amp;lt;el-form-item label=&amp;quot;活动名称&amp;quot;&amp;gt;
+        &amp;lt;el-input v-model=&amp;quot;form.name&amp;quot;&amp;gt;&amp;lt;/el-input&amp;gt;
+      &amp;lt;/el-form-item&amp;gt;
+      &amp;lt;el-form-item label=&amp;quot;活动区域&amp;quot;&amp;gt;
+        &amp;lt;el-select v-model=&amp;.."><meta name="generator" content="Hexo 5.4.1"></head><body class="is-flex is-flex-direction-column"><header class="header-widget is-flex-shrink-0 is-hidden-mobile"><div class="container is-fullhd is-flex is-justify-content-space-between is-align-items-center is-full-height"><section class="is-hidden-mobile is-flex-shrink-0"><h2><a href="/">Jude's blog</a></h2></section><h3 class="is-hidden-mobile is-family-serif is-full-height is-flex is-align-items-center is-flex-shrink-0"><div class="is-full-height" id="postTopic"><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">75、vue.$data页面暂存</p><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">点击返回顶部</p></div></h3><aside class="is-flex-shrink-0"><h3 class="is-inline-block"><a href="/">首页</a></h3><h3 class="is-inline-block"><a href="/about">关于</a></h3><h3 class="is-inline-block"><a href="/archives">归档</a></h3></aside></div></header><header class="is-flex header-widget is-flex-shrink-0 is-align-items-center is-justify-content-center is-hidden-tablet"><h3 class="is-inline-block"><a href="/">首页</a></h3><h3 class="is-inline-block"><a href="/about">关于</a></h3><h3 class="is-inline-block"><a href="/archives">归档</a></h3></header><main><main class="container is-max-widescreen content section post-page pt-4 px-4"><div class="columns is-flex-desktop is-justify-content-center is-flex-direction-row-reverse"><div class="column is-3 is-hidden-mobile is-hidden"></div><div class="column is-9"><header class="my-4"></header><h1 class="mt-0 mb-1 is-family-serif" id="postTitle">75、vue.$data页面暂存</h1><time class="has-text-grey" datetime="2022-07-27T16:00:00.000Z">2022-07-28</time><article class="mt-2 post-content"><span id="more"></span>
+
+<pre><code class="html">&lt;template&gt;
+  &lt;div&gt;
+    &lt;el-form ref=&quot;form&quot; :model=&quot;form&quot; label-width=&quot;80px&quot;&gt;
+      &lt;el-form-item label=&quot;活动名称&quot;&gt;
+        &lt;el-input v-model=&quot;form.name&quot;&gt;&lt;/el-input&gt;
+      &lt;/el-form-item&gt;
+      &lt;el-form-item label=&quot;活动区域&quot;&gt;
+        &lt;el-select v-model=&quot;form.region&quot; placeholder=&quot;请选择活动区域&quot;&gt;
+          &lt;el-option label=&quot;区域一&quot; value=&quot;shanghai&quot;&gt;&lt;/el-option&gt;
+          &lt;el-option label=&quot;区域二&quot; value=&quot;beijing&quot;&gt;&lt;/el-option&gt;
+        &lt;/el-select&gt;
+      &lt;/el-form-item&gt;
+      &lt;el-form-item label=&quot;活动时间&quot;&gt;
+        &lt;el-col :span=&quot;11&quot;&gt;
+          &lt;el-date-picker
+            type=&quot;date&quot;
+            placeholder=&quot;选择日期&quot;
+            v-model=&quot;form.date1&quot;
+            style=&quot;width: 100%;&quot;
+          &gt;&lt;/el-date-picker&gt;
+        &lt;/el-col&gt;
+        &lt;el-col class=&quot;line&quot; :span=&quot;2&quot;&gt;-&lt;/el-col&gt;
+        &lt;el-col :span=&quot;11&quot;&gt;
+          &lt;el-time-picker
+            placeholder=&quot;选择时间&quot;
+            v-model=&quot;form.date2&quot;
+            style=&quot;width: 100%;&quot;
+          &gt;&lt;/el-time-picker&gt;
+        &lt;/el-col&gt;
+      &lt;/el-form-item&gt;
+      &lt;el-form-item label=&quot;即时配送&quot;&gt;
+        &lt;el-switch v-model=&quot;form.delivery&quot;&gt;&lt;/el-switch&gt;
+      &lt;/el-form-item&gt;
+      &lt;el-form-item label=&quot;活动性质&quot;&gt;
+        &lt;el-checkbox-group v-model=&quot;form.type&quot;&gt;
+          &lt;el-checkbox label=&quot;美食/餐厅线上活动&quot; name=&quot;type&quot;&gt;&lt;/el-checkbox&gt;
+          &lt;el-checkbox label=&quot;地推活动&quot; name=&quot;type&quot;&gt;&lt;/el-checkbox&gt;
+          &lt;el-checkbox label=&quot;线下主题活动&quot; name=&quot;type&quot;&gt;&lt;/el-checkbox&gt;
+          &lt;el-checkbox label=&quot;单纯品牌曝光&quot; name=&quot;type&quot;&gt;&lt;/el-checkbox&gt;
+        &lt;/el-checkbox-group&gt;
+      &lt;/el-form-item&gt;
+      &lt;el-form-item label=&quot;特殊资源&quot;&gt;
+        &lt;el-radio-group v-model=&quot;form.resource&quot;&gt;
+          &lt;el-radio label=&quot;线上品牌商赞助&quot;&gt;&lt;/el-radio&gt;
+          &lt;el-radio label=&quot;线下场地免费&quot;&gt;&lt;/el-radio&gt;
+        &lt;/el-radio-group&gt;
+      &lt;/el-form-item&gt;
+      &lt;el-form-item label=&quot;活动形式&quot;&gt;
+        &lt;el-input type=&quot;textarea&quot; v-model=&quot;form.desc&quot;&gt;&lt;/el-input&gt;
+      &lt;/el-form-item&gt;
+      &lt;el-form-item&gt;
+        &lt;el-button type=&quot;primary&quot; @click=&quot;onSubmit&quot;&gt;立即创建&lt;/el-button&gt;
+        &lt;el-button @click=&quot;stash&quot;&gt;暂存&lt;/el-button&gt;
+      &lt;/el-form-item&gt;
+    &lt;/el-form&gt;
+  &lt;/div&gt;
+&lt;/template&gt;
+</code></pre>
+<pre><code class="js">&lt;script&gt;
+
+export default &#123;
+    data() &#123;
+        const stashStr = localStorage.getItem(&#39;stash&#39;)
+        const stash = stashStr ? JSON.parse(stashStr) : &#123;&#125;
+        return Object.assign(&#123;
+            form: &#123;
+                name: &#39;&#39;,
+                region: &#39;&#39;,
+                date1: &#39;&#39;,
+                date2: &#39;&#39;,
+                delivery: false,
+                type: [],
+                resource: &#39;&#39;,
+                desc: &#39;&#39;
+            &#125;
+        &#125;, stash)
+    &#125;,
+    methods: &#123;
+        onSubmit() &#123;
+            console.log(&#39;submit!&#39;);
+        &#125;,
+        stash() &#123;
+            localStorage.setItem(&#39;stash&#39;, JSON.stringify(this.$data));
+        &#125;
+    &#125;
+
+&#125;
+&lt;/script&gt;
+</code></pre>
+</article><section class="jump-container is-flex is-justify-content-space-between my-6"><!-- em is empty placeholder--><em></em><a class="button is-default" href="/2022/07/26/composition-api&amp;options-api/" title="74、options-api &amp; composition-api"><span class="has-text-weight-semibold">下一页: 74、options-api &amp; composition-api</span><i class="iconfont icon-next ml-2 has-text-grey"></i></a></section></div></div></main></main><footer class="is-flex is-flex-direction-column is-align-items-center is-flex-shrink-0 is-family-serif"><section class="sns-container"><!-- Github--><a title="github" target="_blank" rel="noopener nofollow" href="//github.com/Jude"><i class="iconfont icon-github"></i></a><!-- Ins--><!-- RSS--><!-- 知乎--><!-- 领英--><!-- 脸书--></section><p><span>Copyright ©</span><span> Jude 2022</span></p><div class="is-flex is-justify-content-center is-flex-wrap-wrap"><p>Powered by Hexo &verbar;&nbsp;</p><p class="is-flex is-justify-content-center"><a title="Hexo theme author" target="_blank" rel="noopener" href="//github.com/haojen">Theme by Haojen&nbsp;</a></p><div style="margin-top: 2px"><a class="github-button" title="github-button" target="_blank" rel="noopener" href="https://github.com/haojen/hexo-theme-Claudia" data-color-scheme="no-preference: light; light: light; dark: dark;" data-show-count="true"></a></div></div><div><span></span></div></footer><script async defer src="https://buttons.github.io/buttons.js"></script><script src="/js/post.js"></script></body></html>
