@@ -4,11 +4,30 @@
   
     
     <entry>
+      <title>80、使用 element-plus 版本升级后的问题清单</title>
+      <link href="/2022/08/01/element-plus/"/>
+      <url>/2022/08/01/element-plus/</url>
+      
+        <content type="html"><![CDATA[<p>element-plus 版本升级由@1.1.0-beta.15 升级到@2.0.4 版本时，在开发时遇到的问题整理及解决方法</p><span id="more"></span><h2 id="一、错误：-Can-39-t-reexport-the-named-export-39-xxx-39-from-non-EcmaScript-module-only-default-export-is-available-处理"><a href="#一、错误：-Can-39-t-reexport-the-named-export-39-xxx-39-from-non-EcmaScript-module-only-default-export-is-available-处理" class="headerlink" title="一、错误： Can&#39;t reexport the named export &#39;xxx&#39; from non EcmaScript module (only default export is available) 处理"></a>一、错误： <code>Can&#39;t reexport the named export &#39;xxx&#39; from non EcmaScript module (only default export is available)</code> 处理</h2><p>这个问题是 element plus 版本升级后，再运行项目，element plus 对 webpack 的一个编译处理。</p><p>解决方式：</p><p>在 vue.config.js 的 chainWebpack 下增加一个规则：</p><pre><code class="js">chainWebpack(config)&#123;  config.module  .rule(&quot;element-plus-2&quot;)  .test(/\.mjs$/)  // https://webpack.docschina.org/configuration/module/#ruletype  .type(&quot;javascript/auto&quot;)  .include.add(/node_modules/)  .end();&#125;</code></pre><h2 id="二、样式错误问题：input的白-蓝边、图片的灰色底"><a href="#二、样式错误问题：input的白-蓝边、图片的灰色底" class="headerlink" title="二、样式错误问题：input的白/蓝边、图片的灰色底"></a>二、样式错误问题：input的白/蓝边、图片的灰色底</h2><p>在做用户登录发现的el-input 存在的2个样式问题</p><pre><code class="css">// 处理 input 的白/蓝边.el-input__inner &#123;  box-shadow: none !important;  --el-select-input-focus-border-color: none !important;&#125;// 处理图片的灰色底.el-avatar &#123;  --el-avatar-bg-color: none !important;&#125;</code></pre><h2 id="三、tbody路径的变更"><a href="#三、tbody路径的变更" class="headerlink" title="三、tbody路径的变更"></a>三、tbody路径的变更</h2><p>1.x版本的element plus获取el元素的方式为：</p><pre><code class="js">const el = tableRef.value.$el.querySelectorAll(&#39;.el-table__body-wrapper &gt; table &gt; tbody&#39;)[0]</code></pre><p>2.x版本的element plus获取el元素的方式为</p><pre><code class="js">const el = tableRef.value.$el.querySelectorAll(&#39;.el-table__body &gt; tbody&#39;)[0]</code></pre><h2 id="四、中台项目侧边栏收起图标不显示问题"><a href="#四、中台项目侧边栏收起图标不显示问题" class="headerlink" title="四、中台项目侧边栏收起图标不显示问题"></a>四、中台项目侧边栏收起图标不显示问题</h2><p>查看控制台发现，#app .sidebar-container .svg-icon{margin-left:16px} 这个样式存在问题</p><p>解决方式：在侧边栏menu收起时，取消margin-left</p><pre><code class="css">.el-menu--collapse&#123;  .svg-icon&#123;    margin-right:0px;  &#125;&#125;</code></pre>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> vue3 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>79、ref-reactive</title>
       <link href="/2022/07/31/ref-reactive/"/>
       <url>/2022/07/31/ref-reactive/</url>
       
-        <content type="html"><![CDATA[<span id="more"></span>]]></content>
+        <content type="html"><![CDATA[<p>ref/reactive都能创建一个响应对象，这二者的区别是什么呢</p><span id="more"></span><h2 id="一、reactive"><a href="#一、reactive" class="headerlink" title="一、reactive"></a>一、reactive</h2><blockquote><p>reactive都能创建一个响应对象或数组</p></blockquote><pre><code class="html">&lt;tempalte&gt;  &lt;div&gt;&#123;&#123; state.count &#125;&#125;&lt;/div&gt;&lt;/tempalte&gt;</code></pre><pre><code class="js">// script 这里加了setup  没写setup需要在setup()&#123;&#125;内部定义 并返回（return）&lt;script setup&gt;import &#123; reactive &#125; from &quot;vue&quot;const state = reactive(&#123;count:0&#125;)&lt;/script&gt;</code></pre><h2 id="二、ref"><a href="#二、ref" class="headerlink" title="二、ref"></a>二、ref</h2><blockquote><p>vue3提供了一个ref()方法允许我们创建使用任何值类型的响应式ref</p></blockquote><pre><code class="js">import &#123;ref&#125; from &quot;vue&quot;const count = ref(0)console.log(count) // &#123; value:0 &#125;count.value++console.log(count.value) // 2</code></pre>]]></content>
       
       
       
