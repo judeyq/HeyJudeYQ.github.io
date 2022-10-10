@@ -1,0 +1,188 @@
+<!DOCTYPE html><html class="appearance-auto" lang="zh-CN"><head><meta charset="UTF-8"><title>81、egg.js(二)</title><meta name="description" content="🐯 🐯 🐯 🐯 🐯"><meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, initial-scale=1"><!-- Google Analytics --><!-- End Google Analytics -->
+<!-- Baidu Analytics --><!-- End Baidu Analytics --><link rel="icon" href="/images/favicon.png"><link rel="stylesheet" href="/style/common/bulma.css"><link rel="stylesheet" href="/style/base.css"><link rel="stylesheet" href="/style/common/helper.css"><script src="/js/common.js"></script><link rel="stylesheet" href="/style/post.css"><link rel="stylesheet" href="/style/themes/highlight-theme-light.css"><script src="/js/highlight.pack.js"></script><meta name="description" content="Egg.js：https://issummer.cn/2021/06/20/egg/
+
+
+一、项目环境egg.js对node版本是有要求的，node&amp;gt; 8.x npm &amp;gt;= 6.1.0
+目前电脑环境：node:12.6.0  npm 6.1.0
+egg提供脚手架生成指令
+mkdir egg-example &amp;amp;&amp;amp; cd egg-example
+npm init egg --type=simple
+npm i
+
+启动项目会出现报错：Cannot find module ‘fs/promise’
+主要是由于node版本较低造成的，使用n 升级node版本到16.13.0 ,重新npm install，启动项目，报错消失。
+二、egg项目目录Egg 作为一套解决方案，它内部高度集成了封装.."><meta name="generator" content="Hexo 5.4.1"></head><body class="is-flex is-flex-direction-column"><header class="header-widget is-flex-shrink-0 is-hidden-mobile"><div class="container is-fullhd is-flex is-justify-content-space-between is-align-items-center is-full-height"><section class="is-hidden-mobile is-flex-shrink-0"><h2><a href="/">Jude's blog</a></h2></section><h3 class="is-hidden-mobile is-family-serif is-full-height is-flex is-align-items-center is-flex-shrink-0"><div class="is-full-height" id="postTopic"><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">81、egg.js(二)</p><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">点击返回顶部</p></div></h3><aside class="is-flex-shrink-0"><h3 class="is-inline-block"><a href="/">首页</a></h3><h3 class="is-inline-block"><a href="/about">关于</a></h3><h3 class="is-inline-block"><a href="/archives">归档</a></h3></aside></div></header><header class="is-flex header-widget is-flex-shrink-0 is-align-items-center is-justify-content-center is-hidden-tablet"><h3 class="is-inline-block"><a href="/">首页</a></h3><h3 class="is-inline-block"><a href="/about">关于</a></h3><h3 class="is-inline-block"><a href="/archives">归档</a></h3></header><main><main class="container is-max-widescreen content section post-page pt-4 px-4"><div class="columns is-flex-desktop is-justify-content-center is-flex-direction-row-reverse"><div class="column is-3 is-hidden-mobile"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E9%A1%B9%E7%9B%AE%E7%8E%AF%E5%A2%83"><span class="toc-text">一、项目环境</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81egg%E9%A1%B9%E7%9B%AE%E7%9B%AE%E5%BD%95"><span class="toc-text">二、egg项目目录</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1%E3%80%81app-router-js"><span class="toc-text">1、app&#x2F;router.js</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2%E3%80%81app-controller-xx"><span class="toc-text">2、app&#x2F;controller&#x2F;xx</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3%E3%80%81app-service-xx"><span class="toc-text">3、app&#x2F;service&#x2F;xx</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4%E3%80%81app-middleware-xx"><span class="toc-text">4、app&#x2F;middleware&#x2F;xx</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5%E3%80%81app-public-xx"><span class="toc-text">5、app&#x2F;public&#x2F;xx</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6%E3%80%81config-config-env-js"><span class="toc-text">6、config&#x2F;config.{env}.js</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#7%E3%80%81config-plugin-js"><span class="toc-text">7、config&#x2F;plugin.js</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E7%BC%96%E5%86%99-GET-%E5%92%8C-POST-%E6%8E%A5%E5%8F%A3"><span class="toc-text">三、编写 GET 和 POST 接口</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#GET-%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0%E8%8E%B7%E5%8F%96"><span class="toc-text">GET 请求参数获取</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#POST-%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0%E8%8E%B7%E5%8F%96"><span class="toc-text">POST 请求参数获取</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BB%8E-Service-%E5%86%85%E8%8E%B7%E5%8F%96%E6%95%B0%E6%8D%AE"><span class="toc-text">从 Service 内获取数据</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%9B%E3%80%81Egg-js-%E4%B8%AD%E4%BD%BF%E7%94%A8%E5%89%8D%E7%AB%AF%E6%A8%A1%E6%9D%BF"><span class="toc-text">四、Egg.js 中使用前端模板</span></a></li></ol></div><div class="column is-9"><header class="my-4"><a href="/tags/egg"><i class="tag post-item-tag">egg</i></a></header><h1 class="mt-0 mb-1 is-family-serif" id="postTitle">81、egg.js(二)</h1><time class="has-text-grey" datetime="2022-08-02T12:00:00.000Z">2022-08-02</time><article class="mt-2 post-content"><p>Egg.js：<a href="https://issummer.cn/2021/06/20/egg/">https://issummer.cn/2021/06/20/egg/</a></p>
+<span id="more"></span>
+
+<h2 id="一、项目环境"><a href="#一、项目环境" class="headerlink" title="一、项目环境"></a>一、项目环境</h2><p>egg.js对node版本是有要求的，node&gt; 8.x npm &gt;= 6.1.0</p>
+<p>目前电脑环境：node:12.6.0  npm 6.1.0</p>
+<p>egg提供脚手架生成指令</p>
+<pre><code class="shell">mkdir egg-example &amp;&amp; cd egg-example
+npm init egg --type=simple
+npm i
+</code></pre>
+<p>启动项目会出现报错：Cannot find module ‘fs/promise’</p>
+<p>主要是由于node版本较低造成的，使用n 升级node版本到16.13.0 ,重新npm install，启动项目，报错消失。</p>
+<h2 id="二、egg项目目录"><a href="#二、egg项目目录" class="headerlink" title="二、egg项目目录"></a>二、egg项目目录</h2><p><code>Egg</code> 作为一套解决方案，它内部高度集成了封装好的项目目录结构，现代开发俗称“约定式开发”。正常情况下，你从 0 开始搭建一个 <code>Node</code> 服务端代码，需要结合很多工具插件来辅助完成项目的搭建，而 <code>Egg</code> 则提前为你提供好了这些繁琐的初始工作，让你能专心与业务层面的开发。</p>
+<p>当然，“约定式开发”也有不好的地方，很多配置项都是内部约定好的，在你想要用到某一个功能时，你可能需要去查阅 <code>Egg</code> 的官方文档是如何配置的，这就会消耗一点时间，但是相比之下，使用它的利大于弊。</p>
+<h4 id="1、app-router-js"><a href="#1、app-router-js" class="headerlink" title="1、app/router.js"></a>1、<strong>app/router.js</strong></h4><p>用于配置 URL 路由规则，比如 <code>get</code> 请求，<code>npm run dev</code> 启动项目之后，直接在浏览器中访问启动的<code>端口 + 路径</code>，默认是 <code>http://localhost:7001/</code>，将会拿到 <code>app/controller</code> 文件夹下，<code>home.js</code> 脚本中 <code>index</code> 方法返回的内容。</p>
+<p>这就是路由配置的作用，当然，抛出的形式有多种，如<code>router.get</code>、<code>router.post</code>、<code>router.delete</code>、<code>router.put</code> 等，都是支持的，更加具体的内容 <a href="https://link.juejin.cn/?target=https://eggjs.org/zh-cn/basics/router.html">Router 配置</a>。</p>
+<h4 id="2、app-controller-xx"><a href="#2、app-controller-xx" class="headerlink" title="2、app/controller/xx"></a><strong>2、app/controller/xx</strong></h4><p>用于解析用户的输入，处理后返回相应的结果。通过请求路径将用户的请求基于 <code>method</code> 和 <code>URL</code> 分发到对应的 <code>Controller</code> 上，而 <code>Controller</code> 要做的事情就是响应用户的诉求。举个例子，我想拿到 A 用户的个人信息，于是我们要在控制器（Controller）里，通过请求携带的 A 用户的 id 参数，从数据库里获取指定用户的个人信息。</p>
+<p>控制器需要做的就是处理数据和响应请求返回数据。更加详细的描述 <a href="https://link.juejin.cn/?target=https://eggjs.org/zh-cn/basics/controller.html">Controller 文档</a></p>
+<h4 id="3、app-service-xx"><a href="#3、app-service-xx" class="headerlink" title="3、app/service/xx"></a><strong>3、app/service/xx</strong></h4><p>简单来说，<code>Service</code> 就是在复杂业务场景下用于做业务逻辑封装的一个抽象层。初始化项目中未声明 <code>service</code> 文件夹，它是可选项，但是官方建议我们操作业务逻辑最好做一层封装。我们换一种理解方式，<code>Service</code> 层就是用于数据库的查询，我们尽量将粒度细化，这样以便多个 <code>Controller</code> 共同调用同一个 <code>Service</code>。更加详细的描述 <a href="https://link.juejin.cn/?target=https://eggjs.org/zh-cn/basics/service.html">Service 文档</a>。</p>
+<h4 id="4、app-middleware-xx"><a href="#4、app-middleware-xx" class="headerlink" title="4、app/middleware/xx"></a><strong>4、app/middleware/xx</strong></h4><p>用于编写中间件，中间件的概念就是在路由配置里设置了中间件的路由，每次请求命中后，都要过一层中间件。在后续的开发中，也会利用到这个中间件的原理做用户鉴权。当用户未登录的情况下，是不能调用某些接口的。</p>
+<p>每次都在 <code>Controller</code> 判断，当前请求是否携带有效的用户认证信息。接口一多，到处都是这样的判断，逻辑重复。所以，中间件在某种程度上，也算是优化代码结构的一种方式。更加详细的描述 <a href="https://link.juejin.cn/?target=https://eggjs.org/zh-cn/basics/middleware.html">Middleware 文档</a>。</p>
+<h4 id="5、app-public-xx"><a href="#5、app-public-xx" class="headerlink" title="5、app/public/xx"></a><strong>5、app/public/xx</strong></h4><p>用于放置静态资源。会有一个上传静态资源的接口，包括图片、文本文档、excel、word等，都可以通过服务端读取文件之后，将其写入 <code>app/public</code> 文件夹中。在目前没有 <code>OSS</code> 服务的情况下，姑且先用这种方式存储静态资源，会消耗一点服务器的内存。</p>
+<h4 id="6、config-config-env-js"><a href="#6、config-config-env-js" class="headerlink" title="6、config/config.{env}.js"></a><strong>6、config/config.{env}.js</strong></h4><p>用于编写配置文件。 <code>config/config.default.js</code> 文件，这个是 <code>Egg</code> 框架约定好的，在内部设置一些全局的配置常量，在任何地方都可以通过 <code>app.config</code> 获取到 <code>config.default.js</code> 文件内的配置项。</p>
+<h4 id="7、config-plugin-js"><a href="#7、config-plugin-js" class="headerlink" title="7、config/plugin.js"></a><strong>7、config/plugin.js</strong></h4><p>用于配置需要加载的插件。比如 <code>egg-mysql</code>、<code>egg-cors</code>、<code>egg-jwt</code> 等官方提供的插件</p>
+<h2 id="三、编写-GET-和-POST-接口"><a href="#三、编写-GET-和-POST-接口" class="headerlink" title="三、编写 GET 和 POST 接口"></a>三、编写 GET 和 POST 接口</h2><h4 id="GET-请求参数获取"><a href="#GET-请求参数获取" class="headerlink" title="GET 请求参数获取"></a>GET 请求参数获取</h4><p>浏览器输入URL：http:*//localhost:7001/?id=yuqi</p>
+<p>打开 <code>app/controller/home.js</code>，通过如下形式获取到浏览器查询参数</p>
+<pre><code class="js">const Controller = require(&#39;egg&#39;).Controller;
+
+class HomeController extends Controller &#123;
+  async index() &#123;
+    const &#123; ctx &#125; = this;
+    const &#123; id &#125; = ctx.query;
+    ctx.body = id;
+  &#125;
+&#125;
+
+module.exports = HomeController;
+</code></pre>
+<p>还有另一种获取申明参数，比如我希望通过这样一个地址获取用户参数 <code>/user/5</code>，想获取用户 <code>id</code> 为 <code>5</code> 的用户信息。我们可以这样操作，首先添加路由，打开 <code>app/router.js</code> 添加一个路由：</p>
+<pre><code class="js">&#39;use strict&#39;;
+
+/**
+ * @param &#123;Egg.Application&#125; app - egg application
+ */
+module.exports = app =&gt; &#123;
+  const &#123; router, controller &#125; = app;
+  router.get(&#39;/&#39;, controller.home.index);
+  router.get(&#39;/user/:id&#39;, controller.home.user);
+&#125;;
+</code></pre>
+<p>其次在 <code>app/controller/home.js</code> 下添加一个 <code>user</code> 方法如下：</p>
+<pre><code class="js">&#39;use strict&#39;;
+
+const Controller = require(&#39;egg&#39;).Controller;
+
+class HomeController extends Controller &#123;
+  async index() &#123;
+    const &#123; ctx &#125; = this;
+    const &#123; id &#125; = ctx.query;
+    ctx.body = id;
+  &#125;
+  // 获取用户信息
+  async user() &#123;
+    const &#123; ctx &#125; = this;
+    const &#123; id &#125; = ctx.params; // 通过 params 获取申明参数
+    ctx.body = id;
+  &#125;
+&#125;
+module.exports = HomeController;
+</code></pre>
+<p>浏览器输入URL：localhost:7001/user/123</p>
+<p>网页会打印出：123</p>
+<h4 id="POST-请求参数获取"><a href="#POST-请求参数获取" class="headerlink" title="POST 请求参数获取"></a><strong>POST 请求参数获取</strong></h4><p><code>POST</code> 接口需要借助 <code>Postman</code> 或者Apifox工具进行请求，因为通过浏览器无法手动发起 <code>POST</code> 请求，只能通过浏览器地址栏发起 <code>GET</code> 请求。</p>
+<pre><code class="js">// app/router.js
+// ...
+router.post(&#39;/add&#39;, controller.home.add);
+</code></pre>
+<pre><code>// app/controller/home.js
+// post 请求方法
+async add() &#123;
+  const &#123; ctx &#125; = this;
+  const &#123; title &#125; = ctx.request.body;
+  // Egg 框架内置了 bodyParser 中间件来对 POST 请求 body 解析成 object 挂载到 ctx.request.body 上
+  ctx.body = &#123;
+    title
+  &#125;;
+&#125;
+</code></pre>
+<p>用apifox发送post请求会出现报错，触发网络请求的安防策略</p>
+<p><code>config/config.default.js</code> 做好白名单配置，全部允许请求：</p>
+<pre><code>config.security = &#123;
+  csrf: &#123;
+    enable: false,
+    ignoreJSON: true
+  &#125;,
+  domainWhiteList: [ &#39;*&#39; ], // 配置白名单
+&#125;;
+</code></pre>
+<p>配置完成后，再次发送请求，可以看到请求成功，成功拿到服务端参数。</p>
+<h4 id="从-Service-内获取数据"><a href="#从-Service-内获取数据" class="headerlink" title="从 Service 内获取数据"></a><strong>从 Service 内获取数据</strong></h4><p>模拟一下在 <code>Service</code> 中获取数据库的数据，在 <code>app</code> 目录下新建 <code>service</code>，并且创建一个 <code>home.js</code>，</p>
+<pre><code class="js">&#39;use strict&#39;
+
+const Service = require(&#39;egg&#39;).Service
+
+class HomeService extends Service &#123;
+  async user()&#123;
+    // 假设从数据库获取的用户信息
+    return &#123;
+      name:&#39;yu&#39;,
+      slogen:&#39;i love you egg.js&#39;
+    &#125;
+  &#125;
+&#125;
+
+module.exports = HomeService
+</code></pre>
+<p>在 <code>Controller</code> 内拿到上述方法</p>
+<pre><code class="js">//  app/controller/home.js
+// 获取用户信息
+async user() &#123;
+  const &#123; ctx &#125; = this;
+  const &#123; name, slogen &#125; = await ctx.service.home.user();
+  ctx.body = &#123;
+    name,
+    slogen
+  &#125;
+&#125;
+</code></pre>
+<p>Apifox打开<a target="_blank" rel="noopener" href="http://127.0.0.1:7001/user/yu">http://127.0.0.1:7001/user/yu</a>  可以看到网页显示：{“name”:”yu”,”slogen”:”i love you egg.js”}</p>
+<h2 id="四、Egg-js-中使用前端模板"><a href="#四、Egg-js-中使用前端模板" class="headerlink" title="四、Egg.js 中使用前端模板"></a>四、Egg.js 中使用前端模板</h2><p>开发一些简单的网页，想快速部署到云服务器上，就可以使用前端模板的开发形式。</p>
+<p>首先安装插件 <code>egg-view-ejs</code>：</p>
+<pre><code class="shell">npm install egg-view-ejs -save
+</code></pre>
+<p>然后在 <code>config/plugin.js</code> 里面声明需要用到的插件：</p>
+<pre><code class="js">module.exports = &#123;
+  ejs: &#123;
+    enable: true,
+    package: &#39;egg-view-ejs&#39;
+  &#125;
+&#125;;
+</code></pre>
+<p>去 <code>config/config.default.js</code> 里配置 <code>ejs</code> ，这一步我们会将 <code>.ejs</code> 的后缀改成 <code>.html</code> 的后缀。</p>
+<pre><code class="js">config.view = &#123;
+  mapping: &#123;&#39;.html&#39;: &#39;ejs&#39;&#125;  //左边写成.html后缀，会自动渲染.html文件
+&#125;;
+</code></pre>
+<p>上述的配置，指的是将 <code>view</code> 文件夹下的 <code>.html</code> 后缀的文件，识别为 <code>.ejs</code>。</p>
+<p>接着，在 <code>app</code> 目录下创建 <code>view</code> 文件夹，并且新建一个 <code>index.html</code> 文件，作为前端模板</p>
+<pre><code class="html">&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
+    &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;ie=edge&quot;&gt;
+    &lt;title&gt;&lt;%-title%&gt;&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;!-- 使用模板数据 --&gt;
+    &lt;h1&gt;&lt;%-title%&gt;&lt;/h1&gt; 
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<p>在 <code>Controller</code> 内把变量注入到 <code>index.html</code> 文件，模板通过 <code>&lt;%-xx%&gt;</code>关键字获取到传入的变量。</p>
+<p>下面修改 <code>controller/home.js</code> 下的 <code>index</code> 方法</p>
+<pre><code class="js">async index() &#123;
+  const &#123; ctx &#125; = this;
+  // ctx.render 默认会去 view 文件夹寻找 index.html，这是 Egg 约定好的。
+  await ctx.render(&#39;index.html&#39;, &#123;
+    title: &#39;于齐&#39;, // 将 title 传入 index.html
+  &#125;);
+&#125;
+</code></pre>
+<p>浏览器打开：localhost:7001  就会显示：于齐</p>
+<p>上述开发模式便是前后端不分离的模式，在页面不复杂的情况下，整个项目不采用如 <code>React</code> 、<code>Vue</code> 这些前端框架，也是可以的。在上述代码 <code>ctx.render</code> 之前，我们可以从数据库获取想要的信息，作为参数塞入模板中，模板拿到数据，构建 <code>HTML</code>。如果是提交事件，可以通过原生 <code>ajax</code> 或者是引入一把梭专家 <code>jQuery</code>，提交数据。</p>
+</article><section class="jump-container is-flex is-justify-content-space-between my-6"><!-- em is empty placeholder--><em></em><a class="button is-default" href="/2022/08/01/element-plus/" title="80、使用 element-plus 版本升级后的问题清单"><span class="has-text-weight-semibold">下一页: 80、使用 element-plus 版本升级后的问题清单</span><i class="iconfont icon-next ml-2 has-text-grey"></i></a></section></div></div></main></main><footer class="is-flex is-flex-direction-column is-align-items-center is-flex-shrink-0 is-family-serif"><section class="sns-container"><!-- Github--><a title="github" target="_blank" rel="noopener nofollow" href="//github.com/Jude"><i class="iconfont icon-github"></i></a><!-- Ins--><!-- RSS--><!-- 知乎--><!-- 领英--><!-- 脸书--></section><p><span>Copyright ©</span><span> Jude 2022</span></p><div class="is-flex is-justify-content-center is-flex-wrap-wrap"><p>Powered by Hexo &verbar;&nbsp;</p><p class="is-flex is-justify-content-center"><a title="Hexo theme author" target="_blank" rel="noopener" href="//github.com/haojen">Theme by Haojen&nbsp;</a></p><div style="margin-top: 2px"><a class="github-button" title="github-button" target="_blank" rel="noopener" href="https://github.com/haojen/hexo-theme-Claudia" data-color-scheme="no-preference: light; light: light; dark: dark;" data-show-count="true"></a></div></div><div><span></span></div></footer><script async defer src="https://buttons.github.io/buttons.js"></script><script src="/js/post.js"></script></body></html>
