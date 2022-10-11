@@ -1,0 +1,300 @@
+<!DOCTYPE html><html class="appearance-auto" lang="zh-CN"><head><meta charset="UTF-8"><title>83、egg-jwt用户鉴权、注册、登录及中间件</title><meta name="description" content="🐯 🐯 🐯 🐯 🐯"><meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, initial-scale=1"><!-- Google Analytics --><!-- End Google Analytics -->
+<!-- Baidu Analytics --><!-- End Baidu Analytics --><link rel="icon" href="/images/favicon.png"><link rel="stylesheet" href="/style/common/bulma.css"><link rel="stylesheet" href="/style/base.css"><link rel="stylesheet" href="/style/common/helper.css"><script src="/js/common.js"></script><link rel="stylesheet" href="/style/post.css"><link rel="stylesheet" href="/style/themes/highlight-theme-light.css"><script src="/js/highlight.pack.js"></script><meta name="description" content="
+
+一、egg-jwt实现用户鉴权
+用户鉴权，一种用于在通信网络中对试图访问来自服务提供商的服务的用户进行鉴权的方法。用于用户登陆到DSMP或使用数据业务时，业务网关或Portal发送此消息到DSMP，对该用户使用数据业务的合法性和有效性（状态是否为激活）进行检查。
+
+简单理解，鉴权就是用户在浏览网页或 App 时，通过约定好的方式，让网页和用户建立起一种相互信赖的机制，继而返回给用户需要的信息。
+鉴权的机制：
+
+HTTP Basic Authentication
+session-cookie
+Token 令牌
+OAuth(开放授权)
+
+token 可以运用在如网页、客户端、小程序、浏览器插件等等领域。如果选用 cookie 的形式鉴权，在客户端和小程序就无法使用这套接口，因为它们没有域的概念，而 cook.."><meta name="generator" content="Hexo 5.4.1"></head><body class="is-flex is-flex-direction-column"><header class="header-widget is-flex-shrink-0 is-hidden-mobile"><div class="container is-fullhd is-flex is-justify-content-space-between is-align-items-center is-full-height"><section class="is-hidden-mobile is-flex-shrink-0"><h2><a href="/">Jude's blog</a></h2></section><h3 class="is-hidden-mobile is-family-serif is-full-height is-flex is-align-items-center is-flex-shrink-0"><div class="is-full-height" id="postTopic"><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">83、egg-jwt用户鉴权、注册、登录及中间件</p><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">点击返回顶部</p></div></h3><aside class="is-flex-shrink-0"><h3 class="is-inline-block"><a href="/">首页</a></h3><h3 class="is-inline-block"><a href="/about">关于</a></h3><h3 class="is-inline-block"><a href="/archives">归档</a></h3></aside></div></header><header class="is-flex header-widget is-flex-shrink-0 is-align-items-center is-justify-content-center is-hidden-tablet"><h3 class="is-inline-block"><a href="/">首页</a></h3><h3 class="is-inline-block"><a href="/about">关于</a></h3><h3 class="is-inline-block"><a href="/archives">归档</a></h3></header><main><main class="container is-max-widescreen content section post-page pt-4 px-4"><div class="columns is-flex-desktop is-justify-content-center is-flex-direction-row-reverse"><div class="column is-3 is-hidden-mobile"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81egg-jwt%E5%AE%9E%E7%8E%B0%E7%94%A8%E6%88%B7%E9%89%B4%E6%9D%83"><span class="toc-text">一、egg-jwt实现用户鉴权</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E6%B3%A8%E5%86%8C%E6%8E%A5%E5%8F%A3"><span class="toc-text">二、注册接口</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E7%99%BB%E5%BD%95%E6%8E%A5%E5%8F%A3"><span class="toc-text">三、登录接口</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%9B%E3%80%81%E7%99%BB%E5%BD%95%E9%AA%8C%E8%AF%81%E4%B8%AD%E9%97%B4%E4%BB%B6"><span class="toc-text">四、登录验证中间件</span></a></li></ol></div><div class="column is-9"><header class="my-4"><a href="/tags/egg"><i class="tag post-item-tag">egg</i></a></header><h1 class="mt-0 mb-1 is-family-serif" id="postTitle">83、egg-jwt用户鉴权、注册、登录及中间件</h1><time class="has-text-grey" datetime="2022-08-03T14:00:00.000Z">2022-08-03</time><article class="mt-2 post-content"><span id="more"></span>
+
+<h2 id="一、egg-jwt实现用户鉴权"><a href="#一、egg-jwt实现用户鉴权" class="headerlink" title="一、egg-jwt实现用户鉴权"></a>一、egg-jwt实现用户鉴权</h2><blockquote>
+<p>用户鉴权，一种用于在通信网络中对试图访问来自服务提供商的服务的用户进行鉴权的方法。用于用户登陆到DSMP或使用数据业务时，业务网关或Portal发送此消息到DSMP，对该用户使用数据业务的合法性和有效性（状态是否为激活）进行检查。</p>
+</blockquote>
+<p>简单理解，鉴权就是用户在浏览网页或 <code>App</code> 时，通过约定好的方式，让网页和用户建立起一种相互信赖的机制，继而返回给用户需要的信息。</p>
+<p>鉴权的机制：</p>
+<ul>
+<li>HTTP Basic Authentication</li>
+<li>session-cookie</li>
+<li>Token 令牌</li>
+<li>OAuth(开放授权)</li>
+</ul>
+<p><code>token</code> 可以运用在如网页、客户端、小程序、浏览器插件等等领域。如果选用 <code>cookie</code> 的形式鉴权，在客户端和小程序就无法使用这套接口，因为它们没有域的概念，而 <code>cookie</code> 是需要存在某个域下。</p>
+<h2 id="二、注册接口"><a href="#二、注册接口" class="headerlink" title="二、注册接口"></a>二、注册接口</h2><p>在 <code>controller</code> 目录下新建 <code>user.js</code> 用于编写用户相关的代码</p>
+<pre><code class="js">// controller/user.js
+&#39;use strict&#39;;
+
+const Controller = require(&#39;egg&#39;).Controller;
+
+class UserController extends Controller &#123;
+  async register() &#123;
+    const &#123; ctx &#125; = this;
+    const &#123; username, password &#125; = ctx.request.body; // 获取注册需要的参数
+  &#125;
+&#125;
+
+module.exports = UserController;
+</code></pre>
+<p>此时我们拿到了 <code>username</code> 和 <code>password</code>，我们需要判断两个参数是否为空。如果是空，则返回错误信息：</p>
+<pre><code class="js">// 判空操作
+if (!username || !password) &#123;
+  ctx.body = &#123;
+    code: 500,
+    msg: &#39;账号密码不能为空&#39;,
+    data: null
+  &#125;
+  return
+&#125;
+</code></pre>
+<p>此时我们还需要一个判断，根据用户传入的 <code>username</code> 去数据库的 <code>user</code> 表查询，是否已经被注册。</p>
+<p>在 <code>service</code> 目录下新建 <code>user.js</code>，并且添加 <code>getUserByName</code> 方法用于根据 <code>username</code> 查找用户信息</p>
+<pre><code class="js">//  service/user.js
+&#39;use strict&#39;;
+
+const Service = require(&#39;egg&#39;).Service;
+
+class UserService extends Service &#123;
+  // 通过用户名获取用户信息
+  async getUserByName(username) &#123;
+    const &#123; app &#125; = this;
+      try &#123;
+        const result = await app.mysql.get(&#39;user&#39;, &#123; username &#125;);
+        return result;
+      &#125; catch (error) &#123;
+        console.log(error);
+        return null;
+      &#125;
+  &#125;
+&#125;
+module.exports = UserService;
+</code></pre>
+<blockquote>
+<p>使用 async 和 await 时，如果想捕获错误，需要使用 try…catch 来捕获，如果代码运行过程中发生错误，都将会被 catch 捕获。</p>
+</blockquote>
+<p> <code>controller/user.js</code> 继续添加逻辑，在 「判空操作」逻辑下，判断是否已经被注册的逻辑：</p>
+<pre><code class="js">// controller/user.js
+async register() &#123;
+  ...
+  // 验证数据库内是否已经有该账户名
+  const userInfo = await ctx.service.user.getUserByName(username) // 获取用户信息
+
+  // 判断是否已经存在
+  if (userInfo &amp;&amp; userInfo.id) &#123;
+    ctx.body = &#123;
+      code: 500,
+      msg: &#39;账户名已被注册，请重新输入&#39;,
+      data: null
+    &#125;
+    return
+  &#125;
+&#125;
+</code></pre>
+<p>经过上述两层判断之后，接下便可将账号和密码写入数据库</p>
+<pre><code class="js">// controller/user.js
+// 默认头像，放在 user.js 的最外，部避免重复声明。
+const defaultAvatar = &#39;http://s.yezgea02.com/1615973940679/WeChat77d6d2ac093e247c361f0b8a7aeb6c2a.png&#39;
+// 调用 service 方法，将数据存入数据库。
+const result = await ctx.service.user.register(&#123;
+  username,
+  password,
+  signature: &#39;世界和平。&#39;,
+  avatar: defaultAvatar
+&#125;);
+
+if (result) &#123;
+  ctx.body = &#123;
+    code: 200,
+    msg: &#39;注册成功&#39;,
+    data: null
+  &#125;
+&#125; else &#123;
+  ctx.body = &#123;
+    code: 500,
+    msg: &#39;注册失败&#39;,
+    data: null
+  &#125;
+&#125;
+</code></pre>
+<p><code>service/user.js</code> 添加 <code>register</code> 写入数据库的方法</p>
+<pre><code class="js">// service/user.js
+...
+// 注册
+async register(params) &#123;
+  const &#123; app &#125; = this;
+  try &#123;
+    const result = await app.mysql.insert(&#39;user&#39;, params);
+    return result;
+  &#125; catch (error) &#123;
+    console.log(error);
+    return null;
+  &#125;
+&#125;
+</code></pre>
+<p>在 <code>router.js</code> 将接口抛出</p>
+<pre><code class="js">// router.js
+&#39;use strict&#39;;
+
+/**
+ * @param &#123;Egg.Application&#125; app - egg application
+ */
+module.exports = app =&gt; &#123;
+  const &#123; router, controller &#125; = app;
+  router.post(&#39;/api/user/register&#39;, controller.user.register);
+&#125;;
+</code></pre>
+<p>通过postman工具测试接口。</p>
+<h2 id="三、登录接口"><a href="#三、登录接口" class="headerlink" title="三、登录接口"></a>三、登录接口</h2><blockquote>
+<p>通过注册的「用户名」和「密码」，调用登录接口，接口会返回给我们一个 <code>token</code> 令牌</p>
+</blockquote>
+<p>每次发起请求，无论是获取数据，还是提交数据，我们都需要将 <code>token</code> 带上，以此来标识，此次获取(GET)或提交(POST)是哪一个用户的行为。</p>
+<p> <code>egg-jwt</code> 有加密的功能，也有解密的功能。通过解密 <code>token</code> 拿到当初加密 <code>token</code> 时的信息，信息的内容大致就是当初注册时候的用户信息。</p>
+<p>安装egg-jwt插件</p>
+<pre><code class="shell">npm i egg-jwt -S
+</code></pre>
+<p>Egg-jwt的<a href="https://link.juejin.cn/?target=https://github.com/okoala/egg-jwt%23readme">仓库地址</a></p>
+<p>在 <code>config/plugin.js</code> 下添加插件：</p>
+<pre><code class="js">jwt: &#123;
+  enable: true,
+  package: &#39;egg-jwt&#39;
+&#125;
+</code></pre>
+<p><code>config/config.default.js</code> 下添加自定义加密字符串</p>
+<pre><code class="js">config.jwt = &#123;
+  secret: &#39;YQ&#39;,
+&#125;;
+</code></pre>
+<blockquote>
+<p>secret<code>加密字符串，将在后续用于结合用户信息生成一串</code>token</p>
+</blockquote>
+<p>在 <code>/controller/user.js</code> 下新建 <code>login</code> 方法</p>
+<pre><code class="js">async login() &#123;
+    // app 为全局属性，相当于所有的插件方法都植入到了 app 对象。
+    const &#123; ctx, app &#125; = this;
+    const &#123; username, password &#125; = ctx.request.body
+    // 根据用户名，在数据库查找相对应的id操作
+    const userInfo = await ctx.service.user.getUserByName(username)
+    // 没找到说明没有该用户
+    if (!userInfo || !userInfo.id) &#123;
+      ctx.body = &#123;
+        code: 500,
+        msg: &#39;账号不存在&#39;,
+        data: null
+      &#125;
+      return
+    &#125;
+    // 找到用户，并且判断输入密码与数据库中用户密码。
+    if (userInfo &amp;&amp; password != userInfo.password) &#123;
+      ctx.body = &#123;
+        code: 500,
+        msg: &#39;账号密码错误&#39;,
+        data: null
+      &#125;
+      return
+    &#125;
+       // 生成 token 加盐
+      // app.jwt.sign 方法接受两个参数，第一个为对象，对象内是需要加密的内容；第二个是加密字符串，上文已经提到过。
+    const token = app.jwt.sign(&#123;
+      id: userInfo.id,
+      username: userInfo.username,
+      exp: Math.floor(Date.now() / 1000) + (24 * 60 * 60) // token 有效期为 24 小时
+    &#125;, app.config.jwt.secret);
+
+    ctx.body = &#123;
+      code: 200,
+      message: &#39;登录成功&#39;,
+      data: &#123;
+        token
+      &#125;,
+    &#125;;
+&#125;
+</code></pre>
+<p>把获取到的 <code>userInfo</code> 中的 <code>id</code> 和 <code>username</code> 两个属性，通过 <code>app.jwt.sign</code> 方法，结合 <code>app.config.jwt.secret</code> 加密字符串（之前声明的 <code>YQ</code>），生成一个 <code>token</code>。这个 <code>token</code> 会是一串很长的加密字符串</p>
+<p>在 <code>/controller/user.js</code> 中，新增一个验证方法 <code>test</code></p>
+<pre><code class="js">// 验证方法
+async test() &#123;
+  const &#123; ctx, app &#125; = this;
+  // 通过 token 解析，拿到 user_id
+  const token = ctx.request.header.authorization; // 请求头获取 authorization 属性，值为 token
+  // 通过 app.jwt.verify + 加密字符串 解析出 token 的值 
+  const decode = await app.jwt.verify(token, app.config.jwt.secret);
+  // 响应接口
+  ctx.body = &#123;
+    code: 200,
+    message: &#39;获取成功&#39;,
+    data: &#123;
+      ...decode
+    &#125;
+  &#125;
+&#125;
+</code></pre>
+<p>在路由 <code>router.js</code> 脚本中，将登录接口抛出</p>
+<pre><code class="JS">&#39;use strict&#39;;
+
+/**
+ * @param &#123;Egg.Application&#125; app - egg application
+ */
+module.exports = app =&gt; &#123;
+  const &#123; router, controller &#125; = app;
+  router.post(&#39;/api/user/register&#39;, controller.user.register);
+  router.post(&#39;/api/user/login&#39;, controller.user.login);
+&#125;;
+</code></pre>
+<h2 id="四、登录验证中间件"><a href="#四、登录验证中间件" class="headerlink" title="四、登录验证中间件"></a>四、登录验证中间件</h2><p>中间件我们可以理解成一个过滤器，举个例子，我们有 <code>A</code>、<code>B</code>、<code>C</code>、<code>D</code> 四个接口是需要用户权限的，如果我们要判断是否有用户权限的话，就需要在这四个接口的控制层去判断用户是否登录。</p>
+<p>每个接口都验证存在的弊端</p>
+<blockquote>
+<p>1、每次编写新的接口，都要在方法内部做判断，这很费事。 2、一旦鉴权有所调整，我们需要修改每个用到判断登录的代码。</p>
+</blockquote>
+<p>在请求接口的时候，过一层中间件，判断该请求是否是登录状态下发起的。此时我们打开项目，在 <code>app</code> 目录下新新建一个文件夹 <code>middleware</code>，并且在该目录下新增 <code>jwtErr.js</code></p>
+<pre><code class="js">&#39;use strict&#39;;
+
+module.exports = (secret) =&gt; &#123;
+  return async function jwtErr(ctx, next) &#123;
+    const token = ctx.request.header.authorization; // 若是没有 token，返回的是 null 字符串
+    let decode
+    if(token != &#39;null&#39; &amp;&amp; token) &#123;
+      try &#123;
+        decode = ctx.app.jwt.verify(token, secret); // 验证token
+        await next();
+      &#125; catch (error) &#123;
+        console.log(&#39;error&#39;, error)
+        ctx.status = 200;
+        ctx.body = &#123;
+          msg: &#39;token已过期，请重新登录&#39;,
+          code: 401,
+        &#125;
+        return;
+      &#125;
+    &#125; else &#123;
+      ctx.status = 200;
+      ctx.body = &#123;
+        code: 401,
+        msg: &#39;token不存在&#39;,
+      &#125;;
+      return;
+    &#125;
+  &#125;
+&#125;
+</code></pre>
+<p>首先中间件默认抛出一个函数，该函数返回一个异步方法 <code>jwtErr</code>，<code>jewErr</code> 方法有两个参数 <code>ctx</code> 是上下文，可以在 <code>ctx</code> 中拿到全局对象 <code>app</code>。</p>
+<p>首先，通过 <code>ctx.request.header.authorization</code> 获取到请求头中的 <code>authorization</code> 属性，它便是我们请求接口是携带的 <code>token</code> 值，如果没有携带 <code>token</code>，该值为字符串 <code>null</code>。我们通过 <code>if</code> 语句判断如果有 <code>token</code> 的情况下，使用 <code>ctx.app.jwt.verify</code> 方法验证该 <code>token</code> 是否存在并且有效，如果是存在且有效，则通过验证 <code>await next()</code> 继续执行后续的接口逻辑。否则判断是失效还是不存在该 <code>token</code>。</p>
+<p>中间件完成后，我们在路由中<code>router.js</code> 去使用它</p>
+<pre><code class="js">&#39;use strict&#39;;
+
+/**
+ * @param &#123;Egg.Application&#125; app - egg application
+ */
+module.exports = app =&gt; &#123;
+  const &#123; router, controller, middleware &#125; = app;
+  const _jwt = middleware.jwtErr(app.config.jwt.secret); // 传入加密字符串
+  router.post(&#39;/api/user/register&#39;, controller.user.register);
+  router.post(&#39;/api/user/login&#39;, controller.user.login);
+  router.get(&#39;/api/user/test&#39;, _jwt, controller.user.test); // 放入第二个参数，作为中间件过滤项
+&#125;;
+</code></pre>
+</article><section class="jump-container is-flex is-justify-content-space-between my-6"><!-- em is empty placeholder--><em></em><a class="button is-default" href="/2022/08/03/82-egg-mysql/" title="82、egg-mysql的增删改查"><span class="has-text-weight-semibold">下一页: 82、egg-mysql的增删改查</span><i class="iconfont icon-next ml-2 has-text-grey"></i></a></section></div></div></main></main><footer class="is-flex is-flex-direction-column is-align-items-center is-flex-shrink-0 is-family-serif"><section class="sns-container"><!-- Github--><a title="github" target="_blank" rel="noopener nofollow" href="//github.com/Jude"><i class="iconfont icon-github"></i></a><!-- Ins--><!-- RSS--><!-- 知乎--><!-- 领英--><!-- 脸书--></section><p><span>Copyright ©</span><span> Jude 2022</span></p><div class="is-flex is-justify-content-center is-flex-wrap-wrap"><p>Powered by Hexo &verbar;&nbsp;</p><p class="is-flex is-justify-content-center"><a title="Hexo theme author" target="_blank" rel="noopener" href="//github.com/haojen">Theme by Haojen&nbsp;</a></p><div style="margin-top: 2px"><a class="github-button" title="github-button" target="_blank" rel="noopener" href="https://github.com/haojen/hexo-theme-Claudia" data-color-scheme="no-preference: light; light: light; dark: dark;" data-show-count="true"></a></div></div><div><span></span></div></footer><script async defer src="https://buttons.github.io/buttons.js"></script><script src="/js/post.js"></script></body></html>
