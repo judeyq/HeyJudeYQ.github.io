@@ -11,7 +11,7 @@ npm i
 
 启动项目会出现报错：Cannot find module ‘fs/promise’
 主要是由于node版本较低造成的，使用n 升级node版本到16.13.0 ,重新npm install，启动项目，报错消失。
-二、egg项目目录Egg 作为一套解决方案，它内部高度集成了封装.."><meta name="generator" content="Hexo 5.4.1"></head><body class="is-flex is-flex-direction-column"><header class="header-widget is-flex-shrink-0 is-hidden-mobile"><div class="container is-fullhd is-flex is-justify-content-space-between is-align-items-center is-full-height"><section class="is-hidden-mobile is-flex-shrink-0"><h2><a href="/">Jude's blog</a></h2></section><h3 class="is-hidden-mobile is-family-serif is-full-height is-flex is-align-items-center is-flex-shrink-0"><div class="is-full-height" id="postTopic"><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">81、egg.js(二)</p><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">点击返回顶部</p></div></h3><aside class="is-flex-shrink-0"><h3 class="is-inline-block"><a href="/">首页</a></h3><h3 class="is-inline-block"><a href="/about">关于</a></h3><h3 class="is-inline-block"><a href="/archives">归档</a></h3></aside></div></header><header class="is-flex header-widget is-flex-shrink-0 is-align-items-center is-justify-content-center is-hidden-tablet"><h3 class="is-inline-block"><a href="/">首页</a></h3><h3 class="is-inline-block"><a href="/about">关于</a></h3><h3 class="is-inline-block"><a href="/archives">归档</a></h3></header><main><main class="container is-max-widescreen content section post-page pt-4 px-4"><div class="columns is-flex-desktop is-justify-content-center is-flex-direction-row-reverse"><div class="column is-3 is-hidden-mobile"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E9%A1%B9%E7%9B%AE%E7%8E%AF%E5%A2%83"><span class="toc-text">一、项目环境</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81egg%E9%A1%B9%E7%9B%AE%E7%9B%AE%E5%BD%95"><span class="toc-text">二、egg项目目录</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1%E3%80%81app-router-js"><span class="toc-text">1、app&#x2F;router.js</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2%E3%80%81app-controller-xx"><span class="toc-text">2、app&#x2F;controller&#x2F;xx</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3%E3%80%81app-service-xx"><span class="toc-text">3、app&#x2F;service&#x2F;xx</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4%E3%80%81app-middleware-xx"><span class="toc-text">4、app&#x2F;middleware&#x2F;xx</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5%E3%80%81app-public-xx"><span class="toc-text">5、app&#x2F;public&#x2F;xx</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6%E3%80%81config-config-env-js"><span class="toc-text">6、config&#x2F;config.{env}.js</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#7%E3%80%81config-plugin-js"><span class="toc-text">7、config&#x2F;plugin.js</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E7%BC%96%E5%86%99-GET-%E5%92%8C-POST-%E6%8E%A5%E5%8F%A3"><span class="toc-text">三、编写 GET 和 POST 接口</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#GET-%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0%E8%8E%B7%E5%8F%96"><span class="toc-text">GET 请求参数获取</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#POST-%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0%E8%8E%B7%E5%8F%96"><span class="toc-text">POST 请求参数获取</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BB%8E-Service-%E5%86%85%E8%8E%B7%E5%8F%96%E6%95%B0%E6%8D%AE"><span class="toc-text">从 Service 内获取数据</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%9B%E3%80%81Egg-js-%E4%B8%AD%E4%BD%BF%E7%94%A8%E5%89%8D%E7%AB%AF%E6%A8%A1%E6%9D%BF"><span class="toc-text">四、Egg.js 中使用前端模板</span></a></li></ol></div><div class="column is-9"><header class="my-4"><a href="/tags/egg"><i class="tag post-item-tag">egg</i></a></header><h1 class="mt-0 mb-1 is-family-serif" id="postTitle">81、egg.js(二)</h1><time class="has-text-grey" datetime="2022-08-02T12:00:00.000Z">2022-08-02</time><article class="mt-2 post-content"><p>Egg.js：<a href="https://issummer.cn/2021/06/20/egg/">https://issummer.cn/2021/06/20/egg/</a></p>
+二、egg项目目录Egg 作为一套解决方案，它内部高度集成了封装.."><meta name="generator" content="Hexo 5.4.1"></head><body class="is-flex is-flex-direction-column"><header class="header-widget is-flex-shrink-0 is-hidden-mobile"><div class="container is-fullhd is-flex is-justify-content-space-between is-align-items-center is-full-height"><section class="is-hidden-mobile is-flex-shrink-0"><h2><a href="/">Jude's blog</a></h2></section><h3 class="is-hidden-mobile is-family-serif is-full-height is-flex is-align-items-center is-flex-shrink-0"><div class="is-full-height" id="postTopic"><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">81、egg.js(二)</p><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">点击返回顶部</p></div></h3><aside class="is-flex-shrink-0"><h3 class="is-inline-block"><a href="/">首页</a></h3><h3 class="is-inline-block"><a href="/about">关于</a></h3><h3 class="is-inline-block"><a href="/archives">归档</a></h3></aside></div></header><header class="is-flex header-widget is-flex-shrink-0 is-align-items-center is-justify-content-center is-hidden-tablet"><h3 class="is-inline-block"><a href="/">首页</a></h3><h3 class="is-inline-block"><a href="/about">关于</a></h3><h3 class="is-inline-block"><a href="/archives">归档</a></h3></header><main><main class="container is-max-widescreen content section post-page pt-4 px-4"><div class="columns is-flex-desktop is-justify-content-center is-flex-direction-row-reverse"><div class="column is-3 is-hidden-mobile"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E9%A1%B9%E7%9B%AE%E7%8E%AF%E5%A2%83"><span class="toc-text">一、项目环境</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81egg%E9%A1%B9%E7%9B%AE%E7%9B%AE%E5%BD%95"><span class="toc-text">二、egg项目目录</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1%E3%80%81app-router-js"><span class="toc-text">1、app&#x2F;router.js</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2%E3%80%81app-controller-xx"><span class="toc-text">2、app&#x2F;controller&#x2F;xx</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3%E3%80%81app-service-xx"><span class="toc-text">3、app&#x2F;service&#x2F;xx</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4%E3%80%81app-middleware-xx"><span class="toc-text">4、app&#x2F;middleware&#x2F;xx</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5%E3%80%81app-public-xx"><span class="toc-text">5、app&#x2F;public&#x2F;xx</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6%E3%80%81config-config-env-js"><span class="toc-text">6、config&#x2F;config.{env}.js</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#7%E3%80%81config-plugin-js"><span class="toc-text">7、config&#x2F;plugin.js</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E7%BC%96%E5%86%99-GET-%E5%92%8C-POST-%E6%8E%A5%E5%8F%A3"><span class="toc-text">三、编写 GET 和 POST 接口</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#GET-%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0%E8%8E%B7%E5%8F%96"><span class="toc-text">GET 请求参数获取</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#post%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0%E8%8E%B7%E5%8F%96"><span class="toc-text">post请求参数获取</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BB%8E-Service-%E5%86%85%E8%8E%B7%E5%8F%96%E6%95%B0%E6%8D%AE"><span class="toc-text">从 Service 内获取数据</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%9B%E3%80%81Egg-js-%E4%B8%AD%E4%BD%BF%E7%94%A8%E5%89%8D%E7%AB%AF%E6%A8%A1%E6%9D%BF"><span class="toc-text">四、Egg.js 中使用前端模板</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1%E3%80%81%E9%A6%96%E5%85%88%E5%AE%89%E8%A3%85%E6%8F%92%E4%BB%B6-egg-view-ejs%EF%BC%9A"><span class="toc-text">1、首先安装插件 egg-view-ejs：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2%E3%80%81%E7%84%B6%E5%90%8E%E5%9C%A8-config-plugin-js-%E9%87%8C%E9%9D%A2%E5%A3%B0%E6%98%8E%E9%9C%80%E8%A6%81%E7%94%A8%E5%88%B0%E7%9A%84%E6%8F%92%E4%BB%B6%EF%BC%9A"><span class="toc-text">2、然后在 config&#x2F;plugin.js 里面声明需要用到的插件：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3%E3%80%81%E5%8E%BB-config-config-default-js-%E9%87%8C%E9%85%8D%E7%BD%AE-ejs-%EF%BC%8C%E8%BF%99%E4%B8%80%E6%AD%A5%E6%88%91%E4%BB%AC%E4%BC%9A%E5%B0%86-ejs-%E7%9A%84%E5%90%8E%E7%BC%80%E6%94%B9%E6%88%90-html-%E7%9A%84%E5%90%8E%E7%BC%80%E3%80%82"><span class="toc-text">3、去 config&#x2F;config.default.js 里配置 ejs ，这一步我们会将 .ejs 的后缀改成 .html 的后缀。</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4%E3%80%81%E4%BF%AE%E6%94%B9-controller-home-js-%E4%B8%8B%E7%9A%84-index-%E6%96%B9%E6%B3%95"><span class="toc-text">4、修改 controller&#x2F;home.js 下的 index 方法</span></a></li></ol></li></ol></li></ol></div><div class="column is-9"><header class="my-4"><a href="/tags/egg"><i class="tag post-item-tag">egg</i></a></header><h1 class="mt-0 mb-1 is-family-serif" id="postTitle">81、egg.js(二)</h1><time class="has-text-grey" datetime="2022-08-02T12:00:00.000Z">2022-08-02</time><article class="mt-2 post-content"><p>Egg.js：<a href="https://issummer.cn/2021/06/20/egg/">https://issummer.cn/2021/06/20/egg/</a></p>
 <span id="more"></span>
 
 <h2 id="一、项目环境"><a href="#一、项目环境" class="headerlink" title="一、项目环境"></a>一、项目环境</h2><p>egg.js对node版本是有要求的，node&gt; 8.x npm &gt;= 6.1.0</p>
@@ -35,7 +35,7 @@ npm i
 <h4 id="5、app-public-xx"><a href="#5、app-public-xx" class="headerlink" title="5、app/public/xx"></a><strong>5、app/public/xx</strong></h4><p>用于放置静态资源。会有一个上传静态资源的接口，包括图片、文本文档、excel、word等，都可以通过服务端读取文件之后，将其写入 <code>app/public</code> 文件夹中。在目前没有 <code>OSS</code> 服务的情况下，姑且先用这种方式存储静态资源，会消耗一点服务器的内存。</p>
 <h4 id="6、config-config-env-js"><a href="#6、config-config-env-js" class="headerlink" title="6、config/config.{env}.js"></a><strong>6、config/config.{env}.js</strong></h4><p>用于编写配置文件。 <code>config/config.default.js</code> 文件，这个是 <code>Egg</code> 框架约定好的，在内部设置一些全局的配置常量，在任何地方都可以通过 <code>app.config</code> 获取到 <code>config.default.js</code> 文件内的配置项。</p>
 <h4 id="7、config-plugin-js"><a href="#7、config-plugin-js" class="headerlink" title="7、config/plugin.js"></a><strong>7、config/plugin.js</strong></h4><p>用于配置需要加载的插件。比如 <code>egg-mysql</code>、<code>egg-cors</code>、<code>egg-jwt</code> 等官方提供的插件</p>
-<h2 id="三、编写-GET-和-POST-接口"><a href="#三、编写-GET-和-POST-接口" class="headerlink" title="三、编写 GET 和 POST 接口"></a>三、编写 GET 和 POST 接口</h2><h4 id="GET-请求参数获取"><a href="#GET-请求参数获取" class="headerlink" title="GET 请求参数获取"></a>GET 请求参数获取</h4><p>浏览器输入URL：http:*//localhost:7001/?id=yuqi</p>
+<h2 id="三、编写-GET-和-POST-接口"><a href="#三、编写-GET-和-POST-接口" class="headerlink" title="三、编写 GET 和 POST 接口"></a>三、编写 GET 和 POST 接口</h2><h4 id="GET-请求参数获取"><a href="#GET-请求参数获取" class="headerlink" title="GET 请求参数获取"></a><strong><code>GET</code> 请求参数获取</strong></h4><p>浏览器输入URL：<code>http:*//localhost:7001/?id=12</code></p>
 <p>打开 <code>app/controller/home.js</code>，通过如下形式获取到浏览器查询参数</p>
 <pre><code class="js">const Controller = require(&#39;egg&#39;).Controller;
 
@@ -49,7 +49,7 @@ class HomeController extends Controller &#123;
 
 module.exports = HomeController;
 </code></pre>
-<p>还有另一种获取申明参数，比如我希望通过这样一个地址获取用户参数 <code>/user/5</code>，想获取用户 <code>id</code> 为 <code>5</code> 的用户信息。我们可以这样操作，首先添加路由，打开 <code>app/router.js</code> 添加一个路由：</p>
+<p>还有另一种获取申明参数，比如我希望通过这样一个地址获取用户参数 <code>/user/5</code>，想获取用户 <code>id</code> 为 <code>5</code> 的用户信息。<br>我们可以这样操作，首先添加路由，打开 <code>app/router.js</code> 添加一个路由：</p>
 <pre><code class="js">&#39;use strict&#39;;
 
 /**
@@ -81,14 +81,14 @@ class HomeController extends Controller &#123;
 &#125;
 module.exports = HomeController;
 </code></pre>
-<p>浏览器输入URL：localhost:7001/user/123</p>
+<p>浏览器输入URL：<code>localhost:7001/user/123</code></p>
 <p>网页会打印出：123</p>
-<h4 id="POST-请求参数获取"><a href="#POST-请求参数获取" class="headerlink" title="POST 请求参数获取"></a><strong>POST 请求参数获取</strong></h4><p><code>POST</code> 接口需要借助 <code>Postman</code> 或者Apifox工具进行请求，因为通过浏览器无法手动发起 <code>POST</code> 请求，只能通过浏览器地址栏发起 <code>GET</code> 请求。</p>
+<h4 id="post请求参数获取"><a href="#post请求参数获取" class="headerlink" title="post请求参数获取"></a><strong>post请求参数获取</strong></h4><p><code>POST</code> 接口需要借助 <code>Postman</code> 工具进行请求，因为通过浏览器无法手动发起 <code>POST</code> 请求，只能通过浏览器地址栏发起 <code>GET</code> 请求。</p>
 <pre><code class="js">// app/router.js
 // ...
 router.post(&#39;/add&#39;, controller.home.add);
 </code></pre>
-<pre><code>// app/controller/home.js
+<pre><code class="js">// app/controller/home.js
 // post 请求方法
 async add() &#123;
   const &#123; ctx &#125; = this;
@@ -99,9 +99,9 @@ async add() &#123;
   &#125;;
 &#125;
 </code></pre>
-<p>用apifox发送post请求会出现报错，触发网络请求的安防策略</p>
+<p>用<code>Postman</code>发送post请求会出现报错，触发网络请求的安防策略</p>
 <p><code>config/config.default.js</code> 做好白名单配置，全部允许请求：</p>
-<pre><code>config.security = &#123;
+<pre><code class="js">config.security = &#123;
   csrf: &#123;
     enable: false,
     ignoreJSON: true
@@ -120,7 +120,7 @@ class HomeService extends Service &#123;
     // 假设从数据库获取的用户信息
     return &#123;
       name:&#39;yu&#39;,
-      slogen:&#39;i love you egg.js&#39;
+      msg:&#39;i love you egg.js&#39;
     &#125;
   &#125;
 &#125;
@@ -132,28 +132,25 @@ module.exports = HomeService
 // 获取用户信息
 async user() &#123;
   const &#123; ctx &#125; = this;
-  const &#123; name, slogen &#125; = await ctx.service.home.user();
+  const &#123; name, msg &#125; = await ctx.service.home.user();
   ctx.body = &#123;
     name,
-    slogen
+    msg
   &#125;
 &#125;
 </code></pre>
-<p>Apifox打开<a target="_blank" rel="noopener" href="http://127.0.0.1:7001/user/yu">http://127.0.0.1:7001/user/yu</a>  可以看到网页显示：{“name”:”yu”,”slogen”:”i love you egg.js”}</p>
+<p><code>Postman</code>打开<a target="_blank" rel="noopener" href="http://127.0.0.1:7001/user/yu">http://127.0.0.1:7001/user/yu</a>  可以看到网页显示：{“name”:”yu”,”msg”:”i love you egg.js”}</p>
 <h2 id="四、Egg-js-中使用前端模板"><a href="#四、Egg-js-中使用前端模板" class="headerlink" title="四、Egg.js 中使用前端模板"></a>四、Egg.js 中使用前端模板</h2><p>开发一些简单的网页，想快速部署到云服务器上，就可以使用前端模板的开发形式。</p>
-<p>首先安装插件 <code>egg-view-ejs</code>：</p>
-<pre><code class="shell">npm install egg-view-ejs -save
+<h4 id="1、首先安装插件-egg-view-ejs："><a href="#1、首先安装插件-egg-view-ejs：" class="headerlink" title="1、首先安装插件 egg-view-ejs："></a>1、首先安装插件 <code>egg-view-ejs</code>：</h4><pre><code class="shell">npm install egg-view-ejs -save
 </code></pre>
-<p>然后在 <code>config/plugin.js</code> 里面声明需要用到的插件：</p>
-<pre><code class="js">module.exports = &#123;
+<h4 id="2、然后在-config-plugin-js-里面声明需要用到的插件："><a href="#2、然后在-config-plugin-js-里面声明需要用到的插件：" class="headerlink" title="2、然后在 config/plugin.js 里面声明需要用到的插件："></a>2、然后在 <code>config/plugin.js</code> 里面声明需要用到的插件：</h4><pre><code class="js">module.exports = &#123;
   ejs: &#123;
     enable: true,
     package: &#39;egg-view-ejs&#39;
   &#125;
 &#125;;
 </code></pre>
-<p>去 <code>config/config.default.js</code> 里配置 <code>ejs</code> ，这一步我们会将 <code>.ejs</code> 的后缀改成 <code>.html</code> 的后缀。</p>
-<pre><code class="js">config.view = &#123;
+<h4 id="3、去-config-config-default-js-里配置-ejs-，这一步我们会将-ejs-的后缀改成-html-的后缀。"><a href="#3、去-config-config-default-js-里配置-ejs-，这一步我们会将-ejs-的后缀改成-html-的后缀。" class="headerlink" title="3、去 config/config.default.js 里配置 ejs ，这一步我们会将 .ejs 的后缀改成 .html 的后缀。"></a>3、去 <code>config/config.default.js</code> 里配置 <code>ejs</code> ，这一步我们会将 <code>.ejs</code> 的后缀改成 <code>.html</code> 的后缀。</h4><pre><code class="js">config.view = &#123;
   mapping: &#123;&#39;.html&#39;: &#39;ejs&#39;&#125;  //左边写成.html后缀，会自动渲染.html文件
 &#125;;
 </code></pre>
@@ -174,8 +171,7 @@ async user() &#123;
 &lt;/html&gt;
 </code></pre>
 <p>在 <code>Controller</code> 内把变量注入到 <code>index.html</code> 文件，模板通过 <code>&lt;%-xx%&gt;</code>关键字获取到传入的变量。</p>
-<p>下面修改 <code>controller/home.js</code> 下的 <code>index</code> 方法</p>
-<pre><code class="js">async index() &#123;
+<h4 id="4、修改-controller-home-js-下的-index-方法"><a href="#4、修改-controller-home-js-下的-index-方法" class="headerlink" title="4、修改 controller/home.js 下的 index 方法"></a>4、修改 <code>controller/home.js</code> 下的 <code>index</code> 方法</h4><pre><code class="js">async index() &#123;
   const &#123; ctx &#125; = this;
   // ctx.render 默认会去 view 文件夹寻找 index.html，这是 Egg 约定好的。
   await ctx.render(&#39;index.html&#39;, &#123;
