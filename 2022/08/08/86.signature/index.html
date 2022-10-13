@@ -1,0 +1,111 @@
+<!DOCTYPE html><html class="appearance-auto" lang="zh-CN"><head><meta charset="UTF-8"><title>86、canvas电子签名</title><meta name="description" content="🐯 🐯 🐯 🐯 🐯"><meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, initial-scale=1"><!-- Google Analytics --><!-- End Google Analytics -->
+<!-- Baidu Analytics --><!-- End Baidu Analytics --><link rel="icon" href="/images/favicon.png"><link rel="stylesheet" href="/style/common/bulma.css"><link rel="stylesheet" href="/style/base.css"><link rel="stylesheet" href="/style/common/helper.css"><script src="/js/common.js"></script><link rel="stylesheet" href="/style/post.css"><link rel="stylesheet" href="/style/themes/highlight-theme-light.css"><script src="/js/highlight.pack.js"></script><meta name="description" content="canvas电子签名
+
+
+&amp;lt;!DOCTYPE html&amp;gt;
+&amp;lt;html lang=&amp;quot;en&amp;quot;&amp;gt;
+  &amp;lt;head&amp;gt;
+    &amp;lt;meta charset=&amp;quot;UTF-8&amp;quot; /&amp;gt;
+    &amp;lt;meta http-equiv=&amp;quot;X-UA-Compatible&amp;quot; content=&amp;quot;IE=edge&amp;quot; /&amp;gt;
+    &amp;lt;meta name=&amp;quot;viewport&amp;quot; content=&amp;quot;width=device-width, initial-scale=1.0&amp;quot; /&amp;gt;
+    &amp;lt;title&amp;gt;Document&amp;lt;/title&amp;gt;
+ .."><meta name="generator" content="Hexo 5.4.1"></head><body class="is-flex is-flex-direction-column"><header class="header-widget is-flex-shrink-0 is-hidden-mobile"><div class="container is-fullhd is-flex is-justify-content-space-between is-align-items-center is-full-height"><section class="is-hidden-mobile is-flex-shrink-0"><h2><a href="/">Jude's blog</a></h2></section><h3 class="is-hidden-mobile is-family-serif is-full-height is-flex is-align-items-center is-flex-shrink-0"><div class="is-full-height" id="postTopic"><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">86、canvas电子签名</p><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">点击返回顶部</p></div></h3><aside class="is-flex-shrink-0"><h3 class="is-inline-block"><a href="/">首页</a></h3><h3 class="is-inline-block"><a href="/about">关于</a></h3><h3 class="is-inline-block"><a href="/archives">归档</a></h3></aside></div></header><header class="is-flex header-widget is-flex-shrink-0 is-align-items-center is-justify-content-center is-hidden-tablet"><h3 class="is-inline-block"><a href="/">首页</a></h3><h3 class="is-inline-block"><a href="/about">关于</a></h3><h3 class="is-inline-block"><a href="/archives">归档</a></h3></header><main><main class="container is-max-widescreen content section post-page pt-4 px-4"><div class="columns is-flex-desktop is-justify-content-center is-flex-direction-row-reverse"><div class="column is-3 is-hidden-mobile is-hidden"></div><div class="column is-9"><header class="my-4"><a href="/tags/js"><i class="tag post-item-tag">js</i></a></header><h1 class="mt-0 mb-1 is-family-serif" id="postTitle">86、canvas电子签名</h1><time class="has-text-grey" datetime="2022-08-08T15:00:00.000Z">2022-08-08</time><article class="mt-2 post-content"><p>canvas电子签名</p>
+<span id="more"></span>
+
+<pre><code class="html">&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+  &lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot; /&gt;
+    &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;IE=edge&quot; /&gt;
+    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot; /&gt;
+    &lt;title&gt;Document&lt;/title&gt;
+    &lt;style&gt;
+      #cvs &#123;
+        background-color: #000;
+        background: #000;
+      &#125;
+      body &#123;
+        height: 100vh;
+        background-color: rgb(26, 25, 25);
+      &#125;
+    &lt;/style&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;canvas id=&quot;cvs&quot;&gt;&lt;/canvas&gt;
+    &lt;div style=&quot;margin-top: 50px&quot;&gt;
+      &lt;button id=&quot;clear&quot;&gt;清空&lt;/button&gt;
+      &lt;button id=&quot;back&quot;&gt;回退&lt;/button&gt;
+      &lt;button id=&quot;save&quot;&gt;保存&lt;/button&gt;
+    &lt;/div&gt;
+    &lt;script&gt;
+      let width = 800;
+      let height = 400;
+      let isDownin = false;
+      let lastX = 0;
+      let lastY = 0;
+      let cacheData = [];
+
+      const cvs = document.getElementById(&quot;cvs&quot;);
+      const ctx = cvs.getContext(&quot;2d&quot;);
+      cvs.width = width;
+      cvs.height = height;
+
+      cvs.addEventListener(&quot;mousedown&quot;, (e) =&gt; &#123;
+        isDownin = true;
+        lastX = e.pageX;
+        lastY = e.pageY;
+        let cacheItem = ctx.getImageData(0, 0, width, height);
+        cacheData.push(cacheItem);
+        ctx.moveTo(lastX, lastY);
+      &#125;);
+      cvs.addEventListener(&quot;mousemove&quot;, (e) =&gt; &#123;
+        if (!isDownin) return;
+        drawLine(e.pageX, e.pageY);
+        ctx.stroke();
+      &#125;);
+      cvs.addEventListener(&quot;mouseup&quot;, (e) =&gt; &#123;
+        isDownin = false;
+      &#125;);
+
+      function drawLine(x, y) &#123;
+        ctx.beginPath();
+        ctx.lineWidth = 8;
+        ctx.strokeStyle = &quot;#fff&quot;;
+        ctx.lineCap = &quot;round&quot;;
+        ctx.lineJoin = &quot;round&quot;;
+        ctx.moveTo(lastX, lastY);
+        ctx.lineTo(x, y);
+        ctx.stroke();
+        lastX = x;
+        lastY = y;
+      &#125;
+
+      /* 清空 */
+      const clear = document.getElementById(&quot;clear&quot;);
+      clear.onclick = () =&gt; &#123;
+        ctx.clearRect(0, 0, width, height);
+      &#125;;
+
+      /* 回退 */
+      const back = document.getElementById(&quot;back&quot;);
+      back.onclick = () =&gt; &#123;
+        if (cacheData.length === 0) return;
+        ctx.putImageData(cacheData.pop(), 0, 0);
+      &#125;;
+
+      const save = document.getElementById(&quot;save&quot;);
+      save.onclick = () =&gt; &#123;
+        cvs.toBlob((blob) =&gt; &#123;
+          const a = document.createElement(&quot;a&quot;);
+          document.body.append(a);
+          a.download = `签名.png`;
+          a.href = URL.createObjectURL(blob);
+          a.click();
+          a.remove();
+        &#125;);
+      &#125;;
+    &lt;/script&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+</article><section class="jump-container is-flex is-justify-content-space-between my-6"><!-- em is empty placeholder--><em></em><a class="button is-default" href="/2022/08/06/85.js-function/" title="85、常用代码片段"><span class="has-text-weight-semibold">下一页: 85、常用代码片段</span><i class="iconfont icon-next ml-2 has-text-grey"></i></a></section></div></div></main></main><footer class="is-flex is-flex-direction-column is-align-items-center is-flex-shrink-0 is-family-serif"><section class="sns-container"><!-- Github--><a title="github" target="_blank" rel="noopener nofollow" href="//github.com/Jude"><i class="iconfont icon-github"></i></a><!-- Ins--><!-- RSS--><!-- 知乎--><!-- 领英--><!-- 脸书--></section><p><span>Copyright ©</span><span> Jude 2022</span></p><div class="is-flex is-justify-content-center is-flex-wrap-wrap"><p>Powered by Hexo &verbar;&nbsp;</p><p class="is-flex is-justify-content-center"><a title="Hexo theme author" target="_blank" rel="noopener" href="//github.com/haojen">Theme by Haojen&nbsp;</a></p><div style="margin-top: 2px"><a class="github-button" title="github-button" target="_blank" rel="noopener" href="https://github.com/haojen/hexo-theme-Claudia" data-color-scheme="no-preference: light; light: light; dark: dark;" data-show-count="true"></a></div></div><div><span></span></div></footer><script async defer src="https://buttons.github.io/buttons.js"></script><script src="/js/post.js"></script></body></html>
