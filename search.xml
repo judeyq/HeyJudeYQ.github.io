@@ -4,6 +4,25 @@
   
     
     <entry>
+      <title>JetBrains Fleet 下一代IDE</title>
+      <link href="/2022/10/13/Fleet-IDE/"/>
+      <url>/2022/10/13/Fleet-IDE/</url>
+      
+        <content type="html"><![CDATA[<p>带有Smart Mode（智能模式）、Join Session(启动后，有一个Copy Invitation Link,发给协作人，Join Session)</p><span id="more"></span><p><img src="https://cdn.staticaly.com/gh/HeyJudeYQ/Image-Host@master/20221014/1.png" alt="Fleet"></p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> vue </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>87、element的表单校验自动定位到未校验成功位置</title>
       <link href="/2022/08/09/87.element-validator/"/>
       <url>/2022/08/09/87.element-validator/</url>
