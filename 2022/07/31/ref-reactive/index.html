@@ -1,28 +1,28 @@
 <!DOCTYPE html><html class="appearance-auto" lang="zh-CN"><head><meta charset="UTF-8"><title>79、ref-reactive</title><meta name="description" content="呦呦鹿鸣，食野之苹"><meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, initial-scale=1"><!-- Google Analytics --><!-- End Google Analytics -->
-<!-- Baidu Analytics --><!-- End Baidu Analytics --><link rel="icon" href="/images/favicon.png"><link rel="stylesheet" href="/style/common/bulma.css"><link rel="stylesheet" href="/style/base.css"><link rel="stylesheet" href="/style/common/helper.css"><script src="/js/common.js"></script><link rel="stylesheet" href="/style/post.css"><link rel="stylesheet" href="/style/themes/highlight-theme-light.css"><script src="/js/highlight.pack.js"></script><meta name="description" content="ref/reactive都能创建一个响应对象，这二者的区别是什么呢？
+<!-- Baidu Analytics --><!-- End Baidu Analytics --><link rel="icon" href="/images/favicon.png"><link rel="stylesheet" href="/style/common/bulma.css"><link rel="stylesheet" href="/style/base.css"><link rel="stylesheet" href="/style/common/helper.css"><script src="/js/common.js"></script><link rel="stylesheet" href="/style/post.css"><link rel="stylesheet" href="/style/themes/highlight-theme-light.css"><script src="/js/highlight.pack.js"></script><meta name="description" content="ref/reactive 都能创建一个响应对象，这二者的区别是什么呢？
 
 
 一、reactive
-reactive都能创建一个响应对象或数组
+reactive 都能创建一个响应对象或数组
 
 1、reactive 用来创建引用类型的响应式数据
-2、reactive的本质是将每一层的数据都解析成proxy对象
-3、reactive 的响应式默认都是递归的，改变某一层的值都会递归的调用一遍，重新渲染dom
-4、直接解构，响应性会丢失，需要用toRefs包裹。引用类型直接改变引用地址也会导致响应式丢失
+2、reactive 的本质是将每一层的数据都解析成 proxy 对象
+3、reactive 的响应式默认都是递归的，改变某一层的值都会递归的调用一遍，重新渲染 dom
+4、直接解构，响应性会丢失，需要用 toRefs 包裹。引用类型直接改变引用地址也会导致响应式丢失
 &amp;lt;tempalte&amp;gt;
   &amp;lt;div&amp;gt;&amp;#123;&amp;#123; state.count &amp;#125;&amp;#125;&amp;lt;/div&amp;gt;
 &amp;lt;/tempalte&amp;gt;
 
-// script 这里加了setup  没写setup需要在se.."><meta name="generator" content="Hexo 5.4.1"></head><body class="is-flex is-flex-direction-column"><header class="header-widget is-flex-shrink-0 is-hidden-mobile"><div class="container is-fullhd is-flex is-justify-content-space-between is-align-items-center is-full-height"><section class="is-hidden-mobile is-flex-shrink-0"><h2><a href="/">Jude's blog</a></h2></section><h3 class="is-hidden-mobile is-family-serif is-full-height is-flex is-align-items-center is-flex-shrink-0"><div class="is-full-height" id="postTopic"><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">79、ref-reactive</p><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">点击返回顶部</p></div></h3><aside class="is-flex-shrink-0"><h3 class="is-inline-block"><a href="/">首页</a></h3><h3 class="is-inline-block"><a href="/about">关于</a></h3><h3 class="is-inline-block"><a href="/archives">归档</a></h3></aside></div></header><header class="is-flex header-widget is-flex-shrink-0 is-align-items-center is-justify-content-center is-hidden-tablet"><h3 class="is-inline-block"><a href="/">首页</a></h3><h3 class="is-inline-block"><a href="/about">关于</a></h3><h3 class="is-inline-block"><a href="/archives">归档</a></h3></header><main><main class="container is-max-widescreen content section post-page pt-4 px-4"><div class="columns is-flex-desktop is-justify-content-center is-flex-direction-row-reverse"><div class="column is-3 is-hidden-mobile"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81reactive"><span class="toc-text">一、reactive</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81ref"><span class="toc-text">二、ref</span></a></li></ol></div><div class="column is-9"><header class="my-4"><a href="/tags/js"><i class="tag post-item-tag">js</i></a></header><h1 class="mt-0 mb-1 is-family-serif" id="postTitle">79、ref-reactive</h1><time class="has-text-grey" datetime="2022-07-31T13:00:00.000Z">2022-07-31</time><article class="mt-2 post-content"><p>ref/reactive都能创建一个响应对象，这二者的区别是什么呢？</p>
+// script 这里加了setup  没写se.."><meta name="generator" content="Hexo 5.4.1"></head><body class="is-flex is-flex-direction-column"><header class="header-widget is-flex-shrink-0 is-hidden-mobile"><div class="container is-fullhd is-flex is-justify-content-space-between is-align-items-center is-full-height"><section class="is-hidden-mobile is-flex-shrink-0"><h2><a href="/">Jude's blog</a></h2></section><h3 class="is-hidden-mobile is-family-serif is-full-height is-flex is-align-items-center is-flex-shrink-0"><div class="is-full-height" id="postTopic"><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">79、ref-reactive</p><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">点击返回顶部</p></div></h3><aside class="is-flex-shrink-0"><h3 class="is-inline-block"><a href="/">首页</a></h3><h3 class="is-inline-block"><a href="/about">关于</a></h3><h3 class="is-inline-block"><a href="/archives">归档</a></h3></aside></div></header><header class="is-flex header-widget is-flex-shrink-0 is-align-items-center is-justify-content-center is-hidden-tablet"><h3 class="is-inline-block"><a href="/">首页</a></h3><h3 class="is-inline-block"><a href="/about">关于</a></h3><h3 class="is-inline-block"><a href="/archives">归档</a></h3></header><main><main class="container is-max-widescreen content section post-page pt-4 px-4"><div class="columns is-flex-desktop is-justify-content-center is-flex-direction-row-reverse"><div class="column is-3 is-hidden-mobile"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81reactive"><span class="toc-text">一、reactive</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81ref"><span class="toc-text">二、ref</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E6%80%BB%E7%BB%93"><span class="toc-text">三、总结</span></a></li></ol></div><div class="column is-9"><header class="my-4"><a href="/tags/js"><i class="tag post-item-tag">js</i></a></header><h1 class="mt-0 mb-1 is-family-serif" id="postTitle">79、ref-reactive</h1><time class="has-text-grey" datetime="2022-07-31T13:00:00.000Z">2022-07-31</time><article class="mt-2 post-content"><p>ref/reactive 都能创建一个响应对象，这二者的区别是什么呢？</p>
 <span id="more"></span>
 
 <h2 id="一、reactive"><a href="#一、reactive" class="headerlink" title="一、reactive"></a>一、reactive</h2><blockquote>
-<p>reactive都能创建一个响应对象或数组</p>
+<p>reactive 都能创建一个响应对象或数组</p>
 </blockquote>
 <p>1、reactive 用来创建引用类型的响应式数据</p>
-<p>2、reactive的本质是将每一层的数据都解析成proxy对象</p>
-<p>3、reactive 的响应式默认都是递归的，改变某一层的值都会递归的调用一遍，重新渲染dom</p>
-<p>4、直接解构，响应性会丢失，需要用toRefs包裹。引用类型直接改变引用地址也会导致响应式丢失</p>
+<p>2、reactive 的本质是将每一层的数据都解析成 proxy 对象</p>
+<p>3、reactive 的响应式默认都是递归的，改变某一层的值都会递归的调用一遍，重新渲染 dom</p>
+<p>4、直接解构，响应性会丢失，需要用 toRefs 包裹。引用类型直接改变引用地址也会导致响应式丢失</p>
 <pre><code class="html">&lt;tempalte&gt;
   &lt;div&gt;&#123;&#123; state.count &#125;&#125;&lt;/div&gt;
 &lt;/tempalte&gt;
@@ -34,22 +34,143 @@ const state = reactive(&#123;count:0&#125;)
 &lt;/script&gt;
 </code></pre>
 <h2 id="二、ref"><a href="#二、ref" class="headerlink" title="二、ref"></a>二、ref</h2><blockquote>
-<p>vue3提供了一个ref()方法允许我们创建使用任何值类型的响应式ref</p>
+<p>vue3 提供了一个 ref()方法允许我们创建使用任何值类型的响应式 ref</p>
 </blockquote>
 <p>1、ref 用来创建基础类型的响应式数据</p>
-<p>2、template中默认调用value显示数据，script中需要使用.value 调用</p>
-<p>3、和react ref差不多，react是.current获取值，vue3是.value</p>
-<pre><code class="js">import &#123;ref&#125; from &quot;vue&quot;
-const count = ref(0)
-console.log(count) // &#123; value:0 &#125;
-count.value++
-console.log(count.value) // 2
+<p>2、template 中默认调用 value 显示数据，script 中需要使用.value 调用</p>
+<p>3、和 react ref 差不多，react 是.current 获取值，vue3 是.value</p>
+<pre><code class="js">import &#123; ref &#125; from &quot;vue&quot;;
+const count = ref(0);
+console.log(count); // &#123; value:0 &#125;
+count.value++;
+console.log(count.value); // 2
 </code></pre>
-<p>相关API</p>
-<p>1、Ref ts定义 import { type Ref } from ‘vue’;</p>
-<p>2、isRef  判断是否为ref对象。一般是ref，toRef，toRefs创建的变量</p>
-<p>3、toRefs 将reactive对象解构为单个响应式对象</p>
-<p>4、shallowRef 创建一个跟踪自身 .value 变化的 ref，但不会使其值也变成响应式的，简单理解为创建一个和ref相同结构的非响应式变量</p>
-<p>5、triggerRef 强制更新页面DOM。即使创建的ref没有变，想更新dom可以用</p>
-<p>6、customRef 提供类似于computed的get和set，可自定义ref行为</p>
+<p>相关 API</p>
+<p>1、Ref ts 定义 import { type Ref } from ‘vue’;</p>
+<p>2、isRef 判断是否为 ref 对象。一般是 ref，toRef，toRefs 创建的变量</p>
+<p>3、toRefs 将 reactive 对象解构为单个响应式对象</p>
+<p>4、shallowRef 创建一个跟踪自身  .value  变化的 ref，但不会使其值也变成响应式的，简单理解为创建一个和 ref 相同结构的非响应式变量</p>
+<p>5、triggerRef 强制更新页面 DOM。即使创建的 ref 没有变，想更新 dom 可以用</p>
+<p>6、customRef 提供类似于 computed 的 get 和 set，可自定义 ref 行为</p>
+<pre><code class="html">&lt;template&gt;
+  &lt;HelloWorld msg=&quot;Hello Vue 3.0 + Vite&quot; @some-event=&quot;callback&quot; /&gt;
+  &lt;div&gt;父组件监听事件：&#123;&#123; counts &#125;&#125;&lt;/div&gt;
+  &lt;p&gt;v-model&lt;/p&gt;
+  &lt;custom-input
+    :modelValue=&quot;searchText&quot;
+    @update:modelValue=&quot;newValue =&gt; searchText = newValue&quot;
+  /&gt;
+  &lt;Child /&gt;
+  &lt;h2&gt;
+    reactive方法用来创建响应式对象，它接收一个对象/数组参数，返回对象的响应式副本，当该对象的属性值发生变化，会自动更新使用该对象的地方。
+  &lt;/h2&gt;
+  &lt;div&gt;
+    Object:&#123;&#123; reactiveObj.name &#125;&#125;
+    &lt;span @click=&quot;setReactiveObj&quot;&gt;Update&lt;/span&gt;
+  &lt;/div&gt;
+  &lt;div&gt;
+    Array:&#123;&#123; reactiveArr &#125;&#125;
+    &lt;span @click=&quot;setReactiveArr&quot;&gt;Update&lt;/span&gt;
+  &lt;/div&gt;
+  &lt;h2&gt;
+    ref 的作用就是将一个原始数据类型（primitive data
+    type）转换成一个带有响应式特性的数据类型，原始数据类型共有7个，分别是：String/
+    Number /BigInt /Boolean /Symbol /Null /Undefined。 ref的值在 JS/TS
+    中读取和修改时，需要使用 .value获取，在模版中读取是，不需要使用 .value。
+  &lt;/h2&gt;
+  &lt;div&gt;
+    String:&#123;&#123;refValue&#125;&#125;
+    &lt;button @click=&quot;setRefValue&quot;&gt;Update&lt;/button&gt;
+  &lt;/div&gt;
+  &lt;div&gt;
+    Object:&#123;&#123; refObj.name &#125;&#125;
+    &lt;button @click=&quot;setRefObj&quot;&gt;Update&lt;/button&gt;
+  &lt;/div&gt;
+  &lt;h2&gt;vue3 reactive deep Obj/array&lt;/h2&gt;
+  &lt;div&gt;
+    Deep Object:&#123;&#123; reactiveDeepObj &#125;&#125;
+    &lt;button @click=&quot;setReactiveDeepObj&quot;&gt;Update&lt;/button&gt;
+  &lt;/div&gt;
+  &lt;div&gt;
+    Deep Object Array: &#123;&#123; reactiveDeepArr &#125;&#125;
+    &lt;button @click=&quot;setReactiveDeepArr&quot;&gt;update&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/template&gt;
+</code></pre>
+<pre><code class="js">&lt;script setup&gt;
+import HelloWorld from &#39;./components/HelloWorld.vue&#39;
+import CustomInput from &quot;./components/CustomInput.vue&quot;
+import Child from &quot;./components/Child.vue&quot;
+
+import &#123; ref, reactive, nextTick, provide &#125; from &quot;vue&quot;
+let counts = ref(10)
+
+const callback = () =&gt; &#123;
+  nextTick(() =&gt; &#123;
+    counts.value = 14
+  &#125;)
+&#125;
+
+const provideMsg = ref(&quot;provide message&quot;)
+provide(&quot;provideMsg&quot;, provideMsg)
+
+
+// reactive
+let reactiveObj = reactive(&#123; name: &#39;jude&#39; &#125;)
+
+let setReactiveObj = () =&gt; &#123;
+  reactiveObj.name = &#39;hello,jude&#39;
+&#125;
+
+let reactiveArr = reactive([&#39;a&#39;, &#39;b&#39;, &#39;c&#39;, &#39;d&#39;])
+let setReactiveArr = () =&gt; &#123;
+  reactiveArr[1] = &#39;hello,jude!&#39;
+&#125;
+
+// Ref
+let refValue = ref(&#39;jude 1992&#39;)
+let setRefValue = () =&gt; &#123;
+  refValue.value = &#39;hello jude 1992&#39;
+&#125;
+
+let refObj = ref(&#123; name: &#39;jude 1992&#39; &#125;)
+let setRefObj = () =&gt; &#123;
+  refObj.value.name = &#39;hello jude 1992&#39;
+&#125;
+
+// reactive可以用在深层对象或者数组
+let reactiveDeepObj = reactive(
+  &#123;
+    user: &#123;
+      name: &#39;jude 1992&#39;
+    &#125;
+  &#125;
+)
+let setReactiveDeepObj = () =&gt; &#123;
+  reactiveDeepObj.user.name = &#39;hello  jude 1992&#39;
+&#125;
+
+let reactiveDeepArr = reactive(
+  [&#39;a&#39;, [&#39;a1&#39;, &#39;a2&#39;, &#39;a3&#39;], &#39;c&#39;, &#39;d&#39;]
+)
+let setReactiveDeepArr = () =&gt; &#123;
+  reactiveDeepArr[1][1] = &quot;hello jude 1992&quot;
+&#125;
+
+// reactive 返回值和源对象不相等
+let reactivSource = &#123; name: &#39;jude 1992&#39; &#125;
+let reactiveData = reactive(reactivSource)
+console.log(reactivSource === reactiveData) // false
+console.log(&#39;reactivSource&#39;, reactivSource);
+console.log(&#39;reactiveData&#39;, reactiveData);
+
+
+// ts写法
+// let refObjValue = ref &lt; string &gt; (&#39;jude 1992&#39;)
+// let reactiveObjValue = reactive &lt; &#123; name: string &#125; &gt; (&#123; name: &#39;jude 1992&#39; &#125;)
+&lt;/script&gt;
+</code></pre>
+<h2 id="三、总结"><a href="#三、总结" class="headerlink" title="三、总结"></a>三、总结</h2><blockquote>
+<p>1.reactive 一般用于对象/数组类型的数据，都不需要使用 .value；<br>2.ref 一般用于基础数据类型的数据，在 JS 中读取和修改时，需要使用 .value，在模版中使用时则不需要；<br>3.eactive 可以修改深层属性值，并保持响应；<br>4.reactive 返回值和源对象不同；<br>5.reactive 的属性值可以是 ref 值；<br>6.ref 本质也是 reactive，ref(obj)等价于 reactive({value: obj})。</p>
+</blockquote>
 </article><section class="jump-container is-flex is-justify-content-space-between my-6"><!-- em is empty placeholder--><a class="button is-default" href="/2022/08/01/element-plus/" title="80、使用 element-plus 版本升级后的问题清单"><i class="iconfont icon-prev mr-2 has-text-grey"></i><span class="has-text-weight-semibold">上一页: 80、使用 element-plus 版本升级后的问题清单</span></a><a class="button is-default" href="/2022/07/30/js-cheat/" title="78、js-cheat-sheet"><span class="has-text-weight-semibold">下一页: 78、js-cheat-sheet</span><i class="iconfont icon-next ml-2 has-text-grey"></i></a></section></div></div></main></main><footer class="is-flex is-flex-direction-column is-align-items-center is-flex-shrink-0 is-family-serif"><section class="sns-container"><!-- Github--><a title="github" target="_blank" rel="noopener nofollow" href="//github.com/Jude"><i class="iconfont icon-github"></i></a><!-- Ins--><!-- RSS--><!-- 知乎--><a title="zhihu" target="_blank" rel="noopener nofollow" href="//zhihu.com/https://www.zhihu.com"><i class="iconfont icon-zhihu"></i></a><!-- 领英--><!-- 脸书--></section><p><span>Copyright ©</span><span> Jude 2022</span></p><div class="is-flex is-justify-content-center is-flex-wrap-wrap"><p>Powered by Hexo &verbar;&nbsp;</p><p class="is-flex is-justify-content-center"><a title="Hexo theme author" target="_blank" rel="noopener" href="//github.com/haojen">Theme by Haojen&nbsp;</a></p><div style="margin-top: 2px"><a class="github-button" title="github-button" target="_blank" rel="noopener" href="https://github.com/haojen/hexo-theme-Claudia" data-color-scheme="no-preference: light; light: light; dark: dark;" data-show-count="true"></a></div></div><div><span>记住昨日的美好，过好今日的生活，憧憬明天的到来</span></div></footer><script async defer src="https://buttons.github.io/buttons.js"></script><script src="/js/post.js"></script></body></html>
