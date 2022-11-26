@@ -5,10 +5,29 @@
     
     <entry>
       <title>95、vue3.0使用sass预处理器使用::v-deep深度选择器抛出警告</title>
-      <link href="/2022/11/20/95-v-deep/"/>
-      <url>/2022/11/20/95-v-deep/</url>
+      <link href="/2022/11/21/95-v-deep/"/>
+      <url>/2022/11/21/95-v-deep/</url>
       
         <content type="html"><![CDATA[<p>terminal 中的警告：::v-deep usage as a combinator has been deprecated. Use :deep(＜ inner-selector ＞)警告解决</p><span id="more"></span><p>警告的写法为：</p><pre><code class="css">.redirect:hover &#123;  color: v-bind(linkHoverColor);&#125;::v-deep .no-redirect &#123;  color: #97a8be;  cursor: text;&#125;</code></pre><p>正确写法：</p><pre><code class="css">.redirect:hover &#123;  color: v-bind(linkHoverColor);&#125;::v-deep(.no-redirect) &#123;  color: #97a8be;  cursor: text;&#125;</code></pre>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> vue3 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>96、vue3的使用transition时，不写根标签的警告</title>
+      <link href="/2022/11/20/96-transition/"/>
+      <url>/2022/11/20/96-transition/</url>
+      
+        <content type="html"><![CDATA[<p>terminal 中的警告：[Vue warn]: Component inside <Transition> renders non-element root node that cannot be animated.</p><span id="more"></span><p>Vue3 支持 template 可以不写根标签，transition 使用组件动画必须含根标签</p><blockquote><p>解决方法：组件加回根标签 div</p></blockquote>]]></content>
       
       
       
