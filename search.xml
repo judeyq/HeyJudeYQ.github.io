@@ -4,6 +4,25 @@
   
     
     <entry>
+      <title>95、vue3.0使用sass预处理器使用::v-deep深度选择器抛出警告</title>
+      <link href="/2022/11/20/95-v-deep/"/>
+      <url>/2022/11/20/95-v-deep/</url>
+      
+        <content type="html"><![CDATA[<p>terminal 中的警告：::v-deep usage as a combinator has been deprecated. Use :deep(＜ inner-selector ＞)警告解决</p><span id="more"></span><p>警告的写法为：</p><pre><code class="css">.redirect:hover &#123;  color: v-bind(linkHoverColor);&#125;::v-deep .no-redirect &#123;  color: #97a8be;  cursor: text;&#125;</code></pre><p>正确写法：</p><pre><code class="css">.redirect:hover &#123;  color: v-bind(linkHoverColor);&#125;::v-deep(.no-redirect) &#123;  color: #97a8be;  cursor: text;&#125;</code></pre>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> vue3 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>94、使用vue3+element-plus写后台管理系统：（四）</title>
       <link href="/2022/11/19/94-vue3-ele-plus-admin/"/>
       <url>/2022/11/19/94-vue3-ele-plus-admin/</url>
