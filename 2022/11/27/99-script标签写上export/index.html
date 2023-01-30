@@ -1,0 +1,205 @@
+<!DOCTYPE html><html class="appearance-auto" lang="zh-CN"><head><meta charset="UTF-8"><title>99、script标签写export为什么会报错?</title><meta name="description" content="呦呦鹿鸣，食野之苹"><meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, initial-scale=1"><!-- Google Analytics --><!-- End Google Analytics -->
+<!-- Baidu Analytics --><!-- End Baidu Analytics --><link rel="icon" href="/images/favicon.png"><link rel="stylesheet" href="/style/common/bulma.css"><link rel="stylesheet" href="/style/base.css"><link rel="stylesheet" href="/style/common/helper.css"><script src="/js/common.js"></script><link rel="stylesheet" href="/style/post.css"><link rel="stylesheet" href="/style/themes/highlight-theme-light.css"><script src="/js/highlight.pack.js"></script><meta name="description" content="
+
+一、脚本和模块​ JavaScript 有 2 种源文件，一种叫做脚本，一种叫做模块。这个区分是在 ES6 引入了模块机制开始的，在 ES5 和之前版本中，就只有一种源文件格式，即脚本。
+​ 脚本是可以由浏览器或者 node 环境引入执行的，而模块智能有 JavaScript 代码用 import 引入执行。
+​ 脚本具有主动性的 JavaScript 代码段，是控制宿主完成一定任务的代码；而模块是被动行的 JavaScript 代码段，是等待被调用的库。
+​ 实际上，模块和脚本之间的区别仅仅在于是否包含import和export。
+​ 脚本是一种兼容之前的版本的定义，在这个模式下，没有 import 就不需要处理加载.js 文件问题。
+​ 现代浏览器可以支持用 script 标签引入模块或者脚本，如果.."><meta name="generator" content="Hexo 5.4.1"></head><body class="is-flex is-flex-direction-column"><header class="header-widget is-flex-shrink-0 is-hidden-mobile"><div class="container is-fullhd is-flex is-justify-content-space-between is-align-items-center is-full-height"><section class="is-hidden-mobile is-flex-shrink-0"><h2><a href="/">Jude's blog</a></h2></section><h3 class="is-hidden-mobile is-family-serif is-full-height is-flex is-align-items-center is-flex-shrink-0"><div class="is-full-height" id="postTopic"><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">99、script标签写export为什么会报错?</p><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">点击返回顶部</p></div></h3><aside class="is-flex-shrink-0"><h3 class="is-inline-block"><a href="/">首页</a></h3><h3 class="is-inline-block"><a href="/about">关于</a></h3><h3 class="is-inline-block"><a href="/archives">归档</a></h3></aside></div></header><header class="is-flex header-widget is-flex-shrink-0 is-align-items-center is-justify-content-center is-hidden-tablet"><h3 class="is-inline-block"><a href="/">首页</a></h3><h3 class="is-inline-block"><a href="/about">关于</a></h3><h3 class="is-inline-block"><a href="/archives">归档</a></h3></header><main><main class="container is-max-widescreen content section post-page pt-4 px-4"><div class="columns is-flex-desktop is-justify-content-center is-flex-direction-row-reverse"><div class="column is-3 is-hidden-mobile"><ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E8%84%9A%E6%9C%AC%E5%92%8C%E6%A8%A1%E5%9D%97"><span class="toc-text">一、脚本和模块</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E5%87%BD%E6%95%B0%E4%BD%93"><span class="toc-text">二、函数体</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E9%A2%84%E5%A4%84%E7%90%86%E6%9C%BA%E5%88%B6"><span class="toc-text">三、预处理机制</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9B%9B%E3%80%81%E6%8C%87%E4%BB%A4%E5%BA%8F%E8%A8%80%E6%9C%BA%E5%88%B6"><span class="toc-text">四、指令序言机制</span></a></li></ol></div><div class="column is-9"><header class="my-4"><a href="/tags/js"><i class="tag post-item-tag">js</i></a></header><h1 class="mt-0 mb-1 is-family-serif" id="postTitle">99、script标签写export为什么会报错?</h1><time class="has-text-grey" datetime="2022-11-27T12:00:00.000Z">2022-11-27</time><article class="mt-2 post-content"><span id="more"></span>
+
+<h4 id="一、脚本和模块"><a href="#一、脚本和模块" class="headerlink" title="一、脚本和模块"></a>一、脚本和模块</h4><p>​ JavaScript 有 2 种源文件，一种叫做脚本，一种叫做模块。这个区分是在 ES6 引入了模块机制开始的，在 ES5 和之前版本中，就只有一种源文件格式，即脚本。</p>
+<p>​ 脚本是可以由浏览器或者 node 环境引入执行的，而模块智能有 JavaScript 代码用 import 引入执行。</p>
+<p>​ 脚本具有主动性的 JavaScript 代码段，是控制宿主完成一定任务的代码；而模块是被动行的 JavaScript 代码段，是等待被调用的库。</p>
+<p>​ 实际上，<code>模块和脚本之间的区别仅仅在于是否包含import和export</code>。</p>
+<p>​ 脚本是一种兼容之前的版本的定义，在这个模式下，没有 import 就不需要处理加载.js 文件问题。</p>
+<p>​ 现代浏览器可以支持用 script 标签引入模块或者脚本，如果需要引入模块，必须给 script 标签添加 type=”module”。如果引入脚本，则不需要 type。</p>
+<pre><code class="js">&lt;script type=&quot;module&quot; scr=&quot;XXX.js&quot;&gt;&lt;/script&gt;
+</code></pre>
+<p>​ script 标签如果不加 type=“module”，默认认为我们加载的文件是脚本而非模块，如果我们在脚本中写了 export，当然会抛错。</p>
+<p>​ 脚本可以包含语句。模块包含 3 中内容：import 声明、export 声明、语句。</p>
+<p>​ <code>import声明</code>用法有 2 种：一个是<code>直接import一个模块</code>、另一个是``带from的import`（能引入模块里的一些信息）</p>
+<pre><code class="js">import &quot;module&quot;; // 引入一个模块
+import m from &quot;module&quot;; // 把模块默认的导出值放入变量m
+</code></pre>
+<p>​ 用法 1 直接 import 一个模块，只是保证了这个模块代码被执行，引用它的模块是无法获得它的任何信息的。</p>
+<p>​ 用法 2 带 from 的 import 意思是引入模块中的一部分信息，可以把他们变成本地的变量。</p>
+<p>​ 带 from 的 import 又分为 3 种用法：</p>
+<pre><code class="js">import x from &quot;./a.js&quot;; // 引入模块中导出的默认值
+import &#123; a as x, modify &#125; from &quot;./a.js&quot;; // 引入模块中的变量
+import * as x from &quot;./a.js&quot;; // 把模块中所有的变量以类型对象属性的方式引入
+
+// 第一种方式还可以跟后两种组合使用
+import d, &#123; a as x, modify &#125; from &quot;./a.js&quot;;
+import d, * as x from &quot;./a.js&quot;;
+</code></pre>
+<p>​ 语法要求不带 as 的默认值永远在最前。注意，这里的变量实际上仍然可以受到原来模块的控制。</p>
+<p>示例代码：</p>
+<p><code>模块a</code></p>
+<pre><code class="js">export var a = 1;
+export function modify() &#123;
+  a = 2;
+&#125;
+</code></pre>
+<p><code>模块b</code></p>
+<pre><code class="js">import &#123; a, modify &#125; from &quot;./a.js&quot;;
+console.log(a);
+modify();
+console.log(a);
+</code></pre>
+<p>​ 当我们调用修改变量的函数后，b 模块变量也跟着发生了改变。这说明导入与一般的赋值不同，导入后的变量只是改变了名字，它仍然与原来的变量是同一个。</p>
+<p><code>export声明</code>：承担的是导出的任务。</p>
+<p>​ 模块中导出变量的方式有两种，一种是独立使用 export 声明，一种是直接在声明型语句前添加 export 关键字。</p>
+<p>​ 独立使用 export 声明就是一个 export 关键字加上变量名列表。</p>
+<pre><code class="js">export &#123; a, b, c &#125;;
+</code></pre>
+<p>​ 我们也可以直接在声明型语句前添加 export 关键字，这里的 export 可以加在任何声明性质的语句之前</p>
+<pre><code class="js">var
+function(含async 和generator)
+class
+let
+const
+</code></pre>
+<p>​ export 还有一种特殊的用法，就是跟 default 联合使用。export default 表示到处一个默认变量值，它可以用于 function 和 class。这里导出的变量是没有名称的，可以使用 import x from ‘./a.js’ 这样的语法，在模块中引入。</p>
+<p>​ export default 还支持一种语法，后面跟一个表达式</p>
+<pre><code class="js">var a = &#123;&#125;;
+export default a;
+</code></pre>
+<p>​ 但是，这里的行为跟导出变量是不一致，这里导出的是值，<code>导出的就是普通变量a的值，以后a的变化与导出的值就无关了</code>，修改变量 a，不会使得其他模块中引入的 default 值发生改变。</p>
+<p>​ 在 import 语句前无法加入 export，但是我们可以直接使用 export from 语法</p>
+<pre><code class="js">export a from &quot;a.js&quot;;
+</code></pre>
+<p>​ JavaScript 引擎除了执行脚本和模块之外，还可以执行函数。而函数体跟脚本和模块有一定的相似之处。</p>
+<h4 id="二、函数体"><a href="#二、函数体" class="headerlink" title="二、函数体"></a>二、函数体</h4><blockquote>
+<p>执行函数的行为通常是在 JavaScript 代码执行时，注册宿主环境的某些事件触发的，而执行的过程，就是执行函数体（函数的花括号中间的部分）。</p>
+</blockquote>
+<p>下面的 setTimeout 函数注册了一个函数给宿主，当一定时间之后，宿主就会执行这个函数。</p>
+<pre><code class="js">setTimeout(function () &#123;
+  console.log(&quot;go&quot;);
+&#125;, 10000);
+</code></pre>
+<p>宿主会为这样的函数创建宏任务。宏任务中可能会执行的代码包括脚本、模块、函数体。</p>
+<p>函数体其实也是一个语句的列表。跟脚本和模块比起来，函数体中的语句列表中多了 return 语句可以用。</p>
+<p><code>普通函数体</code>：</p>
+<pre><code class="js">function foo() &#123;
+  //function body
+&#125;
+</code></pre>
+<p><code>异步函数体</code>：</p>
+<pre><code class="js">async function foo() &#123;
+  // function body
+&#125;
+</code></pre>
+<p><code>生成器函数体</code>：</p>
+<pre><code class="js">function* foo() &#123;
+  // function body
+&#125;
+</code></pre>
+<p><code>异步生成器函数体</code>：</p>
+<pre><code class="js">async function* foo() &#123;
+  // function body
+&#125;
+</code></pre>
+<p>上面的 4 种函数体的区别在于：能否使用 await 或者 yield</p>
+<p>类型 yield await return import&amp;export</p>
+<p>普通函数体 X X √ X</p>
+<p>异步函数体 X √ √ X</p>
+<p>生成器函数体 √ X √ X</p>
+<p>异步生成器函数体 √ √ √ X</p>
+<p>脚本 X X X X</p>
+<p>模块 X X X √</p>
+<h4 id="三、预处理机制"><a href="#三、预处理机制" class="headerlink" title="三、预处理机制"></a>三、预处理机制</h4><p>JavaScript 语法的全局机制：预处理和指令序言。这 2 个机制对于我们解释一些 JavaScript 的语法现象非常重要。预处理机制可以理解 var 等声明类语句行为，指令序言可以解释严格模式。</p>
+<p><code>预处理</code>：JavaScript 执行前，会对脚本、模块和函数体中的语句进行预处理。预处理过程将会提前处理 var、函数声明、class、const 和 let 这些语句，以确定其中变量的意义。</p>
+<p><code>var声明</code>：var 声明永远作用于脚本、模块和函数体，在预处理阶段，不关心赋值的部分，只管在当前作用域声明这个变量。</p>
+<pre><code class="js">var a = 1;
+function foo() &#123;
+  console.log(a); // undefined
+  var a = 2;
+&#125;
+foo();
+</code></pre>
+<p>上面的代码声明了一个脚本级别的 a，又声明了 foo 函数体级别的 a，函数体级的 var 出现在 console.log 语句之后。</p>
+<p>预处理过程在执行前，所以有函数体级的变量 a，就不会去访问外层作用域中的变量 a 了，而函数体级的变量 a 此时还没有复制，所以是 undefined。</p>
+<pre><code class="js">var a = 1;
+function foo() &#123;
+  console.log(a);
+  if (false) &#123;
+    var a = 2;
+  &#125;
+&#125;
+foo();
+</code></pre>
+<p>这段代码比上一段代码在 var a = 2 之外多了一段 if，我们知道 if(false) 中的代码永远不会被执行，但是预处理阶段并不管这个，var 的作用能够穿透一切语句结构，它只认脚本、模块和函数体三种语法结构。所以这里结果跟前一段代码完全一样，我们会得到 undefined。</p>
+<pre><code class="js">var a = 1;
+
+function foo() &#123;
+  var o = &#123; a: 3 &#125;;
+  with (o) &#123;
+    var a = 2;
+  &#125;
+  console.log(o.a);
+  console.log(a);
+&#125;
+
+foo();
+</code></pre>
+<p>引入 with 语句，with(o)创建了一个作用域，并把 o 对象加入词法环境，在其中使用了 var a = 2 语句。</p>
+<p>在预处理阶段，只认 var 中声明的变量，所以同样为 foo 的作用域创建了 a 这个变量，但是没有赋值。在执行阶段，当执行到 var a = 2 时，作用域变成了 with 语句内，这时候的 a 被认为访问到了对象 o 的属性 a，所以最终执行的结果，我们得到了 2 和 undefined。</p>
+<p><code>function声明</code>：function 声明的行为，在全局（脚本、模块和函数体），function 声明表现跟 var 相似，不同之处在于，function 声明不但在作用域中加入变量，还会给它赋值。</p>
+<pre><code class="js">console.log(foo);
+function foo() &#123;&#125;
+</code></pre>
+<p>在声明函数 foo 之前，打印函数 foo,我们可以发现，已经是函数 foo 的值了。</p>
+<p>下面示例不再被提前赋值：</p>
+<pre><code class="js">console.log(foo); // undefined
+if (true) &#123;
+  function foo() &#123;&#125;
+&#125;
+</code></pre>
+<p>function 声明出现在 if 等语句中，它仍然作用于脚本、模块和函数体级别，在预处理阶段，仍然会产生变量，它不再被提前赋值。</p>
+<p>上述打印结果为 undefined，声明 function 在预处理阶段仍然发生了作用，在作用域中产生了变量，没有产生赋值，赋值行为发生在了执行阶段。</p>
+<p>出现在 if 等语句中的 function，在 if 创建的作用域中仍然会被提前，产生赋值效果。</p>
+<p><code>class声明</code>：在全局的行为跟 function 和 var 都不一样。</p>
+<p>在 class 声明前使用 class 类名，会抛出错误：</p>
+<pre><code class="js">console.log(c); // c is not defined
+class c &#123;&#125;
+</code></pre>
+<p>这个抛错很像是 class 没有预处理，但实际上并非如此。</p>
+<p>复杂一点的例子：</p>
+<pre><code class="js">var c = 1;
+function foo() &#123;
+  console.log(c);
+  class c &#123;&#125;
+&#125;
+foo();
+</code></pre>
+<p>上面的代码，把 class 放进了一个函数体中，在外层作用域中有变量 c。</p>
+<p>执行后，我们看到，仍然抛出了错误，如果去掉 class 声明，则会正常打印出 1，也就是说，出现在后面的 class 声明影响了前面语句的结果。这说明，class 声明也是会被预处理的，它会在作用域中创建变量，并且要求访问它时抛出错误。</p>
+<p>class 的声明作用不会穿透 if 等语句结构，所以只有写在全局环境才会有声明作用。这样的 class 设计比 function 和 var 更符合直觉，而且在遇到一些比较奇怪的用法时，倾向于抛出错误。</p>
+<h4 id="四、指令序言机制"><a href="#四、指令序言机制" class="headerlink" title="四、指令序言机制"></a>四、指令序言机制</h4><blockquote>
+<p>脚本和模块都支持一种特别的语法，指令序言最早是为了 use strict 设计的，它规定了一种给 JavaScript 代码添加元信息的方式。</p>
+</blockquote>
+<pre><code class="js">&quot;use strict&quot;;
+function f() &#123;
+  console.log(this);
+&#125;
+f.call(null);
+</code></pre>
+<p>null 原封不动地被当做 this 值打印了出来，这是严格模式的特征。</p>
+<p>去掉严格模式，打印结果会变成 global。</p>
+<p>‘use strict’是 JavaScript 标准中规定的唯一一种指令序言，但是设计指令序言的目的是留给 JavaScript 的引擎和实现者一些统一的表达式，在静态规定扫描时指定 JavaScript 代码的一些特性。</p>
+<p>JavaScript 的指令序言是只有一个字符串直接量的表达式语句，它只能出现在脚本、模块和函数体的最前面。</p>
+<pre><code class="js">function doSth() &#123;
+  //
+&#125;
+(&quot;use strict&quot;);
+var a = 1;
+// .....
+</code></pre>
+<p>‘use strct’没有出现在最前，所以不是指令序言。</p>
+<pre><code class="js">&quot;use strict&quot;; // 单引号也是指令序言
+function doSth() &#123;
+  // ....
+&#125;
+</code></pre>
+</article><section class="jump-container is-flex is-justify-content-space-between my-6"><!-- em is empty placeholder--><a class="button is-default" href="/2022/11/29/100-vuex/" title="100、vuex的缺点及从0写一个vuex的思路"><i class="iconfont icon-prev mr-2 has-text-grey"></i><span class="has-text-weight-semibold">上一页: 100、vuex的缺点及从0写一个vuex的思路</span></a><a class="button is-default" href="/2022/11/26/98-js-string-number-array/" title="98、基于JavaScript开发灵活的数据应用--基本数据处理(一)"><span class="has-text-weight-semibold">下一页: 98、基于JavaScript开发灵活的数据应用--基本数据处理(一)</span><i class="iconfont icon-next ml-2 has-text-grey"></i></a></section></div></div></main></main><footer class="is-flex is-flex-direction-column is-align-items-center is-flex-shrink-0 is-family-serif"><section class="sns-container"><!-- Github--><a title="github" target="_blank" rel="noopener nofollow" href="//github.com/Jude"><i class="iconfont icon-github"></i></a><!-- Ins--><!-- RSS--><!-- 知乎--><a title="zhihu" target="_blank" rel="noopener nofollow" href="//zhihu.com/https://www.zhihu.com"><i class="iconfont icon-zhihu"></i></a><!-- 领英--><!-- 脸书--></section><p><span>Copyright ©</span><span> Jude 2023</span></p><div class="is-flex is-justify-content-center is-flex-wrap-wrap"><p>Powered by Hexo &verbar;&nbsp;</p><p class="is-flex is-justify-content-center"><a title="Hexo theme author" target="_blank" rel="noopener" href="//github.com/haojen">Theme by Haojen&nbsp;</a></p><div style="margin-top: 2px"><a class="github-button" title="github-button" target="_blank" rel="noopener" href="https://github.com/haojen/hexo-theme-Claudia" data-color-scheme="no-preference: light; light: light; dark: dark;" data-show-count="true"></a></div></div><div><span>记住昨日的美好，过好今日的生活，憧憬明天的到来</span></div></footer><script async defer src="https://buttons.github.io/buttons.js"></script><script src="/js/post.js"></script></body></html>
