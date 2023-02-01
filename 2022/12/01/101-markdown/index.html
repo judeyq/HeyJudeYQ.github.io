@@ -1,0 +1,444 @@
+<!DOCTYPE html><html class="appearance-auto" lang="zh-CN"><head><meta charset="UTF-8"><title>101、富文本与markdown对文本的处理</title><meta name="description" content="呦呦鹿鸣，食野之苹"><meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, initial-scale=1"><!-- Google Analytics --><!-- End Google Analytics -->
+<!-- Baidu Analytics --><!-- End Baidu Analytics --><link rel="icon" href="/images/favicon.png"><link rel="stylesheet" href="/style/common/bulma.css"><link rel="stylesheet" href="/style/base.css"><link rel="stylesheet" href="/style/common/helper.css"><script src="/js/common.js"></script><link rel="stylesheet" href="/style/post.css"><link rel="stylesheet" href="/style/themes/highlight-theme-light.css"><script src="/js/highlight.pack.js"></script><meta name="description" content="
+
+编辑文本的 2 种方式：1、富文本; 2、markdown。这 2 种编辑形式在前端中有很多第 3 方库。
+一、创建文本基本结构1-1 创建文本基本结构，主要分为三部分：1、article-create 页面：基本结构
+2、Editor 组件：富文本编辑器
+3、Markdown 组件： markdown 编辑器
+src 目录下的项目结构：
+views / article - create / components / Editor.vue;
+
+views / article - create / components / Markdown.vue;
+
+views / article - create / index.vue;
+
+1-2 创建文本父组件&amp;lt;template&amp;gt;
+  &amp;lt;div .."><meta name="generator" content="Hexo 5.4.1"></head><body class="is-flex is-flex-direction-column"><header class="header-widget is-flex-shrink-0 is-hidden-mobile"><div class="container is-fullhd is-flex is-justify-content-space-between is-align-items-center is-full-height"><section class="is-hidden-mobile is-flex-shrink-0"><h2><a href="/">Jude's blog</a></h2></section><h3 class="is-hidden-mobile is-family-serif is-full-height is-flex is-align-items-center is-flex-shrink-0"><div class="is-full-height" id="postTopic"><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">101、富文本与markdown对文本的处理</p><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">点击返回顶部</p></div></h3><aside class="is-flex-shrink-0"><h3 class="is-inline-block"><a href="/">首页</a></h3><h3 class="is-inline-block"><a href="/about">关于</a></h3><h3 class="is-inline-block"><a href="/archives">归档</a></h3></aside></div></header><header class="is-flex header-widget is-flex-shrink-0 is-align-items-center is-justify-content-center is-hidden-tablet"><h3 class="is-inline-block"><a href="/">首页</a></h3><h3 class="is-inline-block"><a href="/about">关于</a></h3><h3 class="is-inline-block"><a href="/archives">归档</a></h3></header><main><main class="container is-max-widescreen content section post-page pt-4 px-4"><div class="columns is-flex-desktop is-justify-content-center is-flex-direction-row-reverse"><div class="column is-3 is-hidden-mobile"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E5%88%9B%E5%BB%BA%E6%96%87%E6%9C%AC%E5%9F%BA%E6%9C%AC%E7%BB%93%E6%9E%84"><span class="toc-text">一、创建文本基本结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1-%E5%88%9B%E5%BB%BA%E6%96%87%E6%9C%AC%E5%9F%BA%E6%9C%AC%E7%BB%93%E6%9E%84%EF%BC%8C%E4%B8%BB%E8%A6%81%E5%88%86%E4%B8%BA%E4%B8%89%E9%83%A8%E5%88%86%EF%BC%9A"><span class="toc-text">1-1 创建文本基本结构，主要分为三部分：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2-%E5%88%9B%E5%BB%BA%E6%96%87%E6%9C%AC%E7%88%B6%E7%BB%84%E4%BB%B6"><span class="toc-text">1-2 创建文本父组件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-3-markdown-%E7%BC%96%E8%BE%91%E5%99%A8%EF%BC%9Atui-editor"><span class="toc-text">1-3 markdown 编辑器：tui.editor</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-4-%E5%AF%8C%E6%96%87%E6%9C%AC%E7%BC%96%E8%BE%91%E5%99%A8%EF%BC%9AwangEditor"><span class="toc-text">1-4 富文本编辑器：wangEditor</span></a></li></ol></div><div class="column is-9"><header class="my-4"><a href="/tags/vue3"><i class="tag post-item-tag">vue3</i></a></header><h1 class="mt-0 mb-1 is-family-serif" id="postTitle">101、富文本与markdown对文本的处理</h1><time class="has-text-grey" datetime="2022-12-01T12:00:00.000Z">2022-12-01</time><article class="mt-2 post-content"><span id="more"></span>
+
+<p>编辑文本的 2 种方式：1、富文本; 2、markdown。这 2 种编辑形式在前端中有很多第 3 方库。</p>
+<h2 id="一、创建文本基本结构"><a href="#一、创建文本基本结构" class="headerlink" title="一、创建文本基本结构"></a>一、创建文本基本结构</h2><h2 id="1-1-创建文本基本结构，主要分为三部分："><a href="#1-1-创建文本基本结构，主要分为三部分：" class="headerlink" title="1-1 创建文本基本结构，主要分为三部分："></a>1-1 创建文本基本结构，主要分为三部分：</h2><p>1、article-create 页面：基本结构</p>
+<p>2、Editor 组件：富文本编辑器</p>
+<p>3、Markdown 组件： markdown 编辑器</p>
+<p>src 目录下的项目结构：</p>
+<pre><code>views / article - create / components / Editor.vue;
+
+views / article - create / components / Markdown.vue;
+
+views / article - create / index.vue;
+</code></pre>
+<h2 id="1-2-创建文本父组件"><a href="#1-2-创建文本父组件" class="headerlink" title="1-2 创建文本父组件"></a>1-2 创建文本父组件</h2><pre><code class="vue">&lt;template&gt;
+  &lt;div class=&quot;article-create&quot;&gt;
+    &lt;el-card&gt;
+      &lt;el-input
+        class=&quot;title-input&quot;
+        placeholder=&quot;请输入标题&quot;
+        v-model=&quot;title&quot;
+        maxlength=&quot;20&quot;
+        clearable
+      &gt;
+      &lt;/el-input&gt;
+      &lt;el-tabs v-model=&quot;activeName&quot;&gt;
+        &lt;el-tab-pane label=&quot;markdown&quot; name=&quot;markdown&quot;&gt;
+          &lt;markdown&gt;&lt;/markdown&gt;
+        &lt;/el-tab-pane&gt;
+        &lt;el-tab-pane label=&quot;富文本&quot; name=&quot;editor&quot;&gt;
+          &lt;editor&gt;&lt;/editor&gt;
+        &lt;/el-tab-pane&gt;
+      &lt;/el-tabs&gt;
+    &lt;/el-card&gt;
+  &lt;/div&gt;
+&lt;/template&gt;
+
+&lt;script setup&gt;
+import Editor from &quot;./components/Editor.vue&quot;;
+import Markdown from &quot;./components/Markdown.vue&quot;;
+import &#123; ref &#125; from &quot;vue&quot;;
+
+const activeName = ref(&quot;markdown&quot;);
+const title = ref(&quot;&quot;);
+&lt;/script&gt;
+
+&lt;style lang=&quot;scss&quot; scoped&gt;
+.title-input &#123;
+  margin-bottom: 20px;
+&#125;
+&lt;/style&gt;
+</code></pre>
+<h2 id="1-3-markdown-编辑器：tui-editor"><a href="#1-3-markdown-编辑器：tui-editor" class="headerlink" title="1-3 markdown 编辑器：tui.editor"></a>1-3 markdown 编辑器：tui.editor</h2><blockquote>
+<p>安装 plugin：</p>
+</blockquote>
+<pre><code class="shell">npm i @toast-ui/editor@3.0.2
+</code></pre>
+<blockquote>
+<p>渲染 markdown 基本结构</p>
+</blockquote>
+<pre><code class="vue">&lt;template&gt;
+  &lt;div class=&quot;markdown-container&quot;&gt;
+    &lt;!-- 渲染区 --&gt;
+    &lt;div id=&quot;markdown-box&quot;&gt;&lt;/div&gt;
+    &lt;div class=&quot;bottom&quot;&gt;
+      &lt;el-button type=&quot;primary&quot; @click=&quot;onSubmitClick&quot;&gt;提交&lt;/el-button&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/template&gt;
+
+&lt;script setup&gt;
+import &#123;&#125; from &quot;vue&quot;;
+&lt;/script&gt;
+
+&lt;style lang=&quot;scss&quot; scoped&gt;
+.markdown-container &#123;
+  .bottom &#123;
+    margin-top: 20px;
+    text-align: right;
+  &#125;
+&#125;
+&lt;/style&gt;
+</code></pre>
+<blockquote>
+<p>初始化 editor</p>
+</blockquote>
+<pre><code class="js">&lt;script setup&gt;
+import MkEditor from &#39;@toast-ui/editor&#39;
+import &#39;@toast-ui/editor/dist/toastui-editor.css&#39;
+// 国际化部分
+// import &#39;@toast-ui/editor/dist/i18n/zh-cn&#39;
+import &#123; onMounted &#125; from &#39;vue&#39;
+import &#123; useStore &#125; from &#39;vuex&#39;
+
+// Editor实例
+let mkEditor
+// 处理离开页面切换语言导致 dom 无法被获取
+let el
+onMounted(() =&gt; &#123;
+  el = document.querySelector(&#39;#markdown-box&#39;)
+  initEditor()
+&#125;)
+
+const store = useStore()
+const initEditor = () =&gt; &#123;
+  mkEditor = new MkEditor(&#123;
+    el,
+    height: &#39;500px&#39;,
+    previewStyle: &#39;vertical&#39;
+  &#125;)
+
+  mkEditor.getMarkdown()
+&#125;
+&lt;/script&gt;
+</code></pre>
+<blockquote>
+<p>新建文本及新建文本的提交</p>
+</blockquote>
+<p>接口定义：</p>
+<pre><code class="js">// src/api/article.js
+/**
+ * 创建文章
+ */
+export const createArticle = (data) =&gt; &#123;
+  return request(&#123;
+    url: &quot;/article/create&quot;,
+    method: &quot;POST&quot;,
+    data,
+  &#125;);
+&#125;;
+/**
+ * 编辑文章详情
+ */
+export const articleEdit = (data) =&gt; &#123;
+  return request(&#123;
+    url: &quot;/article/edit&quot;,
+    method: &quot;POST&quot;,
+    data,
+  &#125;);
+&#125;;
+</code></pre>
+<blockquote>
+<blockquote>
+<p>注意：markwodn 和富文本最终都会处理提交事件，将提交合并到一个模块实现</p>
+</blockquote>
+</blockquote>
+<pre><code class="js">// src/views/article-create/components/commit.js
+import &#123; createArticle, articleEdit &#125; from &quot;@/api/article&quot;;
+import &#123; ElMessage &#125; from &quot;element-plus&quot;;
+
+export const commitArticle = async (data) =&gt; &#123;
+  const res = await createArticle(data);
+  ElMessage.success(&quot;创建成功！&quot;);
+  return res;
+&#125;;
+export const editArticle = async (data) =&gt; &#123;
+  const res = await articleEdit(data);
+  ElMessage.success(&quot;编辑成功！&quot;);
+  return res;
+&#125;;
+
+// 将此方法导入到markdown.vue中
+import &#123; commitArticle &#125; from &quot;./commit&quot;;
+</code></pre>
+<blockquote>
+<p>提交文本事件的触发</p>
+</blockquote>
+<pre><code class="js">// markdown.vue
+const props = defineProps(&#123;
+  title: &#123;
+    required: true,
+    type: String
+  &#125;
+&#125;)
+
+const emits = defineEmits([&#39;onSuccess&#39;])
+...
+// 处理提交
+const onSubmitClick = async () =&gt; &#123;
+  // 创建文章
+  await commitArticle(&#123;
+    title: props.title,
+    content: mkEditor.getHTML()
+  &#125;)
+  // 重置一下
+  mkEditor.reset()
+  emits(&#39;onSuccess&#39;)
+&#125;
+</code></pre>
+<blockquote>
+<p>父组件中处理传递的 title，处理 onSuccess 事件</p>
+</blockquote>
+<pre><code class="js">// 创建成功
+const onSuccess = () =&gt; &#123;
+  title.value = &quot;&quot;;
+&#125;;
+</code></pre>
+<blockquote>
+<p>markdown 文本编辑</p>
+</blockquote>
+<pre><code class="js">// 路径为src/views/article-detail/index.vue
+&lt;template&gt;
+  &lt;div class=&quot;article-detail-container&quot;&gt;
+    &lt;h2 class=&quot;title&quot;&gt;&#123;&#123; detail.title &#125;&#125;&lt;/h2&gt;
+    &lt;div class=&quot;header&quot;&gt;
+      &lt;span class=&quot;author&quot;&gt;
+        作者：&#123;&#123; detail.author &#125;&#125;
+      &lt;/span&gt;
+      &lt;span class=&quot;time&quot;&gt;
+        时间: &#123;&#123; $filters.relativeTime(detail.publicDate) &#125;&#125;
+      &lt;/span&gt;
+      &lt;el-button type=&quot;text&quot; class=&quot;edit&quot; @click=&quot;onEditClick&quot;&gt;编辑&lt;/el-button&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;content&quot; v-html=&quot;detail.content&quot;&gt;&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/template&gt;
+&lt;script setup&gt;
+import &#123; ref &#125; from &#39;vue&#39;
+import &#123; useRoute, useRouter &#125; from &#39;vue-router&#39;
+import &#123; articleDetail &#125; from &#39;@/api/article&#39;
+
+// 获取数据
+const route = useRoute()
+const articleId = route.params.id
+const detail = ref(&#123;&#125;)
+const getArticleDetail = async () =&gt; &#123;
+  detail.value = await articleDetail(articleId)
+&#125;
+getArticleDetail()
+// 编辑
+const router = useRouter()
+const onEditClick = () =&gt; &#123;
+  router.push(`/article/editor/$&#123;articleId&#125;`)
+&#125;
+&lt;/script&gt;
+
+&lt;style lang=&quot;scss&quot; scoped&gt;
+.article-detail-container &#123;
+  .title &#123;
+    font-size: 22px;
+    text-align: center;
+    padding: 12px 0;
+  &#125;
+
+  .header &#123;
+    padding: 26px 0;
+
+    .author &#123;
+      font-size: 14px;
+      color: #555666;
+      margin-right: 20px;
+    &#125;
+
+    .time &#123;
+      font-size: 14px;
+      color: #999aaa;
+      margin-right: 20px;
+    &#125;
+
+    .edit &#123;
+      float: right;
+    &#125;
+  &#125;
+
+  .content &#123;
+    font-size: 14px;
+    padding: 20px 0;
+    border-top: 1px solid #d4d4d4;
+    ;
+  &#125;
+&#125;
+&lt;/style&gt;
+</code></pre>
+<blockquote>
+<p>将数据传递给 markdown 组件</p>
+</blockquote>
+<pre><code class="js">&lt;markdown :title=&quot;title&quot; :detail=&quot;detail&quot; @onSuccess=&quot;onSuccess&quot;&gt;&lt;/markdown&gt;
+
+// 数据接收
+const props = defineProps(&#123;
+  title: &#123;
+    required: true,
+    type: String
+  &#125;,
+  detail: &#123;
+    type: Object
+  &#125;
+&#125;)
+</code></pre>
+<blockquote>
+<p>使用 watch 检测数据变化，存在 detail 时，将 detail 赋值给 mkEditor</p>
+</blockquote>
+<pre><code class="js">// 编辑相关
+watch(
+  () =&gt; props.detail,
+  (val) =&gt; &#123;
+    if (val &amp;&amp; val.content) &#123;
+      mkEditor.setHTML(val.content);
+    &#125;
+  &#125;,
+  &#123;
+    immediate: true,
+  &#125;
+);
+</code></pre>
+<blockquote>
+<p>markdown 组件中处理提交事件</p>
+</blockquote>
+<pre><code class="js">// 处理提交
+const onSubmitClick = async () =&gt; &#123;
+  if (props.detail &amp;&amp; props.detail._id) &#123;
+    // 编辑文章
+    await editArticle(&#123;
+      id: props.detail._id,
+      title: props.title,
+      content: mkEditor.getHTML(),
+    &#125;);
+  &#125; else &#123;
+    // 创建文章
+    await commitArticle(&#123;
+      title: props.title,
+      content: mkEditor.getHTML(),
+    &#125;);
+  &#125;
+
+  mkEditor.reset();
+  emits(&quot;onSuccess&quot;);
+&#125;;
+</code></pre>
+<h2 id="1-4-富文本编辑器：wangEditor"><a href="#1-4-富文本编辑器：wangEditor" class="headerlink" title="1-4 富文本编辑器：wangEditor"></a>1-4 富文本编辑器：wangEditor</h2><blockquote>
+<p>安装 plugin</p>
+</blockquote>
+<pre><code class="shell">npm i wangeditor@4.7.6
+</code></pre>
+<blockquote>
+<p>富文本的基本组件结构和 markdown 组件基本一致</p>
+</blockquote>
+<pre><code class="js">&lt;template&gt;
+  &lt;div class=&quot;editor-container&quot;&gt;
+    &lt;div id=&quot;editor-box&quot;&gt;&lt;/div&gt;
+    &lt;div class=&quot;bottom&quot;&gt;
+      &lt;el-button type=&quot;primary&quot; @click=&quot;onSubmitClick&quot;&gt;提交&lt;/el-button&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/template&gt;
+
+&lt;script setup&gt;
+import E from &#39;wangeditor&#39;
+import &#123; onMounted, defineProps, defineEmits, watch &#125; from &#39;vue&#39;
+import &#123; useStore &#125; from &#39;vuex&#39;
+import &#123; commitArticle, editArticle &#125; from &#39;./commit&#39;
+
+const props = defineProps(&#123;
+  title: &#123;
+    required: true,
+    type: String
+  &#125;,
+  detail: &#123;
+    type: Object
+  &#125;
+&#125;)
+
+const emits = defineEmits([&#39;onSuccess&#39;])
+
+const store = useStore()
+
+// Editor实例
+let editor
+// 处理离开页面切换语言导致 dom 无法被获取
+let el
+onMounted(() =&gt; &#123;
+  el = document.querySelector(&#39;#editor-box&#39;)
+  initEditor()
+&#125;)
+
+const initEditor = () =&gt; &#123;
+  editor = new E(el)
+  editor.config.zIndex = 1
+  // 菜单栏提示
+  editor.config.showMenuTooltips = true
+  editor.config.menuTooltipPosition = &#39;down&#39;
+
+  editor.create()
+&#125;
+
+// 编辑相关
+watch(
+  () =&gt; props.detail,
+  val =&gt; &#123;
+    if (val &amp;&amp; val.content) &#123;
+      editor.txt.html(val.content)
+    &#125;
+  &#125;,
+  &#123;
+    immediate: true
+  &#125;
+)
+
+// 处理文本提交的事件
+const onSubmitClick = async () =&gt; &#123;
+  if (props.detail &amp;&amp; props.detail._id) &#123;
+    // 编辑文章
+    await editArticle(&#123;
+      id: props.detail._id,
+      title: props.title,
+      content: editor.txt.html()
+    &#125;)
+  &#125; else &#123;
+    // 创建文章
+    await commitArticle(&#123;
+      title: props.title,
+      content: editor.txt.html()
+    &#125;)
+  &#125;
+
+  editor.txt.html(&#39;&#39;)
+  emits(&#39;onSuccess&#39;)
+&#125;
+&lt;/script&gt;
+
+&lt;style lang=&quot;scss&quot; scoped&gt;
+.editor-container &#123;
+  .bottom &#123;
+    margin-top: 20px;
+    text-align: right;
+  &#125;
+&#125;
+&lt;/style&gt;
+</code></pre>
+</article><section class="jump-container is-flex is-justify-content-space-between my-6"><!-- em is empty placeholder--><em></em><a class="button is-default" href="/2022/11/29/100-vuex/" title="100、vuex的缺点及从0写一个vuex的思路"><span class="has-text-weight-semibold">下一页: 100、vuex的缺点及从0写一个vuex的思路</span><i class="iconfont icon-next ml-2 has-text-grey"></i></a></section></div></div></main></main><footer class="is-flex is-flex-direction-column is-align-items-center is-flex-shrink-0 is-family-serif"><section class="sns-container"><!-- Github--><a title="github" target="_blank" rel="noopener nofollow" href="//github.com/Jude"><i class="iconfont icon-github"></i></a><!-- Ins--><!-- RSS--><!-- 知乎--><a title="zhihu" target="_blank" rel="noopener nofollow" href="//zhihu.com/https://www.zhihu.com"><i class="iconfont icon-zhihu"></i></a><!-- 领英--><!-- 脸书--></section><p><span>Copyright ©</span><span> Jude 2023</span></p><div class="is-flex is-justify-content-center is-flex-wrap-wrap"><p>Powered by Hexo &verbar;&nbsp;</p><p class="is-flex is-justify-content-center"><a title="Hexo theme author" target="_blank" rel="noopener" href="//github.com/haojen">Theme by Haojen&nbsp;</a></p><div style="margin-top: 2px"><a class="github-button" title="github-button" target="_blank" rel="noopener" href="https://github.com/haojen/hexo-theme-Claudia" data-color-scheme="no-preference: light; light: light; dark: dark;" data-show-count="true"></a></div></div><div><span>记住昨日的美好，过好今日的生活，憧憬明天的到来</span></div></footer><script async defer src="https://buttons.github.io/buttons.js"></script><script src="/js/post.js"></script></body></html>
