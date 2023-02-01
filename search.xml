@@ -4,6 +4,25 @@
   
     
     <entry>
+      <title>102、项目部署通用方案</title>
+      <link href="/2022/12/03/102-deploy/"/>
+      <url>/2022/12/03/102-deploy/</url>
+      
+        <content type="html"><![CDATA[<p>之前用过阿里巴巴的云效（codeup）管理代码及部署，通过搭建流水线的方式，前端提交完代码之后(前端提交代码时不用 npm run build)，可以按照简单的步骤将前端代码打包、发布(包括开发环境、测试环境)。</p><span id="more"></span><h2 id="一、为什么需要打包项目？"><a href="#一、为什么需要打包项目？" class="headerlink" title="一、为什么需要打包项目？"></a>一、为什么需要打包项目？</h2><p>浏览器只能识别并运行 <strong><code>html、css、js</code> 文件</strong> 。</p><p>那么换句话而言，项目中的 <code>.vue</code> 文件，浏览器是不认识的。</p><p>而打包的过程就是把 <code>.vue</code> 的 <strong>单文件组件</strong> 打包成 <code>html、css、js</code> 的文件，让浏览器进行识别，并展示我们的项目</p><h2 id="二、打包后的项目可以直接使用浏览器访问吗？"><a href="#二、打包后的项目可以直接使用浏览器访问吗？" class="headerlink" title="二、打包后的项目可以直接使用浏览器访问吗？"></a>二、打包后的项目可以直接使用浏览器访问吗？</h2><p>通过 <code>npm run build</code> 打包项目之后，打包的文件会被放入到 <code>dist</code> 文件夹中，其实我们可以直接双击 <code>index.html</code> 文件，可以发现，浏览器是 <strong>无法</strong> 显示项目的。</p><p>F12 查看控制台，发现抛出了很多错误。根据错误可以知道，无法显示项目的原因是一些文件找不到。</p><p>文件找不到的原因是我们打开 dist 下的 index.html 文件，在浏览器的 URL 其实是一个 file 协议，对应着的文件路径就会变成盘符下的 xxx,在我们当前的盘符下没有对应的文件，项目自然是无法访问的。</p><h2 id="三、为什么需要服务？"><a href="#三、为什么需要服务？" class="headerlink" title="三、为什么需要服务？"></a>三、为什么需要服务？</h2><p>项目需要通过一个服务托管，从而避免出现模块无法被找到等原因。</p><h2 id="四、明确域名、DNS、公网-IP、服务器、Nginx-之间的关系"><a href="#四、明确域名、DNS、公网-IP、服务器、Nginx-之间的关系" class="headerlink" title="四、明确域名、DNS、公网 IP、服务器、Nginx 之间的关系"></a>四、明确域名、DNS、公网 IP、服务器、Nginx 之间的关系</h2><ol><li>域名：<code>https://.baidu.com</code></li><li>DNS：域名解析服务器</li><li>公网 IP：服务器在网络中的唯一地址</li><li>服务器：服务部署的电脑</li><li>Nginx：网页服务</li></ol><h2 id="五、服务器的连接方式"><a href="#五、服务器的连接方式" class="headerlink" title="五、服务器的连接方式"></a>五、服务器的连接方式</h2><p>常见的连接服务器方式：<br>1、云商控制台中进行远程链接<br>2、SSH 工具（XShell）<br>3、SSH 指令远程登录</p><blockquote><p>SSH 工具-XShell</p></blockquote><p>1、新建会话<br>2、确定会话信息，协议为 SSH、主机为服务器 IP、端口号为 22<br>3、双击会话进行连接<br>4、输入用户名（默认为 root）<br>5、输入密码</p><blockquote><p>Nginx 环境处理</p></blockquote><ol><li><p><code>nginx</code> 编译时依赖 <code>gcc</code> 环境</p><pre><code>yum -y install gcc gcc-c++</code></pre></li><li><p>安装 <code>prce</code>，让 <code>nginx</code> 支持重写功能</p><pre><code>yum -y install pcre*</code></pre></li><li><p>安装 <code>zlib</code>，<code>nginx</code> 使用 <code>zlib</code> 对 <code>http</code> 包内容进行 <code>gzip</code> 压缩</p><pre><code>yum -y install zlib zlib-devel</code></pre></li><li><p>安装 <code>openssl</code>，用于通讯加密</p><pre><code>yum -y install openssl openssl-devel</code></pre></li><li><p>进行 <code>nginx</code> 安装</p></li><li><p>创建 <code>nginx</code> 文件夹</p></li><li><p>下载 <code>nginx</code> 压缩包</p><pre><code>wget https://nginx.org/download/nginx-1.11.5.tar.gz</code></pre></li><li><p>解压 <code>nginx</code></p><pre><code>tar -zxvf  nginx-1.11.5.tar.gz</code></pre></li><li><p>进入 <code>nginx-1.11.5</code> 目录</p><pre><code>cd nginx-1.11.5</code></pre></li><li><p>检查平台安装环境</p><pre><code>./configure --prefix=/usr/local/nginx</code></pre></li><li><p>进行源码编译</p><pre><code>make</code></pre></li><li><p>安装 <code>nginx</code></p><pre><code>make install</code></pre></li><li><p>查看 <code>nginx</code> 配置</p><pre><code>/usr/local/nginx/sbin/nginx -t</code></pre></li><li><p>制作 <code>nginx</code> 软连接</p></li><li><p>进入 <code>usr/bin</code> 目录</p><pre><code>cd /usr/bin</code></pre></li><li><p>制作软连接</p><pre><code>ln -s /usr/local/nginx/sbin/nginx nginx</code></pre></li><li><p>接下来制作配置文件</p></li><li><p>首先进入到 <code>nginx</code> 的默认配置文件中</p><pre><code>vim /usr/local/nginx/conf/nginx.conf</code></pre></li><li><p>在最底部增加配置项（按下 <code>i</code> 进入 输入模式）</p><pre><code>include /nginx/*.conf;</code></pre></li><li><p>按下 <code>esc</code> 键，通过 <code>:wq!</code> 保存并退出</p></li><li><p>创建新的配置文件</p><pre><code>touch /nginx/nginx.conf</code></pre></li><li><p>进入到 <code>/root/nginx/nginx.conf</code> 文件</p><pre><code>vim /nginx/nginx.conf</code></pre></li><li><p>写入如下配置</p><pre><code class="js">server &#123;    # 端口    listen       80;    # 域名    server_name  localhost;    # 资源地址    root   /nginx/dist/;    # 目录浏览    autoindex on;    # 缓存处理    add_header Cache-Control &quot;no-cache, must-revalidate&quot;;    # 请求配置    location / &#123;        # 跨域        add_header Access-Control-Allow-Origin *;        # 返回 index.html        try_files $uri $uri/ /index.html;    &#125;&#125;</code></pre></li><li><p>通过 <code>:wq!</code> 保存退出</p></li><li><p>在 <code>root/nginx</code> 中创建 <code>dist</code> 文件夹</p><pre><code>mkdir /nginx/dist</code></pre></li><li><p>在 <code>nginx/dist</code> 中写入 <code>index.html</code> 进行测试</p></li><li><p>通过 <code>nginx -s reload</code> 重启服务</p></li><li><p>在 浏览器中通过，<code>IP</code> 测试访问</p></li></ol>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> vue3 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>101、富文本与markdown对文本的处理</title>
       <link href="/2022/12/01/101-markdown/"/>
       <url>/2022/12/01/101-markdown/</url>
