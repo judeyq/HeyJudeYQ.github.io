@@ -4,6 +4,25 @@
   
     
     <entry>
+      <title>107、Mac的MySQL无法启动</title>
+      <link href="/2022/12/13/107-mysql/"/>
+      <url>/2022/12/13/107-mysql/</url>
+      
+        <content type="html"><![CDATA[<p>安装好 MySQL 之后，在 Mac 的系统设置 最下方会新增一个 MySQL,点击之后，会出现 MySQL 的版本号:MySQL 8.0.32,点击 start MySQL Server,仍然无法启动。</p><span id="more"></span><p>解决方法：</p><pre><code class="shell">sudo chown -R mysql /usr/local/mysql/datasudo /usr/local/mysql/support-files/mysql.server start// 会出现success  MySQL启动成功</code></pre>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> mysql </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>106、ref小技巧</title>
       <link href="/2022/12/12/106.ref/"/>
       <url>/2022/12/12/106.ref/</url>
