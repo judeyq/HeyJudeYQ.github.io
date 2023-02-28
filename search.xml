@@ -4,6 +4,25 @@
   
     
     <entry>
+      <title>106、ref小技巧</title>
+      <link href="/2022/12/12/106.ref/"/>
+      <url>/2022/12/12/106.ref/</url>
+      
+        <content type="html"><![CDATA[<p>使用 console.log 输出一个 ref 对象时，控制台查看结果时很不方便，Chrome 浏览器对此有一个格式化的处理。</p><span id="more"></span><h2 id="示例："><a href="#示例：" class="headerlink" title="示例："></a>示例：</h2><pre><code class="js">&lt;script setup lang=&quot;ts&quot;&gt;import &#123; ref &#125; from &#39;vue&#39;const str = ref&lt;string&gt;(&#39;jude&#39;)console.log(&#39;str&#39;,str)&lt;/script&gt;</code></pre><p>控制台打印结果为</p><pre><code>RefImp&#123;  dep:undefined  __v_isRef:true  __v_isShallow:false  _rawValue:&#39;jude&#39;  _value:&#39;jude&#39;  value:&#39;jude&#39;&#125;</code></pre><p>点击控制台右上角设置按钮 — 偏好设置 — 启动自定义格式设置工具，此时控制台的打印结果就很明显了。</p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> vue3 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>105、typescript函数Class类型：函数重载和面向对象(三)</title>
       <link href="/2022/12/10/105-ts/"/>
       <url>/2022/12/10/105-ts/</url>

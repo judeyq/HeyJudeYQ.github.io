@@ -1,0 +1,37 @@
+<!DOCTYPE html><html class="appearance-auto" lang="zh-CN"><head><meta charset="UTF-8"><title>106、ref小技巧</title><meta name="description" content="呦呦鹿鸣，食野之苹"><meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, initial-scale=1"><!-- Google Analytics --><!-- End Google Analytics -->
+<!-- Baidu Analytics --><!-- End Baidu Analytics --><link rel="icon" href="/images/favicon.png"><link rel="stylesheet" href="/style/common/bulma.css"><link rel="stylesheet" href="/style/base.css"><link rel="stylesheet" href="/style/common/helper.css"><script src="/js/common.js"></script><link rel="stylesheet" href="/style/post.css"><link rel="stylesheet" href="/style/themes/highlight-theme-light.css"><script src="/js/highlight.pack.js"></script><meta name="description" content="使用 console.log 输出一个 ref 对象时，控制台查看结果时很不方便，Chrome 浏览器对此有一个格式化的处理。
+
+
+示例：&amp;lt;script setup lang=&amp;quot;ts&amp;quot;&amp;gt;
+import &amp;#123; ref &amp;#125; from &amp;#39;vue&amp;#39;
+const str = ref&amp;lt;string&amp;gt;(&amp;#39;jude&amp;#39;)
+console.log(&amp;#39;str&amp;#39;,str)
+&amp;lt;/script&amp;gt;
+
+控制台打印结果为
+RefImp&amp;#123;
+  dep:undefined
+  __v_isRef:true
+  __v_isShallow:false
+  _rawValue:&amp;#39;jude&amp;#39;
+  _val.."><meta name="generator" content="Hexo 5.4.1"></head><body class="is-flex is-flex-direction-column"><header class="header-widget is-flex-shrink-0 is-hidden-mobile"><div class="container is-fullhd is-flex is-justify-content-space-between is-align-items-center is-full-height"><section class="is-hidden-mobile is-flex-shrink-0"><h2><a href="/">Jude's blog</a></h2></section><h3 class="is-hidden-mobile is-family-serif is-full-height is-flex is-align-items-center is-flex-shrink-0"><div class="is-full-height" id="postTopic"><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">106、ref小技巧</p><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">点击返回顶部</p></div></h3><aside class="is-flex-shrink-0"><h3 class="is-inline-block"><a href="/">首页</a></h3><h3 class="is-inline-block"><a href="/about">关于</a></h3><h3 class="is-inline-block"><a href="/archives">归档</a></h3></aside></div></header><header class="is-flex header-widget is-flex-shrink-0 is-align-items-center is-justify-content-center is-hidden-tablet"><h3 class="is-inline-block"><a href="/">首页</a></h3><h3 class="is-inline-block"><a href="/about">关于</a></h3><h3 class="is-inline-block"><a href="/archives">归档</a></h3></header><main><main class="container is-max-widescreen content section post-page pt-4 px-4"><div class="columns is-flex-desktop is-justify-content-center is-flex-direction-row-reverse"><div class="column is-3 is-hidden-mobile"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A4%BA%E4%BE%8B%EF%BC%9A"><span class="toc-text">示例：</span></a></li></ol></div><div class="column is-9"><header class="my-4"><a href="/tags/vue3"><i class="tag post-item-tag">vue3</i></a></header><h1 class="mt-0 mb-1 is-family-serif" id="postTitle">106、ref小技巧</h1><time class="has-text-grey" datetime="2022-12-12T12:00:00.000Z">2022-12-12</time><article class="mt-2 post-content"><p>使用 console.log 输出一个 ref 对象时，控制台查看结果时很不方便，Chrome 浏览器对此有一个格式化的处理。</p>
+<span id="more"></span>
+
+<h2 id="示例："><a href="#示例：" class="headerlink" title="示例："></a>示例：</h2><pre><code class="js">&lt;script setup lang=&quot;ts&quot;&gt;
+import &#123; ref &#125; from &#39;vue&#39;
+const str = ref&lt;string&gt;(&#39;jude&#39;)
+console.log(&#39;str&#39;,str)
+&lt;/script&gt;
+</code></pre>
+<p>控制台打印结果为</p>
+<pre><code>RefImp&#123;
+  dep:undefined
+  __v_isRef:true
+  __v_isShallow:false
+  _rawValue:&#39;jude&#39;
+  _value:&#39;jude&#39;
+  value:&#39;jude&#39;
+&#125;
+</code></pre>
+<p>点击控制台右上角设置按钮 — 偏好设置 — 启动自定义格式设置工具，此时控制台的打印结果就很明显了。</p>
+</article><section class="jump-container is-flex is-justify-content-space-between my-6"><!-- em is empty placeholder--><em></em><a class="button is-default" href="/2022/12/10/105-ts/" title="105、typescript函数Class类型：函数重载和面向对象(三)"><span class="has-text-weight-semibold">下一页: 105、typescript函数Class类型：函数重载和面向对象(三)</span><i class="iconfont icon-next ml-2 has-text-grey"></i></a></section></div></div></main></main><footer class="is-flex is-flex-direction-column is-align-items-center is-flex-shrink-0 is-family-serif"><section class="sns-container"><!-- Github--><a title="github" target="_blank" rel="noopener nofollow" href="//github.com/Jude"><i class="iconfont icon-github"></i></a><!-- Ins--><!-- RSS--><!-- 知乎--><a title="zhihu" target="_blank" rel="noopener nofollow" href="//zhihu.com/https://www.zhihu.com"><i class="iconfont icon-zhihu"></i></a><!-- 领英--><!-- 脸书--></section><p><span>Copyright ©</span><span> Jude 2023</span></p><div class="is-flex is-justify-content-center is-flex-wrap-wrap"><p>Powered by Hexo &verbar;&nbsp;</p><p class="is-flex is-justify-content-center"><a title="Hexo theme author" target="_blank" rel="noopener" href="//github.com/haojen">Theme by Haojen&nbsp;</a></p><div style="margin-top: 2px"><a class="github-button" title="github-button" target="_blank" rel="noopener" href="https://github.com/haojen/hexo-theme-Claudia" data-color-scheme="no-preference: light; light: light; dark: dark;" data-show-count="true"></a></div></div><div><span>记住昨日的美好，过好今日的生活，憧憬明天的到来</span></div></footer><script async defer src="https://buttons.github.io/buttons.js"></script><script src="/js/post.js"></script></body></html>
