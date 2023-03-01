@@ -4,6 +4,25 @@
   
     
     <entry>
+      <title>108、web components和vue+web components</title>
+      <link href="/2022/12/15/108-vue3/"/>
+      <url>/2022/12/15/108-vue3/</url>
+      
+        <content type="html"><![CDATA[<p>Web Components 提供了基于原生支持的、对视图层的封装能力，可以让单个组件相关的 javaScript、css、html 模板运行在以 html 标签为界限的局部环境中，不会影响到全局，组件间也不会相互影响 。 再简单来说：就是提供了我们自定义标签的能力，并且提供了标签内完整的生命周期 。</p><span id="more"></span><p>Custom elements（自定义元素）：JavaScript API，允许定义 custom elements 及其行为，然后可以在我们的用户界面中按照需要使用它们。</p><p>Shadow DOM（影子 DOM）：JavaScript API，用于将封装的“影子”DOM 树附加到元素（与主文档 DOM 分开呈现）并控制其关联的功能。通过这种方式，开发者可以保持元素的功能私有，这样它们就可以被脚本化和样式化，而不用担心与文档的其他部分发生冲突。</p><p>HTML templates（HTML 模板）：和元素使开发者可以编写与 HTML 结构类似的组件和样式。然后它们可以作为自定义元素结构的基础被多次重用。</p><h2 id="一、web-components-示例："><a href="#一、web-components-示例：" class="headerlink" title="一、web components 示例："></a>一、web components 示例：</h2><p>btn.js</p><pre><code class="js">class Btn extends HTMLElement &#123;  constructor() &#123;    super();    const shadowDom = this.attachShadow(&#123; mode: &quot;open&quot; &#125;);    this.p = this.h(&quot;p&quot;);    this.p.innerText = &quot;jude&quot;;    this.p.setAttribute(      &quot;style&quot;,      &quot;width:100px;height:100px;border:1px solid #999;background:yellowgreen&quot;    );    shadowDom.appendChild(this.p);    // tempalte    this.template = this.h(&quot;template&quot;);    this.template.innerHTML = `      &lt;style&gt;        div&#123;          width:50px;          height:50px;          background:green;        &#125;      &lt;/style&gt;      &lt;div&gt;      我是template,上面的样式会被隔离      &lt;/div&gt;`;    shadowDom.appendChild(this.template.content.cloneNode(true));  &#125;  h(el) &#123;    return document.createElement(el);  &#125;  // 生命周期  // 当自定义元素第一次被连接到文档DOM时被调用  connectedCallback() &#123;    console.log(&quot;连接调用&quot;);  &#125;  // 当自定义元素与文档DOM断开连接时被调用  disconnectedCallback() &#123;    console.log(&quot;断开调用&quot;);  &#125;  // 当自定义元素被移动到新文档时被调用  adoptedCallback() &#123;    console.log(&quot;移动时调用&quot;);  &#125;  // 当自定义元素的第一个属性被增加、移除或者更改时被调用  attributeChangedCallback(attrName, oldVal, newVal) &#123;    console.log(&quot;改变调用&quot;, attrName, oldVal, newVal);  &#125;&#125;window.customElements.define(&quot;yu-btn&quot;, Btn);</code></pre><blockquote><p>这里存在一个问题，如果使用 window.customElements.define(“btn”, Btn)，会报错：Uncaught DOMException: Failed to execute ‘define’ on ‘CustomElementRegistry’: “btn” is not a valid custom element name,修改一下 name 即可</p></blockquote><p>index.html</p><pre><code class="html">&lt;!DOCTYPE html&gt;&lt;html lang=&quot;en&quot;&gt;  &lt;head&gt;    &lt;meta charset=&quot;UTF-8&quot; /&gt;    &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;IE=edge&quot; /&gt;    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot; /&gt;    &lt;title&gt;Document&lt;/title&gt;    &lt;script src=&quot;./btn.js&quot;&gt;&lt;/script&gt;  &lt;/head&gt;  &lt;body&gt;    &lt;yu-btn&gt;&lt;/yu-btn&gt;  &lt;/body&gt;&lt;/html&gt;</code></pre><h2 id="二、vue-使用自定义组件"><a href="#二、vue-使用自定义组件" class="headerlink" title="二、vue 使用自定义组件"></a>二、vue 使用自定义组件</h2><p>defineCustomElement</p><p>首先需要告知 vue 这是一个自定义组件，跳过组件检查</p><pre><code class="ts">/*vite config ts 配置*/vue(&#123;  template: &#123;    compilerOptions: &#123;      isCustomElement: (tag) =&gt; tag.includes(&quot;yu-&quot;),    &#125;,  &#125;,&#125;);</code></pre><p>父组件：</p><blockquote><p>这里需要注意，传递参数 如果是对象需要序列化 他是作用于 标签上的</p></blockquote><pre><code class="vue">&lt;template&gt;  &lt;div&gt;    &lt;yu-btn :title=&quot;JSON.stringify(name)&quot;&gt;&lt;/yu-btn&gt;  &lt;/div&gt;&lt;/template&gt;&lt;script setup lang=&quot;ts&quot;&gt;import &#123; ref, reactive, defineCustomElement &#125; from &quot;vue&quot;;//自定义元素模式  要开启这个模式，只需要将你的组件文件以 .ce.vue 结尾即可import customVueVue from &quot;./components/custom-vue.ce.vue&quot;;const Btn = defineCustomElement(customVueVue);customElements.define(&quot;yu-btn&quot;, Btn);const name = ref(&#123; a: 1 &#125;);&lt;/script&gt;&lt;style scoped lang=&quot;less&quot;&gt;&lt;/style&gt;</code></pre><p>子组件：</p><pre><code class="vue">&lt;template&gt;  &lt;div&gt;title: &#123;&#123; title &#125;&#125;&lt;/div&gt;&lt;/template&gt;&lt;script setup lang=&quot;ts&quot;&gt;import &#123; ref, reactive &#125; from &quot;vue&quot;;defineProps&lt;&#123;  title: string;&#125;&gt;();&lt;/script&gt;&lt;style scoped lang=&quot;less&quot;&gt;&lt;/style&gt;</code></pre>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> vue </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>107、Mac的MySQL无法启动</title>
       <link href="/2022/12/13/107-mysql/"/>
       <url>/2022/12/13/107-mysql/</url>
