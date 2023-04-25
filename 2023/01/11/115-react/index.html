@@ -1,0 +1,780 @@
+<!DOCTYPE html><html class="appearance-auto" lang="zh-CN"><head><meta charset="UTF-8"><title>115、稀土掘金小册-记账本（六）账单列表</title><meta name="description" content="呦呦鹿鸣，食野之苹"><meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, initial-scale=1"><!-- Google Analytics --><!-- End Google Analytics -->
+<!-- Baidu Analytics --><!-- End Baidu Analytics --><link rel="icon" href="/images/favicon.png"><link rel="stylesheet" href="/style/common/bulma.css"><link rel="stylesheet" href="/style/base.css"><link rel="stylesheet" href="/style/common/helper.css"><script src="/js/common.js"></script><link rel="stylesheet" href="/style/post.css"><link rel="stylesheet" href="/style/themes/highlight-theme-light.css"><script src="/js/highlight.pack.js"></script><meta name="description" content="
+
+前言上一章节介绍的登录注册是整个项目的根基，没有拿到 token，将无法进行后续的各种操作，如账单的增删改查。所以务必将上一章节好好地阅读与揣摩，为后面的学习做好铺垫。我们直接进入本次前端实战项目的主题，账单的增删改查之列表页。
+
+本教程已有线上地址在线地址，同学们可以在实战部分，对照着线上页面进行学习。
+
+知识点
+单项组件抽离
+列表页无限滚动
+下拉刷新列表
+弹窗组件封装
+
+我们先来欣赏一下最终的页面效果：
+
+列表页编写（静态部分）按照正常的开发流程，我们先将静态页面切出来，再填入数据使其动态化。在此之前，我们已经新建好了 Home 目录，该目录便是用于放置账单列表，所以我们直接在 Home/index.jsx 新增代码。
+头部统计实现列表的头部展示的内容为当月的收入和支出汇总，并且有两个列表条件过滤项.."><meta name="generator" content="Hexo 5.4.1"></head><body class="is-flex is-flex-direction-column"><header class="header-widget is-flex-shrink-0 is-hidden-mobile"><div class="container is-fullhd is-flex is-justify-content-space-between is-align-items-center is-full-height"><section class="is-hidden-mobile is-flex-shrink-0"><h2><a href="/">Jude's blog</a></h2></section><h3 class="is-hidden-mobile is-family-serif is-full-height is-flex is-align-items-center is-flex-shrink-0"><div class="is-full-height" id="postTopic"><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">115、稀土掘金小册-记账本（六）账单列表</p><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">点击返回顶部</p></div></h3><aside class="is-flex-shrink-0"><h3 class="is-inline-block"><a href="/">首页</a></h3><h3 class="is-inline-block"><a href="/about">关于</a></h3><h3 class="is-inline-block"><a href="/archives">归档</a></h3></aside></div></header><header class="is-flex header-widget is-flex-shrink-0 is-align-items-center is-justify-content-center is-hidden-tablet"><h3 class="is-inline-block"><a href="/">首页</a></h3><h3 class="is-inline-block"><a href="/about">关于</a></h3><h3 class="is-inline-block"><a href="/archives">归档</a></h3></header><main><main class="container is-max-widescreen content section post-page pt-4 px-4"><div class="columns is-flex-desktop is-justify-content-center is-flex-direction-row-reverse"><div class="column is-3 is-hidden-mobile"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-text">前言</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%9F%A5%E8%AF%86%E7%82%B9"><span class="toc-text">知识点</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%97%E8%A1%A8%E9%A1%B5%E7%BC%96%E5%86%99%EF%BC%88%E9%9D%99%E6%80%81%E9%83%A8%E5%88%86%EF%BC%89"><span class="toc-text">列表页编写（静态部分）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A4%B4%E9%83%A8%E7%BB%9F%E8%AE%A1%E5%AE%9E%E7%8E%B0"><span class="toc-text">头部统计实现</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%97%E8%A1%A8%E9%A1%B5%E9%9D%A2%E5%AE%9E%E7%8E%B0"><span class="toc-text">列表页面实现</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%8B%E6%8B%89%E5%88%B7%E6%96%B0%E3%80%81%E4%B8%8A%E6%BB%91%E6%97%A0%E9%99%90%E5%8A%A0%E8%BD%BD"><span class="toc-text">下拉刷新、上滑无限加载</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%B7%BB%E5%8A%A0%E7%AD%9B%E9%80%89%E6%9D%A1%E4%BB%B6"><span class="toc-text">添加筛选条件</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-text">总结</span></a></li></ol></div><div class="column is-9"><header class="my-4"><a href="/tags/react"><i class="tag post-item-tag">react</i></a></header><h1 class="mt-0 mb-1 is-family-serif" id="postTitle">115、稀土掘金小册-记账本（六）账单列表</h1><time class="has-text-grey" datetime="2023-01-11T12:00:00.000Z">2023-01-11</time><article class="mt-2 post-content"><span id="more"></span>
+
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>上一章节介绍的登录注册是整个项目的根基，没有拿到 <code>token</code>，将无法进行后续的各种操作，如账单的增删改查。所以务必将上一章节好好地阅读与揣摩，为后面的学习做好铺垫。我们直接进入本次前端实战项目的主题，账单的增删改查之列表页。</p>
+<blockquote>
+<p>本教程已有线上地址<a href="https://link.juejin.cn/?target=http://cost.chennick.wang">在线地址</a>，同学们可以在实战部分，对照着线上页面进行学习。</p>
+</blockquote>
+<h4 id="知识点"><a href="#知识点" class="headerlink" title="知识点"></a>知识点</h4><ul>
+<li>单项组件抽离</li>
+<li>列表页无限滚动</li>
+<li>下拉刷新列表</li>
+<li>弹窗组件封装</li>
+</ul>
+<p>我们先来欣赏一下最终的页面效果：</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/8fc0196a649c41cb8fe73dafe50233b0~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp" alt="img"></p>
+<h2 id="列表页编写（静态部分）"><a href="#列表页编写（静态部分）" class="headerlink" title="列表页编写（静态部分）"></a>列表页编写（静态部分）</h2><p>按照正常的开发流程，我们先将静态页面切出来，再填入数据使其动态化。在此之前，我们已经新建好了 <code>Home</code> 目录，该目录便是用于放置账单列表，所以我们直接在 <code>Home/index.jsx</code> 新增代码。</p>
+<h4 id="头部统计实现"><a href="#头部统计实现" class="headerlink" title="头部统计实现"></a>头部统计实现</h4><p>列表的头部展示的内容为当月的收入和支出汇总，并且有两个列表条件过滤项，分别是类型过滤和时间过滤。</p>
+<p>我们新增代码如下：</p>
+<pre><code class="js">import React from &quot;react&quot;;
+import &#123; Icon &#125; from &quot;zarm&quot;;
+
+import s from &quot;./style.module.less&quot;;
+
+const Home = () =&gt; &#123;
+  return (
+    &lt;div className=&#123;s.home&#125;&gt;
+      &lt;div className=&#123;s.header&#125;&gt;
+        &lt;div className=&#123;s.dataWrap&#125;&gt;
+          &lt;span className=&#123;s.expense&#125;&gt;
+            总支出：&lt;b&gt;¥ 200&lt;/b&gt;
+          &lt;/span&gt;
+          &lt;span className=&#123;s.income&#125;&gt;
+            总收入：&lt;b&gt;¥ 500&lt;/b&gt;
+          &lt;/span&gt;
+        &lt;/div&gt;
+        &lt;div className=&#123;s.typeWrap&#125;&gt;
+          &lt;div className=&#123;s.left&#125;&gt;
+            &lt;span className=&#123;s.title&#125;&gt;
+              类型 &lt;Icon className=&#123;s.arrow&#125; type=&quot;arrow-bottom&quot; /&gt;
+            &lt;/span&gt;
+          &lt;/div&gt;
+          &lt;div className=&#123;s.right&#125;&gt;
+            &lt;span className=&#123;s.time&#125;&gt;
+              2022-06
+              &lt;Icon className=&#123;s.arrow&#125; type=&quot;arrow-bottom&quot; /&gt;
+            &lt;/span&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  );
+&#125;;
+
+export default Home;
+</code></pre>
+<blockquote>
+<p>文末已为同学们提供下本章节 demo 代码，样式部分不再详细说明。</p>
+</blockquote>
+<p>代码分析：</p>
+<p><code>header</code> 采用 <code>fixed</code> 固定定位，将整个汇总信息固定在页面的顶部位置，这样后续列表滚动的时候，你可以方便查看当月的收入汇总，以及筛选当月消费类型和时间段的筛选。每个列表展示的是当月的收入与支出明细，比如 <code>2021-06</code> 的收入明细。</p>
+<p>本次项目全程采用的是 <code>Flex</code> 弹性布局，这种布局形式在当下的开发生产环境已经非常成熟，同学们如果还有不熟悉的，请实现对 <code>Flex</code> 布局做一个简单的学习，这边推荐一个学习网站：</p>
+<blockquote>
+<p><a href="https://link.juejin.cn/?target=http://flexboxfroggy.com/%23zh-cn">flexboxfroggy.com/#zh-cn</a></p>
+</blockquote>
+<p>笔者当初也是通过这个网站的学习，入门的 <code>Flex</code>。</p>
+<p>完成上述布局之后，页面如下所示：</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/4b4da908ba7d412ea25d6b925006f163~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp" alt="img"></p>
+<h4 id="列表页面实现"><a href="#列表页面实现" class="headerlink" title="列表页面实现"></a>列表页面实现</h4><p>列表页面会用到 <code>Zarm</code> 组件库为我们提供的 <a href="https://link.juejin.cn/?target=https://zarm.gitee.io/%23/components/pull">Pull</a> 组件，来实现下拉刷新以及无限滚动，我们先来将基础布局实现，如下所示：</p>
+<pre><code class="js">// Home/index.jsx
+const Home = () =&gt; &#123;
+  const [list, setList] = useState([
+    &#123;
+      bills: [
+        &#123;
+          amount: &quot;25.00&quot;,
+          date: &quot;1623390740000&quot;,
+          id: 911,
+          pay_type: 1,
+          remark: &quot;&quot;,
+          type_id: 1,
+          type_name: &quot;餐饮&quot;,
+        &#125;,
+      ],
+      date: &quot;2021-06-11&quot;,
+    &#125;,
+  ]); // 账单列表
+  return (
+    &lt;div className=&#123;s.home&#125;&gt;
+      &lt;div className=&#123;s.header&#125;&gt;...&lt;/div&gt;
+      &lt;div className=&#123;s.contentWrap&#125;&gt;
+        &#123;list.map((item, index) =&gt; (
+          &lt;BillItem /&gt;
+        ))&#125;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  );
+&#125;;
+</code></pre>
+<p>上述我们添加 <code>list</code> 为列表假数据，<code>BillItem</code> 组件为账单单项组件，我们将其抽离到 <code>components</code> 组件库，如下：</p>
+<pre><code class="js">// components/BillItem/index.jsx
+import React, &#123; useEffect, useState &#125; from &quot;react&quot;;
+import PropTypes from &quot;prop-types&quot;;
+import dayjs from &quot;dayjs&quot;;
+import &#123; Cell &#125; from &quot;zarm&quot;;
+import &#123; useNavigate &#125; from &quot;react-router-dom&quot;;
+import CustomIcon from &quot;../CustomIcon&quot;;
+import &#123; typeMap &#125; from &quot;@/utils&quot;;
+
+import s from &quot;./style.module.less&quot;;
+
+const BillItem = (&#123; bill &#125;) =&gt; &#123;
+  const [income, setIncome] = useState(0); // 收入
+  const [expense, setExpense] = useState(0); // 支出
+  const navigateTo = useNavigate(); // 路由实例
+
+  // 当添加账单是，bill.bills 长度变化，触发当日收支总和计算。
+  useEffect(() =&gt; &#123;
+    // 初始化将传入的 bill 内的 bills 数组内数据项，过滤出支出和收入。
+    // pay_type：1 为支出；2 为收入
+    // 通过 reduce 累加
+    const _income = bill.bills
+      .filter((i) =&gt; i.pay_type == 2)
+      .reduce((curr, item) =&gt; &#123;
+        curr += Number(item.amount);
+        return curr;
+      &#125;, 0);
+    setIncome(_income);
+    const _expense = bill.bills
+      .filter((i) =&gt; i.pay_type == 1)
+      .reduce((curr, item) =&gt; &#123;
+        curr += Number(item.amount);
+        return curr;
+      &#125;, 0);
+    setExpense(_expense);
+  &#125;, [bill.bills]);
+
+  // 前往账单详情
+  const goToDetail = (item) =&gt; &#123;
+    navigateTo(`/detail?id=$&#123;item.id&#125;`);
+  &#125;;
+
+  return (
+    &lt;div className=&#123;s.item&#125;&gt;
+      &lt;div className=&#123;s.headerDate&#125;&gt;
+        &lt;div className=&#123;s.date&#125;&gt;&#123;bill.date&#125;&lt;/div&gt;
+        &lt;div className=&#123;s.money&#125;&gt;
+          &lt;span&gt;
+            &lt;img src=&quot;//s.yezgea02.com/1615953405599/zhi%402x.png&quot; alt=&quot;支&quot; /&gt;
+            &lt;span&gt;¥&#123;expense.toFixed(2)&#125;&lt;/span&gt;
+          &lt;/span&gt;
+          &lt;span&gt;
+            &lt;img src=&quot;//s.yezgea02.com/1615953405599/shou%402x.png&quot; alt=&quot;收&quot; /&gt;
+            &lt;span&gt;¥&#123;income.toFixed(2)&#125;&lt;/span&gt;
+          &lt;/span&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+      &#123;bill &amp;&amp;
+        bill.bills.map((item) =&gt; (
+          &lt;Cell
+            className=&#123;s.bill&#125;
+            key=&#123;item.id&#125;
+            onClick=&#123;() =&gt; goToDetail(item)&#125;
+            title=&#123;
+              &lt;&gt;
+                &lt;CustomIcon
+                  className=&#123;s.itemIcon&#125;
+                  type=&#123;item.type_id ? typeMap[item.type_id].icon : 1&#125;
+                /&gt;
+                &lt;span&gt;&#123;item.type_name&#125;&lt;/span&gt;
+              &lt;/&gt;
+            &#125;
+            description=&#123;
+              &lt;span
+                style=&#123;&#123; color: item.pay_type == 2 ? "red" : "#39be77" &#125;&#125;
+              &gt;&#123;`$&#123;item.pay_type == 1 ? &quot;-&quot; : &quot;+&quot;&#125;$&#123;item.amount&#125;`&#125;&lt;/span&gt;
+            &#125;
+            help=&#123;
+              &lt;div&gt;
+                &#123;dayjs(Number(item.date)).format(&quot;HH:mm&quot;)&#125;&#123;&quot; &quot;&#125;
+                &#123;item.remark ? `| $&#123;item.remark&#125;` : &quot;&quot;&#125;
+              &lt;/div&gt;
+            &#125;
+          &gt;&lt;/Cell&gt;
+        ))&#125;
+    &lt;/div&gt;
+  );
+&#125;;
+
+BillItem.propTypes = &#123;
+  bill: PropTypes.object,
+&#125;;
+
+export default BillItem;
+</code></pre>
+<p>通过 <code>npm i dayjs -S</code> 添加日期操作工具，移动端建议使用 <code>dayjs</code>，因为它相比 <code>moment</code>，体积小很多。</p>
+<p>上述代码中，<code>typeMap</code> 为我们自定义的属性，它是一个简直对，<code>key</code> 为消费类型 <code>icon</code> 的 <code>id</code>，<code>value</code> 为消费类型的 <code>iconfont</code> 的值，如下所示：</p>
+<pre><code class="js">// utils/index.js
+...
+export const typeMap = &#123;
+  1: &#123;
+    icon: &#39;canyin&#39;
+  &#125;,
+  2: &#123;
+    icon: &#39;fushi&#39;
+  &#125;,
+  3: &#123;
+    icon: &#39;jiaotong&#39;
+  &#125;,
+  4: &#123;
+    icon: &#39;riyong&#39;
+  &#125;,
+  5: &#123;
+    icon: &#39;gouwu&#39;
+  &#125;,
+  6: &#123;
+    icon: &#39;xuexi&#39;
+  &#125;,
+  7: &#123;
+    icon: &#39;yiliao&#39;
+  &#125;,
+  8: &#123;
+    icon: &#39;lvxing&#39;
+  &#125;,
+  9: &#123;
+    icon: &#39;renqing&#39;
+  &#125;,
+  10: &#123;
+    icon: &#39;qita&#39;
+  &#125;,
+  11: &#123;
+    icon: &#39;gongzi&#39;
+  &#125;,
+  12: &#123;
+    icon: &#39;jiangjin&#39;
+  &#125;,
+  13: &#123;
+    icon: &#39;zhuanzhang&#39;
+  &#125;,
+  14: &#123;
+    icon: &#39;licai&#39;
+  &#125;,
+  15: &#123;
+    icon: &#39;tuikuang&#39;
+  &#125;,
+  16: &#123;
+    icon: &#39;qita&#39;
+  &#125;
+&#125;
+</code></pre>
+<p>完成上述操作之后，我们重启浏览器，如下所示：</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/d2eb308feee24749a7ce4cd0d00a9645~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp" alt="img"></p>
+<p>样式部分大家可以根据自己的喜好进行微调，不一定要一模一样，仁者见仁。</p>
+<h4 id="下拉刷新、上滑无限加载"><a href="#下拉刷新、上滑无限加载" class="headerlink" title="下拉刷新、上滑无限加载"></a>下拉刷新、上滑无限加载</h4><p>我们修改 <code>Home/index.jsx</code> 如下所示：</p>
+<pre><code class="js">import React, &#123; useState, useEffect &#125; from &#39;react&#39;
+import &#123; Icon, Pull &#125; from &#39;zarm&#39;
+import dayjs from &#39;dayjs&#39;
+import BillItem from &#39;@/components/BillItem&#39;
+import &#123; get, REFRESH_STATE, LOAD_STATE &#125; from &#39;@/utils&#39; // Pull 组件需要的一些常量
+
+import s from &#39;./style.module.less&#39;
+
+const Home = () =&gt; &#123;
+  const [currentTime, setCurrentTime] = useState(dayjs().format(&#39;YYYY-MM&#39;)); // 当前筛选时间
+  const [page, setPage] = useState(1); // 分页
+  const [list, setList] = useState([]); // 账单列表
+  const [totalPage, setTotalPage] = useState(0); // 分页总数
+  const [refreshing, setRefreshing] = useState(REFRESH_STATE.normal); // 下拉刷新状态
+  const [loading, setLoading] = useState(LOAD_STATE.normal); // 上拉加载状态
+
+  useEffect(() =&gt; &#123;
+    getBillList() // 初始化
+  &#125;, [page])
+
+  // 获取账单方法
+  const getBillList = async () =&gt; &#123;
+    const &#123; data &#125; = await get(`/api/bill/list?page=$&#123;page&#125;&amp;page_size=5&amp;date=$&#123;currentTime&#125;`);
+    // 下拉刷新，重制数据
+    if (page == 1) &#123;
+      setList(data.list);
+    &#125; else &#123;
+      setList(list.concat(data.list));
+    &#125;
+    setTotalPage(data.totalPage);
+    // 上滑加载状态
+    setLoading(LOAD_STATE.success);
+    setRefreshing(REFRESH_STATE.success);
+  &#125;
+
+  // 请求列表数据
+  const refreshData = () =&gt; &#123;
+    setRefreshing(REFRESH_STATE.loading);
+    if (page != 1) &#123;
+      setPage(1);
+    &#125; else &#123;
+      getBillList();
+    &#125;;
+  &#125;;
+
+  const loadData = () =&gt; &#123;
+    if (page &lt; totalPage) &#123;
+      setLoading(LOAD_STATE.loading);
+      setPage(page + 1);
+    &#125;
+  &#125;
+
+  return &lt;div className=&#123;s.home&#125;&gt;
+    &lt;div className=&#123;s.header&#125;&gt;
+      &lt;div className=&#123;s.dataWrap&#125;&gt;
+        &lt;span className=&#123;s.expense&#125;&gt;总支出：&lt;b&gt;¥ 200&lt;/b&gt;&lt;/span&gt;
+        &lt;span className=&#123;s.income&#125;&gt;总收入：&lt;b&gt;¥ 500&lt;/b&gt;&lt;/span&gt;
+      &lt;/div&gt;
+      &lt;div className=&#123;s.typeWrap&#125;&gt;
+        &lt;div className=&#123;s.left&#125;&gt;
+          &lt;span className=&#123;s.title&#125;&gt;类型 &lt;Icon className=&#123;s.arrow&#125; type=&quot;arrow-bottom&quot; /&gt;&lt;/span&gt;
+        &lt;/div&gt;
+        &lt;div className=&#123;s.right&#125;&gt;
+          &lt;span className=&#123;s.time&#125;&gt;2022-06&lt;Icon className=&#123;s.arrow&#125; type=&quot;arrow-bottom&quot; /&gt;&lt;/span&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div className=&#123;s.contentWrap&#125;&gt;
+      &#123;
+        list.length ? &lt;Pull
+          animationDuration=&#123;200&#125;
+          stayTime=&#123;400&#125;
+          refresh=&#123;&#123;
+            state: refreshing,
+            handler: refreshData
+          &#125;&#125;
+          load=&#123;&#123;
+            state: loading,
+            distance: 200,
+            handler: loadData
+          &#125;&#125;
+        &gt;
+          &#123;
+            list.map((item, index) =&gt; &lt;BillItem
+              bill=&#123;item&#125;
+              key=&#123;index&#125;
+            /&gt;)
+          &#125;
+        &lt;/Pull&gt; : null
+      &#125;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&#125;
+
+export default Home
+&#125;
+</code></pre>
+<p>在 <code>utils/index.js</code> 中添加一些 <code>Pull</code> 组件需要用到的常量，如下：</p>
+<pre><code class="js">// utils/index.js
+export const REFRESH_STATE = &#123;
+  normal: 0, // 普通
+  pull: 1, // 下拉刷新（未满足刷新条件）
+  drop: 2, // 释放立即刷新（满足刷新条件）
+  loading: 3, // 加载中
+  success: 4, // 加载成功
+  failure: 5, // 加载失败
+&#125;;
+
+export const LOAD_STATE = &#123;
+  normal: 0, // 普通
+  abort: 1, // 中止
+  loading: 2, // 加载中
+  success: 3, // 加载成功
+  failure: 4, // 加载失败
+  complete: 5, // 加载完成（无新数据）
+&#125;;
+</code></pre>
+<p>代码中，已经为大家整理了详细的注释。无限滚动在移动端的应用随处可见，所以这块内容大家尽量能做到烂熟于心。如果有可能的话，希望你也能将其二次封装，便于多个地方的复用。我们打开浏览器查看效果：</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/9b1408791dbd457f9a68abd898f6bb74~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp" alt="img"></p>
+<p>同学们注意一下上述动图中的细节，滑到底部的时候，有一部分内容被遮挡住了，此时我们需要添加下列样式，进行修复：</p>
+<pre><code class="css">.home &#123;
+  ... .content-wrap &#123;
+    height: calc(~&quot;(100% - 50px)&quot;);
+    overflow: hidden;
+    overflow-y: scroll;
+    background-color: #f5f5f5;
+    padding: 10px;
+    :global &#123;
+      .za-pull &#123;
+        overflow: unset;
+      &#125;
+    &#125;
+  &#125;
+&#125;
+</code></pre>
+<p>给 <code>content-wrap</code> 对应的标签一个高度，并且减去 <code>50px</code> 的高度，这样就不会被遮挡住下面一点的部分。</p>
+<p>还有一个很关键的步骤，给 <code>src</code> 目录下的的 <code>index.css</code> 添加初始化高度和样式：</p>
+<pre><code class="css">body &#123;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, &quot;Roboto&quot;,
+    &quot;Oxygen&quot;, &quot;Ubuntu&quot;, &quot;Cantarell&quot;, &quot;Fira Sans&quot;, &quot;Droid Sans&quot;,
+    &quot;Helvetica Neue&quot;, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+&#125;
+
+body,
+html,
+p &#123;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+&#125;
+
+* &#123;
+  box-sizing: border-box;
+&#125;
+
+#root &#123;
+  height: 100%;
+&#125;
+
+.text-deep &#123;
+  color: rgba(0, 0, 0, 0.9);
+&#125;
+
+.text-light &#123;
+  color: rgba(0, 0, 0, 0.6);
+&#125;
+</code></pre>
+<p>至此，滚动加载基本上就完成了。</p>
+<h4 id="添加筛选条件"><a href="#添加筛选条件" class="headerlink" title="添加筛选条件"></a>添加筛选条件</h4><p>最后我们需要添加两个筛选条件，类型选择和日期选择。</p>
+<p>我们先来实现类型选择弹窗，我们采用的形式如下，底部弹出的弹窗形式，大致如下：</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/6a334aa0eee1451fbb268f3b2e70a67c~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp" alt="img"></p>
+<p>想要实现上述形式，我们需要借助 <code>Zarm</code> 组件库为我们提供的 <a href="https://link.juejin.cn/?target=https://zarm.gitee.io/%23/components/popup">Popup</a> 组件，它的作用就是从不同方向弹出一个脱离文档流的弹出层。同样，我们使用组件的形式将其放置于 <code>components</code> 文件夹内实现，这样便于后续其他地方的使用。</p>
+<p>新建 <code>components/PopupType</code>，在其内部新建 <code>index.jsx</code> 和 <code>style.module.less</code> 内容如下：</p>
+<pre><code class="js">// PopupType/index.jsx
+import React, &#123; forwardRef, useEffect, useState &#125; from &quot;react&quot;;
+import PropTypes from &quot;prop-types&quot;;
+import &#123; Popup, Icon &#125; from &quot;zarm&quot;;
+import cx from &quot;classnames&quot;;
+import &#123; get &#125; from &quot;@/utils&quot;;
+
+import s from &quot;./style.module.less&quot;;
+
+// forwardRef 用于拿到父组件传入的 ref 属性，这样在父组件便能通过 ref 控制子组件。
+const PopupType = forwardRef((&#123; onSelect &#125;, ref) =&gt; &#123;
+  const [show, setShow] = useState(false); // 组件的显示和隐藏
+  const [active, setActive] = useState(&quot;all&quot;); // 激活的 type
+  const [expense, setExpense] = useState([]); // 支出类型标签
+  const [income, setIncome] = useState([]); // 收入类型标签
+
+  useEffect(async () =&gt; &#123;
+    // 请求标签接口放在弹窗内，这个弹窗可能会被复用，所以请求如果放在外面，会造成代码冗余。
+    const &#123;
+      data: &#123; list &#125;,
+    &#125; = await get(&quot;/api/type/list&quot;);
+    setExpense(list.filter((i) =&gt; i.type == 1));
+    setIncome(list.filter((i) =&gt; i.type == 2));
+  &#125;, []);
+
+  if (ref) &#123;
+    ref.current = &#123;
+      // 外部可以通过 ref.current.show 来控制组件的显示
+      show: () =&gt; &#123;
+        setShow(true);
+      &#125;,
+      // 外部可以通过 ref.current.close 来控制组件的显示
+      close: () =&gt; &#123;
+        setShow(false);
+      &#125;,
+    &#125;;
+  &#125;
+
+  // 选择类型回调
+  const choseType = (item) =&gt; &#123;
+    setActive(item.id);
+    setShow(false);
+    // 父组件传入的 onSelect，为了获取类型
+    onSelect(item);
+  &#125;;
+
+  return (
+    &lt;Popup
+      visible=&#123;show&#125;
+      direction=&quot;bottom&quot;
+      onMaskClick=&#123;() =&gt; setShow(false)&#125;
+      destroy=&#123;false&#125;
+      mountContainer=&#123;() =&gt; document.body&#125;
+    &gt;
+      &lt;div className=&#123;s.popupType&#125;&gt;
+        &lt;div className=&#123;s.header&#125;&gt;
+          请选择类型
+          &lt;Icon
+            type=&quot;wrong&quot;
+            className=&#123;s.cross&#125;
+            onClick=&#123;() =&gt; setShow(false)&#125;
+          /&gt;
+        &lt;/div&gt;
+        &lt;div className=&#123;s.content&#125;&gt;
+          &lt;div
+            onClick=&#123;() =&gt; choseType(&#123; id: &quot;all&quot; &#125;)&#125;
+            className=&#123;cx(&#123; [s.all]: true, [s.active]: active == &quot;all&quot; &#125;)&#125;
+          &gt;
+            全部类型
+          &lt;/div&gt;
+          &lt;div className=&#123;s.title&#125;&gt;支出&lt;/div&gt;
+          &lt;div className=&#123;s.expenseWrap&#125;&gt;
+            &#123;expense.map((item, index) =&gt; (
+              &lt;p
+                key=&#123;index&#125;
+                onClick=&#123;() =&gt; choseType(item)&#125;
+                className=&#123;cx(&#123; [s.active]: active == item.id &#125;)&#125;
+              &gt;
+                &#123;item.name&#125;
+              &lt;/p&gt;
+            ))&#125;
+          &lt;/div&gt;
+          &lt;div className=&#123;s.title&#125;&gt;收入&lt;/div&gt;
+          &lt;div className=&#123;s.incomeWrap&#125;&gt;
+            &#123;income.map((item, index) =&gt; (
+              &lt;p
+                key=&#123;index&#125;
+                onClick=&#123;() =&gt; choseType(item)&#125;
+                className=&#123;cx(&#123; [s.active]: active == item.id &#125;)&#125;
+              &gt;
+                &#123;item.name&#125;
+              &lt;/p&gt;
+            ))&#125;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/Popup&gt;
+  );
+&#125;);
+
+PopupType.propTypes = &#123;
+  onSelect: PropTypes.func,
+&#125;;
+
+export default PopupType;
+</code></pre>
+<p>老规矩，代码逻辑注释我都写在代码中，我坚持不把注释和逻辑分开，是因为我自己在看其他教程的时候，遇到代码中没写逻辑的文章，来回看下边的注释和上边的代码，有点乱，如果同学们有疑问，可以进群截图咨询，我在群里看到的话，随时进行解答。</p>
+<p>类型弹窗组件写完之后，我们在 <code>Home/index.jsx</code> 内尝试调用它，如下所示：</p>
+<pre><code class="js">...
+import PopupType from &#39;@/components/PopupType&#39;
+
+const Home = () =&gt; &#123;
+  const typeRef = useRef(); // 账单类型 ref
+  const [currentSelect, setCurrentSelect] = useState(&#123;&#125;); // 当前筛选类型
+  ...
+
+  useEffect(() =&gt; &#123;
+    getBillList() // 初始化
+  &#125;, [page, currentSelect])
+
+  const getBillList = async () =&gt; &#123;
+    const &#123; data &#125; = await get(`/api/bill/list?page=$&#123;page&#125;&amp;page_size=5&amp;date=$&#123;currentTime&#125;&amp;type_id=$&#123;currentSelect.id || &#39;all&#39;&#125;`);
+    // 下拉刷新，重制数据
+    if (page == 1) &#123;
+      setList(data.list);
+    &#125; else &#123;
+      setList(list.concat(data.list));
+    &#125;
+    setTotalPage(data.totalPage);
+    // 上滑加载状态
+    setLoading(LOAD_STATE.success);
+    setRefreshing(REFRESH_STATE.success);
+  &#125;
+
+  ...
+
+  // 添加账单弹窗
+  const toggle = () =&gt; &#123;
+    typeRef.current &amp;&amp; typeRef.current.show()
+  &#125;;
+
+  // 筛选类型
+  const select = (item) =&gt; &#123;
+    setRefreshing(REFRESH_STATE.loading);
+    // 触发刷新列表，将分页重制为 1
+    setPage(1);
+    setCurrentSelect(item)
+  &#125;
+
+  return &lt;div className=&#123;s.home&#125;&gt;
+    &lt;div className=&#123;s.header&#125;&gt;
+      &lt;div className=&#123;s.dataWrap&#125;&gt;
+        &lt;span className=&#123;s.expense&#125;&gt;总支出：&lt;b&gt;¥ 200&lt;/b&gt;&lt;/span&gt;
+        &lt;span className=&#123;s.income&#125;&gt;总收入：&lt;b&gt;¥ 500&lt;/b&gt;&lt;/span&gt;
+      &lt;/div&gt;
+      &lt;div className=&#123;s.typeWrap&#125;&gt;
+        &lt;div className=&#123;s.left&#125; onClick=&#123;toggle&#125;&gt;
+          &lt;span className=&#123;s.title&#125;&gt;&#123; currentSelect.name || &#39;全部类型&#39; &#125; &lt;Icon className=&#123;s.arrow&#125; type=&quot;arrow-bottom&quot; /&gt;&lt;/span&gt;
+        &lt;/div&gt;
+        &lt;div className=&#123;s.right&#125;&gt;
+          &lt;span className=&#123;s.time&#125;&gt;2022-06&lt;Icon className=&#123;s.arrow&#125; type=&quot;arrow-bottom&quot; /&gt;&lt;/span&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div className=&#123;s.contentWrap&#125;&gt;
+      &#123;
+        list.length ? &lt;Pull
+          animationDuration=&#123;200&#125;
+          stayTime=&#123;400&#125;
+          refresh=&#123;&#123;
+            state: refreshing,
+            handler: refreshData
+          &#125;&#125;
+          load=&#123;&#123;
+            state: loading,
+            distance: 200,
+            handler: loadData
+          &#125;&#125;
+        &gt;
+          &#123;
+            list.map((item, index) =&gt; &lt;BillItem
+              bill=&#123;item&#125;
+              key=&#123;index&#125;
+            /&gt;)
+          &#125;
+        &lt;/Pull&gt; : null
+      &#125;
+    &lt;/div&gt;
+    &lt;PopupType ref=&#123;typeRef&#125; onSelect=&#123;select&#125; /&gt;
+  &lt;/div&gt;
+&#125;
+</code></pre>
+<p>添加类型选择弹窗注意几个点：</p>
+<p>1、使用 <code>useState</code> 声明好类型字段。 2、通过 <code>useRef</code> 声明的 ref 给到 <code>PopupType</code> 组件，便于控制内部的方法。 3、传递 <code>onSelect</code> 方法，获取到弹窗内部选择的类型。 4、<code>useEffect</code> 第二个参数，添加一个 <code>currentSelect</code> 以来，便于修改的时候，触发列表的重新渲染。</p>
+<p>有一个有趣的知识点，这里和大家分享一下，你尝试去打印 <code>typeRef</code> 变量，如下所示：</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/3c7b0f79094c436d8ee0d089b35acc46~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp" alt="img"></p>
+<p>可以看到，在 <code>PopupType</code> 组件内挂载的方法，可以在父组件内获取到，那么我们便可以直接把弹窗的显示隐藏参数放在子组件内维护，而不用每次都去在父组件声明 <code>show</code> 或 <code>hide</code>。</p>
+<p>加完类型筛选之后，我们再将时间筛选加上，同样将时间筛选添加至 <code>components</code> 目录下，便于后续数据页面的时间筛选。</p>
+<pre><code class="js">// PopupDate/index.jsx
+import React, &#123; forwardRef, useState &#125; from &quot;react&quot;;
+import PropTypes from &quot;prop-types&quot;;
+import &#123; Popup, DatePicker &#125; from &quot;zarm&quot;;
+import dayjs from &quot;dayjs&quot;;
+
+const PopupDate = forwardRef((&#123; onSelect, mode = &quot;date&quot; &#125;, ref) =&gt; &#123;
+  const [show, setShow] = useState(false);
+  const [now, setNow] = useState(new Date());
+
+  const choseMonth = (item) =&gt; &#123;
+    setNow(item);
+    setShow(false);
+    if (mode == &quot;month&quot;) &#123;
+      onSelect(dayjs(item).format(&quot;YYYY-MM&quot;));
+    &#125; else if (mode == &quot;date&quot;) &#123;
+      onSelect(dayjs(item).format(&quot;YYYY-MM-DD&quot;));
+    &#125;
+  &#125;;
+
+  if (ref) &#123;
+    ref.current = &#123;
+      show: () =&gt; &#123;
+        setShow(true);
+      &#125;,
+      close: () =&gt; &#123;
+        setShow(false);
+      &#125;,
+    &#125;;
+  &#125;
+  return (
+    &lt;Popup
+      visible=&#123;show&#125;
+      direction=&quot;bottom&quot;
+      onMaskClick=&#123;() =&gt; setShow(false)&#125;
+      destroy=&#123;false&#125;
+      mountContainer=&#123;() =&gt; document.body&#125;
+    &gt;
+      &lt;div&gt;
+        &lt;DatePicker
+          visible=&#123;show&#125;
+          value=&#123;now&#125;
+          mode=&#123;mode&#125;
+          onOk=&#123;choseMonth&#125;
+          onCancel=&#123;() =&gt; setShow(false)&#125;
+        /&gt;
+      &lt;/div&gt;
+    &lt;/Popup&gt;
+  );
+&#125;);
+
+PopupDate.propTypes = &#123;
+  mode: PropTypes.string, // 日期模式
+  onSelect: PropTypes.func, // 选择后的回调
+&#125;;
+
+export default PopupDate;
+</code></pre>
+<p>底部时间弹窗逻辑和类型选择的逻辑相似，这里不做赘述，直接在 <code>Home/index.jsx</code> 中引入时间筛选框：</p>
+<pre><code class="js">// Home/index.jsx
+...
+import PopupDate from &#39;@/components/PopupDate&#39;
+
+const Home = () =&gt; &#123;
+  ...
+  const monthRef = useRef(); // 月份筛选 ref
+
+  useEffect(() =&gt; &#123;
+    getBillList() // 初始化
+  &#125;, [page, currentSelect, currentTime])
+
+  ...
+
+  // 选择月份弹窗
+  const monthToggle = () =&gt; &#123;
+    monthRef.current &amp;&amp; monthRef.current.show()
+  &#125;;
+
+  // 筛选月份
+  const selectMonth = (item) =&gt; &#123;
+    setRefreshing(REFRESH_STATE.loading);
+    setPage(1);
+    setCurrentTime(item)
+  &#125;
+
+  return &lt;div className=&#123;s.home&#125;&gt;
+    ...
+    &lt;div className=&#123;s.right&#125;&gt;
+      &lt;span className=&#123;s.time&#125; onClick=&#123;monthToggle&#125;&gt;&#123; currentTime &#125;&lt;Icon className=&#123;s.arrow&#125; type=&quot;arrow-bottom&quot; /&gt;&lt;/span&gt;
+    &lt;/div&gt;
+    ...
+
+    &lt;PopupDate ref=&#123;monthRef&#125; mode=&quot;month&quot; onSelect=&#123;selectMonth&#125; /&gt;
+  &lt;/div&gt;
+&#125;
+</code></pre>
+<p>刷新浏览器如下所示：</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/847ab58538134cdcb8d819d61823a5a7~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp" alt="img"></p>
+<p>最后不要忘记计算当前月份的收入和支出汇总数据，放置于头部，修改 <code>Home/index.jsx</code> 内的代码如下：</p>
+<pre><code class="js">...
+const Home = () =&gt; &#123;
+  ...
+  const [totalExpense, setTotalExpense] = useState(0); // 总支出
+  const [totalIncome, setTotalIncome] = useState(0); // 总收入
+
+  const getBillList = async () =&gt; &#123;
+    const &#123; data &#125; = await get(`/api/bill/list?page=$&#123;page&#125;&amp;page_size=5&amp;date=$&#123;currentTime&#125;&amp;type_id=$&#123;currentSelect.id || &#39;all&#39;&#125;`);
+    // 下拉刷新，重制数据
+    if (page == 1) &#123;
+      setList(data.list);
+    &#125; else &#123;
+      setList(list.concat(data.list));
+    &#125;
+    setTotalExpense(data.totalExpense.toFixed(2));
+    setTotalIncome(data.totalIncome.toFixed(2));
+    setTotalPage(data.totalPage);
+    // 上滑加载状态
+    setLoading(LOAD_STATE.success);
+    setRefreshing(REFRESH_STATE.success);
+  &#125;
+
+  return &lt;div className=&#123;s.home&#125;&gt;
+    ...
+    &lt;div className=&#123;s.dataWrap&#125;&gt;
+      &lt;span className=&#123;s.expense&#125;&gt;总支出：&lt;b&gt;¥ &#123; totalExpense &#125;&lt;/b&gt;&lt;/span&gt;
+      &lt;span className=&#123;s.income&#125;&gt;总收入：&lt;b&gt;¥ &#123; totalIncome &#125;&lt;/b&gt;&lt;/span&gt;
+    &lt;/div&gt;
+    ...
+  &lt;div&gt;
+&#125;
+</code></pre>
+<p>最终展示效果如下所示：</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/17747f5d0d7b41eabcbe47e8dc633de7~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp" alt="img"></p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>本章节的内容，偏向实战，而实战部分代码在文章的重复率不可避免，这里大家把握好本章节两个重要知识点：</p>
+<p>1、无限加载、下拉刷新。</p>
+<p>2、公用组件提取，如弹窗组件、账单组件。</p>
+<p>这两个知识点在实战中，用到的非常多，希望同学们能重视。</p>
+</article><section class="jump-container is-flex is-justify-content-space-between my-6"><!-- em is empty placeholder--><a class="button is-default" href="/2023/01/18/116-react/" title="116、稀土掘金小册-记账本（七）新增账单弹窗封装"><i class="iconfont icon-prev mr-2 has-text-grey"></i><span class="has-text-weight-semibold">上一页: 116、稀土掘金小册-记账本（七）新增账单弹窗封装</span></a><a class="button is-default" href="/2023/01/08/114-react/" title="114、稀土掘金小册-记账本（五）登录注册"><span class="has-text-weight-semibold">下一页: 114、稀土掘金小册-记账本（五）登录注册</span><i class="iconfont icon-next ml-2 has-text-grey"></i></a></section></div></div></main></main><footer class="is-flex is-flex-direction-column is-align-items-center is-flex-shrink-0 is-family-serif"><section class="sns-container"><!-- Github--><a title="github" target="_blank" rel="noopener nofollow" href="//github.com/Jude"><i class="iconfont icon-github"></i></a><!-- Ins--><!-- RSS--><!-- 知乎--><a title="zhihu" target="_blank" rel="noopener nofollow" href="//zhihu.com/https://www.zhihu.com"><i class="iconfont icon-zhihu"></i></a><!-- 领英--><!-- 脸书--></section><p><span>Copyright ©</span><span> Jude 2023</span></p><div class="is-flex is-justify-content-center is-flex-wrap-wrap"><p>Powered by Hexo &verbar;&nbsp;</p><p class="is-flex is-justify-content-center"><a title="Hexo theme author" target="_blank" rel="noopener" href="//github.com/haojen">Theme by Haojen&nbsp;</a></p><div style="margin-top: 2px"><a class="github-button" title="github-button" target="_blank" rel="noopener" href="https://github.com/haojen/hexo-theme-Claudia" data-color-scheme="no-preference: light; light: light; dark: dark;" data-show-count="true"></a></div></div><div><span>记住昨日的美好，过好今日的生活，憧憬明天的到来</span></div></footer><script async defer src="https://buttons.github.io/buttons.js"></script><script src="/js/post.js"></script></body></html>
