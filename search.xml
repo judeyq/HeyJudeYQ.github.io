@@ -4,11 +4,11 @@
   
     
     <entry>
-      <title>120、github出现“Enter passphrase for key ‘/Users/yq/.ssh/id_rsa”</title>
+      <title>120、git提交代码终端出现“Enter passphrase for key ‘/Users/yq/.ssh/id_rsa”</title>
       <link href="/2023/02/03/120-github/"/>
       <url>/2023/02/03/120-github/</url>
       
-        <content type="html"><![CDATA[<span id="more"></span><h2 id="解决方式"><a href="#解决方式" class="headerlink" title="解决方式"></a>解决方式</h2><p>1、打开终端</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ssh">ssh-add -K /Users/yq/.ssh/id_rsa<br></code></pre></td></tr></table></figure><p>根据终端提示，输入电脑开机密码；</p><p>成功后会提示： Identity added: /Users/yq/.ssh/id_rsa (<a href="mailto:&#49;&#51;&#x33;&#52;&#x33;&#x35;&#x32;&#x38;&#48;&#x38;&#x40;&#113;&#113;&#46;&#x63;&#x6f;&#109;">&#49;&#51;&#x33;&#52;&#x33;&#x35;&#x32;&#x38;&#48;&#x38;&#x40;&#113;&#113;&#46;&#x63;&#x6f;&#109;</a>)</p><p>之后在提交代码的时候，不会需要 enter 以下提交代码</p>]]></content>
+        <content type="html"><![CDATA[<span id="more"></span><h2 id="解决方式"><a href="#解决方式" class="headerlink" title="解决方式"></a>解决方式</h2><p>1、打开终端</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ssh">ssh-add -K /Users/yq/.ssh/id_rsa<br></code></pre></td></tr></table></figure><p>根据终端提示，输入电脑开机密码；</p><p>成功后会提示： Identity added: /Users/yq/.ssh/id_rsa (<a href="mailto:&#x31;&#x33;&#51;&#x34;&#x33;&#x35;&#x32;&#x38;&#x30;&#56;&#x40;&#113;&#113;&#46;&#99;&#x6f;&#109;">&#x31;&#x33;&#51;&#x34;&#x33;&#x35;&#x32;&#x38;&#x30;&#56;&#x40;&#113;&#113;&#46;&#99;&#x6f;&#109;</a>)</p><p>之后在提交代码的时候，不会需要 enter 以下提交代码</p>]]></content>
       
       
       
