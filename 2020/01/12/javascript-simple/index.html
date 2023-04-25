@@ -26,13 +26,8 @@ JavaScript 数据类型包括：Null、Undefined、Boolean、Number、String、S
 <p>instanceof 运算符是用于检测构造函数的 prototype 属性是否出现在某个实例对象的原型链上。</p>
 </blockquote>
 <p>Tips: 检测对象不是某个构造函数的实例</p>
-<pre><code class="js">if (!(mycar instanceof Car)) &#123;
-  // do something
-&#125;
-// 上面代码和下面代码完全不同，下面的代码!mycar会在instanceof之前被验证
-if (!mycar instanceof Car) &#123;
-&#125;
-</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">if</span> (!(mycar <span class="hljs-keyword">instanceof</span> Car)) &#123;<br>  <span class="hljs-comment">// do something</span><br>&#125;<br><span class="hljs-comment">// 上面代码和下面代码完全不同，下面的代码!mycar会在instanceof之前被验证</span><br><span class="hljs-keyword">if</span> (!mycar <span class="hljs-keyword">instanceof</span> Car) &#123;<br>&#125;<br></code></pre></td></tr></table></figure>
+
 <h5 id="（3-、Object-prototype-toString-call"><a href="#（3-、Object-prototype-toString-call" class="headerlink" title="（3)、Object.prototype.toString().call()"></a>（3)、Object.prototype.toString().call()</h5><blockquote>
 <p>每个对象都有一个 toString()方法，可以通过 toString() 来获取每个对象的类型。为了每个对象都能通过 Object.prototype.toString() 来检测，需要以 Function.prototype.call() 或者 Function.prototype.apply() 的形式来调用，传递要检查的对象作为第一个参数，称为 thisArg。</p>
 </blockquote>
@@ -41,171 +36,33 @@ if (!mycar instanceof Car) &#123;
 <blockquote>
 <p>1、如果 this 值是 undefined，就返回 [object Undefined]<br>2、如果 this 的值是 null，就返回 [object Null]<br>3、让 O 成为 ToObject(this) 的结果<br>4、让 class 成为 O 的内部属性 [[Class]] 的值<br>5、最后返回由 “[object “ 和 class 和 “]” 三个部分组成的字符串</p>
 </blockquote>
-<pre><code class="js">// 以下是11种：
-var number = 1; // [object Number]
-var string = &quot;123&quot;; // [object String]
-var boolean = true; // [object Boolean]
-var und = undefined; // [object Undefined]
-var nul = null; // [object Null]
-var obj = &#123; a: 1 &#125;; // [object Object]
-var array = [1, 2, 3]; // [object Array]
-var date = new Date(); // [object Date]
-var error = new Error(); // [object Error]
-var reg = /a/g; // [object RegExp]
-var func = function a() &#123;&#125;; // [object Function]
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-comment">// 以下是11种：</span><br><span class="hljs-keyword">var</span> number = <span class="hljs-number">1</span>; <span class="hljs-comment">// [object Number]</span><br><span class="hljs-keyword">var</span> string = <span class="hljs-string">&quot;123&quot;</span>; <span class="hljs-comment">// [object String]</span><br><span class="hljs-keyword">var</span> boolean = <span class="hljs-literal">true</span>; <span class="hljs-comment">// [object Boolean]</span><br><span class="hljs-keyword">var</span> und = <span class="hljs-literal">undefined</span>; <span class="hljs-comment">// [object Undefined]</span><br><span class="hljs-keyword">var</span> nul = <span class="hljs-literal">null</span>; <span class="hljs-comment">// [object Null]</span><br><span class="hljs-keyword">var</span> obj = &#123; <span class="hljs-attr">a</span>: <span class="hljs-number">1</span> &#125;; <span class="hljs-comment">// [object Object]</span><br><span class="hljs-keyword">var</span> array = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>]; <span class="hljs-comment">// [object Array]</span><br><span class="hljs-keyword">var</span> date = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>(); <span class="hljs-comment">// [object Date]</span><br><span class="hljs-keyword">var</span> error = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(); <span class="hljs-comment">// [object Error]</span><br><span class="hljs-keyword">var</span> reg = <span class="hljs-regexp">/a/g</span>; <span class="hljs-comment">// [object RegExp]</span><br><span class="hljs-keyword">var</span> func = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">a</span>(<span class="hljs-params"></span>) </span>&#123;&#125;; <span class="hljs-comment">// [object Function]</span><br><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">checkType</span>(<span class="hljs-params"></span>) </span>&#123;<br>  <span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-built_in">arguments</span>.length; i++) &#123;<br>    <span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">Object</span>.prototype.toString.call(<span class="hljs-built_in">arguments</span>[i]));<br>  &#125;<br>&#125;<br><br>checkType(<br>  number,<br>  string,<br>  boolean,<br>  und,<br>  nul,<br>  obj,<br>  array,<br>  date,<br>  error,<br>  reg,<br>  func<br>);<br><br><span class="hljs-comment">// 除了以上11种，还包括</span><br><span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">Object</span>.prototype.toString.call(<span class="hljs-built_in">Math</span>)); <span class="hljs-comment">// [object Math]</span><br><span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">Object</span>.prototype.toString.call(<span class="hljs-built_in">JSON</span>)); <span class="hljs-comment">// [object JSON]</span><br><br><span class="hljs-comment">// 还可以这样</span><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">a</span>(<span class="hljs-params"></span>) </span>&#123;<br>  <span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">Object</span>.prototype.toString.call(<span class="hljs-built_in">arguments</span>)); <span class="hljs-comment">// [object Arguments]</span><br>&#125;<br>a();<br></code></pre></td></tr></table></figure>
 
-function checkType() &#123;
-  for (var i = 0; i &lt; arguments.length; i++) &#123;
-    console.log(Object.prototype.toString.call(arguments[i]));
-  &#125;
-&#125;
-
-checkType(
-  number,
-  string,
-  boolean,
-  und,
-  nul,
-  obj,
-  array,
-  date,
-  error,
-  reg,
-  func
-);
-
-// 除了以上11种，还包括
-console.log(Object.prototype.toString.call(Math)); // [object Math]
-console.log(Object.prototype.toString.call(JSON)); // [object JSON]
-
-// 还可以这样
-function a() &#123;
-  console.log(Object.prototype.toString.call(arguments)); // [object Arguments]
-&#125;
-a();
-</code></pre>
 <h5 id="（4-、封装一个-type-函数"><a href="#（4-、封装一个-type-函数" class="headerlink" title="（4)、封装一个 type 函数"></a>（4)、封装一个 type 函数</h5><p>写一个 type 函数检测各种类型的值,考虑到兼容性（IE6，null 和 undefined 会被 Obejct.prototype.toString 识别为[object Obejct]）</p>
-<pre><code class="js">var class2type = &#123;&#125;;
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">var</span> class2type = &#123;&#125;;<br><br><span class="hljs-comment">// 生成class2type映射</span><br><span class="hljs-string">&quot;Boolean Number String Function Array Date RegExp Object Error&quot;</span><br>  .split(<span class="hljs-string">&quot; &quot;</span>)<br>  .map(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">item, index</span>) </span>&#123;<br>    class2type[<span class="hljs-string">&quot;[object &quot;</span> + item + <span class="hljs-string">&quot;]&quot;</span>] = item.toLowerCase();<br>  &#125;);<br><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">type</span>(<span class="hljs-params">obj</span>) </span>&#123;<br>  <span class="hljs-comment">// 一箭双雕</span><br>  <span class="hljs-keyword">if</span> (obj == <span class="hljs-literal">null</span>) &#123;<br>    <span class="hljs-keyword">return</span> obj + <span class="hljs-string">&quot;&quot;</span>;<br>  &#125;<br>  <span class="hljs-keyword">return</span> <span class="hljs-keyword">typeof</span> obj === <span class="hljs-string">&quot;object&quot;</span> || <span class="hljs-keyword">typeof</span> obj === <span class="hljs-string">&quot;function&quot;</span><br>    ? class2type[<span class="hljs-built_in">Object</span>.prototype.toString.call(obj)] || <span class="hljs-string">&quot;object&quot;</span><br>    : <span class="hljs-keyword">typeof</span> obj;<br>&#125;<br></code></pre></td></tr></table></figure>
 
-// 生成class2type映射
-&quot;Boolean Number String Function Array Date RegExp Object Error&quot;
-  .split(&quot; &quot;)
-  .map(function (item, index) &#123;
-    class2type[&quot;[object &quot; + item + &quot;]&quot;] = item.toLowerCase();
-  &#125;);
+<h5 id="（5-、函数类型的检测"><a href="#（5-、函数类型的检测" class="headerlink" title="（5)、函数类型的检测"></a>（5)、函数类型的检测</h5><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-comment">// type函数</span><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">isFunction</span>(<span class="hljs-params">obj</span>) </span>&#123;<br>  <span class="hljs-keyword">return</span> type(obj) === <span class="hljs-string">&quot;function&quot;</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
 
-function type(obj) &#123;
-  // 一箭双雕
-  if (obj == null) &#123;
-    return obj + &quot;&quot;;
-  &#125;
-  return typeof obj === &quot;object&quot; || typeof obj === &quot;function&quot;
-    ? class2type[Object.prototype.toString.call(obj)] || &quot;object&quot;
-    : typeof obj;
-&#125;
-</code></pre>
-<h5 id="（5-、函数类型的检测"><a href="#（5-、函数类型的检测" class="headerlink" title="（5)、函数类型的检测"></a>（5)、函数类型的检测</h5><pre><code class="js">// type函数
-function isFunction(obj) &#123;
-  return type(obj) === &quot;function&quot;;
-&#125;
-</code></pre>
 <h5 id="（6-、纯粹对象的检测"><a href="#（6-、纯粹对象的检测" class="headerlink" title="（6)、纯粹对象的检测"></a>（6)、纯粹对象的检测</h5><p>什么是纯粹对象？</p>
 <blockquote>
 <p>该对象是通过 “{}” 或 “new Object” 创建的，该对象含有零个或者多个键值对。</p>
 </blockquote>
-<pre><code class="js">// 上面写 type 函数时，用来存放 toString 映射结果的对象
-var class2type = &#123;&#125;;
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-comment">// 上面写 type 函数时，用来存放 toString 映射结果的对象</span><br><span class="hljs-keyword">var</span> class2type = &#123;&#125;;<br><br><span class="hljs-comment">// 相当于 Object.prototype.toString</span><br><span class="hljs-keyword">var</span> toString = class2type.toString;<br><br><span class="hljs-comment">// 相当于 Object.prototype.hasOwnProperty</span><br><span class="hljs-keyword">var</span> hasOwn = class2type.hasOwnProperty;<br><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">isPlainObject</span>(<span class="hljs-params">obj</span>) </span>&#123;<br>  <span class="hljs-keyword">var</span> proto, Ctor;<br><br>  <span class="hljs-comment">// 排除掉明显不是obj的以及一些宿主对象如Window</span><br>  <span class="hljs-keyword">if</span> (!obj || toString.call(obj) !== <span class="hljs-string">&quot;[object Object]&quot;</span>) &#123;<br>    <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>  &#125;<br><br>  <span class="hljs-comment">/**</span><br><span class="hljs-comment">   * getPrototypeOf es5 方法，获取 obj 的原型</span><br><span class="hljs-comment">   * 以 new Object 创建的对象为例的话</span><br><span class="hljs-comment">   * obj.__proto__ === Object.prototype</span><br><span class="hljs-comment">   */</span><br>  proto = <span class="hljs-built_in">Object</span>.getPrototypeOf(obj);<br><br>  <span class="hljs-comment">// 没有原型的对象是纯粹的，Object.create(null) 就在这里返回 true</span><br>  <span class="hljs-keyword">if</span> (!proto) &#123;<br>    <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>  &#125;<br><br>  <span class="hljs-comment">/**</span><br><span class="hljs-comment">   * 以下判断通过 new Object 方式创建的对象</span><br><span class="hljs-comment">   * 判断 proto 是否有 constructor 属性，如果有就让 Ctor 的值为 proto.constructor</span><br><span class="hljs-comment">   * 如果是 Object 函数创建的对象，Ctor 在这里就等于 Object 构造函数</span><br><span class="hljs-comment">   */</span><br>  Ctor = hasOwn.call(proto, <span class="hljs-string">&quot;constructor&quot;</span>) &amp;&amp; proto.constructor;<br><br>  <span class="hljs-comment">// 在这里判断 Ctor 构造函数是不是 Object 构造函数，用于区分自定义构造函数和 Object 构造函数</span><br>  <span class="hljs-keyword">return</span> (<br>    <span class="hljs-keyword">typeof</span> Ctor === <span class="hljs-string">&quot;function&quot;</span> &amp;&amp;<br>    hasOwn.toString.call(Ctor) === hasOwn.toString.call(<span class="hljs-built_in">Object</span>)<br>  );<br>&#125;<br></code></pre></td></tr></table></figure>
 
-// 相当于 Object.prototype.toString
-var toString = class2type.toString;
+<h5 id="（7-、空对象的判断"><a href="#（7-、空对象的判断" class="headerlink" title="（7)、空对象的判断"></a>（7)、空对象的判断</h5><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">isEmptyObject</span>(<span class="hljs-params">obj</span>) </span>&#123;<br>  <span class="hljs-keyword">var</span> name;<br>  <span class="hljs-keyword">for</span> (name <span class="hljs-keyword">in</span> obj) &#123;<br>    <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>  &#125;<br>  <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
 
-// 相当于 Object.prototype.hasOwnProperty
-var hasOwn = class2type.hasOwnProperty;
+<h5 id="（8-、window-对象的判断"><a href="#（8-、window-对象的判断" class="headerlink" title="（8)、window 对象的判断"></a>（8)、window 对象的判断</h5><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">isWindow</span>(<span class="hljs-params">obj</span>) </span>&#123;<br>  <span class="hljs-keyword">return</span> obj != <span class="hljs-literal">null</span> &amp;&amp; obj === obj.window;<br>&#125;<br></code></pre></td></tr></table></figure>
 
-function isPlainObject(obj) &#123;
-  var proto, Ctor;
+<h5 id="（9-、数组类型的检测"><a href="#（9-、数组类型的检测" class="headerlink" title="（9)、数组类型的检测"></a>（9)、数组类型的检测</h5><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-comment">// 判断Array.isArray()方法是否存在，如果存在就使用该方法，不存在就使用type函数</span><br><span class="hljs-keyword">var</span> isArray =<br>  <span class="hljs-built_in">Array</span>.isArray ||<br>  <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">obj</span>) </span>&#123;<br>    <span class="hljs-keyword">return</span> type(obj) === <span class="hljs-string">&quot;array&quot;</span>;<br>  &#125;;<br></code></pre></td></tr></table></figure>
 
-  // 排除掉明显不是obj的以及一些宿主对象如Window
-  if (!obj || toString.call(obj) !== &quot;[object Object]&quot;) &#123;
-    return false;
-  &#125;
-
-  /**
-   * getPrototypeOf es5 方法，获取 obj 的原型
-   * 以 new Object 创建的对象为例的话
-   * obj.__proto__ === Object.prototype
-   */
-  proto = Object.getPrototypeOf(obj);
-
-  // 没有原型的对象是纯粹的，Object.create(null) 就在这里返回 true
-  if (!proto) &#123;
-    return true;
-  &#125;
-
-  /**
-   * 以下判断通过 new Object 方式创建的对象
-   * 判断 proto 是否有 constructor 属性，如果有就让 Ctor 的值为 proto.constructor
-   * 如果是 Object 函数创建的对象，Ctor 在这里就等于 Object 构造函数
-   */
-  Ctor = hasOwn.call(proto, &quot;constructor&quot;) &amp;&amp; proto.constructor;
-
-  // 在这里判断 Ctor 构造函数是不是 Object 构造函数，用于区分自定义构造函数和 Object 构造函数
-  return (
-    typeof Ctor === &quot;function&quot; &amp;&amp;
-    hasOwn.toString.call(Ctor) === hasOwn.toString.call(Object)
-  );
-&#125;
-</code></pre>
-<h5 id="（7-、空对象的判断"><a href="#（7-、空对象的判断" class="headerlink" title="（7)、空对象的判断"></a>（7)、空对象的判断</h5><pre><code class="js">function isEmptyObject(obj) &#123;
-  var name;
-  for (name in obj) &#123;
-    return false;
-  &#125;
-  return true;
-&#125;
-</code></pre>
-<h5 id="（8-、window-对象的判断"><a href="#（8-、window-对象的判断" class="headerlink" title="（8)、window 对象的判断"></a>（8)、window 对象的判断</h5><pre><code class="js">function isWindow(obj) &#123;
-  return obj != null &amp;&amp; obj === obj.window;
-&#125;
-</code></pre>
-<h5 id="（9-、数组类型的检测"><a href="#（9-、数组类型的检测" class="headerlink" title="（9)、数组类型的检测"></a>（9)、数组类型的检测</h5><pre><code class="js">// 判断Array.isArray()方法是否存在，如果存在就使用该方法，不存在就使用type函数
-var isArray =
-  Array.isArray ||
-  function (obj) &#123;
-    return type(obj) === &quot;array&quot;;
-  &#125;;
-</code></pre>
 <h5 id="（10-、类数组的判断"><a href="#（10-、类数组的判断" class="headerlink" title="（10)、类数组的判断"></a>（10)、类数组的判断</h5><p>满足的三个条件：</p>
 <blockquote>
 <p>1、是数组<br>2、长度为 0<br>3、lengths 属性是大于 0 的数字类型，并且 obj[length - 1]必须存在</p>
 </blockquote>
-<pre><code class="js">function isArrayLike(obj) &#123;
-  // obj 必须有 length属性
-  var length = !!obj &amp;&amp; &quot;length&quot; in obj &amp;&amp; obj.length;
-  var typeRes = type(obj);
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">isArrayLike</span>(<span class="hljs-params">obj</span>) </span>&#123;<br>  <span class="hljs-comment">// obj 必须有 length属性</span><br>  <span class="hljs-keyword">var</span> length = !!obj &amp;&amp; <span class="hljs-string">&quot;length&quot;</span> <span class="hljs-keyword">in</span> obj &amp;&amp; obj.length;<br>  <span class="hljs-keyword">var</span> typeRes = type(obj);<br><br>  <span class="hljs-comment">// 排除掉函数和 Window 对象</span><br>  <span class="hljs-keyword">if</span> (typeRes === <span class="hljs-string">&quot;function&quot;</span> || isWindow(obj)) &#123;<br>    <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>  &#125;<br><br>  <span class="hljs-keyword">return</span> (<br>    typeRes === <span class="hljs-string">&quot;array&quot;</span> ||<br>    length === <span class="hljs-number">0</span> ||<br>    (<span class="hljs-keyword">typeof</span> length === <span class="hljs-string">&quot;number&quot;</span> &amp;&amp; length &gt; <span class="hljs-number">0</span> &amp;&amp; length - <span class="hljs-number">1</span> <span class="hljs-keyword">in</span> obj)<br>  );<br>&#125;<br></code></pre></td></tr></table></figure>
 
-  // 排除掉函数和 Window 对象
-  if (typeRes === &quot;function&quot; || isWindow(obj)) &#123;
-    return false;
-  &#125;
-
-  return (
-    typeRes === &quot;array&quot; ||
-    length === 0 ||
-    (typeof length === &quot;number&quot; &amp;&amp; length &gt; 0 &amp;&amp; length - 1 in obj)
-  );
-&#125;
-</code></pre>
 <p>函数库的实现，如：underscore</p>
-<pre><code class="js">var MAX_ARRAY_INDEX = Math.pow(2, 53) - 1;
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">var</span> MAX_ARRAY_INDEX = <span class="hljs-built_in">Math</span>.pow(<span class="hljs-number">2</span>, <span class="hljs-number">53</span>) - <span class="hljs-number">1</span>;<br><br><span class="hljs-keyword">var</span> isArrayLike = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">collection</span>) </span>&#123;<br>  <span class="hljs-keyword">var</span> length = getLength(collection);<br>  <span class="hljs-keyword">return</span> <span class="hljs-keyword">typeof</span> length == <span class="hljs-string">&quot;number&quot;</span> &amp;&amp; length &gt;= <span class="hljs-number">0</span> &amp;&amp; length &lt;= MAX_ARRAY_INDEX;<br>&#125;;<br></code></pre></td></tr></table></figure>
 
-var isArrayLike = function (collection) &#123;
-  var length = getLength(collection);
-  return typeof length == &quot;number&quot; &amp;&amp; length &gt;= 0 &amp;&amp; length &lt;= MAX_ARRAY_INDEX;
-&#125;;
-</code></pre>
-<h5 id="11-、判断是不是-DOM-元素"><a href="#11-、判断是不是-DOM-元素" class="headerlink" title="(11)、判断是不是 DOM 元素"></a>(11)、判断是不是 DOM 元素</h5><pre><code class="js">var isElement = function (obj) &#123;
-  return !!(obj &amp;&amp; obj.nodeType === 1);
-&#125;;
-</code></pre>
+<h5 id="11-、判断是不是-DOM-元素"><a href="#11-、判断是不是-DOM-元素" class="headerlink" title="(11)、判断是不是 DOM 元素"></a>(11)、判断是不是 DOM 元素</h5><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">var</span> isElement = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">obj</span>) </span>&#123;<br>  <span class="hljs-keyword">return</span> !!(obj &amp;&amp; obj.nodeType === <span class="hljs-number">1</span>);<br>&#125;;<br></code></pre></td></tr></table></figure>
 </article><section class="jump-container is-flex is-justify-content-space-between my-6"><!-- em is empty placeholder--><a class="button is-default" href="/2020/01/15/javascript-simple2/" title="14、整理javascript知识(二)"><i class="iconfont icon-prev mr-2 has-text-grey"></i><span class="has-text-weight-semibold">上一页: 14、整理javascript知识(二)</span></a><a class="button is-default" href="/2019/12/29/select/" title="12、下拉框select银行卡号格式处理"><span class="has-text-weight-semibold">下一页: 12、下拉框select银行卡号格式处理</span><i class="iconfont icon-next ml-2 has-text-grey"></i></a></section></div></div></main></main><footer class="is-flex is-flex-direction-column is-align-items-center is-flex-shrink-0 is-family-serif"><section class="sns-container"><!-- Github--><a title="github" target="_blank" rel="noopener nofollow" href="//github.com/Jude"><i class="iconfont icon-github"></i></a><!-- Ins--><!-- RSS--><!-- 知乎--><a title="zhihu" target="_blank" rel="noopener nofollow" href="//zhihu.com/https://www.zhihu.com/hot"><i class="iconfont icon-zhihu"></i></a><!-- 领英--><!-- 脸书--></section><p><span>Copyright ©</span><span> Jude 2023</span></p><div class="is-flex is-justify-content-center is-flex-wrap-wrap"><p>Powered by Hexo &verbar;&nbsp;</p><p class="is-flex is-justify-content-center"><a title="Hexo theme author" target="_blank" rel="noopener" href="//github.com/haojen">Theme by Haojen&nbsp;</a></p><div style="margin-top: 2px"><a class="github-button" title="github-button" target="_blank" rel="noopener" href="https://github.com/haojen/hexo-theme-Claudia" data-color-scheme="no-preference: light; light: light; dark: dark;" data-show-count="true"></a></div></div><div><span>记住昨日的美好，过好今日的生活，憧憬明天的到来</span></div></footer><script async defer src="https://buttons.github.io/buttons.js"></script><script src="/js/post.js"></script></body></html>

@@ -53,26 +53,16 @@ GET: 通常是用来获取资源POST： 提交数据PUT： 修改数据DELETE：
 <blockquote>
 <p>options 预检请求</p>
 </blockquote>
-<pre><code class="js">OPTIONS / HTTP/1.1
-Origin: 当前地址
-Host: xxx.com
-Access-Control-Request-Method: PUT
-Access-Control-Request-Headers: X-Custom-Header
-</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs js">OPTIONS / HTTP/<span class="hljs-number">1.1</span><br><span class="hljs-attr">Origin</span>: 当前地址<br><span class="hljs-attr">Host</span>: xxx.com<br>Access-Control-Request-Method: PUT<br>Access-Control-Request-Headers: X-Custom-Header<br></code></pre></td></tr></table></figure>
+
 <p>在预检请求的响应返回后，如果请求不满足响应头的条件，则触发XMLHttpRequest的onerror方法，当然后面真正的CORS请求也不会发出去了。</p>
 <h3 id="3、Nginx反向代理"><a href="#3、Nginx反向代理" class="headerlink" title="3、Nginx反向代理"></a>3、Nginx反向代理</h3><blockquote>
 <p>Nginx是高性能的反向代理服务器</p>
 </blockquote>
 <p>反向代理其实就是拿到客户端的请求，将请求转发给其他服务器，主要场景是维持服务器集群的负载均衡。即：反向代理帮其他的服务器拿到请求，然后选择一个合适的服务器，将请求转交给它。</p>
 <p>例如：客户端域名：client.com  服务器域名：server.com,Nginx解决跨域的方法如下：</p>
-<pre><code class="js">server &#123;
-  listen  80;
-  server_name  client.com;
-  location /api &#123;
-    proxy_pass server.com;
-  &#125;
-&#125;
-</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs js">server &#123;<br>  listen  <span class="hljs-number">80</span>;<br>  server_name  client.com;<br>  location /api &#123;<br>    proxy_pass server.com;<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
 <p>客户端首先访问client.com/api（此时不存在跨域），Nginx服务器作为反向代理，将请求转发给sever.com，响应返回时又将响应给到客户端，完成整个跨域请求。</p>
 <h3 id="4、Jsonp"><a href="#4、Jsonp" class="headerlink" title="4、Jsonp"></a>4、Jsonp</h3><blockquote>
 <p>通过给script标签的src填上目标地址发送GET请求（只支持GET请求），实现跨域请求拿到相应数据。</p>

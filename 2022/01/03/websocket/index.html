@@ -10,35 +10,8 @@
 <p>1、建立在 TCP 协议之上，服务器端的实现比较容易。<br>2、与 HTTP 协议有着良好的兼容性，默认端口也是80和443。并且握手阶段采用 HTTP 协议，因此握手时不容易屏蔽，能通过各种 HTTP 代理服务器。<br>3、数据格式比较轻量，性能开销小，通信高效。<br>4、可以发送文本，也可以发送二进制数据。<br>5、没有同源限制，客户端可以与任意服务器通信。<br>6、全双工(通信允许数据在两个方向上同时传输，它在能力上相当于两个单工通信方式的结合,例如指 A→B 的同时 B→A ，是瞬时同步的)<br>7、协议标识符是ws（如果加密，则为wss），服务器网址就是 URL。</p>
 </blockquote>
 <p>初始化websocket<br>1、创建websocket实例，参数为url<br>2、连接 websocket.onopen<br>3、server响应数据触发 websocket.onmessage<br>4、关闭websocket，websocket.onclose</p>
-<pre><code class="js">// 构造函数 参数为url
-const wsurl = &quot;ws://localhost:8080&quot;;
-var ws = new Websocket(wsurl);
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-comment">// 构造函数 参数为url</span><br><span class="hljs-keyword">const</span> wsurl = <span class="hljs-string">&quot;ws://localhost:8080&quot;</span>;<br><span class="hljs-keyword">var</span> ws = <span class="hljs-keyword">new</span> Websocket(wsurl);<br><br><span class="hljs-comment">// 连接状态readState 1  准备好发送和接受数据了</span><br>ws.onopen = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>&#123;<br>  ws.send(<span class="hljs-string">&#x27;hello server! websocket is open now!&#x27;</span>)<br>&#125;<br><br><span class="hljs-comment">// 通过客户端的事件   发送信息给服务端</span><br>ws.send(<span class="hljs-string">&#x27;hello websocket&#x27;</span>);<br><br><span class="hljs-comment">// 发生错误</span><br>ws.onerror = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">event</span>)</span>&#123;<br>  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;websocket error observed&quot;</span>,event)<br>&#125;<br><br><span class="hljs-comment">// readState CLOSED  关闭websocket</span><br>ws.onclose = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">event</span>)</span>&#123;<br>  <span class="hljs-keyword">let</span> status_code = event.status;<br>  <span class="hljs-keyword">let</span> msg = event.msg;<br>  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;websocket is closed now&quot;</span>)<br>&#125;<br><br><span class="hljs-comment">// 响应数据的接收</span><br>ws.onmessage = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">event</span>)</span>&#123;<br>  <span class="hljs-keyword">let</span> data = event.data;<br>&#125;<br><br></code></pre></td></tr></table></figure>
 
-// 连接状态readState 1  准备好发送和接受数据了
-ws.onopen = function()&#123;
-  ws.send(&#39;hello server! websocket is open now!&#39;)
-&#125;
-
-// 通过客户端的事件   发送信息给服务端
-ws.send(&#39;hello websocket&#39;);
-
-// 发生错误
-ws.onerror = function(event)&#123;
-  console.log(&quot;websocket error observed&quot;,event)
-&#125;
-
-// readState CLOSED  关闭websocket
-ws.onclose = function(event)&#123;
-  let status_code = event.status;
-  let msg = event.msg;
-  console.log(&quot;websocket is closed now&quot;)
-&#125;
-
-// 响应数据的接收
-ws.onmessage = function(event)&#123;
-  let data = event.data;
-&#125;
-</code></pre>
 <ul>
 <li>路由改变，需要断开websocket连接，节省服务器开支。</li>
 </ul>
@@ -50,104 +23,8 @@ ws.onmessage = function(event)&#123;
 <details>
 <summary>点我展示代码</summary>
 
-<pre><code class="js">import &#123; mapActions, mapState &#125; from &#39;vuex&#39;;
-export default &#123;
-    name: &#39;Websocket&#39;,
-    data() &#123;
-        return &#123;
-            // 是否正在重连
-            lockReconnect: false,
-            socket: null,
-            reconnectTimeout: null,
-            timeout: 10 * 1000,
-            timer: null,
-            serverTimer: null
-        &#125;;
-    &#125;,
-    computed: &#123;
-        ...mapState([&#39;userInfo&#39;]),
-        wsuri() &#123;
-            return `$&#123;process.env.VUE_APP_WEBSOCKET_URI&#125;$&#123;this.userInfo.tenantId&#125;;$&#123;this.userInfo.userId&#125;`;
-        &#125;
-    &#125;,
-    async mounted() &#123;
-        await this.getUserInfo();
-        this.initWebSocket();
-    &#125;,
-    destroyed() &#123;
-        this.socket.close();
-    &#125;,
-    methods: &#123;
-        ...mapActions([&#39;getUserInfo&#39;]),
-        start(ws) &#123;
-            this.reset();
-            this.timer = setTimeout(() =&gt; &#123;
-                // console.log(&#39;发送心跳,后端收到后，返回一个心跳消息&#39;)
-                // onmessage拿到返回的心跳就说明连接正常
-                ws.send(&#39;ping&#39;);
-                this.serverTimer = setTimeout(() =&gt; &#123;
-                    // 如果超过一定时间还没响应(响应后触发重置)，说明后端断开了
-                    ws.close();
-                &#125;, this.timeout);
-            &#125;, this.timeout);
-        &#125;,
-        reset() &#123;
-            this.serverTimer &amp;&amp; clearTimeout(this.serverTimer);
-            this.timer &amp;&amp; clearTimeout(this.timer);
-        &#125;,
-        reconnect() &#123;
-            console.log(&#39;尝试重连&#39;);
-            if (this.lockReconnect) &#123;
-                return;
-            &#125;
-            this.lockReconnect = true;
-            this.reconnectTimeout &amp;&amp; clearTimeout(this.reconnectTimeout);
-            this.reconnectTimeout = setTimeout(() =&gt; &#123;
-                this.initWebSocket();
-                this.lockReconnect = false;
-            &#125;, 4 * 1000);
-        &#125;,
-        // 初始化websocket
-        initWebSocket() &#123;
-            try &#123;
-                if (&#39;WebSocket&#39; in window) &#123;
-                    this.socket = new WebSocket(this.wsuri);
-                &#125; else &#123;
-                    console.log(&#39;您的浏览器不支持websocket&#39;);
-                &#125;
-                this.socket.onopen = this.websocketOnOpen;
-                this.socket.onerror = this.websocketOnError;
-                this.socket.onmessage = this.websocketOnMessage;
-                this.socket.onclose = this.websocketClose;
-            &#125; catch (e) &#123;
-                this.reconnect();
-            &#125;
-        &#125;,
-        websocketOnOpen() &#123;
-            console.log(&#39;WebSocket连接成功&#39;, this.socket.readyState);
-            this.start(this.socket);
-            this.websocketSend();
-        &#125;,
-        websocketOnError(e) &#123;
-            console.log(&#39;WebSocket连接发生错误&#39;, e);
-            this.reconnect();
-        &#125;,
-        websocketOnMessage(e) &#123;
-            if (e.data === &#39;pong&#39;) &#123;
-                // 消息获取成功，重置心跳
-                this.start(this.socket);
-            &#125;
-        &#125;,
-        websocketClose(e) &#123;
-            console.log(&#39;connection closed (&#39; + e.code + &#39;)&#39;);
-            this.reconnect();
-        &#125;,
-        websocketSend() &#123;
-            this.socket.send(&#39;ping&#39;);
-        &#125;
-    &#125;
-&#125;;
-</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">import</span> &#123; mapActions, mapState &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;vuex&#x27;</span>;<br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> &#123;<br>    <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;Websocket&#x27;</span>,<br>    <span class="hljs-function"><span class="hljs-title">data</span>(<span class="hljs-params"></span>)</span> &#123;<br>        <span class="hljs-keyword">return</span> &#123;<br>            <span class="hljs-comment">// 是否正在重连</span><br>            <span class="hljs-attr">lockReconnect</span>: <span class="hljs-literal">false</span>,<br>            <span class="hljs-attr">socket</span>: <span class="hljs-literal">null</span>,<br>            <span class="hljs-attr">reconnectTimeout</span>: <span class="hljs-literal">null</span>,<br>            <span class="hljs-attr">timeout</span>: <span class="hljs-number">10</span> * <span class="hljs-number">1000</span>,<br>            <span class="hljs-attr">timer</span>: <span class="hljs-literal">null</span>,<br>            <span class="hljs-attr">serverTimer</span>: <span class="hljs-literal">null</span><br>        &#125;;<br>    &#125;,<br>    <span class="hljs-attr">computed</span>: &#123;<br>        ...mapState([<span class="hljs-string">&#x27;userInfo&#x27;</span>]),<br>        <span class="hljs-function"><span class="hljs-title">wsuri</span>(<span class="hljs-params"></span>)</span> &#123;<br>            <span class="hljs-keyword">return</span> <span class="hljs-string">`<span class="hljs-subst">$&#123;process.env.VUE_APP_WEBSOCKET_URI&#125;</span><span class="hljs-subst">$&#123;<span class="hljs-built_in">this</span>.userInfo.tenantId&#125;</span>;<span class="hljs-subst">$&#123;<span class="hljs-built_in">this</span>.userInfo.userId&#125;</span>`</span>;<br>        &#125;<br>    &#125;,<br>    <span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-title">mounted</span>(<span class="hljs-params"></span>)</span> &#123;<br>        <span class="hljs-keyword">await</span> <span class="hljs-built_in">this</span>.getUserInfo();<br>        <span class="hljs-built_in">this</span>.initWebSocket();<br>    &#125;,<br>    <span class="hljs-function"><span class="hljs-title">destroyed</span>(<span class="hljs-params"></span>)</span> &#123;<br>        <span class="hljs-built_in">this</span>.socket.close();<br>    &#125;,<br>    <span class="hljs-attr">methods</span>: &#123;<br>        ...mapActions([<span class="hljs-string">&#x27;getUserInfo&#x27;</span>]),<br>        <span class="hljs-function"><span class="hljs-title">start</span>(<span class="hljs-params">ws</span>)</span> &#123;<br>            <span class="hljs-built_in">this</span>.reset();<br>            <span class="hljs-built_in">this</span>.timer = <span class="hljs-built_in">setTimeout</span>(<span class="hljs-function">() =&gt;</span> &#123;<br>                <span class="hljs-comment">// console.log(&#x27;发送心跳,后端收到后，返回一个心跳消息&#x27;)</span><br>                <span class="hljs-comment">// onmessage拿到返回的心跳就说明连接正常</span><br>                ws.send(<span class="hljs-string">&#x27;ping&#x27;</span>);<br>                <span class="hljs-built_in">this</span>.serverTimer = <span class="hljs-built_in">setTimeout</span>(<span class="hljs-function">() =&gt;</span> &#123;<br>                    <span class="hljs-comment">// 如果超过一定时间还没响应(响应后触发重置)，说明后端断开了</span><br>                    ws.close();<br>                &#125;, <span class="hljs-built_in">this</span>.timeout);<br>            &#125;, <span class="hljs-built_in">this</span>.timeout);<br>        &#125;,<br>        <span class="hljs-function"><span class="hljs-title">reset</span>(<span class="hljs-params"></span>)</span> &#123;<br>            <span class="hljs-built_in">this</span>.serverTimer &amp;&amp; <span class="hljs-built_in">clearTimeout</span>(<span class="hljs-built_in">this</span>.serverTimer);<br>            <span class="hljs-built_in">this</span>.timer &amp;&amp; <span class="hljs-built_in">clearTimeout</span>(<span class="hljs-built_in">this</span>.timer);<br>        &#125;,<br>        <span class="hljs-function"><span class="hljs-title">reconnect</span>(<span class="hljs-params"></span>)</span> &#123;<br>            <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;尝试重连&#x27;</span>);<br>            <span class="hljs-keyword">if</span> (<span class="hljs-built_in">this</span>.lockReconnect) &#123;<br>                <span class="hljs-keyword">return</span>;<br>            &#125;<br>            <span class="hljs-built_in">this</span>.lockReconnect = <span class="hljs-literal">true</span>;<br>            <span class="hljs-built_in">this</span>.reconnectTimeout &amp;&amp; <span class="hljs-built_in">clearTimeout</span>(<span class="hljs-built_in">this</span>.reconnectTimeout);<br>            <span class="hljs-built_in">this</span>.reconnectTimeout = <span class="hljs-built_in">setTimeout</span>(<span class="hljs-function">() =&gt;</span> &#123;<br>                <span class="hljs-built_in">this</span>.initWebSocket();<br>                <span class="hljs-built_in">this</span>.lockReconnect = <span class="hljs-literal">false</span>;<br>            &#125;, <span class="hljs-number">4</span> * <span class="hljs-number">1000</span>);<br>        &#125;,<br>        <span class="hljs-comment">// 初始化websocket</span><br>        <span class="hljs-function"><span class="hljs-title">initWebSocket</span>(<span class="hljs-params"></span>)</span> &#123;<br>            <span class="hljs-keyword">try</span> &#123;<br>                <span class="hljs-keyword">if</span> (<span class="hljs-string">&#x27;WebSocket&#x27;</span> <span class="hljs-keyword">in</span> <span class="hljs-built_in">window</span>) &#123;<br>                    <span class="hljs-built_in">this</span>.socket = <span class="hljs-keyword">new</span> WebSocket(<span class="hljs-built_in">this</span>.wsuri);<br>                &#125; <span class="hljs-keyword">else</span> &#123;<br>                    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;您的浏览器不支持websocket&#x27;</span>);<br>                &#125;<br>                <span class="hljs-built_in">this</span>.socket.onopen = <span class="hljs-built_in">this</span>.websocketOnOpen;<br>                <span class="hljs-built_in">this</span>.socket.onerror = <span class="hljs-built_in">this</span>.websocketOnError;<br>                <span class="hljs-built_in">this</span>.socket.onmessage = <span class="hljs-built_in">this</span>.websocketOnMessage;<br>                <span class="hljs-built_in">this</span>.socket.onclose = <span class="hljs-built_in">this</span>.websocketClose;<br>            &#125; <span class="hljs-keyword">catch</span> (e) &#123;<br>                <span class="hljs-built_in">this</span>.reconnect();<br>            &#125;<br>        &#125;,<br>        <span class="hljs-function"><span class="hljs-title">websocketOnOpen</span>(<span class="hljs-params"></span>)</span> &#123;<br>            <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;WebSocket连接成功&#x27;</span>, <span class="hljs-built_in">this</span>.socket.readyState);<br>            <span class="hljs-built_in">this</span>.start(<span class="hljs-built_in">this</span>.socket);<br>            <span class="hljs-built_in">this</span>.websocketSend();<br>        &#125;,<br>        <span class="hljs-function"><span class="hljs-title">websocketOnError</span>(<span class="hljs-params">e</span>)</span> &#123;<br>            <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;WebSocket连接发生错误&#x27;</span>, e);<br>            <span class="hljs-built_in">this</span>.reconnect();<br>        &#125;,<br>        <span class="hljs-function"><span class="hljs-title">websocketOnMessage</span>(<span class="hljs-params">e</span>)</span> &#123;<br>            <span class="hljs-keyword">if</span> (e.data === <span class="hljs-string">&#x27;pong&#x27;</span>) &#123;<br>                <span class="hljs-comment">// 消息获取成功，重置心跳</span><br>                <span class="hljs-built_in">this</span>.start(<span class="hljs-built_in">this</span>.socket);<br>            &#125;<br>        &#125;,<br>        <span class="hljs-function"><span class="hljs-title">websocketClose</span>(<span class="hljs-params">e</span>)</span> &#123;<br>            <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;connection closed (&#x27;</span> + e.code + <span class="hljs-string">&#x27;)&#x27;</span>);<br>            <span class="hljs-built_in">this</span>.reconnect();<br>        &#125;,<br>        <span class="hljs-function"><span class="hljs-title">websocketSend</span>(<span class="hljs-params"></span>)</span> &#123;<br>            <span class="hljs-built_in">this</span>.socket.send(<span class="hljs-string">&#x27;ping&#x27;</span>);<br>        &#125;<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
+
 </details>
 
 

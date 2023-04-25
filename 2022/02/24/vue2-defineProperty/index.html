@@ -11,30 +11,16 @@
 <blockquote>
 <p>原因：由于Vue会在初始化实例时对对象的属性执行getter/setter转化，所以属性必须在data对象上存在才能让Vue将它转换为响应式的。</p>
 </blockquote>
-<pre><code class="js">var vm = new Vue(&#123;
-    data:&#123;
-        a:1
-    &#125;
-&#125;)
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">var</span> vm = <span class="hljs-keyword">new</span> Vue(&#123;<br>    <span class="hljs-attr">data</span>:&#123;<br>        <span class="hljs-attr">a</span>:<span class="hljs-number">1</span><br>    &#125;<br>&#125;)<br><br>vm.a 是响应式<br>vm.b 是非响应式<br></code></pre></td></tr></table></figure>
 
-vm.a 是响应式
-vm.b 是非响应式
-</code></pre>
 <p>解决无法检测对象属性的增加、删除的方法：Vue.set(object,propertyName,value)(增加属性)、Vue.delete()（删除属性）</p>
 <h2 id="二、Vue不能检测数组的变动"><a href="#二、Vue不能检测数组的变动" class="headerlink" title="二、Vue不能检测数组的变动"></a>二、Vue不能检测数组的变动</h2><p>数组是一个特殊的JavaScript对象，Vue没有对数组进⾏ Object.defineProperty 的属性劫持，所以会存在的问题：</p>
 <p>不能检测数组变动的2类问题：</p>
 <blockquote>
 <p>1、当你利用索引直接设置一个数组项时，例如：vm.items[indexOfItem] = newValue<br>2、当你修改数组的长度时，例如：vm.items.length = newLength</p>
 </blockquote>
-<pre><code class="js">var vm = new Vue(&#123;
-    data:&#123;
-        items: [&#39;a&#39;&#39;,&#39;b&#39;,&#39;c&#39;]
-    &#125;
-&#125;)
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">var</span> vm = <span class="hljs-keyword">new</span> Vue(&#123;<br>    <span class="hljs-attr">data</span>:&#123;<br>        <span class="hljs-attr">items</span>: [<span class="hljs-string">&#x27;a&#x27;</span><span class="hljs-string">&#x27;,&#x27;</span>b<span class="hljs-string">&#x27;,&#x27;</span>c<span class="hljs-string">&#x27;]</span><br><span class="hljs-string">    &#125;</span><br><span class="hljs-string">&#125;)</span><br><span class="hljs-string"></span><br><span class="hljs-string">vvm.items[1] = &#x27;</span>x<span class="hljs-string">&#x27; // 非响应式</span><br><span class="hljs-string">vm.items.length = 2 // 非响应式</span><br></code></pre></td></tr></table></figure>
 
-vvm.items[1] = &#39;x&#39; // 非响应式
-vm.items.length = 2 // 非响应式
-</code></pre>
 <p>解决利用索引值设置一个数组项的方法：</p>
 <blockquote>
 <p>vm.$set(vm.items, indexOfItem, newValue)</p>
@@ -62,112 +48,30 @@ vm.items.length = 2 // 非响应式
 <h2 id="五、为什么只对对象劫持，对数组方法进行重写？"><a href="#五、为什么只对对象劫持，对数组方法进行重写？" class="headerlink" title="五、为什么只对对象劫持，对数组方法进行重写？"></a>五、为什么只对对象劫持，对数组方法进行重写？</h2><blockquote>
 <p>因为对象最多也就⼏⼗个属性，拦截起来数量不多，但是数组可能会有⼏百⼏千项，拦截起来⾮常耗性能，所以直接重写数组原型上的⽅法，是⽐较节省性能的⽅案</p>
 </blockquote>
-<h2 id="六、实现一个数据双向绑定"><a href="#六、实现一个数据双向绑定" class="headerlink" title="六、实现一个数据双向绑定"></a>六、实现一个数据双向绑定</h2><pre><code class="js">    &lt;input id=&quot;hangdleInput&quot; type=&quot;text&quot;&gt;
-    &lt;span id=&quot;hangdleValue&quot;&gt;&lt;/span&gt;
-    &lt;script&gt;
-        let obj =&#123;&#125;
-        let input = document.getElementById(&#39;hangdleInput&#39;)
-        let span = document.getElementById(&#39;hangdleValue&#39;)
-        Object.defineProperty(obj,&#39;text&#39;,&#123;
-            configurable: true,
-            enumerable: true,
-            get()&#123;
-                console.log(&#39;get data&#39;)
-            &#125;,
-            set(newVal)&#123;
-                console.log(&#39;set data&#39;)
-                input.value = newVal
-                span.innerHTML = newVal
-            &#125;
-        &#125;)
-        input.addEventListener(&#39;keyup&#39;,function(e)&#123;
-            obj.text = e.target.value
-        &#125;)
-    &lt;/script&gt;
-</code></pre>
+<h2 id="六、实现一个数据双向绑定"><a href="#六、实现一个数据双向绑定" class="headerlink" title="六、实现一个数据双向绑定"></a>六、实现一个数据双向绑定</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs js">&lt;input id=<span class="hljs-string">&quot;hangdleInput&quot;</span> type=<span class="hljs-string">&quot;text&quot;</span>&gt;<br><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;hangdleValue&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span></span><br><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="javascript"></span></span><br><span class="javascript"><span class="xml">    <span class="hljs-keyword">let</span> obj =&#123;&#125;</span></span><br><span class="javascript"><span class="xml">    <span class="hljs-keyword">let</span> input = <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">&#x27;hangdleInput&#x27;</span>)</span></span><br><span class="javascript"><span class="xml">    <span class="hljs-keyword">let</span> span = <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">&#x27;hangdleValue&#x27;</span>)</span></span><br><span class="javascript"><span class="xml">    <span class="hljs-built_in">Object</span>.defineProperty(obj,<span class="hljs-string">&#x27;text&#x27;</span>,&#123;</span></span><br><span class="javascript"><span class="xml">        <span class="hljs-attr">configurable</span>: <span class="hljs-literal">true</span>,</span></span><br><span class="javascript"><span class="xml">        <span class="hljs-attr">enumerable</span>: <span class="hljs-literal">true</span>,</span></span><br><span class="javascript"><span class="xml">        <span class="hljs-function"><span class="hljs-title">get</span>(<span class="hljs-params"></span>)</span>&#123;</span></span><br><span class="javascript"><span class="xml">            <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;get data&#x27;</span>)</span></span><br><span class="javascript"><span class="xml">        &#125;,</span></span><br><span class="javascript"><span class="xml">        <span class="hljs-function"><span class="hljs-title">set</span>(<span class="hljs-params">newVal</span>)</span>&#123;</span></span><br><span class="javascript"><span class="xml">            <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;set data&#x27;</span>)</span></span><br><span class="javascript"><span class="xml">            input.value = newVal</span></span><br><span class="javascript"><span class="xml">            span.innerHTML = newVal</span></span><br><span class="javascript"><span class="xml">        &#125;</span></span><br><span class="javascript"><span class="xml">    &#125;)</span></span><br><span class="javascript"><span class="xml">    input.addEventListener(<span class="hljs-string">&#x27;keyup&#x27;</span>,<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">e</span>)</span>&#123;</span></span><br><span class="javascript"><span class="xml">        obj.text = e.target.value</span></span><br><span class="javascript"><span class="xml">    &#125;)</span></span><br><span class="javascript"><span class="xml"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></span><br></code></pre></td></tr></table></figure>
+
 <h2 id="七、Vue3-Proxy"><a href="#七、Vue3-Proxy" class="headerlink" title="七、Vue3 Proxy"></a>七、Vue3 Proxy</h2><blockquote>
 <p>Vue2 的响应式是基于 Object.defineProperty 实现的<br>Vue3 的响应式是基于 ES6 的 Proxy 来实现的</p>
 </blockquote>
 <p>在Vue2.0中，数据双向绑定就是通过Object.defineProperty去监听对象的每一个属性，然后在get/set方法中通过发布订阅者模式来实现的数据响应，但是存在一定的缺陷，比如只能监听已存在的属性，对于新增删除属性就无能为力了，同时无法监听数组的变化，所以在Vue3.0中将其换成了功能更强大的ES6 Proxy。</p>
 <p>Vue2的响应式函数:</p>
-<pre><code class="js">// 响应式函数
-function reactive(obj, key, value) &#123;
-  Object.defineProperty(data, key, &#123;
-    get() &#123;
-      console.log(`访问了$&#123;key&#125;属性`)
-      return value
-    &#125;,
-    set(val) &#123;
-      console.log(`将$&#123;key&#125;由-&gt;$&#123;value&#125;-&gt;设置成-&gt;$&#123;val&#125;`)
-      if (value !== val) &#123;
-        value = val
-      &#125;
-    &#125;
-  &#125;)
-&#125;
-const data = &#123;
-  name: &#39;jude&#39;,
-  age: 18
-&#125;
-Object.keys(data).forEach(key =&gt; reactive(data, key, data[key]))
-console.log(data.name)
-// 访问了name属性
-// jude
-data.name = &#39;summer&#39; // 将name由-&gt;jude-&gt;设置成-&gt;summer
-console.log(data.name)
-// 访问了name属性
-// summer
-</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-comment">// 响应式函数</span><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">reactive</span>(<span class="hljs-params">obj, key, value</span>) </span>&#123;<br>  <span class="hljs-built_in">Object</span>.defineProperty(data, key, &#123;<br>    <span class="hljs-function"><span class="hljs-title">get</span>(<span class="hljs-params"></span>)</span> &#123;<br>      <span class="hljs-built_in">console</span>.log(<span class="hljs-string">`访问了<span class="hljs-subst">$&#123;key&#125;</span>属性`</span>)<br>      <span class="hljs-keyword">return</span> value<br>    &#125;,<br>    <span class="hljs-function"><span class="hljs-title">set</span>(<span class="hljs-params">val</span>)</span> &#123;<br>      <span class="hljs-built_in">console</span>.log(<span class="hljs-string">`将<span class="hljs-subst">$&#123;key&#125;</span>由-&gt;<span class="hljs-subst">$&#123;value&#125;</span>-&gt;设置成-&gt;<span class="hljs-subst">$&#123;val&#125;</span>`</span>)<br>      <span class="hljs-keyword">if</span> (value !== val) &#123;<br>        value = val<br>      &#125;<br>    &#125;<br>  &#125;)<br>&#125;<br><span class="hljs-keyword">const</span> data = &#123;<br>  <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;jude&#x27;</span>,<br>  <span class="hljs-attr">age</span>: <span class="hljs-number">18</span><br>&#125;<br><span class="hljs-built_in">Object</span>.keys(data).forEach(<span class="hljs-function"><span class="hljs-params">key</span> =&gt;</span> reactive(data, key, data[key]))<br><span class="hljs-built_in">console</span>.log(data.name)<br><span class="hljs-comment">// 访问了name属性</span><br><span class="hljs-comment">// jude</span><br>data.name = <span class="hljs-string">&#x27;summer&#x27;</span> <span class="hljs-comment">// 将name由-&gt;jude-&gt;设置成-&gt;summer</span><br><span class="hljs-built_in">console</span>.log(data.name)<br><span class="hljs-comment">// 访问了name属性</span><br><span class="hljs-comment">// summer</span><br></code></pre></td></tr></table></figure>
+
 <p>Vue3的响应式函数：</p>
-<pre><code class="js">const data = &#123;
-  name: &#39;jude&#39;,
-  age: 18
-&#125;
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">const</span> data = &#123;<br>  <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;jude&#x27;</span>,<br>  <span class="hljs-attr">age</span>: <span class="hljs-number">18</span><br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">reactive</span>(<span class="hljs-params">target</span>) </span>&#123;<br>  <span class="hljs-keyword">const</span> handler = &#123;<br>    <span class="hljs-function"><span class="hljs-title">get</span>(<span class="hljs-params">target, key, receiver</span>)</span> &#123;<br>      <span class="hljs-built_in">console</span>.log(<span class="hljs-string">`访问了<span class="hljs-subst">$&#123;key&#125;</span>属性`</span>)<br>      <span class="hljs-keyword">return</span> <span class="hljs-built_in">Reflect</span>.get(target, key, receiver)<br>    &#125;,<br>    <span class="hljs-function"><span class="hljs-title">set</span>(<span class="hljs-params">target, key, value, receiver</span>)</span> &#123;<br>      <span class="hljs-built_in">console</span>.log(<span class="hljs-string">`将<span class="hljs-subst">$&#123;key&#125;</span>由-&gt;<span class="hljs-subst">$&#123;target[key]&#125;</span>-&gt;设置成-&gt;<span class="hljs-subst">$&#123;value&#125;</span>`</span>)<br>      <span class="hljs-built_in">Reflect</span>.set(target, key, value, receiver)<br>    &#125;<br>  &#125;<br><br>  <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Proxy</span>(target, handler)<br>&#125;<br><br><span class="hljs-keyword">const</span> proxyData = reactive(data)<br><br><span class="hljs-built_in">console</span>.log(proxyData.name)<br><span class="hljs-comment">// 访问了name属性</span><br><span class="hljs-comment">// jude</span><br>proxyData.name = <span class="hljs-string">&#x27;summer&#x27;</span><br><span class="hljs-comment">// 将name由-&gt;jude-&gt;设置成-&gt;summer</span><br><span class="hljs-built_in">console</span>.log(proxyData.name)<br><span class="hljs-comment">// 访问了name属性</span><br><span class="hljs-comment">// summer</span><br></code></pre></td></tr></table></figure>
 
-function reactive(target) &#123;
-  const handler = &#123;
-    get(target, key, receiver) &#123;
-      console.log(`访问了$&#123;key&#125;属性`)
-      return Reflect.get(target, key, receiver)
-    &#125;,
-    set(target, key, value, receiver) &#123;
-      console.log(`将$&#123;key&#125;由-&gt;$&#123;target[key]&#125;-&gt;设置成-&gt;$&#123;value&#125;`)
-      Reflect.set(target, key, value, receiver)
-    &#125;
-  &#125;
 
-  return new Proxy(target, handler)
-&#125;
 
-const proxyData = reactive(data)
 
-console.log(proxyData.name)
-// 访问了name属性
-// jude
-proxyData.name = &#39;summer&#39;
-// 将name由-&gt;jude-&gt;设置成-&gt;summer
-console.log(proxyData.name)
-// 访问了name属性
-// summer
-</code></pre>
-<pre><code class="js">/**
-* target: 要兼容的对象，可以是一个对象，数组,函数等等
-* handler: 是一个对象，里面包含了可以监听这个对象的行为函数，比如上面例子里面的get与set
-* 同时会返回一个新的对象proxy, 为了能够触发handler里面的函数，必须要使用返回值去进行其他操作，比如修改值
-*/
-const proxy = new Proxy(target, handler)
-</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-comment">/**</span><br><span class="hljs-comment">* target: 要兼容的对象，可以是一个对象，数组,函数等等</span><br><span class="hljs-comment">* handler: 是一个对象，里面包含了可以监听这个对象的行为函数，比如上面例子里面的get与set</span><br><span class="hljs-comment">* 同时会返回一个新的对象proxy, 为了能够触发handler里面的函数，必须要使用返回值去进行其他操作，比如修改值</span><br><span class="hljs-comment">*/</span><br><span class="hljs-keyword">const</span> proxy = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Proxy</span>(target, handler)<br><br></code></pre></td></tr></table></figure>
+
 <h3 id="1、handle-get、handle-set、handle-has、handler-deleteProperty"><a href="#1、handle-get、handle-set、handle-has、handler-deleteProperty" class="headerlink" title="1、handle.get、handle.set、handle.has、handler.deleteProperty"></a>1、handle.get、handle.set、handle.has、handler.deleteProperty</h3><blockquote>
 <p>当通过proxy去读取对象里面的属性的时候，会进入到get钩子函数里面<br>当通过proxy去为对象设置修改属性的时候，会进入到set钩子函数里面<br>当使用in判断属性是否在proxy代理对象里面时，会触发has<br>当使用delete去删除对象里面的属性的时候，会进入deleteProperty钩子函数</p>
 </blockquote>
 <h3 id="2、Reflect"><a href="#2、Reflect" class="headerlink" title="2、Reflect"></a>2、Reflect</h3><blockquote>
 <p>在上面，我们获取属性的值或者修改属性的值都是通过直接操作target来实现的，但实际上ES6已经为我们提供了在Proxy内部调用对象的默认行为的API: Reflect。</p>
 </blockquote>
-<pre><code class="js">const obj = &#123;&#125;
-const proxy = new Proxy(obj, &#123;
-  get(target,key,receiver) &#123;
-    return Reflect.get(target,key,receiver)
-  &#125;
-&#125;)
-</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">const</span> obj = &#123;&#125;<br><span class="hljs-keyword">const</span> proxy = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Proxy</span>(obj, &#123;<br>  <span class="hljs-function"><span class="hljs-title">get</span>(<span class="hljs-params">target,key,receiver</span>)</span> &#123;<br>    <span class="hljs-keyword">return</span> <span class="hljs-built_in">Reflect</span>.get(target,key,receiver)<br>  &#125;<br>&#125;)<br></code></pre></td></tr></table></figure>
+
+
 </article><section class="jump-container is-flex is-justify-content-space-between my-6"><!-- em is empty placeholder--><a class="button is-default" href="/2022/02/25/homebrew/" title="58、解决Homebrew安装失败"><i class="iconfont icon-prev mr-2 has-text-grey"></i><span class="has-text-weight-semibold">上一页: 58、解决Homebrew安装失败</span></a><a class="button is-default" href="/2022/02/23/http/" title="56、HTTP的请求方法、状态码"><span class="has-text-weight-semibold">下一页: 56、HTTP的请求方法、状态码</span><i class="iconfont icon-next ml-2 has-text-grey"></i></a></section></div></div></main></main><footer class="is-flex is-flex-direction-column is-align-items-center is-flex-shrink-0 is-family-serif"><section class="sns-container"><!-- Github--><a title="github" target="_blank" rel="noopener nofollow" href="//github.com/Jude"><i class="iconfont icon-github"></i></a><!-- Ins--><!-- RSS--><!-- 知乎--><a title="zhihu" target="_blank" rel="noopener nofollow" href="//zhihu.com/https://www.zhihu.com/hot"><i class="iconfont icon-zhihu"></i></a><!-- 领英--><!-- 脸书--></section><p><span>Copyright ©</span><span> Jude 2023</span></p><div class="is-flex is-justify-content-center is-flex-wrap-wrap"><p>Powered by Hexo &verbar;&nbsp;</p><p class="is-flex is-justify-content-center"><a title="Hexo theme author" target="_blank" rel="noopener" href="//github.com/haojen">Theme by Haojen&nbsp;</a></p><div style="margin-top: 2px"><a class="github-button" title="github-button" target="_blank" rel="noopener" href="https://github.com/haojen/hexo-theme-Claudia" data-color-scheme="no-preference: light; light: light; dark: dark;" data-show-count="true"></a></div></div><div><span>记住昨日的美好，过好今日的生活，憧憬明天的到来</span></div></footer><script async defer src="https://buttons.github.io/buttons.js"></script><script src="/js/post.js"></script></body></html>

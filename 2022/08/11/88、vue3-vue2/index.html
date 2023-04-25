@@ -4,40 +4,13 @@
 
 一、options api 选项式 API
 Options Api 可以理解为就是组件的各个选项，data、methods、computed、watch 等等就像是组件的一个个选项，在对应的选项里做对应的事情。
-export default &amp;#123;
-    data () &amp;#123;
-        return &amp;#123;
-            // 定义响应式数据的选项
-        &amp;#125;
-    &amp;#125;,
-    methods: &amp;#123;
-        // 定义相关方法的选项
-    &amp;#125;,
-    computed: &amp;#123;
-        // 计算属性的选项
- .."><meta name="generator" content="Hexo 5.4.1"></head><body class="is-flex is-flex-direction-column"><header class="header-widget is-flex-shrink-0 is-hidden-mobile"><div class="container is-fullhd is-flex is-justify-content-space-between is-align-items-center is-full-height"><section class="is-hidden-mobile is-flex-shrink-0"><h2><a href="/">Jude's blog</a></h2></section><h3 class="is-hidden-mobile is-family-serif is-full-height is-flex is-align-items-center is-flex-shrink-0"><div class="is-full-height" id="postTopic"><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">88、Vue3和Vue2</p><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">点击返回顶部</p></div></h3><aside class="is-flex-shrink-0"><h3 class="is-inline-block"><a href="/">首页</a></h3><h3 class="is-inline-block"><a href="/about">关于</a></h3><h3 class="is-inline-block"><a href="/archives">归档</a></h3></aside></div></header><header class="is-flex header-widget is-flex-shrink-0 is-align-items-center is-justify-content-center is-hidden-tablet"><h3 class="is-inline-block"><a href="/">首页</a></h3><h3 class="is-inline-block"><a href="/about">关于</a></h3><h3 class="is-inline-block"><a href="/archives">归档</a></h3></header><main><main class="container is-max-widescreen content section post-page pt-4 px-4"><div class="columns is-flex-desktop is-justify-content-center is-flex-direction-row-reverse"><div class="column is-3 is-hidden-mobile"><ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#1%E3%80%81Vue2-x-%E7%9A%84%E5%93%8D%E5%BA%94%E5%BC%8F%E2%80%94%E2%80%94Object-defineProperty"><span class="toc-text">1、Vue2.x 的响应式——Object.defineProperty</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2%E3%80%81Vue3-%E7%9A%84%E5%93%8D%E5%BA%94%E5%BC%8F-proxy"><span class="toc-text">2、Vue3 的响应式-proxy</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%9B%E3%80%81Vue2-%E5%8D%87%E7%BA%A7%E5%88%B0-Vue3-%E7%9A%84%E9%9D%9E%E5%85%BC%E5%AE%B9%E6%80%A7%E5%8F%98%E6%9B%B4"><span class="toc-text">四、Vue2 升级到 Vue3 的非兼容性变更</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1%E3%80%81createApp-%E7%9A%84%E9%9D%9E%E5%85%BC%E5%AE%B9%E6%80%A7%E5%8F%98%E6%9B%B4"><span class="toc-text">1、createApp 的非兼容性变更</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2%E3%80%81api-%E7%9A%84-import-%E5%AF%BC%E5%85%A5"><span class="toc-text">2、api 的 import 导入</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3%E3%80%81%E5%B0%8F%E7%BB%93"><span class="toc-text">3、小结</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%94%E3%80%81%E5%A6%82%E4%BD%95%E5%B0%86-Vue2-%E9%A1%B9%E7%9B%AE%E5%8D%87%E7%BA%A7%E5%88%B0-Vue3"><span class="toc-text">五、如何将 Vue2 项目升级到 Vue3?</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1%E3%80%81%E9%A1%B9%E7%9B%AE%E5%8D%87%E7%BA%A7%E6%96%B9%E6%B3%95%E4%B8%80"><span class="toc-text">1、项目升级方法一</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2%E3%80%81%E9%A1%B9%E7%9B%AE%E5%8D%87%E7%BA%A7%E6%96%B9%E6%B3%95%E4%BA%8C%EF%BC%9Agogocode"><span class="toc-text">2、项目升级方法二：gogocode</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%AD%E3%80%81vite"><span class="toc-text">六、vite</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1%E3%80%81%E4%BB%80%E4%B9%88%E6%98%AF-ES-Module%EF%BC%9F"><span class="toc-text">1、什么是 ES Module？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2%E3%80%81%E6%90%AD%E5%BB%BA-vite-%E9%A1%B9%E7%9B%AE"><span class="toc-text">2、搭建 vite 项目</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3%E3%80%81vite-%E9%A1%B9%E7%9B%AE%E7%9A%84%E7%9B%AE%E5%BD%95"><span class="toc-text">3、vite 项目的目录</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4%E3%80%81%E5%AE%89%E8%A3%85-vue-router-%E7%9A%84-4-x-%E7%89%88%E6%9C%AC"><span class="toc-text">4、安装 vue-router 的 4.x 版本</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%83%E3%80%81%E8%BE%93%E5%85%A5%E8%B7%AF%E7%94%B1%E7%9A%84%E6%97%B6%E5%80%99%E6%98%AF%E6%80%8E%E4%B9%88%E8%8E%B7%E5%8F%96%E5%88%B0%E9%A1%B5%E9%9D%A2%E7%9A%84"><span class="toc-text">七、输入路由的时候是怎么获取到页面的</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%AB%E3%80%81%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96"><span class="toc-text">八、性能优化</span></a></div><div class="column is-9"><header class="my-4"><a href="/tags/vue3"><i class="tag post-item-tag">vue3</i></a></header><h1 class="mt-0 mb-1 is-family-serif" id="postTitle">88、Vue3和Vue2</h1><time class="has-text-grey" datetime="2022-08-11T12:00:00.000Z">2022-08-11</time><article class="mt-2 post-content"><p>vue3 的 2 种响应式实现、Vue2 项目如何升级到 Vue3 等等。。。</p>
+1234567891011121314151617export default &amp;#123;    data () &amp;#123;        return &amp;#123;            // 定义响应式数据的选项        &amp;#125;    &amp;#125;,    methods: &amp;#123;        // 定义相关方法的选项    &amp;#125;,    computed: &amp;#123;     .."><meta name="generator" content="Hexo 5.4.1"></head><body class="is-flex is-flex-direction-column"><header class="header-widget is-flex-shrink-0 is-hidden-mobile"><div class="container is-fullhd is-flex is-justify-content-space-between is-align-items-center is-full-height"><section class="is-hidden-mobile is-flex-shrink-0"><h2><a href="/">Jude's blog</a></h2></section><h3 class="is-hidden-mobile is-family-serif is-full-height is-flex is-align-items-center is-flex-shrink-0"><div class="is-full-height" id="postTopic"><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">88、Vue3和Vue2</p><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">点击返回顶部</p></div></h3><aside class="is-flex-shrink-0"><h3 class="is-inline-block"><a href="/">首页</a></h3><h3 class="is-inline-block"><a href="/about">关于</a></h3><h3 class="is-inline-block"><a href="/archives">归档</a></h3></aside></div></header><header class="is-flex header-widget is-flex-shrink-0 is-align-items-center is-justify-content-center is-hidden-tablet"><h3 class="is-inline-block"><a href="/">首页</a></h3><h3 class="is-inline-block"><a href="/about">关于</a></h3><h3 class="is-inline-block"><a href="/archives">归档</a></h3></header><main><main class="container is-max-widescreen content section post-page pt-4 px-4"><div class="columns is-flex-desktop is-justify-content-center is-flex-direction-row-reverse"><div class="column is-3 is-hidden-mobile"><ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#1%E3%80%81Vue2-x-%E7%9A%84%E5%93%8D%E5%BA%94%E5%BC%8F%E2%80%94%E2%80%94Object-defineProperty"><span class="toc-text">1、Vue2.x 的响应式——Object.defineProperty</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2%E3%80%81Vue3-%E7%9A%84%E5%93%8D%E5%BA%94%E5%BC%8F-proxy"><span class="toc-text">2、Vue3 的响应式-proxy</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%9B%E3%80%81Vue2-%E5%8D%87%E7%BA%A7%E5%88%B0-Vue3-%E7%9A%84%E9%9D%9E%E5%85%BC%E5%AE%B9%E6%80%A7%E5%8F%98%E6%9B%B4"><span class="toc-text">四、Vue2 升级到 Vue3 的非兼容性变更</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1%E3%80%81createApp-%E7%9A%84%E9%9D%9E%E5%85%BC%E5%AE%B9%E6%80%A7%E5%8F%98%E6%9B%B4"><span class="toc-text">1、createApp 的非兼容性变更</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2%E3%80%81api-%E7%9A%84-import-%E5%AF%BC%E5%85%A5"><span class="toc-text">2、api 的 import 导入</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3%E3%80%81%E5%B0%8F%E7%BB%93"><span class="toc-text">3、小结</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%94%E3%80%81%E5%A6%82%E4%BD%95%E5%B0%86-Vue2-%E9%A1%B9%E7%9B%AE%E5%8D%87%E7%BA%A7%E5%88%B0-Vue3"><span class="toc-text">五、如何将 Vue2 项目升级到 Vue3?</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1%E3%80%81%E9%A1%B9%E7%9B%AE%E5%8D%87%E7%BA%A7%E6%96%B9%E6%B3%95%E4%B8%80"><span class="toc-text">1、项目升级方法一</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2%E3%80%81%E9%A1%B9%E7%9B%AE%E5%8D%87%E7%BA%A7%E6%96%B9%E6%B3%95%E4%BA%8C%EF%BC%9Agogocode"><span class="toc-text">2、项目升级方法二：gogocode</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%AD%E3%80%81vite"><span class="toc-text">六、vite</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1%E3%80%81%E4%BB%80%E4%B9%88%E6%98%AF-ES-Module%EF%BC%9F"><span class="toc-text">1、什么是 ES Module？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2%E3%80%81%E6%90%AD%E5%BB%BA-vite-%E9%A1%B9%E7%9B%AE"><span class="toc-text">2、搭建 vite 项目</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3%E3%80%81vite-%E9%A1%B9%E7%9B%AE%E7%9A%84%E7%9B%AE%E5%BD%95"><span class="toc-text">3、vite 项目的目录</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4%E3%80%81%E5%AE%89%E8%A3%85-vue-router-%E7%9A%84-4-x-%E7%89%88%E6%9C%AC"><span class="toc-text">4、安装 vue-router 的 4.x 版本</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%83%E3%80%81%E8%BE%93%E5%85%A5%E8%B7%AF%E7%94%B1%E7%9A%84%E6%97%B6%E5%80%99%E6%98%AF%E6%80%8E%E4%B9%88%E8%8E%B7%E5%8F%96%E5%88%B0%E9%A1%B5%E9%9D%A2%E7%9A%84"><span class="toc-text">七、输入路由的时候是怎么获取到页面的</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%AB%E3%80%81%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96"><span class="toc-text">八、性能优化</span></a></div><div class="column is-9"><header class="my-4"><a href="/tags/vue3"><i class="tag post-item-tag">vue3</i></a></header><h1 class="mt-0 mb-1 is-family-serif" id="postTitle">88、Vue3和Vue2</h1><time class="has-text-grey" datetime="2022-08-11T12:00:00.000Z">2022-08-11</time><article class="mt-2 post-content"><p>vue3 的 2 种响应式实现、Vue2 项目如何升级到 Vue3 等等。。。</p>
 <span id="more"></span>
 
 <p>一、options api 选项式 API</p>
 <p>Options Api 可以理解为就是组件的各个选项，data、methods、computed、watch 等等就像是组件的一个个选项，在对应的选项里做对应的事情。</p>
-<pre><code class="js">export default &#123;
-    data () &#123;
-        return &#123;
-            // 定义响应式数据的选项
-        &#125;
-    &#125;,
-    methods: &#123;
-        // 定义相关方法的选项
-    &#125;,
-    computed: &#123;
-        // 计算属性的选项
-    &#125;,
-    watch: &#123;
-        // 监听数据的选项
-    &#125;
-    ...
-&#125;
-</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> &#123;<br>    data () &#123;<br>        <span class="hljs-keyword">return</span> &#123;<br>            <span class="hljs-comment">// 定义响应式数据的选项</span><br>        &#125;<br>    &#125;,<br>    <span class="hljs-attr">methods</span>: &#123;<br>        <span class="hljs-comment">// 定义相关方法的选项</span><br>    &#125;,<br>    <span class="hljs-attr">computed</span>: &#123;<br>        <span class="hljs-comment">// 计算属性的选项</span><br>    &#125;,<br>    <span class="hljs-attr">watch</span>: &#123;<br>        <span class="hljs-comment">// 监听数据的选项</span><br>    &#125;<br>    ...<br>&#125;<br></code></pre></td></tr></table></figure>
+
 <p>在 data 中定义的数据，是无法做到响应式的，那是因为 Object.definePropety 只会对 data 选项中的数据进行递归拦截</p>
 <p>在实际项目的开发过程中，数据定义在 data 中，方法定义在 methods 中，当我们的代码多起来，比如达到四、五百行的时候，如果我们想改动某个功能，就要去 data 中改数据，再去 methods 中改方法，来回地寻找。</p>
 <p>二、composition api 组合式 api</p>
@@ -46,14 +19,8 @@ export default &amp;#123;
 <p>支持将相同的功能模块代码写在一起，甚至可以将某个功能单独的封装成函数，随意导入引用；也可以将任意的数据定义成响应式，再也不用局限于 data 中，我们只需要将每个实现的功能组合起来就可以了。</p>
 </blockquote>
 <p>示例：</p>
-<pre><code class="js">&lt;template&gt;
-    &lt;div&gt;&#123;&#123;count&#125;&#125;&lt;/div&gt;
-&lt;/template&gt;
-&lt;script setup&gt;
-    import &#123; ref &#125; from &quot;vue&quot;;
-    let count = ref(0);
-&lt;/script&gt;
-</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs js">&lt;template&gt;<br>    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>&#123;&#123;count&#125;&#125;<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span><br>&lt;/template&gt;<br><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">setup</span>&gt;</span><span class="javascript"></span></span><br><span class="javascript"><span class="xml">    <span class="hljs-keyword">import</span> &#123; ref &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;vue&quot;</span>;</span></span><br><span class="javascript"><span class="xml">    <span class="hljs-keyword">let</span> count = ref(<span class="hljs-number">0</span>);</span></span><br><span class="javascript"><span class="xml"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></span><br></code></pre></td></tr></table></figure>
+
 <p>2、watchEffect</p>
 <p>(1)、watchEffect 是立即执行的，不需要添加 immediate 属性。</p>
 <p>(2)、watchEffect 不需要指定对某个具体的数据监听，watchEffect 会根据内容自动去感知，所以我们也可以在一个 watchEffect 中添加多个数据的监听处理</p>
@@ -91,56 +58,16 @@ export default &amp;#123;
 <p>在 Vue2.x 中，响应式的机制深入人心，我们只需要在 data 中定义我们需要的数据，就会在初始化时被自动转为响应式数据。</p>
 <p>但是在 Vue2 中，响应式的使用还存在一些限制，比如对象属性的增加和删除等并不能被监听到，在 Vue3 中，重新设计了响应式系统来解决这些问题。</p>
 <h4 id="1、Vue2-x-的响应式——Object-defineProperty"><a href="#1、Vue2-x-的响应式——Object-defineProperty" class="headerlink" title="1、Vue2.x 的响应式——Object.defineProperty"></a>1、Vue2.x 的响应式——Object.defineProperty</h4><p>Vue2 响应式失效的现象</p>
-<pre><code class="js">&lt;template&gt;
-    &lt;div&gt;
-        &lt;span&gt;姓名：&lt;/span&gt;
-        &lt;span&gt;&#123;&#123;person.name&#125;&#125;&lt;/span&gt;
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><code class="hljs js">&lt;template&gt;<br>    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span></span><br><span class="xml">        <span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>姓名：<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span></span><br><span class="xml">        <span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>&#123;&#123;person.name&#125;&#125;<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span></span><br><span class="xml"></span><br><span class="xml">        <span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>年龄：<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span></span><br><span class="xml">        <span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>&#123;&#123;person.age&#125;&#125;<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span></span><br><span class="xml"></span><br><span class="xml">        <span class="hljs-tag">&lt;<span class="hljs-name">button</span> @<span class="hljs-attr">click</span>=<span class="hljs-string">&quot;changeName&quot;</span>&gt;</span>修改姓名<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span></span><br><span class="xml">        <span class="hljs-tag">&lt;<span class="hljs-name">button</span> @<span class="hljs-attr">click</span>=<span class="hljs-string">&quot;addAge&quot;</span>&gt;</span>增加年龄<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span></span><br><span class="xml">    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span><br>&lt;/template&gt;<br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> &#123;<br>    data () &#123;<br>        <span class="hljs-keyword">return</span> &#123;<br>            <span class="hljs-attr">person</span>: &#123;<br>                <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;小明&#x27;</span><br>            &#125;<br>        &#125;<br>     &#125;,<br>     <span class="hljs-attr">methods</span>: &#123;<br>         <span class="hljs-function"><span class="hljs-title">addAge</span>(<span class="hljs-params"></span>)</span> &#123;<br>             <span class="hljs-built_in">this</span>.person.age = <span class="hljs-string">&#x27;18&#x27;</span>;<br>         &#125;,<br>         <span class="hljs-function"><span class="hljs-title">changeName</span>(<span class="hljs-params"></span>)</span> &#123;<br>             <span class="hljs-built_in">this</span>.person.name = <span class="hljs-string">&#x27;小红&#x27;</span>;<br>         &#125;<br>     &#125;<br>    ...<br>&#125;<br></code></pre></td></tr></table></figure>
 
-        &lt;span&gt;年龄：&lt;/span&gt;
-        &lt;span&gt;&#123;&#123;person.age&#125;&#125;&lt;/span&gt;
-
-        &lt;button @click=&quot;changeName&quot;&gt;修改姓名&lt;/button&gt;
-        &lt;button @click=&quot;addAge&quot;&gt;增加年龄&lt;/button&gt;
-    &lt;/div&gt;
-&lt;/template&gt;
-export default &#123;
-    data () &#123;
-        return &#123;
-            person: &#123;
-                name: &#39;小明&#39;
-            &#125;
-        &#125;
-     &#125;,
-     methods: &#123;
-         addAge() &#123;
-             this.person.age = &#39;18&#39;;
-         &#125;,
-         changeName() &#123;
-             this.person.name = &#39;小红&#39;;
-         &#125;
-     &#125;
-    ...
-&#125;
-</code></pre>
 <p>data 里面只定义了一个响应式对象 person，我们定义了 2 个方法，一个是修改名称、一个是增加年龄，但是使用增加年龄方法时，会给响应式对象添加一个新的属性 age，页面上的年龄部分并不会发生改变。</p>
 <p>Vue2 是通过 Object.defineProperty 循环遍历拦截 data 中的数据来实现响应式的。</p>
 <blockquote>
 <p><strong>Object.defineProperty 其实不是真正的代理，而应该是拦截</strong></p>
 </blockquote>
 <p>而且 Object.defineProperty 也不是对对象进行拦截，而是拦截对象的具体的某个属性。</p>
-<pre><code class="js">const person = &#123;&#125;;
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">const</span> person = &#123;&#125;;<br><br><span class="hljs-built_in">Object</span>.defineProperty(person, <span class="hljs-string">&quot;name&quot;</span>, &#123;<br>  <span class="hljs-function"><span class="hljs-title">set</span>(<span class="hljs-params">value</span>)</span> &#123;<br>    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;name:&quot;</span>, value);<br>  &#125;,<br>  <span class="hljs-function"><span class="hljs-title">get</span>(<span class="hljs-params"></span>)</span> &#123;<br>    <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;小明&quot;</span>;<br>  &#125;,<br>&#125;);<br><br><span class="hljs-built_in">console</span>.log(person.name);<br></code></pre></td></tr></table></figure>
 
-Object.defineProperty(person, &quot;name&quot;, &#123;
-  set(value) &#123;
-    console.log(&quot;name:&quot;, value);
-  &#125;,
-  get() &#123;
-    return &quot;小明&quot;;
-  &#125;,
-&#125;);
-
-console.log(person.name);
-</code></pre>
 <p>Vue2.x 的响应式实现其实就是递归遍历 data 中返回的对象，对每一个属性都使用 Object.defineProperty 进行拦截，而不在 data 中被初始化的数据是没有添加拦截的。</p>
 <p>Vue2 如何添加和删除响应式数据？</p>
 <p>需要额外的 api 来实现，Vue.$set 和Vue.$delete 方法分别实现添加、删除响应式数据</p>
@@ -157,81 +84,32 @@ console.log(person.name);
 <h4 id="2、Vue3-的响应式-proxy"><a href="#2、Vue3-的响应式-proxy" class="headerlink" title="2、Vue3 的响应式-proxy"></a>2、Vue3 的响应式-proxy</h4><blockquote>
 <p>proxy 是真正地对整个对象进行代理，因为 proxy 可以劫持整个对象，所以 Object.defineProperty 中新增，删除某个属性无法检测的问题就不存在了，同时 proxy 也可以检测数组的变化</p>
 </blockquote>
-<pre><code class="js">const person = &#123;
-  name: &quot;小明&quot;,
-  age: 18,
-&#125;;
-const personProxy = new Proxy(person, &#123;
-  get: function (target, prop) &#123;
-    console.log(`获取了$&#123;prop&#125;:`, target[prop]);
-    return target[prop];
-  &#125;,
-  set: function (target, prop, value) &#123;
-    console.log(`修改了$&#123;prop&#125;:`, value);
-    target[prop] = value;
-  &#125;,
-&#125;);
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">const</span> person = &#123;<br>  <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;小明&quot;</span>,<br>  <span class="hljs-attr">age</span>: <span class="hljs-number">18</span>,<br>&#125;;<br><span class="hljs-keyword">const</span> personProxy = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Proxy</span>(person, &#123;<br>  <span class="hljs-attr">get</span>: <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">target, prop</span>) </span>&#123;<br>    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">`获取了<span class="hljs-subst">$&#123;prop&#125;</span>:`</span>, target[prop]);<br>    <span class="hljs-keyword">return</span> target[prop];<br>  &#125;,<br>  <span class="hljs-attr">set</span>: <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">target, prop, value</span>) </span>&#123;<br>    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">`修改了<span class="hljs-subst">$&#123;prop&#125;</span>:`</span>, value);<br>    target[prop] = value;<br>  &#125;,<br>&#125;);<br><br><span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;name:&quot;</span>, personProxy.name); <span class="hljs-comment">// 获取了name:小明</span><br>personProxy.age = <span class="hljs-number">20</span>; <span class="hljs-comment">// 修改了age:20</span><br></code></pre></td></tr></table></figure>
 
-console.log(&quot;name:&quot;, personProxy.name); // 获取了name:小明
-personProxy.age = 20; // 修改了age:20
-</code></pre>
 <p>参数 target，表示当前代理的对象，prop 是我们具体要操作的属性，set 多了一个参数 value 是我们对新属性的赋值。</p>
 <p>从方法的参数我们其实就能看出来，proxy 是真的对整个对象进行拦截的，我们如果有新增或删除的属性，也不需要单独去添加处理，可以直接被检测代理。</p>
 <p>在添加删除属性时，无需额外的 api。proxy 不支持 IE11。</p>
 <p>vue3 另外一个代理的方法，那就是对象本身的 get、set 方法</p>
-<pre><code class="js">const count = &#123;
-  _value: 0,
-  set value(num) &#123;
-    console.log(&quot;修改了count:&quot;, num);
-    this._value = num;
-  &#125;,
-  get value() &#123;
-    console.log(&quot;获取了count&quot;);
-    return this._value;
-  &#125;,
-&#125;;
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">const</span> count = &#123;<br>  <span class="hljs-attr">_value</span>: <span class="hljs-number">0</span>,<br>  <span class="hljs-keyword">set</span> <span class="hljs-title">value</span>(<span class="hljs-params">num</span>) &#123;<br>    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;修改了count:&quot;</span>, num);<br>    <span class="hljs-built_in">this</span>._value = num;<br>  &#125;,<br>  <span class="hljs-keyword">get</span> <span class="hljs-title">value</span>() &#123;<br>    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;获取了count&quot;</span>);<br>    <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>._value;<br>  &#125;,<br>&#125;;<br><br><span class="hljs-built_in">console</span>.log(count.value); <span class="hljs-comment">// 获取了count</span><br>count.value = <span class="hljs-number">1</span>; <span class="hljs-comment">// 修改了count: 1</span><br></code></pre></td></tr></table></figure>
 
-console.log(count.value); // 获取了count
-count.value = 1; // 修改了count: 1
-</code></pre>
 <p>这其实就是为什么我们使用 ref 定义的数据，赋值和取值的时候需要使用 xxx.value 了</p>
 <p>一个 Vue3 composition api 常用的工具集：VueUse</p>
 <h2 id="四、Vue2-升级到-Vue3-的非兼容性变更"><a href="#四、Vue2-升级到-Vue3-的非兼容性变更" class="headerlink" title="四、Vue2 升级到 Vue3 的非兼容性变更"></a>四、Vue2 升级到 Vue3 的非兼容性变更</h2><p>Vue3 中做了很多重构，有部分内容对于 Vue2 来说是不兼容的，所以说 Vue2 的代码直接升级到 Vue3 是不能直接运行的。</p>
 <h4 id="1、createApp-的非兼容性变更"><a href="#1、createApp-的非兼容性变更" class="headerlink" title="1、createApp 的非兼容性变更"></a>1、createApp 的非兼容性变更</h4><p>Vue2 根实例挂载及全局组件注册方法：</p>
-<pre><code class="js">import Vue from &quot;vue&quot;;
-import App from &quot;./App.vue&quot;;
-// 引入全局组件
-import GlobalComponent from &quot;./GlobalComponent.vue&quot;;
-// 注册全局组件
-Vue.component(&quot;GlobalComponent&quot;, GlobalComponent);
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">import</span> Vue <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;vue&quot;</span>;<br><span class="hljs-keyword">import</span> App <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;./App.vue&quot;</span>;<br><span class="hljs-comment">// 引入全局组件</span><br><span class="hljs-keyword">import</span> GlobalComponent <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;./GlobalComponent.vue&quot;</span>;<br><span class="hljs-comment">// 注册全局组件</span><br>Vue.component(<span class="hljs-string">&quot;GlobalComponent&quot;</span>, GlobalComponent);<br><br><span class="hljs-keyword">new</span> Vue(&#123;<br>  <span class="hljs-attr">render</span>: <span class="hljs-function">(<span class="hljs-params">h</span>) =&gt;</span> h(App),<br>&#125;).$mount(<span class="hljs-string">&quot;#app&quot;</span>);<br></code></pre></td></tr></table></figure>
 
-new Vue(&#123;
-  render: (h) =&gt; h(App),
-&#125;).$mount(&quot;#app&quot;);
-</code></pre>
 <p>Vue3 不直接在 Vue 对象上进行操作了，而是通过 createApp 来创建一个 App 应用实例，所有的操作都在 App 上进行</p>
-<pre><code class="js">import &#123; createApp &#125; from &quot;vue&quot;;
-import App from &quot;./App.vue&quot;;
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">import</span> &#123; createApp &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;vue&quot;</span>;<br><span class="hljs-keyword">import</span> App <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;./App.vue&quot;</span>;<br><br>createApp(App).mount(<span class="hljs-string">&quot;#app&quot;</span>);<br></code></pre></td></tr></table></figure>
 
-createApp(App).mount(&quot;#app&quot;);
-</code></pre>
 <p>现在我们想要在一个 App 上引入 store，就可以使用下面的写法(<strong>全局对象被共享是一件非常危险的事情</strong>)</p>
-<pre><code class="js">// 引入封装好的store
-import store from &quot;./store&quot;;
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-comment">// 引入封装好的store</span><br><span class="hljs-keyword">import</span> store <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;./store&quot;</span>;<br><br>createApp(App).use(store).mount(<span class="hljs-string">&quot;#app&quot;</span>);<br>createApp(App2).mount(<span class="hljs-string">&quot;#app2&quot;</span>);<br></code></pre></td></tr></table></figure>
 
-createApp(App).use(store).mount(&quot;#app&quot;);
-createApp(App2).mount(&quot;#app2&quot;);
-</code></pre>
 <p>App 实例上的 store 不会影响 App2</p>
 <h4 id="2、api-的-import-导入"><a href="#2、api-的-import-导入" class="headerlink" title="2、api 的 import 导入"></a>2、api 的 import 导入</h4><blockquote>
 <p><strong>我们在使用这些挂载在 Vue 对象下的 Api 时，需要经过 import 导入的方式来使用。</strong></p>
 </blockquote>
-<pre><code class="js">import &#123; nextTick &#125; from &#39;vue&#39;;
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">import</span> &#123; nextTick &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;vue&#x27;</span>;<br><br>nextTick(<span class="hljs-function">() =&gt;</span> &#123;<br>    ...<br>&#125;)<br></code></pre></td></tr></table></figure>
 
-nextTick(() =&gt; &#123;
-    ...
-&#125;)
-</code></pre>
 <p>按需加载的使用。</p>
 <p>在 Vue2 的 Api 中，都是挂载在 Vue 下面，那么在打包的时候，会不管你有没有使用到这个 Api，都会一起打包进去，如果都是这样，随着 Vue 的全局 Api 越来越多，冗余的代码也就越多，打包的耗时、体积或者说代价也就越大。</p>
 <p>在 Vue3 中，通过 import 导入 Api 来使用，那我们在打包的时候，则只会将对应的模块打包进去，做到真正的用了多少就打包多少，就算 Vue 中再增加多少代码，也不会影响我们打包的项目。</p>
@@ -241,34 +119,11 @@ nextTick(() =&gt; &#123;
 <li>全局和内部 API 已经被重构，需要使用 import 导入使用，并且支持 tree-shake。</li>
 </ol>
 <p>如何将 localStorage 中的数据变成响应式的？</p>
-<pre><code class="js">// tool.js
-import &#123; ref, watchEffect &#125; from &quot;vue&quot;;
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-comment">// tool.js</span><br><span class="hljs-keyword">import</span> &#123; ref, watchEffect &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;vue&quot;</span>;<br><br><span class="hljs-keyword">const</span> useLocalStorage = <span class="hljs-function">(<span class="hljs-params">name, value = &#123;&#125;</span>) =&gt;</span> &#123;<br>  <span class="hljs-keyword">const</span> localData = ref(<span class="hljs-built_in">JSON</span>.parse(<span class="hljs-built_in">localStorage</span>.getItem(name)) || value);<br><br>  watchEffect(<span class="hljs-function">() =&gt;</span> &#123;<br>    <span class="hljs-comment">// 监听本地localstorage数据对应的响应式变量更改</span><br>    <span class="hljs-built_in">localStorage</span>.setItem(name, <span class="hljs-built_in">JSON</span>.stringify(localData.value));<br>  &#125;);<br><br>  <span class="hljs-keyword">return</span> localData;<br>&#125;;<br><br><span class="hljs-keyword">export</span> &#123; useLocalStorage &#125;;<br></code></pre></td></tr></table></figure>
 
-const useLocalStorage = (name, value = &#123;&#125;) =&gt; &#123;
-  const localData = ref(JSON.parse(localStorage.getItem(name)) || value);
-
-  watchEffect(() =&gt; &#123;
-    // 监听本地localstorage数据对应的响应式变量更改
-    localStorage.setItem(name, JSON.stringify(localData.value));
-  &#125;);
-
-  return localData;
-&#125;;
-
-export &#123; useLocalStorage &#125;;
-</code></pre>
 <p>假设有一个计数器，需要将数据同步到本地的 localStorage 中，我们只需要在计数器文件中引入 useLocalStorage 方法即可：</p>
-<pre><code class="js">&lt;script setup&gt;
-  import &#123;useLocalStorage&#125; from &#39;./useLocalStorage&#39;;
-  // 定义响应式数据
-  let count = useLocalStorage(&#39;count&#39;, 0);
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs js">&lt;script setup&gt;<br>  <span class="hljs-keyword">import</span> &#123;useLocalStorage&#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./useLocalStorage&#x27;</span>;<br>  <span class="hljs-comment">// 定义响应式数据</span><br>  <span class="hljs-keyword">let</span> count = useLocalStorage(<span class="hljs-string">&#x27;count&#x27;</span>, <span class="hljs-number">0</span>);<br><br>  <span class="hljs-keyword">const</span> addCount = <span class="hljs-function">() =&gt;</span> &#123;<br>    count.value ++;<br>  &#125;<br><br>&lt;/script&gt;<br></code></pre></td></tr></table></figure>
 
-  const addCount = () =&gt; &#123;
-    count.value ++;
-  &#125;
-
-&lt;/script&gt;
-</code></pre>
 <h2 id="五、如何将-Vue2-项目升级到-Vue3"><a href="#五、如何将-Vue2-项目升级到-Vue3" class="headerlink" title="五、如何将 Vue2 项目升级到 Vue3?"></a>五、如何将 Vue2 项目升级到 Vue3?</h2><h4 id="1、项目升级方法一"><a href="#1、项目升级方法一" class="headerlink" title="1、项目升级方法一"></a>1、项目升级方法一</h4><p>将 vue-cli 升级到高版本</p>
 <p>Vue 的依赖版本升级到 vue3,需要安装@vue/compat</p>
 <blockquote>
@@ -278,70 +133,25 @@ export &#123; useLocalStorage &#125;;
 </blockquote>
 <p>@vue/compat 是 Vue2 和 Vue3 的一个过渡产物，@vue/compat 可以运行在 Vue2 的环境下，但会对 Vue3 不兼容或者废弃的部分进行警告，我们引入@vue/compat 后，只需要根据警告的内容进行修改就可以了。<br>通过@vue/compat 也可以对警告进行分类过滤，单独针对某一些问题进行修改.</p>
 <p>安装完 Vue 和@vue/compat 的依赖后，还需要在项目根目录下新增 vue.config.js 文件，包含以下内容:</p>
-<pre><code class="js">// vue.config.js
-module.exports = &#123;
-  chainWebpack: (config) =&gt; &#123;
-    config.resolve.alias.set(&quot;vue&quot;, &quot;@vue/compat&quot;);
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-comment">// vue.config.js</span><br><span class="hljs-built_in">module</span>.exports = &#123;<br>  <span class="hljs-attr">chainWebpack</span>: <span class="hljs-function">(<span class="hljs-params">config</span>) =&gt;</span> &#123;<br>    config.resolve.alias.set(<span class="hljs-string">&quot;vue&quot;</span>, <span class="hljs-string">&quot;@vue/compat&quot;</span>);<br><br>    config.module<br>      .rule(<span class="hljs-string">&quot;vue&quot;</span>)<br>      .use(<span class="hljs-string">&quot;vue-loader&quot;</span>)<br>      .tap(<span class="hljs-function">(<span class="hljs-params">options</span>) =&gt;</span> &#123;<br>        <span class="hljs-keyword">return</span> &#123;<br>          ...options,<br>          <span class="hljs-attr">compilerOptions</span>: &#123;<br>            <span class="hljs-attr">compatConfig</span>: &#123;<br>              <span class="hljs-attr">MODE</span>: <span class="hljs-number">2</span>,<br>            &#125;,<br>          &#125;,<br>        &#125;;<br>      &#125;);<br>  &#125;,<br>&#125;;<br></code></pre></td></tr></table></figure>
 
-    config.module
-      .rule(&quot;vue&quot;)
-      .use(&quot;vue-loader&quot;)
-      .tap((options) =&gt; &#123;
-        return &#123;
-          ...options,
-          compilerOptions: &#123;
-            compatConfig: &#123;
-              MODE: 2,
-            &#125;,
-          &#125;,
-        &#125;;
-      &#125;);
-  &#125;,
-&#125;;
-</code></pre>
 <p>运行项目，根据警告信息的内容去 Vue 官网的特性参考中查询具体的错误原因，以及修改方案。</p>
 <p>vue-router 和 vuex 都要升级到 v4，Element-ui 也要更新到 Vue3 对应的版本（element-plus）</p>
 <p>vue3 版本 router 部分的写法：</p>
-<pre><code class="js">import &#123; createRouter, createWebHashHistory &#125; from &quot;vue-router&quot;;
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">import</span> &#123; createRouter, createWebHashHistory &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;vue-router&quot;</span>;<br><br><span class="hljs-keyword">import</span> Home <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;../pages/home.vue&quot;</span>;<br><span class="hljs-keyword">import</span> Login <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;../pages/login.vue&quot;</span>;<br><br><span class="hljs-keyword">const</span> routes = [<br>  &#123;<br>    <span class="hljs-attr">path</span>: <span class="hljs-string">&quot;/home&quot;</span>,<br>    <span class="hljs-attr">component</span>: Home,<br>  &#125;,<br>  &#123;<br>    <span class="hljs-attr">path</span>: <span class="hljs-string">&quot;/&quot;</span>,<br>    <span class="hljs-attr">component</span>: Login,<br>  &#125;,<br>];<br><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> createRouter(&#123;<br>  <span class="hljs-attr">history</span>: createWebHashHistory(),<br>  routes,<br>&#125;);<br></code></pre></td></tr></table></figure>
 
-import Home from &quot;../pages/home.vue&quot;;
-import Login from &quot;../pages/login.vue&quot;;
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-comment">// main.js</span><br><span class="hljs-keyword">import</span> &#123; createApp &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;vue&quot;</span>;<br><br><span class="hljs-keyword">import</span> App <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;./App.vue&quot;</span>;<br><span class="hljs-keyword">import</span> routers <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;./router&quot;</span>;<br><br><span class="hljs-keyword">const</span> app = createApp(App);<br>app.use(routers).mount(<span class="hljs-string">&quot;#app&quot;</span>);<br></code></pre></td></tr></table></figure>
 
-const routes = [
-  &#123;
-    path: &quot;/home&quot;,
-    component: Home,
-  &#125;,
-  &#123;
-    path: &quot;/&quot;,
-    component: Login,
-  &#125;,
-];
-
-export default createRouter(&#123;
-  history: createWebHashHistory(),
-  routes,
-&#125;);
-</code></pre>
-<pre><code class="js">// main.js
-import &#123; createApp &#125; from &quot;vue&quot;;
-
-import App from &quot;./App.vue&quot;;
-import routers from &quot;./router&quot;;
-
-const app = createApp(App);
-app.use(routers).mount(&quot;#app&quot;);
-</code></pre>
 <h4 id="2、项目升级方法二：gogocode"><a href="#2、项目升级方法二：gogocode" class="headerlink" title="2、项目升级方法二：gogocode"></a>2、项目升级方法二：gogocode</h4><p>1、安装最新的 gogocode-cli</p>
-<pre><code class="js">npm install gogocode-cli -g
-</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs js">npm install gogocode-cli -g<br></code></pre></td></tr></table></figure>
+
 <p>2、在需要升级的项目根目录下，运行下面的指令</p>
-<pre><code class="js">gogocode -s ./src -t gogocode-plugin-vue -o ./src-out
-</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs js">gogocode -s ./src -t gogocode-plugin-vue -o ./src-out<br></code></pre></td></tr></table></figure>
+
 <p>-s 后面指的是需要升级的源码文件夹，-o 后面的参数指的是升级后的代码输出位置</p>
 <p>3、代码转换了还不够，我们项目的依赖都要升级到对应版本<br>GOGOCode 可以帮我们把 package.json 里面的 Vue/Vuex/Vue-router/Vue 编译工具升级到适配 Vue3 的版本，在项目根目录下执行以下指令</p>
-<pre><code class="js">gogocode -s package.json -t gogocode-plugin-vue -o package.json
-</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs js">gogocode -s package.json -t gogocode-plugin-vue -o package.json<br></code></pre></td></tr></table></figure>
+
 <p>虽然使用了 GOGOCode，但也不代表我们的项目就可以直接完成升级，项目中如果用到了其他 Vue2 版本的组件库，还是需要我们自己去升级 Vue3 对应的版本，包括一些 Api 的变化都要我们自己去手动调整，并且使用 GOGOCode 也有一些转化规则是不支持的，具体的可以参考 GOGOCode 的转化规则覆盖。</p>
 <h2 id="六、vite"><a href="#六、vite" class="headerlink" title="六、vite"></a>六、vite</h2><h4 id="1、什么是-ES-Module？"><a href="#1、什么是-ES-Module？" class="headerlink" title="1、什么是 ES Module？"></a>1、什么是 ES Module？</h4><blockquote>
 <p>将 JavaScript 程序拆分为可按需导入的单独模块的机制，简单来说就是我们可以对 JavaScript 模块化开发，通过 import 和 export 来导入导出我们的模块内容</p>
@@ -350,65 +160,15 @@ app.use(routers).mount(&quot;#app&quot;);
 <p>Esbuild 的优势：</p>
 <p>1、语言优势，Esbuild 使用 Go 语言开发，相对于 JavaScript，Go 语言是一种编译型语言，在编译阶段就已经将源码转译为机器码。</p>
 <p>2、多线程，Rollup 和 webpack 都没有使用多线程的能力，而 Esbuild 在算法上进行了大量的优化，充分的利用了多 CPU 的优势。</p>
-<h4 id="2、搭建-vite-项目"><a href="#2、搭建-vite-项目" class="headerlink" title="2、搭建 vite 项目"></a>2、搭建 vite 项目</h4><pre><code class="js">// node 16.3.0
-npm init vite@latest
-</code></pre>
-<h4 id="3、vite-项目的目录"><a href="#3、vite-项目的目录" class="headerlink" title="3、vite 项目的目录"></a>3、vite 项目的目录</h4><pre><code class="js">    |-- .gitignore
-    |-- index.html
-    |-- package-lock.json
-    |-- package.json
-    |-- README.md
-    |-- vite.config.js
-    |-- .vscode
-    |   |-- extensions.json
-    |-- public
-    |   |-- favicon.ico
-    |-- src
-        |-- App.vue
-        |-- main.js
-        |-- assets
-        |   |-- logo.png
-        |-- components
-            |-- HelloWorld.vue
+<h4 id="2、搭建-vite-项目"><a href="#2、搭建-vite-项目" class="headerlink" title="2、搭建 vite 项目"></a>2、搭建 vite 项目</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-comment">// node 16.3.0</span><br>npm init vite@latest<br></code></pre></td></tr></table></figure>
 
-// src/
-|-- src
-    |-- App.vue
-    |-- main.js
-    |-- api           -- 请求数据，接口文件
-    |-- assets        -- 静态资源
-    |-- commons       -- 公共文件（公共方法，封装函数）
-    |-- components    -- Vue组件
-    |-- pages         -- 模块页面
-    |-- router        -- 路由文件
-    |-- store         -- 数据管理
-</code></pre>
-<h4 id="4、安装-vue-router-的-4-x-版本"><a href="#4、安装-vue-router-的-4-x-版本" class="headerlink" title="4、安装 vue-router 的 4.x 版本"></a>4、安装 vue-router 的 4.x 版本</h4><pre><code class="js">npm install vue-router@4
-</code></pre>
+<h4 id="3、vite-项目的目录"><a href="#3、vite-项目的目录" class="headerlink" title="3、vite 项目的目录"></a>3、vite 项目的目录</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><code class="hljs js">    |-- .gitignore<br>    |-- index.html<br>    |-- package-lock.json<br>    |-- package.json<br>    |-- README.md<br>    |-- vite.config.js<br>    |-- .vscode<br>    |   |-- extensions.json<br>    |-- public<br>    |   |-- favicon.ico<br>    |-- src<br>        |-- App.vue<br>        |-- main.js<br>        |-- assets<br>        |   |-- logo.png<br>        |-- components<br>            |-- HelloWorld.vue<br><br><span class="hljs-comment">// src/</span><br>|-- src<br>    |-- App.vue<br>    |-- main.js<br>    |-- api           -- 请求数据，接口文件<br>    |-- assets        -- 静态资源<br>    |-- commons       -- 公共文件（公共方法，封装函数）<br>    |-- components    -- Vue组件<br>    |-- pages         -- 模块页面<br>    |-- router        -- 路由文件<br>    |-- store         -- 数据管理<br></code></pre></td></tr></table></figure>
+
+<h4 id="4、安装-vue-router-的-4-x-版本"><a href="#4、安装-vue-router-的-4-x-版本" class="headerlink" title="4、安装 vue-router 的 4.x 版本"></a>4、安装 vue-router 的 4.x 版本</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs js">npm install vue-router@<span class="hljs-number">4</span><br></code></pre></td></tr></table></figure>
+
 <p>在 router 文件下新建 router.js 文件来增加路由控制，</p>
-<pre><code class="js">import &#123; createRouter, createWebHashHistory &#125; from &quot;vue-router&quot;;
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">import</span> &#123; createRouter, createWebHashHistory &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;vue-router&quot;</span>;<br><br><span class="hljs-keyword">import</span> Login <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;../pages/login.vue&quot;</span>;<br><span class="hljs-keyword">import</span> Home <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;../pages/home.vue&quot;</span>;<br><br><span class="hljs-keyword">const</span> routes = [<br>  &#123;<br>    <span class="hljs-attr">path</span>: <span class="hljs-string">&quot;/login&quot;</span>,<br>    <span class="hljs-attr">component</span>: Login,<br>  &#125;,<br>  &#123;<br>    <span class="hljs-attr">path</span>: <span class="hljs-string">&quot;/home&quot;</span>,<br>    <span class="hljs-attr">component</span>: Home,<br>  &#125;,<br>];<br><br><span class="hljs-keyword">const</span> router = createRouter(&#123;<br>  <span class="hljs-attr">history</span>: createWebHashHistory(),<br>  routes,<br>&#125;);<br><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> router;<br></code></pre></td></tr></table></figure>
 
-import Login from &quot;../pages/login.vue&quot;;
-import Home from &quot;../pages/home.vue&quot;;
-
-const routes = [
-  &#123;
-    path: &quot;/login&quot;,
-    component: Login,
-  &#125;,
-  &#123;
-    path: &quot;/home&quot;,
-    component: Home,
-  &#125;,
-];
-
-const router = createRouter(&#123;
-  history: createWebHashHistory(),
-  routes,
-&#125;);
-
-export default router;
-</code></pre>
 <p>createRouter 用来创建一个可以被 Vue 应用程序使用的路由实例，需要传入两个参数，history 是表示路由的历史记录，我们可以选择使用 createWebHistory、createWebHashHistory 来分别创建 HTML5 历史记录和 hash 历史记录，我们这里选择创建 hash 历史记录</p>
 <h2 id="七、输入路由的时候是怎么获取到页面的"><a href="#七、输入路由的时候是怎么获取到页面的" class="headerlink" title="七、输入路由的时候是怎么获取到页面的"></a>七、输入路由的时候是怎么获取到页面的</h2><blockquote>
 <p>当我们在浏览器中输入一个地址后，浏览器会根据路径构建一个请求，接下来就会对输入的域名进行 DNS 解析，得到正确的 IP 地址，然后和得到的 IP 地址建立 TCP 链接，发送 HTTP 请求，服务器接收到请求后，就会返回响应的 HTML 内容。完成了请求和响应后，浏览器拿到了返回的 HTML 字符串，转换成 DOM 树结构，经过对 DOM 的样式计算，最终生成布局，在页面上进行合成渲染</p>

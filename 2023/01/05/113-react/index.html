@@ -27,41 +27,8 @@
 <p>上图红框中的底部导航栏，在很多业务场景下都是需要的，三个导航栏对应着三个不同的三个页面组件，分别是「账单」、「统计」、「我的」。这三个页面组件是需要导航栏的。如果我们点击内页如账单详情页，则底部的导航栏会被隐藏，这就需要我们在导航栏的控制上，下一些功夫。</p>
 <p>话不多说，我们在上一章的代码基础上添加导航栏组件，在 <code>src</code> 目录下新建 <code>components</code> 目录，专门用于放置一些公用组件，我们再在 <code>components</code> 目录下新建 <code>NavBar</code> 目录，用于编写底部导航栏，代码如下所示：</p>
 <p><strong>Nav/index.jsx</strong></p>
-<pre><code class="js">import React, &#123; useState &#125; from &quot;react&quot;;
-import PropTypes from &quot;prop-types&quot;;
-import &#123; TabBar &#125; from &quot;zarm&quot;;
-import &#123; useNavigate &#125; from &quot;react-router-dom&quot;;
-import s from &quot;./style.module.less&quot;;
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">import</span> React, &#123; useState &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;react&quot;</span>;<br><span class="hljs-keyword">import</span> PropTypes <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;prop-types&quot;</span>;<br><span class="hljs-keyword">import</span> &#123; TabBar &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;zarm&quot;</span>;<br><span class="hljs-keyword">import</span> &#123; useNavigate &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;react-router-dom&quot;</span>;<br><span class="hljs-keyword">import</span> s <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;./style.module.less&quot;</span>;<br><br><span class="hljs-keyword">const</span> NavBar = <span class="hljs-function">(<span class="hljs-params">&#123; showNav &#125;</span>) =&gt;</span> &#123;<br>  <span class="hljs-keyword">const</span> [activeKey, setActiveKey] = useState(<span class="hljs-string">&quot;/&quot;</span>);<br>  <span class="hljs-keyword">const</span> navigateTo = useNavigate();<br><br>  <span class="hljs-keyword">const</span> changeTab = <span class="hljs-function">(<span class="hljs-params">path</span>) =&gt;</span> &#123;<br>    setActiveKey(path);<br>    navigateTo(path);<br>  &#125;;<br><br>  <span class="hljs-keyword">return</span> (<br>    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">TabBar</span></span></span><br><span class="hljs-tag"><span class="xml">      <span class="hljs-attr">visible</span>=<span class="hljs-string">&#123;showNav&#125;</span></span></span><br><span class="hljs-tag"><span class="xml">      <span class="hljs-attr">className</span>=<span class="hljs-string">&#123;s.tab&#125;</span></span></span><br><span class="hljs-tag"><span class="xml">      <span class="hljs-attr">activeKey</span>=<span class="hljs-string">&#123;activeKey&#125;</span></span></span><br><span class="hljs-tag"><span class="xml">      <span class="hljs-attr">onChange</span>=<span class="hljs-string">&#123;changeTab&#125;</span></span></span><br><span class="hljs-tag"><span class="xml">    &gt;</span></span><br><span class="xml">      <span class="hljs-tag">&lt;<span class="hljs-name">TabBar.Item</span> <span class="hljs-attr">itemKey</span>=<span class="hljs-string">&quot;/&quot;</span> <span class="hljs-attr">title</span>=<span class="hljs-string">&quot;账单&quot;</span> /&gt;</span></span><br><span class="xml">      <span class="hljs-tag">&lt;<span class="hljs-name">TabBar.Item</span> <span class="hljs-attr">itemKey</span>=<span class="hljs-string">&quot;/data&quot;</span> <span class="hljs-attr">title</span>=<span class="hljs-string">&quot;统计&quot;</span> /&gt;</span></span><br><span class="xml">      <span class="hljs-tag">&lt;<span class="hljs-name">TabBar.Item</span> <span class="hljs-attr">itemKey</span>=<span class="hljs-string">&quot;/user&quot;</span> <span class="hljs-attr">title</span>=<span class="hljs-string">&quot;我的&quot;</span> /&gt;</span></span><br><span class="xml">    <span class="hljs-tag">&lt;/<span class="hljs-name">TabBar</span>&gt;</span></span><br>  );<br>&#125;;<br><br>NavBar.propTypes = &#123;<br>  <span class="hljs-attr">showNav</span>: PropTypes.bool,<br>&#125;;<br><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> NavBar;<br></code></pre></td></tr></table></figure>
 
-const NavBar = (&#123; showNav &#125;) =&gt; &#123;
-  const [activeKey, setActiveKey] = useState(&quot;/&quot;);
-  const navigateTo = useNavigate();
-
-  const changeTab = (path) =&gt; &#123;
-    setActiveKey(path);
-    navigateTo(path);
-  &#125;;
-
-  return (
-    &lt;TabBar
-      visible=&#123;showNav&#125;
-      className=&#123;s.tab&#125;
-      activeKey=&#123;activeKey&#125;
-      onChange=&#123;changeTab&#125;
-    &gt;
-      &lt;TabBar.Item itemKey=&quot;/&quot; title=&quot;账单&quot; /&gt;
-      &lt;TabBar.Item itemKey=&quot;/data&quot; title=&quot;统计&quot; /&gt;
-      &lt;TabBar.Item itemKey=&quot;/user&quot; title=&quot;我的&quot; /&gt;
-    &lt;/TabBar&gt;
-  );
-&#125;;
-
-NavBar.propTypes = &#123;
-  showNav: PropTypes.bool,
-&#125;;
-
-export default NavBar;
-</code></pre>
 <p>代码解析：</p>
 <p>首先是声明 <code>NavBar</code> 函数组件，它接收一个外部传入的 <code>showNav</code> 属性，用于控制导航栏的显示隐藏。</p>
 <p>通过 <code>useNavigate</code> 钩子方法，拿到路由实例 <code>navigateTo</code>，它内部含有很多路由的方法，在上述代码中，我们使用到的是 <code>navigateTo</code> 进行路由跳转。</p>
@@ -76,75 +43,14 @@ export default NavBar;
 </blockquote>
 <p>所以当你点击导航栏的时候，<code>changeTab</code> 方法便会被触发，执行内部的 <code>setActiveKey</code> 和 <code>navigateTo</code>，他们的作用分别是设置当前点击的高亮和让页面跳转到对应的页面组件。</p>
 <p>说到跳转到对应的组件，’/‘、’/data’、’/user’ 这三个路由对应的三个组件我们还未编写，这里我们在 <code>container</code> 目录下新建这三个页面组件，作为占位。</p>
-<pre><code class="js">// Home/index.jsx
-import React from &#39;react&#39;
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-comment">// Home/index.jsx</span><br><span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;react&#x27;</span><br><br><span class="hljs-keyword">const</span> Home = <span class="hljs-function">() =&gt;</span> &#123;<br>  <span class="hljs-keyword">return</span> <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>首页<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span><br>&#125;<br><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> Home<br><br><span class="hljs-comment">// Data/index.jsx</span><br><span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;react&#x27;</span><br><br><span class="hljs-keyword">const</span> Data = <span class="hljs-function">() =&gt;</span> &#123;<br>  <span class="hljs-keyword">return</span> <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>数据<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span><br>&#125;<br><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> Data<br><br><span class="hljs-comment">// User/index.jsx</span><br><span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;react&#x27;</span><br><br><span class="hljs-keyword">const</span> User = <span class="hljs-function">() =&gt;</span> &#123;<br>  <span class="hljs-keyword">return</span> <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>个人中心<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span><br>&#125;<br><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> User<br></code></pre></td></tr></table></figure>
 
-const Home = () =&gt; &#123;
-  return &lt;div&gt;首页&lt;/div&gt;
-&#125;
-
-export default Home
-
-// Data/index.jsx
-import React from &#39;react&#39;
-
-const Data = () =&gt; &#123;
-  return &lt;div&gt;数据&lt;/div&gt;
-&#125;
-
-export default Data
-
-// User/index.jsx
-import React from &#39;react&#39;
-
-const User = () =&gt; &#123;
-  return &lt;div&gt;个人中心&lt;/div&gt;
-&#125;
-
-export default User
-</code></pre>
 <p>别忘了，前往 <code>router/index.js</code> 添加路由配置，如果不添加这个配置，调用 <code>navigateTo</code> 这个方法，就无法匹配到对应的页面组件，代码如下：</p>
-<pre><code class="js">// router/index.js
-import Home from &quot;@/container/Home&quot;;
-import Data from &quot;@/container/Data&quot;;
-import User from &quot;@/container/User&quot;;
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-comment">// router/index.js</span><br><span class="hljs-keyword">import</span> Home <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@/container/Home&quot;</span>;<br><span class="hljs-keyword">import</span> Data <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@/container/Data&quot;</span>;<br><span class="hljs-keyword">import</span> User <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@/container/User&quot;</span>;<br><br><span class="hljs-keyword">const</span> routes = [<br>  &#123;<br>    <span class="hljs-attr">path</span>: <span class="hljs-string">&quot;/&quot;</span>,<br>    <span class="hljs-attr">component</span>: Home,<br>  &#125;,<br>  &#123;<br>    <span class="hljs-attr">path</span>: <span class="hljs-string">&quot;/data&quot;</span>,<br>    <span class="hljs-attr">component</span>: Data,<br>  &#125;,<br>  &#123;<br>    <span class="hljs-attr">path</span>: <span class="hljs-string">&quot;/user&quot;</span>,<br>    <span class="hljs-attr">component</span>: User,<br>  &#125;,<br>];<br><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> routes;<br></code></pre></td></tr></table></figure>
 
-const routes = [
-  &#123;
-    path: &quot;/&quot;,
-    component: Home,
-  &#125;,
-  &#123;
-    path: &quot;/data&quot;,
-    component: Data,
-  &#125;,
-  &#123;
-    path: &quot;/user&quot;,
-    component: User,
-  &#125;,
-];
-
-export default routes;
-</code></pre>
 <p>这时，我们还缺少一步，将导航栏组件引入 <code>App.jsx</code> 入口页面，如下所示：</p>
-<pre><code class="js">// App.jsx
-...
-import NavBar from &#39;@/components/NavBar&#39;;
-...
-function App() &#123;
-  return &lt;Router&gt;
-    &lt;ConfigProvider primaryColor=&#123;&#39;#007fff&#39;&#125;&gt;
-      &lt;&gt;
-       &lt;Routes&gt;
-        &#123;routes.map(route =&gt; &lt;Route exact key=&#123;route.path&#125; path=&#123;route.path&#125; element=&#123;&lt;route.component /&gt;&#125; /&gt;)&#125;
-       &lt;/Routes&gt;
-      &lt;NavBar showNav=&#123;showNav&#125; /&gt;
-     &lt;/&gt;
-    &lt;/ConfigProvider&gt;
-    &lt;NavBar showNav=&#123;true&#125; /&gt;
-  &lt;/Router&gt;
-&#125;
-</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-comment">// App.jsx</span><br>...<br><span class="hljs-keyword">import</span> NavBar <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@/components/NavBar&#x27;</span>;<br>...<br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">App</span>(<span class="hljs-params"></span>) </span>&#123;<br>  <span class="hljs-keyword">return</span> <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">Router</span>&gt;</span></span><br><span class="xml">    <span class="hljs-tag">&lt;<span class="hljs-name">ConfigProvider</span> <span class="hljs-attr">primaryColor</span>=<span class="hljs-string">&#123;</span>&#x27;#<span class="hljs-attr">007fff</span>&#x27;&#125;&gt;</span></span><br><span class="xml">      <span class="hljs-tag">&lt;&gt;</span></span><br><span class="xml">       <span class="hljs-tag">&lt;<span class="hljs-name">Routes</span>&gt;</span></span><br><span class="xml">        &#123;routes.map(route =&gt; <span class="hljs-tag">&lt;<span class="hljs-name">Route</span> <span class="hljs-attr">exact</span> <span class="hljs-attr">key</span>=<span class="hljs-string">&#123;route.path&#125;</span> <span class="hljs-attr">path</span>=<span class="hljs-string">&#123;route.path&#125;</span> <span class="hljs-attr">element</span>=<span class="hljs-string">&#123;</span>&lt;<span class="hljs-attr">route.component</span> /&gt;</span>&#125; /&gt;)&#125;</span><br><span class="xml">       <span class="hljs-tag">&lt;/<span class="hljs-name">Routes</span>&gt;</span></span><br><span class="xml">      <span class="hljs-tag">&lt;<span class="hljs-name">NavBar</span> <span class="hljs-attr">showNav</span>=<span class="hljs-string">&#123;showNav&#125;</span> /&gt;</span></span><br><span class="xml">     <span class="hljs-tag">&lt;/&gt;</span></span><br><span class="xml">    <span class="hljs-tag">&lt;/<span class="hljs-name">ConfigProvider</span>&gt;</span></span><br>    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">NavBar</span> <span class="hljs-attr">showNav</span>=<span class="hljs-string">&#123;true&#125;</span> /&gt;</span></span><br>  &lt;/Router&gt;<br>&#125;<br></code></pre></td></tr></table></figure>
+
 <p>通过 <code>npm run dev</code> 启动项目，浏览器展示效果如下所示：</p>
 <p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/39ce0d3387fd41df97db10b054a6ae0a~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp" alt="img"></p>
 <p>上图效果所示，注意地址栏的变化，点击相应的 <code>Tab</code>，调用的 <code>navigateTo</code> 方法，将地址栏的 <code>pathname</code> 改变，随之而来的是页面组件的改变。这个就应证了我们第 10 章给大家解释的单页面路由控制的原理。<code>navigateTo</code> 做的事情就是改变地址栏，地址栏一旦改变，就会触发地址所对应的组件渲染，如 <code>/data</code>，渲染的就是 <code>Data</code> 页面组件。</p>
@@ -153,76 +59,19 @@ function App() &#123;
 <p>红色框是组件展示的区域，每个路径对应着一个组件，这个在 <code>router/index.js</code> 文件中也有所体现。</p>
 <p>绿色框则代表导航栏的位置，也就是说，无论上面的组件怎么变化，底部的导航栏一直都是存在的。</p>
 <h4 id="添加底部导航图标"><a href="#添加底部导航图标" class="headerlink" title="添加底部导航图标"></a>添加底部导航图标</h4><p>我们将图标写成公共组件，这样便于后面各个页面方便引入，我们新建 <code>components/CustomIcon/index.jsx</code>，添加如下代码：</p>
-<pre><code class="js">import &#123; Icon &#125; from &quot;zarm&quot;;
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">import</span> &#123; Icon &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;zarm&quot;</span>;<br><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> Icon.createFromIconfont(<br>  <span class="hljs-string">&quot;//at.alicdn.com/t/font_2236655_w1mpqp7n1ni.js&quot;</span><br>);<br></code></pre></td></tr></table></figure>
 
-export default Icon.createFromIconfont(
-  &quot;//at.alicdn.com/t/font_2236655_w1mpqp7n1ni.js&quot;
-);
-</code></pre>
 <p>上述代码，我们引入 <code>Icon</code>，执行它的自定义图标方法 <code>createFromIconfont</code>，它接收一个参数，为 <code>iconfont</code> 生产的静态脚本路径，你可以自己去 <a href="https://link.juejin.cn/?target=https://www.iconfont.cn/">官网</a> 配置，也可以直接用我提供的：</p>
 <p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/5fe4857973a74a78a2cc2d2110e49c34~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp" alt="img"></p>
 <p>这里我已经为大家添加好了各个图标，地址就是上述代码的地址。</p>
 <p>接着我们将其引入到代码中使用，打开 <code>components/NavBar/index.jsx</code> ，添加如下属性：</p>
-<pre><code class="js">import CustomIcon from &#39;../CustomIcon&#39;;
-...
-&lt;TabBar.Item
-  itemKey=&quot;/&quot;
-  title=&quot;账单&quot;
-  icon=&#123;&lt;CustomIcon type=&quot;zhangdan&quot; /&gt;&#125;
-/&gt;
-&lt;TabBar.Item
-  itemKey=&quot;/data&quot;
-  title=&quot;统计&quot;
-  icon=&#123;&lt;CustomIcon type=&quot;tongji&quot; /&gt;&#125;
-/&gt;
-&lt;TabBar.Item
-  itemKey=&quot;/user&quot;
-  title=&quot;我的&quot;
-  icon=&#123;&lt;CustomIcon type=&quot;wode&quot; /&gt;&#125;
-/&gt;
-</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">import</span> CustomIcon <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;../CustomIcon&#x27;</span>;<br>...<br>&lt;TabBar.Item<br>  itemKey=<span class="hljs-string">&quot;/&quot;</span><br>  title=<span class="hljs-string">&quot;账单&quot;</span><br>  icon=&#123;<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">CustomIcon</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;zhangdan&quot;</span> /&gt;</span></span>&#125;<br>/&gt;<br><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">TabBar.Item</span></span></span><br><span class="hljs-tag"><span class="xml">  <span class="hljs-attr">itemKey</span>=<span class="hljs-string">&quot;/data&quot;</span></span></span><br><span class="hljs-tag"><span class="xml">  <span class="hljs-attr">title</span>=<span class="hljs-string">&quot;统计&quot;</span></span></span><br><span class="hljs-tag"><span class="xml">  <span class="hljs-attr">icon</span>=<span class="hljs-string">&#123;</span>&lt;<span class="hljs-attr">CustomIcon</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;tongji&quot;</span> /&gt;</span>&#125;</span><br><span class="xml">/&gt;</span><br><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">TabBar.Item</span></span></span><br><span class="hljs-tag"><span class="xml">  <span class="hljs-attr">itemKey</span>=<span class="hljs-string">&quot;/user&quot;</span></span></span><br><span class="hljs-tag"><span class="xml">  <span class="hljs-attr">title</span>=<span class="hljs-string">&quot;我的&quot;</span></span></span><br><span class="hljs-tag"><span class="xml">  <span class="hljs-attr">icon</span>=<span class="hljs-string">&#123;</span>&lt;<span class="hljs-attr">CustomIcon</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;wode&quot;</span> /&gt;</span>&#125;</span><br><span class="xml">/&gt;</span><br></code></pre></td></tr></table></figure>
+
 <p>查看浏览器展示效果如下：</p>
 <p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/5f7b75bd787a402795887b4893924916~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp" alt="img"></p>
 <h2 id="底部导航栏的显示隐藏"><a href="#底部导航栏的显示隐藏" class="headerlink" title="底部导航栏的显示隐藏"></a>底部导航栏的显示隐藏</h2><p>我们在之前引入 <code>NavBar</code> 的代码中，将 <code>showNav</code> 属性写死为 <code>true</code>。此时，我们需要将其盘活，打开 <code>App.jsx</code>，添加如下代码：</p>
-<pre><code class="js">import React, &#123; useEffect, useState &#125; from &quot;react&quot;;
-import &#123;
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  useLocation,
-&#125; from &quot;react-router-dom&quot;;
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">import</span> React, &#123; useEffect, useState &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;react&quot;</span>;<br><span class="hljs-keyword">import</span> &#123;<br>  BrowserRouter <span class="hljs-keyword">as</span> Router,<br>  Routes,<br>  Route,<br>  useLocation,<br>&#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;react-router-dom&quot;</span>;<br><br><span class="hljs-keyword">import</span> NavBar <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@/components/NavBar&quot;</span>;<br><br><span class="hljs-keyword">import</span> &#123; ConfigProvider &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;zarm&quot;</span>;<br><br><span class="hljs-keyword">import</span> routes <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@/router&quot;</span>;<br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">App</span>(<span class="hljs-params"></span>) </span>&#123;<br>  <span class="hljs-keyword">const</span> location = useLocation(); <span class="hljs-comment">// 拿到 location 实例</span><br>  <span class="hljs-keyword">const</span> &#123; pathname &#125; = location; <span class="hljs-comment">// 获取当前路径</span><br>  <span class="hljs-keyword">const</span> needNav = [<span class="hljs-string">&quot;/&quot;</span>, <span class="hljs-string">&quot;/data&quot;</span>, <span class="hljs-string">&quot;/user&quot;</span>]; <span class="hljs-comment">// 需要底部导航栏的路径</span><br>  <span class="hljs-keyword">const</span> [showNav, setShowNav] = useState(<span class="hljs-literal">false</span>); <span class="hljs-comment">// 是否展示 Nav</span><br>  useEffect(<span class="hljs-function">() =&gt;</span> &#123;<br>    setShowNav(needNav.includes(pathname));<br>  &#125;, [pathname]); <span class="hljs-comment">// [] 内的参数若是变化，便会执行上述回调函数=</span><br>  <span class="hljs-keyword">return</span> (<br>    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">Router</span>&gt;</span></span><br><span class="xml">      <span class="hljs-tag">&lt;<span class="hljs-name">ConfigProvider</span> <span class="hljs-attr">primaryColor</span>=<span class="hljs-string">&#123;</span>&quot;#<span class="hljs-attr">007fff</span>&quot;&#125;&gt;</span></span><br><span class="xml">        <span class="hljs-tag">&lt;<span class="hljs-name">Switch</span>&gt;</span></span><br><span class="xml">          &#123;routes.map((route) =&gt; (</span><br><span class="xml">            <span class="hljs-tag">&lt;<span class="hljs-name">Route</span> <span class="hljs-attr">exact</span> <span class="hljs-attr">key</span>=<span class="hljs-string">&#123;route.path&#125;</span> <span class="hljs-attr">path</span>=<span class="hljs-string">&#123;route.path&#125;</span>&gt;</span></span><br><span class="xml">              <span class="hljs-tag">&lt;<span class="hljs-name">route.component</span> /&gt;</span></span><br><span class="xml">            <span class="hljs-tag">&lt;/<span class="hljs-name">Route</span>&gt;</span></span><br><span class="xml">          ))&#125;</span><br><span class="xml">        <span class="hljs-tag">&lt;/<span class="hljs-name">Switch</span>&gt;</span></span><br><span class="xml">      <span class="hljs-tag">&lt;/<span class="hljs-name">ConfigProvider</span>&gt;</span></span><br><span class="xml">      <span class="hljs-tag">&lt;<span class="hljs-name">NavBar</span> <span class="hljs-attr">showNav</span>=<span class="hljs-string">&#123;true&#125;</span> /&gt;</span></span><br><span class="xml">    <span class="hljs-tag">&lt;/<span class="hljs-name">Router</span>&gt;</span></span><br>  );<br>&#125;<br><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> App;<br></code></pre></td></tr></table></figure>
 
-import NavBar from &quot;@/components/NavBar&quot;;
-
-import &#123; ConfigProvider &#125; from &quot;zarm&quot;;
-
-import routes from &quot;@/router&quot;;
-function App() &#123;
-  const location = useLocation(); // 拿到 location 实例
-  const &#123; pathname &#125; = location; // 获取当前路径
-  const needNav = [&quot;/&quot;, &quot;/data&quot;, &quot;/user&quot;]; // 需要底部导航栏的路径
-  const [showNav, setShowNav] = useState(false); // 是否展示 Nav
-  useEffect(() =&gt; &#123;
-    setShowNav(needNav.includes(pathname));
-  &#125;, [pathname]); // [] 内的参数若是变化，便会执行上述回调函数=
-  return (
-    &lt;Router&gt;
-      &lt;ConfigProvider primaryColor=&#123;&quot;#007fff&quot;&#125;&gt;
-        &lt;Switch&gt;
-          &#123;routes.map((route) =&gt; (
-            &lt;Route exact key=&#123;route.path&#125; path=&#123;route.path&#125;&gt;
-              &lt;route.component /&gt;
-            &lt;/Route&gt;
-          ))&#125;
-        &lt;/Switch&gt;
-      &lt;/ConfigProvider&gt;
-      &lt;NavBar showNav=&#123;true&#125; /&gt;
-    &lt;/Router&gt;
-  );
-&#125;
-
-export default App;
-</code></pre>
 <p>当你刷新浏览器，控制台应该会报下面的错误：</p>
 <p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/f3a8e99d9b4346ada136f513486912e6~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp" alt="img"></p>
 <p>执行 <code>useLocation</code> 时，报错 <code>location of undefined</code>。这是因为想要在函数组件内执行 <code>useLocation</code>，该组件必须被 <code>Router</code> 高阶组件包裹，我们做如下改动，将 <code>App.jsx</code> 的 <code>Router</code> 组件，前移到 <code>main.jsx</code> 内，如下：</p>
@@ -231,8 +80,8 @@ export default App;
 <p>我们拿到 <code>pathname</code>，将其设置为 <code>useEffect</code> 钩子函数的第二个参数，监听它的变化，一旦 <code>pathname</code> 变化，便会触发回调函数执行 <code>setShowNav(needNav.includes(pathname))</code>，结果会传递给 <code>NavBar</code> 组件，从而控制组件的显示隐藏。<code>needNav</code> 为需要底部导航的路径值。</p>
 <p>我们不妨做个测试，在 <code>container</code> 目录下新建一个测试页面组件 <code>Detail</code>，并且添加路由配置。</p>
 <p>别忘记把组件属性修改成动态变量：</p>
-<pre><code class="js">&lt;NavBar showNav=&#123;showNav&#125; /&gt;
-</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs js">&lt;NavBar showNav=&#123;showNav&#125; /&gt;<br></code></pre></td></tr></table></figure>
+
 <p>查看浏览器的展示效果：</p>
 <p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/c659b2430bab4985a86c2519eac7d62e~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp" alt="img"></p>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>导航栏可以用在很多地方，映射到 <code>PC</code> 网页就是左侧侧边导航，道理都是相通的。移动端放在下面控制，<code>PC</code> 端放在左边或者右边控制罢了。所以再次强调不要学完了一个知识点，就思维定势地认为只能用在某一个需求上，能做到融会贯通，才是判断一个好程序员的标准。</p>

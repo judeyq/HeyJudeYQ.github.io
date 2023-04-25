@@ -43,15 +43,11 @@
 <p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/eabc5b637e734347b8e7965496669fee~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp" alt="img"></p>
 <p>手动新建 <code>index.html</code>，通过 <code>script</code> 标签，引入 <code>main.js</code>。这里注意，需要将 <code>type</code> 属性设置为 <code>module</code>，这样才能支持 <code>ES Module</code> 模块化开发。</p>
 <p>通过 <code>npm</code> 安装 <code>lodash-es</code>，这里我们之所以不使用 <code>lodash</code>，是因为 <code>lodash</code> 不是通过 <code>ES Module</code> 形式开发的，直接通过相对路径引入会报错，需要通过 <code>Webpack</code> 打包构建。</p>
-<pre><code class="bash">npm i lodash-es
-</code></pre>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">npm i lodash-es<br></code></pre></td></tr></table></figure>
+
 <p>新建 <code>main.js</code> 添加去重逻辑：</p>
-<pre><code class="js">import uniq from &quot;./node_modules/lodash-es/uniq.js&quot;;
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">import</span> uniq <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;./node_modules/lodash-es/uniq.js&quot;</span>;<br><br><span class="hljs-keyword">const</span> arr = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>];<br><br><span class="hljs-built_in">console</span>.log(uniq(arr));<br></code></pre></td></tr></table></figure>
 
-const arr = [1, 2, 3, 3, 4];
-
-console.log(uniq(arr));
-</code></pre>
 <p>这里我们采用 <code>VSCode</code> 的插件，<code>Live Server</code>，来启动项目。</p>
 <p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/30054fefbeaf485a96db8d4a4d8f5aad~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp" alt="img"></p>
 <p>安装完之后，在项目中双击 <code>index.html</code>，找到右下角的 「Go Live」，如下所示：</p>
@@ -72,15 +68,11 @@ console.log(uniq(arr));
 <p>所以这时候 <code>Vite</code> 便引入了「依赖预构建」的概念。</p>
 <h4 id="依赖现预构建浅析"><a href="#依赖现预构建浅析" class="headerlink" title="依赖现预构建浅析"></a>依赖现预构建浅析</h4><p>同样的，再通过 <code>Vite</code> 构建出一个 <code>React</code> 项目，去实现上述逻辑，我们观察 <code>Vite</code> 是怎么作的。</p>
 <p>首先通过 <code>Vite</code> 指令生成项目：</p>
-<pre><code class="bash">npm init @vitejs/app test2 --template react
-</code></pre>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">npm init @vitejs/app test2 --template react<br></code></pre></td></tr></table></figure>
+
 <p>并安装 <code>lodash-es</code>，修改入口脚本 <code>main.jsx</code>：</p>
-<pre><code class="js">import uniq from &quot;lodash-es/uniq.js&quot;;
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">import</span> uniq <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;lodash-es/uniq.js&quot;</span>;<br><br><span class="hljs-keyword">const</span> arr = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>];<br><br><span class="hljs-built_in">console</span>.log(uniq(arr));<br></code></pre></td></tr></table></figure>
 
-const arr = [1, 2, 3, 3, 4];
-
-console.log(uniq(arr));
-</code></pre>
 <p>我们观察浏览器的 <code>Network</code>，如下所示：</p>
 <p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/dce2afc266e84fa79ee8c9a0c0266c85~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp" alt="img"></p>
 <p>注意上图，执行 <code>npm run dev</code> 后，脚本中引用 <code>lodash-es/uniq</code> 的路径是在 <code>/node_modules/.vite</code> 文件夹下，并且左下角的请求资源数，也没有我们之前原生 <code>ES Module</code> 时的多，少了足足 3/4 还多。</p>

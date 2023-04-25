@@ -7,12 +7,10 @@ HLS 与 M3U8 HLS(全称:Http Live Streaming)是由 Apple 公司定义的用于�
 
 公司项目中使用了视频监控功能，需要在系统内显示 m3u8 格式的视频。
 1、安装 hls.js 插件或者使用 CDN 引入
-npm install hls.js --save
-// 或者
-&amp;lt;script src=&amp;quot;https://cdn.jsdelivr.net/npm/hls.js@latest&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;
+123npm install hls.js --save// 或者&amp;lt;script src=&amp;quot;https://cdn.jsdelivr.net/npm/hls.js@latest&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;
 
 2、业务代码如下：
-&amp;l.."><meta name="generator" content="Hexo 5.4.1"></head><body class="is-flex is-flex-direction-column"><header class="header-widget is-flex-shrink-0 is-hidden-mobile"><div class="container is-fullhd is-flex is-justify-content-space-between is-align-items-center is-full-height"><section class="is-hidden-mobile is-flex-shrink-0"><h2><a href="/">Jude's blog</a></h2></section><h3 class="is-hidden-mobile is-family-serif is-full-height is-flex is-align-items-center is-flex-shrink-0"><div class="is-full-height" id="postTopic"><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">25、vue使用hls.js处理m3u8格式的视频</p><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">点击返回顶部</p></div></h3><aside class="is-flex-shrink-0"><h3 class="is-inline-block"><a href="/">首页</a></h3><h3 class="is-inline-block"><a href="/about">关于</a></h3><h3 class="is-inline-block"><a href="/archives">归档</a></h3></aside></div></header><header class="is-flex header-widget is-flex-shrink-0 is-align-items-center is-justify-content-center is-hidden-tablet"><h3 class="is-inline-block"><a href="/">首页</a></h3><h3 class="is-inline-block"><a href="/about">关于</a></h3><h3 class="is-inline-block"><a href="/archives">归档</a></h3></header><main><main class="container is-max-widescreen content section post-page pt-4 px-4"><div class="columns is-flex-desktop is-justify-content-center is-flex-direction-row-reverse"><div class="column is-3 is-hidden-mobile is-hidden"></div><div class="column is-9"><header class="my-4"><a href="/tags/dev"><i class="tag post-item-tag">dev</i></a></header><h1 class="mt-0 mb-1 is-family-serif" id="postTitle">25、vue使用hls.js处理m3u8格式的视频</h1><time class="has-text-grey" datetime="2021-01-08T12:00:00.000Z">2021-01-08</time><article class="mt-2 post-content"><p>m3u8 文件是指 UTF-8 编码格式的 m3u 文件。m3u 文件是记录了一个索引纯文本文件,打开它时播放软件并不是播放它,而是根据它的索引找到对应的音视频文件的网络地址进行在线播放。</p>
+1.."><meta name="generator" content="Hexo 5.4.1"></head><body class="is-flex is-flex-direction-column"><header class="header-widget is-flex-shrink-0 is-hidden-mobile"><div class="container is-fullhd is-flex is-justify-content-space-between is-align-items-center is-full-height"><section class="is-hidden-mobile is-flex-shrink-0"><h2><a href="/">Jude's blog</a></h2></section><h3 class="is-hidden-mobile is-family-serif is-full-height is-flex is-align-items-center is-flex-shrink-0"><div class="is-full-height" id="postTopic"><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">25、vue使用hls.js处理m3u8格式的视频</p><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">点击返回顶部</p></div></h3><aside class="is-flex-shrink-0"><h3 class="is-inline-block"><a href="/">首页</a></h3><h3 class="is-inline-block"><a href="/about">关于</a></h3><h3 class="is-inline-block"><a href="/archives">归档</a></h3></aside></div></header><header class="is-flex header-widget is-flex-shrink-0 is-align-items-center is-justify-content-center is-hidden-tablet"><h3 class="is-inline-block"><a href="/">首页</a></h3><h3 class="is-inline-block"><a href="/about">关于</a></h3><h3 class="is-inline-block"><a href="/archives">归档</a></h3></header><main><main class="container is-max-widescreen content section post-page pt-4 px-4"><div class="columns is-flex-desktop is-justify-content-center is-flex-direction-row-reverse"><div class="column is-3 is-hidden-mobile is-hidden"></div><div class="column is-9"><header class="my-4"><a href="/tags/dev"><i class="tag post-item-tag">dev</i></a></header><h1 class="mt-0 mb-1 is-family-serif" id="postTitle">25、vue使用hls.js处理m3u8格式的视频</h1><time class="has-text-grey" datetime="2021-01-08T12:00:00.000Z">2021-01-08</time><article class="mt-2 post-content"><p>m3u8 文件是指 UTF-8 编码格式的 m3u 文件。m3u 文件是记录了一个索引纯文本文件,打开它时播放软件并不是播放它,而是根据它的索引找到对应的音视频文件的网络地址进行在线播放。</p>
 <span id="more"></span>
 
 <blockquote>
@@ -20,50 +18,10 @@ npm install hls.js --save
 </blockquote>
 <p>公司项目中使用了视频监控功能，需要在系统内显示 m3u8 格式的视频。</p>
 <p>1、安装 hls.js 插件或者使用 CDN 引入</p>
-<pre><code class="js">npm install hls.js --save
-// 或者
-&lt;script src=&quot;https://cdn.jsdelivr.net/npm/hls.js@latest&quot;&gt;&lt;/script&gt;
-</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs js">npm install hls.js --save<br><span class="hljs-comment">// 或者</span><br>&lt;script src=<span class="hljs-string">&quot;https://cdn.jsdelivr.net/npm/hls.js@latest&quot;</span>&gt;&lt;/script&gt;<br></code></pre></td></tr></table></figure>
+
 <p>2、业务代码如下：</p>
-<pre><code class="html">&lt;video
-  ref=&quot;video&quot;
-  id=&quot;myVideo2&quot;
-  class=&quot;video-js vjs-default-skin vjs-big-play-centered&quot;
-  autoplay=&quot;autoplay&quot;
-  controls
-  style=&quot;width: 100%; height: 280px; margin-top: 5px&quot;
-&gt;&lt;/video&gt;
-</code></pre>
-<pre><code class="js">import Hls from &quot;hls.js&quot;;
-export default &#123;
-  data() &#123;
-    return &#123;
-      hls: null,
-    &#125;;
-  &#125;,
-  methods: &#123;
-    getStream(source) &#123;
-      if (Hls.isSupported()) &#123;
-        this.hls = new Hls();
-        this.hls.loadSource(source);
-        this.hls.attachMedia(this.$refs.video);
-        this.hls.on(Hls.Events.MANIFEST_PARSED, () =&gt; &#123;
-          this.$refs.video.play();
-        &#125;);
-        this.hls.on(Hls.Events.ERROR, (event, data) =&gt; &#123;
-          this.$message(&quot;视频加载失败&quot;);
-        &#125;);
-      &#125;else&#123;
-        this.$message(&quot;格式不支持&quot;)
-      &#125;
-    &#125;,
-  &#125;,
-  // 从接口获取的视频资源应当写在mounted里面，否则容易出现进入视频页面的时候，视频加载不出来的现象
-  mounted() &#123;
-    this.$service.get(&quot;demo/test&quot;).then((res) =&gt; &#123;
-      this.getStream(res.data[1].hls);
-    &#125;);
-  &#125;,
-&#125;;
-</code></pre>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">video</span></span><br><span class="hljs-tag">  <span class="hljs-attr">ref</span>=<span class="hljs-string">&quot;video&quot;</span></span><br><span class="hljs-tag">  <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;myVideo2&quot;</span></span><br><span class="hljs-tag">  <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;video-js vjs-default-skin vjs-big-play-centered&quot;</span></span><br><span class="hljs-tag">  <span class="hljs-attr">autoplay</span>=<span class="hljs-string">&quot;autoplay&quot;</span></span><br><span class="hljs-tag">  <span class="hljs-attr">controls</span></span><br><span class="hljs-tag">  <span class="hljs-attr">style</span>=<span class="hljs-string">&quot;width: 100%; height: 280px; margin-top: 5px&quot;</span></span><br><span class="hljs-tag">&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">video</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">import</span> Hls <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;hls.js&quot;</span>;<br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> &#123;<br>  <span class="hljs-function"><span class="hljs-title">data</span>(<span class="hljs-params"></span>)</span> &#123;<br>    <span class="hljs-keyword">return</span> &#123;<br>      <span class="hljs-attr">hls</span>: <span class="hljs-literal">null</span>,<br>    &#125;;<br>  &#125;,<br>  <span class="hljs-attr">methods</span>: &#123;<br>    <span class="hljs-function"><span class="hljs-title">getStream</span>(<span class="hljs-params">source</span>)</span> &#123;<br>      <span class="hljs-keyword">if</span> (Hls.isSupported()) &#123;<br>        <span class="hljs-built_in">this</span>.hls = <span class="hljs-keyword">new</span> Hls();<br>        <span class="hljs-built_in">this</span>.hls.loadSource(source);<br>        <span class="hljs-built_in">this</span>.hls.attachMedia(<span class="hljs-built_in">this</span>.$refs.video);<br>        <span class="hljs-built_in">this</span>.hls.on(Hls.Events.MANIFEST_PARSED, <span class="hljs-function">() =&gt;</span> &#123;<br>          <span class="hljs-built_in">this</span>.$refs.video.play();<br>        &#125;);<br>        <span class="hljs-built_in">this</span>.hls.on(Hls.Events.ERROR, <span class="hljs-function">(<span class="hljs-params">event, data</span>) =&gt;</span> &#123;<br>          <span class="hljs-built_in">this</span>.$message(<span class="hljs-string">&quot;视频加载失败&quot;</span>);<br>        &#125;);<br>      &#125;<span class="hljs-keyword">else</span>&#123;<br>        <span class="hljs-built_in">this</span>.$message(<span class="hljs-string">&quot;格式不支持&quot;</span>)<br>      &#125;<br>    &#125;,<br>  &#125;,<br>  <span class="hljs-comment">// 从接口获取的视频资源应当写在mounted里面，否则容易出现进入视频页面的时候，视频加载不出来的现象</span><br>  <span class="hljs-function"><span class="hljs-title">mounted</span>(<span class="hljs-params"></span>)</span> &#123;<br>    <span class="hljs-built_in">this</span>.$service.get(<span class="hljs-string">&quot;demo/test&quot;</span>).then(<span class="hljs-function">(<span class="hljs-params">res</span>) =&gt;</span> &#123;<br>      <span class="hljs-built_in">this</span>.getStream(res.data[<span class="hljs-number">1</span>].hls);<br>    &#125;);<br>  &#125;,<br>&#125;;<br></code></pre></td></tr></table></figure>
 </article><section class="jump-container is-flex is-justify-content-space-between my-6"><!-- em is empty placeholder--><a class="button is-default" href="/2021/02/14/v-for-index/" title="26、关于v-for的key值为什么不能是index？"><i class="iconfont icon-prev mr-2 has-text-grey"></i><span class="has-text-weight-semibold">上一页: 26、关于v-for的key值为什么不能是index？</span></a><a class="button is-default" href="/2020/08/12/css3-linear-gradient/" title="24、CSS3：linear-gradient线性渐变和radial-gradient径向渐变的使用"><span class="has-text-weight-semibold">下一页: 24、CSS3：linear-gradient线性渐变和radial-gradient径向渐变的使用</span><i class="iconfont icon-next ml-2 has-text-grey"></i></a></section></div></div></main></main><footer class="is-flex is-flex-direction-column is-align-items-center is-flex-shrink-0 is-family-serif"><section class="sns-container"><!-- Github--><a title="github" target="_blank" rel="noopener nofollow" href="//github.com/Jude"><i class="iconfont icon-github"></i></a><!-- Ins--><!-- RSS--><!-- 知乎--><a title="zhihu" target="_blank" rel="noopener nofollow" href="//zhihu.com/https://www.zhihu.com/hot"><i class="iconfont icon-zhihu"></i></a><!-- 领英--><!-- 脸书--></section><p><span>Copyright ©</span><span> Jude 2023</span></p><div class="is-flex is-justify-content-center is-flex-wrap-wrap"><p>Powered by Hexo &verbar;&nbsp;</p><p class="is-flex is-justify-content-center"><a title="Hexo theme author" target="_blank" rel="noopener" href="//github.com/haojen">Theme by Haojen&nbsp;</a></p><div style="margin-top: 2px"><a class="github-button" title="github-button" target="_blank" rel="noopener" href="https://github.com/haojen/hexo-theme-Claudia" data-color-scheme="no-preference: light; light: light; dark: dark;" data-show-count="true"></a></div></div><div><span>记住昨日的美好，过好今日的生活，憧憬明天的到来</span></div></footer><script async defer src="https://buttons.github.io/buttons.js"></script><script src="/js/post.js"></script></body></html>

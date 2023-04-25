@@ -3,97 +3,31 @@
 
 
 一、使用生命周期函数处理定时器通常处理组件内定时器的步骤是下面这样的
-export default&amp;#123;
-    mounted()&amp;#123;
-        this.timer = setInterval（() =&amp;gt;&amp;#123;
-            // do something
-        &amp;#125;,1000）
-    &amp;#125;,
-    beforeDestory()&amp;#123;
-        clearInterval(th.."><meta name="generator" content="Hexo 5.4.1"></head><body class="is-flex is-flex-direction-column"><header class="header-widget is-flex-shrink-0 is-hidden-mobile"><div class="container is-fullhd is-flex is-justify-content-space-between is-align-items-center is-full-height"><section class="is-hidden-mobile is-flex-shrink-0"><h2><a href="/">Jude's blog</a></h2></section><h3 class="is-hidden-mobile is-family-serif is-full-height is-flex is-align-items-center is-flex-shrink-0"><div class="is-full-height" id="postTopic"><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">48、用hook处理组件内定时器</p><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">点击返回顶部</p></div></h3><aside class="is-flex-shrink-0"><h3 class="is-inline-block"><a href="/">首页</a></h3><h3 class="is-inline-block"><a href="/about">关于</a></h3><h3 class="is-inline-block"><a href="/archives">归档</a></h3></aside></div></header><header class="is-flex header-widget is-flex-shrink-0 is-align-items-center is-justify-content-center is-hidden-tablet"><h3 class="is-inline-block"><a href="/">首页</a></h3><h3 class="is-inline-block"><a href="/about">关于</a></h3><h3 class="is-inline-block"><a href="/archives">归档</a></h3></header><main><main class="container is-max-widescreen content section post-page pt-4 px-4"><div class="columns is-flex-desktop is-justify-content-center is-flex-direction-row-reverse"><div class="column is-3 is-hidden-mobile"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E4%BD%BF%E7%94%A8%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E5%87%BD%E6%95%B0%E5%A4%84%E7%90%86%E5%AE%9A%E6%97%B6%E5%99%A8"><span class="toc-text">一、使用生命周期函数处理定时器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E4%BD%BF%E7%94%A8-hook-%E5%A4%84%E7%90%86%E5%AE%9A%E6%97%B6%E5%99%A8"><span class="toc-text">二、使用 hook 处理定时器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E9%80%82%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="toc-text">三、适用场景:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%9B%E3%80%81%E8%A1%A5%E5%85%85%E8%AF%B4%E6%98%8E%EF%BC%9A%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E7%88%B6%E7%BB%84%E4%BB%B6%E7%9B%91%E5%90%AC%E5%AD%90%E7%BB%84%E4%BB%B6%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%EF%BC%9F"><span class="toc-text">四、补充说明：如何实现父组件监听子组件生命周期？</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1%E3%80%81%E6%96%B9%E6%B3%95%E4%B8%80%EF%BC%9A-emit"><span class="toc-text">1、方法一：$emit</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2%E3%80%81%E6%96%B9%E6%B3%95%E4%BA%8C%EF%BC%9A-hook"><span class="toc-text">2、方法二：@hook</span></a></li></ol></li></ol></div><div class="column is-9"><header class="my-4"><a href="/tags/vue"><i class="tag post-item-tag">vue</i></a></header><h1 class="mt-0 mb-1 is-family-serif" id="postTitle">48、用hook处理组件内定时器</h1><time class="has-text-grey" datetime="2022-01-01T12:00:00.000Z">2022-01-01</time><article class="mt-2 post-content"><p>vue 项目使用 hook 处理组件内定时器的方式。一般是使用生命周期钩子函数beforeDestory来销毁定时器。从Vue源码的lifecycle.js中发现了一种拓展方法，可以提升代码的简洁性，而且还可以减少data里无用变量的定义。</p>
+12345678910export default&amp;#123;    mounted()&amp;#123;        this.timer = setInterval（() =&amp;gt;&amp;#123;            // do something        &amp;#125;,1000）    &amp;#125;,    beforeDestory()&amp;#123;        clearInterva.."><meta name="generator" content="Hexo 5.4.1"></head><body class="is-flex is-flex-direction-column"><header class="header-widget is-flex-shrink-0 is-hidden-mobile"><div class="container is-fullhd is-flex is-justify-content-space-between is-align-items-center is-full-height"><section class="is-hidden-mobile is-flex-shrink-0"><h2><a href="/">Jude's blog</a></h2></section><h3 class="is-hidden-mobile is-family-serif is-full-height is-flex is-align-items-center is-flex-shrink-0"><div class="is-full-height" id="postTopic"><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">48、用hook处理组件内定时器</p><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">点击返回顶部</p></div></h3><aside class="is-flex-shrink-0"><h3 class="is-inline-block"><a href="/">首页</a></h3><h3 class="is-inline-block"><a href="/about">关于</a></h3><h3 class="is-inline-block"><a href="/archives">归档</a></h3></aside></div></header><header class="is-flex header-widget is-flex-shrink-0 is-align-items-center is-justify-content-center is-hidden-tablet"><h3 class="is-inline-block"><a href="/">首页</a></h3><h3 class="is-inline-block"><a href="/about">关于</a></h3><h3 class="is-inline-block"><a href="/archives">归档</a></h3></header><main><main class="container is-max-widescreen content section post-page pt-4 px-4"><div class="columns is-flex-desktop is-justify-content-center is-flex-direction-row-reverse"><div class="column is-3 is-hidden-mobile"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E4%BD%BF%E7%94%A8%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E5%87%BD%E6%95%B0%E5%A4%84%E7%90%86%E5%AE%9A%E6%97%B6%E5%99%A8"><span class="toc-text">一、使用生命周期函数处理定时器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E4%BD%BF%E7%94%A8-hook-%E5%A4%84%E7%90%86%E5%AE%9A%E6%97%B6%E5%99%A8"><span class="toc-text">二、使用 hook 处理定时器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E9%80%82%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="toc-text">三、适用场景:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%9B%E3%80%81%E8%A1%A5%E5%85%85%E8%AF%B4%E6%98%8E%EF%BC%9A%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E7%88%B6%E7%BB%84%E4%BB%B6%E7%9B%91%E5%90%AC%E5%AD%90%E7%BB%84%E4%BB%B6%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%EF%BC%9F"><span class="toc-text">四、补充说明：如何实现父组件监听子组件生命周期？</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1%E3%80%81%E6%96%B9%E6%B3%95%E4%B8%80%EF%BC%9A-emit"><span class="toc-text">1、方法一：$emit</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2%E3%80%81%E6%96%B9%E6%B3%95%E4%BA%8C%EF%BC%9A-hook"><span class="toc-text">2、方法二：@hook</span></a></li></ol></li></ol></div><div class="column is-9"><header class="my-4"><a href="/tags/vue"><i class="tag post-item-tag">vue</i></a></header><h1 class="mt-0 mb-1 is-family-serif" id="postTitle">48、用hook处理组件内定时器</h1><time class="has-text-grey" datetime="2022-01-01T12:00:00.000Z">2022-01-01</time><article class="mt-2 post-content"><p>vue 项目使用 hook 处理组件内定时器的方式。一般是使用生命周期钩子函数beforeDestory来销毁定时器。从Vue源码的lifecycle.js中发现了一种拓展方法，可以提升代码的简洁性，而且还可以减少data里无用变量的定义。</p>
 <span id="more"></span>
 
 <h2 id="一、使用生命周期函数处理定时器"><a href="#一、使用生命周期函数处理定时器" class="headerlink" title="一、使用生命周期函数处理定时器"></a>一、使用生命周期函数处理定时器</h2><p>通常处理组件内定时器的步骤是下面这样的</p>
-<pre><code class="js">export default&#123;
-    mounted()&#123;
-        this.timer = setInterval（() =&gt;&#123;
-            // do something
-        &#125;,1000）
-    &#125;,
-    beforeDestory()&#123;
-        clearInterval(this.timer);
-    &#125;
-&#125;
-</code></pre>
-<h2 id="二、使用-hook-处理定时器"><a href="#二、使用-hook-处理定时器" class="headerlink" title="二、使用 hook 处理定时器"></a>二、使用 hook 处理定时器</h2><pre><code class="js">export default&#123;
-    mounted()&#123;
-        const timer = setInterval(() =&gt; &#123;
-            // do something
-        &#125;,1000);
-        this.$once(&#39;hook:beforeDestory&#39;,()=&gt; clearInterval(timer);)
-    &#125;
-&#125;
-</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span>&#123;<br>    <span class="hljs-function"><span class="hljs-title">mounted</span>(<span class="hljs-params"></span>)</span>&#123;<br>        <span class="hljs-built_in">this</span>.timer = <span class="hljs-built_in">setInterval</span>（() =&gt;&#123;<br>            <span class="hljs-comment">// do something</span><br>        &#125;,<span class="hljs-number">1000</span>）<br>    &#125;,<br>    <span class="hljs-function"><span class="hljs-title">beforeDestory</span>(<span class="hljs-params"></span>)</span>&#123;<br>        <span class="hljs-built_in">clearInterval</span>(<span class="hljs-built_in">this</span>.timer);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h2 id="二、使用-hook-处理定时器"><a href="#二、使用-hook-处理定时器" class="headerlink" title="二、使用 hook 处理定时器"></a>二、使用 hook 处理定时器</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span>&#123;<br>    <span class="hljs-function"><span class="hljs-title">mounted</span>(<span class="hljs-params"></span>)</span>&#123;<br>        <span class="hljs-keyword">const</span> timer = <span class="hljs-built_in">setInterval</span>(<span class="hljs-function">() =&gt;</span> &#123;<br>            <span class="hljs-comment">// do something</span><br>        &#125;,<span class="hljs-number">1000</span>);<br>        <span class="hljs-built_in">this</span>.$once(<span class="hljs-string">&#x27;hook:beforeDestory&#x27;</span>,<span class="hljs-function">()=&gt;</span> <span class="hljs-built_in">clearInterval</span>(timer);)<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
 <h2 id="三、适用场景"><a href="#三、适用场景" class="headerlink" title="三、适用场景:"></a>三、适用场景:</h2><p>处理可视化图表的时候，我们需要在数据渲染到页面之前让页面有 loading 动画，mounted 挂载之后停止 loading，beforeUpdate 时开始 loading，updated 之后停止 loading。</p>
 <p>使用 hook 处理:</p>
-<pre><code class="tempalte">&lt;v-chart&gt;
-  @hook:mounted=&quot;loading = false&quot; @hook:beforeUpdated=&quot;loading = true&quot;
-  @hook:updated=&quot;loading = false&quot; :data=&quot;data&quot;
-&lt;/v-chart&gt;
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs tempalte">&lt;v-chart&gt;<br>  @hook:mounted=&quot;loading = false&quot; @hook:beforeUpdated=&quot;loading = true&quot;<br>  @hook:updated=&quot;loading = false&quot; :data=&quot;data&quot;<br>&lt;/v-chart&gt;<br></code></pre></td></tr></table></figure>
+
 <h2 id="四、补充说明：如何实现父组件监听子组件生命周期？"><a href="#四、补充说明：如何实现父组件监听子组件生命周期？" class="headerlink" title="四、补充说明：如何实现父组件监听子组件生命周期？"></a>四、补充说明：如何实现父组件监听子组件生命周期？</h2><h3 id="1、方法一：-emit"><a href="#1、方法一：-emit" class="headerlink" title="1、方法一：$emit"></a>1、方法一：$emit</h3><p>父组件给子组件传递多个回调函数，依赖子组件在自身的生命周期李通过vm.$emit的方式，调用父组件生命的回调函数。</p>
-<pre><code class="html">&lt;!-- 父组件 --&gt;
-&lt;template&gt;
-    &lt;div&gt;
-        &lt;Child @mounted=&quot;onMounted&quot;
-            @updated=&quot;onUpdated&quot;
-            @beforeDestory=&quot;beforeDestory&quot;
-        &gt;
-        &lt;/Child&gt;
-    &lt;/div&gt;
-&lt;/template&gt;
-</code></pre>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-comment">&lt;!-- 父组件 --&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">template</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">Child</span> @<span class="hljs-attr">mounted</span>=<span class="hljs-string">&quot;onMounted&quot;</span></span><br><span class="hljs-tag">            @<span class="hljs-attr">updated</span>=<span class="hljs-string">&quot;onUpdated&quot;</span></span><br><span class="hljs-tag">            @<span class="hljs-attr">beforeDestory</span>=<span class="hljs-string">&quot;beforeDestory&quot;</span></span><br><span class="hljs-tag">        &gt;</span><br>        <span class="hljs-tag">&lt;/<span class="hljs-name">Child</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">template</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
 <p>子组件：</p>
-<pre><code class="js">mounted()&#123;
-    this.$emit(&#39;mounted&#39;)
-&#125;,
-updated()&#123;
-    this.$emit(&#39;updated&#39;)
-&#125;,
-beforeDestory()&#123;
-    this.$emit(&#39;beforeDestory&#39;)
-&#125;
-</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-function"><span class="hljs-title">mounted</span>(<span class="hljs-params"></span>)</span>&#123;<br>    <span class="hljs-built_in">this</span>.$emit(<span class="hljs-string">&#x27;mounted&#x27;</span>)<br>&#125;,<br><span class="hljs-function"><span class="hljs-title">updated</span>(<span class="hljs-params"></span>)</span>&#123;<br>    <span class="hljs-built_in">this</span>.$emit(<span class="hljs-string">&#x27;updated&#x27;</span>)<br>&#125;,<br><span class="hljs-function"><span class="hljs-title">beforeDestory</span>(<span class="hljs-params"></span>)</span>&#123;<br>    <span class="hljs-built_in">this</span>.$emit(<span class="hljs-string">&#x27;beforeDestory&#x27;</span>)<br>&#125;<br></code></pre></td></tr></table></figure>
+
 <h3 id="2、方法二：-hook"><a href="#2、方法二：-hook" class="headerlink" title="2、方法二：@hook"></a>2、方法二：@hook</h3><p>父组件模板</p>
-<pre><code class="html">&lt;template&gt;
-    &lt;div&gt;
-        &lt;Child @hook:mounted=&quot;onMounted&quot;
-            @hook:updated=&quot;onUpdated&quot;
-            @hook:beforeDestory=&quot;beforeDestory&quot;
-        &gt;
-        &lt;/Child&gt;
-    &lt;/div&gt;
-&lt;/template&gt;
-</code></pre>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">template</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">Child</span> @<span class="hljs-attr">hook:mounted</span>=<span class="hljs-string">&quot;onMounted&quot;</span></span><br><span class="hljs-tag">            @<span class="hljs-attr">hook:updated</span>=<span class="hljs-string">&quot;onUpdated&quot;</span></span><br><span class="hljs-tag">            @<span class="hljs-attr">hook:beforeDestory</span>=<span class="hljs-string">&quot;beforeDestory&quot;</span></span><br><span class="hljs-tag">        &gt;</span><br>        <span class="hljs-tag">&lt;/<span class="hljs-name">Child</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">template</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
 <p>vue源码的lifecycle.js中，Vue的生命周期各个阶段都会去调用一个callHook函数，这个函数支持2个参数：实例vm和生命周期钩子名称,callHook里面执行了vm.$emit(‘hook:’+hook)。</p>
 <p>lifecycle.js源码片段（这个文件在Vue源码的src/core/instance/lifecycle.js）</p>
-<pre><code class="js">// callHook函数
-export function callHook (vm: Component, hook: string) &#123;
-  // #7573 disable dep collection when invoking lifecycle hooks
-  pushTarget()
-  const handlers = vm.$options[hook]
-  const info = `$&#123;hook&#125; hook`
-  if (handlers) &#123;
-    for (let i = 0, j = handlers.length; i &lt; j; i++) &#123;
-      invokeWithErrorHandling(handlers[i], vm, null, vm, info)
-    &#125;
-  &#125;
-  if (vm._hasHookEvent) &#123;
-    vm.$emit(&#39;hook:&#39; + hook)
-  &#125;
-  popTarget()
-&#125;
-</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-comment">// callHook函数</span><br><span class="hljs-keyword">export</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">callHook</span> (<span class="hljs-params">vm: Component, hook: string</span>) </span>&#123;<br>  <span class="hljs-comment">// #7573 disable dep collection when invoking lifecycle hooks</span><br>  pushTarget()<br>  <span class="hljs-keyword">const</span> handlers = vm.$options[hook]<br>  <span class="hljs-keyword">const</span> info = <span class="hljs-string">`<span class="hljs-subst">$&#123;hook&#125;</span> hook`</span><br>  <span class="hljs-keyword">if</span> (handlers) &#123;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>, j = handlers.length; i &lt; j; i++) &#123;<br>      invokeWithErrorHandling(handlers[i], vm, <span class="hljs-literal">null</span>, vm, info)<br>    &#125;<br>  &#125;<br>  <span class="hljs-keyword">if</span> (vm._hasHookEvent) &#123;<br>    vm.$emit(<span class="hljs-string">&#x27;hook:&#x27;</span> + hook)<br>  &#125;<br>  popTarget()<br>&#125;<br><br></code></pre></td></tr></table></figure>
+
 <p>@hook原理：</p>
 <blockquote>
 <p>当我们在子组件上传了对应的@hook:mounted钩子，也就执行了vm.$on(‘hook:mounted’),vue实例在生命周期里本身就会执行vm.$emit(‘hook:mounted’),也触发了我们绑定给子组件的回调函数。</p>

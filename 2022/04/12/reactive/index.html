@@ -18,32 +18,15 @@ Vue2肿的数据响应式会根据数据类型来做不同处理，如果是对�
 <p>通过数据响应式加上虚拟DOM和patch算法，开发人员只需要操作数据，关心业务，完全不用接触繁琐的DOM操作，大大提升开发效率，降低开发难度。</p>
 <p>4、如何实现Vue的响应式？优缺点？</p>
 <p>Vue2肿的数据响应式会根据数据类型来做不同处理，如果是对象采用Object.defineProperty()的方式定义数据拦截，当数据被访问或发生变化时，我们感知并做出响应；<br>如果是数组则通过覆盖数组对象原型的7个变更方法，使这些方法可以额外的做更新通知，从而作出响应。<br>这种机制很好的解决了数据响应化问题，但是也存在一些缺点：<br>初始化时的递归遍历会造成性能损失；新增或者删除属性需要使用Vue.set/delete这些特殊的API才能生效；对于es6中新产生的Map、Set这些数据结构不支持。</p>
-<pre><code class="js">function defineReactive(obj,key,val)&#123;
-  Object.defineProperty(obj,key,&#123;
-    get(key)&#123;&#125;,
-    set(key,val)&#123;&#125;
-  &#125;)
-&#125;
-</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">defineReactive</span>(<span class="hljs-params">obj,key,val</span>)</span>&#123;<br>  <span class="hljs-built_in">Object</span>.defineProperty(obj,key,&#123;<br>    <span class="hljs-function"><span class="hljs-title">get</span>(<span class="hljs-params">key</span>)</span>&#123;&#125;,<br>    <span class="hljs-function"><span class="hljs-title">set</span>(<span class="hljs-params">key,val</span>)</span>&#123;&#125;<br>  &#125;)<br>&#125;<br></code></pre></td></tr></table></figure>
+
 <p>5、Vue3如何实现响应式？</p>
 <p>利用es6的Proxy代理响应式的数据。<br>好处：不需要特殊的api，初始化性能和内存小号都得到了大幅改善<br>由于响应化的实现代码抽取为独立的reactivity报，使得我们可以灵活的使用它，第三方的扩展开发更加的灵活</p>
 <p>Proxy属性拦截的原理：利用get、set、deleteProperty这3个trap实现拦截</p>
-<pre><code class="js">function reactive(obj)&#123;
-  return new Proxy(obj,&#123;
-    get(target,key)&#123;&#125;,
-    set(target,key,val)&#123;&#125;,
-    deleteProperty(target,key)&#123;&#125;
-  &#125;)
-&#125;
-</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">reactive</span>(<span class="hljs-params">obj</span>)</span>&#123;<br>  <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Proxy</span>(obj,&#123;<br>    <span class="hljs-function"><span class="hljs-title">get</span>(<span class="hljs-params">target,key</span>)</span>&#123;&#125;,<br>    <span class="hljs-function"><span class="hljs-title">set</span>(<span class="hljs-params">target,key,val</span>)</span>&#123;&#125;,<br>    <span class="hljs-function"><span class="hljs-title">deleteProperty</span>(<span class="hljs-params">target,key</span>)</span>&#123;&#125;<br>  &#125;)<br>&#125;<br></code></pre></td></tr></table></figure>
+
 <p>proxy更快的原因：初始化时懒处理，用户访问才做拦截处理，初始化更快。</p>
-<pre><code class="ts">// https://github1s.com/vuejs/core/blob/HEAD/packages/reactivity/src/baseHandlers.ts
-    if (isObject(res)) &#123;
-      // Convert returned value into a proxy as well. we do the isObject check
-      // here to avoid invalid value warning. Also need to lazy access readonly
-      // and reactive here to avoid circular dependency.
-      return isReadonly ? readonly(res) : reactive(res)
-    &#125;
-</code></pre>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs ts"><span class="hljs-comment">// https://github1s.com/vuejs/core/blob/HEAD/packages/reactivity/src/baseHandlers.ts</span><br>    <span class="hljs-keyword">if</span> (isObject(res)) &#123;<br>      <span class="hljs-comment">// Convert returned value into a proxy as well. we do the isObject check</span><br>      <span class="hljs-comment">// here to avoid invalid value warning. Also need to lazy access readonly</span><br>      <span class="hljs-comment">// and reactive here to avoid circular dependency.</span><br>      <span class="hljs-keyword">return</span> isReadonly ? <span class="hljs-keyword">readonly</span>(res) : reactive(res)<br>    &#125;<br></code></pre></td></tr></table></figure>
+
 <p>轻量的依赖关系保存：利用WeakMap\Map\Set保存响应式数据和副作用之间的依赖关系。</p>
 </article><section class="jump-container is-flex is-justify-content-space-between my-6"><!-- em is empty placeholder--><a class="button is-default" href="/2022/04/19/mac-finder/" title="66、Mac系统升级后桌面文件夹及文件消失"><i class="iconfont icon-prev mr-2 has-text-grey"></i><span class="has-text-weight-semibold">上一页: 66、Mac系统升级后桌面文件夹及文件消失</span></a><a class="button is-default" href="/2022/04/06/ant-design-vue-picker/" title="64、ant-design-vue-picker"><span class="has-text-weight-semibold">下一页: 64、ant-design-vue-picker</span><i class="iconfont icon-next ml-2 has-text-grey"></i></a></section></div></div></main></main><footer class="is-flex is-flex-direction-column is-align-items-center is-flex-shrink-0 is-family-serif"><section class="sns-container"><!-- Github--><a title="github" target="_blank" rel="noopener nofollow" href="//github.com/Jude"><i class="iconfont icon-github"></i></a><!-- Ins--><!-- RSS--><!-- 知乎--><a title="zhihu" target="_blank" rel="noopener nofollow" href="//zhihu.com/https://www.zhihu.com/hot"><i class="iconfont icon-zhihu"></i></a><!-- 领英--><!-- 脸书--></section><p><span>Copyright ©</span><span> Jude 2023</span></p><div class="is-flex is-justify-content-center is-flex-wrap-wrap"><p>Powered by Hexo &verbar;&nbsp;</p><p class="is-flex is-justify-content-center"><a title="Hexo theme author" target="_blank" rel="noopener" href="//github.com/haojen">Theme by Haojen&nbsp;</a></p><div style="margin-top: 2px"><a class="github-button" title="github-button" target="_blank" rel="noopener" href="https://github.com/haojen/hexo-theme-Claudia" data-color-scheme="no-preference: light; light: light; dark: dark;" data-show-count="true"></a></div></div><div><span>记住昨日的美好，过好今日的生活，憧憬明天的到来</span></div></footer><script async defer src="https://buttons.github.io/buttons.js"></script><script src="/js/post.js"></script></body></html>

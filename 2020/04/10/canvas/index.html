@@ -8,12 +8,7 @@ canvas 是 HTML5 的新特性，它允许我们使用 canvas 元素在网页上�
 
 
 1、绘图流程:
-// 1、编写canvas标签，指定宽高（注意）；
-&amp;lt;canvas id=&amp;quot;canvas&amp;quot; width=&amp;quot;800&amp;quot; height=&amp;quot;800&amp;quot;&amp;gt;&amp;lt;/canvas&amp;gt;;
-// 2、获取canvas DOM对象；
-const canvas = document.getElementById(&amp;quot;canvas&amp;quot;);
-// 3、获取Canvas对象；
-const ctx = canvas.getContext(&amp;qu.."><meta name="generator" content="Hexo 5.4.1"></head><body class="is-flex is-flex-direction-column"><header class="header-widget is-flex-shrink-0 is-hidden-mobile"><div class="container is-fullhd is-flex is-justify-content-space-between is-align-items-center is-full-height"><section class="is-hidden-mobile is-flex-shrink-0"><h2><a href="/">Jude's blog</a></h2></section><h3 class="is-hidden-mobile is-family-serif is-full-height is-flex is-align-items-center is-flex-shrink-0"><div class="is-full-height" id="postTopic"><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">18、如何使用canvas压缩图片？</p><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">点击返回顶部</p></div></h3><aside class="is-flex-shrink-0"><h3 class="is-inline-block"><a href="/">首页</a></h3><h3 class="is-inline-block"><a href="/about">关于</a></h3><h3 class="is-inline-block"><a href="/archives">归档</a></h3></aside></div></header><header class="is-flex header-widget is-flex-shrink-0 is-align-items-center is-justify-content-center is-hidden-tablet"><h3 class="is-inline-block"><a href="/">首页</a></h3><h3 class="is-inline-block"><a href="/about">关于</a></h3><h3 class="is-inline-block"><a href="/archives">归档</a></h3></header><main><main class="container is-max-widescreen content section post-page pt-4 px-4"><div class="columns is-flex-desktop is-justify-content-center is-flex-direction-row-reverse"><div class="column is-3 is-hidden-mobile is-hidden"></div><div class="column is-9"><header class="my-4"><a href="/tags/canvas"><i class="tag post-item-tag">canvas</i></a></header><h1 class="mt-0 mb-1 is-family-serif" id="postTitle">18、如何使用canvas压缩图片？</h1><time class="has-text-grey" datetime="2020-04-10T12:00:00.000Z">2020-04-10</time><article class="mt-2 post-content"><blockquote>
+12345678910// 1、编写canvas标签，指定宽高（注意）；&amp;lt;canvas id=&amp;quot;canvas&amp;quot; width=&amp;quot;800&amp;quot; height=&amp;quot;800&amp;quot;&amp;gt;&amp;lt;/canvas&amp;gt;;// 2、获取canvas DOM对象；const canvas = document.getElementById(&amp;quot;canvas&amp;quot;);// 3、获取Canvas对象；const ctx = canvas.getConte.."><meta name="generator" content="Hexo 5.4.1"></head><body class="is-flex is-flex-direction-column"><header class="header-widget is-flex-shrink-0 is-hidden-mobile"><div class="container is-fullhd is-flex is-justify-content-space-between is-align-items-center is-full-height"><section class="is-hidden-mobile is-flex-shrink-0"><h2><a href="/">Jude's blog</a></h2></section><h3 class="is-hidden-mobile is-family-serif is-full-height is-flex is-align-items-center is-flex-shrink-0"><div class="is-full-height" id="postTopic"><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">18、如何使用canvas压缩图片？</p><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">点击返回顶部</p></div></h3><aside class="is-flex-shrink-0"><h3 class="is-inline-block"><a href="/">首页</a></h3><h3 class="is-inline-block"><a href="/about">关于</a></h3><h3 class="is-inline-block"><a href="/archives">归档</a></h3></aside></div></header><header class="is-flex header-widget is-flex-shrink-0 is-align-items-center is-justify-content-center is-hidden-tablet"><h3 class="is-inline-block"><a href="/">首页</a></h3><h3 class="is-inline-block"><a href="/about">关于</a></h3><h3 class="is-inline-block"><a href="/archives">归档</a></h3></header><main><main class="container is-max-widescreen content section post-page pt-4 px-4"><div class="columns is-flex-desktop is-justify-content-center is-flex-direction-row-reverse"><div class="column is-3 is-hidden-mobile is-hidden"></div><div class="column is-9"><header class="my-4"><a href="/tags/canvas"><i class="tag post-item-tag">canvas</i></a></header><h1 class="mt-0 mb-1 is-family-serif" id="postTitle">18、如何使用canvas压缩图片？</h1><time class="has-text-grey" datetime="2020-04-10T12:00:00.000Z">2020-04-10</time><article class="mt-2 post-content"><blockquote>
 <p>canvas 是 HTML5 的新特性，它允许我们使用 canvas 元素在网页上通过 JavaScript 绘制图像 （可以在 HTML 页面使用多个 canvas 元素）</p>
 </blockquote>
 <span id="more"></span>
@@ -22,137 +17,26 @@ const ctx = canvas.getContext(&amp;qu.."><meta name="generator" content="Hexo 5.
 
 
 <p><strong>1、绘图流程:</strong></p>
-<pre><code class="js">// 1、编写canvas标签，指定宽高（注意）；
-&lt;canvas id=&quot;canvas&quot; width=&quot;800&quot; height=&quot;800&quot;&gt;&lt;/canvas&gt;;
-// 2、获取canvas DOM对象；
-const canvas = document.getElementById(&quot;canvas&quot;);
-// 3、获取Canvas对象；
-const ctx = canvas.getContext(&quot;2d&quot;); // 拥有多种绘制路径、矩形、圆形、字符以及添加图像的方法
-// 4、设置绘图属性；
-ctx.fillStyle = &quot;red&quot;; //设置填充色
-// 5、调用绘图API。
-ctx.fillRect(0, 0, 50, 50); // 绘制矩形
-</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-comment">// 1、编写canvas标签，指定宽高（注意）；</span><br>&lt;canvas id=<span class="hljs-string">&quot;canvas&quot;</span> width=<span class="hljs-string">&quot;800&quot;</span> height=<span class="hljs-string">&quot;800&quot;</span>&gt;&lt;/canvas&gt;;<br><span class="hljs-comment">// 2、获取canvas DOM对象；</span><br><span class="hljs-keyword">const</span> canvas = <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">&quot;canvas&quot;</span>);<br><span class="hljs-comment">// 3、获取Canvas对象；</span><br><span class="hljs-keyword">const</span> ctx = canvas.getContext(<span class="hljs-string">&quot;2d&quot;</span>); <span class="hljs-comment">// 拥有多种绘制路径、矩形、圆形、字符以及添加图像的方法</span><br><span class="hljs-comment">// 4、设置绘图属性；</span><br>ctx.fillStyle = <span class="hljs-string">&quot;red&quot;</span>; <span class="hljs-comment">//设置填充色</span><br><span class="hljs-comment">// 5、调用绘图API。</span><br>ctx.fillRect(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">50</span>, <span class="hljs-number">50</span>); <span class="hljs-comment">// 绘制矩形</span><br></code></pre></td></tr></table></figure>
+
 <p><strong>2、canvas 路径</strong></p>
 <p>常用的方法：</p>
 <p>（1）moveTo(x,y)–定义线条开始坐标</p>
 <p>（2）lineTo(x,y)–定义线条结束坐标</p>
 <p>示例 1、绘制线段</p>
-<pre><code class="js">&lt;canvas id=&quot;canvas&quot; width=&quot;800&quot; height=&quot;800&quot;&gt;&lt;/canvas&gt;;
-var canvas = document.getElementById(&quot;canvas&quot;);
-var ctx = canvas.getContext(&quot;2d&quot;);
-ctx.beginPath(); // 开始绘制路径
-ctx.lineWidth = 1; // 线条宽度
-ctx.strokeStyle = &quot;green&quot;; // 线条填充色
-ctx.moveTo(0, 0);
-ctx.lineTo(200, 100);
-ctx.stroke(); // 绘制线段
-</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs js">&lt;canvas id=<span class="hljs-string">&quot;canvas&quot;</span> width=<span class="hljs-string">&quot;800&quot;</span> height=<span class="hljs-string">&quot;800&quot;</span>&gt;&lt;/canvas&gt;;<br><span class="hljs-keyword">var</span> canvas = <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">&quot;canvas&quot;</span>);<br><span class="hljs-keyword">var</span> ctx = canvas.getContext(<span class="hljs-string">&quot;2d&quot;</span>);<br>ctx.beginPath(); <span class="hljs-comment">// 开始绘制路径</span><br>ctx.lineWidth = <span class="hljs-number">1</span>; <span class="hljs-comment">// 线条宽度</span><br>ctx.strokeStyle = <span class="hljs-string">&quot;green&quot;</span>; <span class="hljs-comment">// 线条填充色</span><br>ctx.moveTo(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>);<br>ctx.lineTo(<span class="hljs-number">200</span>, <span class="hljs-number">100</span>);<br>ctx.stroke(); <span class="hljs-comment">// 绘制线段</span><br></code></pre></td></tr></table></figure>
+
 <p>示例 2、绘制圆形</p>
 <p>arc(x,y,r,start,stop) x 轴 y 轴 r 半径</p>
-<pre><code class="js">&lt;canvas id=&quot;canvas&quot; width=&quot;800&quot; height=&quot;800&quot;&gt;&lt;/canvas&gt;;
-var canvas = document.getElementById(&quot;canvas&quot;);
-var ctx = canvas.getContext(&quot;2d&quot;);
-ctx.beginPath();
-ctx.lineWidth = 2;
-ctx.strokeStyle = &quot;green&quot;; // 圆形边框色
-ctx.fillStyle = &quot;red&quot;; // 圆形填充色
-ctx.arc(95, 50, 40, 0, 2 * Math.PI);
-ctx.stroke();
-</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs js">&lt;canvas id=<span class="hljs-string">&quot;canvas&quot;</span> width=<span class="hljs-string">&quot;800&quot;</span> height=<span class="hljs-string">&quot;800&quot;</span>&gt;&lt;/canvas&gt;;<br><span class="hljs-keyword">var</span> canvas = <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">&quot;canvas&quot;</span>);<br><span class="hljs-keyword">var</span> ctx = canvas.getContext(<span class="hljs-string">&quot;2d&quot;</span>);<br>ctx.beginPath();<br>ctx.lineWidth = <span class="hljs-number">2</span>;<br>ctx.strokeStyle = <span class="hljs-string">&quot;green&quot;</span>; <span class="hljs-comment">// 圆形边框色</span><br>ctx.fillStyle = <span class="hljs-string">&quot;red&quot;</span>; <span class="hljs-comment">// 圆形填充色</span><br>ctx.arc(<span class="hljs-number">95</span>, <span class="hljs-number">50</span>, <span class="hljs-number">40</span>, <span class="hljs-number">0</span>, <span class="hljs-number">2</span> * <span class="hljs-built_in">Math</span>.PI);<br>ctx.stroke();<br></code></pre></td></tr></table></figure>
+
 <p>示例 3、绘制矩形 （代码见绘图流程）</p>
 <p><strong>3、使用 canvas 压缩图片</strong></p>
-<pre><code class="html">&lt;!--编写input标签 指定type类型为file--&gt;
-&lt;input type=&quot;file&quot; id=&quot;upload&quot; /&gt;
-</code></pre>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-comment">&lt;!--编写input标签 指定type类型为file--&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;file&quot;</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;upload&quot;</span> /&gt;</span><br></code></pre></td></tr></table></figure>
+
 <details>
 <summary>压缩图片js代码(点击展开)</summary>
 
-<pre><code class="js">// 设置上传图片类型  上传图片的容量大小
-const ACCEPT = [&quot;image/jpg&quot;, &quot;image/png&quot;, &quot;image/jpeg&quot;]; // 限定图片文件类型
-const MAXSIZE = 1024 * 1024 * 3; // 限定图片最大容量
-const MAXSIZE_STR = &quot;3MB&quot;;
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-comment">// 设置上传图片类型  上传图片的容量大小</span><br><span class="hljs-keyword">const</span> ACCEPT = [<span class="hljs-string">&quot;image/jpg&quot;</span>, <span class="hljs-string">&quot;image/png&quot;</span>, <span class="hljs-string">&quot;image/jpeg&quot;</span>]; <span class="hljs-comment">// 限定图片文件类型</span><br><span class="hljs-keyword">const</span> MAXSIZE = <span class="hljs-number">1024</span> * <span class="hljs-number">1024</span> * <span class="hljs-number">3</span>; <span class="hljs-comment">// 限定图片最大容量</span><br><span class="hljs-keyword">const</span> MAXSIZE_STR = <span class="hljs-string">&quot;3MB&quot;</span>;<br><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">convertImageToBase64</span>(<span class="hljs-params">file, cb</span>) </span>&#123;<br>  <span class="hljs-keyword">let</span> reader = <span class="hljs-keyword">new</span> FileReader();<br>  reader.addEventListener(<span class="hljs-string">&quot;load&quot;</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">e</span>) </span>&#123;<br>    <span class="hljs-keyword">const</span> base64Image = e.target.result; <span class="hljs-comment">// 获取文件内容，等同于 reader.result</span><br>    cb(base64Image);<br>    reader = <span class="hljs-literal">null</span>;<br>  &#125;);<br>  reader.readAsDataURL(file); <span class="hljs-comment">// 读取 file 对象中的内容</span><br>&#125;<br><span class="hljs-comment">// 图片是否压缩的判断</span><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">compress</span>(<span class="hljs-params">base64Image, cb</span>) </span>&#123;<br>  <span class="hljs-keyword">let</span> maxW = <span class="hljs-number">1024</span>;<br>  <span class="hljs-keyword">let</span> maxH = <span class="hljs-number">1024</span>;<br>  <span class="hljs-keyword">const</span> image = <span class="hljs-keyword">new</span> Image();<br>  image.addEventListener(<span class="hljs-string">&quot;load&quot;</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;<br>    <span class="hljs-keyword">let</span> ratio; <span class="hljs-comment">// 压缩比</span><br>    <span class="hljs-keyword">let</span> needCompress = <span class="hljs-literal">false</span>; <span class="hljs-comment">// 是否需要压缩</span><br>    <span class="hljs-keyword">if</span> (maxW &lt; image.naturalWidth) &#123;<br>      needCompress = <span class="hljs-literal">true</span>;<br>      ratio = image.naturalWidth / maxW;<br>      maxH = image.naturalHeight / ratio;<br>    &#125;<br>    <span class="hljs-keyword">if</span> (maxH &lt; image.naturalHeight) &#123;<br>      needCompress = <span class="hljs-literal">true</span>;<br>      ratio = image.naturalHeight / maxH;<br>      maxW = image.naturalWidth / ratio;<br>    &#125;<br>    <span class="hljs-keyword">if</span> (!needCompress) &#123;<br>      maxW = image.naturalWidth;<br>      maxH = image.naturalHeight;<br>    &#125;<br>    <span class="hljs-keyword">const</span> canvas = <span class="hljs-built_in">document</span>.createElement(<span class="hljs-string">&quot;canvas&quot;</span>);<br>    canvas.setAttribute(<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;__compress__&quot;</span>);<br>    canvas.width = maxW;<br>    canvas.height = maxH;<br>    canvas.style.visibility = <span class="hljs-string">&quot;hidden&quot;</span>;<br>    <span class="hljs-built_in">document</span>.body.append(canvas);<br>    <span class="hljs-comment">// canvas画布</span><br>    <span class="hljs-keyword">const</span> ctx = canvas.getContext(<span class="hljs-string">&quot;2d&quot;</span>);<br>    ctx.clearRect(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, maxW, maxH);<br>    ctx.drawImage(image, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, maxW, maxH); <span class="hljs-comment">// 渲染图片</span><br>    <span class="hljs-keyword">const</span> compressImage = canvas.toDataURL(<span class="hljs-string">&quot;image/jpeg&quot;</span>, <span class="hljs-number">0.9</span>); <span class="hljs-comment">// 压缩图片</span><br>    cb(compressImage);<br>    <span class="hljs-keyword">const</span> _image = <span class="hljs-keyword">new</span> Image();<br>    _image.src = compressImage;<br>    <span class="hljs-built_in">document</span>.body.appendChild(_image);<br>    canvas.remove(); <span class="hljs-comment">// 移除 canvas</span><br>  &#125;);<br>  image.src = base64Image; <span class="hljs-comment">// 将图片设置到 image 的 src 属性中</span><br>  <span class="hljs-built_in">document</span>.body.appendChild(image);<br>&#125;<br><span class="hljs-comment">// 上传给服务端</span><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">uploadImage</span>(<span class="hljs-params">compressImage</span>) </span>&#123;<br>  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;upload image to server...&quot;</span>, compressImage);<br>&#125;<br><br><span class="hljs-keyword">const</span> upload = <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">&quot;upload&quot;</span>);<br>upload.addEventListener(<span class="hljs-string">&quot;change&quot;</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">e</span>) </span>&#123;<br>  <span class="hljs-keyword">const</span> file = e.target.files[<span class="hljs-number">0</span>];<br>  <span class="hljs-built_in">console</span>.log(file);<br>  <span class="hljs-keyword">if</span> (!file) &#123;<br>    <span class="hljs-keyword">return</span>;<br>  &#125;<br>  <span class="hljs-keyword">const</span> &#123; <span class="hljs-attr">type</span>: fileType, <span class="hljs-attr">size</span>: fileSize &#125; = file;<br>  <span class="hljs-comment">// 图片类型检查</span><br>  <span class="hljs-keyword">if</span> (!ACCEPT.includes(fileType)) &#123;<br>    alert(<span class="hljs-string">&quot;不支持上传该格式文件！&quot;</span>);<br>    upload.value = <span class="hljs-string">&quot;&quot;</span>;<br>    <span class="hljs-keyword">return</span>;<br>  &#125;<br>  <span class="hljs-comment">// 图片大小检查</span><br>  <span class="hljs-keyword">if</span> (fileSize &gt; MAXSIZE) &#123;<br>    alert(<span class="hljs-string">&quot;文件超出&quot;</span> + MAXSIZE_STR + <span class="hljs-string">&quot;！&quot;</span>);<br>    upload.value = <span class="hljs-string">&quot;&quot;</span>;<br>    <span class="hljs-keyword">return</span>;<br>  &#125;<br>  <span class="hljs-comment">// 压缩文件</span><br>  convertImageToBase64(file, <span class="hljs-function">(<span class="hljs-params">base64Image</span>) =&gt;</span><br>    compress(base64Image, uploadImage)<br>  );<br>&#125;);<br></code></pre></td></tr></table></figure>
 
-function convertImageToBase64(file, cb) &#123;
-  let reader = new FileReader();
-  reader.addEventListener(&quot;load&quot;, function (e) &#123;
-    const base64Image = e.target.result; // 获取文件内容，等同于 reader.result
-    cb(base64Image);
-    reader = null;
-  &#125;);
-  reader.readAsDataURL(file); // 读取 file 对象中的内容
-&#125;
-// 图片是否压缩的判断
-function compress(base64Image, cb) &#123;
-  let maxW = 1024;
-  let maxH = 1024;
-  const image = new Image();
-  image.addEventListener(&quot;load&quot;, function () &#123;
-    let ratio; // 压缩比
-    let needCompress = false; // 是否需要压缩
-    if (maxW &lt; image.naturalWidth) &#123;
-      needCompress = true;
-      ratio = image.naturalWidth / maxW;
-      maxH = image.naturalHeight / ratio;
-    &#125;
-    if (maxH &lt; image.naturalHeight) &#123;
-      needCompress = true;
-      ratio = image.naturalHeight / maxH;
-      maxW = image.naturalWidth / ratio;
-    &#125;
-    if (!needCompress) &#123;
-      maxW = image.naturalWidth;
-      maxH = image.naturalHeight;
-    &#125;
-    const canvas = document.createElement(&quot;canvas&quot;);
-    canvas.setAttribute(&quot;id&quot;, &quot;__compress__&quot;);
-    canvas.width = maxW;
-    canvas.height = maxH;
-    canvas.style.visibility = &quot;hidden&quot;;
-    document.body.append(canvas);
-    // canvas画布
-    const ctx = canvas.getContext(&quot;2d&quot;);
-    ctx.clearRect(0, 0, maxW, maxH);
-    ctx.drawImage(image, 0, 0, maxW, maxH); // 渲染图片
-    const compressImage = canvas.toDataURL(&quot;image/jpeg&quot;, 0.9); // 压缩图片
-    cb(compressImage);
-    const _image = new Image();
-    _image.src = compressImage;
-    document.body.appendChild(_image);
-    canvas.remove(); // 移除 canvas
-  &#125;);
-  image.src = base64Image; // 将图片设置到 image 的 src 属性中
-  document.body.appendChild(image);
-&#125;
-// 上传给服务端
-function uploadImage(compressImage) &#123;
-  console.log(&quot;upload image to server...&quot;, compressImage);
-&#125;
-
-const upload = document.getElementById(&quot;upload&quot;);
-upload.addEventListener(&quot;change&quot;, function (e) &#123;
-  const file = e.target.files[0];
-  console.log(file);
-  if (!file) &#123;
-    return;
-  &#125;
-  const &#123; type: fileType, size: fileSize &#125; = file;
-  // 图片类型检查
-  if (!ACCEPT.includes(fileType)) &#123;
-    alert(&quot;不支持上传该格式文件！&quot;);
-    upload.value = &quot;&quot;;
-    return;
-  &#125;
-  // 图片大小检查
-  if (fileSize &gt; MAXSIZE) &#123;
-    alert(&quot;文件超出&quot; + MAXSIZE_STR + &quot;！&quot;);
-    upload.value = &quot;&quot;;
-    return;
-  &#125;
-  // 压缩文件
-  convertImageToBase64(file, (base64Image) =&gt;
-    compress(base64Image, uploadImage)
-  );
-&#125;);
-</code></pre>
 </details></article><section class="jump-container is-flex is-justify-content-space-between my-6"><!-- em is empty placeholder--><a class="button is-default" href="/2020/04/20/echarts/" title="19、关于echarts官方的一个bug -- sublink跳转问题"><i class="iconfont icon-prev mr-2 has-text-grey"></i><span class="has-text-weight-semibold">上一页: 19、关于echarts官方的一个bug -- sublink跳转问题</span></a><a class="button is-default" href="/2020/02/20/mobile/" title="17、移动端300ms延迟在IOS11中的bug"><span class="has-text-weight-semibold">下一页: 17、移动端300ms延迟在IOS11中的bug</span><i class="iconfont icon-next ml-2 has-text-grey"></i></a></section></div></div></main></main><footer class="is-flex is-flex-direction-column is-align-items-center is-flex-shrink-0 is-family-serif"><section class="sns-container"><!-- Github--><a title="github" target="_blank" rel="noopener nofollow" href="//github.com/Jude"><i class="iconfont icon-github"></i></a><!-- Ins--><!-- RSS--><!-- 知乎--><a title="zhihu" target="_blank" rel="noopener nofollow" href="//zhihu.com/https://www.zhihu.com/hot"><i class="iconfont icon-zhihu"></i></a><!-- 领英--><!-- 脸书--></section><p><span>Copyright ©</span><span> Jude 2023</span></p><div class="is-flex is-justify-content-center is-flex-wrap-wrap"><p>Powered by Hexo &verbar;&nbsp;</p><p class="is-flex is-justify-content-center"><a title="Hexo theme author" target="_blank" rel="noopener" href="//github.com/haojen">Theme by Haojen&nbsp;</a></p><div style="margin-top: 2px"><a class="github-button" title="github-button" target="_blank" rel="noopener" href="https://github.com/haojen/hexo-theme-Claudia" data-color-scheme="no-preference: light; light: light; dark: dark;" data-show-count="true"></a></div></div><div><span>记住昨日的美好，过好今日的生活，憧憬明天的到来</span></div></footer><script async defer src="https://buttons.github.io/buttons.js"></script><script src="/js/post.js"></script></body></html>

@@ -20,51 +20,23 @@
 <p>MacroTask</p>
 <p>​ 有了宏观任务和微观任务机制，我们就可以实现 JavaScript 引擎级和宿主级的任务了，例如：<code>Promise 永远在队列尾部添加微观任务</code>。setTimeout 等宿主 API，则会添加宏观任务。</p>
 <h4 id="三、Promise"><a href="#三、Promise" class="headerlink" title="三、Promise"></a>三、Promise</h4><p>​ Promise 是 JavaScript 语言提供的一种标准化的异步管理方式。promise 总体思想是，需要进行 IO、等待或者其它异步操作的函数，不返回真实结果，而返回一个“承诺”，函数的调用方可以在合适的时机，选择等待这个承诺兑现（promise 的 then 方法回调）</p>
-<pre><code class="js">function sleep(duration) &#123;
-  return new Promise((resolve, reject) =&gt; &#123;
-    setTimeout(resolve, duration);
-  &#125;);
-&#125;
-sleep(1000).then(() =&gt; console.log(&quot;finished&quot;));
-</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">sleep</span>(<span class="hljs-params">duration</span>) </span>&#123;<br>  <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Promise</span>(<span class="hljs-function">(<span class="hljs-params">resolve, reject</span>) =&gt;</span> &#123;<br>    <span class="hljs-built_in">setTimeout</span>(resolve, duration);<br>  &#125;);<br>&#125;<br>sleep(<span class="hljs-number">1000</span>).then(<span class="hljs-function">() =&gt;</span> <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;finished&quot;</span>));<br></code></pre></td></tr></table></figure>
+
 <p>sleep 函数的作用：等候传入参数指定的时长。</p>
 <p>Promise 的 then 回调是一个异步的执行过程。示例代码：</p>
-<pre><code class="js">var test = new Promise(function (resolve, reject) &#123;
-  console.log(&quot;a&quot;);
-  resolve();
-&#125;);
-test.then(() =&gt; console.log(&quot;c&quot;));
-console.log(&quot;b&quot;);
-</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">var</span> test = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Promise</span>(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">resolve, reject</span>) </span>&#123;<br>  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;a&quot;</span>);<br>  resolve();<br>&#125;);<br>test.then(<span class="hljs-function">() =&gt;</span> <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;c&quot;</span>));<br><span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;b&quot;</span>);<br></code></pre></td></tr></table></figure>
+
 <blockquote>
 <p>打印顺序：a &gt; b &gt; c</p>
 </blockquote>
 <p>​ 在进入 console.log(‘b’)之前，毫无疑问 test 已经得到了 resolve，但是 Promise 的 resolve 始终是异步操作，所以 c 无法出现在 b 之前。</p>
 <p>当 setTimeout 和 Promise 混用，设置两段互不相干的异步操作：通过 setTimeout 执行 console.log(‘d’)，通过 Promise 执行 console.log(‘c’)</p>
-<pre><code class="js">var test = new Promise(function (resolve, reject) &#123;
-  console.log(&quot;a&quot;);
-  resolve();
-&#125;);
-setTimeout(() =&gt; console.log(&quot;d&quot;), 0);
-test.then(() =&gt; console.log(&quot;c&quot;));
-console.log(&quot;b&quot;);
-</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">var</span> test = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Promise</span>(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">resolve, reject</span>) </span>&#123;<br>  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;a&quot;</span>);<br>  resolve();<br>&#125;);<br><span class="hljs-built_in">setTimeout</span>(<span class="hljs-function">() =&gt;</span> <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;d&quot;</span>), <span class="hljs-number">0</span>);<br>test.then(<span class="hljs-function">() =&gt;</span> <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;c&quot;</span>));<br><span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;b&quot;</span>);<br></code></pre></td></tr></table></figure>
+
 <p>我们发现，不论代码顺序如何，d 必定发生在 c 之后，因为 Promise 产生的是 JavaScript 引擎内部的微任务，而 setTimeout 是浏览器 API，它产生宏任务。</p>
 <p>理解<code>微任务始终先于宏任务</code>，示例：</p>
-<pre><code class="js">// 执行一个耗时1秒的Promise
-setTimeout(() =&gt; console.log(&quot;d&quot;), 0);
-var r = new Promise(function (resolve, reject) &#123;
-  resolve();
-&#125;);
-r.then(() =&gt; &#123;
-  var begin = Date.now();
-  while (Date.now() - begin &lt; 1000);
-  console.log(&quot;c1&quot;);
-  new Promise(function (resolve, reject) &#123;
-    resolve();
-  &#125;).then(() =&gt; console.log(&quot;c2&quot;));
-&#125;);
-</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-comment">// 执行一个耗时1秒的Promise</span><br><span class="hljs-built_in">setTimeout</span>(<span class="hljs-function">() =&gt;</span> <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;d&quot;</span>), <span class="hljs-number">0</span>);<br><span class="hljs-keyword">var</span> r = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Promise</span>(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">resolve, reject</span>) </span>&#123;<br>  resolve();<br>&#125;);<br>r.then(<span class="hljs-function">() =&gt;</span> &#123;<br>  <span class="hljs-keyword">var</span> begin = <span class="hljs-built_in">Date</span>.now();<br>  <span class="hljs-keyword">while</span> (<span class="hljs-built_in">Date</span>.now() - begin &lt; <span class="hljs-number">1000</span>);<br>  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;c1&quot;</span>);<br>  <span class="hljs-keyword">new</span> <span class="hljs-built_in">Promise</span>(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">resolve, reject</span>) </span>&#123;<br>    resolve();<br>  &#125;).then(<span class="hljs-function">() =&gt;</span> <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;c2&quot;</span>));<br>&#125;);<br></code></pre></td></tr></table></figure>
+
 <p>执行顺序：c1 &gt; c2 &gt; d 。 即使耗时 1 秒的 c1 执行完毕，再 enque 的 c2，仍然先于 d 执行，这可以很好的解释了<code>微任务优先</code>的原理。</p>
 <p>异步执行的顺序：</p>
 <blockquote>
@@ -75,15 +47,8 @@ r.then(() =&gt; &#123;
 <p>5、确定整个顺序</p>
 </blockquote>
 <p>复杂的例子：</p>
-<pre><code class="js">function sleep(duration) &#123;
-  return new Promise(function (resolve, reject) &#123;
-    console.log(&quot;b&quot;);
-    setTimeout(resolve, duration);
-  &#125;);
-&#125;
-console.log(&quot;a&quot;);
-sleep(5000).then(() =&gt; console.log(&quot;c&quot;));
-</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">sleep</span>(<span class="hljs-params">duration</span>) </span>&#123;<br>  <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Promise</span>(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">resolve, reject</span>) </span>&#123;<br>    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;b&quot;</span>);<br>    <span class="hljs-built_in">setTimeout</span>(resolve, duration);<br>  &#125;);<br>&#125;<br><span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;a&quot;</span>);<br>sleep(<span class="hljs-number">5000</span>).then(<span class="hljs-function">() =&gt;</span> <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;c&quot;</span>));<br></code></pre></td></tr></table></figure>
+
 <p>执行顺序：a &gt; b &gt; c 。setTimeout 把整个代码分割成了 2 个宏观任务，，不论是 5 秒还是 0 秒，都是一样。</p>
 <p>第一个宏观任务中，包含了先后同步执行的 console.log(‘a’)和 console.log(‘b’)</p>
 <p>setTimeout 后，第二个宏观任务执行调用了 resolve，然后 then 中的代码异步得到执行，所以调用了 console.log(‘c’),最终输出的顺序为： a b c 。</p>
@@ -92,31 +57,8 @@ sleep(5000).then(() =&gt; console.log(&quot;c&quot;));
 <p>它的运行时基础是 Promise。</p>
 <p>​ async 函数必定返回 Promise，我们把所有返回 Promise 的函数都可以认为是异步函数。</p>
 <p>async 函数是一种特殊语法，特征是在 function 关键字之前加上一个 async 关键字，这样就定义了一个 async 函数，我们可以在其中使用 await 来等待一个 Promise。</p>
-<pre><code class="js">function sleep(duration) &#123;
-  return new Promise(function (resolve, reject) &#123;
-    setTimeout(resolve, duration);
-  &#125;);
-&#125;
-async function foo() &#123;
-  console.log(&quot;a&quot;);
-  await sleep(2000);
-  console.log(&quot;b&quot;);
-&#125;
-foo();
-</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">sleep</span>(<span class="hljs-params">duration</span>) </span>&#123;<br>  <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Promise</span>(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">resolve, reject</span>) </span>&#123;<br>    <span class="hljs-built_in">setTimeout</span>(resolve, duration);<br>  &#125;);<br>&#125;<br><span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">foo</span>(<span class="hljs-params"></span>) </span>&#123;<br>  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;a&quot;</span>);<br>  <span class="hljs-keyword">await</span> sleep(<span class="hljs-number">2000</span>);<br>  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;b&quot;</span>);<br>&#125;<br>foo();<br></code></pre></td></tr></table></figure>
+
 <p>​ async 函数强大之处在于，它是可以嵌套的。</p>
-<pre><code class="js">function sleep(duration) &#123;
-  return new Promise(function (resolve, reject) &#123;
-    setTimeout(resolve, duration);
-  &#125;);
-&#125;
-async function foo(name) &#123;
-  await sleep(2000);
-  console.log(name);
-&#125;
-async function foo2() &#123;
-  await foo(&quot;a&quot;);
-  await foo(&quot;b&quot;);
-&#125;
-</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">sleep</span>(<span class="hljs-params">duration</span>) </span>&#123;<br>  <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Promise</span>(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">resolve, reject</span>) </span>&#123;<br>    <span class="hljs-built_in">setTimeout</span>(resolve, duration);<br>  &#125;);<br>&#125;<br><span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">foo</span>(<span class="hljs-params">name</span>) </span>&#123;<br>  <span class="hljs-keyword">await</span> sleep(<span class="hljs-number">2000</span>);<br>  <span class="hljs-built_in">console</span>.log(name);<br>&#125;<br><span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">foo2</span>(<span class="hljs-params"></span>) </span>&#123;<br>  <span class="hljs-keyword">await</span> foo(<span class="hljs-string">&quot;a&quot;</span>);<br>  <span class="hljs-keyword">await</span> foo(<span class="hljs-string">&quot;b&quot;</span>);<br>&#125;<br></code></pre></td></tr></table></figure>
 </article><section class="jump-container is-flex is-justify-content-space-between my-6"><!-- em is empty placeholder--><a class="button is-default" href="/2022/11/26/98-js-string-number-array/" title="98、基于JavaScript开发灵活的数据应用--基本数据处理(一)"><i class="iconfont icon-prev mr-2 has-text-grey"></i><span class="has-text-weight-semibold">上一页: 98、基于JavaScript开发灵活的数据应用--基本数据处理(一)</span></a><a class="button is-default" href="/2022/11/22/96-transition/" title="96、vue3的使用transition时，不写根标签的警告"><span class="has-text-weight-semibold">下一页: 96、vue3的使用transition时，不写根标签的警告</span><i class="iconfont icon-next ml-2 has-text-grey"></i></a></section></div></div></main></main><footer class="is-flex is-flex-direction-column is-align-items-center is-flex-shrink-0 is-family-serif"><section class="sns-container"><!-- Github--><a title="github" target="_blank" rel="noopener nofollow" href="//github.com/Jude"><i class="iconfont icon-github"></i></a><!-- Ins--><!-- RSS--><!-- 知乎--><a title="zhihu" target="_blank" rel="noopener nofollow" href="//zhihu.com/https://www.zhihu.com/hot"><i class="iconfont icon-zhihu"></i></a><!-- 领英--><!-- 脸书--></section><p><span>Copyright ©</span><span> Jude 2023</span></p><div class="is-flex is-justify-content-center is-flex-wrap-wrap"><p>Powered by Hexo &verbar;&nbsp;</p><p class="is-flex is-justify-content-center"><a title="Hexo theme author" target="_blank" rel="noopener" href="//github.com/haojen">Theme by Haojen&nbsp;</a></p><div style="margin-top: 2px"><a class="github-button" title="github-button" target="_blank" rel="noopener" href="https://github.com/haojen/hexo-theme-Claudia" data-color-scheme="no-preference: light; light: light; dark: dark;" data-show-count="true"></a></div></div><div><span>记住昨日的美好，过好今日的生活，憧憬明天的到来</span></div></footer><script async defer src="https://buttons.github.io/buttons.js"></script><script src="/js/post.js"></script></body></html>

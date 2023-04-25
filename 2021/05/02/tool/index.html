@@ -3,194 +3,96 @@
 
 
 iTerm2快捷键
-    commond + t              // 新建标签页
-    commond + w              // 关闭标签
-    commond + enter          // 切换全屏(第一次切换至全屏，再commond + enter恢复到之前窗口) 
-    commond + 左右方向键       // 切换标签
-    commond + +              // 窗口和字体变大
-    commond + -              // 窗口和字体变小
-
+123456commond + t              // 新建标签页commond + w              // 关闭标签commond + enter          // 切换全屏(第一次切换至全屏，再commond + enter恢复到之前窗口) commond + 左右方向键       // 切换标签commond + +              // 窗口和字体变大commond + -              // 窗口和字体变小
 Node版本管理工具在开发的工程中，我们可能需要经常切换node版本来应对不同的开发环境，所以需要经常使用不同版本的node。
-一、安.."><meta name="generator" content="Hexo 5.4.1"></head><body class="is-flex is-flex-direction-column"><header class="header-widget is-flex-shrink-0 is-hidden-mobile"><div class="container is-fullhd is-flex is-justify-content-space-between is-align-items-center is-full-height"><section class="is-hidden-mobile is-flex-shrink-0"><h2><a href="/">Jude's blog</a></h2></section><h3 class="is-hidden-mobile is-family-serif is-full-height is-flex is-align-items-center is-flex-shrink-0"><div class="is-full-height" id="postTopic"><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">34、iTerms、Node版本管理工具、nrm等的使用方法</p><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">点击返回顶部</p></div></h3><aside class="is-flex-shrink-0"><h3 class="is-inline-block"><a href="/">首页</a></h3><h3 class="is-inline-block"><a href="/about">关于</a></h3><h3 class="is-inline-block"><a href="/archives">归档</a></h3></aside></div></header><header class="is-flex header-widget is-flex-shrink-0 is-align-items-center is-justify-content-center is-hidden-tablet"><h3 class="is-inline-block"><a href="/">首页</a></h3><h3 class="is-inline-block"><a href="/about">关于</a></h3><h3 class="is-inline-block"><a href="/archives">归档</a></h3></header><main><main class="container is-max-widescreen content section post-page pt-4 px-4"><div class="columns is-flex-desktop is-justify-content-center is-flex-direction-row-reverse"><div class="column is-3 is-hidden-mobile"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#iTerm2"><span class="toc-text">iTerm2</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Node%E7%89%88%E6%9C%AC%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7"><span class="toc-text">Node版本管理工具</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#nrm%E5%88%87%E6%8D%A2npm%E6%BA%90"><span class="toc-text">nrm切换npm源</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E7%AB%AF%E5%B8%B8%E7%94%A8%E7%9A%84linux%E5%91%BD%E4%BB%A4"><span class="toc-text">前端常用的linux命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#eslint%E7%9A%84%E9%85%8D%E7%BD%AE"><span class="toc-text">eslint的配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#git%E6%8F%90%E4%BA%A4%E4%BB%A3%E7%A0%81"><span class="toc-text">git提交代码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#vscode%E5%BF%AB%E6%8D%B7%E9%94%AE"><span class="toc-text">vscode快捷键</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Markdown%E8%AF%AD%E6%B3%95"><span class="toc-text">Markdown语法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#HBuilder%E7%9C%9F%E6%9C%BA%E8%B0%83%E8%AF%95"><span class="toc-text">HBuilder真机调试</span></a></li></ol></div><div class="column is-9"><header class="my-4"><a href="/tags/tool"><i class="tag post-item-tag">tool</i></a></header><h1 class="mt-0 mb-1 is-family-serif" id="postTitle">34、iTerms、Node版本管理工具、nrm等的使用方法</h1><time class="has-text-grey" datetime="2021-05-02T12:00:00.000Z">2021-05-02</time><article class="mt-2 post-content"><p>一些开发过程中需要使用的工具整理</p>
+一、安装npm插件n ,通过n模块来管理node版本
+.."><meta name="generator" content="Hexo 5.4.1"></head><body class="is-flex is-flex-direction-column"><header class="header-widget is-flex-shrink-0 is-hidden-mobile"><div class="container is-fullhd is-flex is-justify-content-space-between is-align-items-center is-full-height"><section class="is-hidden-mobile is-flex-shrink-0"><h2><a href="/">Jude's blog</a></h2></section><h3 class="is-hidden-mobile is-family-serif is-full-height is-flex is-align-items-center is-flex-shrink-0"><div class="is-full-height" id="postTopic"><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">34、iTerms、Node版本管理工具、nrm等的使用方法</p><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">点击返回顶部</p></div></h3><aside class="is-flex-shrink-0"><h3 class="is-inline-block"><a href="/">首页</a></h3><h3 class="is-inline-block"><a href="/about">关于</a></h3><h3 class="is-inline-block"><a href="/archives">归档</a></h3></aside></div></header><header class="is-flex header-widget is-flex-shrink-0 is-align-items-center is-justify-content-center is-hidden-tablet"><h3 class="is-inline-block"><a href="/">首页</a></h3><h3 class="is-inline-block"><a href="/about">关于</a></h3><h3 class="is-inline-block"><a href="/archives">归档</a></h3></header><main><main class="container is-max-widescreen content section post-page pt-4 px-4"><div class="columns is-flex-desktop is-justify-content-center is-flex-direction-row-reverse"><div class="column is-3 is-hidden-mobile"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#iTerm2"><span class="toc-text">iTerm2</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Node%E7%89%88%E6%9C%AC%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7"><span class="toc-text">Node版本管理工具</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#nrm%E5%88%87%E6%8D%A2npm%E6%BA%90"><span class="toc-text">nrm切换npm源</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E7%AB%AF%E5%B8%B8%E7%94%A8%E7%9A%84linux%E5%91%BD%E4%BB%A4"><span class="toc-text">前端常用的linux命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#eslint%E7%9A%84%E9%85%8D%E7%BD%AE"><span class="toc-text">eslint的配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#git%E6%8F%90%E4%BA%A4%E4%BB%A3%E7%A0%81"><span class="toc-text">git提交代码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#vscode%E5%BF%AB%E6%8D%B7%E9%94%AE"><span class="toc-text">vscode快捷键</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Markdown%E8%AF%AD%E6%B3%95"><span class="toc-text">Markdown语法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#HBuilder%E7%9C%9F%E6%9C%BA%E8%B0%83%E8%AF%95"><span class="toc-text">HBuilder真机调试</span></a></li></ol></div><div class="column is-9"><header class="my-4"><a href="/tags/tool"><i class="tag post-item-tag">tool</i></a></header><h1 class="mt-0 mb-1 is-family-serif" id="postTitle">34、iTerms、Node版本管理工具、nrm等的使用方法</h1><time class="has-text-grey" datetime="2021-05-02T12:00:00.000Z">2021-05-02</time><article class="mt-2 post-content"><p>一些开发过程中需要使用的工具整理</p>
 <span id="more"></span>
 
 <h2 id="iTerm2"><a href="#iTerm2" class="headerlink" title="iTerm2"></a>iTerm2</h2><p>快捷键</p>
-<pre><code>    commond + t              // 新建标签页
-    commond + w              // 关闭标签
-    commond + enter          // 切换全屏(第一次切换至全屏，再commond + enter恢复到之前窗口) 
-    commond + 左右方向键       // 切换标签
-    commond + +              // 窗口和字体变大
-    commond + -              // 窗口和字体变小
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">commond + t              // 新建标签页<br>commond + w              // 关闭标签<br>commond + enter          // 切换全屏(第一次切换至全屏，再commond + enter恢复到之前窗口) <br>commond + 左右方向键       // 切换标签<br>commond + +              // 窗口和字体变大<br>commond + -              // 窗口和字体变小<br></code></pre></td></tr></table></figure>
 <h2 id="Node版本管理工具"><a href="#Node版本管理工具" class="headerlink" title="Node版本管理工具"></a>Node版本管理工具</h2><p>在开发的工程中，我们可能需要经常切换node版本来应对不同的开发环境，所以需要经常使用不同版本的node。</p>
 <p>一、安装npm插件n ,通过n模块来管理node版本</p>
 <p>1、全局安装n模块</p>
-<pre><code>    npm instlal -g n 
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">npm instlal -g n <br></code></pre></td></tr></table></figure>
 <p>2、安装当前稳定版本</p>
-<pre><code>    n stable或者sudo n stable
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">n stable或者sudo n stable<br></code></pre></td></tr></table></figure>
 <p>3、安装最新版本的</p>
-<pre><code>    n latest或者sudo n latest
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">n latest或者sudo n latest<br></code></pre></td></tr></table></figure>
 <p>4、安装指定版本的node</p>
-<pre><code>    n v8.16.0
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">n v8.16.0<br></code></pre></td></tr></table></figure>
 <p>5、卸载指定的node版本</p>
-<pre><code>    n rm v8.16.0
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">n rm v8.16.0<br></code></pre></td></tr></table></figure>
 <p>二、使用nvm管理node版本<br>1、安装nvm </p>
-<pre><code>    brew install nvm
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">brew install nvm<br></code></pre></td></tr></table></figure>
 <p>2、使用nvm安装node版本</p>
-<pre><code>    // 安装最新版本
-    nvm isntall node
-    // 安装指定版本
-    nvm install 8.16.0
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">// 安装最新版本<br>nvm isntall node<br>// 安装指定版本<br>nvm install 8.16.0<br></code></pre></td></tr></table></figure>
 <p>3、查看所有版本</p>
-<pre><code>    nvm ls
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">nvm ls<br></code></pre></td></tr></table></figure>
 <p>4、切换node版本</p>
-<pre><code>    // 使用最新版本
-    nvm use node       
-    // 使用指定版本
-    nvm use 8.16.0
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">// 使用最新版本<br>nvm use node       <br>// 使用指定版本<br>nvm use 8.16.0<br></code></pre></td></tr></table></figure>
 <p>通常我会使用第二种方式<br>例如：</p>
 <p>我在一个项目中使用的是<code>node@6.13.2</code>,</p>
 <p>新项目使用的是<code>node@8.16.0</code>,</p>
 <p>先要安装<code>node@8.16.0   nvm install 8.16.0</code></p>
 <p>然后<code>nvm use 8.16.0</code></p>
 <p>5、卸载指定版本的node</p>
-<pre><code>    nvm uninstall  v6.13.2
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">nvm uninstall  v6.13.2<br></code></pre></td></tr></table></figure>
 <p>6、设置系统默认的node版本</p>
-<pre><code>    nvm alias default v8.16.0
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">nvm alias default v8.16.0<br></code></pre></td></tr></table></figure>
 <p>这样使用的node的默认版本为8.16.0</p>
 <h2 id="nrm切换npm源"><a href="#nrm切换npm源" class="headerlink" title="nrm切换npm源"></a>nrm切换npm源</h2><p>因为在使用npm下载插件的过程中速度太慢了（npm源在国外），所以找到一个切换源的方法：nrm。</p>
 <p>一、切换成淘宝源</p>
 <p>1、config命令的使用</p>
-<pre><code>npm config set registry https://registry.npm.taobao.org
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">npm config set registry https://registry.npm.taobao.org<br></code></pre></td></tr></table></figure>
 <p>2、命令行指定</p>
-<pre><code>npm i node --registry https://registry.npm.taobao.org info underscore 
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">npm i node --registry https://registry.npm.taobao.org info underscore <br></code></pre></td></tr></table></figure>
 <p>3、编辑~/.npmrc，加入以下内容：</p>
-<pre><code>registry = https://registry.npm.taobao.org
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">registry = https://registry.npm.taobao.org<br></code></pre></td></tr></table></figure>
 <p>二、nrm的使用</p>
 <blockquote>
 <p>nrm是一个可以切换、添加/删除/测试源的工具</p>
 </blockquote>
 <p>1、全局安装nrm</p>
-<pre><code>npm install -g nrm  // mac如果出现权限问题，加上sudo
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">npm install -g nrm  // mac如果出现权限问题，加上sudo<br></code></pre></td></tr></table></figure>
 <p>2、安装完成，查看所有的可用源</p>
-<pre><code>nrm ls
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">nrm ls<br></code></pre></td></tr></table></figure>
 <p>3、添加源</p>
-<pre><code>nrm add 源的名称  https:// 地址
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">nrm add 源的名称  https:// 地址<br></code></pre></td></tr></table></figure>
 <p>4、删除原</p>
-<pre><code>nrm del 源的名字
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">nrm del 源的名字<br></code></pre></td></tr></table></figure>
 <p>5、切换到某个源</p>
-<pre><code>nrm use 源的名字
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">nrm use 源的名字<br></code></pre></td></tr></table></figure>
 <p>6、测试源速度</p>
-<pre><code>nrm test
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">nrm test<br></code></pre></td></tr></table></figure>
+
 <p>例如，我需要使用淘宝源，只需nrm use taobao就可以了，cnpm不要使用，容易出现莫名其妙的错误。</p>
 <h2 id="前端常用的linux命令"><a href="#前端常用的linux命令" class="headerlink" title="前端常用的linux命令"></a>前端常用的linux命令</h2><p>常用的Linux命令</p>
-<pre><code>1、vim test.html   创建新的文件 
-   vim + 文件名.后缀
-2、ls     查看当前文件夹下的文件
-    ls -a  列出所有文件，包括隐藏文件
-    ls -1  每行列出一个文件，以单列形式列出
-3、cat test.html  将该文件内容打印显示出来
-   cat test1.html
-   cat test2.html
-   cat test1.html     test2.html&gt;test3.html
-   cat test3.html   将多个文件合并到目标文件中。
-
-   cat test1.html
-   cat test2.html
-   cat test1.html test2.html&gt;&gt;test4.html  将几个文件附加到目录文件中
-4、mv   移动或重命名文件和目录
-mv file1.txt file2.txt   将file1文件命名为file2
-用法：
- cat 1.txt
- mv 1.txt 2.txt
- mv file1.txt file2  将file1文本移动到file2目录  
-5、touch  file   命令用于修改文件或者目录的时间属性，包括存取时间和更改时间。若文件不存在，系统会建立一个新的空白文件。
- touch newfile
-6、mkdir file    创建文件夹
-7、cd ../  返回当前文件夹的上一层
- cd /    返回到根目录下
-8、rm -rf folder  删除文件夹
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">1、vim test.html   创建新的文件 <br>   vim + 文件名.后缀<br>2、ls     查看当前文件夹下的文件<br>    ls -a  列出所有文件，包括隐藏文件<br>    ls -1  每行列出一个文件，以单列形式列出<br>3、cat test.html  将该文件内容打印显示出来<br>   cat test1.html<br>   cat test2.html<br>   cat test1.html     test2.html&gt;test3.html<br>   cat test3.html   将多个文件合并到目标文件中。<br><br>   cat test1.html<br>   cat test2.html<br>   cat test1.html test2.html&gt;&gt;test4.html  将几个文件附加到目录文件中<br>4、mv   移动或重命名文件和目录<br>mv file1.txt file2.txt   将file1文件命名为file2<br>用法：<br> cat 1.txt<br> mv 1.txt 2.txt<br> mv file1.txt file2  将file1文本移动到file2目录  <br>5、touch  file   命令用于修改文件或者目录的时间属性，包括存取时间和更改时间。若文件不存在，系统会建立一个新的空白文件。<br> touch newfile<br>6、mkdir file    创建文件夹<br>7、cd ../  返回当前文件夹的上一层<br> cd /    返回到根目录下<br>8、rm -rf folder  删除文件夹<br></code></pre></td></tr></table></figure>
 <h2 id="eslint的配置"><a href="#eslint的配置" class="headerlink" title="eslint的配置"></a>eslint的配置</h2><p>常用的配置</p>
-<pre><code>module.exports = &#123;
-  root: true,
-  env: &#123;
-    node: true
-  &#125;,
-  &#39;extends&#39;: [
-    &#39;plugin:vue/essential&#39;,
-    &#39;@vue/standard&#39;
-  ],
-  rules: &#123;
-    &#39;no-console&#39;: process.env.NODE_ENV === &#39;production&#39; ? &#39;error&#39; : &#39;off&#39;, // 生产环境 无console.log
-    &#39;no-debugger&#39;: process.env.NODE_ENV === &#39;production&#39; ? &#39;error&#39; : &#39;off&#39;, // 生产环境 无debugger
-    &#39;indent&#39;: &#39;off&#39;,
-    // 函数定义时括号前面要不要有空格
-    &#39;space-before-function-paren&#39;: &#39;off&#39;
-  &#125;,
-  parserOptions: &#123;
-    parser: &#39;babel-eslint&#39;
-  &#125;
-&#125;
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">module.exports = &#123;<br>  root: true,<br>  env: &#123;<br>    node: true<br>  &#125;,<br>  &#x27;extends&#x27;: [<br>    &#x27;plugin:vue/essential&#x27;,<br>    &#x27;@vue/standard&#x27;<br>  ],<br>  rules: &#123;<br>    &#x27;no-console&#x27;: process.env.NODE_ENV === &#x27;production&#x27; ? &#x27;error&#x27; : &#x27;off&#x27;, // 生产环境 无console.log<br>    &#x27;no-debugger&#x27;: process.env.NODE_ENV === &#x27;production&#x27; ? &#x27;error&#x27; : &#x27;off&#x27;, // 生产环境 无debugger<br>    &#x27;indent&#x27;: &#x27;off&#x27;,<br>    // 函数定义时括号前面要不要有空格<br>    &#x27;space-before-function-paren&#x27;: &#x27;off&#x27;<br>  &#125;,<br>  parserOptions: &#123;<br>    parser: &#x27;babel-eslint&#x27;<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
 <h2 id="git提交代码"><a href="#git提交代码" class="headerlink" title="git提交代码"></a>git提交代码</h2><p>一、初始化本地仓库，提交代码，提交到远程git仓库</p>
 <p>1、初始化代码仓库</p>
-<pre><code>    git init
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">git init<br></code></pre></td></tr></table></figure>
 <p>2、将当前目录下的所有文件放到暂存区</p>
-<pre><code>    git add .
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">git add .<br></code></pre></td></tr></table></figure>
 <p>3、查看文件状态</p>
-<pre><code>    git status
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">git status<br></code></pre></td></tr></table></figure>
 <p>4、添加提交的描述信息</p>
-<pre><code>    git commit -m &quot;提交的描述信息&quot;
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">git commit -m &quot;提交的描述信息&quot;<br></code></pre></td></tr></table></figure>
 <p>5、远程仓库地址</p>
-<pre><code>    git remote add origin &quot;远程仓库地址&quot;
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">git remote add origin &quot;远程仓库地址&quot;<br></code></pre></td></tr></table></figure>
 <p>6、推送到远程仓库</p>
-<pre><code>    git push -u origin master
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">git push -u origin master<br></code></pre></td></tr></table></figure>
 <p>二、创建分支，提交代码到分支</p>
 <p>1、创建切换分支</p>
-<pre><code>    git checkout -b dev  dev为分支名称
-    git add .
-    git commit -m &#39;描述&#39;
-    git push --set-upstream origin dev1   将分支推送到远程仓库
-    切换到主分支
-    git checkout master
-    git merge dev  将dev合并到主分支
-    git push origin master  推送到远程仓库
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">git checkout -b dev  dev为分支名称<br>git add .<br>git commit -m &#x27;描述&#x27;<br>git push --set-upstream origin dev1   将分支推送到远程仓库<br>切换到主分支<br>git checkout master<br>git merge dev  将dev合并到主分支<br>git push origin master  推送到远程仓库<br></code></pre></td></tr></table></figure>
 <p>三、克隆指定分支</p>
-<pre><code>    git clone -b master git@gitee.com:username/projectname.git
-    git clone -b admin git@gitee.com:username/projectname.git
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">git clone -b master git@gitee.com:username/projectname.git<br>git clone -b admin git@gitee.com:username/projectname.git<br></code></pre></td></tr></table></figure>
+
 <p>四、git reflog</p>
-<pre><code>查看所有分支的所有操作记录（包括已经被删除的 commit 记录和 reset 的操作）
-执行 git reset --hard HEAD~1，退回到上一个版本，用git log则是看不出来被删除的commitid，用git reflog则可以看到被删除的commitid，我们就可以买后悔药，恢复到被删除的那个版本。
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">查看所有分支的所有操作记录（包括已经被删除的 commit 记录和 reset 的操作）<br>执行 git reset --hard HEAD~1，退回到上一个版本，用git log则是看不出来被删除的commitid，用git reflog则可以看到被删除的commitid，我们就可以买后悔药，恢复到被删除的那个版本。<br></code></pre></td></tr></table></figure>
 <h2 id="vscode快捷键"><a href="#vscode快捷键" class="headerlink" title="vscode快捷键"></a>vscode快捷键</h2><table>
 <thead>
 <tr>
@@ -238,15 +140,8 @@ mv file1.txt file2.txt   将file1文件命名为file2
 <blockquote>
 <p>fileheader插件的使用</p>
 </blockquote>
-<pre><code>commond+shift+p -&gt; fileheader -&gt; enter
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">commond+shift+p -&gt; fileheader -&gt; enter<br><br>/*<br> * @Author: Jude <br> * @Date: 2020-07-24 16:39:41 <br> * @Last Modified by: Jude<br> * @Last Modified time: 2020-07-24 16:40:34<br> */<br></code></pre></td></tr></table></figure>
 
-/*
- * @Author: Jude 
- * @Date: 2020-07-24 16:39:41 
- * @Last Modified by: Jude
- * @Last Modified time: 2020-07-24 16:40:34
- */
-</code></pre>
 <h2 id="Markdown语法"><a href="#Markdown语法" class="headerlink" title="Markdown语法"></a>Markdown语法</h2><p>Markdown标题</p>
 <p>使用#号标记，使用 # 号可表示 1-6 级标题，一级标题对应一个 # 号，二级标题对应两个 # 号，以此类推。</p>
 <p>1、Markdown段落</p>
@@ -254,141 +149,78 @@ mv file1.txt file2.txt   将file1文件命名为file2
 <blockquote>
 <p>字体:</p>
 </blockquote>
-<pre><code>*斜体文本*
-</code></pre>
-<pre><code>_斜体文本_
-</code></pre>
-<pre><code>**粗体文本**
-</code></pre>
-<pre><code>__粗体文本__
-</code></pre>
-<pre><code>***粗斜体文本***
-</code></pre>
-<pre><code>___粗斜体文本___
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">*斜体文本*<br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">_斜体文本_<br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">**粗体文本**<br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">__粗体文本__<br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">***粗斜体文本***<br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">___粗斜体文本___<br></code></pre></td></tr></table></figure>
+
 <blockquote>
 <p>分割线</p>
 </blockquote>
-<pre><code>***
-
-* * *
-
-*****
-
-- - -
-
-----------
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">***<br><br>* * *<br><br>*****<br><br>- - -<br><br>----------<br></code></pre></td></tr></table></figure>
 <blockquote>
 <p>删除线、下划线、脚注</p>
 </blockquote>
-<pre><code>~~删除线~~
-&lt;u&gt;下划线&lt;/u&gt;
-[^Vue]:Vuejs是目前最流行的web开发框架之一。
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">~~删除线~~<br>&lt;u&gt;下划线&lt;/u&gt;<br>[^Vue]:Vuejs是目前最流行的web开发框架之一。<br></code></pre></td></tr></table></figure>
+
 <p>2、Markdown列表</p>
 <p>Markdown 支持有序列表和无序列表。</p>
 <p>（1）、无序列表使用星号(*)、加号(+)或是减号(-)作为列表标记，这些标记后面要添加一个空格，然后再填写内容：</p>
-<pre><code>* 第一项
-* 第二项
-* 第三项
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">* 第一项<br>* 第二项<br>* 第三项<br><br>+ 第一项<br>+ 第二项<br>+ 第三项<br><br><br>- 第一项<br>- 第二项<br>- 第三项<br></code></pre></td></tr></table></figure>
 
-+ 第一项
-+ 第二项
-+ 第三项
-
-
-- 第一项
-- 第二项
-- 第三项
-</code></pre>
 <p>（2）、有序列表：有序列表使用数字并加上 . 号来表示。</p>
-<pre><code>1. 第一项
-2. 第二项
-3. 第三项
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">1. 第一项<br>2. 第二项<br>3. 第三项<br></code></pre></td></tr></table></figure>
 <p>（3）、列表嵌套：列表嵌套只需在子列表中的选项前面添加四个空格即可</p>
-<pre><code>1. 第一项：
-    - 第一项嵌套的第一个元素
-    - 第一项嵌套的第二个元素
-2. 第二项：
-    - 第二项嵌套的第一个元素
-    - 第二项嵌套的第二个元素
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">1. 第一项：<br>    - 第一项嵌套的第一个元素<br>    - 第一项嵌套的第二个元素<br>2. 第二项：<br>    - 第二项嵌套的第一个元素<br>    - 第二项嵌套的第二个元素<br></code></pre></td></tr></table></figure>
+
 <p>4、Markdown区块</p>
 <p>Markdown 区块引用是在段落开头使用 &gt; 符号 ，然后后面紧跟一个空格符号</p>
 <blockquote>
 <p>区块的嵌套</p>
 </blockquote>
-<pre><code>&gt; 最外层
-&gt; &gt; 第一层嵌套
-&gt; &gt; &gt; 第二层嵌套
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">&gt; 最外层<br>&gt; &gt; 第一层嵌套<br>&gt; &gt; &gt; 第二层嵌套<br></code></pre></td></tr></table></figure>
+
 <blockquote>
 <p>区块中使用列表</p>
 </blockquote>
-<pre><code>&gt; 区块中使用列表
-&gt; 1. 第一项
-&gt; 2. 第二项
-&gt; + 第一项
-&gt; + 第二项
-&gt; + 第三项
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">&gt; 区块中使用列表<br>&gt; 1. 第一项<br>&gt; 2. 第二项<br>&gt; + 第一项<br>&gt; + 第二项<br>&gt; + 第三项<br></code></pre></td></tr></table></figure>
 <blockquote>
 <p>列表中使用区块</p>
 </blockquote>
 <p>如果要在列表项目内放进区块，那么就需要在 &gt; 前添加四个空格的缩进</p>
-<pre><code>* 第一项
-    &gt; vuejs
-    &gt; JavaScript框架
-* 第二项
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">* 第一项<br>    &gt; vuejs<br>    &gt; JavaScript框架<br>* 第二项<br></code></pre></td></tr></table></figure>
+
 <p>5、Markdown链接和图片</p>
 <blockquote>
 <p>链接</p>
 </blockquote>
-<pre><code>[链接名称](链接地址)
-
-或者
-
-&lt;链接地址&gt;
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">[链接名称](链接地址)<br><br>或者<br><br>&lt;链接地址&gt;<br></code></pre></td></tr></table></figure>
 <blockquote>
 <p>图片</p>
 </blockquote>
-<pre><code>![alt 属性文本](图片地址)
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">![alt 属性文本](图片地址)<br><br>![alt 属性文本](图片地址 &quot;可选标题&quot;)<br><br>![RUNOOB 图标](http://static.runoob.com/images/runoob-logo.png)<br><br>![RUNOOB 图标](http://static.runoob.com/images/runoob-logo.png &quot;RUNOOB&quot;)<br></code></pre></td></tr></table></figure>
 
-![alt 属性文本](图片地址 &quot;可选标题&quot;)
-
-![RUNOOB 图标](http://static.runoob.com/images/runoob-logo.png)
-
-![RUNOOB 图标](http://static.runoob.com/images/runoob-logo.png &quot;RUNOOB&quot;)
-</code></pre>
 <p>6、Markdown表格</p>
-<pre><code>|  表头   | 表头  |
-|  ----  | ----  |
-| 单元格  | 单元格 |
-| 单元格  | 单元格 |
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">|  表头   | 表头  |<br>|  ----  | ----  |<br>| 单元格  | 单元格 |<br>| 单元格  | 单元格 |<br></code></pre></td></tr></table></figure>
+
 <p>我们可以设置表格的对齐方式：</p>
-<pre><code>-: 设置内容和标题栏居右对齐。
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">-: 设置内容和标题栏居右对齐。<br><br>:- 设置内容和标题栏居左对齐。<br><br>:-: 设置内容和标题栏居中对齐。<br></code></pre></td></tr></table></figure>
 
-:- 设置内容和标题栏居左对齐。
-
-:-: 设置内容和标题栏居中对齐。
-</code></pre>
 <h2 id="HBuilder真机调试"><a href="#HBuilder真机调试" class="headerlink" title="HBuilder真机调试"></a>HBuilder真机调试</h2><p>1、小米手机开发者模式如何打开（MIUI 11.0.4）</p>
 <p>步骤：设置–我的设备–全部参数–（点击）MINI版本;</p>
 <p>2、手机连接Mac：</p>
 <p>Mac的关于本机–系统报告–USB–你所连接的device–厂商ID</p>
 <p>3、打开Mac终端：</p>
 <p>在终端执行如下命令：</p>
-<pre><code class="shell">    echo xxxxxx &gt;&gt; ~/.android/adb_usb.ini （“xxxxxx”为厂商ID);
-</code></pre>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">echo xxxxxx &gt;&gt; ~/.android/adb_usb.ini （“xxxxxx”为厂商ID);<br></code></pre></td></tr></table></figure>
 <p>4、重启HBuilderX;</p>
 <p>这里如果出现了问题需要切换到HBuilderX自带的adb目录；</p>
 <p>路径为：/Applications/HBuilderX-Alpha.app/Contents/HBuilderX/plugins/launcher/tools/adbs</p>
 <p>在adbs目录下运行Terminal，输入：</p>
-<pre><code class="shell">    ./adb kill-server
-</code></pre>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">./adb kill-server<br></code></pre></td></tr></table></figure>
+
+
+
 </article><section class="jump-container is-flex is-justify-content-space-between my-6"><!-- em is empty placeholder--><a class="button is-default" href="/2021/05/02/array/" title="35、数组方法"><i class="iconfont icon-prev mr-2 has-text-grey"></i><span class="has-text-weight-semibold">上一页: 35、数组方法</span></a><a class="button is-default" href="/2021/04/28/time/" title="33、时间格式化"><span class="has-text-weight-semibold">下一页: 33、时间格式化</span><i class="iconfont icon-next ml-2 has-text-grey"></i></a></section></div></div></main></main><footer class="is-flex is-flex-direction-column is-align-items-center is-flex-shrink-0 is-family-serif"><section class="sns-container"><!-- Github--><a title="github" target="_blank" rel="noopener nofollow" href="//github.com/Jude"><i class="iconfont icon-github"></i></a><!-- Ins--><!-- RSS--><!-- 知乎--><a title="zhihu" target="_blank" rel="noopener nofollow" href="//zhihu.com/https://www.zhihu.com/hot"><i class="iconfont icon-zhihu"></i></a><!-- 领英--><!-- 脸书--></section><p><span>Copyright ©</span><span> Jude 2023</span></p><div class="is-flex is-justify-content-center is-flex-wrap-wrap"><p>Powered by Hexo &verbar;&nbsp;</p><p class="is-flex is-justify-content-center"><a title="Hexo theme author" target="_blank" rel="noopener" href="//github.com/haojen">Theme by Haojen&nbsp;</a></p><div style="margin-top: 2px"><a class="github-button" title="github-button" target="_blank" rel="noopener" href="https://github.com/haojen/hexo-theme-Claudia" data-color-scheme="no-preference: light; light: light; dark: dark;" data-show-count="true"></a></div></div><div><span>记住昨日的美好，过好今日的生活，憧憬明天的到来</span></div></footer><script async defer src="https://buttons.github.io/buttons.js"></script><script src="/js/post.js"></script></body></html>

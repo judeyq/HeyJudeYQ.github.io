@@ -33,111 +33,55 @@ F12 查看.."><meta name="generator" content="Hexo 5.4.1"></head><body class="is
 </blockquote>
 <ol>
 <li><p><code>nginx</code> 编译时依赖 <code>gcc</code> 环境</p>
-<pre><code>yum -y install gcc gcc-c++
-</code></pre>
-</li>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">yum -y install gcc gcc-c++<br></code></pre></td></tr></table></figure></li>
 <li><p>安装 <code>prce</code>，让 <code>nginx</code> 支持重写功能</p>
-<pre><code>yum -y install pcre*
-</code></pre>
-</li>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">yum -y install pcre*<br></code></pre></td></tr></table></figure></li>
 <li><p>安装 <code>zlib</code>，<code>nginx</code> 使用 <code>zlib</code> 对 <code>http</code> 包内容进行 <code>gzip</code> 压缩</p>
-<pre><code>yum -y install zlib zlib-devel
-</code></pre>
-</li>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">yum -y install zlib zlib-devel<br></code></pre></td></tr></table></figure></li>
 <li><p>安装 <code>openssl</code>，用于通讯加密</p>
-<pre><code>yum -y install openssl openssl-devel
-</code></pre>
-</li>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">yum -y install openssl openssl-devel<br></code></pre></td></tr></table></figure></li>
 <li><p>进行 <code>nginx</code> 安装</p>
 </li>
 <li><p>创建 <code>nginx</code> 文件夹</p>
 </li>
 <li><p>下载 <code>nginx</code> 压缩包</p>
-<pre><code>wget https://nginx.org/download/nginx-1.11.5.tar.gz
-</code></pre>
-</li>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">wget https://nginx.org/download/nginx-1.11.5.tar.gz<br></code></pre></td></tr></table></figure></li>
 <li><p>解压 <code>nginx</code></p>
-<pre><code>tar -zxvf  nginx-1.11.5.tar.gz
-</code></pre>
-</li>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">tar -zxvf  nginx-1.11.5.tar.gz<br></code></pre></td></tr></table></figure></li>
 <li><p>进入 <code>nginx-1.11.5</code> 目录</p>
-<pre><code>cd nginx-1.11.5
-</code></pre>
-</li>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">cd nginx-1.11.5<br></code></pre></td></tr></table></figure></li>
 <li><p>检查平台安装环境</p>
-<pre><code>./configure --prefix=/usr/local/nginx
-</code></pre>
-</li>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">./configure --prefix=/usr/local/nginx<br></code></pre></td></tr></table></figure></li>
 <li><p>进行源码编译</p>
-<pre><code>make
-</code></pre>
-</li>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">make<br></code></pre></td></tr></table></figure></li>
 <li><p>安装 <code>nginx</code></p>
-<pre><code>make install
-</code></pre>
-</li>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">make install<br></code></pre></td></tr></table></figure></li>
 <li><p>查看 <code>nginx</code> 配置</p>
-<pre><code>/usr/local/nginx/sbin/nginx -t
-</code></pre>
-</li>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">/usr/local/nginx/sbin/nginx -t<br></code></pre></td></tr></table></figure></li>
 <li><p>制作 <code>nginx</code> 软连接</p>
 </li>
 <li><p>进入 <code>usr/bin</code> 目录</p>
-<pre><code>cd /usr/bin
-</code></pre>
-</li>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">cd /usr/bin<br></code></pre></td></tr></table></figure></li>
 <li><p>制作软连接</p>
-<pre><code>ln -s /usr/local/nginx/sbin/nginx nginx
-</code></pre>
-</li>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">ln -s /usr/local/nginx/sbin/nginx nginx<br></code></pre></td></tr></table></figure></li>
 <li><p>接下来制作配置文件</p>
 </li>
 <li><p>首先进入到 <code>nginx</code> 的默认配置文件中</p>
-<pre><code>vim /usr/local/nginx/conf/nginx.conf
-</code></pre>
-</li>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">vim /usr/local/nginx/conf/nginx.conf<br></code></pre></td></tr></table></figure></li>
 <li><p>在最底部增加配置项（按下 <code>i</code> 进入 输入模式）</p>
-<pre><code>include /nginx/*.conf;
-</code></pre>
-</li>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">include /nginx/*.conf;<br></code></pre></td></tr></table></figure></li>
 <li><p>按下 <code>esc</code> 键，通过 <code>:wq!</code> 保存并退出</p>
 </li>
 <li><p>创建新的配置文件</p>
-<pre><code>touch /nginx/nginx.conf
-</code></pre>
-</li>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">touch /nginx/nginx.conf<br></code></pre></td></tr></table></figure></li>
 <li><p>进入到 <code>/root/nginx/nginx.conf</code> 文件</p>
-<pre><code>vim /nginx/nginx.conf
-</code></pre>
-</li>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">vim /nginx/nginx.conf<br></code></pre></td></tr></table></figure></li>
 <li><p>写入如下配置</p>
-<pre><code class="js">server &#123;
-    # 端口
-    listen       80;
-    # 域名
-    server_name  localhost;
-    # 资源地址
-    root   /nginx/dist/;
-    # 目录浏览
-    autoindex on;
-    # 缓存处理
-    add_header Cache-Control &quot;no-cache, must-revalidate&quot;;
-    # 请求配置
-    location / &#123;
-        # 跨域
-        add_header Access-Control-Allow-Origin *;
-        # 返回 index.html
-        try_files $uri $uri/ /index.html;
-    &#125;
-&#125;
-</code></pre>
-</li>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs js">server &#123;<br>    # 端口<br>    listen       <span class="hljs-number">80</span>;<br>    # 域名<br>    server_name  localhost;<br>    # 资源地址<br>    root   /nginx/dist/;<br>    # 目录浏览<br>    autoindex on;<br>    # 缓存处理<br>    add_header Cache-Control <span class="hljs-string">&quot;no-cache, must-revalidate&quot;</span>;<br>    # 请求配置<br>    location / &#123;<br>        # 跨域<br>        add_header Access-Control-Allow-Origin *;<br>        # 返回 index.html<br>        try_files $uri $uri/ /index.html;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure></li>
 <li><p>通过 <code>:wq!</code> 保存退出</p>
 </li>
 <li><p>在 <code>root/nginx</code> 中创建 <code>dist</code> 文件夹</p>
-<pre><code>mkdir /nginx/dist
-</code></pre>
-</li>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">mkdir /nginx/dist<br></code></pre></td></tr></table></figure></li>
 <li><p>在 <code>nginx/dist</code> 中写入 <code>index.html</code> 进行测试</p>
 </li>
 <li><p>通过 <code>nginx -s reload</code> 重启服务</p>

@@ -3,63 +3,11 @@
 <span id="more"></span>
 
 <h3 id="一、案例-bug-复现"><a href="#一、案例-bug-复现" class="headerlink" title="一、案例 bug 复现"></a>一、案例 bug 复现</h3><p>父组件代码：</p>
-<pre><code class="js">// 父组件
-&lt;Child
-    v-for=&quot;(item,index) in list&quot;
-    :key=&quot;index&quot;
-    :count=&quot;item.count&quot;
-    :name=&quot;item.name&quot;
-    @delete=&quot;handleDelete(index)&quot;
-/&gt;
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-comment">// 父组件</span><br>&lt;Child<br>    v-<span class="hljs-keyword">for</span>=<span class="hljs-string">&quot;(item,index) in list&quot;</span><br>    :key=<span class="hljs-string">&quot;index&quot;</span><br>    :count=<span class="hljs-string">&quot;item.count&quot;</span><br>    :name=<span class="hljs-string">&quot;item.name&quot;</span><br>    @<span class="hljs-keyword">delete</span>=<span class="hljs-string">&quot;handleDelete(index)&quot;</span><br>/&gt;<br><br><span class="hljs-comment">// data</span><br>list:[<br>    &#123;<br>        <span class="hljs-attr">count</span>:<span class="hljs-number">1</span>,<br>        <span class="hljs-attr">name</span>:<span class="hljs-string">&quot;1&quot;</span><br>    &#125;,<br>    &#123;<br>        <span class="hljs-attr">count</span>:<span class="hljs-number">2</span>,<br>        <span class="hljs-attr">name</span>:<span class="hljs-string">&quot;2&quot;</span><br>    &#125;,<br>       &#123;<br>        <span class="hljs-attr">count</span>:<span class="hljs-number">3</span>,<br>        <span class="hljs-attr">name</span>:<span class="hljs-string">&quot;3&quot;</span><br>    &#125;,<br>]<br><span class="hljs-comment">// method</span><br><span class="hljs-function"><span class="hljs-title">handelDelete</span>(<span class="hljs-params">index</span>)</span>&#123;<br>    <span class="hljs-built_in">this</span>.list.splice(index,<span class="hljs-number">1</span>)<br>&#125;<br></code></pre></td></tr></table></figure>
 
-// data
-list:[
-    &#123;
-        count:1,
-        name:&quot;1&quot;
-    &#125;,
-    &#123;
-        count:2,
-        name:&quot;2&quot;
-    &#125;,
-       &#123;
-        count:3,
-        name:&quot;3&quot;
-    &#125;,
-]
-// method
-handelDelete(index)&#123;
-    this.list.splice(index,1)
-&#125;
-</code></pre>
 <p>子组件代码：</p>
-<pre><code class="js">// 子组件
-&lt;div&gt;
-&lt;span&gt;
-    &#123;&#123;name&#125;&#125;
-&lt;/span&gt;
-count：&#123;&#123; innerCount &#125;&#125;
-&lt;button @click=&quot;$emit(&#39;delete)&quot;&gt;&lt;/button&gt;delete&lt;/button&gt;
-&lt;/div&gt;
-// props
-props:&#123;
-    count:&#123;
-        type:Number,
-        default:0
-    &#125;,
-    name:&#123;
-        type:String,
-        default:&#39;&#39;
-    &#125;
-&#125;
-// data
-data()&#123;
-    retrun&#123;
-        // 子组件下面的这行代码定义了自己的状态，无法使用index作为key值
-        innerCount:this.count
-    &#125;
-&#125;
-</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-comment">// 子组件</span><br>&lt;div&gt;<br><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span></span><br><span class="xml">    &#123;&#123;name&#125;&#125;</span><br><span class="xml"><span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span></span><br>count：&#123;&#123; innerCount &#125;&#125;<br>&lt;button @click=<span class="hljs-string">&quot;$emit(&#x27;delete)&quot;</span>&gt;&lt;<span class="hljs-regexp">/button&gt;delete&lt;/</span>button&gt;<br>&lt;/div&gt;<br><span class="hljs-comment">// props</span><br>props:&#123;<br>    <span class="hljs-attr">count</span>:&#123;<br>        <span class="hljs-attr">type</span>:<span class="hljs-built_in">Number</span>,<br>        <span class="hljs-attr">default</span>:<span class="hljs-number">0</span><br>    &#125;,<br>    <span class="hljs-attr">name</span>:&#123;<br>        <span class="hljs-attr">type</span>:<span class="hljs-built_in">String</span>,<br>        <span class="hljs-attr">default</span>:<span class="hljs-string">&#x27;&#x27;</span><br>    &#125;<br>&#125;<br><span class="hljs-comment">// data</span><br><span class="hljs-function"><span class="hljs-title">data</span>(<span class="hljs-params"></span>)</span>&#123;<br>    retrun&#123;<br>        <span class="hljs-comment">// 子组件下面的这行代码定义了自己的状态，无法使用index作为key值</span><br>        <span class="hljs-attr">innerCount</span>:<span class="hljs-built_in">this</span>.count<br>    &#125;<br>&#125;<br><br></code></pre></td></tr></table></figure>
+
 <p>当删除的时候，看上去是成功了，其实存在问题。加上排序也是存在问题。</p>
 <p>将 v-for 里面的 key 换成 item 后，是正常的。</p>
 <p>Vue 官网的描述：</p>

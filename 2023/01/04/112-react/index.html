@@ -12,9 +12,9 @@ HTTP 请求库 axios。
 跨域代理。
 
 初始化 Vite + React 项目Vite 官方提供两种初始化项目的方式，一种是如下所示，可以自由选择需要的前端框架。
-npm init @vitejs/app
+1npm init @vitejs/app
 
-另一种则是直接.."><meta name="generator" content="Hexo 5.4.1"></head><body class="is-flex is-flex-direction-column"><header class="header-widget is-flex-shrink-0 is-hidden-mobile"><div class="container is-fullhd is-flex is-justify-content-space-between is-align-items-center is-full-height"><section class="is-hidden-mobile is-flex-shrink-0"><h2><a href="/">Jude's blog</a></h2></section><h3 class="is-hidden-mobile is-family-serif is-full-height is-flex is-align-items-center is-flex-shrink-0"><div class="is-full-height" id="postTopic"><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">112、稀土掘金小册-记账本（三）react vite2.0 ZarmUI搭建开发环境</p><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">点击返回顶部</p></div></h3><aside class="is-flex-shrink-0"><h3 class="is-inline-block"><a href="/">首页</a></h3><h3 class="is-inline-block"><a href="/about">关于</a></h3><h3 class="is-inline-block"><a href="/archives">归档</a></h3></aside></div></header><header class="is-flex header-widget is-flex-shrink-0 is-align-items-center is-justify-content-center is-hidden-tablet"><h3 class="is-inline-block"><a href="/">首页</a></h3><h3 class="is-inline-block"><a href="/about">关于</a></h3><h3 class="is-inline-block"><a href="/archives">归档</a></h3></header><main><main class="container is-max-widescreen content section post-page pt-4 px-4"><div class="columns is-flex-desktop is-justify-content-center is-flex-direction-row-reverse"><div class="column is-3 is-hidden-mobile"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-text">前言</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%9F%A5%E8%AF%86%E7%82%B9"><span class="toc-text">知识点</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%9D%E5%A7%8B%E5%8C%96-Vite-React-%E9%A1%B9%E7%9B%AE"><span class="toc-text">初始化 Vite + React 项目</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%95%E5%85%A5%E8%B7%AF%E7%94%B1%E6%8F%92%E4%BB%B6-react-router-dom"><span class="toc-text">引入路由插件 react-router-dom</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%95%E5%85%A5-Zarm-UI-%E7%BB%84%E4%BB%B6%E5%BA%93"><span class="toc-text">引入 Zarm UI 组件库</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B0%8F%E4%BC%98%E5%8C%96"><span class="toc-text">小优化</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE-CSS-%E9%A2%84%E5%A4%84%E7%90%86%E5%99%A8-Less"><span class="toc-text">配置 CSS 预处理器 Less</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A7%BB%E5%8A%A8%E7%AB%AF%E9%A1%B9%E7%9B%AE%E9%80%82%E9%85%8D-rem"><span class="toc-text">移动端项目适配 rem</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E6%AC%A1%E5%B0%81%E8%A3%85-axios"><span class="toc-text">二次封装 axios</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%A3%E7%90%86%E9%85%8D%E7%BD%AE"><span class="toc-text">代理配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#resolve-alias-%E5%88%AB%E5%90%8D%E8%AE%BE%E7%BD%AE"><span class="toc-text">resolve.alias 别名设置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-text">总结</span></a></li></ol></div><div class="column is-9"><header class="my-4"><a href="/tags/react"><i class="tag post-item-tag">react</i></a></header><h1 class="mt-0 mb-1 is-family-serif" id="postTitle">112、稀土掘金小册-记账本（三）react vite2.0 ZarmUI搭建开发环境</h1><time class="has-text-grey" datetime="2023-01-04T12:00:00.000Z">2023-01-04</time><article class="mt-2 post-content"><span id="more"></span>
+另一种则是直.."><meta name="generator" content="Hexo 5.4.1"></head><body class="is-flex is-flex-direction-column"><header class="header-widget is-flex-shrink-0 is-hidden-mobile"><div class="container is-fullhd is-flex is-justify-content-space-between is-align-items-center is-full-height"><section class="is-hidden-mobile is-flex-shrink-0"><h2><a href="/">Jude's blog</a></h2></section><h3 class="is-hidden-mobile is-family-serif is-full-height is-flex is-align-items-center is-flex-shrink-0"><div class="is-full-height" id="postTopic"><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">112、稀土掘金小册-记账本（三）react vite2.0 ZarmUI搭建开发环境</p><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">点击返回顶部</p></div></h3><aside class="is-flex-shrink-0"><h3 class="is-inline-block"><a href="/">首页</a></h3><h3 class="is-inline-block"><a href="/about">关于</a></h3><h3 class="is-inline-block"><a href="/archives">归档</a></h3></aside></div></header><header class="is-flex header-widget is-flex-shrink-0 is-align-items-center is-justify-content-center is-hidden-tablet"><h3 class="is-inline-block"><a href="/">首页</a></h3><h3 class="is-inline-block"><a href="/about">关于</a></h3><h3 class="is-inline-block"><a href="/archives">归档</a></h3></header><main><main class="container is-max-widescreen content section post-page pt-4 px-4"><div class="columns is-flex-desktop is-justify-content-center is-flex-direction-row-reverse"><div class="column is-3 is-hidden-mobile"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-text">前言</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%9F%A5%E8%AF%86%E7%82%B9"><span class="toc-text">知识点</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%9D%E5%A7%8B%E5%8C%96-Vite-React-%E9%A1%B9%E7%9B%AE"><span class="toc-text">初始化 Vite + React 项目</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%95%E5%85%A5%E8%B7%AF%E7%94%B1%E6%8F%92%E4%BB%B6-react-router-dom"><span class="toc-text">引入路由插件 react-router-dom</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%95%E5%85%A5-Zarm-UI-%E7%BB%84%E4%BB%B6%E5%BA%93"><span class="toc-text">引入 Zarm UI 组件库</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B0%8F%E4%BC%98%E5%8C%96"><span class="toc-text">小优化</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE-CSS-%E9%A2%84%E5%A4%84%E7%90%86%E5%99%A8-Less"><span class="toc-text">配置 CSS 预处理器 Less</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A7%BB%E5%8A%A8%E7%AB%AF%E9%A1%B9%E7%9B%AE%E9%80%82%E9%85%8D-rem"><span class="toc-text">移动端项目适配 rem</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E6%AC%A1%E5%B0%81%E8%A3%85-axios"><span class="toc-text">二次封装 axios</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%A3%E7%90%86%E9%85%8D%E7%BD%AE"><span class="toc-text">代理配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#resolve-alias-%E5%88%AB%E5%90%8D%E8%AE%BE%E7%BD%AE"><span class="toc-text">resolve.alias 别名设置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-text">总结</span></a></li></ol></div><div class="column is-9"><header class="my-4"><a href="/tags/react"><i class="tag post-item-tag">react</i></a></header><h1 class="mt-0 mb-1 is-family-serif" id="postTitle">112、稀土掘金小册-记账本（三）react vite2.0 ZarmUI搭建开发环境</h1><time class="has-text-grey" datetime="2023-01-04T12:00:00.000Z">2023-01-04</time><article class="mt-2 post-content"><span id="more"></span>
 
 <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p><code>React</code> 技术栈的 <code>UI</code> 组件库相比 <code>Vue</code>，会少一些。我们耳熟能详的便是 <code>Antd</code>，但是它针对的是 <code>PC</code> 端的，我们的项目目前是一个 <code>H5</code> 的网页（不排除后期做一个 PC 端）。所以我选择了 <a href="https://link.juejin.cn/?target=https:https://zarm.gitee.io/%23/">Zarm</a>。</p>
 <p>这里再次强调，不是 <code>Zarm</code> 就比别的移动端组件库好，只是目前我开发的这款记账本项目，<code>Zarm</code> 比较适合。</p>
@@ -27,135 +27,39 @@ npm init @vitejs/app
 <li>跨域代理。</li>
 </ul>
 <h2 id="初始化-Vite-React-项目"><a href="#初始化-Vite-React-项目" class="headerlink" title="初始化 Vite + React 项目"></a>初始化 Vite + React 项目</h2><p><code>Vite</code> 官方提供两种初始化项目的方式，一种是如下所示，可以自由选择需要的前端框架。</p>
-<pre><code class="bash">npm init @vitejs/app
-</code></pre>
-<p>另一种则是直接用官方提供的模板，一键生成项目：</p>
-<pre><code class="bash"># npm 6.x
-npm init @vitejs/app react-vite-h5 --template react
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">npm init @vitejs/app<br></code></pre></td></tr></table></figure>
 
-# npm 7+, 需要额外的双横线：
-npm init @vitejs/app react-vite-h5 -- --template react
-</code></pre>
+<p>另一种则是直接用官方提供的模板，一键生成项目：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># npm 6.x</span><br>npm init @vitejs/app react-vite-h5 --template react<br><br><span class="hljs-comment"># npm 7+, 需要额外的双横线：</span><br>npm init @vitejs/app react-vite-h5 -- --template react<br></code></pre></td></tr></table></figure>
+
 <p>我们使用第二种方式初始化项目，如下所示：</p>
 <p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/32661c92fce54016949d56b5a57399ba~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp" alt="img"></p>
 <p>安装完 <code>node_modules</code> 之后，通过 <code>npm run dev</code> 启动项目，如下所示代表成功了：</p>
 <p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/874d34fcf2394af585b2c42a11cef607~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp" alt="img"></p>
 <h2 id="引入路由插件-react-router-dom"><a href="#引入路由插件-react-router-dom" class="headerlink" title="引入路由插件 react-router-dom"></a>引入路由插件 react-router-dom</h2><p>没有路由的项目，那就不是一个完整项目，而是一个页面而已。真实项目都是存在各种模块之间的切换，各个模块的功能组合在一起才能叫做一个项目。</p>
 <p>首选安装 <code>react-router-dom</code>，指令如下：</p>
-<pre><code class="bash">npm i react-router-dom -S
-</code></pre>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">npm i react-router-dom -S<br></code></pre></td></tr></table></figure>
+
 <p>在项目 <code>src</code> 目录下新增 <code>container</code> 目录用于放置页面组件，再在 <code>container</code> 下新增两个目录分别是 <code>Index</code> 和 <code>About</code> ，添加如下内容：</p>
-<pre><code class="js">// Index/index.jsx
-import React from &#39;react&#39;
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-comment">// Index/index.jsx</span><br><span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;react&#x27;</span><br><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Index</span>(<span class="hljs-params"></span>) </span>&#123;<br>  <span class="hljs-keyword">return</span> <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span></span><br><span class="xml">    Index</span><br><span class="xml">  <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span><br>&#125;<br><br><span class="hljs-comment">// About/index.jsx</span><br><span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;react&#x27;</span><br><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">About</span>(<span class="hljs-params"></span>) </span>&#123;<br>  <span class="hljs-keyword">return</span> <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span></span><br><span class="xml">    About</span><br><span class="xml">  <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span><br>&#125;<br></code></pre></td></tr></table></figure>
 
-export default function Index() &#123;
-  return &lt;div&gt;
-    Index
-  &lt;/div&gt;
-&#125;
-
-// About/index.jsx
-import React from &#39;react&#39;
-
-export default function About() &#123;
-  return &lt;div&gt;
-    About
-  &lt;/div&gt;
-&#125;
-</code></pre>
 <p>再来新建 <code>src/router/index.js</code> 配置路由数组，添加如下内容：</p>
-<pre><code class="js">// router/index.js
-import Index from &quot;../container/Index&quot;;
-import About from &quot;../container/About&quot;;
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-comment">// router/index.js</span><br><span class="hljs-keyword">import</span> Index <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;../container/Index&quot;</span>;<br><span class="hljs-keyword">import</span> About <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;../container/About&quot;</span>;<br><br><span class="hljs-keyword">const</span> routes = [<br>  &#123;<br>    <span class="hljs-attr">path</span>: <span class="hljs-string">&quot;/&quot;</span>,<br>    <span class="hljs-attr">component</span>: Index,<br>  &#125;,<br>  &#123;<br>    <span class="hljs-attr">path</span>: <span class="hljs-string">&quot;/about&quot;</span>,<br>    <span class="hljs-attr">component</span>: About,<br>  &#125;,<br>];<br><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> routes;<br></code></pre></td></tr></table></figure>
 
-const routes = [
-  &#123;
-    path: &quot;/&quot;,
-    component: Index,
-  &#125;,
-  &#123;
-    path: &quot;/about&quot;,
-    component: About,
-  &#125;,
-];
-
-export default routes;
-</code></pre>
 <p>在 <code>App.jsx</code> 引入路由配置，实现切换浏览器路径，显示相应的组件：</p>
-<pre><code class="js">// App.jsx
-import React, &#123; useState &#125; from &quot;react&quot;;
-import &#123; BrowserRouter as Router, Routes, Route &#125; from &quot;react-router-dom&quot;;
-import routes from &quot;../src/router&quot;;
-function App() &#123;
-  return (
-    &lt;&gt;
-      &lt;Routes&gt;
-        &#123;routes.map((route) =&gt; (
-          &lt;Route
-            exact
-            key=&#123;route.path&#125;
-            path=&#123;route.path&#125;
-            element=&#123;&lt;route.component /&gt;&#125;
-          /&gt;
-        ))&#125;
-      &lt;/Routes&gt;
-    &lt;/&gt;
-  );
-&#125;
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-comment">// App.jsx</span><br><span class="hljs-keyword">import</span> React, &#123; useState &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;react&quot;</span>;<br><span class="hljs-keyword">import</span> &#123; BrowserRouter <span class="hljs-keyword">as</span> Router, Routes, Route &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;react-router-dom&quot;</span>;<br><span class="hljs-keyword">import</span> routes <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;../src/router&quot;</span>;<br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">App</span>(<span class="hljs-params"></span>) </span>&#123;<br>  <span class="hljs-keyword">return</span> (<br>    <span class="xml"><span class="hljs-tag">&lt;&gt;</span></span><br><span class="xml">      <span class="hljs-tag">&lt;<span class="hljs-name">Routes</span>&gt;</span></span><br><span class="xml">        &#123;routes.map((route) =&gt; (</span><br><span class="xml">          <span class="hljs-tag">&lt;<span class="hljs-name">Route</span></span></span><br><span class="hljs-tag"><span class="xml">            <span class="hljs-attr">exact</span></span></span><br><span class="hljs-tag"><span class="xml">            <span class="hljs-attr">key</span>=<span class="hljs-string">&#123;route.path&#125;</span></span></span><br><span class="hljs-tag"><span class="xml">            <span class="hljs-attr">path</span>=<span class="hljs-string">&#123;route.path&#125;</span></span></span><br><span class="hljs-tag"><span class="xml">            <span class="hljs-attr">element</span>=<span class="hljs-string">&#123;</span>&lt;<span class="hljs-attr">route.component</span> /&gt;</span>&#125;</span><br><span class="xml">          /&gt;</span><br><span class="xml">        ))&#125;</span><br><span class="xml">      <span class="hljs-tag">&lt;/<span class="hljs-name">Routes</span>&gt;</span></span><br><span class="xml">    <span class="hljs-tag">&lt;/&gt;</span></span><br>  );<br>&#125;<br><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> App;<br></code></pre></td></tr></table></figure>
 
-export default App;
-</code></pre>
 <p>启动项目 <code>npm run dev</code>，如下图所示：</p>
 <p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/d67090d0f61641539e3fcd9061d27474~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp" alt="img"></p>
 <h2 id="引入-Zarm-UI-组件库"><a href="#引入-Zarm-UI-组件库" class="headerlink" title="引入 Zarm UI 组件库"></a>引入 Zarm UI 组件库</h2><p>首先通过如下指令安装它：</p>
-<pre><code class="bash">npm install zarm -S
-</code></pre>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">npm install zarm -S<br></code></pre></td></tr></table></figure>
+
 <p>修改 <code>App.jsx</code> 的代码，全局引入样式和中文包：</p>
-<pre><code class="js">import React, &#123; useState &#125; from &quot;react&quot;;
-import &#123; BrowserRouter as Router, Routes, Route &#125; from &quot;react-router-dom&quot;;
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">import</span> React, &#123; useState &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;react&quot;</span>;<br><span class="hljs-keyword">import</span> &#123; BrowserRouter <span class="hljs-keyword">as</span> Router, Routes, Route &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;react-router-dom&quot;</span>;<br><br><span class="hljs-keyword">import</span> &#123; ConfigProvider &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;zarm&quot;</span>;<br><span class="hljs-keyword">import</span> zhCN <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;zarm/lib/config-provider/locale/zh_CN&quot;</span>;<br><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;zarm/dist/zarm.css&quot;</span>;<br><br><span class="hljs-keyword">import</span> routes <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;../src/router&quot;</span>;<br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">App</span>(<span class="hljs-params"></span>) </span>&#123;<br>  <span class="hljs-keyword">return</span> (<br>    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">Router</span>&gt;</span></span><br><span class="xml">      <span class="hljs-tag">&lt;<span class="hljs-name">ConfigProvider</span> <span class="hljs-attr">primaryColor</span>=<span class="hljs-string">&#123;</span>&quot;#<span class="hljs-attr">007fff</span>&quot;&#125; <span class="hljs-attr">locale</span>=<span class="hljs-string">&#123;zhCN&#125;</span>&gt;</span></span><br><span class="xml">        <span class="hljs-tag">&lt;&gt;</span></span><br><span class="xml">          <span class="hljs-tag">&lt;<span class="hljs-name">Routes</span>&gt;</span></span><br><span class="xml">            &#123;routes.map((route) =&gt; (</span><br><span class="xml">              <span class="hljs-tag">&lt;<span class="hljs-name">Route</span></span></span><br><span class="hljs-tag"><span class="xml">                <span class="hljs-attr">exact</span></span></span><br><span class="hljs-tag"><span class="xml">                <span class="hljs-attr">key</span>=<span class="hljs-string">&#123;route.path&#125;</span></span></span><br><span class="hljs-tag"><span class="xml">                <span class="hljs-attr">path</span>=<span class="hljs-string">&#123;route.path&#125;</span></span></span><br><span class="hljs-tag"><span class="xml">                <span class="hljs-attr">element</span>=<span class="hljs-string">&#123;</span>&lt;<span class="hljs-attr">route.component</span> /&gt;</span>&#125;</span><br><span class="xml">              /&gt;</span><br><span class="xml">            ))&#125;</span><br><span class="xml">          <span class="hljs-tag">&lt;/<span class="hljs-name">Routes</span>&gt;</span></span><br><span class="xml">        <span class="hljs-tag">&lt;/&gt;</span></span><br><span class="xml">      <span class="hljs-tag">&lt;/<span class="hljs-name">ConfigProvider</span>&gt;</span></span><br>    &lt;/Router&gt;<br>  );<br>&#125;<br><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> App;<br></code></pre></td></tr></table></figure>
 
-import &#123; ConfigProvider &#125; from &quot;zarm&quot;;
-import zhCN from &quot;zarm/lib/config-provider/locale/zh_CN&quot;;
-import &quot;zarm/dist/zarm.css&quot;;
-
-import routes from &quot;../src/router&quot;;
-function App() &#123;
-  return (
-    &lt;Router&gt;
-      &lt;ConfigProvider primaryColor=&#123;&quot;#007fff&quot;&#125; locale=&#123;zhCN&#125;&gt;
-        &lt;&gt;
-          &lt;Routes&gt;
-            &#123;routes.map((route) =&gt; (
-              &lt;Route
-                exact
-                key=&#123;route.path&#125;
-                path=&#123;route.path&#125;
-                element=&#123;&lt;route.component /&gt;&#125;
-              /&gt;
-            ))&#125;
-          &lt;/Routes&gt;
-        &lt;/&gt;
-      &lt;/ConfigProvider&gt;
-    &lt;/Router&gt;
-  );
-&#125;
-
-export default App;
-</code></pre>
 <p>此时 <code>zarm</code> 的样式，已经全局引入了，我们先查看在 <code>/container/Index/index.jsx</code> 添加一个按钮是否生效：</p>
-<pre><code class="js">// Index/index.jsx
-import React from &quot;react&quot;;
-import &#123; Button &#125; from &quot;zarm&quot;;
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-comment">// Index/index.jsx</span><br><span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;react&quot;</span>;<br><span class="hljs-keyword">import</span> &#123; Button &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;zarm&quot;</span>;<br><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Index</span>(<span class="hljs-params"></span>) </span>&#123;<br>  <span class="hljs-keyword">return</span> (<br>    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span></span><br><span class="xml">      Index</span><br><span class="xml">      <span class="hljs-tag">&lt;<span class="hljs-name">Button</span> <span class="hljs-attr">theme</span>=<span class="hljs-string">&quot;primary&quot;</span>&gt;</span>按钮<span class="hljs-tag">&lt;/<span class="hljs-name">Button</span>&gt;</span></span><br><span class="xml">    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span><br>  );<br>&#125;<br></code></pre></td></tr></table></figure>
 
-export default function Index() &#123;
-  return (
-    &lt;div&gt;
-      Index
-      &lt;Button theme=&quot;primary&quot;&gt;按钮&lt;/Button&gt;
-    &lt;/div&gt;
-  );
-&#125;
-</code></pre>
 <p>重启项目，如下所示：</p>
 <p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/5196fda769074ec387a085af87b6bb92~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp" alt="img"></p>
 <p>此时恭喜你 🎉，你已经成功将组件引入项目中。</p>
@@ -164,8 +68,8 @@ export default function Index() &#123;
 <p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/ba361939748e48499cab35833093c012~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp" alt="img"></p>
 <p>腚眼一看，全局引入样式的形式，直接打完包， <code>css</code> 静态资源就 <code>168.22kb</code> 了，我们尝试配置「按需引入」。</p>
 <p>首先我们安装一个插件：</p>
-<pre><code class="bash">npm i vite-plugin-style-import -D
-</code></pre>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">npm i vite-plugin-style-import -D<br></code></pre></td></tr></table></figure>
+
 <p>然后在 <code>vite.config.js</code> 配置文件内添加如下内容：</p>
 <p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/cd0314c0446e4654bfcc73e3dee44291~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp" alt="img"></p>
 <p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/7bcf00b0cb0c4293a2daf92bef93f451~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp" alt="img"></p>
@@ -173,87 +77,29 @@ export default function Index() &#123;
 <h2 id="配置-CSS-预处理器-Less"><a href="#配置-CSS-预处理器-Less" class="headerlink" title="配置 CSS 预处理器 Less"></a>配置 CSS 预处理器 Less</h2><p>项目中采用的 <code>Less</code> 作为 <code>CSS</code> 预处理器，它能设置变量以及一些嵌套逻辑，便于项目的样式编写。</p>
 <p>安装 <code>less</code> 插件包，<code>npm i less -D</code>，因为上述配置我们使用的是 <code>less</code>，并且我们需要配置 <code>javascriptEnabled 为 true</code>，支持 <code>less</code> 内联 <code>JS</code>。</p>
 <p>修改 <code>vite.config.js</code>，如下：</p>
-<pre><code class="js">&#123;
-  plugins: [...]
-  css: &#123;
-    modules: &#123;
-      localsConvention: &#39;dashesOnly&#39;
-    &#125;,
-    preprocessorOptions: &#123;
-      less: &#123;
-        // 支持内联 JavaScript
-        javascriptEnabled: true,
-      &#125;
-    &#125;
-  &#125;,
-&#125;
-</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs js">&#123;<br>  <span class="hljs-attr">plugins</span>: [...]<br>  <span class="hljs-attr">css</span>: &#123;<br>    <span class="hljs-attr">modules</span>: &#123;<br>      <span class="hljs-attr">localsConvention</span>: <span class="hljs-string">&#x27;dashesOnly&#x27;</span><br>    &#125;,<br>    <span class="hljs-attr">preprocessorOptions</span>: &#123;<br>      <span class="hljs-attr">less</span>: &#123;<br>        <span class="hljs-comment">// 支持内联 JavaScript</span><br>        <span class="hljs-attr">javascriptEnabled</span>: <span class="hljs-literal">true</span>,<br>      &#125;<br>    &#125;<br>  &#125;,<br>&#125;<br></code></pre></td></tr></table></figure>
+
 <p>并且添加了 <code>css modules</code> 配置，这样我们就不用担心在项目中，自定义的样式重名的风险，我们尝试在 <code>/container/Index</code> 目录下添加样式文件 <code>style.module.less</code>，并且在 <code>/container/Index/index.jsx</code> 中引入它，如下：</p>
-<pre><code class="css">.index &#123;
-  span &#123;
-    color: red;
-  &#125;
-&#125;
-// Index/index.jsx
-import React from &#39;react&#39;
-import &#123; Button &#125; from &#39;zarm&#39;
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-selector-class">.index</span> &#123;<br>  <span class="hljs-selector-tag">span</span> &#123;<br>    <span class="hljs-attribute">color</span>: red;<br>  &#125;<br>&#125;<br>// Index/index<span class="hljs-selector-class">.jsx</span><br>import React <span class="hljs-selector-tag">from</span> &#x27;react&#x27;<br>import &#123; <span class="hljs-selector-tag">Button</span> &#125; <span class="hljs-selector-tag">from</span> &#x27;zarm&#x27;<br><br>import s <span class="hljs-selector-tag">from</span> &#x27;./style<span class="hljs-selector-class">.module</span><span class="hljs-selector-class">.less</span>&#x27;<br><br>export default function Index() &#123;<br>  return &lt;<span class="hljs-selector-tag">div</span> className=&#123;s<span class="hljs-selector-class">.index</span>&#125;&gt;<br>    &lt;<span class="hljs-selector-tag">span</span>&gt;样式&lt;/<span class="hljs-selector-tag">span</span>&gt;<br>    &lt;<span class="hljs-selector-tag">Button</span> theme=&#x27;primary&#x27;&gt;按钮&lt;/<span class="hljs-selector-tag">Button</span>&gt;<br>  &lt;/<span class="hljs-selector-tag">div</span>&gt;<br>&#125;<br></code></pre></td></tr></table></figure>
 
-import s from &#39;./style.module.less&#39;
-
-export default function Index() &#123;
-  return &lt;div className=&#123;s.index&#125;&gt;
-    &lt;span&gt;样式&lt;/span&gt;
-    &lt;Button theme=&#39;primary&#39;&gt;按钮&lt;/Button&gt;
-  &lt;/div&gt;
-&#125;
-</code></pre>
 <p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/8866be0be4824492b94297eea2eb4ca3~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp" alt="img"></p>
 <p>此时我只能再次恭喜你，<code>Less</code> 成功被引入。</p>
 <h2 id="移动端项目适配-rem"><a href="#移动端项目适配-rem" class="headerlink" title="移动端项目适配 rem"></a>移动端项目适配 rem</h2><p>移动端项目，肯定是需要适配各种分辨率屏幕的，就比如你 10px 的宽度，在每个屏幕上的占比都是不一样的，我们这里不对分辨率做深入的探讨，我们目前的首要目的是完成项目移动端的分辨率适配。</p>
 <p>首先我们需要安装 <code>lib-flexible</code>：</p>
-<pre><code class="bash">npm i lib-flexible -S
-</code></pre>
-<p>并在 <code>main.jsx</code> 中引入它：</p>
-<pre><code class="js">import React from &quot;react&quot;;
-import ReactDOM from &quot;react-dom&quot;;
-import &quot;lib-flexible/flexible&quot;;
-import &quot;./index.css&quot;;
-import App from &quot;./App&quot;;
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">npm i lib-flexible -S<br></code></pre></td></tr></table></figure>
 
-ReactDOM.render(
-  &lt;React.StrictMode&gt;
-    &lt;App /&gt;
-  &lt;/React.StrictMode&gt;,
-  document.getElementById(&quot;root&quot;)
-);
-</code></pre>
+<p>并在 <code>main.jsx</code> 中引入它：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;react&quot;</span>;<br><span class="hljs-keyword">import</span> ReactDOM <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;react-dom&quot;</span>;<br><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;lib-flexible/flexible&quot;</span>;<br><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;./index.css&quot;</span>;<br><span class="hljs-keyword">import</span> App <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;./App&quot;</span>;<br><br>ReactDOM.render(<br>  <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">React.StrictMode</span>&gt;</span></span><br><span class="xml">    <span class="hljs-tag">&lt;<span class="hljs-name">App</span> /&gt;</span></span><br><span class="xml">  <span class="hljs-tag">&lt;/<span class="hljs-name">React.StrictMode</span>&gt;</span></span>,<br>  <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">&quot;root&quot;</span>)<br>);<br></code></pre></td></tr></table></figure>
+
 <p>然后再安装一个 <code>postcss-pxtorem</code>，它的作用是在你编写完 <code>css</code> 后，将你的单位自动转化为 <code>rem</code> 单位。</p>
-<pre><code class="bash">npm i postcss-pxtorem
-</code></pre>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">npm i postcss-pxtorem<br></code></pre></td></tr></table></figure>
+
 <p>在项目根目录新建 <code>postcss.config.js</code>：</p>
-<pre><code class="js">// postcss.config.js
-// 用 vite 创建项目，配置 postcss 需要使用 post.config.js，之前使用的 .postcssrc.js 已经被抛弃
-// 具体配置可以去 postcss-pxtorem 仓库看看文档
-module.exports = &#123;
-  plugins: [
-    require(&quot;postcss-pxtorem&quot;)(&#123;
-      rootValue: 37.5,
-      propList: [&quot;*&quot;],
-      selectorBlackList: [&quot;.norem&quot;], // 过滤掉.norem-开头的class，不进行rem转换
-    &#125;),
-  ],
-&#125;;
-</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-comment">// postcss.config.js</span><br><span class="hljs-comment">// 用 vite 创建项目，配置 postcss 需要使用 post.config.js，之前使用的 .postcssrc.js 已经被抛弃</span><br><span class="hljs-comment">// 具体配置可以去 postcss-pxtorem 仓库看看文档</span><br><span class="hljs-built_in">module</span>.exports = &#123;<br>  <span class="hljs-attr">plugins</span>: [<br>    <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;postcss-pxtorem&quot;</span>)(&#123;<br>      <span class="hljs-attr">rootValue</span>: <span class="hljs-number">37.5</span>,<br>      <span class="hljs-attr">propList</span>: [<span class="hljs-string">&quot;*&quot;</span>],<br>      <span class="hljs-attr">selectorBlackList</span>: [<span class="hljs-string">&quot;.norem&quot;</span>], <span class="hljs-comment">// 过滤掉.norem-开头的class，不进行rem转换</span><br>    &#125;),<br>  ],<br>&#125;;<br></code></pre></td></tr></table></figure>
+
 <p>修改 <code>Index/style.module.less</code>：</p>
-<pre><code class="css">.index &#123;
-  width: 200px;
-  height: 200px;
-  background: green;
-  span &#123;
-    color: red;
-  &#125;
-&#125;
-</code></pre>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-selector-class">.index</span> &#123;<br>  <span class="hljs-attribute">width</span>: <span class="hljs-number">200px</span>;<br>  <span class="hljs-attribute">height</span>: <span class="hljs-number">200px</span>;<br>  <span class="hljs-attribute">background</span>: green;<br>  <span class="hljs-selector-tag">span</span> &#123;<br>    <span class="hljs-attribute">color</span>: red;<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
 <p>重启项目 <code>npm run dev</code>，如下所示：</p>
 <p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/28c6f12ba2c446ef9f374f878636c1f0~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp" alt="img"></p>
 <p>可以看到，<code>200px</code> 已经被转化为 <code>5.3333rem</code>，我们设置的 <code>rootValue</code> 是 <code>37.5</code>，你可以换算一下 <code>5.33333 * 37.5 = 200</code>。</p>
@@ -265,120 +111,46 @@ module.exports = &#123;
 <p>此时你是可以在后续的请求中，使用 <code>http://127.0.0.1/7001</code> 作为项目的 <code>baseURL</code>。但是照顾到有些同学没有启动服务端项目，直奔前端项目来的。这里我已经将接口提前部署到了线上环境，供大家使用。接口地址是 <code>http://api.chennick.wang</code>。</p>
 <p>所以在后续的封装过程中，我会提醒大家两种使用。</p>
 <p>首先我们安装 <code>npm i axios -S</code>，在 <code>src</code> 目录下新建 <code>utils</code> 目录，并新建 <code>axios.js</code> 脚本：</p>
-<pre><code class="js">// src/utils/axios.js
-import axios from &quot;axios&quot;;
-import &#123; Toast &#125; from &quot;zarm&quot;;
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-comment">// src/utils/axios.js</span><br><span class="hljs-keyword">import</span> axios <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;axios&quot;</span>;<br><span class="hljs-keyword">import</span> &#123; Toast &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;zarm&quot;</span>;<br><br><span class="hljs-keyword">const</span> MODE = <span class="hljs-keyword">import</span>.meta.env.MODE; <span class="hljs-comment">// 环境变量</span><br><br>axios.defaults.baseURL =<br>  MODE == <span class="hljs-string">&quot;development&quot;</span> ? <span class="hljs-string">&quot;/api&quot;</span> : <span class="hljs-string">&quot;http://api.chennick.wang&quot;</span>;<br>axios.defaults.withCredentials = <span class="hljs-literal">true</span>;<br>axios.defaults.headers[<span class="hljs-string">&quot;X-Requested-With&quot;</span>] = <span class="hljs-string">&quot;XMLHttpRequest&quot;</span>;<br>axios.defaults.headers[<span class="hljs-string">&quot;Authorization&quot;</span>] = <span class="hljs-string">`<span class="hljs-subst">$&#123;</span></span><br><span class="hljs-subst"><span class="hljs-string">  <span class="hljs-built_in">localStorage</span>.getItem(<span class="hljs-string">&quot;token&quot;</span>) || <span class="hljs-literal">null</span></span></span><br><span class="hljs-subst"><span class="hljs-string">&#125;</span>`</span>;<br>axios.defaults.headers.post[<span class="hljs-string">&quot;Content-Type&quot;</span>] = <span class="hljs-string">&quot;application/json&quot;</span>;<br><br>axios.interceptors.response.use(<span class="hljs-function">(<span class="hljs-params">res</span>) =&gt;</span> &#123;<br>  <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> res.data !== <span class="hljs-string">&quot;object&quot;</span>) &#123;<br>    Toast.show(<span class="hljs-string">&quot;服务端异常！&quot;</span>);<br>    <span class="hljs-keyword">return</span> <span class="hljs-built_in">Promise</span>.reject(res);<br>  &#125;<br>  <span class="hljs-keyword">if</span> (res.data.code != <span class="hljs-number">200</span>) &#123;<br>    <span class="hljs-keyword">if</span> (res.data.msg) Toast.show(res.data.msg);<br>    <span class="hljs-keyword">if</span> (res.data.code == <span class="hljs-number">401</span>) &#123;<br>      <span class="hljs-built_in">window</span>.location.href = <span class="hljs-string">&quot;/login&quot;</span>;<br>    &#125;<br>    <span class="hljs-keyword">return</span> <span class="hljs-built_in">Promise</span>.reject(res.data);<br>  &#125;<br><br>  <span class="hljs-keyword">return</span> res.data;<br>&#125;);<br><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> axios;<br></code></pre></td></tr></table></figure>
 
-const MODE = import.meta.env.MODE; // 环境变量
-
-axios.defaults.baseURL =
-  MODE == &quot;development&quot; ? &quot;/api&quot; : &quot;http://api.chennick.wang&quot;;
-axios.defaults.withCredentials = true;
-axios.defaults.headers[&quot;X-Requested-With&quot;] = &quot;XMLHttpRequest&quot;;
-axios.defaults.headers[&quot;Authorization&quot;] = `$&#123;
-  localStorage.getItem(&quot;token&quot;) || null
-&#125;`;
-axios.defaults.headers.post[&quot;Content-Type&quot;] = &quot;application/json&quot;;
-
-axios.interceptors.response.use((res) =&gt; &#123;
-  if (typeof res.data !== &quot;object&quot;) &#123;
-    Toast.show(&quot;服务端异常！&quot;);
-    return Promise.reject(res);
-  &#125;
-  if (res.data.code != 200) &#123;
-    if (res.data.msg) Toast.show(res.data.msg);
-    if (res.data.code == 401) &#123;
-      window.location.href = &quot;/login&quot;;
-    &#125;
-    return Promise.reject(res.data);
-  &#125;
-
-  return res.data;
-&#125;);
-
-export default axios;
-</code></pre>
 <p>我逐行为大家分析上述代码的情况情况。</p>
-<pre><code class="js">const MODE = import.meta.env.MODE;
-</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">const</span> MODE = <span class="hljs-keyword">import</span>.meta.env.MODE;<br></code></pre></td></tr></table></figure>
+
 <p><code>MODE</code> 是一个环境变量，通过 <code>Vite</code> 构建的项目中，环境变量在项目中，可以通过 <code>import.meta.env.MODE</code> 获取，环境变量的作用就是判断当前代码运行在开发环境还是生产环境。</p>
-<pre><code class="js">axios.defaults.baseURL = &quot;development&quot; ? &quot;/api&quot; : &quot;http://api.chennick.wang&quot;;
-</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs js">axios.defaults.baseURL = <span class="hljs-string">&quot;development&quot;</span> ? <span class="hljs-string">&quot;/api&quot;</span> : <span class="hljs-string">&quot;http://api.chennick.wang&quot;</span>;<br></code></pre></td></tr></table></figure>
+
 <p><code>baseURL</code> 是 <code>axios</code> 的配置项，它的作用就是设置请求的基础路径，后续我们会在项目实战中有所体现。配置基础路径的好处就是，当请求地址修改的时候，可以在此统一配置。</p>
-<pre><code class="js">axios.defaults.headers[&quot;X-Requested-With&quot;] = &quot;XMLHttpRequest&quot;;
-axios.defaults.headers[&quot;Authorization&quot;] = `$&#123;
-  localStorage.getItem(&quot;token&quot;) || null
-&#125;`;
-axios.defaults.headers.post[&quot;Content-Type&quot;] = &quot;application/json&quot;;
-</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs js">axios.defaults.headers[<span class="hljs-string">&quot;X-Requested-With&quot;</span>] = <span class="hljs-string">&quot;XMLHttpRequest&quot;</span>;<br>axios.defaults.headers[<span class="hljs-string">&quot;Authorization&quot;</span>] = <span class="hljs-string">`<span class="hljs-subst">$&#123;</span></span><br><span class="hljs-subst"><span class="hljs-string">  <span class="hljs-built_in">localStorage</span>.getItem(<span class="hljs-string">&quot;token&quot;</span>) || <span class="hljs-literal">null</span></span></span><br><span class="hljs-subst"><span class="hljs-string">&#125;</span>`</span>;<br>axios.defaults.headers.post[<span class="hljs-string">&quot;Content-Type&quot;</span>] = <span class="hljs-string">&quot;application/json&quot;</span>;<br></code></pre></td></tr></table></figure>
+
 <p>上述三个配置是用于请求头的设置，<code>Authorization</code> 是我们在服务端鉴权的时候用到的，我们在前端设置好 <code>token</code>，服务端通过获取请求头中的 <code>token</code> 去验证每一次请求是否合法。</p>
 <p>最后一行是配置 <code>post</code> 请求是，使用的请求体，这里默认设置成 <code>application/json</code> 的形式。</p>
-<pre><code class="js">axios.interceptors.response.use((res) =&gt; &#123;
-  if (typeof res.data !== &quot;object&quot;) &#123;
-    Toast.show(&quot;服务端异常！&quot;);
-    return Promise.reject(res);
-  &#125;
-  if (res.data.code != 200) &#123;
-    if (res.data.msg) Toast.show(res.data.msg);
-    if (res.data.code == 401) &#123;
-      window.location.href = &quot;/login&quot;;
-    &#125;
-    return Promise.reject(res.data);
-  &#125;
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs js">axios.interceptors.response.use(<span class="hljs-function">(<span class="hljs-params">res</span>) =&gt;</span> &#123;<br>  <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> res.data !== <span class="hljs-string">&quot;object&quot;</span>) &#123;<br>    Toast.show(<span class="hljs-string">&quot;服务端异常！&quot;</span>);<br>    <span class="hljs-keyword">return</span> <span class="hljs-built_in">Promise</span>.reject(res);<br>  &#125;<br>  <span class="hljs-keyword">if</span> (res.data.code != <span class="hljs-number">200</span>) &#123;<br>    <span class="hljs-keyword">if</span> (res.data.msg) Toast.show(res.data.msg);<br>    <span class="hljs-keyword">if</span> (res.data.code == <span class="hljs-number">401</span>) &#123;<br>      <span class="hljs-built_in">window</span>.location.href = <span class="hljs-string">&quot;/login&quot;</span>;<br>    &#125;<br>    <span class="hljs-keyword">return</span> <span class="hljs-built_in">Promise</span>.reject(res.data);<br>  &#125;<br><br>  <span class="hljs-keyword">return</span> res.data;<br>&#125;);<br></code></pre></td></tr></table></figure>
 
-  return res.data;
-&#125;);
-</code></pre>
 <p><code>interceptors</code> 为拦截器，拦截器的作用是帮你拦截每一次请求，你可以在回调函数中做一些“手脚”，再将数据 <code>return</code> 回去。上述代码就是拦截了响应内容，统一判断请求内容，如果非 200，则提示错误信息，<code>401</code> 的话，就是没有登录的用户，默认跳到 <code>/login</code> 页面。如果是正常的响应，则 <code>retrun res.data</code>。</p>
 <p>最后我们将这个 <code>axios</code> 抛出，供页面组件请求使用。</p>
 <p>在 <code>utils</code> 下新建一个 <code>index.js</code>，内容如下：</p>
-<pre><code class="js">import axios from &quot;./axios&quot;;
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">import</span> axios <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;./axios&quot;</span>;<br><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> get = axios.get;<br><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> post = axios.post;<br></code></pre></td></tr></table></figure>
 
-export const get = axios.get;
-
-export const post = axios.post;
-</code></pre>
 <p>这样获取的时候，能少写几行代码，能少写点就少写点。</p>
 <h2 id="代理配置"><a href="#代理配置" class="headerlink" title="代理配置"></a>代理配置</h2><p><code>baseURL</code> 为什么在 <code>development</code> 环境下，用 <code>/api</code> 这样的请求地址。其实它就是为了代理请求而配置的。</p>
 <p>这样配置完后，在请求接口的时候，请求地址大概长这样：</p>
-<pre><code class="js">/api/userInfo
-</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs js">/api/userInfo<br></code></pre></td></tr></table></figure>
+
 <p>于是我们需要去配置代理，打开 <code>vite.config.js</code>，添加如下代码：</p>
-<pre><code class="js">server: &#123;
-  proxy: &#123;
-    &#39;/api&#39;: &#123;
-      // 当遇到 /api 路径时，将其转换成 target 的值
-      target: &#39;http://api.chennick.wang/api/&#39;,
-      changeOrigin: true,
-      rewrite: path =&gt; path.replace(/^\/api/, &#39;&#39;) // 将 /api 重写为空
-    &#125;
-  &#125;
-&#125;
-</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs js">server: &#123;<br>  <span class="hljs-attr">proxy</span>: &#123;<br>    <span class="hljs-string">&#x27;/api&#x27;</span>: &#123;<br>      <span class="hljs-comment">// 当遇到 /api 路径时，将其转换成 target 的值</span><br>      <span class="hljs-attr">target</span>: <span class="hljs-string">&#x27;http://api.chennick.wang/api/&#x27;</span>,<br>      <span class="hljs-attr">changeOrigin</span>: <span class="hljs-literal">true</span>,<br>      <span class="hljs-attr">rewrite</span>: <span class="hljs-function"><span class="hljs-params">path</span> =&gt;</span> path.replace(<span class="hljs-regexp">/^\/api/</span>, <span class="hljs-string">&#x27;&#x27;</span>) <span class="hljs-comment">// 将 /api 重写为空</span><br>    &#125;<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
 <p>这样配置完之后，开发环境下，<code>/api/userInfo</code> -&gt; <code>http://api.chennick.wang/api/userInfo</code>。这样就解决了大家老大难的跨域问题。</p>
 <p>但是其实服务端只要设置好白名单，就不会有这样那样的跨域问题。</p>
 <h2 id="resolve-alias-别名设置"><a href="#resolve-alias-别名设置" class="headerlink" title="resolve.alias 别名设置"></a>resolve.alias 别名设置</h2><p>这里我们必须得设置好别名，否则在页面中，你会写出很长一串类似这样的代码 <code>../../../</code>。</p>
 <p>打开 <code>vite.config.js</code>，添加配置如下：</p>
-<pre><code class="js">...
-import path from &#39;path&#39;
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs js">...<br><span class="hljs-keyword">import</span> path <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;path&#x27;</span><br><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> defineConfig(&#123;<br>  ...<br>  <span class="hljs-attr">resolve</span>: &#123;<br>    <span class="hljs-attr">alias</span>: &#123;<br>      <span class="hljs-string">&#x27;@&#x27;</span>: path.resolve(__dirname, <span class="hljs-string">&#x27;src&#x27;</span>), <span class="hljs-comment">// src 路径</span><br>      <span class="hljs-string">&#x27;utils&#x27;</span>: path.resolve(__dirname, <span class="hljs-string">&#x27;src/utils&#x27;</span>) <span class="hljs-comment">// src 路径</span><br>    &#125;<br>  &#125;,<br>&#125;)<br></code></pre></td></tr></table></figure>
 
-export default defineConfig(&#123;
-  ...
-  resolve: &#123;
-    alias: &#123;
-      &#39;@&#39;: path.resolve(__dirname, &#39;src&#39;), // src 路径
-      &#39;utils&#39;: path.resolve(__dirname, &#39;src/utils&#39;) // src 路径
-    &#125;
-  &#125;,
-&#125;)
-</code></pre>
 <p>此时我们便可以修改之前的代码如下：</p>
 <p><strong>router/index.js</strong></p>
-<pre><code class="js">import Index from &quot;@/container/Index&quot;;
-import About from &quot;@/container/About&quot;;
-</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">import</span> Index <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@/container/Index&quot;</span>;<br><span class="hljs-keyword">import</span> About <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@/container/About&quot;</span>;<br></code></pre></td></tr></table></figure>
+
 <p><strong>App.jsx</strong></p>
-<pre><code class="js">import routes from &quot;@/router&quot;;
-</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">import</span> routes <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@/router&quot;</span>;<br></code></pre></td></tr></table></figure>
+
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>行文至此，我们的基础开发环境已经搭建完毕，涉及构建工具、前端框架、<code>UI</code> 组件库、<code>HTTP</code> 请求库、<code>CSS</code> 预加载器、跨域代理、移动端分辨率适配，这些知识都是一个合格的前端工程师应该具备的，所以请大家加油，将他们都通通拿下。</p>
 </article><section class="jump-container is-flex is-justify-content-space-between my-6"><!-- em is empty placeholder--><a class="button is-default" href="/2023/01/05/113-react/" title="113、稀土掘金小册-记账本（四）底部导航栏"><i class="iconfont icon-prev mr-2 has-text-grey"></i><span class="has-text-weight-semibold">上一页: 113、稀土掘金小册-记账本（四）底部导航栏</span></a><a class="button is-default" href="/2023/01/03/111-react/" title="111、稀土掘金小册-记账本（二）react vite"><span class="has-text-weight-semibold">下一页: 111、稀土掘金小册-记账本（二）react vite</span><i class="iconfont icon-next ml-2 has-text-grey"></i></a></section></div></div></main></main><footer class="is-flex is-flex-direction-column is-align-items-center is-flex-shrink-0 is-family-serif"><section class="sns-container"><!-- Github--><a title="github" target="_blank" rel="noopener nofollow" href="//github.com/Jude"><i class="iconfont icon-github"></i></a><!-- Ins--><!-- RSS--><!-- 知乎--><a title="zhihu" target="_blank" rel="noopener nofollow" href="//zhihu.com/https://www.zhihu.com/hot"><i class="iconfont icon-zhihu"></i></a><!-- 领英--><!-- 脸书--></section><p><span>Copyright ©</span><span> Jude 2023</span></p><div class="is-flex is-justify-content-center is-flex-wrap-wrap"><p>Powered by Hexo &verbar;&nbsp;</p><p class="is-flex is-justify-content-center"><a title="Hexo theme author" target="_blank" rel="noopener" href="//github.com/haojen">Theme by Haojen&nbsp;</a></p><div style="margin-top: 2px"><a class="github-button" title="github-button" target="_blank" rel="noopener" href="https://github.com/haojen/hexo-theme-Claudia" data-color-scheme="no-preference: light; light: light; dark: dark;" data-show-count="true"></a></div></div><div><span>记住昨日的美好，过好今日的生活，憧憬明天的到来</span></div></footer><script async defer src="https://buttons.github.io/buttons.js"></script><script src="/js/post.js"></script></body></html>

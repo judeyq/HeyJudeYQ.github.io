@@ -35,38 +35,19 @@ js7种基本数据类型变量保存在栈内存中，因为基本数据类型�
 <h3 id="2、引用数据类型"><a href="#2、引用数据类型" class="headerlink" title="2、引用数据类型"></a>2、引用数据类型</h3><blockquote>
 <p>引用数据类型存储在堆内存中，引用数据类型占据空间大、大小不固定，如果存储在栈中，将影响程序的运行性能。<br>引用数据类型会在栈中存储一个指针，这个指针指向堆内存空间中该实体的起始地址。<br>当解释器寻找引用值时，会先检索其在栈中的地址，取得地址后，从堆中获得实体。</p>
 </blockquote>
-<pre><code class="js">// 基本数据类型-栈内存
-let name = &quot;大白&quot;;
-// 基本数据类型-栈内存
-let age = 20;
-// 基本数据类型-栈内存
-let info = null;
-// 对象指针存放在栈内存中，指针指向的对象放在堆内存中
-let msgObj = &#123;msg: &quot;测试&quot;, id: 5&#125;;
-// 数组的指针存放在栈内存中，指针指向的数组存放在堆内存中
-let ages = [19, 22, 57]
-</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-comment">// 基本数据类型-栈内存</span><br><span class="hljs-keyword">let</span> name = <span class="hljs-string">&quot;大白&quot;</span>;<br><span class="hljs-comment">// 基本数据类型-栈内存</span><br><span class="hljs-keyword">let</span> age = <span class="hljs-number">20</span>;<br><span class="hljs-comment">// 基本数据类型-栈内存</span><br><span class="hljs-keyword">let</span> info = <span class="hljs-literal">null</span>;<br><span class="hljs-comment">// 对象指针存放在栈内存中，指针指向的对象放在堆内存中</span><br><span class="hljs-keyword">let</span> msgObj = &#123;<span class="hljs-attr">msg</span>: <span class="hljs-string">&quot;测试&quot;</span>, <span class="hljs-attr">id</span>: <span class="hljs-number">5</span>&#125;;<br><span class="hljs-comment">// 数组的指针存放在栈内存中，指针指向的数组存放在堆内存中</span><br><span class="hljs-keyword">let</span> ages = [<span class="hljs-number">19</span>, <span class="hljs-number">22</span>, <span class="hljs-number">57</span>]<br><br></code></pre></td></tr></table></figure>
+
 <p>上面代码中：</p>
-<pre><code>1、创建了两个变量msgObj、ages，它们的值都是引用类型(object、array)
-2、堆内存空间采用二叉堆作为数据结构，msgObj与ages的具体值会存在堆内存空间中
-3、存储完成后，堆内存空间会返回这两个值的引用地址(指针)
-4、拿到引用地址后，这个引用地址会和它的变量名对应起来，存放在栈内存空间中
-5、在查找变量msgObj与ages的具体值时，会先从栈内存空间中获取它的引用地址
-6、获取到引用地址后，通过引用地址在堆内存空间的二叉堆中查找到对应的值。
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">1、创建了两个变量msgObj、ages，它们的值都是引用类型(object、array)<br>2、堆内存空间采用二叉堆作为数据结构，msgObj与ages的具体值会存在堆内存空间中<br>3、存储完成后，堆内存空间会返回这两个值的引用地址(指针)<br>4、拿到引用地址后，这个引用地址会和它的变量名对应起来，存放在栈内存空间中<br>5、在查找变量msgObj与ages的具体值时，会先从栈内存空间中获取它的引用地址<br>6、获取到引用地址后，通过引用地址在堆内存空间的二叉堆中查找到对应的值。<br></code></pre></td></tr></table></figure>
+
 <p>堆内存空间中的object，表示的是存储在空间中的其他对象的引用值</p>
 <p><image src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/18fbd5bf395a42e5b6757c84a4768be7~tplv-k3u1fbpfcp-watermark.awebp"></image></p>
 <h3 id="3、栈内存空间与堆内存的区别"><a href="#3、栈内存空间与堆内存的区别" class="headerlink" title="3、栈内存空间与堆内存的区别"></a>3、栈内存空间与堆内存的区别</h3><blockquote>
 <p>堆内存空间：相当于一个采用二叉堆作为数据结构的容器。<br>堆内存：指的是一个引用类型的具体值<br>堆内存存在于堆内存空间中</p>
 </blockquote>
 <h2 id="三、变量复制"><a href="#三、变量复制" class="headerlink" title="三、变量复制"></a>三、变量复制</h2><h3 id="1、基本数据类型的复制"><a href="#1、基本数据类型的复制" class="headerlink" title="1、基本数据类型的复制"></a>1、基本数据类型的复制</h3><p>下面代码中，name、alias都是基本类型，值存储在栈内存，分别有各自独立的栈空间，因此修改了alias的值，name是不受影响的。</p>
-<pre><code class="js">let name =&#39;jude&#39;
-let alias = name
-alias = &#39;summer&#39;
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">let</span> name =<span class="hljs-string">&#x27;jude&#x27;</span><br><span class="hljs-keyword">let</span> alias = name<br>alias = <span class="hljs-string">&#x27;summer&#x27;</span><br><br><span class="hljs-built_in">console</span>.log(name) <span class="hljs-comment">// jude</span><br><span class="hljs-built_in">console</span>.log(alias) <span class="hljs-comment">// summer</span><br></code></pre></td></tr></table></figure>
 
-console.log(name) // jude
-console.log(alias) // summer
-</code></pre>
 <p>相当于复制前是这样的：</p>
 <blockquote>
 <p>name | jude</p>
@@ -80,63 +61,29 @@ console.log(alias) // summer
 <p>alias | summer<br>name  | jude</p>
 </blockquote>
 <h3 id="2、引用类型的复制"><a href="#2、引用类型的复制" class="headerlink" title="2、引用类型的复制"></a>2、引用类型的复制</h3><p>下面代码中，info、book都是引用类型，它们引用存在栈内存，值存在堆内存，它们的值指向同一块堆内存，栈内存中会复制一份相同的引用。</p>
-<pre><code class="js">let book = &#123;title:&#39;book&#39;,id:1&#125;
-let info = book
-info.title = &#39;javascript&#39;
-console.log(book.title) // javascript
-</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">let</span> book = &#123;<span class="hljs-attr">title</span>:<span class="hljs-string">&#x27;book&#x27;</span>,<span class="hljs-attr">id</span>:<span class="hljs-number">1</span>&#125;<br><span class="hljs-keyword">let</span> info = book<br>info.title = <span class="hljs-string">&#x27;javascript&#x27;</span><br><span class="hljs-built_in">console</span>.log(book.title) <span class="hljs-comment">// javascript</span><br></code></pre></td></tr></table></figure>
+
 <h2 id="四、深拷贝与浅拷贝"><a href="#四、深拷贝与浅拷贝" class="headerlink" title="四、深拷贝与浅拷贝"></a>四、深拷贝与浅拷贝</h2><h3 id="1、浅拷贝："><a href="#1、浅拷贝：" class="headerlink" title="1、浅拷贝："></a>1、浅拷贝：</h3><blockquote>
 <p>引用数据类型在复制时，改了其中一个数据的值，另一个数据的值也会跟着改变，这种拷贝方式我们称为浅拷贝。</p>
 </blockquote>
 <h4 id="1-1-Object-asign"><a href="#1-1-Object-asign" class="headerlink" title="1.1 Object.asign()"></a>1.1 Object.asign()</h4><blockquote>
 <p>Object.assign() 方法可以把任意多个的源对象自身的可枚举属性拷贝给目标对象，然后返回目标对象。</p>
 </blockquote>
-<pre><code class="js">let obj1 = &#123; person: &#123;name: &quot;kobe&quot;, age: 41&#125;,sports:&#39;basketball&#39; &#125;;
-let obj2 = Object.assign(&#123;&#125;, obj1);
-obj2.person.name = &quot;wade&quot;;
-obj2.sports = &#39;football&#39;
-console.log(obj1); // &#123; person: &#123; name: &#39;wade&#39;, age: 41 &#125;, sports: &#39;basketball&#39; &#125;
-</code></pre>
-<h4 id="1-2-扩展运算符"><a href="#1-2-扩展运算符" class="headerlink" title="1.2 扩展运算符"></a>1.2 扩展运算符</h4><pre><code class="js">let obj1 = &#123; name: &#39;Kobe&#39;, address:&#123;x:100,y:100&#125;&#125;
-let obj2= &#123;... obj1&#125;
-obj1.address.x = 200;
-obj1.name = &#39;wade&#39;
-console.log(&#39;obj2&#39;,obj2) // obj2 &#123; name: &#39;Kobe&#39;, address: &#123; x: 200, y: 100 &#125; &#125;
-</code></pre>
-<h4 id="1-3-Array-prototype-concat-Array-ptototype-slice"><a href="#1-3-Array-prototype-concat-Array-ptototype-slice" class="headerlink" title="1.3 Array.prototype.concat()/Array.ptototype.slice()"></a>1.3 Array.prototype.concat()/Array.ptototype.slice()</h4><pre><code class="js">let arr = [1, 3, &#123;
-    username: &#39;kobe&#39;
-&#125;];
-let arr2 = arr.concat();    
-arr2[2].username = &#39;wade&#39;;
-console.log(arr); //[ 1, 3, &#123; username: &#39;wade&#39; &#125; ]
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">let</span> obj1 = &#123; <span class="hljs-attr">person</span>: &#123;<span class="hljs-attr">name</span>: <span class="hljs-string">&quot;kobe&quot;</span>, <span class="hljs-attr">age</span>: <span class="hljs-number">41</span>&#125;,<span class="hljs-attr">sports</span>:<span class="hljs-string">&#x27;basketball&#x27;</span> &#125;;<br><span class="hljs-keyword">let</span> obj2 = <span class="hljs-built_in">Object</span>.assign(&#123;&#125;, obj1);<br>obj2.person.name = <span class="hljs-string">&quot;wade&quot;</span>;<br>obj2.sports = <span class="hljs-string">&#x27;football&#x27;</span><br><span class="hljs-built_in">console</span>.log(obj1); <span class="hljs-comment">// &#123; person: &#123; name: &#x27;wade&#x27;, age: 41 &#125;, sports: &#x27;basketball&#x27; &#125;</span><br></code></pre></td></tr></table></figure>
 
+<h4 id="1-2-扩展运算符"><a href="#1-2-扩展运算符" class="headerlink" title="1.2 扩展运算符"></a>1.2 扩展运算符</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">let</span> obj1 = &#123; <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;Kobe&#x27;</span>, <span class="hljs-attr">address</span>:&#123;<span class="hljs-attr">x</span>:<span class="hljs-number">100</span>,<span class="hljs-attr">y</span>:<span class="hljs-number">100</span>&#125;&#125;<br><span class="hljs-keyword">let</span> obj2= &#123;... obj1&#125;<br>obj1.address.x = <span class="hljs-number">200</span>;<br>obj1.name = <span class="hljs-string">&#x27;wade&#x27;</span><br><span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;obj2&#x27;</span>,obj2) <span class="hljs-comment">// obj2 &#123; name: &#x27;Kobe&#x27;, address: &#123; x: 200, y: 100 &#125; &#125;</span><br></code></pre></td></tr></table></figure>
 
-let arr = [1, 3, &#123;
-    username: &#39; kobe&#39;
-&#125;];
-let arr3 = arr.slice();
-arr3[2].username = &#39;wade&#39;
-console.log(arr); // [ 1, 3, &#123; username: &#39;wade&#39; &#125; ]
-</code></pre>
+<h4 id="1-3-Array-prototype-concat-Array-ptototype-slice"><a href="#1-3-Array-prototype-concat-Array-ptototype-slice" class="headerlink" title="1.3 Array.prototype.concat()/Array.ptototype.slice()"></a>1.3 Array.prototype.concat()/Array.ptototype.slice()</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">let</span> arr = [<span class="hljs-number">1</span>, <span class="hljs-number">3</span>, &#123;<br>    <span class="hljs-attr">username</span>: <span class="hljs-string">&#x27;kobe&#x27;</span><br>&#125;];<br><span class="hljs-keyword">let</span> arr2 = arr.concat();    <br>arr2[<span class="hljs-number">2</span>].username = <span class="hljs-string">&#x27;wade&#x27;</span>;<br><span class="hljs-built_in">console</span>.log(arr); <span class="hljs-comment">//[ 1, 3, &#123; username: &#x27;wade&#x27; &#125; ]</span><br><br><br><span class="hljs-keyword">let</span> arr = [<span class="hljs-number">1</span>, <span class="hljs-number">3</span>, &#123;<br>    <span class="hljs-attr">username</span>: <span class="hljs-string">&#x27; kobe&#x27;</span><br>&#125;];<br><span class="hljs-keyword">let</span> arr3 = arr.slice();<br>arr3[<span class="hljs-number">2</span>].username = <span class="hljs-string">&#x27;wade&#x27;</span><br><span class="hljs-built_in">console</span>.log(arr); <span class="hljs-comment">// [ 1, 3, &#123; username: &#x27;wade&#x27; &#125; ]</span><br><br></code></pre></td></tr></table></figure>
+
 <h3 id="2、深拷贝："><a href="#2、深拷贝：" class="headerlink" title="2、深拷贝："></a>2、深拷贝：</h3><blockquote>
 <p>引用类型复制到新的变量后，二者是独立的，不会因为一个的改变而影响到另一个<br>实际上就是重新在堆内存中开辟一块新的空间，把原对象的数据拷贝到这个新地址空间里来</p>
 </blockquote>
 <h4 id="2-1-深拷贝方法1："><a href="#2-1-深拷贝方法1：" class="headerlink" title="2.1 深拷贝方法1："></a>2.1 深拷贝方法1：</h4><blockquote>
 <p>将对象转一遍JSON，缺点是只能转化一般常见的数据，function、undefined、正则等类型无法通过这种方法变回来。</p>
 </blockquote>
-<pre><code class="js">const data = &#123; name: &quot;jude&quot; &#125;;
-const obj = JSON.parse(JSON.stringify(data));
-obj.age = 20;
-console.log(&quot;data = &quot;, data);// data = &#123; name:&quot;jude&quot;&#125;
-console.log(&quot;obj = &quot;, obj);// obj = &#123;name:&#39;jude&#39;,age:20&#125;
-</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">const</span> data = &#123; <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;jude&quot;</span> &#125;;<br><span class="hljs-keyword">const</span> obj = <span class="hljs-built_in">JSON</span>.parse(<span class="hljs-built_in">JSON</span>.stringify(data));<br>obj.age = <span class="hljs-number">20</span>;<br><span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;data = &quot;</span>, data);<span class="hljs-comment">// data = &#123; name:&quot;jude&quot;&#125;</span><br><span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;obj = &quot;</span>, obj);<span class="hljs-comment">// obj = &#123;name:&#x27;jude&#x27;,age:20&#125;</span><br></code></pre></td></tr></table></figure>
+
 <h4 id="2-2-深拷贝方法2："><a href="#2-2-深拷贝方法2：" class="headerlink" title="2.2 深拷贝方法2："></a>2.2 深拷贝方法2：</h4><blockquote>
 <p>手动去写循环遍历</p>
 </blockquote>
-<pre><code class="js">const data = [&#123; name: &quot;jude&quot; &#125;];
-let obj = data.map(item =&gt; item);
-obj.push(&#123; name: &quot;summer&quot; &#125;);
-console.log(&quot;data = &quot;, data);// data = [&#123;name:&#39;jude&#39;&#125;]
-console.log(&quot;obj = &quot;, obj);// obj = [&#123;name:&#39;jude&#39;,name:&#39;summer&#39;&#125;]
-</code></pre>
-</article><section class="jump-container is-flex is-justify-content-space-between my-6"><!-- em is empty placeholder--><a class="button is-default" href="/2021/06/20/egg/" title="40、初识egg.js"><i class="iconfont icon-prev mr-2 has-text-grey"></i><span class="has-text-weight-semibold">上一页: 40、初识egg.js</span></a><a class="button is-default" href="/2021/05/19/resize/" title="38、Vue项目中的window.resize"><span class="has-text-weight-semibold">下一页: 38、Vue项目中的window.resize</span><i class="iconfont icon-next ml-2 has-text-grey"></i></a></section></div></div></main></main><footer class="is-flex is-flex-direction-column is-align-items-center is-flex-shrink-0 is-family-serif"><section class="sns-container"><!-- Github--><a title="github" target="_blank" rel="noopener nofollow" href="//github.com/Jude"><i class="iconfont icon-github"></i></a><!-- Ins--><!-- RSS--><!-- 知乎--><a title="zhihu" target="_blank" rel="noopener nofollow" href="//zhihu.com/https://www.zhihu.com/hot"><i class="iconfont icon-zhihu"></i></a><!-- 领英--><!-- 脸书--></section><p><span>Copyright ©</span><span> Jude 2023</span></p><div class="is-flex is-justify-content-center is-flex-wrap-wrap"><p>Powered by Hexo &verbar;&nbsp;</p><p class="is-flex is-justify-content-center"><a title="Hexo theme author" target="_blank" rel="noopener" href="//github.com/haojen">Theme by Haojen&nbsp;</a></p><div style="margin-top: 2px"><a class="github-button" title="github-button" target="_blank" rel="noopener" href="https://github.com/haojen/hexo-theme-Claudia" data-color-scheme="no-preference: light; light: light; dark: dark;" data-show-count="true"></a></div></div><div><span>记住昨日的美好，过好今日的生活，憧憬明天的到来</span></div></footer><script async defer src="https://buttons.github.io/buttons.js"></script><script src="/js/post.js"></script></body></html>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">const</span> data = [&#123; <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;jude&quot;</span> &#125;];<br><span class="hljs-keyword">let</span> obj = data.map(<span class="hljs-function"><span class="hljs-params">item</span> =&gt;</span> item);<br>obj.push(&#123; <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;summer&quot;</span> &#125;);<br><span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;data = &quot;</span>, data);<span class="hljs-comment">// data = [&#123;name:&#x27;jude&#x27;&#125;]</span><br><span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;obj = &quot;</span>, obj);<span class="hljs-comment">// obj = [&#123;name:&#x27;jude&#x27;,name:&#x27;summer&#x27;&#125;]</span><br><br></code></pre></td></tr></table></figure></article><section class="jump-container is-flex is-justify-content-space-between my-6"><!-- em is empty placeholder--><a class="button is-default" href="/2021/06/20/egg/" title="40、初识egg.js"><i class="iconfont icon-prev mr-2 has-text-grey"></i><span class="has-text-weight-semibold">上一页: 40、初识egg.js</span></a><a class="button is-default" href="/2021/05/19/resize/" title="38、Vue项目中的window.resize"><span class="has-text-weight-semibold">下一页: 38、Vue项目中的window.resize</span><i class="iconfont icon-next ml-2 has-text-grey"></i></a></section></div></div></main></main><footer class="is-flex is-flex-direction-column is-align-items-center is-flex-shrink-0 is-family-serif"><section class="sns-container"><!-- Github--><a title="github" target="_blank" rel="noopener nofollow" href="//github.com/Jude"><i class="iconfont icon-github"></i></a><!-- Ins--><!-- RSS--><!-- 知乎--><a title="zhihu" target="_blank" rel="noopener nofollow" href="//zhihu.com/https://www.zhihu.com/hot"><i class="iconfont icon-zhihu"></i></a><!-- 领英--><!-- 脸书--></section><p><span>Copyright ©</span><span> Jude 2023</span></p><div class="is-flex is-justify-content-center is-flex-wrap-wrap"><p>Powered by Hexo &verbar;&nbsp;</p><p class="is-flex is-justify-content-center"><a title="Hexo theme author" target="_blank" rel="noopener" href="//github.com/haojen">Theme by Haojen&nbsp;</a></p><div style="margin-top: 2px"><a class="github-button" title="github-button" target="_blank" rel="noopener" href="https://github.com/haojen/hexo-theme-Claudia" data-color-scheme="no-preference: light; light: light; dark: dark;" data-show-count="true"></a></div></div><div><span>记住昨日的美好，过好今日的生活，憧憬明天的到来</span></div></footer><script async defer src="https://buttons.github.io/buttons.js"></script><script src="/js/post.js"></script></body></html>

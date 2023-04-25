@@ -3,28 +3,12 @@
 
 
 在 JS 中，除了原始类型那么其他的都是对象类型了。对象类型和原始类型不同的是：原始类型存储的是值，对象类型存储的是地址（指针）。当你创建了一个对象类型的时候，计算机会在内存中帮我们开辟一个空间来存放值，但是我们需要找到这个空间，这个空间会拥有一个地址（指针）。
-一、字符串方法// 将字符串的字母转换成小写
-const str = &amp;quot;Hello world&amp;quot;;
-arr = str.split(&amp;quot;&amp;quot;).map(function (item) &amp;#123;
-  return (item + &amp;quot;&amp;quot;).toLowerCase();
-&amp;#125;);
-lowerStr = arr.join(&amp;.."><meta name="generator" content="Hexo 5.4.1"></head><body class="is-flex is-flex-direction-column"><header class="header-widget is-flex-shrink-0 is-hidden-mobile"><div class="container is-fullhd is-flex is-justify-content-space-between is-align-items-center is-full-height"><section class="is-hidden-mobile is-flex-shrink-0"><h2><a href="/">Jude's blog</a></h2></section><h3 class="is-hidden-mobile is-family-serif is-full-height is-flex is-align-items-center is-flex-shrink-0"><div class="is-full-height" id="postTopic"><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">32、javascript -- 对象</p><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">点击返回顶部</p></div></h3><aside class="is-flex-shrink-0"><h3 class="is-inline-block"><a href="/">首页</a></h3><h3 class="is-inline-block"><a href="/about">关于</a></h3><h3 class="is-inline-block"><a href="/archives">归档</a></h3></aside></div></header><header class="is-flex header-widget is-flex-shrink-0 is-align-items-center is-justify-content-center is-hidden-tablet"><h3 class="is-inline-block"><a href="/">首页</a></h3><h3 class="is-inline-block"><a href="/about">关于</a></h3><h3 class="is-inline-block"><a href="/archives">归档</a></h3></header><main><main class="container is-max-widescreen content section post-page pt-4 px-4"><div class="columns is-flex-desktop is-justify-content-center is-flex-direction-row-reverse"><div class="column is-3 is-hidden-mobile"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%96%B9%E6%B3%95"><span class="toc-text">一、字符串方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#js-%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="toc-text">js 数据类型</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Set%E3%80%81Map%E3%80%81WeakSet-%E5%92%8C-WeakMap-%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-text">Set、Map、WeakSet 和 WeakMap 的区别</span></a></li></ol></li></ol></li></ol></div><div class="column is-9"><header class="my-4"><a href="/tags/js"><i class="tag post-item-tag">js</i></a></header><h1 class="mt-0 mb-1 is-family-serif" id="postTitle">32、javascript -- 对象</h1><time class="has-text-grey" datetime="2021-04-13T16:00:00.000Z">2021-04-14</time><article class="mt-2 post-content"><p>对象类型和原始类型的不同之处？函数参数是对象会发生什么问题？</p>
+一、字符串方法123456789101112// 将字符串的字母转换成小写const str = &amp;quot;Hello world&amp;quot;;arr = str.split(&amp;quot;&amp;quot;).map(function (item) &amp;#123;  return (item + &amp;quot;&amp;quot;).toLowerCase();&amp;#125;);lowerStr = .."><meta name="generator" content="Hexo 5.4.1"></head><body class="is-flex is-flex-direction-column"><header class="header-widget is-flex-shrink-0 is-hidden-mobile"><div class="container is-fullhd is-flex is-justify-content-space-between is-align-items-center is-full-height"><section class="is-hidden-mobile is-flex-shrink-0"><h2><a href="/">Jude's blog</a></h2></section><h3 class="is-hidden-mobile is-family-serif is-full-height is-flex is-align-items-center is-flex-shrink-0"><div class="is-full-height" id="postTopic"><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">32、javascript -- 对象</p><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">点击返回顶部</p></div></h3><aside class="is-flex-shrink-0"><h3 class="is-inline-block"><a href="/">首页</a></h3><h3 class="is-inline-block"><a href="/about">关于</a></h3><h3 class="is-inline-block"><a href="/archives">归档</a></h3></aside></div></header><header class="is-flex header-widget is-flex-shrink-0 is-align-items-center is-justify-content-center is-hidden-tablet"><h3 class="is-inline-block"><a href="/">首页</a></h3><h3 class="is-inline-block"><a href="/about">关于</a></h3><h3 class="is-inline-block"><a href="/archives">归档</a></h3></header><main><main class="container is-max-widescreen content section post-page pt-4 px-4"><div class="columns is-flex-desktop is-justify-content-center is-flex-direction-row-reverse"><div class="column is-3 is-hidden-mobile"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%96%B9%E6%B3%95"><span class="toc-text">一、字符串方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#js-%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="toc-text">js 数据类型</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Set%E3%80%81Map%E3%80%81WeakSet-%E5%92%8C-WeakMap-%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-text">Set、Map、WeakSet 和 WeakMap 的区别</span></a></li></ol></li></ol></li></ol></div><div class="column is-9"><header class="my-4"><a href="/tags/js"><i class="tag post-item-tag">js</i></a></header><h1 class="mt-0 mb-1 is-family-serif" id="postTitle">32、javascript -- 对象</h1><time class="has-text-grey" datetime="2021-04-13T16:00:00.000Z">2021-04-14</time><article class="mt-2 post-content"><p>对象类型和原始类型的不同之处？函数参数是对象会发生什么问题？</p>
 <span id="more"></span>
 
 <p>在 JS 中，除了原始类型那么其他的都是对象类型了。<br>对象类型和原始类型不同的是：<br>原始类型存储的是值，对象类型存储的是地址（指针）。<br>当你创建了一个对象类型的时候，计算机会在内存中帮我们开辟一个空间来存放值，<br>但是我们需要找到这个空间，这个空间会拥有一个地址（指针）。</p>
-<h2 id="一、字符串方法"><a href="#一、字符串方法" class="headerlink" title="一、字符串方法"></a>一、字符串方法</h2><pre><code class="js">// 将字符串的字母转换成小写
-const str = &quot;Hello world&quot;;
-arr = str.split(&quot;&quot;).map(function (item) &#123;
-  return (item + &quot;&quot;).toLowerCase();
-&#125;);
-lowerStr = arr.join(&quot;&quot;);
-console.log(lowerStr);
+<h2 id="一、字符串方法"><a href="#一、字符串方法" class="headerlink" title="一、字符串方法"></a>一、字符串方法</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-comment">// 将字符串的字母转换成小写</span><br><span class="hljs-keyword">const</span> str = <span class="hljs-string">&quot;Hello world&quot;</span>;<br>arr = str.split(<span class="hljs-string">&quot;&quot;</span>).map(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">item</span>) </span>&#123;<br>  <span class="hljs-keyword">return</span> (item + <span class="hljs-string">&quot;&quot;</span>).toLowerCase();<br>&#125;);<br>lowerStr = arr.join(<span class="hljs-string">&quot;&quot;</span>);<br><span class="hljs-built_in">console</span>.log(lowerStr);<br><br><span class="hljs-comment">// 挑出大写字母</span><br><span class="hljs-keyword">const</span> str = <span class="hljs-string">&quot;Permission is &quot;</span>;<br>reg = <span class="hljs-regexp">/[A-Z]/g</span>;<br><span class="hljs-built_in">console</span>.log(str.match(reg).join(<span class="hljs-string">&quot;&quot;</span>));<br></code></pre></td></tr></table></figure>
 
-// 挑出大写字母
-const str = &quot;Permission is &quot;;
-reg = /[A-Z]/g;
-console.log(str.match(reg).join(&quot;&quot;));
-</code></pre>
 <h2 id="js-数据类型"><a href="#js-数据类型" class="headerlink" title="js 数据类型"></a>js 数据类型</h2><p>基本数据类型：</p>
 <blockquote>
 <p>Number，String，Boolean，null，undefined，symbol，bigint</p>
@@ -120,401 +104,42 @@ console.log(str.match(reg).join(&quot;&quot;));
 <p>Javascrip 中每个函数都会有一个 Arguments 对象实例 arguments，引用着函数的实参。它是寄生在 js 函数当中的，不能显式创建，arguments 对象只有函数开始时才可用</p>
 </blockquote>
 <p>instanceof 原理：判断实例属于什么类型</p>
-<pre><code class="js">// 实现方法
-function new_instance_of(leftVaule, rightVaule) &#123;
-  let rightProto = rightVaule.prototype; // 取右表达式的 prototype 值
-  leftVaule = leftVaule.__proto__; // 取左表达式的__proto__值
-  while (true) &#123;
-    if (leftVaule === null) &#123;
-      return false;
-    &#125;
-    if (leftVaule === rightProto) &#123;
-      return true;
-    &#125;
-    leftVaule = leftVaule.__proto__;
-  &#125;
-&#125;
-</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-comment">// 实现方法</span><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">new_instance_of</span>(<span class="hljs-params">leftVaule, rightVaule</span>) </span>&#123;<br>  <span class="hljs-keyword">let</span> rightProto = rightVaule.prototype; <span class="hljs-comment">// 取右表达式的 prototype 值</span><br>  leftVaule = leftVaule.__proto__; <span class="hljs-comment">// 取左表达式的__proto__值</span><br>  <span class="hljs-keyword">while</span> (<span class="hljs-literal">true</span>) &#123;<br>    <span class="hljs-keyword">if</span> (leftVaule === <span class="hljs-literal">null</span>) &#123;<br>      <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>    &#125;<br>    <span class="hljs-keyword">if</span> (leftVaule === rightProto) &#123;<br>      <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>    &#125;<br>    leftVaule = leftVaule.__proto__;<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
 <p>数组去重：</p>
 <p>1、es6 Set 方法</p>
-<pre><code class="js">function unique(arr) &#123;
-  return Array.from(new Set(arr));
-&#125;
-// 无法去除 &#123;&#125; 空对象
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">unique</span>(<span class="hljs-params">arr</span>) </span>&#123;<br>  <span class="hljs-keyword">return</span> <span class="hljs-built_in">Array</span>.from(<span class="hljs-keyword">new</span> <span class="hljs-built_in">Set</span>(arr));<br>&#125;<br><span class="hljs-comment">// 无法去除 &#123;&#125; 空对象</span><br><br><span class="hljs-comment">// 简写</span><br>[...new <span class="hljs-built_in">Set</span>(arr)];<br></code></pre></td></tr></table></figure>
 
-// 简写
-[...new Set(arr)];
-</code></pre>
 <p>2、es5 利用 for 循环嵌套，然后 splice 去重</p>
-<pre><code class="js">function unique(arr) &#123;
-  for (var i = 0; i &lt; arr.length; i++) &#123;
-    for (var j = i + 1; j &lt; arr.length; j++) &#123;
-      if (arr[i] == arr[j]) &#123;
-        //第一个等同于第二个，splice方法删除第二个
-        arr.splice(j, 1);
-        j--;
-      &#125;
-    &#125;
-  &#125;
-  return arr;
-&#125;
-var arr = [
-  1,
-  1,
-  &quot;true&quot;,
-  &quot;true&quot;,
-  true,
-  true,
-  15,
-  15,
-  false,
-  false,
-  undefined,
-  undefined,
-  null,
-  null,
-  NaN,
-  NaN,
-  &quot;NaN&quot;,
-  0,
-  0,
-  &quot;a&quot;,
-  &quot;a&quot;,
-  &#123;&#125;,
-  &#123;&#125;,
-];
-console.log(unique(arr)); //[1, &quot;true&quot;, 15, false, undefined, NaN, NaN, &quot;NaN&quot;, &quot;a&quot;, &#123;…&#125;, &#123;…&#125;]     //NaN和&#123;&#125;没有去重，两个null直接消失了
-</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">unique</span>(<span class="hljs-params">arr</span>) </span>&#123;<br>  <span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> i = <span class="hljs-number">0</span>; i &lt; arr.length; i++) &#123;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> j = i + <span class="hljs-number">1</span>; j &lt; arr.length; j++) &#123;<br>      <span class="hljs-keyword">if</span> (arr[i] == arr[j]) &#123;<br>        <span class="hljs-comment">//第一个等同于第二个，splice方法删除第二个</span><br>        arr.splice(j, <span class="hljs-number">1</span>);<br>        j--;<br>      &#125;<br>    &#125;<br>  &#125;<br>  <span class="hljs-keyword">return</span> arr;<br>&#125;<br><span class="hljs-keyword">var</span> arr = [<br>  <span class="hljs-number">1</span>,<br>  <span class="hljs-number">1</span>,<br>  <span class="hljs-string">&quot;true&quot;</span>,<br>  <span class="hljs-string">&quot;true&quot;</span>,<br>  <span class="hljs-literal">true</span>,<br>  <span class="hljs-literal">true</span>,<br>  <span class="hljs-number">15</span>,<br>  <span class="hljs-number">15</span>,<br>  <span class="hljs-literal">false</span>,<br>  <span class="hljs-literal">false</span>,<br>  <span class="hljs-literal">undefined</span>,<br>  <span class="hljs-literal">undefined</span>,<br>  <span class="hljs-literal">null</span>,<br>  <span class="hljs-literal">null</span>,<br>  <span class="hljs-literal">NaN</span>,<br>  <span class="hljs-literal">NaN</span>,<br>  <span class="hljs-string">&quot;NaN&quot;</span>,<br>  <span class="hljs-number">0</span>,<br>  <span class="hljs-number">0</span>,<br>  <span class="hljs-string">&quot;a&quot;</span>,<br>  <span class="hljs-string">&quot;a&quot;</span>,<br>  &#123;&#125;,<br>  &#123;&#125;,<br>];<br><span class="hljs-built_in">console</span>.log(unique(arr)); <span class="hljs-comment">//[1, &quot;true&quot;, 15, false, undefined, NaN, NaN, &quot;NaN&quot;, &quot;a&quot;, &#123;…&#125;, &#123;…&#125;]     //NaN和&#123;&#125;没有去重，两个null直接消失了</span><br></code></pre></td></tr></table></figure>
+
 <p>3、indexOf</p>
-<pre><code class="js">function unique(arr) &#123;
-  if (!Array.isArray(arr)) &#123;
-    console.log(&quot;type error!&quot;);
-    return;
-  &#125;
-  var array = [];
-  for (var i = 0; i &lt; arr.length; i++) &#123;
-    if (array.indexOf(arr[i]) === -1) &#123;
-      array.push(arr[i]);
-    &#125;
-  &#125;
-  return array;
-&#125;
-var arr = [
-  1,
-  1,
-  &quot;true&quot;,
-  &quot;true&quot;,
-  true,
-  true,
-  15,
-  15,
-  false,
-  false,
-  undefined,
-  undefined,
-  null,
-  null,
-  NaN,
-  NaN,
-  &quot;NaN&quot;,
-  0,
-  0,
-  &quot;a&quot;,
-  &quot;a&quot;,
-  &#123;&#125;,
-  &#123;&#125;,
-];
-console.log(unique(arr));
-// [1, &quot;true&quot;, true, 15, false, undefined, null, NaN, NaN, &quot;NaN&quot;, 0, &quot;a&quot;, &#123;…&#125;, &#123;…&#125;]  //NaN、&#123;&#125;没有去重
-</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">unique</span>(<span class="hljs-params">arr</span>) </span>&#123;<br>  <span class="hljs-keyword">if</span> (!<span class="hljs-built_in">Array</span>.isArray(arr)) &#123;<br>    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;type error!&quot;</span>);<br>    <span class="hljs-keyword">return</span>;<br>  &#125;<br>  <span class="hljs-keyword">var</span> array = [];<br>  <span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> i = <span class="hljs-number">0</span>; i &lt; arr.length; i++) &#123;<br>    <span class="hljs-keyword">if</span> (array.indexOf(arr[i]) === -<span class="hljs-number">1</span>) &#123;<br>      array.push(arr[i]);<br>    &#125;<br>  &#125;<br>  <span class="hljs-keyword">return</span> array;<br>&#125;<br><span class="hljs-keyword">var</span> arr = [<br>  <span class="hljs-number">1</span>,<br>  <span class="hljs-number">1</span>,<br>  <span class="hljs-string">&quot;true&quot;</span>,<br>  <span class="hljs-string">&quot;true&quot;</span>,<br>  <span class="hljs-literal">true</span>,<br>  <span class="hljs-literal">true</span>,<br>  <span class="hljs-number">15</span>,<br>  <span class="hljs-number">15</span>,<br>  <span class="hljs-literal">false</span>,<br>  <span class="hljs-literal">false</span>,<br>  <span class="hljs-literal">undefined</span>,<br>  <span class="hljs-literal">undefined</span>,<br>  <span class="hljs-literal">null</span>,<br>  <span class="hljs-literal">null</span>,<br>  <span class="hljs-literal">NaN</span>,<br>  <span class="hljs-literal">NaN</span>,<br>  <span class="hljs-string">&quot;NaN&quot;</span>,<br>  <span class="hljs-number">0</span>,<br>  <span class="hljs-number">0</span>,<br>  <span class="hljs-string">&quot;a&quot;</span>,<br>  <span class="hljs-string">&quot;a&quot;</span>,<br>  &#123;&#125;,<br>  &#123;&#125;,<br>];<br><span class="hljs-built_in">console</span>.log(unique(arr));<br><span class="hljs-comment">// [1, &quot;true&quot;, true, 15, false, undefined, null, NaN, NaN, &quot;NaN&quot;, 0, &quot;a&quot;, &#123;…&#125;, &#123;…&#125;]  //NaN、&#123;&#125;没有去重</span><br></code></pre></td></tr></table></figure>
+
 <p>4、sort</p>
-<pre><code class="js">function unique(arr) &#123;
-  if (!Array.isArray(arr)) &#123;
-    console.log(&quot;type error!&quot;);
-    return;
-  &#125;
-  arr = arr.sort();
-  var arrry = [arr[0]];
-  for (var i = 1; i &lt; arr.length; i++) &#123;
-    if (arr[i] !== arr[i - 1]) &#123;
-      arrry.push(arr[i]);
-    &#125;
-  &#125;
-  return arrry;
-&#125;
-var arr = [
-  1,
-  1,
-  &quot;true&quot;,
-  &quot;true&quot;,
-  true,
-  true,
-  15,
-  15,
-  false,
-  false,
-  undefined,
-  undefined,
-  null,
-  null,
-  NaN,
-  NaN,
-  &quot;NaN&quot;,
-  0,
-  0,
-  &quot;a&quot;,
-  &quot;a&quot;,
-  &#123;&#125;,
-  &#123;&#125;,
-];
-console.log(unique(arr));
-// [0, 1, 15, &quot;NaN&quot;, NaN, NaN, &#123;…&#125;, &#123;…&#125;, &quot;a&quot;, false, null, true, &quot;true&quot;, undefined]      //NaN、&#123;&#125;没有去重
-</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">unique</span>(<span class="hljs-params">arr</span>) </span>&#123;<br>  <span class="hljs-keyword">if</span> (!<span class="hljs-built_in">Array</span>.isArray(arr)) &#123;<br>    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;type error!&quot;</span>);<br>    <span class="hljs-keyword">return</span>;<br>  &#125;<br>  arr = arr.sort();<br>  <span class="hljs-keyword">var</span> arrry = [arr[<span class="hljs-number">0</span>]];<br>  <span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> i = <span class="hljs-number">1</span>; i &lt; arr.length; i++) &#123;<br>    <span class="hljs-keyword">if</span> (arr[i] !== arr[i - <span class="hljs-number">1</span>]) &#123;<br>      arrry.push(arr[i]);<br>    &#125;<br>  &#125;<br>  <span class="hljs-keyword">return</span> arrry;<br>&#125;<br><span class="hljs-keyword">var</span> arr = [<br>  <span class="hljs-number">1</span>,<br>  <span class="hljs-number">1</span>,<br>  <span class="hljs-string">&quot;true&quot;</span>,<br>  <span class="hljs-string">&quot;true&quot;</span>,<br>  <span class="hljs-literal">true</span>,<br>  <span class="hljs-literal">true</span>,<br>  <span class="hljs-number">15</span>,<br>  <span class="hljs-number">15</span>,<br>  <span class="hljs-literal">false</span>,<br>  <span class="hljs-literal">false</span>,<br>  <span class="hljs-literal">undefined</span>,<br>  <span class="hljs-literal">undefined</span>,<br>  <span class="hljs-literal">null</span>,<br>  <span class="hljs-literal">null</span>,<br>  <span class="hljs-literal">NaN</span>,<br>  <span class="hljs-literal">NaN</span>,<br>  <span class="hljs-string">&quot;NaN&quot;</span>,<br>  <span class="hljs-number">0</span>,<br>  <span class="hljs-number">0</span>,<br>  <span class="hljs-string">&quot;a&quot;</span>,<br>  <span class="hljs-string">&quot;a&quot;</span>,<br>  &#123;&#125;,<br>  &#123;&#125;,<br>];<br><span class="hljs-built_in">console</span>.log(unique(arr));<br><span class="hljs-comment">// [0, 1, 15, &quot;NaN&quot;, NaN, NaN, &#123;…&#125;, &#123;…&#125;, &quot;a&quot;, false, null, true, &quot;true&quot;, undefined]      //NaN、&#123;&#125;没有去重</span><br></code></pre></td></tr></table></figure>
+
 <p>5、includes</p>
-<pre><code class="js">function unique(arr) &#123;
-  if (!Array.isArray(arr)) &#123;
-    console.log(&quot;type error!&quot;);
-    return;
-  &#125;
-  var array = [];
-  for (var i = 0; i &lt; arr.length; i++) &#123;
-    if (!array.includes(arr[i])) &#123;
-      //includes 检测数组是否有某个值
-      array.push(arr[i]);
-    &#125;
-  &#125;
-  return array;
-&#125;
-var arr = [
-  1,
-  1,
-  &quot;true&quot;,
-  &quot;true&quot;,
-  true,
-  true,
-  15,
-  15,
-  false,
-  false,
-  undefined,
-  undefined,
-  null,
-  null,
-  NaN,
-  NaN,
-  &quot;NaN&quot;,
-  0,
-  0,
-  &quot;a&quot;,
-  &quot;a&quot;,
-  &#123;&#125;,
-  &#123;&#125;,
-];
-console.log(unique(arr));
-//[1, &quot;true&quot;, true, 15, false, undefined, null, NaN, &quot;NaN&quot;, 0, &quot;a&quot;, &#123;…&#125;, &#123;…&#125;]     //&#123;&#125;没有去重
-</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">unique</span>(<span class="hljs-params">arr</span>) </span>&#123;<br>  <span class="hljs-keyword">if</span> (!<span class="hljs-built_in">Array</span>.isArray(arr)) &#123;<br>    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;type error!&quot;</span>);<br>    <span class="hljs-keyword">return</span>;<br>  &#125;<br>  <span class="hljs-keyword">var</span> array = [];<br>  <span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> i = <span class="hljs-number">0</span>; i &lt; arr.length; i++) &#123;<br>    <span class="hljs-keyword">if</span> (!array.includes(arr[i])) &#123;<br>      <span class="hljs-comment">//includes 检测数组是否有某个值</span><br>      array.push(arr[i]);<br>    &#125;<br>  &#125;<br>  <span class="hljs-keyword">return</span> array;<br>&#125;<br><span class="hljs-keyword">var</span> arr = [<br>  <span class="hljs-number">1</span>,<br>  <span class="hljs-number">1</span>,<br>  <span class="hljs-string">&quot;true&quot;</span>,<br>  <span class="hljs-string">&quot;true&quot;</span>,<br>  <span class="hljs-literal">true</span>,<br>  <span class="hljs-literal">true</span>,<br>  <span class="hljs-number">15</span>,<br>  <span class="hljs-number">15</span>,<br>  <span class="hljs-literal">false</span>,<br>  <span class="hljs-literal">false</span>,<br>  <span class="hljs-literal">undefined</span>,<br>  <span class="hljs-literal">undefined</span>,<br>  <span class="hljs-literal">null</span>,<br>  <span class="hljs-literal">null</span>,<br>  <span class="hljs-literal">NaN</span>,<br>  <span class="hljs-literal">NaN</span>,<br>  <span class="hljs-string">&quot;NaN&quot;</span>,<br>  <span class="hljs-number">0</span>,<br>  <span class="hljs-number">0</span>,<br>  <span class="hljs-string">&quot;a&quot;</span>,<br>  <span class="hljs-string">&quot;a&quot;</span>,<br>  &#123;&#125;,<br>  &#123;&#125;,<br>];<br><span class="hljs-built_in">console</span>.log(unique(arr));<br><span class="hljs-comment">//[1, &quot;true&quot;, true, 15, false, undefined, null, NaN, &quot;NaN&quot;, 0, &quot;a&quot;, &#123;…&#125;, &#123;…&#125;]     //&#123;&#125;没有去重</span><br></code></pre></td></tr></table></figure>
+
 <p>6、<strong>hasOwnProperty</strong>:利用 hasOwnProperty 判断是否存在对象属性</p>
-<pre><code class="js">function unique(arr) &#123;
-  var obj = &#123;&#125;;
-  return arr.filter(function (item, index, arr) &#123;
-    return obj.hasOwnProperty(typeof item + item)
-      ? false
-      : (obj[typeof item + item] = true);
-  &#125;);
-&#125;
-var arr = [
-  1,
-  1,
-  &quot;true&quot;,
-  &quot;true&quot;,
-  true,
-  true,
-  15,
-  15,
-  false,
-  false,
-  undefined,
-  undefined,
-  null,
-  null,
-  NaN,
-  NaN,
-  &quot;NaN&quot;,
-  0,
-  0,
-  &quot;a&quot;,
-  &quot;a&quot;,
-  &#123;&#125;,
-  &#123;&#125;,
-];
-console.log(unique(arr));
-//[1, &quot;true&quot;, true, 15, false, undefined, null, NaN, &quot;NaN&quot;, 0, &quot;a&quot;, &#123;…&#125;]   //所有的都去重了
-</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">unique</span>(<span class="hljs-params">arr</span>) </span>&#123;<br>  <span class="hljs-keyword">var</span> obj = &#123;&#125;;<br>  <span class="hljs-keyword">return</span> arr.filter(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">item, index, arr</span>) </span>&#123;<br>    <span class="hljs-keyword">return</span> obj.hasOwnProperty(<span class="hljs-keyword">typeof</span> item + item)<br>      ? <span class="hljs-literal">false</span><br>      : (obj[<span class="hljs-keyword">typeof</span> item + item] = <span class="hljs-literal">true</span>);<br>  &#125;);<br>&#125;<br><span class="hljs-keyword">var</span> arr = [<br>  <span class="hljs-number">1</span>,<br>  <span class="hljs-number">1</span>,<br>  <span class="hljs-string">&quot;true&quot;</span>,<br>  <span class="hljs-string">&quot;true&quot;</span>,<br>  <span class="hljs-literal">true</span>,<br>  <span class="hljs-literal">true</span>,<br>  <span class="hljs-number">15</span>,<br>  <span class="hljs-number">15</span>,<br>  <span class="hljs-literal">false</span>,<br>  <span class="hljs-literal">false</span>,<br>  <span class="hljs-literal">undefined</span>,<br>  <span class="hljs-literal">undefined</span>,<br>  <span class="hljs-literal">null</span>,<br>  <span class="hljs-literal">null</span>,<br>  <span class="hljs-literal">NaN</span>,<br>  <span class="hljs-literal">NaN</span>,<br>  <span class="hljs-string">&quot;NaN&quot;</span>,<br>  <span class="hljs-number">0</span>,<br>  <span class="hljs-number">0</span>,<br>  <span class="hljs-string">&quot;a&quot;</span>,<br>  <span class="hljs-string">&quot;a&quot;</span>,<br>  &#123;&#125;,<br>  &#123;&#125;,<br>];<br><span class="hljs-built_in">console</span>.log(unique(arr));<br><span class="hljs-comment">//[1, &quot;true&quot;, true, 15, false, undefined, null, NaN, &quot;NaN&quot;, 0, &quot;a&quot;, &#123;…&#125;]   //所有的都去重了</span><br></code></pre></td></tr></table></figure>
+
 <p>7、filter</p>
-<pre><code class="js">function unique(arr) &#123;
-  return arr.filter(function (item, index, arr) &#123;
-    //当前元素，在原始数组中的第一个索引==当前索引值，否则返回当前元素
-    return arr.indexOf(item, 0) === index;
-  &#125;);
-&#125;
-var arr = [
-  1,
-  1,
-  &quot;true&quot;,
-  &quot;true&quot;,
-  true,
-  true,
-  15,
-  15,
-  false,
-  false,
-  undefined,
-  undefined,
-  null,
-  null,
-  NaN,
-  NaN,
-  &quot;NaN&quot;,
-  0,
-  0,
-  &quot;a&quot;,
-  &quot;a&quot;,
-  &#123;&#125;,
-  &#123;&#125;,
-];
-console.log(unique(arr));
-//[1, &quot;true&quot;, true, 15, false, undefined, null, &quot;NaN&quot;, 0, &quot;a&quot;, &#123;…&#125;, &#123;…&#125;]
-</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">unique</span>(<span class="hljs-params">arr</span>) </span>&#123;<br>  <span class="hljs-keyword">return</span> arr.filter(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">item, index, arr</span>) </span>&#123;<br>    <span class="hljs-comment">//当前元素，在原始数组中的第一个索引==当前索引值，否则返回当前元素</span><br>    <span class="hljs-keyword">return</span> arr.indexOf(item, <span class="hljs-number">0</span>) === index;<br>  &#125;);<br>&#125;<br><span class="hljs-keyword">var</span> arr = [<br>  <span class="hljs-number">1</span>,<br>  <span class="hljs-number">1</span>,<br>  <span class="hljs-string">&quot;true&quot;</span>,<br>  <span class="hljs-string">&quot;true&quot;</span>,<br>  <span class="hljs-literal">true</span>,<br>  <span class="hljs-literal">true</span>,<br>  <span class="hljs-number">15</span>,<br>  <span class="hljs-number">15</span>,<br>  <span class="hljs-literal">false</span>,<br>  <span class="hljs-literal">false</span>,<br>  <span class="hljs-literal">undefined</span>,<br>  <span class="hljs-literal">undefined</span>,<br>  <span class="hljs-literal">null</span>,<br>  <span class="hljs-literal">null</span>,<br>  <span class="hljs-literal">NaN</span>,<br>  <span class="hljs-literal">NaN</span>,<br>  <span class="hljs-string">&quot;NaN&quot;</span>,<br>  <span class="hljs-number">0</span>,<br>  <span class="hljs-number">0</span>,<br>  <span class="hljs-string">&quot;a&quot;</span>,<br>  <span class="hljs-string">&quot;a&quot;</span>,<br>  &#123;&#125;,<br>  &#123;&#125;,<br>];<br><span class="hljs-built_in">console</span>.log(unique(arr));<br><span class="hljs-comment">//[1, &quot;true&quot;, true, 15, false, undefined, null, &quot;NaN&quot;, 0, &quot;a&quot;, &#123;…&#125;, &#123;…&#125;]</span><br></code></pre></td></tr></table></figure>
+
 <p>8、递归去重</p>
-<pre><code class="js">function unique(arr) &#123;
-  var array = arr;
-  var len = array.length;
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">unique</span>(<span class="hljs-params">arr</span>) </span>&#123;<br>  <span class="hljs-keyword">var</span> array = arr;<br>  <span class="hljs-keyword">var</span> len = array.length;<br><br>  array.sort(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">a, b</span>) </span>&#123;<br>    <span class="hljs-comment">//排序后更加方便去重</span><br>    <span class="hljs-keyword">return</span> a - b;<br>  &#125;);<br><br>  <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">loop</span>(<span class="hljs-params">index</span>) </span>&#123;<br>    <span class="hljs-keyword">if</span> (index &gt;= <span class="hljs-number">1</span>) &#123;<br>      <span class="hljs-keyword">if</span> (array[index] === array[index - <span class="hljs-number">1</span>]) &#123;<br>        array.splice(index, <span class="hljs-number">1</span>);<br>      &#125;<br>      loop(index - <span class="hljs-number">1</span>); <span class="hljs-comment">//递归loop，然后数组去重</span><br>    &#125;<br>  &#125;<br>  loop(len - <span class="hljs-number">1</span>);<br>  <span class="hljs-keyword">return</span> array;<br>&#125;<br><span class="hljs-keyword">var</span> arr = [<br>  <span class="hljs-number">1</span>,<br>  <span class="hljs-number">1</span>,<br>  <span class="hljs-string">&quot;true&quot;</span>,<br>  <span class="hljs-string">&quot;true&quot;</span>,<br>  <span class="hljs-literal">true</span>,<br>  <span class="hljs-literal">true</span>,<br>  <span class="hljs-number">15</span>,<br>  <span class="hljs-number">15</span>,<br>  <span class="hljs-literal">false</span>,<br>  <span class="hljs-literal">false</span>,<br>  <span class="hljs-literal">undefined</span>,<br>  <span class="hljs-literal">undefined</span>,<br>  <span class="hljs-literal">null</span>,<br>  <span class="hljs-literal">null</span>,<br>  <span class="hljs-literal">NaN</span>,<br>  <span class="hljs-literal">NaN</span>,<br>  <span class="hljs-string">&quot;NaN&quot;</span>,<br>  <span class="hljs-number">0</span>,<br>  <span class="hljs-number">0</span>,<br>  <span class="hljs-string">&quot;a&quot;</span>,<br>  <span class="hljs-string">&quot;a&quot;</span>,<br>  &#123;&#125;,<br>  &#123;&#125;,<br>];<br><span class="hljs-built_in">console</span>.log(unique(arr));<br><span class="hljs-comment">//[1, &quot;a&quot;, &quot;true&quot;, true, 15, false, 1, &#123;…&#125;, null, NaN, NaN, &quot;NaN&quot;, 0, &quot;a&quot;, &#123;…&#125;, undefined]</span><br></code></pre></td></tr></table></figure>
 
-  array.sort(function (a, b) &#123;
-    //排序后更加方便去重
-    return a - b;
-  &#125;);
-
-  function loop(index) &#123;
-    if (index &gt;= 1) &#123;
-      if (array[index] === array[index - 1]) &#123;
-        array.splice(index, 1);
-      &#125;
-      loop(index - 1); //递归loop，然后数组去重
-    &#125;
-  &#125;
-  loop(len - 1);
-  return array;
-&#125;
-var arr = [
-  1,
-  1,
-  &quot;true&quot;,
-  &quot;true&quot;,
-  true,
-  true,
-  15,
-  15,
-  false,
-  false,
-  undefined,
-  undefined,
-  null,
-  null,
-  NaN,
-  NaN,
-  &quot;NaN&quot;,
-  0,
-  0,
-  &quot;a&quot;,
-  &quot;a&quot;,
-  &#123;&#125;,
-  &#123;&#125;,
-];
-console.log(unique(arr));
-//[1, &quot;a&quot;, &quot;true&quot;, true, 15, false, 1, &#123;…&#125;, null, NaN, NaN, &quot;NaN&quot;, 0, &quot;a&quot;, &#123;…&#125;, undefined]
-</code></pre>
 <p>9、Map 数据结构去重</p>
 <blockquote>
 <p>创建一个空 Map 数据结构，遍历需要去重的数组，把数组的每一个元素作为 key 存到 Map 中。由于 Map 中不会出现相同的 key 值，所以最终得到的就是去重后的结果。</p>
 </blockquote>
-<pre><code class="js">function arrayNonRepeatfy(arr) &#123;
-  let map = new Map();
-  let array = new Array(); // 数组用于返回结果
-  for (let i = 0; i &lt; arr.length; i++) &#123;
-    if (map.has(arr[i])) &#123;
-      // 如果有该key值
-      map.set(arr[i], true);
-    &#125; else &#123;
-      map.set(arr[i], false); // 如果没有该key值
-      array.push(arr[i]);
-    &#125;
-  &#125;
-  return array;
-&#125;
-var arr = [
-  1,
-  1,
-  &quot;true&quot;,
-  &quot;true&quot;,
-  true,
-  true,
-  15,
-  15,
-  false,
-  false,
-  undefined,
-  undefined,
-  null,
-  null,
-  NaN,
-  NaN,
-  &quot;NaN&quot;,
-  0,
-  0,
-  &quot;a&quot;,
-  &quot;a&quot;,
-  &#123;&#125;,
-  &#123;&#125;,
-];
-console.log(unique(arr));
-//[1, &quot;a&quot;, &quot;true&quot;, true, 15, false, 1, &#123;…&#125;, null, NaN, NaN, &quot;NaN&quot;, 0, &quot;a&quot;, &#123;…&#125;, undefined]
-</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">arrayNonRepeatfy</span>(<span class="hljs-params">arr</span>) </span>&#123;<br>  <span class="hljs-keyword">let</span> map = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Map</span>();<br>  <span class="hljs-keyword">let</span> array = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Array</span>(); <span class="hljs-comment">// 数组用于返回结果</span><br>  <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; arr.length; i++) &#123;<br>    <span class="hljs-keyword">if</span> (map.has(arr[i])) &#123;<br>      <span class="hljs-comment">// 如果有该key值</span><br>      map.set(arr[i], <span class="hljs-literal">true</span>);<br>    &#125; <span class="hljs-keyword">else</span> &#123;<br>      map.set(arr[i], <span class="hljs-literal">false</span>); <span class="hljs-comment">// 如果没有该key值</span><br>      array.push(arr[i]);<br>    &#125;<br>  &#125;<br>  <span class="hljs-keyword">return</span> array;<br>&#125;<br><span class="hljs-keyword">var</span> arr = [<br>  <span class="hljs-number">1</span>,<br>  <span class="hljs-number">1</span>,<br>  <span class="hljs-string">&quot;true&quot;</span>,<br>  <span class="hljs-string">&quot;true&quot;</span>,<br>  <span class="hljs-literal">true</span>,<br>  <span class="hljs-literal">true</span>,<br>  <span class="hljs-number">15</span>,<br>  <span class="hljs-number">15</span>,<br>  <span class="hljs-literal">false</span>,<br>  <span class="hljs-literal">false</span>,<br>  <span class="hljs-literal">undefined</span>,<br>  <span class="hljs-literal">undefined</span>,<br>  <span class="hljs-literal">null</span>,<br>  <span class="hljs-literal">null</span>,<br>  <span class="hljs-literal">NaN</span>,<br>  <span class="hljs-literal">NaN</span>,<br>  <span class="hljs-string">&quot;NaN&quot;</span>,<br>  <span class="hljs-number">0</span>,<br>  <span class="hljs-number">0</span>,<br>  <span class="hljs-string">&quot;a&quot;</span>,<br>  <span class="hljs-string">&quot;a&quot;</span>,<br>  &#123;&#125;,<br>  &#123;&#125;,<br>];<br><span class="hljs-built_in">console</span>.log(unique(arr));<br><span class="hljs-comment">//[1, &quot;a&quot;, &quot;true&quot;, true, 15, false, 1, &#123;…&#125;, null, NaN, NaN, &quot;NaN&quot;, 0, &quot;a&quot;, &#123;…&#125;, undefined]</span><br></code></pre></td></tr></table></figure>
+
 <p>10、<strong>利用 reduce+includes</strong></p>
-<pre><code class="js">function unique(arr) &#123;
-  return arr.reduce(
-    (prev, cur) =&gt; (prev.includes(cur) ? prev : [...prev, cur]),
-    []
-  );
-&#125;
-var arr = [
-  1,
-  1,
-  &quot;true&quot;,
-  &quot;true&quot;,
-  true,
-  true,
-  15,
-  15,
-  false,
-  false,
-  undefined,
-  undefined,
-  null,
-  null,
-  NaN,
-  NaN,
-  &quot;NaN&quot;,
-  0,
-  0,
-  &quot;a&quot;,
-  &quot;a&quot;,
-  &#123;&#125;,
-  &#123;&#125;,
-];
-console.log(unique(arr));
-// [1, &quot;true&quot;, true, 15, false, undefined, null, NaN, &quot;NaN&quot;, 0, &quot;a&quot;, &#123;…&#125;, &#123;…&#125;]
-</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">unique</span>(<span class="hljs-params">arr</span>) </span>&#123;<br>  <span class="hljs-keyword">return</span> arr.reduce(<br>    <span class="hljs-function">(<span class="hljs-params">prev, cur</span>) =&gt;</span> (prev.includes(cur) ? prev : [...prev, cur]),<br>    []<br>  );<br>&#125;<br><span class="hljs-keyword">var</span> arr = [<br>  <span class="hljs-number">1</span>,<br>  <span class="hljs-number">1</span>,<br>  <span class="hljs-string">&quot;true&quot;</span>,<br>  <span class="hljs-string">&quot;true&quot;</span>,<br>  <span class="hljs-literal">true</span>,<br>  <span class="hljs-literal">true</span>,<br>  <span class="hljs-number">15</span>,<br>  <span class="hljs-number">15</span>,<br>  <span class="hljs-literal">false</span>,<br>  <span class="hljs-literal">false</span>,<br>  <span class="hljs-literal">undefined</span>,<br>  <span class="hljs-literal">undefined</span>,<br>  <span class="hljs-literal">null</span>,<br>  <span class="hljs-literal">null</span>,<br>  <span class="hljs-literal">NaN</span>,<br>  <span class="hljs-literal">NaN</span>,<br>  <span class="hljs-string">&quot;NaN&quot;</span>,<br>  <span class="hljs-number">0</span>,<br>  <span class="hljs-number">0</span>,<br>  <span class="hljs-string">&quot;a&quot;</span>,<br>  <span class="hljs-string">&quot;a&quot;</span>,<br>  &#123;&#125;,<br>  &#123;&#125;,<br>];<br><span class="hljs-built_in">console</span>.log(unique(arr));<br><span class="hljs-comment">// [1, &quot;true&quot;, true, 15, false, undefined, null, NaN, &quot;NaN&quot;, 0, &quot;a&quot;, &#123;…&#125;, &#123;…&#125;]</span><br></code></pre></td></tr></table></figure>
+
 <p>null 和 undefined 的区别</p>
 <blockquote>
 <p>undefined 表示一个变量自然的、最原始的状态值，而 null 则表示一个变量被人为的设置为空对象，而不是原始状态。所以，在实际使用过程中，为了保证变量所代表的语义，不要对一个变量显式的赋值 undefined，当需要释放一个对象时，直接赋值为 null 即可。</p>
@@ -544,33 +169,8 @@ console.log(unique(arr));
 <p>// 转换后的数组长度由 length 属性决定。索引不连续时转换结果是连续的，会自动补位。</p>
 </blockquote>
 <p>数组转树</p>
-<pre><code class="js">function arrayToTree(array) &#123;
-  let root = array[0];
-  array.shift();
-  let tree = &#123;
-    id: root.id,
-    val: root.val,
-    children: array.length &gt; 0 ? toTree(root.id, array) : [],
-  &#125;;
-  return tree;
-&#125;
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">arrayToTree</span>(<span class="hljs-params">array</span>) </span>&#123;<br>  <span class="hljs-keyword">let</span> root = array[<span class="hljs-number">0</span>];<br>  array.shift();<br>  <span class="hljs-keyword">let</span> tree = &#123;<br>    <span class="hljs-attr">id</span>: root.id,<br>    <span class="hljs-attr">val</span>: root.val,<br>    <span class="hljs-attr">children</span>: array.length &gt; <span class="hljs-number">0</span> ? toTree(root.id, array) : [],<br>  &#125;;<br>  <span class="hljs-keyword">return</span> tree;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">toTree</span>(<span class="hljs-params">parenId, array</span>) </span>&#123;<br>  <span class="hljs-keyword">let</span> children = [];<br>  <span class="hljs-keyword">let</span> len = array.length;<br>  <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; len; i++) &#123;<br>    <span class="hljs-keyword">let</span> node = array[i];<br>    <span class="hljs-keyword">if</span> (node.parentId === parenId) &#123;<br>      children.push(&#123;<br>        <span class="hljs-attr">id</span>: node.id,<br>        <span class="hljs-attr">val</span>: node.val,<br>        <span class="hljs-attr">children</span>: toTree(node.id, array),<br>      &#125;);<br>    &#125;<br>  &#125;<br>  <span class="hljs-keyword">return</span> children;<br>&#125;<br></code></pre></td></tr></table></figure>
 
-function toTree(parenId, array) &#123;
-  let children = [];
-  let len = array.length;
-  for (let i = 0; i &lt; len; i++) &#123;
-    let node = array[i];
-    if (node.parentId === parenId) &#123;
-      children.push(&#123;
-        id: node.id,
-        val: node.val,
-        children: toTree(node.id, array),
-      &#125;);
-    &#125;
-  &#125;
-  return children;
-&#125;
-</code></pre>
 <h4 id="Set、Map、WeakSet-和-WeakMap-的区别"><a href="#Set、Map、WeakSet-和-WeakMap-的区别" class="headerlink" title="Set、Map、WeakSet 和 WeakMap 的区别"></a>Set、Map、WeakSet 和 WeakMap 的区别</h4><blockquote>
 <p><strong>Set</strong></p>
 <ol>
@@ -628,16 +228,8 @@ function toTree(parenId, array) &#123;
 </ol>
 </blockquote>
 <p>js 实现 sleep</p>
-<pre><code class="js">function sleep(time) &#123;
-  return new Promise((resolve) =&gt; setTimeout(resolve, time));
-&#125;
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">sleep</span>(<span class="hljs-params">time</span>) </span>&#123;<br>  <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Promise</span>(<span class="hljs-function">(<span class="hljs-params">resolve</span>) =&gt;</span> <span class="hljs-built_in">setTimeout</span>(resolve, time));<br>&#125;<br><br><span class="hljs-keyword">const</span> t1 = +<span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>();<br>sleep(<span class="hljs-number">3000</span>).then(<span class="hljs-function">() =&gt;</span> &#123;<br>  <span class="hljs-keyword">const</span> t2 = +<span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>();<br>  <span class="hljs-built_in">console</span>.log(t2 - t1);<br>&#125;);<br></code></pre></td></tr></table></figure>
 
-const t1 = +new Date();
-sleep(3000).then(() =&gt; &#123;
-  const t2 = +new Date();
-  console.log(t2 - t1);
-&#125;);
-</code></pre>
 <blockquote>
 <p>优点：这种方式实际上是用了 setTimeout，没有形成进程阻塞，不会造成性能和负载问题。</p>
 <p>缺点：虽然不像 callback 套那么多层，但仍不怎么美观，而且当我们需要在某过程中需要停止执行（或者在中途返回了错误的值），还必须得层层判断后跳出，非常麻烦，而且这种异步并不是那么彻底，还是看起来别扭</p>
@@ -658,46 +250,18 @@ sleep(3000).then(() =&gt; &#123;
 <p>执行顺序为，首先执行宏任务队列开头的任务，也就是 A1 任务，执行完毕后，在执行微任务队列里的所有任务，也就是依次执行 B1, B2 , B3，执行完后清空微任务队中的任务，接着执行宏任务中的第二个任务 A2，依次循环。</p>
 <p>宏任务 Macrotask 队列真实包含任务：</p>
 <blockquote>
-<pre><code>script(主程序代码),setTimeout, setInterval, setImmediate, I/O, UI rendering
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">script(主程序代码),setTimeout, setInterval, setImmediate, I/O, UI rendering<br></code></pre></td></tr></table></figure>
 </blockquote>
 <p>微任务 Microtask 队列真实包含任务:</p>
 <blockquote>
-<pre><code>process.nextTick, Promises, Object.observe, MutationObserver
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">process.nextTick, Promises, Object.observe, MutationObserver<br></code></pre></td></tr></table></figure>
 </blockquote>
 <p>执行顺序：</p>
 <blockquote>
-<pre><code>script(主程序代码)—&gt;process.nextTick—&gt;Promises...——&gt;setTimeout——&gt;setInterval——&gt;setImmediate——&gt; I/O——&gt;UI rendering
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">script(主程序代码)—&gt;process.nextTick—&gt;Promises...——&gt;setTimeout——&gt;setInterval——&gt;setImmediate——&gt; I/O——&gt;UI rendering<br></code></pre></td></tr></table></figure>
 </blockquote>
 <p>示例：</p>
-<pre><code class="js">console.time(&quot;start&quot;);
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-built_in">console</span>.time(<span class="hljs-string">&quot;start&quot;</span>);<br><br><span class="hljs-built_in">setTimeout</span>(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;<br>  <span class="hljs-built_in">console</span>.log(<span class="hljs-number">2</span>);<br>&#125;, <span class="hljs-number">10</span>);<br><br>setImmediate(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;<br>  <span class="hljs-built_in">console</span>.log(<span class="hljs-number">1</span>);<br>&#125;);<br><br><span class="hljs-keyword">new</span> <span class="hljs-built_in">Promise</span>(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">resolve</span>) </span>&#123;<br>  <span class="hljs-built_in">console</span>.log(<span class="hljs-number">3</span>);<br>  resolve();<br>  <span class="hljs-built_in">console</span>.log(<span class="hljs-number">4</span>);<br>&#125;).then(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;<br>  <span class="hljs-built_in">console</span>.log(<span class="hljs-number">5</span>);<br>  <span class="hljs-built_in">console</span>.timeEnd(<span class="hljs-string">&quot;start&quot;</span>);<br>&#125;);<br><br><span class="hljs-built_in">console</span>.log(<span class="hljs-number">6</span>);<br><br>process.nextTick(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;<br>  <span class="hljs-built_in">console</span>.log(<span class="hljs-number">7</span>);<br>&#125;);<br><br><span class="hljs-built_in">console</span>.log(<span class="hljs-number">8</span>);<br></code></pre></td></tr></table></figure>
 
-setTimeout(function () &#123;
-  console.log(2);
-&#125;, 10);
-
-setImmediate(function () &#123;
-  console.log(1);
-&#125;);
-
-new Promise(function (resolve) &#123;
-  console.log(3);
-  resolve();
-  console.log(4);
-&#125;).then(function () &#123;
-  console.log(5);
-  console.timeEnd(&quot;start&quot;);
-&#125;);
-
-console.log(6);
-
-process.nextTick(function () &#123;
-  console.log(7);
-&#125;);
-
-console.log(8);
-</code></pre>
 <p>结果：3——&gt;4——&gt;6——&gt;8——&gt;7——&gt;5——&gt;start: XXXXms——&gt;1——&gt;2</p>
 </article><section class="jump-container is-flex is-justify-content-space-between my-6"><!-- em is empty placeholder--><a class="button is-default" href="/2021/04/28/time/" title="33、时间格式化"><i class="iconfont icon-prev mr-2 has-text-grey"></i><span class="has-text-weight-semibold">上一页: 33、时间格式化</span></a><a class="button is-default" href="/2021/03/23/back/" title="31、解决点击手机虚拟返回键退出应用"><span class="has-text-weight-semibold">下一页: 31、解决点击手机虚拟返回键退出应用</span><i class="iconfont icon-next ml-2 has-text-grey"></i></a></section></div></div></main></main><footer class="is-flex is-flex-direction-column is-align-items-center is-flex-shrink-0 is-family-serif"><section class="sns-container"><!-- Github--><a title="github" target="_blank" rel="noopener nofollow" href="//github.com/Jude"><i class="iconfont icon-github"></i></a><!-- Ins--><!-- RSS--><!-- 知乎--><a title="zhihu" target="_blank" rel="noopener nofollow" href="//zhihu.com/https://www.zhihu.com/hot"><i class="iconfont icon-zhihu"></i></a><!-- 领英--><!-- 脸书--></section><p><span>Copyright ©</span><span> Jude 2023</span></p><div class="is-flex is-justify-content-center is-flex-wrap-wrap"><p>Powered by Hexo &verbar;&nbsp;</p><p class="is-flex is-justify-content-center"><a title="Hexo theme author" target="_blank" rel="noopener" href="//github.com/haojen">Theme by Haojen&nbsp;</a></p><div style="margin-top: 2px"><a class="github-button" title="github-button" target="_blank" rel="noopener" href="https://github.com/haojen/hexo-theme-Claudia" data-color-scheme="no-preference: light; light: light; dark: dark;" data-show-count="true"></a></div></div><div><span>记住昨日的美好，过好今日的生活，憧憬明天的到来</span></div></footer><script async defer src="https://buttons.github.io/buttons.js"></script><script src="/js/post.js"></script></body></html>

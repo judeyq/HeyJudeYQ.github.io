@@ -31,20 +31,8 @@
 <p>然后将这些数据，提交给服务端进行处理，然后存储到数据库，完事。</p>
 <h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><p>上述需求整理清楚之后，我们开始本章节的制作环节。</p>
 <h4 id="弹窗组件实现"><a href="#弹窗组件实现" class="headerlink" title="弹窗组件实现"></a>弹窗组件实现</h4><p>先实现点击新增按钮，调出弹窗的功能。首先，在 <code>Home/index.jsx</code> 文件中添加 「新增按钮」，如下所示：</p>
-<pre><code class="js">import CustomIcon from &#39;@/components/CustomIcon&#39;
-...
-const Home = () =&gt; &#123;
-  ...
-  const addToggle = () =&gt; &#123;
-    // do something
-  &#125;
-  ...
-  return &lt;div className=&#123;s.home&#125;&gt;
-    ...
-    &lt;div className=&#123;s.add&#125; onClick=&#123;addToggle&#125;&gt;&lt;CustomIcon type=&#39;tianjia&#39; /&gt;&lt;/div&gt;
-  &lt;/div&gt;
-&#125;
-</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">import</span> CustomIcon <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@/components/CustomIcon&#x27;</span><br>...<br><span class="hljs-keyword">const</span> Home = <span class="hljs-function">() =&gt;</span> &#123;<br>  ...<br>  <span class="hljs-keyword">const</span> addToggle = <span class="hljs-function">() =&gt;</span> &#123;<br>    <span class="hljs-comment">// do something</span><br>  &#125;<br>  ...<br>  <span class="hljs-keyword">return</span> <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&#123;s.home&#125;</span>&gt;</span></span><br><span class="xml">    ...</span><br><span class="xml">    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&#123;s.add&#125;</span> <span class="hljs-attr">onClick</span>=<span class="hljs-string">&#123;addToggle&#125;</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">CustomIcon</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&#x27;tianjia&#x27;</span> /&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span><br><span class="xml">  <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span><br>&#125;<br></code></pre></td></tr></table></figure>
+
 <blockquote>
 <p>文末已为同学们提供下本章节 demo 代码，样式部分不再详细说明。</p>
 </blockquote>
@@ -52,193 +40,36 @@ const Home = () =&gt; &#123;
 <p>重启项目之后，刷新浏览器，如下所示：</p>
 <p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/acf8cf59aeed4061b36a5b7359fb42b9~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp" alt="img"></p>
 <p>根据之前实现的弹窗组件，我们再实现一套类似的，在弹窗内控制弹窗组件的显示隐藏，在 <code>components</code> 下新建 <code>PopupAddBill</code> 文件夹，再新建 <code>index.jsx</code> 和 <code>style.module.less</code>，代码如下：</p>
-<pre><code class="js">// PopupAddBill/index.jsx
-import React, &#123; forwardRef, useEffect, useRef, useState &#125; from &quot;react&quot;;
-import PropTypes from &quot;prop-types&quot;;
-import &#123; Popup &#125; from &quot;zarm&quot;;
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-comment">// PopupAddBill/index.jsx</span><br><span class="hljs-keyword">import</span> React, &#123; forwardRef, useEffect, useRef, useState &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;react&quot;</span>;<br><span class="hljs-keyword">import</span> PropTypes <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;prop-types&quot;</span>;<br><span class="hljs-keyword">import</span> &#123; Popup &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;zarm&quot;</span>;<br><br><span class="hljs-keyword">const</span> PopupAddBill = forwardRef(<span class="hljs-function">(<span class="hljs-params">props, ref</span>) =&gt;</span> &#123;<br>  <span class="hljs-keyword">const</span> [show, setShow] = useState(<span class="hljs-literal">false</span>); <span class="hljs-comment">// 内部控制弹窗显示隐藏。</span><br>  <span class="hljs-comment">// 通过 forwardRef 拿到外部传入的 ref，并添加属性，使得父组件可以通过 ref 控制子组件。</span><br>  <span class="hljs-keyword">if</span> (ref) &#123;<br>    ref.current = &#123;<br>      <span class="hljs-attr">show</span>: <span class="hljs-function">() =&gt;</span> &#123;<br>        setShow(<span class="hljs-literal">true</span>);<br>      &#125;,<br>      <span class="hljs-attr">close</span>: <span class="hljs-function">() =&gt;</span> &#123;<br>        setShow(<span class="hljs-literal">false</span>);<br>      &#125;,<br>    &#125;;<br>  &#125;<br><br>  <span class="hljs-keyword">return</span> (<br>    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">Popup</span></span></span><br><span class="hljs-tag"><span class="xml">      <span class="hljs-attr">visible</span>=<span class="hljs-string">&#123;show&#125;</span></span></span><br><span class="hljs-tag"><span class="xml">      <span class="hljs-attr">direction</span>=<span class="hljs-string">&quot;bottom&quot;</span></span></span><br><span class="hljs-tag"><span class="xml">      <span class="hljs-attr">onMaskClick</span>=<span class="hljs-string">&#123;()</span> =&gt;</span> setShow(false)&#125;</span><br><span class="xml">      destroy=&#123;false&#125;</span><br><span class="xml">      mountContainer=&#123;() =&gt; document.body&#125;</span><br><span class="xml">    &gt;</span><br><span class="xml">      <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">style</span>=<span class="hljs-string">&#123;&#123;</span> <span class="hljs-attr">height:</span> <span class="hljs-attr">200</span>, <span class="hljs-attr">background:</span> &quot;#<span class="hljs-attr">fff</span>&quot; &#125;&#125;&gt;</span>弹窗<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span><br><span class="xml">    <span class="hljs-tag">&lt;/<span class="hljs-name">Popup</span>&gt;</span></span><br>  );<br>&#125;);<br><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> PopupAddBill;<br></code></pre></td></tr></table></figure>
 
-const PopupAddBill = forwardRef((props, ref) =&gt; &#123;
-  const [show, setShow] = useState(false); // 内部控制弹窗显示隐藏。
-  // 通过 forwardRef 拿到外部传入的 ref，并添加属性，使得父组件可以通过 ref 控制子组件。
-  if (ref) &#123;
-    ref.current = &#123;
-      show: () =&gt; &#123;
-        setShow(true);
-      &#125;,
-      close: () =&gt; &#123;
-        setShow(false);
-      &#125;,
-    &#125;;
-  &#125;
-
-  return (
-    &lt;Popup
-      visible=&#123;show&#125;
-      direction=&quot;bottom&quot;
-      onMaskClick=&#123;() =&gt; setShow(false)&#125;
-      destroy=&#123;false&#125;
-      mountContainer=&#123;() =&gt; document.body&#125;
-    &gt;
-      &lt;div style=&#123;&#123; height: 200, background: "#fff" &#125;&#125;&gt;弹窗&lt;/div&gt;
-    &lt;/Popup&gt;
-  );
-&#125;);
-
-export default PopupAddBill;
-</code></pre>
 <p>写完弹窗组件，当然就得去 <code>Home/index.jsx</code> 中调用：</p>
-<pre><code class="js">// Home/index.jsx
-import PopupAddBill from &#39;@/components/PopupAddBill&#39;
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-comment">// Home/index.jsx</span><br><span class="hljs-keyword">import</span> PopupAddBill <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@/components/PopupAddBill&#x27;</span><br><br><span class="hljs-keyword">const</span> Home = <span class="hljs-function">() =&gt;</span> &#123;<br>  ...<br>  <span class="hljs-keyword">const</span> addRef = useRef(); <span class="hljs-comment">// 添加账单 ref</span><br>  ...<br>  <span class="hljs-comment">// 添加账单弹窗</span><br>  <span class="hljs-keyword">const</span> addToggle = <span class="hljs-function">() =&gt;</span> &#123;<br>    addRef.current &amp;&amp; addRef.current.show()<br>  &#125;<br><br>  <span class="hljs-keyword">return</span> <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&#123;s.home&#125;</span>&gt;</span></span><br><span class="xml">    ...</span><br><span class="xml">    <span class="hljs-tag">&lt;<span class="hljs-name">PopupAddBill</span> <span class="hljs-attr">ref</span>=<span class="hljs-string">&#123;addRef&#125;</span> /&gt;</span></span><br><span class="xml">  <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span><br>&#125;<br></code></pre></td></tr></table></figure>
 
-const Home = () =&gt; &#123;
-  ...
-  const addRef = useRef(); // 添加账单 ref
-  ...
-  // 添加账单弹窗
-  const addToggle = () =&gt; &#123;
-    addRef.current &amp;&amp; addRef.current.show()
-  &#125;
-
-  return &lt;div className=&#123;s.home&#125;&gt;
-    ...
-    &lt;PopupAddBill ref=&#123;addRef&#125; /&gt;
-  &lt;/div&gt;
-&#125;
-</code></pre>
 <p>重启浏览器，效果如下：</p>
 <p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/7025a89978114333bdf7cbdb20139482~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp" alt="img"></p>
 <p>此时我们的“地基”已经打好了，接下来我们要在这个基础上给新增账单弹窗“添砖加瓦”。</p>
 <h4 id="账单类型和账单时间"><a href="#账单类型和账单时间" class="headerlink" title="账单类型和账单时间"></a>账单类型和账单时间</h4><p>我们先实现弹窗头部左侧的「支出」和「收入」账单类型切换功能，添加代码如下：</p>
-<pre><code class="js">// components/PopupAddBill/index.jsx
-...
-import cx from &#39;classnames&#39;;
-import &#123; Popup, Icon  &#125; from &#39;zarm&#39;;
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-comment">// components/PopupAddBill/index.jsx</span><br>...<br><span class="hljs-keyword">import</span> cx <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;classnames&#x27;</span>;<br><span class="hljs-keyword">import</span> &#123; Popup, Icon  &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;zarm&#x27;</span>;<br><br><span class="hljs-keyword">import</span> s <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./style.module.less&#x27;</span>;<br><br><span class="hljs-keyword">const</span> PopupAddBill = forwardRef(<span class="hljs-function">(<span class="hljs-params">props, ref</span>) =&gt;</span> &#123;<br>  ...<br>  <span class="hljs-keyword">const</span> [payType, setPayType] = useState(<span class="hljs-string">&#x27;expense&#x27;</span>); <span class="hljs-comment">// 支出或收入类型</span><br>  ...<br>  <span class="hljs-comment">// 切换收入还是支出</span><br>  <span class="hljs-keyword">const</span> changeType = <span class="hljs-function">(<span class="hljs-params">type</span>) =&gt;</span> &#123;<br>    setPayType(type);<br>  &#125;;<br><br>  <span class="hljs-keyword">return</span> <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">Popup</span></span></span><br><span class="hljs-tag"><span class="xml">    <span class="hljs-attr">visible</span>=<span class="hljs-string">&#123;show&#125;</span></span></span><br><span class="hljs-tag"><span class="xml">    <span class="hljs-attr">direction</span>=<span class="hljs-string">&quot;bottom&quot;</span></span></span><br><span class="hljs-tag"><span class="xml">    <span class="hljs-attr">onMaskClick</span>=<span class="hljs-string">&#123;()</span> =&gt;</span> setShow(false)&#125;</span><br><span class="xml">    destroy=&#123;false&#125;</span><br><span class="xml">    mountContainer=&#123;() =&gt; document.body&#125;</span><br><span class="xml">  &gt;</span><br><span class="xml">    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&#123;s.addWrap&#125;</span>&gt;</span></span><br><span class="xml">      &#123;/* 右上角关闭弹窗 */&#125;</span><br><span class="xml">      <span class="hljs-tag">&lt;<span class="hljs-name">header</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&#123;s.header&#125;</span>&gt;</span></span><br><span class="xml">        <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&#123;s.close&#125;</span> <span class="hljs-attr">onClick</span>=<span class="hljs-string">&#123;()</span> =&gt;</span> setShow(false)&#125;&gt;<span class="hljs-tag">&lt;<span class="hljs-name">Icon</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;wrong&quot;</span> /&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span></span><br><span class="xml">      <span class="hljs-tag">&lt;/<span class="hljs-name">header</span>&gt;</span></span><br><span class="xml">       &#123;/* 「收入」和「支出」类型切换 */&#125;</span><br><span class="xml">      <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&#123;s.filter&#125;</span>&gt;</span></span><br><span class="xml">        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&#123;s.type&#125;</span>&gt;</span></span><br><span class="xml">          <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">onClick</span>=<span class="hljs-string">&#123;()</span> =&gt;</span> changeType(&#x27;expense&#x27;)&#125; className=&#123;cx(&#123; [s.expense]: true, [s.active]: payType == &#x27;expense&#x27; &#125;)&#125;&gt;支出<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span></span><br><span class="xml">          <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">onClick</span>=<span class="hljs-string">&#123;()</span> =&gt;</span> changeType(&#x27;income&#x27;)&#125; className=&#123;cx(&#123; [s.income]: true, [s.active]: payType == &#x27;income&#x27; &#125;)&#125;&gt;收入<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span></span><br><span class="xml">        <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span><br><span class="xml">      <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span><br><span class="xml">    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span><br><span class="xml">  <span class="hljs-tag">&lt;/<span class="hljs-name">Popup</span>&gt;</span></span><br>&#125;)<br><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> PopupAddBill<br></code></pre></td></tr></table></figure>
 
-import s from &#39;./style.module.less&#39;;
-
-const PopupAddBill = forwardRef((props, ref) =&gt; &#123;
-  ...
-  const [payType, setPayType] = useState(&#39;expense&#39;); // 支出或收入类型
-  ...
-  // 切换收入还是支出
-  const changeType = (type) =&gt; &#123;
-    setPayType(type);
-  &#125;;
-
-  return &lt;Popup
-    visible=&#123;show&#125;
-    direction=&quot;bottom&quot;
-    onMaskClick=&#123;() =&gt; setShow(false)&#125;
-    destroy=&#123;false&#125;
-    mountContainer=&#123;() =&gt; document.body&#125;
-  &gt;
-    &lt;div className=&#123;s.addWrap&#125;&gt;
-      &#123;/* 右上角关闭弹窗 */&#125;
-      &lt;header className=&#123;s.header&#125;&gt;
-        &lt;span className=&#123;s.close&#125; onClick=&#123;() =&gt; setShow(false)&#125;&gt;&lt;Icon type=&quot;wrong&quot; /&gt;&lt;/span&gt;
-      &lt;/header&gt;
-       &#123;/* 「收入」和「支出」类型切换 */&#125;
-      &lt;div className=&#123;s.filter&#125;&gt;
-        &lt;div className=&#123;s.type&#125;&gt;
-          &lt;span onClick=&#123;() =&gt; changeType(&#39;expense&#39;)&#125; className=&#123;cx(&#123; [s.expense]: true, [s.active]: payType == &#39;expense&#39; &#125;)&#125;&gt;支出&lt;/span&gt;
-          &lt;span onClick=&#123;() =&gt; changeType(&#39;income&#39;)&#125; className=&#123;cx(&#123; [s.income]: true, [s.active]: payType == &#39;income&#39; &#125;)&#125;&gt;收入&lt;/span&gt;
-        &lt;/div&gt;
-      &lt;/div&gt;
-    &lt;/div&gt;
-  &lt;/Popup&gt;
-&#125;)
-
-export default PopupAddBill
-</code></pre>
 <p>为了减少代码的重复，上述代码只展示了需要添加的部分，尽量不让大家混淆视听。</p>
 <p>我们定义 <code>expense</code> 为支出，<code>income</code> 为收入，代码中通过 <code>payType</code> 变量，来控制「收入」和「支出」按钮的切换。上述代码视图效果如下所示：</p>
 <p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/bd1f72d07dff4f69af0848e8d2f0696f~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp" alt="img"></p>
 <p>接下来在类型边上添加时间筛选弹窗，此时你将体会到之前提取时间筛选组件是多么的明智。我们继续添加代码：</p>
-<pre><code class="js">import React, &#123; forwardRef, useEffect, useRef, useState &#125; from &#39;react&#39;;
-...
-import dayjs from &#39;dayjs&#39;;
-import PopupDate from &#39;../PopupDate&#39;
-...
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">import</span> React, &#123; forwardRef, useEffect, useRef, useState &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;react&#x27;</span>;<br>...<br><span class="hljs-keyword">import</span> dayjs <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;dayjs&#x27;</span>;<br><span class="hljs-keyword">import</span> PopupDate <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;../PopupDate&#x27;</span><br>...<br><br><span class="hljs-keyword">const</span> PopupAddBill = forwardRef(<span class="hljs-function">(<span class="hljs-params">props, ref</span>) =&gt;</span> &#123;<br>  ...<br>  <span class="hljs-keyword">const</span> dateRef = useRef();<br>  <span class="hljs-keyword">const</span> [date, setDate] = useState(<span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>()); <span class="hljs-comment">// 日期</span><br>  ...<br>  <span class="hljs-comment">// 日期选择回调</span><br>  <span class="hljs-keyword">const</span> selectDate = <span class="hljs-function">(<span class="hljs-params">val</span>) =&gt;</span> &#123;<br>    setDate(val);<br>  &#125;<br><br>  <span class="hljs-keyword">return</span> <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">Popup</span></span></span><br><span class="hljs-tag"><span class="xml">    <span class="hljs-attr">visible</span>=<span class="hljs-string">&#123;show&#125;</span></span></span><br><span class="hljs-tag"><span class="xml">    <span class="hljs-attr">direction</span>=<span class="hljs-string">&quot;bottom&quot;</span></span></span><br><span class="hljs-tag"><span class="xml">    <span class="hljs-attr">onMaskClick</span>=<span class="hljs-string">&#123;()</span> =&gt;</span> setShow(false)&#125;</span><br><span class="xml">    destroy=&#123;false&#125;</span><br><span class="xml">    mountContainer=&#123;() =&gt; document.body&#125;</span><br><span class="xml">  &gt;</span><br><span class="xml">    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&#123;s.addWrap&#125;</span>&gt;</span></span><br><span class="xml">       &#123;/* 「收入」和「支出」类型切换 */&#125;</span><br><span class="xml">      <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&#123;s.filter&#125;</span>&gt;</span></span><br><span class="xml">        ...</span><br><span class="xml">        <span class="hljs-tag">&lt;<span class="hljs-name">div</span></span></span><br><span class="hljs-tag"><span class="xml">          <span class="hljs-attr">className</span>=<span class="hljs-string">&#123;s.time&#125;</span></span></span><br><span class="hljs-tag"><span class="xml">          <span class="hljs-attr">onClick</span>=<span class="hljs-string">&#123;()</span> =&gt;</span> dateRef.current &amp;&amp; dateRef.current.show()&#125;</span><br><span class="xml">        &gt;&#123;dayjs(date).format(&#x27;MM-DD&#x27;)&#125; <span class="hljs-tag">&lt;<span class="hljs-name">Icon</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&#123;s.arrow&#125;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;arrow-bottom&quot;</span> /&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span><br><span class="xml">      <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span><br><span class="xml">      <span class="hljs-tag">&lt;<span class="hljs-name">PopupDate</span> <span class="hljs-attr">ref</span>=<span class="hljs-string">&#123;dateRef&#125;</span> <span class="hljs-attr">onSelect</span>=<span class="hljs-string">&#123;selectDate&#125;</span> /&gt;</span></span><br><span class="xml">    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span><br><span class="xml">  <span class="hljs-tag">&lt;/<span class="hljs-name">Popup</span>&gt;</span></span><br>&#125;)<br><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> PopupAddBill<br></code></pre></td></tr></table></figure>
 
-const PopupAddBill = forwardRef((props, ref) =&gt; &#123;
-  ...
-  const dateRef = useRef();
-  const [date, setDate] = useState(new Date()); // 日期
-  ...
-  // 日期选择回调
-  const selectDate = (val) =&gt; &#123;
-    setDate(val);
-  &#125;
-
-  return &lt;Popup
-    visible=&#123;show&#125;
-    direction=&quot;bottom&quot;
-    onMaskClick=&#123;() =&gt; setShow(false)&#125;
-    destroy=&#123;false&#125;
-    mountContainer=&#123;() =&gt; document.body&#125;
-  &gt;
-    &lt;div className=&#123;s.addWrap&#125;&gt;
-       &#123;/* 「收入」和「支出」类型切换 */&#125;
-      &lt;div className=&#123;s.filter&#125;&gt;
-        ...
-        &lt;div
-          className=&#123;s.time&#125;
-          onClick=&#123;() =&gt; dateRef.current &amp;&amp; dateRef.current.show()&#125;
-        &gt;&#123;dayjs(date).format(&#39;MM-DD&#39;)&#125; &lt;Icon className=&#123;s.arrow&#125; type=&quot;arrow-bottom&quot; /&gt;&lt;/div&gt;
-      &lt;/div&gt;
-      &lt;PopupDate ref=&#123;dateRef&#125; onSelect=&#123;selectDate&#125; /&gt;
-    &lt;/div&gt;
-  &lt;/Popup&gt;
-&#125;)
-
-export default PopupAddBill
-</code></pre>
 <p>我们引入了公共组件 <code>PopupDate</code>，传入 <code>ref</code> 控制弹窗的显示隐藏，传入 <code>onSelect</code> 获取日期组件选择后回调的值，并通过 <code>setDate</code> 重制 <code>date</code>，触发视图的更新，我们来看浏览器展示效果如下：</p>
 <p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/ee3fa326b74f41ddb0d211e886ca5ccb~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp" alt="img"></p>
 <p>我们通过上述代码，已经创造出了两个值，分别是「账单类型」和「账单日期」，还差「账单金额」 「账单种类」、「备注」。</p>
 <h4 id="账单金额"><a href="#账单金额" class="headerlink" title="账单金额"></a>账单金额</h4><p>本章开头大家也应该看到了，金额输入框是模拟的，也就是说当下面模拟数字键盘点击的时候，我们将返回的数据渲染到进入输入框的位置，下面我们先将金额输入框搭建出来，添加代码如下：</p>
-<pre><code class="js">&lt;div className=&#123;s.money&#125;&gt;
-  &lt;span className=&#123;s.sufix&#125;&gt;¥&lt;/span&gt;
-  &lt;span className=&#123;cx(s.amount, s.animation)&#125;&gt;10&lt;/span&gt;
-&lt;/div&gt;
-</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs js">&lt;div className=&#123;s.money&#125;&gt;<br>  <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&#123;s.sufix&#125;</span>&gt;</span>¥<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span></span><br>  <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&#123;cx(s.amount,</span> <span class="hljs-attr">s.animation</span>)&#125;&gt;</span>10<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span></span><br>&lt;/div&gt;<br></code></pre></td></tr></table></figure>
+
 <blockquote>
 <p>文末已为同学们提供下本章节 demo 代码，样式部分不再详细说明。</p>
 </blockquote>
 <p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/15dc48f98c4f42eb9310619510603506~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp" alt="img"></p>
 <p>我们将金额动态化，引入 <code>Zarm</code> 为我们提供的模拟数字键盘组件 <code>Keyboard</code>，代码如下：</p>
-<pre><code class="js">...
-// 监听输入框改变值
-  const handleMoney = (value) =&gt; &#123;
-    value = String(value)
-    // 点击是删除按钮时
-    if (value == &#39;delete&#39;) &#123;
-      let _amount = amount.slice(0, amount.length - 1)
-      setAmount(_amount)
-      return
-    &#125;
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><code class="hljs js">...<br><span class="hljs-comment">// 监听输入框改变值</span><br>  <span class="hljs-keyword">const</span> handleMoney = <span class="hljs-function">(<span class="hljs-params">value</span>) =&gt;</span> &#123;<br>    value = <span class="hljs-built_in">String</span>(value)<br>    <span class="hljs-comment">// 点击是删除按钮时</span><br>    <span class="hljs-keyword">if</span> (value == <span class="hljs-string">&#x27;delete&#x27;</span>) &#123;<br>      <span class="hljs-keyword">let</span> _amount = amount.slice(<span class="hljs-number">0</span>, amount.length - <span class="hljs-number">1</span>)<br>      setAmount(_amount)<br>      <span class="hljs-keyword">return</span><br>    &#125;<br><br>    <span class="hljs-comment">// 点击确认按钮时</span><br>    <span class="hljs-keyword">if</span> (value == <span class="hljs-string">&#x27;ok&#x27;</span>) &#123;<br>      <span class="hljs-comment">// 这里后续将处理添加账单逻辑</span><br>      <span class="hljs-keyword">return</span><br>    &#125;<br><br>    <span class="hljs-comment">// 当输入的值为 &#x27;.&#x27; 且 已经存在 &#x27;.&#x27;，则不让其继续字符串相加。</span><br>    <span class="hljs-keyword">if</span> (value == <span class="hljs-string">&#x27;.&#x27;</span> &amp;&amp; amount.includes(<span class="hljs-string">&#x27;.&#x27;</span>)) <span class="hljs-keyword">return</span><br>    <span class="hljs-comment">// 小数点后保留两位，当超过两位时，不让其字符串继续相加。</span><br>    <span class="hljs-keyword">if</span> (value != <span class="hljs-string">&#x27;.&#x27;</span> &amp;&amp; amount.includes(<span class="hljs-string">&#x27;.&#x27;</span>) &amp;&amp; amount &amp;&amp; amount.split(<span class="hljs-string">&#x27;.&#x27;</span>)[<span class="hljs-number">1</span>].length &gt;= <span class="hljs-number">2</span>) <span class="hljs-keyword">return</span><br>    <span class="hljs-comment">// amount += value</span><br>    setAmount(amount + value)<br>  &#125;<br>...<br><br>&lt;div className=&#123;s.money&#125;&gt;<br>  <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&#123;s.sufix&#125;</span>&gt;</span>¥<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span></span><br>  <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&#123;cx(s.amount,</span> <span class="hljs-attr">s.animation</span>)&#125;&gt;</span>&#123;amount&#125;<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span></span><br>&lt;/div&gt;<br><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">Keyboard</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;price&quot;</span> <span class="hljs-attr">onKeyClick</span>=<span class="hljs-string">&#123;(value)</span> =&gt;</span> handleMoney(value)&#125; /&gt;</span><br></code></pre></td></tr></table></figure>
 
-    // 点击确认按钮时
-    if (value == &#39;ok&#39;) &#123;
-      // 这里后续将处理添加账单逻辑
-      return
-    &#125;
-
-    // 当输入的值为 &#39;.&#39; 且 已经存在 &#39;.&#39;，则不让其继续字符串相加。
-    if (value == &#39;.&#39; &amp;&amp; amount.includes(&#39;.&#39;)) return
-    // 小数点后保留两位，当超过两位时，不让其字符串继续相加。
-    if (value != &#39;.&#39; &amp;&amp; amount.includes(&#39;.&#39;) &amp;&amp; amount &amp;&amp; amount.split(&#39;.&#39;)[1].length &gt;= 2) return
-    // amount += value
-    setAmount(amount + value)
-  &#125;
-...
-
-&lt;div className=&#123;s.money&#125;&gt;
-  &lt;span className=&#123;s.sufix&#125;&gt;¥&lt;/span&gt;
-  &lt;span className=&#123;cx(s.amount, s.animation)&#125;&gt;&#123;amount&#125;&lt;/span&gt;
-&lt;/div&gt;
-&lt;Keyboard type=&quot;price&quot; onKeyClick=&#123;(value) =&gt; handleMoney(value)&#125; /&gt;
-</code></pre>
 <p>重启项目，浏览器展示如下图所示：</p>
 <p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/0fc90561f73d4b2c921864ebefc2cd2c~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp" alt="img"></p>
 <blockquote>
@@ -246,46 +77,11 @@ export default PopupAddBill
 </blockquote>
 <p>此时「账单金额」也被安排上了。</p>
 <h4 id="账单种类"><a href="#账单种类" class="headerlink" title="账单种类"></a>账单种类</h4><p>账单种类的作用是表示该笔账单的大致用途，我们通过接口从数据库回去账单种类列表，以横向滚动的形式，展示在金额的下面，接下来我们看具体的代码实现：</p>
-<pre><code class="js">...
-import CustomIcon from &#39;../CustomIcon&#39;;
-import &#123; get, typeMap &#125; from &#39;@/utils&#39;;
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><code class="hljs js">...<br><span class="hljs-keyword">import</span> CustomIcon <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;../CustomIcon&#x27;</span>;<br><span class="hljs-keyword">import</span> &#123; get, typeMap &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@/utils&#x27;</span>;<br><br>...<br><span class="hljs-keyword">const</span> [currentType, setCurrentType] = useState(&#123;&#125;); <span class="hljs-comment">// 当前选中账单类型</span><br><span class="hljs-keyword">const</span> [expense, setExpense] = useState([]); <span class="hljs-comment">// 支出类型数组</span><br><span class="hljs-keyword">const</span> [income, setIncome] = useState([]); <span class="hljs-comment">// 收入类型数组</span><br><br>useEffect(<span class="hljs-keyword">async</span> () =&gt; &#123;<br>  <span class="hljs-keyword">const</span> &#123; <span class="hljs-attr">data</span>: &#123; list &#125; &#125; = <span class="hljs-keyword">await</span> get(<span class="hljs-string">&#x27;/api/type/list&#x27;</span>);<br>  <span class="hljs-keyword">const</span> _expense = list.filter(<span class="hljs-function"><span class="hljs-params">i</span> =&gt;</span> i.type == <span class="hljs-number">1</span>); <span class="hljs-comment">// 支出类型</span><br>  <span class="hljs-keyword">const</span> _income = list.filter(<span class="hljs-function"><span class="hljs-params">i</span> =&gt;</span> i.type == <span class="hljs-number">2</span>); <span class="hljs-comment">// 收入类型</span><br>  setExpense(_expense);<br>  setIncome(_income);<br>  setCurrentType(_expense[<span class="hljs-number">0</span>]); <span class="hljs-comment">// 新建账单，类型默认是支出类型数组的第一项</span><br>&#125;, [])<br><br><br>...<br>&lt;div className=&#123;s.typeWarp&#125;&gt;<br>  <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&#123;s.typeBody&#125;</span>&gt;</span></span><br><span class="xml">    &#123;/* 通过 payType 判断，是展示收入账单类型，还是支出账单类型 */&#125;</span><br><span class="xml">    &#123;</span><br><span class="xml">      (payType == &#x27;expense&#x27; ? expense : income).map(item =&gt; <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">onClick</span>=<span class="hljs-string">&#123;()</span> =&gt;</span> setCurrentType(item)&#125; key=&#123;item.id&#125; className=&#123;s.typeItem&#125;&gt;</span><br><span class="xml">        &#123;/* 收入和支出的字体颜色，以及背景颜色通过 payType 区分，并且设置高亮 */&#125;</span><br><span class="xml">        <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&#123;cx(&#123;[s.iconfontWrap]:</span> <span class="hljs-attr">true</span>, [<span class="hljs-attr">s.expense</span>]<span class="hljs-attr">:</span> <span class="hljs-attr">payType</span> == <span class="hljs-string">&#x27;expense&#x27;</span>, [<span class="hljs-attr">s.income</span>]<span class="hljs-attr">:</span> <span class="hljs-attr">payType</span> == <span class="hljs-string">&#x27;income&#x27;</span>, [<span class="hljs-attr">s.active</span>]<span class="hljs-attr">:</span> <span class="hljs-attr">currentType.id</span> == <span class="hljs-string">item.id&#125;)&#125;</span>&gt;</span></span><br><span class="xml">          <span class="hljs-tag">&lt;<span class="hljs-name">CustomIcon</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&#123;s.iconfont&#125;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&#123;typeMap[item.id].icon&#125;</span> /&gt;</span></span><br><span class="xml">        <span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span></span><br><span class="xml">        <span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>&#123;item.name&#125;<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span></span><br><span class="xml">      <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>)</span><br><span class="xml">    &#125;</span><br><span class="xml">  <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span><br>&lt;/div&gt;<br></code></pre></td></tr></table></figure>
 
-...
-const [currentType, setCurrentType] = useState(&#123;&#125;); // 当前选中账单类型
-const [expense, setExpense] = useState([]); // 支出类型数组
-const [income, setIncome] = useState([]); // 收入类型数组
-
-useEffect(async () =&gt; &#123;
-  const &#123; data: &#123; list &#125; &#125; = await get(&#39;/api/type/list&#39;);
-  const _expense = list.filter(i =&gt; i.type == 1); // 支出类型
-  const _income = list.filter(i =&gt; i.type == 2); // 收入类型
-  setExpense(_expense);
-  setIncome(_income);
-  setCurrentType(_expense[0]); // 新建账单，类型默认是支出类型数组的第一项
-&#125;, [])
-
-
-...
-&lt;div className=&#123;s.typeWarp&#125;&gt;
-  &lt;div className=&#123;s.typeBody&#125;&gt;
-    &#123;/* 通过 payType 判断，是展示收入账单类型，还是支出账单类型 */&#125;
-    &#123;
-      (payType == &#39;expense&#39; ? expense : income).map(item =&gt; &lt;div onClick=&#123;() =&gt; setCurrentType(item)&#125; key=&#123;item.id&#125; className=&#123;s.typeItem&#125;&gt;
-        &#123;/* 收入和支出的字体颜色，以及背景颜色通过 payType 区分，并且设置高亮 */&#125;
-        &lt;span className=&#123;cx(&#123;[s.iconfontWrap]: true, [s.expense]: payType == &#39;expense&#39;, [s.income]: payType == &#39;income&#39;, [s.active]: currentType.id == item.id&#125;)&#125;&gt;
-          &lt;CustomIcon className=&#123;s.iconfont&#125; type=&#123;typeMap[item.id].icon&#125; /&gt;
-        &lt;/span&gt;
-        &lt;span&gt;&#123;item.name&#125;&lt;/span&gt;
-      &lt;/div&gt;)
-    &#125;
-  &lt;/div&gt;
-&lt;/div&gt;
-</code></pre>
 <p>注意，在 <code>h5</code> 界面实现横向滚动，和在网页端相比，多了如下属性：</p>
-<pre><code class="css">* &#123;
-  touch-action: pan-x;
-&#125;
-</code></pre>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs css">* &#123;<br>  touch-action: pan-x;<br>&#125;<br></code></pre></td></tr></table></figure>
+
 <blockquote>
 <p>CSS 属性 touch-action 用于设置触摸屏用户如何操纵元素的区域(例如，浏览器内置的缩放功能)。</p>
 </blockquote>
@@ -294,43 +90,11 @@ useEffect(async () =&gt; &#123;
 <p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/9047dbf8d2d44f09ab66fce10dc1ee89~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp" alt="img"></p>
 <h4 id="备注弹窗"><a href="#备注弹窗" class="headerlink" title="备注弹窗"></a>备注弹窗</h4><p>备注虽然不起眼，但是别小看它，它可以在账单类型不足以概括账单时，加以一定的文字描述。</p>
 <p>我们直接将其放置于「账单种类」的下面，代码如下：</p>
-<pre><code class="js">...
-import &#123;  Input  &#125; from &#39;zarm&#39;;
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs js">...<br><span class="hljs-keyword">import</span> &#123;  Input  &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;zarm&#x27;</span>;<br><br>...<br><span class="hljs-keyword">const</span> [remark, setRemark] = useState(<span class="hljs-string">&#x27;&#x27;</span>); <span class="hljs-comment">// 备注</span><br><span class="hljs-keyword">const</span> [showRemark, setShowRemark] = useState(<span class="hljs-literal">false</span>); <span class="hljs-comment">// 备注输入框展示控制</span><br><br>...<br>&lt;div className=&#123;s.remark&#125;&gt;<br>  &#123;<br>    showRemark ? <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">Input</span></span></span><br><span class="hljs-tag"><span class="xml">      <span class="hljs-attr">autoHeight</span></span></span><br><span class="hljs-tag"><span class="xml">      <span class="hljs-attr">showLength</span></span></span><br><span class="hljs-tag"><span class="xml">      <span class="hljs-attr">maxLength</span>=<span class="hljs-string">&#123;50&#125;</span></span></span><br><span class="hljs-tag"><span class="xml">      <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;text&quot;</span></span></span><br><span class="hljs-tag"><span class="xml">      <span class="hljs-attr">rows</span>=<span class="hljs-string">&#123;3&#125;</span></span></span><br><span class="hljs-tag"><span class="xml">      <span class="hljs-attr">value</span>=<span class="hljs-string">&#123;remark&#125;</span></span></span><br><span class="hljs-tag"><span class="xml">      <span class="hljs-attr">placeholder</span>=<span class="hljs-string">&quot;请输入备注信息&quot;</span></span></span><br><span class="hljs-tag"><span class="xml">      <span class="hljs-attr">onChange</span>=<span class="hljs-string">&#123;(val)</span> =&gt;</span> setRemark(val)&#125;</span><br><span class="xml">      onBlur=&#123;() =&gt; setShowRemark(false)&#125;</span><br><span class="xml">    /&gt;</span> : <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">onClick</span>=<span class="hljs-string">&#123;()</span> =&gt;</span> setShowRemark(true)&#125;&gt;&#123;remark || &#x27;添加备注&#x27;&#125;<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span></span><br>  &#125;<br>&lt;/div&gt;<br></code></pre></td></tr></table></figure>
 
-...
-const [remark, setRemark] = useState(&#39;&#39;); // 备注
-const [showRemark, setShowRemark] = useState(false); // 备注输入框展示控制
-
-...
-&lt;div className=&#123;s.remark&#125;&gt;
-  &#123;
-    showRemark ? &lt;Input
-      autoHeight
-      showLength
-      maxLength=&#123;50&#125;
-      type=&quot;text&quot;
-      rows=&#123;3&#125;
-      value=&#123;remark&#125;
-      placeholder=&quot;请输入备注信息&quot;
-      onChange=&#123;(val) =&gt; setRemark(val)&#125;
-      onBlur=&#123;() =&gt; setShowRemark(false)&#125;
-    /&gt; : &lt;span onClick=&#123;() =&gt; setShowRemark(true)&#125;&gt;&#123;remark || &#39;添加备注&#39;&#125;&lt;/span&gt;
-  &#125;
-&lt;/div&gt;
-</code></pre>
 <p><strong>CSS 样式部分</strong></p>
-<pre><code class="css">.remark &#123;
-  padding: 0 24px;
-  padding-bottom: 12px;
-  color: #4b67e2;
-  :global &#123;
-    .za-input--textarea &#123;
-      border: 1px solid #e9e9e9;
-      padding: 10px;
-    &#125;
-  &#125;
-&#125;
-</code></pre>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-selector-class">.remark</span> &#123;<br>  <span class="hljs-attribute">padding</span>: <span class="hljs-number">0</span> <span class="hljs-number">24px</span>;<br>  <span class="hljs-attribute">padding-bottom</span>: <span class="hljs-number">12px</span>;<br>  <span class="hljs-attribute">color</span>: <span class="hljs-number">#4b67e2</span>;<br>  :global &#123;<br>    .za-input--textarea &#123;<br>      border: <span class="hljs-number">1px</span> solid <span class="hljs-number">#e9e9e9</span>;<br>      <span class="hljs-attribute">padding</span>: <span class="hljs-number">10px</span>;<br>    &#125;<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
 <p><code>:global</code> 的使用之前已经有描述过，这里再提醒大家一句，目前项目使用的是 <code>css module</code> 的形式，所以样式名都会被打上 <code>hash</code> 值，我们需要修改没有打 <code>hash</code> 值的 <code>zarm</code> 内部样式，需要通过 <code>:global</code> 方法。</p>
 <p>浏览器展示效果如下：</p>
 <p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/28bec13e3c9444cb8a4fd3779290193f~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp" alt="img"></p>
@@ -343,65 +107,11 @@ const [showRemark, setShowRemark] = useState(false); // 备注输入框展示控
 <li>备注：remark</li>
 </ul>
 <p>我们给 <code>Keyboard</code> 的「确定」按钮回调添加方法：</p>
-<pre><code class="js">import &#123; Toast &#125; from &quot;zarm&quot;;
-import &#123; post &#125; from &quot;@/utils&quot;;
-// 监听输入框改变值
-const handleMoney = (value) =&gt; &#123;
-  value = String(value);
-  // 点击是删除按钮时
-  if (value == &quot;delete&quot;) &#123;
-    let _amount = amount.slice(0, amount.length - 1);
-    setAmount(_amount);
-    return;
-  &#125;
-  // 点击确认按钮时
-  if (value == &quot;ok&quot;) &#123;
-    addBill();
-    return;
-  &#125;
-  // 当输入的值为 &#39;.&#39; 且 已经存在 &#39;.&#39;，则不让其继续字符串相加。
-  if (value == &quot;.&quot; &amp;&amp; amount.includes(&quot;.&quot;)) return;
-  // 小数点后保留两位，当超过两位时，不让其字符串继续相加。
-  if (
-    value != &quot;.&quot; &amp;&amp;
-    amount.includes(&quot;.&quot;) &amp;&amp;
-    amount &amp;&amp;
-    amount.split(&quot;.&quot;)[1].length &gt;= 2
-  )
-    return;
-  // amount += value
-  setAmount(amount + value);
-&#125;;
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">import</span> &#123; Toast &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;zarm&quot;</span>;<br><span class="hljs-keyword">import</span> &#123; post &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@/utils&quot;</span>;<br><span class="hljs-comment">// 监听输入框改变值</span><br><span class="hljs-keyword">const</span> handleMoney = <span class="hljs-function">(<span class="hljs-params">value</span>) =&gt;</span> &#123;<br>  value = <span class="hljs-built_in">String</span>(value);<br>  <span class="hljs-comment">// 点击是删除按钮时</span><br>  <span class="hljs-keyword">if</span> (value == <span class="hljs-string">&quot;delete&quot;</span>) &#123;<br>    <span class="hljs-keyword">let</span> _amount = amount.slice(<span class="hljs-number">0</span>, amount.length - <span class="hljs-number">1</span>);<br>    setAmount(_amount);<br>    <span class="hljs-keyword">return</span>;<br>  &#125;<br>  <span class="hljs-comment">// 点击确认按钮时</span><br>  <span class="hljs-keyword">if</span> (value == <span class="hljs-string">&quot;ok&quot;</span>) &#123;<br>    addBill();<br>    <span class="hljs-keyword">return</span>;<br>  &#125;<br>  <span class="hljs-comment">// 当输入的值为 &#x27;.&#x27; 且 已经存在 &#x27;.&#x27;，则不让其继续字符串相加。</span><br>  <span class="hljs-keyword">if</span> (value == <span class="hljs-string">&quot;.&quot;</span> &amp;&amp; amount.includes(<span class="hljs-string">&quot;.&quot;</span>)) <span class="hljs-keyword">return</span>;<br>  <span class="hljs-comment">// 小数点后保留两位，当超过两位时，不让其字符串继续相加。</span><br>  <span class="hljs-keyword">if</span> (<br>    value != <span class="hljs-string">&quot;.&quot;</span> &amp;&amp;<br>    amount.includes(<span class="hljs-string">&quot;.&quot;</span>) &amp;&amp;<br>    amount &amp;&amp;<br>    amount.split(<span class="hljs-string">&quot;.&quot;</span>)[<span class="hljs-number">1</span>].length &gt;= <span class="hljs-number">2</span><br>  )<br>    <span class="hljs-keyword">return</span>;<br>  <span class="hljs-comment">// amount += value</span><br>  setAmount(amount + value);<br>&#125;;<br><br><span class="hljs-comment">// 添加账单</span><br><span class="hljs-keyword">const</span> addBill = <span class="hljs-keyword">async</span> () =&gt; &#123;<br>  <span class="hljs-keyword">if</span> (!amount) &#123;<br>    Toast.show(<span class="hljs-string">&quot;请输入具体金额&quot;</span>);<br>    <span class="hljs-keyword">return</span>;<br>  &#125;<br>  <span class="hljs-keyword">const</span> params = &#123;<br>    <span class="hljs-attr">amount</span>: <span class="hljs-built_in">Number</span>(amount).toFixed(<span class="hljs-number">2</span>), <span class="hljs-comment">// 账单金额小数点后保留两位</span><br>    <span class="hljs-attr">type_id</span>: currentType.id, <span class="hljs-comment">// 账单种类id</span><br>    <span class="hljs-attr">type_name</span>: currentType.name, <span class="hljs-comment">// 账单种类名称</span><br>    <span class="hljs-attr">date</span>: dayjs(date).unix() * <span class="hljs-number">1000</span>, <span class="hljs-comment">// 日期传时间戳</span><br>    <span class="hljs-attr">pay_type</span>: payType == <span class="hljs-string">&quot;expense&quot;</span> ? <span class="hljs-number">1</span> : <span class="hljs-number">2</span>, <span class="hljs-comment">// 账单类型传 1 或 2</span><br>    <span class="hljs-attr">remark</span>: remark || <span class="hljs-string">&quot;&quot;</span>, <span class="hljs-comment">// 备注</span><br>  &#125;;<br>  <span class="hljs-keyword">const</span> result = <span class="hljs-keyword">await</span> post(<span class="hljs-string">&quot;/api/bill/add&quot;</span>, params);<br>  <span class="hljs-comment">// 重制数据</span><br>  setAmount(<span class="hljs-string">&quot;&quot;</span>);<br>  setPayType(<span class="hljs-string">&quot;expense&quot;</span>);<br>  setCurrentType(expense[<span class="hljs-number">0</span>]);<br>  setDate(<span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>());<br>  setRemark(<span class="hljs-string">&quot;&quot;</span>);<br>  Toast.show(<span class="hljs-string">&quot;添加成功&quot;</span>);<br>  setShow(<span class="hljs-literal">false</span>);<br>  <span class="hljs-keyword">if</span> (props.onReload) props.onReload();<br>&#125;;<br></code></pre></td></tr></table></figure>
 
-// 添加账单
-const addBill = async () =&gt; &#123;
-  if (!amount) &#123;
-    Toast.show(&quot;请输入具体金额&quot;);
-    return;
-  &#125;
-  const params = &#123;
-    amount: Number(amount).toFixed(2), // 账单金额小数点后保留两位
-    type_id: currentType.id, // 账单种类id
-    type_name: currentType.name, // 账单种类名称
-    date: dayjs(date).unix() * 1000, // 日期传时间戳
-    pay_type: payType == &quot;expense&quot; ? 1 : 2, // 账单类型传 1 或 2
-    remark: remark || &quot;&quot;, // 备注
-  &#125;;
-  const result = await post(&quot;/api/bill/add&quot;, params);
-  // 重制数据
-  setAmount(&quot;&quot;);
-  setPayType(&quot;expense&quot;);
-  setCurrentType(expense[0]);
-  setDate(new Date());
-  setRemark(&quot;&quot;);
-  Toast.show(&quot;添加成功&quot;);
-  setShow(false);
-  if (props.onReload) props.onReload();
-&#125;;
-</code></pre>
 <p><code>onReload</code> 方法为首页账单列表传进来的函数，当添加完账单的时候，执行 <code>onReload</code> 重新获取首页列表数据。</p>
-<pre><code class="js">&lt;PopupAddBill ref=&#123;addRef&#125; onReload=&#123;refreshData&#125; /&gt;
-</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs js">&lt;PopupAddBill ref=&#123;addRef&#125; onReload=&#123;refreshData&#125; /&gt;<br></code></pre></td></tr></table></figure>
+
 <p>浏览器展示如下所示：</p>
 <p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/8c3fd021a8f8497d8b14ff0c81a53367~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp" alt="img"></p>
 <p>如果如上图所示，恭喜你，你已经成功完成了添加账单的 工作，此时再回头甚至之前写的代码，马上改正一些变量及一些方法的命名，规范化一下代码。</p>

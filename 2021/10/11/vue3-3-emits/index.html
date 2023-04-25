@@ -3,63 +3,28 @@
 
 
 一、问题复现Emits.vue
-&amp;lt;template&amp;gt;
-  &amp;lt;div @click=&amp;quot;$emit(&amp;#39;click&amp;#39;)&amp;quot;&amp;gt;
-    &amp;lt;p&amp;gt;自定义事件&amp;lt;/p&amp;gt;
-  &amp;lt;/div&amp;gt;
-&amp;lt;/template&amp;gt;
+12345&amp;lt;template&amp;gt;  &amp;lt;div @click=&amp;quot;$emit(&amp;#x27;click&amp;#x27;)&amp;quot;&amp;gt;    &amp;lt;p&amp;gt;自定义事件&amp;lt;/p&amp;gt;  &amp;lt;/div&amp;gt;&amp;lt;/template&amp;gt;
 
 使用 Emits.vue
-&amp;lt;Emits @click=&amp;quot;handleClick&amp;quot;&amp;gt;&amp;lt;/Emits&amp;gt;
+1&amp;lt;Emits @click=&amp;quot;handleClick&amp;quot;&amp;gt;&amp;lt;/Emits&amp;gt;
 
-import Emits from &amp;quot;./Emits.vue&amp;quot;;
-export default &amp;#123;
-  components: &amp;#1.."><meta name="generator" content="Hexo 5.4.1"></head><body class="is-flex is-flex-direction-column"><header class="header-widget is-flex-shrink-0 is-hidden-mobile"><div class="container is-fullhd is-flex is-justify-content-space-between is-align-items-center is-full-height"><section class="is-hidden-mobile is-flex-shrink-0"><h2><a href="/">Jude's blog</a></h2></section><h3 class="is-hidden-mobile is-family-serif is-full-height is-flex is-align-items-center is-flex-shrink-0"><div class="is-full-height" id="postTopic"><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">43、vue3-emits</p><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">点击返回顶部</p></div></h3><aside class="is-flex-shrink-0"><h3 class="is-inline-block"><a href="/">首页</a></h3><h3 class="is-inline-block"><a href="/about">关于</a></h3><h3 class="is-inline-block"><a href="/archives">归档</a></h3></aside></div></header><header class="is-flex header-widget is-flex-shrink-0 is-align-items-center is-justify-content-center is-hidden-tablet"><h3 class="is-inline-block"><a href="/">首页</a></h3><h3 class="is-inline-block"><a href="/about">关于</a></h3><h3 class="is-inline-block"><a href="/archives">归档</a></h3></header><main><main class="container is-max-widescreen content section post-page pt-4 px-4"><div class="columns is-flex-desktop is-justify-content-center is-flex-direction-row-reverse"><div class="column is-3 is-hidden-mobile"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E9%97%AE%E9%A2%98%E5%A4%8D%E7%8E%B0"><span class="toc-text">一、问题复现</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95%EF%BC%9A"><span class="toc-text">二、解决方法：</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%96%B9%E6%B3%951%E3%80%81%E5%9C%A8Emits-vue%E4%B8%AD%E5%8A%A0%E5%85%A5%E4%BB%A5%E4%B8%8B%E4%BB%A3%E7%A0%81"><span class="toc-text">方法1、在Emits.vue中加入以下代码</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%96%B9%E6%B3%952%E3%80%81%E4%B8%8D%E8%A6%81%E4%BD%BF%E7%94%A8%E5%8E%9F%E7%94%9F%E4%BA%8B%E4%BB%B6%E5%90%8D%E7%A7%B0"><span class="toc-text">方法2、不要使用原生事件名称</span></a></li></ol></li></ol></li></ol></div><div class="column is-9"><header class="my-4"><a href="/tags/vue3"><i class="tag post-item-tag">vue3</i></a></header><h1 class="mt-0 mb-1 is-family-serif" id="postTitle">43、vue3-emits</h1><time class="has-text-grey" datetime="2021-10-11T02:00:00.000Z">2021-10-11</time><article class="mt-2 post-content"><p>自定义事件不使用 emit:[‘event name’],会出现连续执行 2 次的一个 bug。</p>
+1234567891011import Emits from &amp;quot;./Emits.vue&amp;quot;;export default &amp;#123;  .."><meta name="generator" content="Hexo 5.4.1"></head><body class="is-flex is-flex-direction-column"><header class="header-widget is-flex-shrink-0 is-hidden-mobile"><div class="container is-fullhd is-flex is-justify-content-space-between is-align-items-center is-full-height"><section class="is-hidden-mobile is-flex-shrink-0"><h2><a href="/">Jude's blog</a></h2></section><h3 class="is-hidden-mobile is-family-serif is-full-height is-flex is-align-items-center is-flex-shrink-0"><div class="is-full-height" id="postTopic"><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">43、vue3-emits</p><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">点击返回顶部</p></div></h3><aside class="is-flex-shrink-0"><h3 class="is-inline-block"><a href="/">首页</a></h3><h3 class="is-inline-block"><a href="/about">关于</a></h3><h3 class="is-inline-block"><a href="/archives">归档</a></h3></aside></div></header><header class="is-flex header-widget is-flex-shrink-0 is-align-items-center is-justify-content-center is-hidden-tablet"><h3 class="is-inline-block"><a href="/">首页</a></h3><h3 class="is-inline-block"><a href="/about">关于</a></h3><h3 class="is-inline-block"><a href="/archives">归档</a></h3></header><main><main class="container is-max-widescreen content section post-page pt-4 px-4"><div class="columns is-flex-desktop is-justify-content-center is-flex-direction-row-reverse"><div class="column is-3 is-hidden-mobile"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E9%97%AE%E9%A2%98%E5%A4%8D%E7%8E%B0"><span class="toc-text">一、问题复现</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95%EF%BC%9A"><span class="toc-text">二、解决方法：</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%96%B9%E6%B3%951%E3%80%81%E5%9C%A8Emits-vue%E4%B8%AD%E5%8A%A0%E5%85%A5%E4%BB%A5%E4%B8%8B%E4%BB%A3%E7%A0%81"><span class="toc-text">方法1、在Emits.vue中加入以下代码</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%96%B9%E6%B3%952%E3%80%81%E4%B8%8D%E8%A6%81%E4%BD%BF%E7%94%A8%E5%8E%9F%E7%94%9F%E4%BA%8B%E4%BB%B6%E5%90%8D%E7%A7%B0"><span class="toc-text">方法2、不要使用原生事件名称</span></a></li></ol></li></ol></li></ol></div><div class="column is-9"><header class="my-4"><a href="/tags/vue3"><i class="tag post-item-tag">vue3</i></a></header><h1 class="mt-0 mb-1 is-family-serif" id="postTitle">43、vue3-emits</h1><time class="has-text-grey" datetime="2021-10-11T02:00:00.000Z">2021-10-11</time><article class="mt-2 post-content"><p>自定义事件不使用 emit:[‘event name’],会出现连续执行 2 次的一个 bug。</p>
 <span id="more"></span>
 
 <h2 id="一、问题复现"><a href="#一、问题复现" class="headerlink" title="一、问题复现"></a>一、问题复现</h2><p>Emits.vue</p>
-<pre><code class="html">&lt;template&gt;
-  &lt;div @click=&quot;$emit(&#39;click&#39;)&quot;&gt;
-    &lt;p&gt;自定义事件&lt;/p&gt;
-  &lt;/div&gt;
-&lt;/template&gt;
-</code></pre>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">template</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">div</span> @<span class="hljs-attr">click</span>=<span class="hljs-string">&quot;$emit(&#x27;click&#x27;)&quot;</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>自定义事件<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span><br>  <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">template</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
 <p>使用 Emits.vue</p>
-<pre><code class="html">&lt;Emits @click=&quot;handleClick&quot;&gt;&lt;/Emits&gt;
-</code></pre>
-<pre><code class="js">import Emits from &quot;./Emits.vue&quot;;
-export default &#123;
-  components: &#123;
-    Emits,
-  &#125;,
-  methods: &#123;
-    handleClick()&#123;
-      console.log(&quot;click me&quot;);
-    &#125;
-  &#125;,
-&#125;;
-</code></pre>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">Emits</span> @<span class="hljs-attr">click</span>=<span class="hljs-string">&quot;handleClick&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">Emits</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">import</span> Emits <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;./Emits.vue&quot;</span>;<br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> &#123;<br>  <span class="hljs-attr">components</span>: &#123;<br>    Emits,<br>  &#125;,<br>  <span class="hljs-attr">methods</span>: &#123;<br>    <span class="hljs-function"><span class="hljs-title">handleClick</span>(<span class="hljs-params"></span>)</span>&#123;<br>      <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;click me&quot;</span>);<br>    &#125;<br>  &#125;,<br>&#125;;<br></code></pre></td></tr></table></figure>
+
 <p>点击自定义事件，会打印2次click me</p>
-<h2 id="二、解决方法："><a href="#二、解决方法：" class="headerlink" title="二、解决方法："></a>二、解决方法：</h2><h4 id="方法1、在Emits-vue中加入以下代码"><a href="#方法1、在Emits-vue中加入以下代码" class="headerlink" title="方法1、在Emits.vue中加入以下代码"></a>方法1、在Emits.vue中加入以下代码</h4><pre><code class="js">emits:[&#39;click&#39;]
-</code></pre>
+<h2 id="二、解决方法："><a href="#二、解决方法：" class="headerlink" title="二、解决方法："></a>二、解决方法：</h2><h4 id="方法1、在Emits-vue中加入以下代码"><a href="#方法1、在Emits-vue中加入以下代码" class="headerlink" title="方法1、在Emits.vue中加入以下代码"></a>方法1、在Emits.vue中加入以下代码</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs js">emits:[<span class="hljs-string">&#x27;click&#x27;</span>]<br></code></pre></td></tr></table></figure>
+
 <h4 id="方法2、不要使用原生事件名称"><a href="#方法2、不要使用原生事件名称" class="headerlink" title="方法2、不要使用原生事件名称"></a>方法2、不要使用原生事件名称</h4><p>Emits.vue</p>
-<pre><code class="html">&lt;template&gt;
-  &lt;div @click=&quot;$emit(&#39;my-click&#39;)&quot;&gt;
-    &lt;p &gt;自定义事件&lt;/p&gt;
-  &lt;/div&gt;
-&lt;/template&gt;
-</code></pre>
-<pre><code class="js">&lt;script&gt;
-  export default &#123;
-    emits:[&#39;my-click&#39;]
-  &#125;
-&lt;/script&gt;
-
-&lt;style scoped&gt;
-
-&lt;/style&gt;
-</code></pre>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">template</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">div</span> @<span class="hljs-attr">click</span>=<span class="hljs-string">&quot;$emit(&#x27;my-click&#x27;)&quot;</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">p</span> &gt;</span>自定义事件<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span><br>  <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">template</span>&gt;</span><br><br></code></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs js">&lt;script&gt;<br>  <span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> &#123;<br>    <span class="hljs-attr">emits</span>:[<span class="hljs-string">&#x27;my-click&#x27;</span>]<br>  &#125;<br>&lt;/script&gt;<br><br><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">style</span> <span class="hljs-attr">scoped</span>&gt;</span></span><br><span class="xml"></span><br><span class="xml"><span class="hljs-tag">&lt;/<span class="hljs-name">style</span>&gt;</span></span><br></code></pre></td></tr></table></figure>
 <p>引用处：</p>
-<pre><code class="html">  &lt;Emits @my-click=&quot;handleClick&quot;&gt;&lt;/Emits&gt;
-</code></pre>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">Emits</span> @<span class="hljs-attr">my-click</span>=<span class="hljs-string">&quot;handleClick&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">Emits</span>&gt;</span><br></code></pre></td></tr></table></figure>
 </article><section class="jump-container is-flex is-justify-content-space-between my-6"><!-- em is empty placeholder--><a class="button is-default" href="/2021/10/14/vue3-4-v-model/" title="44、vue3-v-model"><i class="iconfont icon-prev mr-2 has-text-grey"></i><span class="has-text-weight-semibold">上一页: 44、vue3-v-model</span></a><a class="button is-default" href="/2021/10/02/vue3-2-teleport/" title="42、vue3-传送门：teleport"><span class="has-text-weight-semibold">下一页: 42、vue3-传送门：teleport</span><i class="iconfont icon-next ml-2 has-text-grey"></i></a></section></div></div></main></main><footer class="is-flex is-flex-direction-column is-align-items-center is-flex-shrink-0 is-family-serif"><section class="sns-container"><!-- Github--><a title="github" target="_blank" rel="noopener nofollow" href="//github.com/Jude"><i class="iconfont icon-github"></i></a><!-- Ins--><!-- RSS--><!-- 知乎--><a title="zhihu" target="_blank" rel="noopener nofollow" href="//zhihu.com/https://www.zhihu.com/hot"><i class="iconfont icon-zhihu"></i></a><!-- 领英--><!-- 脸书--></section><p><span>Copyright ©</span><span> Jude 2023</span></p><div class="is-flex is-justify-content-center is-flex-wrap-wrap"><p>Powered by Hexo &verbar;&nbsp;</p><p class="is-flex is-justify-content-center"><a title="Hexo theme author" target="_blank" rel="noopener" href="//github.com/haojen">Theme by Haojen&nbsp;</a></p><div style="margin-top: 2px"><a class="github-button" title="github-button" target="_blank" rel="noopener" href="https://github.com/haojen/hexo-theme-Claudia" data-color-scheme="no-preference: light; light: light; dark: dark;" data-show-count="true"></a></div></div><div><span>记住昨日的美好，过好今日的生活，憧憬明天的到来</span></div></footer><script async defer src="https://buttons.github.io/buttons.js"></script><script src="/js/post.js"></script></body></html>

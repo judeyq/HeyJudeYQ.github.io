@@ -4,342 +4,132 @@
 
 一、字符串字符串的运用包括，字符串的创建、分割、大小写转换、拼接等
 1-1 创建字符串在 JavaScript 中创建一个字符串跟其他语言并没有较大的区别，可以分别使用 ‘、” 和 ` 作为边界标识。
-const str1 = &amp;quot;string 1&amp;quot;;
-const str2 = &amp;quot;string 2&amp;quot;;
-const str3 = `string 3`;
+123const str1 = &amp;quot;string 1&amp;quot;;const str2 = &amp;quot;string 2&amp;quot;;const str3 = `string 3`;
 
 从 JavaScript 的语法定义上 ‘ 和 “ 并没有太大的差别，但是 ` 的用途较为特殊。 同样可以以与 ‘ 和 “ 一样的使用方式使用，但也可以有更高级的用法。
 例如：
-const targ.."><meta name="generator" content="Hexo 5.4.1"></head><body class="is-flex is-flex-direction-column"><header class="header-widget is-flex-shrink-0 is-hidden-mobile"><div class="container is-fullhd is-flex is-justify-content-space-between is-align-items-center is-full-height"><section class="is-hidden-mobile is-flex-shrink-0"><h2><a href="/">Jude's blog</a></h2></section><h3 class="is-hidden-mobile is-family-serif is-full-height is-flex is-align-items-center is-flex-shrink-0"><div class="is-full-height" id="postTopic"><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">98、基于JavaScript开发灵活的数据应用--基本数据处理(一)</p><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">点击返回顶部</p></div></h3><aside class="is-flex-shrink-0"><h3 class="is-inline-block"><a href="/">首页</a></h3><h3 class="is-inline-block"><a href="/about">关于</a></h3><h3 class="is-inline-block"><a href="/archives">归档</a></h3></aside></div></header><header class="is-flex header-widget is-flex-shrink-0 is-align-items-center is-justify-content-center is-hidden-tablet"><h3 class="is-inline-block"><a href="/">首页</a></h3><h3 class="is-inline-block"><a href="/about">关于</a></h3><h3 class="is-inline-block"><a href="/archives">归档</a></h3></header><main><main class="container is-max-widescreen content section post-page pt-4 px-4"><div class="columns is-flex-desktop is-justify-content-center is-flex-direction-row-reverse"><div class="column is-3 is-hidden-mobile"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="toc-text">一、字符串</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-1-%E5%88%9B%E5%BB%BA%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="toc-text">1-1 创建字符串</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-2-%E5%88%86%E5%89%B2%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="toc-text">1-2 分割字符串</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-3-%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E5%88%86%E5%89%B2"><span class="toc-text">1-3 字符串的分割</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-4-%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E6%8B%BC%E6%8E%A5"><span class="toc-text">1-4 字符串的拼接</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E5%AF%B9%E8%B1%A1%E5%AD%97%E9%9D%A2%E9%87%8F"><span class="toc-text">二、对象字面量</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2-1-%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%86%85%E5%AE%B9%E8%AF%BB%E5%8F%96"><span class="toc-text">2-1 对象的内容读取</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-2-%E4%BF%AE%E6%94%B9%E5%AF%B9%E8%B1%A1%E5%86%85%E5%AE%B9"><span class="toc-text">2-2 修改对象内容</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E6%95%B0%E7%BB%84"><span class="toc-text">三、数组</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#3-1-%E6%95%B0%E7%BB%84%E5%A2%9E%E5%8A%A0%E5%86%85%E5%AE%B9"><span class="toc-text">3-1 数组增加内容</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-2-%E6%95%B0%E7%BB%84%E8%BD%AC%E6%8D%A2-%E8%81%9A%E5%90%88"><span class="toc-text">3-2 数组转换&#x2F;聚合</span></a></li></ol></li></ol></li></ol></div><div class="column is-9"><header class="my-4"><a href="/tags/js"><i class="tag post-item-tag">js</i></a></header><h1 class="mt-0 mb-1 is-family-serif" id="postTitle">98、基于JavaScript开发灵活的数据应用--基本数据处理(一)</h1><time class="has-text-grey" datetime="2022-11-26T12:00:00.000Z">2022-11-26</time><article class="mt-2 post-content"><p>现代编程语言中，最基本的数据格式都会是字符串和数字。字符串用于表达人类文明的自然语言，数字用于表达量化世界的各种数值。</p>
+12const t.."><meta name="generator" content="Hexo 5.4.1"></head><body class="is-flex is-flex-direction-column"><header class="header-widget is-flex-shrink-0 is-hidden-mobile"><div class="container is-fullhd is-flex is-justify-content-space-between is-align-items-center is-full-height"><section class="is-hidden-mobile is-flex-shrink-0"><h2><a href="/">Jude's blog</a></h2></section><h3 class="is-hidden-mobile is-family-serif is-full-height is-flex is-align-items-center is-flex-shrink-0"><div class="is-full-height" id="postTopic"><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">98、基于JavaScript开发灵活的数据应用--基本数据处理(一)</p><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">点击返回顶部</p></div></h3><aside class="is-flex-shrink-0"><h3 class="is-inline-block"><a href="/">首页</a></h3><h3 class="is-inline-block"><a href="/about">关于</a></h3><h3 class="is-inline-block"><a href="/archives">归档</a></h3></aside></div></header><header class="is-flex header-widget is-flex-shrink-0 is-align-items-center is-justify-content-center is-hidden-tablet"><h3 class="is-inline-block"><a href="/">首页</a></h3><h3 class="is-inline-block"><a href="/about">关于</a></h3><h3 class="is-inline-block"><a href="/archives">归档</a></h3></header><main><main class="container is-max-widescreen content section post-page pt-4 px-4"><div class="columns is-flex-desktop is-justify-content-center is-flex-direction-row-reverse"><div class="column is-3 is-hidden-mobile"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="toc-text">一、字符串</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-1-%E5%88%9B%E5%BB%BA%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="toc-text">1-1 创建字符串</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-2-%E5%88%86%E5%89%B2%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="toc-text">1-2 分割字符串</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-3-%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E5%88%86%E5%89%B2"><span class="toc-text">1-3 字符串的分割</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-4-%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E6%8B%BC%E6%8E%A5"><span class="toc-text">1-4 字符串的拼接</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E5%AF%B9%E8%B1%A1%E5%AD%97%E9%9D%A2%E9%87%8F"><span class="toc-text">二、对象字面量</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2-1-%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%86%85%E5%AE%B9%E8%AF%BB%E5%8F%96"><span class="toc-text">2-1 对象的内容读取</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-2-%E4%BF%AE%E6%94%B9%E5%AF%B9%E8%B1%A1%E5%86%85%E5%AE%B9"><span class="toc-text">2-2 修改对象内容</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E6%95%B0%E7%BB%84"><span class="toc-text">三、数组</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#3-1-%E6%95%B0%E7%BB%84%E5%A2%9E%E5%8A%A0%E5%86%85%E5%AE%B9"><span class="toc-text">3-1 数组增加内容</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-2-%E6%95%B0%E7%BB%84%E8%BD%AC%E6%8D%A2-%E8%81%9A%E5%90%88"><span class="toc-text">3-2 数组转换&#x2F;聚合</span></a></li></ol></li></ol></li></ol></div><div class="column is-9"><header class="my-4"><a href="/tags/js"><i class="tag post-item-tag">js</i></a></header><h1 class="mt-0 mb-1 is-family-serif" id="postTitle">98、基于JavaScript开发灵活的数据应用--基本数据处理(一)</h1><time class="has-text-grey" datetime="2022-11-26T12:00:00.000Z">2022-11-26</time><article class="mt-2 post-content"><p>现代编程语言中，最基本的数据格式都会是字符串和数字。字符串用于表达人类文明的自然语言，数字用于表达量化世界的各种数值。</p>
 <span id="more"></span>
 
 <h2 id="一、字符串"><a href="#一、字符串" class="headerlink" title="一、字符串"></a>一、字符串</h2><p>字符串的运用包括，字符串的创建、分割、大小写转换、拼接等</p>
 <h4 id="1-1-创建字符串"><a href="#1-1-创建字符串" class="headerlink" title="1-1 创建字符串"></a>1-1 创建字符串</h4><p>在 JavaScript 中创建一个字符串跟其他语言并没有较大的区别，可以分别使用 ‘、” 和 ` 作为边界标识。</p>
-<pre><code class="js">const str1 = &quot;string 1&quot;;
-const str2 = &quot;string 2&quot;;
-const str3 = `string 3`;
-</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">const</span> str1 = <span class="hljs-string">&quot;string 1&quot;</span>;<br><span class="hljs-keyword">const</span> str2 = <span class="hljs-string">&quot;string 2&quot;</span>;<br><span class="hljs-keyword">const</span> str3 = <span class="hljs-string">`string 3`</span>;<br></code></pre></td></tr></table></figure>
+
 <p>从 JavaScript 的语法定义上 ‘ 和 “ 并没有太大的差别，但是 ` 的用途较为特殊。 同样可以以与 ‘ 和 “ 一样的使用方式使用，但也可以有更高级的用法。</p>
 <p>例如：</p>
-<pre><code class="js">const target = &quot;world&quot;;
-const word = `hello $&#123;target&#125;`; // =&gt; hello world
-</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">const</span> target = <span class="hljs-string">&quot;world&quot;</span>;<br><span class="hljs-keyword">const</span> word = <span class="hljs-string">`hello <span class="hljs-subst">$&#123;target&#125;</span>`</span>; <span class="hljs-comment">// =&gt; hello world</span><br></code></pre></td></tr></table></figure>
+
 <p>同时 ` 也可以用于创建一个“多行字符串”，即字符串内容中包含多行文本。</p>
 <h4 id="1-2-分割字符串"><a href="#1-2-分割字符串" class="headerlink" title="1-2 分割字符串"></a>1-2 分割字符串</h4><p>例如：如何将 “Hey jude,how is it going?” 转换为“hey jude how is it going”</p>
 <p>二者不同之处在于，去除了文本中的标点符号、数字、大写字母转换为小写字母。</p>
 <p>任务理解：去除标点符号、数字可以说是只保留英文字母，只需筛选出英文字母和空格即可，需要使用 ASCII 码进行甄别，大写字母的 ASCII 码范围为 65 到 90（即：A-Z），小写字母则为 97 到 122，空格的 ASCII 码为 32，换行符的 ASCII 码为 10。JS 中可以用 string.charCodeAt()方法获取字符串的 ASCII 码。</p>
-<pre><code class="js">const originalText = &quot;Hey jude,how is it going?&quot;;
-let wordOnlyText = &quot;&quot;;
-for (let i = 0; i &lt; originalText.length; i++) &#123;
-  const letter = originalText[i];
-  const asciiCode = letter.charCodeAt();
-  if (
-    (asciiCode &gt;= 65 &amp;&amp; asciiCode &lt;= 90) ||
-    (asciiCode &gt;= 97 &amp;&amp; asciiCode &lt;= 122) ||
-    asciiCode === 32
-  ) &#123;
-    wordOnlyText += letter;
-  &#125;
-&#125;
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">const</span> originalText = <span class="hljs-string">&quot;Hey jude,how is it going?&quot;</span>;<br><span class="hljs-keyword">let</span> wordOnlyText = <span class="hljs-string">&quot;&quot;</span>;<br><span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; originalText.length; i++) &#123;<br>  <span class="hljs-keyword">const</span> letter = originalText[i];<br>  <span class="hljs-keyword">const</span> asciiCode = letter.charCodeAt();<br>  <span class="hljs-keyword">if</span> (<br>    (asciiCode &gt;= <span class="hljs-number">65</span> &amp;&amp; asciiCode &lt;= <span class="hljs-number">90</span>) ||<br>    (asciiCode &gt;= <span class="hljs-number">97</span> &amp;&amp; asciiCode &lt;= <span class="hljs-number">122</span>) ||<br>    asciiCode === <span class="hljs-number">32</span><br>  ) &#123;<br>    wordOnlyText += letter;<br>  &#125;<br>&#125;<br><br><span class="hljs-built_in">console</span>.log(wordOnlyText); <span class="hljs-comment">// =&gt; Hey judehow is it going</span><br></code></pre></td></tr></table></figure>
 
-console.log(wordOnlyText); // =&gt; Hey judehow is it going
-</code></pre>
 <p>将大写字母转换为小写字母</p>
 <p>string.charCodeAt() 方法来获取字符的 ASCII 码，那么自然也有对应的方法用于将 ASCII 码转换为对应字符 String.fromCharCode(code)。</p>
 <p>而从字母的 ASCII 码范围可以看到，将大写字母的 ASCII 码数值加上 32 便是其对应小写字母的 ASCII 码数值。</p>
-<pre><code class="js">let lowerCaseText = &quot;&quot;;
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">let</span> lowerCaseText = <span class="hljs-string">&quot;&quot;</span>;<br><br><span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; wordOnlyText.length; ++i) &#123;<br>  <span class="hljs-keyword">const</span> letter = wordOnlyText[i];<br>  <span class="hljs-keyword">const</span> asciiCode = letter.charCodeAt();<br><br>  <span class="hljs-keyword">if</span> (asciiCode &gt;= <span class="hljs-number">65</span> &amp;&amp; asciiCode &lt;= <span class="hljs-number">90</span>) &#123;<br>    lowerCaseText += <span class="hljs-built_in">String</span>.fromCharCode(asciiCode + <span class="hljs-number">32</span>);<br>  &#125; <span class="hljs-keyword">else</span> &#123;<br>    lowerCaseText += letter;<br>  &#125;<br>&#125;<br><br><span class="hljs-built_in">console</span>.log(lowerCaseText); <span class="hljs-comment">// =&gt; hey judehow is it going</span><br></code></pre></td></tr></table></figure>
 
-for (let i = 0; i &lt; wordOnlyText.length; ++i) &#123;
-  const letter = wordOnlyText[i];
-  const asciiCode = letter.charCodeAt();
-
-  if (asciiCode &gt;= 65 &amp;&amp; asciiCode &lt;= 90) &#123;
-    lowerCaseText += String.fromCharCode(asciiCode + 32);
-  &#125; else &#123;
-    lowerCaseText += letter;
-  &#125;
-&#125;
-
-console.log(lowerCaseText); // =&gt; hey judehow is it going
-</code></pre>
 <p>在 JavaScript 中早就已经内置了将文本中的大写字母转换为小写字母的 API 了 —— string.toLowerCase()。</p>
-<pre><code class="js">const lowerCaseText = wordOnlyText.toLowerCase();
-</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">const</span> lowerCaseText = wordOnlyText.toLowerCase();<br></code></pre></td></tr></table></figure>
+
 <h4 id="1-3-字符串的分割"><a href="#1-3-字符串的分割" class="headerlink" title="1-3 字符串的分割"></a>1-3 字符串的分割</h4><p>最主要用到的方法便是 string.split(separator)，其中这个 separator 则是定义了用于分割字符串内容的“分割符”。</p>
-<pre><code class="js">const originalText = `
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the &quot;Software&quot;), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-`;
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">const</span> originalText = <span class="hljs-string">`</span><br><span class="hljs-string">Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the &quot;Software&quot;), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:</span><br><span class="hljs-string">The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.</span><br><span class="hljs-string">THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</span><br><span class="hljs-string">`</span>;<br><br><span class="hljs-keyword">let</span> wordOnlyText = <span class="hljs-string">&quot;&quot;</span>;<br><br><span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; originalText.length; ++i) &#123;<br>  <span class="hljs-keyword">const</span> letter = originalText[i];<br>  <span class="hljs-keyword">const</span> asciiCode = letter.charCodeAt();<br><br>  <span class="hljs-keyword">if</span> (<br>    (asciiCode &gt;= <span class="hljs-number">65</span> &amp;&amp; asciiCode &lt;= <span class="hljs-number">90</span>) ||<br>    (asciiCode &gt;= <span class="hljs-number">97</span> &amp;&amp; asciiCode &lt;= <span class="hljs-number">122</span>) ||<br>    asciiCode === <span class="hljs-number">32</span><br>  ) &#123;<br>    wordOnlyText += letter;<br>  &#125;<br>&#125;<br><br><span class="hljs-keyword">const</span> lowerCaseText = wordOnlyText.toLowerCase();<br><br><span class="hljs-keyword">const</span> words = lowerCaseText.split(<span class="hljs-string">&quot; &quot;</span>);<br><br><span class="hljs-built_in">console</span>.log(words.length); <span class="hljs-comment">//=&gt; 160</span><br></code></pre></td></tr></table></figure>
 
-let wordOnlyText = &quot;&quot;;
-
-for (let i = 0; i &lt; originalText.length; ++i) &#123;
-  const letter = originalText[i];
-  const asciiCode = letter.charCodeAt();
-
-  if (
-    (asciiCode &gt;= 65 &amp;&amp; asciiCode &lt;= 90) ||
-    (asciiCode &gt;= 97 &amp;&amp; asciiCode &lt;= 122) ||
-    asciiCode === 32
-  ) &#123;
-    wordOnlyText += letter;
-  &#125;
-&#125;
-
-const lowerCaseText = wordOnlyText.toLowerCase();
-
-const words = lowerCaseText.split(&quot; &quot;);
-
-console.log(words.length); //=&gt; 160
-</code></pre>
 <h4 id="1-4-字符串的拼接"><a href="#1-4-字符串的拼接" class="headerlink" title="1-4 字符串的拼接"></a>1-4 字符串的拼接</h4><p>除了对字符串进行拆分以外，我们也常常需要将不同的信息通过各种方式拼装成一个完整的字符串信息。最常见的例子便是我们几乎每天都能遇见的，由程序自动发送的自动短信、自动邮件等。</p>
 <p>字符串之间的连接可以直接使用 + 运算符完成。</p>
-<pre><code class="js">const str1 = &quot;hello&quot;;
-const str2 = &quot;world&quot;;
-console.log(str1 + &quot; &quot; + str2); // =&gt; &#39;hello world&#39;
-</code></pre>
-<p>使用 + 运算符是最基本的字符串拼接方式，适用于数据量较小的字符串拼接。数据量大时，我们需要将多个数据量‘嵌入’到文本模板中，这种情况通常可以使用模板引擎来实现这个功能。</p>
-<pre><code class="js">const name = &quot;jude&quot;;
-const level = &quot;Gold&quot;;
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">const</span> str1 = <span class="hljs-string">&quot;hello&quot;</span>;<br><span class="hljs-keyword">const</span> str2 = <span class="hljs-string">&quot;world&quot;</span>;<br><span class="hljs-built_in">console</span>.log(str1 + <span class="hljs-string">&quot; &quot;</span> + str2); <span class="hljs-comment">// =&gt; &#x27;hello world&#x27;</span><br></code></pre></td></tr></table></figure>
 
-const message = `
-Hello,$&#123;name&#125;.
-Here is LOL account,you are the $&#123;level&#125; of our games.
-`;
-console.log(message);
-// =&gt; Hello,jude.
-// Here is LOL account,you are the Gold of our games.
-</code></pre>
+<p>使用 + 运算符是最基本的字符串拼接方式，适用于数据量较小的字符串拼接。数据量大时，我们需要将多个数据量‘嵌入’到文本模板中，这种情况通常可以使用模板引擎来实现这个功能。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">const</span> name = <span class="hljs-string">&quot;jude&quot;</span>;<br><span class="hljs-keyword">const</span> level = <span class="hljs-string">&quot;Gold&quot;</span>;<br><br><span class="hljs-keyword">const</span> message = <span class="hljs-string">`</span><br><span class="hljs-string">Hello,<span class="hljs-subst">$&#123;name&#125;</span>.</span><br><span class="hljs-string">Here is LOL account,you are the <span class="hljs-subst">$&#123;level&#125;</span> of our games.</span><br><span class="hljs-string">`</span>;<br><span class="hljs-built_in">console</span>.log(message);<br><span class="hljs-comment">// =&gt; Hello,jude.</span><br><span class="hljs-comment">// Here is LOL account,you are the Gold of our games.</span><br></code></pre></td></tr></table></figure>
+
 <p>loading…</p>
 <h2 id="二、对象字面量"><a href="#二、对象字面量" class="headerlink" title="二、对象字面量"></a>二、对象字面量</h2><h4 id="2-1-对象的内容读取"><a href="#2-1-对象的内容读取" class="headerlink" title="2-1 对象的内容读取"></a>2-1 对象的内容读取</h4><p>JavaScript 中对象内容读取十分的简单，如果属性键为字符串，且该字符串中只包含英文字母和下划线的话，可以直接用 <obj>.<key> 来读取属性值。</p>
-<pre><code class="js">const person = &#123;
-  name: &quot;jude&quot;,
-  age: &quot;18&quot;,
-  skills: &#123;
-    title: &quot;vue&quot;,
-    desc: &quot;mvvm&quot;,
-    author: &quot;Evan You&quot;,
-  &#125;,
-  others: &quot;....&quot;,
-&#125;;
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">const</span> person = &#123;<br>  <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;jude&quot;</span>,<br>  <span class="hljs-attr">age</span>: <span class="hljs-string">&quot;18&quot;</span>,<br>  <span class="hljs-attr">skills</span>: &#123;<br>    <span class="hljs-attr">title</span>: <span class="hljs-string">&quot;vue&quot;</span>,<br>    <span class="hljs-attr">desc</span>: <span class="hljs-string">&quot;mvvm&quot;</span>,<br>    <span class="hljs-attr">author</span>: <span class="hljs-string">&quot;Evan You&quot;</span>,<br>  &#125;,<br>  <span class="hljs-attr">others</span>: <span class="hljs-string">&quot;....&quot;</span>,<br>&#125;;<br><br><span class="hljs-built_in">console</span>.log(person.name); <span class="hljs-comment">// =&gt; jude</span><br><span class="hljs-built_in">console</span>.log(person.skills.title); <span class="hljs-comment">// =&gt; vue</span><br></code></pre></td></tr></table></figure>
 
-console.log(person.name); // =&gt; jude
-console.log(person.skills.title); // =&gt; vue
-</code></pre>
 <p>而当对象中所需要读取的目标属性键为数字、包含英文字母和下划线以外的字符串甚至是 Symbol 对象的时候，就需要使用 obj[key] 的形式来读取属性值了。</p>
-<pre><code class="js">const obj = &#123;
-  1: 2,
-  &quot;a b c&quot;: &quot;d e f&quot;,
-  [Symbol.for(&quot;foo&quot;)]: &quot;bar&quot;,
-&#125;;
-console.log(obj[1]); // =&gt; 2
-console.log(obj[&quot;a b c&quot;]); // =&gt; d e f
-console.log(obj[Symbol.for(&quot;foo&quot;)]); // =&gt; bar
-</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">const</span> obj = &#123;<br>  <span class="hljs-number">1</span>: <span class="hljs-number">2</span>,<br>  <span class="hljs-string">&quot;a b c&quot;</span>: <span class="hljs-string">&quot;d e f&quot;</span>,<br>  [<span class="hljs-built_in">Symbol</span>.for(<span class="hljs-string">&quot;foo&quot;</span>)]: <span class="hljs-string">&quot;bar&quot;</span>,<br>&#125;;<br><span class="hljs-built_in">console</span>.log(obj[<span class="hljs-number">1</span>]); <span class="hljs-comment">// =&gt; 2</span><br><span class="hljs-built_in">console</span>.log(obj[<span class="hljs-string">&quot;a b c&quot;</span>]); <span class="hljs-comment">// =&gt; d e f</span><br><span class="hljs-built_in">console</span>.log(obj[<span class="hljs-built_in">Symbol</span>.for(<span class="hljs-string">&quot;foo&quot;</span>)]); <span class="hljs-comment">// =&gt; bar</span><br></code></pre></td></tr></table></figure>
+
 <h4 id="2-2-修改对象内容"><a href="#2-2-修改对象内容" class="headerlink" title="2-2 修改对象内容"></a>2-2 修改对象内容</h4><p>const 语句定义的对象是不能直接被替换，但是其中的内容依然是能被修改的。<br>在 JavaScript 中存在着“引用”和“值”的概念区别，对对象内容进行修改跟进行读取类似，只是在读取语句后面加上 = <new value> 即可。</p>
-<pre><code class="js">const obj = &#123;
-  foo: &quot;bar&quot;,
-  1: 2,
-  &quot;a b c&quot;: &quot;d e f&quot;,
-  [Symbol.for(&quot;foo&quot;)]: &quot;bar&quot;,
-&#125;;
-obj.foo = &quot;read&quot;;
-obj[1] = 3;
-console.log(obj.foo); // =&gt; read
-console.log(obj[1]); // =&gt; 3
-</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">const</span> obj = &#123;<br>  <span class="hljs-attr">foo</span>: <span class="hljs-string">&quot;bar&quot;</span>,<br>  <span class="hljs-number">1</span>: <span class="hljs-number">2</span>,<br>  <span class="hljs-string">&quot;a b c&quot;</span>: <span class="hljs-string">&quot;d e f&quot;</span>,<br>  [<span class="hljs-built_in">Symbol</span>.for(<span class="hljs-string">&quot;foo&quot;</span>)]: <span class="hljs-string">&quot;bar&quot;</span>,<br>&#125;;<br>obj.foo = <span class="hljs-string">&quot;read&quot;</span>;<br>obj[<span class="hljs-number">1</span>] = <span class="hljs-number">3</span>;<br><span class="hljs-built_in">console</span>.log(obj.foo); <span class="hljs-comment">// =&gt; read</span><br><span class="hljs-built_in">console</span>.log(obj[<span class="hljs-number">1</span>]); <span class="hljs-comment">// =&gt; 3</span><br></code></pre></td></tr></table></figure>
+
 <p>当你需要为一个对象添加新的属性时，也是通过同样的方式添加属性。</p>
-<pre><code class="js">const obj = &#123;&#125;;
-obj.foo = &quot;bar&quot;;
-obj[1] = 2;
-</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">const</span> obj = &#123;&#125;;<br>obj.foo = <span class="hljs-string">&quot;bar&quot;</span>;<br>obj[<span class="hljs-number">1</span>] = <span class="hljs-number">2</span>;<br></code></pre></td></tr></table></figure>
+
 <p>在一般情况下，无论是对对象进行添加、读取还是修改属性，都遵循着嵌套链完整的原则</p>
-<pre><code class="js">const outer = &#123;
-  inner: &#123;&#125;,
-&#125;;
-outer.inner.foo = &quot;bar&quot;; // success
-outer.something.bar = 1; // error
-</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">const</span> outer = &#123;<br>  <span class="hljs-attr">inner</span>: &#123;&#125;,<br>&#125;;<br>outer.inner.foo = <span class="hljs-string">&quot;bar&quot;</span>; <span class="hljs-comment">// success</span><br>outer.something.bar = <span class="hljs-number">1</span>; <span class="hljs-comment">// error</span><br></code></pre></td></tr></table></figure>
+
 <h2 id="三、数组"><a href="#三、数组" class="headerlink" title="三、数组"></a>三、数组</h2><h4 id="3-1-数组增加内容"><a href="#3-1-数组增加内容" class="headerlink" title="3-1 数组增加内容"></a>3-1 数组增加内容</h4><p>向数组内增加内容包括向数组首端、末尾、中间添加新内容</p>
 <blockquote>
 <p>添加到末端：array.push()</p>
 </blockquote>
-<pre><code class="js">const array = [];
-array.push(1);
-console.log(array); // =&gt; [1]
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">const</span> array = [];<br>array.push(<span class="hljs-number">1</span>);<br><span class="hljs-built_in">console</span>.log(array); <span class="hljs-comment">// =&gt; [1]</span><br><br>array.push(<span class="hljs-number">2</span>, <span class="hljs-number">3</span>);<br><span class="hljs-built_in">console</span>.log(array); <span class="hljs-comment">// =&gt; [1,2,3]</span><br><span class="hljs-built_in">console</span>.log(array.length); <span class="hljs-comment">// 3</span><br></code></pre></td></tr></table></figure>
 
-array.push(2, 3);
-console.log(array); // =&gt; [1,2,3]
-console.log(array.length); // 3
-</code></pre>
 <blockquote>
 <p>添加到首端: array.unshift()</p>
 </blockquote>
-<pre><code class="js">const array = [4, 5];
-array.unshift(3);
-console.log(array); // =&gt; [3,4,5]
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">const</span> array = [<span class="hljs-number">4</span>, <span class="hljs-number">5</span>];<br>array.unshift(<span class="hljs-number">3</span>);<br><span class="hljs-built_in">console</span>.log(array); <span class="hljs-comment">// =&gt; [3,4,5]</span><br><br>array.unshift(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>);<br><span class="hljs-built_in">console</span>.log(array); <span class="hljs-comment">// =&gt; [1,2,3,4,5]</span><br></code></pre></td></tr></table></figure>
 
-array.unshift(1, 2);
-console.log(array); // =&gt; [1,2,3,4,5]
-</code></pre>
 <blockquote>
 <p>添加到数组中间某一位置：array.splice(start,deleteCount,element,….)</p>
 </blockquote>
 <p>该方法第二个参数是 deleteCount，因为这个方法也可以用来删除数组中某一个位置开始的若干个元素，而当我们将这个参数设置为 0 的时候，该方法第三个以及后面的参数便会插入到下标为 start 的位置，后面的元素自动往后推导。</p>
-<pre><code class="js">const array = [1, 2, 6, 7];
-array.splice(2, 0, 3);
-console.log(array); // =&gt; [1,2,3,6,7]
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">const</span> array = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">6</span>, <span class="hljs-number">7</span>];<br>array.splice(<span class="hljs-number">2</span>, <span class="hljs-number">0</span>, <span class="hljs-number">3</span>);<br><span class="hljs-built_in">console</span>.log(array); <span class="hljs-comment">// =&gt; [1,2,3,6,7]</span><br><br>array.splice(<span class="hljs-number">3</span>, <span class="hljs-number">0</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>);<br><span class="hljs-built_in">console</span>.log(array); <span class="hljs-comment">// =&gt; [1,2,3,4,5,6,7]</span><br></code></pre></td></tr></table></figure>
 
-array.splice(3, 0, 4, 5);
-console.log(array); // =&gt; [1,2,3,4,5,6,7]
-</code></pre>
 <blockquote>
 <p>查找内容：filter</p>
 </blockquote>
 <p>filter 过滤器的逻辑便是定义一个过滤函数，该函数会有序地被传入数组中当前下标的元素，而它则需要返回该函数是否符合其过滤要求，即结果为 true 或 false。</p>
-<pre><code class="js">const array = [1, 2, 3, 4, 5, 6, 7, 8];
-const evenNumbers = array.filter(function (x) &#123;
-  return x % 2 == 0;
-&#125;);
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">const</span> array = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>, <span class="hljs-number">6</span>, <span class="hljs-number">7</span>, <span class="hljs-number">8</span>];<br><span class="hljs-keyword">const</span> evenNumbers = array.filter(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">x</span>) </span>&#123;<br>  <span class="hljs-keyword">return</span> x % <span class="hljs-number">2</span> == <span class="hljs-number">0</span>;<br>&#125;);<br><br><span class="hljs-built_in">console</span>.log(evenNumbers); <span class="hljs-comment">// =&gt; [2,4,6,8]</span><br></code></pre></td></tr></table></figure>
 
-console.log(evenNumbers); // =&gt; [2,4,6,8]
-</code></pre>
 <blockquote>
 <p>删除内容：array.splice(start,deleteCount)</p>
 </blockquote>
-<pre><code class="js">const array = [1, 2, 3, 10, 4, 5];
-array.splice(3, 1);
-console.log(array); // =&gt; [1,2,3,4,5]
-</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">const</span> array = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">10</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>];<br>array.splice(<span class="hljs-number">3</span>, <span class="hljs-number">1</span>);<br><span class="hljs-built_in">console</span>.log(array); <span class="hljs-comment">// =&gt; [1,2,3,4,5]</span><br></code></pre></td></tr></table></figure>
+
 <blockquote>
 <p>更新内容</p>
 </blockquote>
-<pre><code class="js">const array = [1, 2, 3, 4, 5];
-array[0] = 10;
-console.log(array); // =&gt; [10,2,3,4,5]
-</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">const</span> array = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>];<br>array[<span class="hljs-number">0</span>] = <span class="hljs-number">10</span>;<br><span class="hljs-built_in">console</span>.log(array); <span class="hljs-comment">// =&gt; [10,2,3,4,5]</span><br></code></pre></td></tr></table></figure>
+
 <blockquote>
 <p>封装数组操作工具</p>
 </blockquote>
 <p>虽然绝大多数操作都可以直接使用 JavaScript 中自带的 API 来实现，但是如 array.splice() 这种方法看上去就很容易产生操作错误。那么为了避免开发中的失误，我们可以通过定义一个抽象对象来封装一个用于操作数组的工具库。</p>
-<pre><code class="js">const arrayUtils = &#123;
-  // 末端添加
-  append(array,...elements)&#123;
-    array.push(...elements)
-    return array
-  &#125;,
-  // 首端添加
-  prepend(array,...elements)&#123;
-    array.unshift(...elements)
-    return array
-  &#125;
-  // 中间插入
-  insert(array,index,...elements)&#123;
-    array.splice(index,0,...elements)
-    return array
-  &#125;
-  // 删除内容
-  remove(array,index)&#123;
-    array.splice(index,1)
-    return array
-  &#125;
-&#125;
-// 使用
-const array = []
-arrayUtils.append(array,3)
-arrayUtils.prepend(array,1)
-arrayUtils.insert(array,1,2)
-console.log(array) // =&gt; [1,2,3]
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">const</span> arrayUtils = &#123;<br>  <span class="hljs-comment">// 末端添加</span><br>  <span class="hljs-function"><span class="hljs-title">append</span>(<span class="hljs-params">array,...elements</span>)</span>&#123;<br>    array.push(...elements)<br>    <span class="hljs-keyword">return</span> array<br>  &#125;,<br>  <span class="hljs-comment">// 首端添加</span><br>  <span class="hljs-function"><span class="hljs-title">prepend</span>(<span class="hljs-params">array,...elements</span>)</span>&#123;<br>    array.unshift(...elements)<br>    <span class="hljs-keyword">return</span> array<br>  &#125;<br>  <span class="hljs-comment">// 中间插入</span><br>  <span class="hljs-function"><span class="hljs-title">insert</span>(<span class="hljs-params">array,index,...elements</span>)</span>&#123;<br>    array.splice(index,<span class="hljs-number">0</span>,...elements)<br>    <span class="hljs-keyword">return</span> array<br>  &#125;<br>  <span class="hljs-comment">// 删除内容</span><br>  <span class="hljs-function"><span class="hljs-title">remove</span>(<span class="hljs-params">array,index</span>)</span>&#123;<br>    array.splice(index,<span class="hljs-number">1</span>)<br>    <span class="hljs-keyword">return</span> array<br>  &#125;<br>&#125;<br><span class="hljs-comment">// 使用</span><br><span class="hljs-keyword">const</span> array = []<br>arrayUtils.append(array,<span class="hljs-number">3</span>)<br>arrayUtils.prepend(array,<span class="hljs-number">1</span>)<br>arrayUtils.insert(array,<span class="hljs-number">1</span>,<span class="hljs-number">2</span>)<br><span class="hljs-built_in">console</span>.log(array) <span class="hljs-comment">// =&gt; [1,2,3]</span><br><br>arrayUtils.remove(array,<span class="hljs-number">1</span>)<br><span class="hljs-built_in">console</span>.log(array) <span class="hljs-comment">// =&gt; [1,3]</span><br></code></pre></td></tr></table></figure>
 
-arrayUtils.remove(array,1)
-console.log(array) // =&gt; [1,3]
-</code></pre>
 <h4 id="3-2-数组转换-聚合"><a href="#3-2-数组转换-聚合" class="headerlink" title="3-2 数组转换/聚合"></a>3-2 数组转换/聚合</h4><blockquote>
 <p>map</p>
 </blockquote>
-<pre><code class="js">const array = [1, 2, 3, 4, 5];
-const addedArray = array.map(function (x) &#123;
-  return x + 2;
-&#125;);
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">const</span> array = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>];<br><span class="hljs-keyword">const</span> addedArray = array.map(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">x</span>) </span>&#123;<br>  <span class="hljs-keyword">return</span> x + <span class="hljs-number">2</span>;<br>&#125;);<br><br><span class="hljs-built_in">console</span>.log(addedArray); <span class="hljs-comment">// =&gt; [3,4,5,6,7]</span><br></code></pre></td></tr></table></figure>
 
-console.log(addedArray); // =&gt; [3,4,5,6,7]
-</code></pre>
 <blockquote>
 <p>reduce</p>
 </blockquote>
-<pre><code class="js">const array = [1,2,3,4]
-const sumResult = array.reduce(function(a,b)&#123;
-  return a + b
-&#125;)
-console.log(sumResult) // =&gt; 10
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">const</span> array = [<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">4</span>]<br><span class="hljs-keyword">const</span> sumResult = array.reduce(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">a,b</span>)</span>&#123;<br>  <span class="hljs-keyword">return</span> a + b<br>&#125;)<br><span class="hljs-built_in">console</span>.log(sumResult) <span class="hljs-comment">// =&gt; 10</span><br><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">multi</span>(<span class="hljs-params">array</span>)</span>&#123;<br>  <span class="hljs-keyword">return</span> array.reduce(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">a,b</span>)</span>&#123;<br>    <span class="hljs-keyword">return</span> a * b<br>  &#125;)<br>&#125;<br><span class="hljs-built_in">console</span>.log(multi(array))<br><br><span class="hljs-comment">// 函数式编程，进一步抽象封装</span><br><span class="hljs-keyword">const</span> array = [<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">4</span>]<br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">reduceFn</span>(<span class="hljs-params">callback</span>)</span>&#123;<br>  <span class="hljs-keyword">return</span> <span class="hljs-function"><span class="hljs-title">funtion</span>(<span class="hljs-params">array</span>)</span>&#123;<br>    <span class="hljs-keyword">return</span> array.reduce(callback)<br>  &#125;<br>&#125;<br><br><span class="hljs-keyword">const</span> sum = reduceFn(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">a,b</span>)</span>&#123;<br>  <span class="hljs-keyword">return</span> a + b<br>&#125;)<br><span class="hljs-keyword">const</span> multi = reduceFn(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">a,b</span>)</span>&#123;<br>  <span class="hljs-keyword">return</span> a + b<br>&#125;)<br><span class="hljs-built_in">console</span>.log(sum(array)) <span class="hljs-comment">// =&gt; 10</span><br><span class="hljs-built_in">console</span>.log(multi(array)) <span class="hljs-comment">// =&gt; 24</span><br></code></pre></td></tr></table></figure>
 
-function multi(array)&#123;
-  return array.reduce(function(a,b)&#123;
-    return a * b
-  &#125;)
-&#125;
-console.log(multi(array))
-
-// 函数式编程，进一步抽象封装
-const array = [1,2,3,4]
-function reduceFn(callback)&#123;
-  return funtion(array)&#123;
-    return array.reduce(callback)
-  &#125;
-&#125;
-
-const sum = reduceFn(function(a,b)&#123;
-  return a + b
-&#125;)
-const multi = reduceFn(function(a,b)&#123;
-  return a + b
-&#125;)
-console.log(sum(array)) // =&gt; 10
-console.log(multi(array)) // =&gt; 24
-</code></pre>
 <blockquote>
 <p>1、将数组[1,2,3,4,5] 转换为 [‘a1’,’a2’,’a3’,’a4’,’a5’]</p>
 </blockquote>
-<pre><code class="js">const array = [1, 2, 3, 4, 5];
-const result = array.map((item) =&gt; &#123;
-  return &quot;a&quot; + item;
-&#125;);
-</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">const</span> array = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>];<br><span class="hljs-keyword">const</span> result = array.map(<span class="hljs-function">(<span class="hljs-params">item</span>) =&gt;</span> &#123;<br>  <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;a&quot;</span> + item;<br>&#125;);<br></code></pre></td></tr></table></figure>
+
 <blockquote>
 <p>将数组 [ 1, 2, 3, 4, 5 ] 转换为 [ ‘a1’, ‘b2’, ‘c3’, ‘d4’, ‘e5’ ]</p>
 </blockquote>
-<pre><code class="js">const array = [1, 2, 3, 4, 5];
-const result = array.map((item) =&gt; &#123;
-  return String.fromCharCode(96 + item) + item;
-&#125;);
-console.log(result);
-</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">const</span> array = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>];<br><span class="hljs-keyword">const</span> result = array.map(<span class="hljs-function">(<span class="hljs-params">item</span>) =&gt;</span> &#123;<br>  <span class="hljs-keyword">return</span> <span class="hljs-built_in">String</span>.fromCharCode(<span class="hljs-number">96</span> + item) + item;<br>&#125;);<br><span class="hljs-built_in">console</span>.log(result);<br></code></pre></td></tr></table></figure>
+
 <blockquote>
 <p>将数组 [ 1, 2, 3, 4, 5 ] 转换为 [ 1, 4, 9, 16, 25 ]</p>
 </blockquote>
-<pre><code class="js">const array = [1, 2, 3, 4, 5];
-const result = array.map((item) =&gt; &#123;
-  return Math.pow(item, 2);
-&#125;);
-console.log(result);
-</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">const</span> array = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>];<br><span class="hljs-keyword">const</span> result = array.map(<span class="hljs-function">(<span class="hljs-params">item</span>) =&gt;</span> &#123;<br>  <span class="hljs-keyword">return</span> <span class="hljs-built_in">Math</span>.pow(item, <span class="hljs-number">2</span>);<br>&#125;);<br><span class="hljs-built_in">console</span>.log(result);<br></code></pre></td></tr></table></figure>
+
 <blockquote>
 <p>查询 JavaScript 中 Array.prototype.map 方法的详细文档，并将数组 [ 0, 0, 0, 0, 0 ] 转换为 [ ‘A’, ‘B’, ‘C’, ‘D’, ‘E’ ]</p>
 </blockquote>
-<pre><code class="js">const array = [0, 0, 0, 0, 0];
-const result = array.map((item, index) =&gt; &#123;
-  return String.fromCharCode(65 + index);
-&#125;);
-console.log(result);
-</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">const</span> array = [<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>];<br><span class="hljs-keyword">const</span> result = array.map(<span class="hljs-function">(<span class="hljs-params">item, index</span>) =&gt;</span> &#123;<br>  <span class="hljs-keyword">return</span> <span class="hljs-built_in">String</span>.fromCharCode(<span class="hljs-number">65</span> + index);<br>&#125;);<br><span class="hljs-built_in">console</span>.log(result);<br></code></pre></td></tr></table></figure>
+
 <blockquote>
 <p>提取数组 [ 1, 2, 3, 4, 5 ] 中的 [ 2, 3, 4 ]</p>
 </blockquote>
-<pre><code class="js">const array = [1, 2, 3, 4, 5];
-const result = array.filter((item) =&gt; &#123;
-  return item &gt; 1 &amp;&amp; item &lt; 5;
-&#125;);
-console.log(result);
-</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">const</span> array = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>];<br><span class="hljs-keyword">const</span> result = array.filter(<span class="hljs-function">(<span class="hljs-params">item</span>) =&gt;</span> &#123;<br>  <span class="hljs-keyword">return</span> item &gt; <span class="hljs-number">1</span> &amp;&amp; item &lt; <span class="hljs-number">5</span>;<br>&#125;);<br><span class="hljs-built_in">console</span>.log(result);<br></code></pre></td></tr></table></figure>
 </article><section class="jump-container is-flex is-justify-content-space-between my-6"><!-- em is empty placeholder--><a class="button is-default" href="/2022/11/27/99-script%E6%A0%87%E7%AD%BE%E5%86%99%E4%B8%8Aexport/" title="99、script标签写export为什么会报错?"><i class="iconfont icon-prev mr-2 has-text-grey"></i><span class="has-text-weight-semibold">上一页: 99、script标签写export为什么会报错?</span></a><a class="button is-default" href="/2022/11/23/97-promise/" title="97、promise代码为什么比setTimeout先执行？"><span class="has-text-weight-semibold">下一页: 97、promise代码为什么比setTimeout先执行？</span><i class="iconfont icon-next ml-2 has-text-grey"></i></a></section></div></div></main></main><footer class="is-flex is-flex-direction-column is-align-items-center is-flex-shrink-0 is-family-serif"><section class="sns-container"><!-- Github--><a title="github" target="_blank" rel="noopener nofollow" href="//github.com/Jude"><i class="iconfont icon-github"></i></a><!-- Ins--><!-- RSS--><!-- 知乎--><a title="zhihu" target="_blank" rel="noopener nofollow" href="//zhihu.com/https://www.zhihu.com/hot"><i class="iconfont icon-zhihu"></i></a><!-- 领英--><!-- 脸书--></section><p><span>Copyright ©</span><span> Jude 2023</span></p><div class="is-flex is-justify-content-center is-flex-wrap-wrap"><p>Powered by Hexo &verbar;&nbsp;</p><p class="is-flex is-justify-content-center"><a title="Hexo theme author" target="_blank" rel="noopener" href="//github.com/haojen">Theme by Haojen&nbsp;</a></p><div style="margin-top: 2px"><a class="github-button" title="github-button" target="_blank" rel="noopener" href="https://github.com/haojen/hexo-theme-Claudia" data-color-scheme="no-preference: light; light: light; dark: dark;" data-show-count="true"></a></div></div><div><span>记住昨日的美好，过好今日的生活，憧憬明天的到来</span></div></footer><script async defer src="https://buttons.github.io/buttons.js"></script><script src="/js/post.js"></script></body></html>
