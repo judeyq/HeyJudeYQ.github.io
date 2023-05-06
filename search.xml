@@ -8,7 +8,7 @@
       <link href="/2023/02/03/120-github/"/>
       <url>/2023/02/03/120-github/</url>
       
-        <content type="html"><![CDATA[<span id="more"></span><h2 id="解决方式"><a href="#解决方式" class="headerlink" title="解决方式"></a>解决方式</h2><p>1、打开终端</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ssh">ssh-add -K /Users/yq/.ssh/id_rsa<br></code></pre></td></tr></table></figure><p>根据终端提示，输入电脑开机密码；</p><p>成功后会提示： Identity added: /Users/yq/.ssh/id_rsa (<a href="mailto:&#49;&#x33;&#x33;&#52;&#x33;&#53;&#x32;&#56;&#x30;&#56;&#64;&#113;&#x71;&#x2e;&#x63;&#111;&#x6d;">&#49;&#x33;&#x33;&#52;&#x33;&#53;&#x32;&#56;&#x30;&#56;&#64;&#113;&#x71;&#x2e;&#x63;&#111;&#x6d;</a>)</p><p>之后在提交代码的时候，不会需要 enter 以下提交代码</p>]]></content>
+        <content type="html"><![CDATA[<span id="more"></span><h2 id="解决方式"><a href="#解决方式" class="headerlink" title="解决方式"></a>解决方式</h2><p>1、打开终端</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ssh">ssh-add -K /Users/yq/.ssh/id_rsa<br></code></pre></td></tr></table></figure><p>根据终端提示，输入电脑开机密码；</p><p>成功后会提示： Identity added: /Users/yq/.ssh/id_rsa (<a href="mailto:&#49;&#51;&#51;&#52;&#x33;&#x35;&#50;&#56;&#48;&#x38;&#x40;&#113;&#113;&#x2e;&#99;&#x6f;&#109;">&#49;&#51;&#51;&#52;&#x33;&#x35;&#50;&#56;&#48;&#x38;&#x40;&#113;&#113;&#x2e;&#99;&#x6f;&#109;</a>)</p><p>之后在提交代码的时候，不会需要 enter 以下提交代码</p><p>2、其他</p>]]></content>
       
       
       
