@@ -1,11 +1,214 @@
-<!DOCTYPE html><html class="appearance-auto" lang="zh-CN"><head><meta charset="UTF-8"><title>53、vue使用装饰器descriptor</title><meta name="description" content="呦呦鹿鸣，食野之苹"><meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, initial-scale=1"><!-- Google Analytics --><!-- End Google Analytics -->
-<!-- Baidu Analytics --><!-- End Baidu Analytics --><link rel="icon" href="/images/favicon.png"><link rel="stylesheet" href="/style/common/bulma.css"><link rel="stylesheet" href="/style/base.css"><link rel="stylesheet" href="/style/common/helper.css"><script src="/js/common.js"></script><link rel="stylesheet" href="/style/post.css"><link rel="stylesheet" href="/style/themes/highlight-theme-light.css"><script src="/js/highlight.pack.js"></script><meta name="description" content="decorator装饰器通过对类、对象、方法、属性进行修饰，对其添加一些其他行为，即对一段代码进行二次包装。装饰器只能用于类和类的方法，不能用于函数，因为存在函数提升。
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.1">
 
 
-一、使用方法：1234567const decorator = (target,name,descriptor) =&amp;gt; &amp;#123;  var oldValue = descriptor.value  descriptor.value = function()&amp;#123;    return oldValue.apply(this,arguments)  &amp;#125;  return descriptor&amp;#125;
-使用装饰器可以不需要关注代码内部的实现，增强了代码的可读性。
-vue中使用装饰器：
-项目中使用eslint，需要开.."><meta name="generator" content="Hexo 5.4.1"></head><body class="is-flex is-flex-direction-column"><header class="header-widget is-flex-shrink-0 is-hidden-mobile"><div class="container is-fullhd is-flex is-justify-content-space-between is-align-items-center is-full-height"><section class="is-hidden-mobile is-flex-shrink-0"><h2><a href="/">Jude's blog</a></h2></section><h3 class="is-hidden-mobile is-family-serif is-full-height is-flex is-align-items-center is-flex-shrink-0"><div class="is-full-height" id="postTopic"><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">53、vue使用装饰器descriptor</p><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">点击返回顶部</p></div></h3><aside class="is-flex-shrink-0"><h3 class="is-inline-block"><a href="/">首页</a></h3><h3 class="is-inline-block"><a href="/about">关于</a></h3><h3 class="is-inline-block"><a href="/archives">归档</a></h3></aside></div></header><header class="is-flex header-widget is-flex-shrink-0 is-align-items-center is-justify-content-center is-hidden-tablet"><h3 class="is-inline-block"><a href="/">首页</a></h3><h3 class="is-inline-block"><a href="/about">关于</a></h3><h3 class="is-inline-block"><a href="/archives">归档</a></h3></header><main><main class="container is-max-widescreen content section post-page pt-4 px-4"><div class="columns is-flex-desktop is-justify-content-center is-flex-direction-row-reverse"><div class="column is-3 is-hidden-mobile"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95%EF%BC%9A"><span class="toc-text">一、使用方法：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81Vue%E9%A1%B9%E7%9B%AE%E4%BD%BF%E7%94%A8Element-Ui%E7%BB%84%E4%BB%B6%E5%BA%93%E8%BF%9B%E8%A1%8C%E4%BA%8C%E6%AC%A1%E5%BC%B9%E7%AA%97%E7%A1%AE%E8%AE%A4%E7%9B%B8%E5%85%B3%E6%93%8D%E4%BD%9C%EF%BC%9A"><span class="toc-text">二、Vue项目使用Element-Ui组件库进行二次弹窗确认相关操作：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E5%89%8D%E7%AB%AFAPI%E8%AF%B7%E6%B1%82%E7%BC%93%E5%AD%98"><span class="toc-text">三、前端API请求缓存</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1%E3%80%81key%E5%80%BC%E9%94%99%E8%AF%AF%E6%8F%90%E7%A4%BA"><span class="toc-text">1、key值错误提示</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2%E3%80%81%E7%94%9F%E6%88%90key%E5%80%BC"><span class="toc-text">2、生成key值</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3%E3%80%81api%E6%8E%A5%E5%8F%A3%E5%A4%84%E4%BD%BF%E7%94%A8ApiCache"><span class="toc-text">3、api接口处使用ApiCache()</span></a></li></ol></li></ol></div><div class="column is-9"><header class="my-4"><a href="/tags/vue"><i class="tag post-item-tag">vue</i></a></header><h1 class="mt-0 mb-1 is-family-serif" id="postTitle">53、vue使用装饰器descriptor</h1><time class="has-text-grey" datetime="2022-01-20T12:00:00.000Z">2022-01-20</time><article class="mt-2 post-content"><p>decorator装饰器通过对类、对象、方法、属性进行修饰，对其添加一些其他行为，即对一段代码进行二次包装。<br>装饰器只能用于类和类的方法，不能用于函数，因为存在函数提升。</p>
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+
+<meta name="hexo-config" content="{&quot;hostname&quot;:&quot;issummer.cn&quot;,&quot;root&quot;:&quot;/&quot;,&quot;images&quot;:&quot;/images&quot;,&quot;scheme&quot;:&quot;Muse&quot;,&quot;version&quot;:&quot;8.3.0&quot;,&quot;exturl&quot;:false,&quot;sidebar&quot;:{&quot;position&quot;:&quot;left&quot;,&quot;display&quot;:&quot;post&quot;,&quot;padding&quot;:18,&quot;offset&quot;:12},&quot;copycode&quot;:false,&quot;bookmark&quot;:{&quot;enable&quot;:false,&quot;color&quot;:&quot;#222&quot;,&quot;save&quot;:&quot;auto&quot;},&quot;fancybox&quot;:false,&quot;mediumzoom&quot;:false,&quot;lazyload&quot;:false,&quot;pangu&quot;:false,&quot;comments&quot;:{&quot;style&quot;:&quot;tabs&quot;,&quot;active&quot;:null,&quot;storage&quot;:true,&quot;lazyload&quot;:false,&quot;nav&quot;:null},&quot;motion&quot;:{&quot;enable&quot;:true,&quot;async&quot;:false,&quot;transition&quot;:{&quot;post_block&quot;:&quot;fadeIn&quot;,&quot;post_header&quot;:&quot;fadeInDown&quot;,&quot;post_body&quot;:&quot;fadeInDown&quot;,&quot;coll_header&quot;:&quot;fadeInLeft&quot;,&quot;sidebar&quot;:&quot;fadeInUp&quot;}},&quot;prism&quot;:false,&quot;i18n&quot;:{&quot;placeholder&quot;:&quot;搜索...&quot;,&quot;empty&quot;:&quot;没有找到任何搜索结果：${query}&quot;,&quot;hits_time&quot;:&quot;找到 ${hits} 个搜索结果（用时 ${time} 毫秒）&quot;,&quot;hits&quot;:&quot;找到 ${hits} 个搜索结果&quot;}}">
+<meta name="description" content="decorator装饰器通过对类、对象、方法、属性进行修饰，对其添加一些其他行为，即对一段代码进行二次包装。装饰器只能用于类和类的方法，不能用于函数，因为存在函数提升。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="53、vue使用装饰器descriptor">
+<meta property="og:url" content="http://issummer.cn/2022/01/20/53-decorator/index.html">
+<meta property="og:site_name" content="Jude">
+<meta property="og:description" content="decorator装饰器通过对类、对象、方法、属性进行修饰，对其添加一些其他行为，即对一段代码进行二次包装。装饰器只能用于类和类的方法，不能用于函数，因为存在函数提升。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-01-20T12:00:00.000Z">
+<meta property="article:modified_time" content="2022-09-05T07:55:41.341Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="vue">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://issummer.cn/2022/01/20/53-decorator/">
+
+
+
+<meta name="hexo-config-page" content="{&quot;sidebar&quot;:&quot;&quot;,&quot;isHome&quot;:false,&quot;isPost&quot;:true,&quot;lang&quot;:&quot;zh-CN&quot;}">
+<meta name="hexo-config-calendar" content="">
+<title>53、vue使用装饰器descriptor | Jude</title><script data-pjax src="/js/load-config.js"></script>
+  
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">Jude</h1>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95%EF%BC%9A"><span class="nav-number">1.</span> <span class="nav-text">一、使用方法：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81Vue%E9%A1%B9%E7%9B%AE%E4%BD%BF%E7%94%A8Element-Ui%E7%BB%84%E4%BB%B6%E5%BA%93%E8%BF%9B%E8%A1%8C%E4%BA%8C%E6%AC%A1%E5%BC%B9%E7%AA%97%E7%A1%AE%E8%AE%A4%E7%9B%B8%E5%85%B3%E6%93%8D%E4%BD%9C%EF%BC%9A"><span class="nav-number">2.</span> <span class="nav-text">二、Vue项目使用Element-Ui组件库进行二次弹窗确认相关操作：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E5%89%8D%E7%AB%AFAPI%E8%AF%B7%E6%B1%82%E7%BC%93%E5%AD%98"><span class="nav-number">3.</span> <span class="nav-text">三、前端API请求缓存</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1%E3%80%81key%E5%80%BC%E9%94%99%E8%AF%AF%E6%8F%90%E7%A4%BA"><span class="nav-number">3.1.</span> <span class="nav-text">1、key值错误提示</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2%E3%80%81%E7%94%9F%E6%88%90key%E5%80%BC"><span class="nav-number">3.2.</span> <span class="nav-text">2、生成key值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3%E3%80%81api%E6%8E%A5%E5%8F%A3%E5%A4%84%E4%BD%BF%E7%94%A8ApiCache"><span class="nav-number">3.3.</span> <span class="nav-text">3、api接口处使用ApiCache()</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">John Doe</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">126</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">34</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://issummer.cn/2022/01/20/53-decorator/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jude">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          53、vue使用装饰器descriptor
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2022-01-20 20:00:00" itemprop="dateCreated datePublished" datetime="2022-01-20T20:00:00+08:00">2022-01-20</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2022-09-05 15:55:41" itemprop="dateModified" datetime="2022-09-05T15:55:41+08:00">2022-09-05</time>
+      </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>decorator装饰器通过对类、对象、方法、属性进行修饰，对其添加一些其他行为，即对一段代码进行二次包装。<br>装饰器只能用于类和类的方法，不能用于函数，因为存在函数提升。</p>
 <span id="more"></span>
 
 <h2 id="一、使用方法："><a href="#一、使用方法：" class="headerlink" title="一、使用方法："></a>一、使用方法：</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">const</span> decorator = <span class="hljs-function">(<span class="hljs-params">target,name,descriptor</span>) =&gt;</span> &#123;<br>  <span class="hljs-keyword">var</span> oldValue = descriptor.value<br>  descriptor.value = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>&#123;<br>    <span class="hljs-keyword">return</span> oldValue.apply(<span class="hljs-built_in">this</span>,<span class="hljs-built_in">arguments</span>)<br>  &#125;<br>  <span class="hljs-keyword">return</span> descriptor<br>&#125;<br></code></pre></td></tr></table></figure>
@@ -28,4 +231,78 @@ vue中使用装饰器：
 
 <h3 id="2、生成key值"><a href="#2、生成key值" class="headerlink" title="2、生成key值"></a>2、生成key值</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">generateKey</span>(<span class="hljs-params">name,argument</span>)</span>&#123;<br>  <span class="hljs-comment">// 从argument 中获取数据然后变为数组</span><br>  <span class="hljs-keyword">const</span> params = <span class="hljs-built_in">Array</span>.from(argument).join(<span class="hljs-string">&#x27;,&#x27;</span>)<br>  <span class="hljs-keyword">try</span>&#123;<br>    <span class="hljs-keyword">return</span> <span class="hljs-string">`<span class="hljs-subst">$&#123;name&#125;</span>:<span class="hljs-subst">$&#123;params&#125;</span>`</span><br>  &#125;<span class="hljs-keyword">catch</span>&#123;<br>    <span class="hljs-keyword">return</span> generateKeyError<br>  &#125;<br>&#125;<br><br><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">decorate</span>(<span class="hljs-params">handleDescription,entryArgs</span>) </span>&#123;<br>  <span class="hljs-comment">// 判断当前最后数据是否是descriptor ，如果是descriptor,直接使用</span><br>  <span class="hljs-keyword">if</span>(isDescriptor(entryArgs[entryArgs.length - <span class="hljs-number">1</span>]))&#123;<br>    <span class="hljs-keyword">return</span> handleDescription(...entryArgs,[])<br>  &#125;<span class="hljs-keyword">else</span>&#123;<br>    <span class="hljs-keyword">return</span> <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>&#123;<br>      <span class="hljs-keyword">return</span> handleDescription(...Array.prototype.slice.call(<span class="hljs-built_in">arguments</span>),entryArgs)<br>    &#125;<br>  &#125;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">handleApiCache</span>(<span class="hljs-params">target, name, descriptor, ...config</span>) </span>&#123;<br>    <span class="hljs-comment">// 拿到函数体并保存</span><br>    <span class="hljs-keyword">const</span> fn = descriptor.value<br>    <span class="hljs-comment">// 修改函数体</span><br>    descriptor.value = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123; <br>        <span class="hljs-keyword">const</span> key =  generateKey(name, <span class="hljs-built_in">arguments</span>)<br>        <span class="hljs-comment">// key无法生成，直接请求 服务端数据</span><br>        <span class="hljs-keyword">if</span> (key === generateKeyError)  &#123;<br>            <span class="hljs-comment">// 利用刚才保存的函数体进行请求</span><br>            <span class="hljs-keyword">return</span> fn.apply(<span class="hljs-literal">null</span>, <span class="hljs-built_in">arguments</span>)<br>        &#125;<br>        <span class="hljs-keyword">let</span> promise = ExpriesCache.get(key)<br>        <span class="hljs-keyword">if</span> (!promise) &#123;<br>            <span class="hljs-comment">// 设定promise</span><br>            promise = fn.apply(<span class="hljs-literal">null</span>, <span class="hljs-built_in">arguments</span>).catch(<span class="hljs-function"><span class="hljs-params">error</span> =&gt;</span> &#123;<br>                 <span class="hljs-comment">// 在请求回来后，如果出现问题，把promise从cache中删除</span><br>                ExpriesCache.delete(key)<br>                <span class="hljs-comment">// 返回错误</span><br>                <span class="hljs-keyword">return</span> <span class="hljs-built_in">Promise</span>.reject(error)<br>            &#125;)<br>            <span class="hljs-comment">// 使用 10s 缓存，10s之后再次get就会 获取null 而从服务端继续请求</span><br>            ExpriesCache.set(key, promise, config[<span class="hljs-number">0</span>])<br>        &#125;<br>        <span class="hljs-keyword">return</span> promise <br>    &#125;<br>    <span class="hljs-keyword">return</span> descriptor;<br>&#125;<br><br><span class="hljs-comment">// 制定 修饰器</span><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">ApiCache</span>(<span class="hljs-params">...args</span>) </span>&#123;<br>    <span class="hljs-keyword">return</span> decorate(handleApiCache, args)<br>&#125;<br></code></pre></td></tr></table></figure>
 
-<h3 id="3、api接口处使用ApiCache"><a href="#3、api接口处使用ApiCache" class="headerlink" title="3、api接口处使用ApiCache()"></a>3、api接口处使用ApiCache()</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Api</span></span>&#123;<br>  <span class="hljs-comment">// 缓存10s</span><br>  @ApiCache(<span class="hljs-number">10</span>)<br>  <span class="hljs-function"><span class="hljs-title">getData</span>(<span class="hljs-params">params1,params2</span>)</span>&#123;<br>    <span class="hljs-keyword">return</span> request.get(<span class="hljs-string">&#x27;/getList&#x27;</span>)<br>  &#125;<br>&#125;<br><br></code></pre></td></tr></table></figure></article><section class="jump-container is-flex is-justify-content-space-between my-6"><!-- em is empty placeholder--><a class="button is-default" href="/2022/01/24/54-image-host/" title="54、个人GitHub图床使用webp格式的图片"><i class="iconfont icon-prev mr-2 has-text-grey"></i><span class="has-text-weight-semibold">上一页: 54、个人GitHub图床使用webp格式的图片</span></a><a class="button is-default" href="/2022/01/19/52-webrtc/" title="52、WebRTC音视频"><span class="has-text-weight-semibold">下一页: 52、WebRTC音视频</span><i class="iconfont icon-next ml-2 has-text-grey"></i></a></section></div></div></main></main><footer class="is-flex is-flex-direction-column is-align-items-center is-flex-shrink-0 is-family-serif"><section class="sns-container"><!-- Github--><a title="github" target="_blank" rel="noopener nofollow" href="//github.com/HeyJudeYQ"><i class="iconfont icon-github"></i></a><!-- Ins--><!-- RSS--><!-- 知乎--><a title="zhihu" target="_blank" rel="noopener nofollow" href="//zhihu.com/https://www.zhihu.com/hot"><i class="iconfont icon-zhihu"></i></a><!-- 领英--><!-- 脸书--></section><p><span>Copyright ©</span><span> Jude 2023</span></p><div class="is-flex is-justify-content-center is-flex-wrap-wrap"><p>Powered by Hexo &verbar;&nbsp;</p><p class="is-flex is-justify-content-center"><a title="Hexo theme author" target="_blank" rel="noopener" href="//github.com/haojen">Theme by Haojen&nbsp;</a></p><div style="margin-top: 2px"><a class="github-button" title="github-button" target="_blank" rel="noopener" href="https://github.com/haojen/hexo-theme-Claudia" data-color-scheme="no-preference: light; light: light; dark: dark;" data-show-count="true"></a></div></div><div><span>记住昨日的美好，过好今日的生活，憧憬明天的到来</span></div></footer><script async defer src="https://buttons.github.io/buttons.js"></script><script src="/js/post.js"></script></body></html>
+<h3 id="3、api接口处使用ApiCache"><a href="#3、api接口处使用ApiCache" class="headerlink" title="3、api接口处使用ApiCache()"></a>3、api接口处使用ApiCache()</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Api</span></span>&#123;<br>  <span class="hljs-comment">// 缓存10s</span><br>  @ApiCache(<span class="hljs-number">10</span>)<br>  <span class="hljs-function"><span class="hljs-title">getData</span>(<span class="hljs-params">params1,params2</span>)</span>&#123;<br>    <span class="hljs-keyword">return</span> request.get(<span class="hljs-string">&#x27;/getList&#x27;</span>)<br>  &#125;<br>&#125;<br><br></code></pre></td></tr></table></figure>
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/vue/" rel="tag"># vue</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2022/01/19/52-webrtc/" rel="prev" title="52、WebRTC音视频">
+                  <i class="fa fa-chevron-left"></i> 52、WebRTC音视频
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2022/01/24/54-image-host/" rel="next" title="54、个人GitHub图床使用webp格式的图片">
+                  54、个人GitHub图床使用webp格式的图片 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+<script src="/js/comments.js"></script>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

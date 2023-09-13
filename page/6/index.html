@@ -1,164 +1,794 @@
-<!DOCTYPE html><html class="appearance-auto" lang="zh-CN"><head><meta charset="UTF-8"><title>Jude's blog</title><meta name="description" content="呦呦鹿鸣，食野之苹"><meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, initial-scale=1"><!-- Google Analytics --><!-- End Google Analytics -->
-<!-- Baidu Analytics --><!-- End Baidu Analytics --><link rel="icon" href="/images/favicon.png"><link rel="stylesheet" href="/style/common/bulma.css"><link rel="stylesheet" href="/style/base.css"><link rel="stylesheet" href="/style/common/helper.css"><script src="/js/common.js"></script><link rel="stylesheet" href="/style/widget-post-list.css"><meta name="generator" content="Hexo 5.4.1"></head><body class="is-flex is-flex-direction-column"><header class="header-widget is-flex-shrink-0 is-hidden-mobile"><div class="container is-fullhd is-flex is-justify-content-space-between is-align-items-center is-full-height"><section class="is-hidden-mobile is-flex-shrink-0"><h2><a href="/">Jude's blog</a></h2></section><h3 class="is-hidden-mobile is-family-serif is-full-height is-flex is-align-items-center is-flex-shrink-0"></h3><aside class="is-flex-shrink-0"><h3 class="is-inline-block"><a href="/">首页</a></h3><h3 class="is-inline-block"><a href="/about">关于</a></h3><h3 class="is-inline-block"><a href="/archives">归档</a></h3></aside></div></header><header class="is-flex header-widget is-flex-shrink-0 is-align-items-center is-justify-content-center is-hidden-tablet"><h3 class="is-inline-block"><a href="/">首页</a></h3><h3 class="is-inline-block"><a href="/about">关于</a></h3><h3 class="is-inline-block"><a href="/archives">归档</a></h3></header><main><article class="post-container is-flex is-justify-content-center section container is-max-widescreen pt-4 px-2"><div class="columns is-variable is-1-tablet is-3-desktop-only is-2-widescreen is-full-width"><section class="column"><article class="post-item-card"><section class="content post-card-content p-4 pb-5"><header><a href="/tags/vue3"><i class="tag post-item-tag">vue3</i></a></header><h2 class="mt-4 mb-0 is-family-serif"><a href="/2022/12/01/101-markdown/">101、富文本与markdown对文本的处理</a></h2><time class="has-text-grey" datetime="2022-12-01T12:00:00.000Z">2022-12-01</time><p class="is-flex-grow-2 mt-2">
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.1">
 
-编辑文本的 2 种方式：1、富文本; 2、markdown。这 2 种编辑形式在前端中有很多第 3 方库。
-一、创建文本基本结构1-1 创建文本基本结构，主要分为三部分：1、article-create 页面：基本结构
-2、Editor 组件：富文本编辑器
-3、Markdown 组件： markdown 编辑器
-src 目录下的项目结构：
-12345views / article - create / components / Editor.vue;views / article - create / components / Markdown.vue;views / article - create / index.vue;
 
-1-2 创建文本父组件12345678910111213141516171..</p><a class="button is-default mt-2 has-text-weight-semibold" href="/2022/12/01/101-markdown/">更多</a></section></article><article class="post-item-card"><section class="content post-card-content p-4 pb-5"><header><a href="/tags/vuex"><i class="tag post-item-tag">vuex</i></a></header><h2 class="mt-4 mb-0 is-family-serif"><a href="/2022/11/29/100-vuex/">100、vuex的缺点及从0写一个vuex的思路</a></h2><time class="has-text-grey" datetime="2022-11-29T12:00:00.000Z">2022-11-29</time><p class="is-flex-grow-2 mt-2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
 
-1、用过 module，项目规模变大之后，单独一个 store 对象会过于庞大臃肿，通过模块方式可以拆分开来便于维护
-2、可以按之前规则单独编写子模块代码，然后在主文件中通过modules选项组织起来：createStore(&amp;#123;modules:&amp;#123;...&amp;#125;&amp;#125;)。
-3、不过使用时要注意访问子模块状态时需要加上注册时模块名：store.state.a.xxx，但同时getters、mutations和actions又在全局空间中，使用方式和之前一样。如果要做到完全拆分，需要在子模块加上namespace选项，此时再访问它们就要加上命名空间前缀。
-很显然，模块的方式可以拆分代码，但是缺点也很明显，就是使用起来比较繁琐复杂，容易出错。而且类型系统支持很差，不能给我们带来帮助..</p><a class="button is-default mt-2 has-text-weight-semibold" href="/2022/11/29/100-vuex/">更多</a></section></article><article class="post-item-card"><section class="content post-card-content p-4 pb-5"><header><a href="/tags/js"><i class="tag post-item-tag">js</i></a></header><h2 class="mt-4 mb-0 is-family-serif"><a href="/2022/11/27/99-script%E6%A0%87%E7%AD%BE%E5%86%99%E4%B8%8Aexport/">99、script标签写export为什么会报错?</a></h2><time class="has-text-grey" datetime="2022-11-27T12:00:00.000Z">2022-11-27</time><p class="is-flex-grow-2 mt-2">
+<link rel="stylesheet" href="/css/main.css">
 
-一、脚本和模块​ JavaScript 有 2 种源文件，一种叫做脚本，一种叫做模块。这个区分是在 ES6 引入了模块机制开始的，在 ES5 和之前版本中，就只有一种源文件格式，即脚本。
-​ 脚本是可以由浏览器或者 node 环境引入执行的，而模块智能有 JavaScript 代码用 import 引入执行。
-​ 脚本具有主动性的 JavaScript 代码段，是控制宿主完成一定任务的代码；而模块是被动行的 JavaScript 代码段，是等待被调用的库。
-​ 实际上，模块和脚本之间的区别仅仅在于是否包含import和export。
-​ 脚本是一种兼容之前的版本的定义，在这个模式下，没有 import 就不需要处理加载.js 文件问题。
-​ 现代浏览器可以支持用 script 标签引入模块或者脚本，如果..</p><a class="button is-default mt-2 has-text-weight-semibold" href="/2022/11/27/99-script%E6%A0%87%E7%AD%BE%E5%86%99%E4%B8%8Aexport/">更多</a></section></article><article class="post-item-card"><section class="content post-card-content p-4 pb-5"><header><a href="/tags/js"><i class="tag post-item-tag">js</i></a></header><h2 class="mt-4 mb-0 is-family-serif"><a href="/2022/11/26/98-js-string-number-array/">98、基于JavaScript开发灵活的数据应用--基本数据处理(一)</a></h2><time class="has-text-grey" datetime="2022-11-26T12:00:00.000Z">2022-11-26</time><p class="is-flex-grow-2 mt-2">现代编程语言中，最基本的数据格式都会是字符串和数字。字符串用于表达人类文明的自然语言，数字用于表达量化世界的各种数值。</p><a class="button is-default mt-2 has-text-weight-semibold" href="/2022/11/26/98-js-string-number-array/">更多</a></section></article><article class="post-item-card"><section class="content post-card-content p-4 pb-5"><header><a href="/tags/promise"><i class="tag post-item-tag">promise</i></a></header><h2 class="mt-4 mb-0 is-family-serif"><a href="/2022/11/23/97-promise/">97、promise代码为什么比setTimeout先执行？</a></h2><time class="has-text-grey" datetime="2022-11-23T12:00:00.000Z">2022-11-23</time><p class="is-flex-grow-2 mt-2">​ 当拿到一段 JavaScript 代码时，浏览器或者 Node 环境首先要做的就是；传递给 JavaScript 引擎，并且要求它去执行。然而，执行 JavaScript 并非一锤子买卖，宿主环境当遇到一些事件时，会继续把一段代码传递给 JavaScript 引擎去执行，此外，我们可能还会提供 API 给 JavaScript 引擎，比如 setTimeout 这样的 API，它会允许 JavaScript 在特定的时机执行。所以，我们首先应该形成一个感性的认知：一个 JavaScript 引擎会常驻于内存中，它等待着我们（宿主）把 JavaScript 代码或者函数传递给它执行。</p><a class="button is-default mt-2 has-text-weight-semibold" href="/2022/11/23/97-promise/">更多</a></section></article><section class="paginator is-flex is-justify-content-flex-end is-flex-wrap-wrap mt-5"><a class="extend prev" rel="prev" href="/page/5/"><i class="iconfont icon-prev has-text-grey"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><span class="space">&hellip;</span><a class="page-number" href="/page/26/">26</a><a class="extend next" rel="next" href="/page/7/"><i class="iconfont icon-next has-text-grey"></i></a></section></section><aside class="column is-hidden-mobile is-4-tablet is-3-widescreen"><style>.search-widget .search-input {
-    border: none;
-    outline: none;
-    background: transparent;
-    color: var(--second-text-color);
-}
-.search-widget .search-content {
-    position: absolute;
-    left: 0;
-    top: calc(100% - 3px);
-    z-index: 2;
 
-    width: 100%;
-    height: 0;
-    max-height: 550px;
 
-    overflow: auto;
-    box-sizing: border-box;
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
 
-    background: var(--top-bar-bg-color);
-    backdrop-filter: blur(var(--backdropFilter));
-    -webkit-backdrop-filter: blur(var(--backdropFilter));
+<meta name="hexo-config" content="{&quot;hostname&quot;:&quot;issummer.cn&quot;,&quot;root&quot;:&quot;/&quot;,&quot;images&quot;:&quot;/images&quot;,&quot;scheme&quot;:&quot;Muse&quot;,&quot;version&quot;:&quot;8.3.0&quot;,&quot;exturl&quot;:false,&quot;sidebar&quot;:{&quot;position&quot;:&quot;left&quot;,&quot;display&quot;:&quot;post&quot;,&quot;padding&quot;:18,&quot;offset&quot;:12},&quot;copycode&quot;:false,&quot;bookmark&quot;:{&quot;enable&quot;:false,&quot;color&quot;:&quot;#222&quot;,&quot;save&quot;:&quot;auto&quot;},&quot;fancybox&quot;:false,&quot;mediumzoom&quot;:false,&quot;lazyload&quot;:false,&quot;pangu&quot;:false,&quot;comments&quot;:{&quot;style&quot;:&quot;tabs&quot;,&quot;active&quot;:null,&quot;storage&quot;:true,&quot;lazyload&quot;:false,&quot;nav&quot;:null},&quot;motion&quot;:{&quot;enable&quot;:true,&quot;async&quot;:false,&quot;transition&quot;:{&quot;post_block&quot;:&quot;fadeIn&quot;,&quot;post_header&quot;:&quot;fadeInDown&quot;,&quot;post_body&quot;:&quot;fadeInDown&quot;,&quot;coll_header&quot;:&quot;fadeInLeft&quot;,&quot;sidebar&quot;:&quot;fadeInUp&quot;}},&quot;prism&quot;:false,&quot;i18n&quot;:{&quot;placeholder&quot;:&quot;搜索...&quot;,&quot;empty&quot;:&quot;没有找到任何搜索结果：${query}&quot;,&quot;hits_time&quot;:&quot;找到 ${hits} 个搜索结果（用时 ${time} 毫秒）&quot;,&quot;hits&quot;:&quot;找到 ${hits} 个搜索结果&quot;}}">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Jude">
+<meta property="og:url" content="http://issummer.cn/page/6/index.html">
+<meta property="og:site_name" content="Jude">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
 
-    border-bottom-left-radius: var(--borderRadius);
-    border-bottom-right-radius: var(--borderRadius);
-    box-shadow: 0 12px 15px rgba(0, 0, 0, 0.08);
-}
 
-.search-widget .search-content a:hover h5 {
-    color: #3273dc!important;
-}
-</style><main class="aside-card-container search-widget is-relative"><label for="searchInput"><div class="is-flex px-4" id="searchButton"><i class="iconfont icon--search1 mr-1"></i><input class="search-input is-flex-grow-1" id="searchInput" placeholder="搜索内容.."></div></label><section class="search-content content" id="searchContent"></section></main><script>var searchDatabase = []
-var searchInputEl = document.getElementById('searchInput')
-var searchButtonEl = document.getElementById('searchButton')
-var searchResultEl = document.getElementById('searchContent')
+<link rel="canonical" href="http://issummer.cn/page/6/">
 
-searchInputEl.oninput = function (evt) {
-    var searchValue = evt.srcElement.value
-    var haveSearchValue = Boolean(searchValue.trim())
-    if (!haveSearchValue) {
-        searchResultEl.style.height = 0
-        searchResultEl.innerHTML = null
-        return
-    }
 
-    var searchResults = searching(searchValue)
 
-    if (searchResults.length > 0) {
-        renderSearchResults(searchResults)
-    }
-}
+<meta name="hexo-config-page" content="{&quot;sidebar&quot;:&quot;&quot;,&quot;isHome&quot;:true,&quot;isPost&quot;:false,&quot;lang&quot;:&quot;zh-CN&quot;}">
+<meta name="hexo-config-calendar" content="">
+<title>Jude</title><script data-pjax src="/js/load-config.js"></script>
+  
 
-function renderSearchResults(results) {
-    searchResultEl.innerHTML = null
-    var fragment = document.createDocumentFragment()
 
-    results.forEach(function (item) {
-        var link = document.createElement('a')
-        var title = document.createElement('h5')
-        var content = document.createElement('p')
 
-        title.className = 'mb-1'
-        title.innerText = item.title
-        content.innerText = item.content
 
-        link.href = item.link
-        link.appendChild(title)
-        link.appendChild(content)
-        link.className = 'p-4 is-block'
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
 
-        fragment.appendChild(link)
-    })
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
 
-    searchResultEl.appendChild(fragment)
-    searchResultEl.style.height = 'auto'
-}
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+    </div>
+  </div>
 
-function searching(inputText) {
-    var inputTexts = inputText.split(' ')
-    var searchResults = []
-    inputTexts.forEach(function (searchKey) {
-        var haveSearchValue = Boolean(searchKey.trim())
-        if (!haveSearchValue) return
+  <div class="site-meta">
 
-        var key = searchKey.toLowerCase()
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">Jude</h1>
+      <i class="logo-line"></i>
+    </a>
+  </div>
 
-        for (var entry of searchDatabase) {
-            var title = entry.getElementsByTagName('title')[0].textContent
-            var link = entry.getElementsByTagName('link')[0].getAttribute('href')
-            var contentWithTags = entry.getElementsByTagName('content')[0].textContent
-            var rawContent = contentWithTags.trim().replace(/<[^>]+>/g, '').toLowerCase()
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
 
-            var LENGTH = 80
-            var finalContent = ''
-            var contentLength = rawContent.length
-            var searchResultIdx = rawContent.indexOf(key)
 
-            var startIdx = searchResultIdx - 20,
-                endIdx = startIdx + LENGTH
 
-            if (startIdx < 0) {
-                startIdx = 0
-                endIdx = 100
-            }
 
-            endIdx > contentLength && (endIdx = contentLength)
 
-            finalContent = rawContent.substring(startIdx, endIdx)
 
-            if (title.indexOf(key) > -1 || searchResultIdx > -1) {
-                searchResults.push({
-                    link: link,
-                    title: title,
-                    content: finalContent
-                })
-            }
-        }
-    })
-    return searchResults
-}
 
-searchButtonEl.onclick = function () {
-    if (searchDatabase.length > 0) return;
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
 
-    fetch(window.location.href + '/search.xml').then(res => res.text()).then(res => {
-        var domparser = new DOMParser
-        var doc = domparser.parseFromString(res, 'application/xml')
-        searchDatabase = doc.getElementsByTagName('search')[0].children
-    })
-}</script><main class="aside-card-container profile-widget"><!-- todo: 使用取色工具动态阴影--><section class="is-flex is-flex-direction-column is-justify-content-center is-align-items-center"><section class="is-flex is-justify-content-center avatar is-clipped skeleton"><!-- debug images "https://api.ixiaowai.cn/gqapi/gqapi.php"--><img class="js-img-fadeIn" src="https://cdn.jsdelivr.net/gh/HeyJudeYQ/Image-Host@master/1.14zp2ajraydc.webp" alt="user avatar"></section><h3 class="user-name">Jude</h3><blockquote class="has-text-centered is-relative"><span style="margin-bottom: 5px;">呦呦鹿鸣，食野之苹</span></blockquote><address class="has-text-centered has-text-grey"><i class="iconfont icon-location" style="margin-right: 5px;"></i><span class="has-text-grey">上海 - 中国</span></address></section><section class="sns-container is-flex is-justify-content-center is-align-items-center"><!-- Github--><a title="github" target="_blank" rel="noopener nofollow" href="//github.com/HeyJudeYQ"><i class="iconfont icon-github"></i></a><!-- Ins--><!-- RSS--><!-- 知乎--><a title="zhihu" target="_blank" rel="noopener nofollow" href="//zhihu.com/https://www.zhihu.com/hot"><i class="iconfont icon-zhihu"></i></a><!-- 领英--><!-- 脸书--></section></main><main class="aside-card-container recent-widget"><h3>最近</h3><ul><li class="is-flex"><!-- change to element replace image placeholder--><img class="js-img-fadeIn" src="https://ui-avatars.com/api/?background=f5f5f5&amp;name=10" alt="cover"><!--else--><!--    div.post-img-placeholder--><section class="is-flex-grow-2"><p class="has-text-weight-semibold" style="line-height: 20px; font-size: 14px"><a href="/2022/12/01/101-markdown/">101、富文本与markdown对文本的处理</a></p><time class="has-text-weight-semibold has-text-grey" datetime="2022-12-01T12:00:00.000Z">2022-12-01</time></section></li><li class="is-flex"><!-- change to element replace image placeholder--><img class="js-img-fadeIn" src="https://ui-avatars.com/api/?background=f5f5f5&amp;name=10" alt="cover"><!--else--><!--    div.post-img-placeholder--><section class="is-flex-grow-2"><p class="has-text-weight-semibold" style="line-height: 20px; font-size: 14px"><a href="/2022/11/29/100-vuex/">100、vuex的缺点及从0写一个vuex的思路</a></p><time class="has-text-weight-semibold has-text-grey" datetime="2022-11-29T12:00:00.000Z">2022-11-29</time></section></li><li class="is-flex"><!-- change to element replace image placeholder--><img class="js-img-fadeIn" src="https://ui-avatars.com/api/?background=f5f5f5&amp;name=99" alt="cover"><!--else--><!--    div.post-img-placeholder--><section class="is-flex-grow-2"><p class="has-text-weight-semibold" style="line-height: 20px; font-size: 14px"><a href="/2022/11/27/99-script%E6%A0%87%E7%AD%BE%E5%86%99%E4%B8%8Aexport/">99、script标签写export为什么会报错?</a></p><time class="has-text-weight-semibold has-text-grey" datetime="2022-11-27T12:00:00.000Z">2022-11-27</time></section></li><li class="is-flex"><!-- change to element replace image placeholder--><img class="js-img-fadeIn" src="https://ui-avatars.com/api/?background=f5f5f5&amp;name=98" alt="cover"><!--else--><!--    div.post-img-placeholder--><section class="is-flex-grow-2"><p class="has-text-weight-semibold" style="line-height: 20px; font-size: 14px"><a href="/2022/11/26/98-js-string-number-array/">98、基于JavaScript开发灵活的数据应用--基本数据处理(一)</a></p><time class="has-text-weight-semibold has-text-grey" datetime="2022-11-26T12:00:00.000Z">2022-11-26</time></section></li><li class="is-flex"><!-- change to element replace image placeholder--><img class="js-img-fadeIn" src="https://ui-avatars.com/api/?background=f5f5f5&amp;name=97" alt="cover"><!--else--><!--    div.post-img-placeholder--><section class="is-flex-grow-2"><p class="has-text-weight-semibold" style="line-height: 20px; font-size: 14px"><a href="/2022/11/23/97-promise/">97、promise代码为什么比setTimeout先执行？</a></p><time class="has-text-weight-semibold has-text-grey" datetime="2022-11-23T12:00:00.000Z">2022-11-23</time></section></li></ul></main><main class="aside-card-container archives-widget"><h3>归档</h3><section><ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/03/">三月 2023</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/02/">二月 2023</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/01/">一月 2023</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/12/">十二月 2022</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/11/">十一月 2022</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/10/">十月 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/08/">八月 2022</a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">七月 2022</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/06/">六月 2022</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">五月 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/04/">四月 2022</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/03/">三月 2022</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/02/">二月 2022</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/01/">一月 2022</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/12/">十二月 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/10/">十月 2021</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/09/">九月 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/06/">六月 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/05/">五月 2021</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">四月 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">三月 2021</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/02/">二月 2021</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">一月 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">八月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">四月 2020</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">二月 2020</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">一月 2020</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">十二月 2019</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">十一月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">九月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">八月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">六月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">一月 2019</a><span class="archive-list-count">2</span></li></ul></section></main><main class="aside-card-container tag-widget"><h3>标签</h3><section><a href="/tags/vuex"><span class="tag post-item-tag" style="margin-bottom: 5px;">vuex</span></a><a href="/tags/vue3"><span class="tag post-item-tag" style="margin-bottom: 5px;">vue3</span></a><a href="/tags/ts"><span class="tag post-item-tag" style="margin-bottom: 5px;">ts</span></a><a href="/tags/vue"><span class="tag post-item-tag" style="margin-bottom: 5px;">vue</span></a><a href="/tags/css"><span class="tag post-item-tag" style="margin-bottom: 5px;">css</span></a><a href="/tags/mysql"><span class="tag post-item-tag" style="margin-bottom: 5px;">mysql</span></a><a href="/tags/react"><span class="tag post-item-tag" style="margin-bottom: 5px;">react</span></a><a href="/tags/git"><span class="tag post-item-tag" style="margin-bottom: 5px;">git</span></a><a href="/tags/egg"><span class="tag post-item-tag" style="margin-bottom: 5px;">egg</span></a><a href="/tags/tool"><span class="tag post-item-tag" style="margin-bottom: 5px;">tool</span></a><a href="/tags/js"><span class="tag post-item-tag" style="margin-bottom: 5px;">js</span></a><a href="/tags/vue-loader"><span class="tag post-item-tag" style="margin-bottom: 5px;">vue-loader</span></a><a href="/tags/promise"><span class="tag post-item-tag" style="margin-bottom: 5px;">promise</span></a><a href="/tags/dev"><span class="tag post-item-tag" style="margin-bottom: 5px;">dev</span></a><a href="/tags/ant-design-vue"><span class="tag post-item-tag" style="margin-bottom: 5px;">ant-design-vue</span></a><a href="/tags/array"><span class="tag post-item-tag" style="margin-bottom: 5px;">array</span></a><a href="/tags/other"><span class="tag post-item-tag" style="margin-bottom: 5px;">other</span></a><a href="/tags/axios"><span class="tag post-item-tag" style="margin-bottom: 5px;">axios</span></a><a href="/tags/canvas"><span class="tag post-item-tag" style="margin-bottom: 5px;">canvas</span></a><a href="/tags/bmap"><span class="tag post-item-tag" style="margin-bottom: 5px;">bmap</span></a><a href="/tags/ECharts"><span class="tag post-item-tag" style="margin-bottom: 5px;">ECharts</span></a><a href="/tags/element-ui"><span class="tag post-item-tag" style="margin-bottom: 5px;">element-ui</span></a><a href="/tags/vue2"><span class="tag post-item-tag" style="margin-bottom: 5px;">vue2</span></a><a href="/tags/eslint"><span class="tag post-item-tag" style="margin-bottom: 5px;">eslint</span></a><a href="/tags/h5"><span class="tag post-item-tag" style="margin-bottom: 5px;">h5</span></a><a href="/tags/http"><span class="tag post-item-tag" style="margin-bottom: 5px;">http</span></a><a href="/tags/cdn"><span class="tag post-item-tag" style="margin-bottom: 5px;">cdn</span></a><a href="/tags/markdown"><span class="tag post-item-tag" style="margin-bottom: 5px;">markdown</span></a><a href="/tags/time"><span class="tag post-item-tag" style="margin-bottom: 5px;">time</span></a><a href="/tags/typescript"><span class="tag post-item-tag" style="margin-bottom: 5px;">typescript</span></a><a href="/tags/hexo"><span class="tag post-item-tag" style="margin-bottom: 5px;">hexo</span></a><a href="/tags/v-charts"><span class="tag post-item-tag" style="margin-bottom: 5px;">v-charts</span></a><a href="/tags/webrtc"><span class="tag post-item-tag" style="margin-bottom: 5px;">webrtc</span></a><a href="/tags/websocket"><span class="tag post-item-tag" style="margin-bottom: 5px;">websocket</span></a></section></main></aside></div></article><script>$claudia.fadeInImage(null, $claudia.blurBackdropImg)
+  <aside class="sidebar">
 
-window.addEventListener('resize', $claudia.throttle(function () {
-    var images = document.querySelectorAll('.js-img-fadeIn')
+    <div class="sidebar-inner sidebar-overview-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
 
-    images.forEach($claudia.blurBackdropImg)
-}, 150))</script></main><footer class="is-flex is-flex-direction-column is-align-items-center is-flex-shrink-0 is-family-serif"><section class="sns-container"><!-- Github--><a title="github" target="_blank" rel="noopener nofollow" href="//github.com/HeyJudeYQ"><i class="iconfont icon-github"></i></a><!-- Ins--><!-- RSS--><!-- 知乎--><a title="zhihu" target="_blank" rel="noopener nofollow" href="//zhihu.com/https://www.zhihu.com/hot"><i class="iconfont icon-zhihu"></i></a><!-- 领英--><!-- 脸书--></section><p><span>Copyright ©</span><span> Jude 2023</span></p><div class="is-flex is-justify-content-center is-flex-wrap-wrap"><p>Powered by Hexo &verbar;&nbsp;</p><p class="is-flex is-justify-content-center"><a title="Hexo theme author" target="_blank" rel="noopener" href="//github.com/haojen">Theme by Haojen&nbsp;</a></p><div style="margin-top: 2px"><a class="github-button" title="github-button" target="_blank" rel="noopener" href="https://github.com/haojen/hexo-theme-Claudia" data-color-scheme="no-preference: light; light: light; dark: dark;" data-show-count="true"></a></div></div><div><span>记住昨日的美好，过好今日的生活，憧憬明天的到来</span></div></footer><script async defer src="https://buttons.github.io/buttons.js"></script><script>$claudia.fadeInImage(null, $claudia.blurBackdropImg)
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+        </div>
+        <!--/noindex-->
 
-window.addEventListener('resize', $claudia.throttle(function () {
-    var images = document.querySelectorAll('.js-img-fadeIn')
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">John Doe</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">126</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">34</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
 
-    images.forEach($claudia.blurBackdropImg)
-}, 150))</script></body></html>
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://issummer.cn/2022/12/01/101-markdown/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jude">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/12/01/101-markdown/" class="post-title-link" itemprop="url">101、富文本与markdown对文本的处理</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2022-12-01 20:00:00" itemprop="dateCreated datePublished" datetime="2022-12-01T20:00:00+08:00">2022-12-01</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2023-02-01 11:24:53" itemprop="dateModified" datetime="2023-02-01T11:24:53+08:00">2023-02-01</time>
+      </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <span id="more"></span>
+
+<p>编辑文本的 2 种方式：1、富文本; 2、markdown。这 2 种编辑形式在前端中有很多第 3 方库。</p>
+<h2 id="一、创建文本基本结构"><a href="#一、创建文本基本结构" class="headerlink" title="一、创建文本基本结构"></a>一、创建文本基本结构</h2><h2 id="1-1-创建文本基本结构，主要分为三部分："><a href="#1-1-创建文本基本结构，主要分为三部分：" class="headerlink" title="1-1 创建文本基本结构，主要分为三部分："></a>1-1 创建文本基本结构，主要分为三部分：</h2><p>1、article-create 页面：基本结构</p>
+<p>2、Editor 组件：富文本编辑器</p>
+<p>3、Markdown 组件： markdown 编辑器</p>
+<p>src 目录下的项目结构：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">views / article - create / components / Editor.vue;<br><br>views / article - create / components / Markdown.vue;<br><br>views / article - create / index.vue;<br></code></pre></td></tr></table></figure>
+
+<h2 id="1-2-创建文本父组件"><a href="#1-2-创建文本父组件" class="headerlink" title="1-2 创建文本父组件"></a>1-2 创建文本父组件</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><code class="hljs vue">&lt;template&gt;<br>  &lt;div class=&quot;article-create&quot;&gt;<br>    &lt;el-card&gt;<br>      &lt;el-input<br>        class=&quot;title-input&quot;<br>        placeholder=&quot;请输入标题&quot;<br>        v-model=&quot;title&quot;<br>        maxlength=&quot;20&quot;<br>        clearable<br>      &gt;<br>      &lt;/el-input&gt;<br>      &lt;el-tabs v-model=&quot;activeName&quot;&gt;<br>        &lt;el-tab-pane label=&quot;markdown&quot; name=&quot;markdown&quot;&gt;<br>          &lt;markdown&gt;&lt;/markdown&gt;<br>        &lt;/el-tab-pane&gt;<br>        &lt;el-tab-pane label=&quot;富文本&quot; name=&quot;editor&quot;&gt;<br>          &lt;editor&gt;&lt;/editor&gt;<br>        &lt;/el-tab-pane&gt;<br>      &lt;/el-tabs&gt;<br>    &lt;/el-card&gt;<br>  &lt;/div&gt;<br>&lt;/template&gt;<br><br>&lt;script setup&gt;<br>import Editor from &quot;./components/Editor.vue&quot;;<br>import Markdown from &quot;./components/Markdown.vue&quot;;<br>import &#123; ref &#125; from &quot;vue&quot;;<br><br>const activeName = ref(&quot;markdown&quot;);<br>const title = ref(&quot;&quot;);<br>&lt;/script&gt;<br><br>&lt;style lang=&quot;scss&quot; scoped&gt;<br>.title-input &#123;<br>  margin-bottom: 20px;<br>&#125;<br>&lt;/style&gt;<br></code></pre></td></tr></table></figure>
+
+<h2 id="1-3-markdown-编辑器：tui-editor"><a href="#1-3-markdown-编辑器：tui-editor" class="headerlink" title="1-3 markdown 编辑器：tui.editor"></a>1-3 markdown 编辑器：tui.editor</h2><blockquote>
+<p>安装 plugin：</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">npm i @toast-ui/editor@3.0.2<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>渲染 markdown 基本结构</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs vue">&lt;template&gt;<br>  &lt;div class=&quot;markdown-container&quot;&gt;<br>    &lt;!-- 渲染区 --&gt;<br>    &lt;div id=&quot;markdown-box&quot;&gt;&lt;/div&gt;<br>    &lt;div class=&quot;bottom&quot;&gt;<br>      &lt;el-button type=&quot;primary&quot; @click=&quot;onSubmitClick&quot;&gt;提交&lt;/el-button&gt;<br>    &lt;/div&gt;<br>  &lt;/div&gt;<br>&lt;/template&gt;<br><br>&lt;script setup&gt;<br>import &#123;&#125; from &quot;vue&quot;;<br>&lt;/script&gt;<br><br>&lt;style lang=&quot;scss&quot; scoped&gt;<br>.markdown-container &#123;<br>  .bottom &#123;<br>    margin-top: 20px;<br>    text-align: right;<br>  &#125;<br>&#125;<br>&lt;/style&gt;<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>初始化 editor</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><code class="hljs js">&lt;script setup&gt;<br><span class="hljs-keyword">import</span> MkEditor <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@toast-ui/editor&#x27;</span><br><span class="hljs-keyword">import</span> <span class="hljs-string">&#x27;@toast-ui/editor/dist/toastui-editor.css&#x27;</span><br><span class="hljs-comment">// 国际化部分</span><br><span class="hljs-comment">// import &#x27;@toast-ui/editor/dist/i18n/zh-cn&#x27;</span><br><span class="hljs-keyword">import</span> &#123; onMounted &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;vue&#x27;</span><br><span class="hljs-keyword">import</span> &#123; useStore &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;vuex&#x27;</span><br><br><span class="hljs-comment">// Editor实例</span><br><span class="hljs-keyword">let</span> mkEditor<br><span class="hljs-comment">// 处理离开页面切换语言导致 dom 无法被获取</span><br><span class="hljs-keyword">let</span> el<br>onMounted(<span class="hljs-function">() =&gt;</span> &#123;<br>  el = <span class="hljs-built_in">document</span>.querySelector(<span class="hljs-string">&#x27;#markdown-box&#x27;</span>)<br>  initEditor()<br>&#125;)<br><br><span class="hljs-keyword">const</span> store = useStore()<br><span class="hljs-keyword">const</span> initEditor = <span class="hljs-function">() =&gt;</span> &#123;<br>  mkEditor = <span class="hljs-keyword">new</span> MkEditor(&#123;<br>    el,<br>    <span class="hljs-attr">height</span>: <span class="hljs-string">&#x27;500px&#x27;</span>,<br>    <span class="hljs-attr">previewStyle</span>: <span class="hljs-string">&#x27;vertical&#x27;</span><br>  &#125;)<br><br>  mkEditor.getMarkdown()<br>&#125;<br>&lt;/script&gt;<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>新建文本及新建文本的提交</p>
+</blockquote>
+<p>接口定义：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-comment">// src/api/article.js</span><br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * 创建文章</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> createArticle = <span class="hljs-function">(<span class="hljs-params">data</span>) =&gt;</span> &#123;<br>  <span class="hljs-keyword">return</span> request(&#123;<br>    <span class="hljs-attr">url</span>: <span class="hljs-string">&quot;/article/create&quot;</span>,<br>    <span class="hljs-attr">method</span>: <span class="hljs-string">&quot;POST&quot;</span>,<br>    data,<br>  &#125;);<br>&#125;;<br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * 编辑文章详情</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> articleEdit = <span class="hljs-function">(<span class="hljs-params">data</span>) =&gt;</span> &#123;<br>  <span class="hljs-keyword">return</span> request(&#123;<br>    <span class="hljs-attr">url</span>: <span class="hljs-string">&quot;/article/edit&quot;</span>,<br>    <span class="hljs-attr">method</span>: <span class="hljs-string">&quot;POST&quot;</span>,<br>    data,<br>  &#125;);<br>&#125;;<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<blockquote>
+<p>注意：markwodn 和富文本最终都会处理提交事件，将提交合并到一个模块实现</p>
+</blockquote>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-comment">// src/views/article-create/components/commit.js</span><br><span class="hljs-keyword">import</span> &#123; createArticle, articleEdit &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@/api/article&quot;</span>;<br><span class="hljs-keyword">import</span> &#123; ElMessage &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;element-plus&quot;</span>;<br><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> commitArticle = <span class="hljs-keyword">async</span> (data) =&gt; &#123;<br>  <span class="hljs-keyword">const</span> res = <span class="hljs-keyword">await</span> createArticle(data);<br>  ElMessage.success(<span class="hljs-string">&quot;创建成功！&quot;</span>);<br>  <span class="hljs-keyword">return</span> res;<br>&#125;;<br><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> editArticle = <span class="hljs-keyword">async</span> (data) =&gt; &#123;<br>  <span class="hljs-keyword">const</span> res = <span class="hljs-keyword">await</span> articleEdit(data);<br>  ElMessage.success(<span class="hljs-string">&quot;编辑成功！&quot;</span>);<br>  <span class="hljs-keyword">return</span> res;<br>&#125;;<br><br><span class="hljs-comment">// 将此方法导入到markdown.vue中</span><br><span class="hljs-keyword">import</span> &#123; commitArticle &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;./commit&quot;</span>;<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>提交文本事件的触发</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-comment">// markdown.vue</span><br><span class="hljs-keyword">const</span> props = defineProps(&#123;<br>  <span class="hljs-attr">title</span>: &#123;<br>    <span class="hljs-attr">required</span>: <span class="hljs-literal">true</span>,<br>    <span class="hljs-attr">type</span>: <span class="hljs-built_in">String</span><br>  &#125;<br>&#125;)<br><br><span class="hljs-keyword">const</span> emits = defineEmits([<span class="hljs-string">&#x27;onSuccess&#x27;</span>])<br>...<br><span class="hljs-comment">// 处理提交</span><br><span class="hljs-keyword">const</span> onSubmitClick = <span class="hljs-keyword">async</span> () =&gt; &#123;<br>  <span class="hljs-comment">// 创建文章</span><br>  <span class="hljs-keyword">await</span> commitArticle(&#123;<br>    <span class="hljs-attr">title</span>: props.title,<br>    <span class="hljs-attr">content</span>: mkEditor.getHTML()<br>  &#125;)<br>  <span class="hljs-comment">// 重置一下</span><br>  mkEditor.reset()<br>  emits(<span class="hljs-string">&#x27;onSuccess&#x27;</span>)<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>父组件中处理传递的 title，处理 onSuccess 事件</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-comment">// 创建成功</span><br><span class="hljs-keyword">const</span> onSuccess = <span class="hljs-function">() =&gt;</span> &#123;<br>  title.value = <span class="hljs-string">&quot;&quot;</span>;<br>&#125;;<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>markdown 文本编辑</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-comment">// 路径为src/views/article-detail/index.vue</span><br>&lt;template&gt;<br>  <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;article-detail-container&quot;</span>&gt;</span></span><br><span class="xml">    <span class="hljs-tag">&lt;<span class="hljs-name">h2</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;title&quot;</span>&gt;</span>&#123;&#123; detail.title &#125;&#125;<span class="hljs-tag">&lt;/<span class="hljs-name">h2</span>&gt;</span></span><br><span class="xml">    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;header&quot;</span>&gt;</span></span><br><span class="xml">      <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;author&quot;</span>&gt;</span></span><br><span class="xml">        作者：&#123;&#123; detail.author &#125;&#125;</span><br><span class="xml">      <span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span></span><br><span class="xml">      <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;time&quot;</span>&gt;</span></span><br><span class="xml">        时间: &#123;&#123; $filters.relativeTime(detail.publicDate) &#125;&#125;</span><br><span class="xml">      <span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span></span><br><span class="xml">      <span class="hljs-tag">&lt;<span class="hljs-name">el-button</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;text&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;edit&quot;</span> @<span class="hljs-attr">click</span>=<span class="hljs-string">&quot;onEditClick&quot;</span>&gt;</span>编辑<span class="hljs-tag">&lt;/<span class="hljs-name">el-button</span>&gt;</span></span><br><span class="xml">    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span><br><span class="xml">    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;content&quot;</span> <span class="hljs-attr">v-html</span>=<span class="hljs-string">&quot;detail.content&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span><br><span class="xml">  <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span><br>&lt;/template&gt;<br><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">setup</span>&gt;</span><span class="javascript"></span></span><br><span class="javascript"><span class="xml"><span class="hljs-keyword">import</span> &#123; ref &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;vue&#x27;</span></span></span><br><span class="javascript"><span class="xml"><span class="hljs-keyword">import</span> &#123; useRoute, useRouter &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;vue-router&#x27;</span></span></span><br><span class="javascript"><span class="xml"><span class="hljs-keyword">import</span> &#123; articleDetail &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@/api/article&#x27;</span></span></span><br><span class="javascript"><span class="xml"></span></span><br><span class="javascript"><span class="xml"><span class="hljs-comment">// 获取数据</span></span></span><br><span class="javascript"><span class="xml"><span class="hljs-keyword">const</span> route = useRoute()</span></span><br><span class="javascript"><span class="xml"><span class="hljs-keyword">const</span> articleId = route.params.id</span></span><br><span class="javascript"><span class="xml"><span class="hljs-keyword">const</span> detail = ref(&#123;&#125;)</span></span><br><span class="javascript"><span class="xml"><span class="hljs-keyword">const</span> getArticleDetail = <span class="hljs-keyword">async</span> () =&gt; &#123;</span></span><br><span class="javascript"><span class="xml">  detail.value = <span class="hljs-keyword">await</span> articleDetail(articleId)</span></span><br><span class="javascript"><span class="xml">&#125;</span></span><br><span class="javascript"><span class="xml">getArticleDetail()</span></span><br><span class="javascript"><span class="xml"><span class="hljs-comment">// 编辑</span></span></span><br><span class="javascript"><span class="xml"><span class="hljs-keyword">const</span> router = useRouter()</span></span><br><span class="javascript"><span class="xml"><span class="hljs-keyword">const</span> onEditClick = <span class="hljs-function">() =&gt;</span> &#123;</span></span><br><span class="javascript"><span class="xml">  router.push(<span class="hljs-string">`/article/editor/<span class="hljs-subst">$&#123;articleId&#125;</span>`</span>)</span></span><br><span class="javascript"><span class="xml">&#125;</span></span><br><span class="javascript"><span class="xml"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></span><br><br><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">style</span> <span class="hljs-attr">lang</span>=<span class="hljs-string">&quot;scss&quot;</span> <span class="hljs-attr">scoped</span>&gt;</span><span class="css"></span></span><br><span class="css"><span class="xml"><span class="hljs-selector-class">.article-detail-container</span> &#123;</span></span><br><span class="css"><span class="xml">  <span class="hljs-selector-class">.title</span> &#123;</span></span><br><span class="css"><span class="xml">    <span class="hljs-attribute">font-size</span>: <span class="hljs-number">22px</span>;</span></span><br><span class="css"><span class="xml">    <span class="hljs-attribute">text-align</span>: center;</span></span><br><span class="css"><span class="xml">    <span class="hljs-attribute">padding</span>: <span class="hljs-number">12px</span> <span class="hljs-number">0</span>;</span></span><br><span class="css"><span class="xml">  &#125;</span></span><br><span class="css"><span class="xml"></span></span><br><span class="css"><span class="xml">  <span class="hljs-selector-class">.header</span> &#123;</span></span><br><span class="css"><span class="xml">    <span class="hljs-attribute">padding</span>: <span class="hljs-number">26px</span> <span class="hljs-number">0</span>;</span></span><br><span class="css"><span class="xml"></span></span><br><span class="css"><span class="xml">    <span class="hljs-selector-class">.author</span> &#123;</span></span><br><span class="css"><span class="xml">      <span class="hljs-attribute">font-size</span>: <span class="hljs-number">14px</span>;</span></span><br><span class="css"><span class="xml">      <span class="hljs-attribute">color</span>: <span class="hljs-number">#555666</span>;</span></span><br><span class="css"><span class="xml">      <span class="hljs-attribute">margin-right</span>: <span class="hljs-number">20px</span>;</span></span><br><span class="css"><span class="xml">    &#125;</span></span><br><span class="css"><span class="xml"></span></span><br><span class="css"><span class="xml">    <span class="hljs-selector-class">.time</span> &#123;</span></span><br><span class="css"><span class="xml">      <span class="hljs-attribute">font-size</span>: <span class="hljs-number">14px</span>;</span></span><br><span class="css"><span class="xml">      <span class="hljs-attribute">color</span>: <span class="hljs-number">#999aaa</span>;</span></span><br><span class="css"><span class="xml">      <span class="hljs-attribute">margin-right</span>: <span class="hljs-number">20px</span>;</span></span><br><span class="css"><span class="xml">    &#125;</span></span><br><span class="css"><span class="xml"></span></span><br><span class="css"><span class="xml">    <span class="hljs-selector-class">.edit</span> &#123;</span></span><br><span class="css"><span class="xml">      <span class="hljs-attribute">float</span>: right;</span></span><br><span class="css"><span class="xml">    &#125;</span></span><br><span class="css"><span class="xml">  &#125;</span></span><br><span class="css"><span class="xml"></span></span><br><span class="css"><span class="xml">  <span class="hljs-selector-class">.content</span> &#123;</span></span><br><span class="css"><span class="xml">    <span class="hljs-attribute">font-size</span>: <span class="hljs-number">14px</span>;</span></span><br><span class="css"><span class="xml">    <span class="hljs-attribute">padding</span>: <span class="hljs-number">20px</span> <span class="hljs-number">0</span>;</span></span><br><span class="css"><span class="xml">    <span class="hljs-attribute">border-top</span>: <span class="hljs-number">1px</span> solid <span class="hljs-number">#d4d4d4</span>;</span></span><br><span class="css"><span class="xml">    ;</span></span><br><span class="css"><span class="xml">  &#125;</span></span><br><span class="css"><span class="xml">&#125;</span></span><br><span class="css"><span class="xml"></span><span class="hljs-tag">&lt;/<span class="hljs-name">style</span>&gt;</span></span><br><br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>将数据传递给 markdown 组件</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs js">&lt;markdown :title=<span class="hljs-string">&quot;title&quot;</span> :detail=<span class="hljs-string">&quot;detail&quot;</span> @onSuccess=<span class="hljs-string">&quot;onSuccess&quot;</span>&gt;&lt;/markdown&gt;<br><br><span class="hljs-comment">// 数据接收</span><br><span class="hljs-keyword">const</span> props = defineProps(&#123;<br>  <span class="hljs-attr">title</span>: &#123;<br>    <span class="hljs-attr">required</span>: <span class="hljs-literal">true</span>,<br>    <span class="hljs-attr">type</span>: <span class="hljs-built_in">String</span><br>  &#125;,<br>  <span class="hljs-attr">detail</span>: &#123;<br>    <span class="hljs-attr">type</span>: <span class="hljs-built_in">Object</span><br>  &#125;<br>&#125;)<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>使用 watch 检测数据变化，存在 detail 时，将 detail 赋值给 mkEditor</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-comment">// 编辑相关</span><br>watch(<br>  <span class="hljs-function">() =&gt;</span> props.detail,<br>  <span class="hljs-function">(<span class="hljs-params">val</span>) =&gt;</span> &#123;<br>    <span class="hljs-keyword">if</span> (val &amp;&amp; val.content) &#123;<br>      mkEditor.setHTML(val.content);<br>    &#125;<br>  &#125;,<br>  &#123;<br>    <span class="hljs-attr">immediate</span>: <span class="hljs-literal">true</span>,<br>  &#125;<br>);<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>markdown 组件中处理提交事件</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-comment">// 处理提交</span><br><span class="hljs-keyword">const</span> onSubmitClick = <span class="hljs-keyword">async</span> () =&gt; &#123;<br>  <span class="hljs-keyword">if</span> (props.detail &amp;&amp; props.detail._id) &#123;<br>    <span class="hljs-comment">// 编辑文章</span><br>    <span class="hljs-keyword">await</span> editArticle(&#123;<br>      <span class="hljs-attr">id</span>: props.detail._id,<br>      <span class="hljs-attr">title</span>: props.title,<br>      <span class="hljs-attr">content</span>: mkEditor.getHTML(),<br>    &#125;);<br>  &#125; <span class="hljs-keyword">else</span> &#123;<br>    <span class="hljs-comment">// 创建文章</span><br>    <span class="hljs-keyword">await</span> commitArticle(&#123;<br>      <span class="hljs-attr">title</span>: props.title,<br>      <span class="hljs-attr">content</span>: mkEditor.getHTML(),<br>    &#125;);<br>  &#125;<br><br>  mkEditor.reset();<br>  emits(<span class="hljs-string">&quot;onSuccess&quot;</span>);<br>&#125;;<br></code></pre></td></tr></table></figure>
+
+<h2 id="1-4-富文本编辑器：wangEditor"><a href="#1-4-富文本编辑器：wangEditor" class="headerlink" title="1-4 富文本编辑器：wangEditor"></a>1-4 富文本编辑器：wangEditor</h2><blockquote>
+<p>安装 plugin</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">npm i wangeditor@4.7.6<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>富文本的基本组件结构和 markdown 组件基本一致</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br></pre></td><td class="code"><pre><code class="hljs js">&lt;template&gt;<br>  <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;editor-container&quot;</span>&gt;</span></span><br><span class="xml">    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;editor-box&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span><br><span class="xml">    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;bottom&quot;</span>&gt;</span></span><br><span class="xml">      <span class="hljs-tag">&lt;<span class="hljs-name">el-button</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;primary&quot;</span> @<span class="hljs-attr">click</span>=<span class="hljs-string">&quot;onSubmitClick&quot;</span>&gt;</span>提交<span class="hljs-tag">&lt;/<span class="hljs-name">el-button</span>&gt;</span></span><br><span class="xml">    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span><br><span class="xml">  <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span><br>&lt;/template&gt;<br><br><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">setup</span>&gt;</span><span class="javascript"></span></span><br><span class="javascript"><span class="xml"><span class="hljs-keyword">import</span> E <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;wangeditor&#x27;</span></span></span><br><span class="javascript"><span class="xml"><span class="hljs-keyword">import</span> &#123; onMounted, defineProps, defineEmits, watch &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;vue&#x27;</span></span></span><br><span class="javascript"><span class="xml"><span class="hljs-keyword">import</span> &#123; useStore &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;vuex&#x27;</span></span></span><br><span class="javascript"><span class="xml"><span class="hljs-keyword">import</span> &#123; commitArticle, editArticle &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./commit&#x27;</span></span></span><br><span class="javascript"><span class="xml"></span></span><br><span class="javascript"><span class="xml"><span class="hljs-keyword">const</span> props = defineProps(&#123;</span></span><br><span class="javascript"><span class="xml">  <span class="hljs-attr">title</span>: &#123;</span></span><br><span class="javascript"><span class="xml">    <span class="hljs-attr">required</span>: <span class="hljs-literal">true</span>,</span></span><br><span class="javascript"><span class="xml">    <span class="hljs-attr">type</span>: <span class="hljs-built_in">String</span></span></span><br><span class="javascript"><span class="xml">  &#125;,</span></span><br><span class="javascript"><span class="xml">  <span class="hljs-attr">detail</span>: &#123;</span></span><br><span class="javascript"><span class="xml">    <span class="hljs-attr">type</span>: <span class="hljs-built_in">Object</span></span></span><br><span class="javascript"><span class="xml">  &#125;</span></span><br><span class="javascript"><span class="xml">&#125;)</span></span><br><span class="javascript"><span class="xml"></span></span><br><span class="javascript"><span class="xml"><span class="hljs-keyword">const</span> emits = defineEmits([<span class="hljs-string">&#x27;onSuccess&#x27;</span>])</span></span><br><span class="javascript"><span class="xml"></span></span><br><span class="javascript"><span class="xml"><span class="hljs-keyword">const</span> store = useStore()</span></span><br><span class="javascript"><span class="xml"></span></span><br><span class="javascript"><span class="xml"><span class="hljs-comment">// Editor实例</span></span></span><br><span class="javascript"><span class="xml"><span class="hljs-keyword">let</span> editor</span></span><br><span class="javascript"><span class="xml"><span class="hljs-comment">// 处理离开页面切换语言导致 dom 无法被获取</span></span></span><br><span class="javascript"><span class="xml"><span class="hljs-keyword">let</span> el</span></span><br><span class="javascript"><span class="xml">onMounted(<span class="hljs-function">() =&gt;</span> &#123;</span></span><br><span class="javascript"><span class="xml">  el = <span class="hljs-built_in">document</span>.querySelector(<span class="hljs-string">&#x27;#editor-box&#x27;</span>)</span></span><br><span class="javascript"><span class="xml">  initEditor()</span></span><br><span class="javascript"><span class="xml">&#125;)</span></span><br><span class="javascript"><span class="xml"></span></span><br><span class="javascript"><span class="xml"><span class="hljs-keyword">const</span> initEditor = <span class="hljs-function">() =&gt;</span> &#123;</span></span><br><span class="javascript"><span class="xml">  editor = <span class="hljs-keyword">new</span> E(el)</span></span><br><span class="javascript"><span class="xml">  editor.config.zIndex = <span class="hljs-number">1</span></span></span><br><span class="javascript"><span class="xml">  <span class="hljs-comment">// 菜单栏提示</span></span></span><br><span class="javascript"><span class="xml">  editor.config.showMenuTooltips = <span class="hljs-literal">true</span></span></span><br><span class="javascript"><span class="xml">  editor.config.menuTooltipPosition = <span class="hljs-string">&#x27;down&#x27;</span></span></span><br><span class="javascript"><span class="xml"></span></span><br><span class="javascript"><span class="xml">  editor.create()</span></span><br><span class="javascript"><span class="xml">&#125;</span></span><br><span class="javascript"><span class="xml"></span></span><br><span class="javascript"><span class="xml"><span class="hljs-comment">// 编辑相关</span></span></span><br><span class="javascript"><span class="xml">watch(</span></span><br><span class="javascript"><span class="xml">  <span class="hljs-function">() =&gt;</span> props.detail,</span></span><br><span class="javascript"><span class="xml">  <span class="hljs-function"><span class="hljs-params">val</span> =&gt;</span> &#123;</span></span><br><span class="javascript"><span class="xml">    <span class="hljs-keyword">if</span> (val &amp;&amp; val.content) &#123;</span></span><br><span class="javascript"><span class="xml">      editor.txt.html(val.content)</span></span><br><span class="javascript"><span class="xml">    &#125;</span></span><br><span class="javascript"><span class="xml">  &#125;,</span></span><br><span class="javascript"><span class="xml">  &#123;</span></span><br><span class="javascript"><span class="xml">    <span class="hljs-attr">immediate</span>: <span class="hljs-literal">true</span></span></span><br><span class="javascript"><span class="xml">  &#125;</span></span><br><span class="javascript"><span class="xml">)</span></span><br><span class="javascript"><span class="xml"></span></span><br><span class="javascript"><span class="xml"><span class="hljs-comment">// 处理文本提交的事件</span></span></span><br><span class="javascript"><span class="xml"><span class="hljs-keyword">const</span> onSubmitClick = <span class="hljs-keyword">async</span> () =&gt; &#123;</span></span><br><span class="javascript"><span class="xml">  <span class="hljs-keyword">if</span> (props.detail &amp;&amp; props.detail._id) &#123;</span></span><br><span class="javascript"><span class="xml">    <span class="hljs-comment">// 编辑文章</span></span></span><br><span class="javascript"><span class="xml">    <span class="hljs-keyword">await</span> editArticle(&#123;</span></span><br><span class="javascript"><span class="xml">      <span class="hljs-attr">id</span>: props.detail._id,</span></span><br><span class="javascript"><span class="xml">      <span class="hljs-attr">title</span>: props.title,</span></span><br><span class="javascript"><span class="xml">      <span class="hljs-attr">content</span>: editor.txt.html()</span></span><br><span class="javascript"><span class="xml">    &#125;)</span></span><br><span class="javascript"><span class="xml">  &#125; <span class="hljs-keyword">else</span> &#123;</span></span><br><span class="javascript"><span class="xml">    <span class="hljs-comment">// 创建文章</span></span></span><br><span class="javascript"><span class="xml">    <span class="hljs-keyword">await</span> commitArticle(&#123;</span></span><br><span class="javascript"><span class="xml">      <span class="hljs-attr">title</span>: props.title,</span></span><br><span class="javascript"><span class="xml">      <span class="hljs-attr">content</span>: editor.txt.html()</span></span><br><span class="javascript"><span class="xml">    &#125;)</span></span><br><span class="javascript"><span class="xml">  &#125;</span></span><br><span class="javascript"><span class="xml"></span></span><br><span class="javascript"><span class="xml">  editor.txt.html(<span class="hljs-string">&#x27;&#x27;</span>)</span></span><br><span class="javascript"><span class="xml">  emits(<span class="hljs-string">&#x27;onSuccess&#x27;</span>)</span></span><br><span class="javascript"><span class="xml">&#125;</span></span><br><span class="javascript"><span class="xml"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></span><br><br><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">style</span> <span class="hljs-attr">lang</span>=<span class="hljs-string">&quot;scss&quot;</span> <span class="hljs-attr">scoped</span>&gt;</span><span class="css"></span></span><br><span class="css"><span class="xml"><span class="hljs-selector-class">.editor-container</span> &#123;</span></span><br><span class="css"><span class="xml">  <span class="hljs-selector-class">.bottom</span> &#123;</span></span><br><span class="css"><span class="xml">    <span class="hljs-attribute">margin-top</span>: <span class="hljs-number">20px</span>;</span></span><br><span class="css"><span class="xml">    <span class="hljs-attribute">text-align</span>: right;</span></span><br><span class="css"><span class="xml">  &#125;</span></span><br><span class="css"><span class="xml">&#125;</span></span><br><span class="css"><span class="xml"></span><span class="hljs-tag">&lt;/<span class="hljs-name">style</span>&gt;</span></span><br><br></code></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://issummer.cn/2022/11/29/100-vuex/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jude">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/11/29/100-vuex/" class="post-title-link" itemprop="url">100、vuex的缺点及从0写一个vuex的思路</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2022-11-29 20:00:00" itemprop="dateCreated datePublished" datetime="2022-11-29T20:00:00+08:00">2022-11-29</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2023-02-01 10:32:43" itemprop="dateModified" datetime="2023-02-01T10:32:43+08:00">2023-02-01</time>
+      </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <span id="more"></span>
+
+<p>1、用过 module，项目规模变大之后，单独一个 store 对象会过于庞大臃肿，通过模块方式可以拆分开来便于维护</p>
+<p>2、可以按之前规则单独编写子模块代码，然后在主文件中通过<code>modules</code>选项组织起来：<code>createStore(&#123;modules:&#123;...&#125;&#125;)</code>。</p>
+<p>3、不过使用时要注意访问子模块状态时需要加上注册时模块名：<code>store.state.a.xxx</code>，但同时<code>getters</code>、<code>mutations</code>和<code>actions</code>又在全局空间中，使用方式和之前一样。如果要做到完全拆分，需要在子模块加上<code>namespace</code>选项，此时再访问它们就要加上命名空间前缀。</p>
+<p>很显然，模块的方式可以拆分代码，但是缺点也很明显，就是使用起来比较繁琐复杂，容易出错。而且类型系统支持很差，不能给我们带来帮助。pinia 显然在这方面有了很大改进，是时候切换过去了。</p>
+<p>修改状态只能是<code>mutations</code>，<code>actions</code>只能通过提交<code>mutation</code>修改状态即可</p>
+<p>官方文档说：更改 Vuex 的 store 中的状态的唯一方法是提交 <code>mutation</code>，<code>mutation</code> 非常类似于事件：每个 <code>mutation</code> 都有一个字符串的<strong>类型 (type)**和一个** 回调函数 (handler)</strong> 。<code>Action</code> 类似于 <code>mutation</code>，不同在于：<code>Action</code>可以包含任意异步操作，但它不能修改状态， 需要提交<code>mutation</code>才能变更状态。</p>
+<p>因此，开发时，包含异步操作或者复杂业务组合时使用 action；需要直接修改状态则提交 mutation。但由于 dispatch 和 commit 是两个 API，容易引起混淆，实践中也会采用统一使用 dispatch action 的方式。</p>
+<p>调用 dispatch 和 commit 两个 API 时几乎完全一样，但是定义两者时却不甚相同，mutation 的回调函数接收参数是 state 对象。action 则是与 Store 实例具有相同方法和属性的上下文 context 对象，因此一般会解构它为<code>&#123;commit, dispatch, state&#125;</code>，从而方便编码。另外 dispatch 会返回 Promise 实例便于处理内部异步结果。</p>
+<p>实现上 commit(type)方法相当于调用<code>options.mutations[type](state)</code>；<code>dispatch(type)</code>方法相当于调用<code>options.actions[type](store)</code>，这样就很容易理解两者使用上的不同了。</p>
+<blockquote>
+<p>如何从零写一个 vuex？思路是什么？</p>
+</blockquote>
+<ol>
+<li>官方说<code>vuex</code>是一个状态管理模式和库，并确保这些状态以可预期的方式变更。可见要实现一个<code>vuex</code>：<ul>
+<li>要实现一个<code>Store</code>存储全局状态</li>
+<li>要提供修改状态所需 API：<code>commit(type, payload)</code>, <code>dispatch(type, payload)</code></li>
+</ul>
+</li>
+<li>实现<code>Store</code>时，可以定义 Store 类，构造函数接收选项 options，设置属性 state 对外暴露状态，提供 commit 和 dispatch 修改属性 state。这里需要设置 state 为响应式对象，同时将 Store 定义为一个 Vue 插件。</li>
+<li><code>commit(type, payload)</code>方法中可以获取用户传入<code>mutations</code>并执行它，这样可以按用户提供的方法修改状态。 <code>dispatch(type, payload)</code>类似，但需要注意它可能是异步的，需要返回一个 Promise 给用户以处理异步结果。</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Store</span> </span>&#123;<br>  <span class="hljs-function"><span class="hljs-title">constructor</span>(<span class="hljs-params">options</span>)</span> &#123;<br>    <span class="hljs-built_in">this</span>.state = reactive(options.state);<br>    <span class="hljs-built_in">this</span>.options = options;<br>  &#125;<br>  <span class="hljs-function"><span class="hljs-title">commit</span>(<span class="hljs-params">type, payload</span>)</span> &#123;<br>    <span class="hljs-built_in">this</span>.options.mutations[type].call(<span class="hljs-built_in">this</span>, <span class="hljs-built_in">this</span>.state, payload);<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>vuex 如何监听数据的变化？</p>
+<blockquote>
+<p>可以通过 watch 选项或者 watch 方法监听状态</p>
+<p>可以使用 vuex 提供的 API：store.subscribe()</p>
+</blockquote>
+<p>watch 选项方式，可以以字符串形式监听<code>$store.state.xx</code>；subscribe 方式，可以调用 store.subscribe(cb),回调函数接收 mutation 对象和 state 对象，这样可以进一步判断 mutation.type 是否是期待的那个，从而进一步做后续处理。</p>
+<p>watch 方式简单好用，且能获取变化前后值，首选；subscribe 方法会被所有 commit 行为触发，因此还需要判断 mutation.type，用起来略繁琐，一般用于 vuex 插件中。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-comment">// watch</span><br><span class="hljs-keyword">const</span> app = createApp(&#123;<br>  <span class="hljs-attr">watch</span>: &#123;<br>    <span class="hljs-string">&quot;$store.state.counter&quot;</span>() &#123;<br>      <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;counter change!&quot;</span>);<br>    &#125;,<br>  &#125;,<br>&#125;);<br><span class="hljs-comment">// subscrible</span><br>store.subscribe(<span class="hljs-function">(<span class="hljs-params">mutation, state</span>) =&gt;</span> &#123;<br>  <span class="hljs-keyword">if</span> (mutation.type === <span class="hljs-string">&quot;add&quot;</span>) &#123;<br>    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;counter change in subscribe()!&quot;</span>);<br>  &#125;<br>&#125;);<br></code></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://issummer.cn/2022/11/27/99-script%E6%A0%87%E7%AD%BE%E5%86%99%E4%B8%8Aexport/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jude">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/11/27/99-script%E6%A0%87%E7%AD%BE%E5%86%99%E4%B8%8Aexport/" class="post-title-link" itemprop="url">99、script标签写export为什么会报错?</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2022-11-27 20:00:00" itemprop="dateCreated datePublished" datetime="2022-11-27T20:00:00+08:00">2022-11-27</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2023-01-30 16:52:38" itemprop="dateModified" datetime="2023-01-30T16:52:38+08:00">2023-01-30</time>
+      </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <span id="more"></span>
+
+<h4 id="一、脚本和模块"><a href="#一、脚本和模块" class="headerlink" title="一、脚本和模块"></a>一、脚本和模块</h4><p>​ JavaScript 有 2 种源文件，一种叫做脚本，一种叫做模块。这个区分是在 ES6 引入了模块机制开始的，在 ES5 和之前版本中，就只有一种源文件格式，即脚本。</p>
+<p>​ 脚本是可以由浏览器或者 node 环境引入执行的，而模块智能有 JavaScript 代码用 import 引入执行。</p>
+<p>​ 脚本具有主动性的 JavaScript 代码段，是控制宿主完成一定任务的代码；而模块是被动行的 JavaScript 代码段，是等待被调用的库。</p>
+<p>​ 实际上，<code>模块和脚本之间的区别仅仅在于是否包含import和export</code>。</p>
+<p>​ 脚本是一种兼容之前的版本的定义，在这个模式下，没有 import 就不需要处理加载.js 文件问题。</p>
+<p>​ 现代浏览器可以支持用 script 标签引入模块或者脚本，如果需要引入模块，必须给 script 标签添加 type=”module”。如果引入脚本，则不需要 type。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs js">&lt;script type=<span class="hljs-string">&quot;module&quot;</span> scr=<span class="hljs-string">&quot;XXX.js&quot;</span>&gt;&lt;/script&gt;<br></code></pre></td></tr></table></figure>
+
+<p>​ script 标签如果不加 type=“module”，默认认为我们加载的文件是脚本而非模块，如果我们在脚本中写了 export，当然会抛错。</p>
+<p>​ 脚本可以包含语句。模块包含 3 中内容：import 声明、export 声明、语句。</p>
+<p>​ <code>import声明</code>用法有 2 种：一个是<code>直接import一个模块</code>、另一个是``带from的import`（能引入模块里的一些信息）</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;module&quot;</span>; <span class="hljs-comment">// 引入一个模块</span><br><span class="hljs-keyword">import</span> m <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;module&quot;</span>; <span class="hljs-comment">// 把模块默认的导出值放入变量m</span><br></code></pre></td></tr></table></figure>
+
+<p>​ 用法 1 直接 import 一个模块，只是保证了这个模块代码被执行，引用它的模块是无法获得它的任何信息的。</p>
+<p>​ 用法 2 带 from 的 import 意思是引入模块中的一部分信息，可以把他们变成本地的变量。</p>
+<p>​ 带 from 的 import 又分为 3 种用法：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">import</span> x <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;./a.js&quot;</span>; <span class="hljs-comment">// 引入模块中导出的默认值</span><br><span class="hljs-keyword">import</span> &#123; a <span class="hljs-keyword">as</span> x, modify &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;./a.js&quot;</span>; <span class="hljs-comment">// 引入模块中的变量</span><br><span class="hljs-keyword">import</span> * <span class="hljs-keyword">as</span> x <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;./a.js&quot;</span>; <span class="hljs-comment">// 把模块中所有的变量以类型对象属性的方式引入</span><br><br><span class="hljs-comment">// 第一种方式还可以跟后两种组合使用</span><br><span class="hljs-keyword">import</span> d, &#123; a <span class="hljs-keyword">as</span> x, modify &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;./a.js&quot;</span>;<br><span class="hljs-keyword">import</span> d, * <span class="hljs-keyword">as</span> x <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;./a.js&quot;</span>;<br></code></pre></td></tr></table></figure>
+
+<p>​ 语法要求不带 as 的默认值永远在最前。注意，这里的变量实际上仍然可以受到原来模块的控制。</p>
+<p>示例代码：</p>
+<p><code>模块a</code></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">export</span> <span class="hljs-keyword">var</span> a = <span class="hljs-number">1</span>;<br><span class="hljs-keyword">export</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">modify</span>(<span class="hljs-params"></span>) </span>&#123;<br>  a = <span class="hljs-number">2</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p><code>模块b</code></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">import</span> &#123; a, modify &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;./a.js&quot;</span>;<br><span class="hljs-built_in">console</span>.log(a);<br>modify();<br><span class="hljs-built_in">console</span>.log(a);<br></code></pre></td></tr></table></figure>
+
+<p>​ 当我们调用修改变量的函数后，b 模块变量也跟着发生了改变。这说明导入与一般的赋值不同，导入后的变量只是改变了名字，它仍然与原来的变量是同一个。</p>
+<p><code>export声明</code>：承担的是导出的任务。</p>
+<p>​ 模块中导出变量的方式有两种，一种是独立使用 export 声明，一种是直接在声明型语句前添加 export 关键字。</p>
+<p>​ 独立使用 export 声明就是一个 export 关键字加上变量名列表。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">export</span> &#123; a, b, c &#125;;<br></code></pre></td></tr></table></figure>
+
+<p>​ 我们也可以直接在声明型语句前添加 export 关键字，这里的 export 可以加在任何声明性质的语句之前</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">var</span><br><span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">含<span class="hljs-keyword">async</span> 和generator</span>)</span><br><span class="hljs-function"><span class="hljs-title">class</span></span><br><span class="hljs-function"><span class="hljs-title">let</span></span><br><span class="hljs-function"><span class="hljs-title">const</span></span><br></code></pre></td></tr></table></figure>
+
+<p>​ export 还有一种特殊的用法，就是跟 default 联合使用。export default 表示到处一个默认变量值，它可以用于 function 和 class。这里导出的变量是没有名称的，可以使用 import x from ‘./a.js’ 这样的语法，在模块中引入。</p>
+<p>​ export default 还支持一种语法，后面跟一个表达式</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">var</span> a = &#123;&#125;;<br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> a;<br></code></pre></td></tr></table></figure>
+
+<p>​ 但是，这里的行为跟导出变量是不一致，这里导出的是值，<code>导出的就是普通变量a的值，以后a的变化与导出的值就无关了</code>，修改变量 a，不会使得其他模块中引入的 default 值发生改变。</p>
+<p>​ 在 import 语句前无法加入 export，但是我们可以直接使用 export from 语法</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">export</span> a <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;a.js&quot;</span>;<br></code></pre></td></tr></table></figure>
+
+<p>​ JavaScript 引擎除了执行脚本和模块之外，还可以执行函数。而函数体跟脚本和模块有一定的相似之处。</p>
+<h4 id="二、函数体"><a href="#二、函数体" class="headerlink" title="二、函数体"></a>二、函数体</h4><blockquote>
+<p>执行函数的行为通常是在 JavaScript 代码执行时，注册宿主环境的某些事件触发的，而执行的过程，就是执行函数体（函数的花括号中间的部分）。</p>
+</blockquote>
+<p>下面的 setTimeout 函数注册了一个函数给宿主，当一定时间之后，宿主就会执行这个函数。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-built_in">setTimeout</span>(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;<br>  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;go&quot;</span>);<br>&#125;, <span class="hljs-number">10000</span>);<br></code></pre></td></tr></table></figure>
+
+<p>宿主会为这样的函数创建宏任务。宏任务中可能会执行的代码包括脚本、模块、函数体。</p>
+<p>函数体其实也是一个语句的列表。跟脚本和模块比起来，函数体中的语句列表中多了 return 语句可以用。</p>
+<p><code>普通函数体</code>：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">foo</span>(<span class="hljs-params"></span>) </span>&#123;<br>  <span class="hljs-comment">//function body</span><br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p><code>异步函数体</code>：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">foo</span>(<span class="hljs-params"></span>) </span>&#123;<br>  <span class="hljs-comment">// function body</span><br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p><code>生成器函数体</code>：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-function"><span class="hljs-keyword">function</span>* <span class="hljs-title">foo</span>(<span class="hljs-params"></span>) </span>&#123;<br>  <span class="hljs-comment">// function body</span><br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p><code>异步生成器函数体</code>：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span>* <span class="hljs-title">foo</span>(<span class="hljs-params"></span>) </span>&#123;<br>  <span class="hljs-comment">// function body</span><br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>上面的 4 种函数体的区别在于：能否使用 await 或者 yield</p>
+<p>类型 yield await return import&amp;export</p>
+<p>普通函数体 X X √ X</p>
+<p>异步函数体 X √ √ X</p>
+<p>生成器函数体 √ X √ X</p>
+<p>异步生成器函数体 √ √ √ X</p>
+<p>脚本 X X X X</p>
+<p>模块 X X X √</p>
+<h4 id="三、预处理机制"><a href="#三、预处理机制" class="headerlink" title="三、预处理机制"></a>三、预处理机制</h4><p>JavaScript 语法的全局机制：预处理和指令序言。这 2 个机制对于我们解释一些 JavaScript 的语法现象非常重要。预处理机制可以理解 var 等声明类语句行为，指令序言可以解释严格模式。</p>
+<p><code>预处理</code>：JavaScript 执行前，会对脚本、模块和函数体中的语句进行预处理。预处理过程将会提前处理 var、函数声明、class、const 和 let 这些语句，以确定其中变量的意义。</p>
+<p><code>var声明</code>：var 声明永远作用于脚本、模块和函数体，在预处理阶段，不关心赋值的部分，只管在当前作用域声明这个变量。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">var</span> a = <span class="hljs-number">1</span>;<br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">foo</span>(<span class="hljs-params"></span>) </span>&#123;<br>  <span class="hljs-built_in">console</span>.log(a); <span class="hljs-comment">// undefined</span><br>  <span class="hljs-keyword">var</span> a = <span class="hljs-number">2</span>;<br>&#125;<br>foo();<br></code></pre></td></tr></table></figure>
+
+<p>上面的代码声明了一个脚本级别的 a，又声明了 foo 函数体级别的 a，函数体级的 var 出现在 console.log 语句之后。</p>
+<p>预处理过程在执行前，所以有函数体级的变量 a，就不会去访问外层作用域中的变量 a 了，而函数体级的变量 a 此时还没有复制，所以是 undefined。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">var</span> a = <span class="hljs-number">1</span>;<br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">foo</span>(<span class="hljs-params"></span>) </span>&#123;<br>  <span class="hljs-built_in">console</span>.log(a);<br>  <span class="hljs-keyword">if</span> (<span class="hljs-literal">false</span>) &#123;<br>    <span class="hljs-keyword">var</span> a = <span class="hljs-number">2</span>;<br>  &#125;<br>&#125;<br>foo();<br></code></pre></td></tr></table></figure>
+
+<p>这段代码比上一段代码在 var a = 2 之外多了一段 if，我们知道 if(false) 中的代码永远不会被执行，但是预处理阶段并不管这个，var 的作用能够穿透一切语句结构，它只认脚本、模块和函数体三种语法结构。所以这里结果跟前一段代码完全一样，我们会得到 undefined。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">var</span> a = <span class="hljs-number">1</span>;<br><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">foo</span>(<span class="hljs-params"></span>) </span>&#123;<br>  <span class="hljs-keyword">var</span> o = &#123; <span class="hljs-attr">a</span>: <span class="hljs-number">3</span> &#125;;<br>  <span class="hljs-keyword">with</span> (o) &#123;<br>    <span class="hljs-keyword">var</span> a = <span class="hljs-number">2</span>;<br>  &#125;<br>  <span class="hljs-built_in">console</span>.log(o.a);<br>  <span class="hljs-built_in">console</span>.log(a);<br>&#125;<br><br>foo();<br></code></pre></td></tr></table></figure>
+
+<p>引入 with 语句，with(o)创建了一个作用域，并把 o 对象加入词法环境，在其中使用了 var a = 2 语句。</p>
+<p>在预处理阶段，只认 var 中声明的变量，所以同样为 foo 的作用域创建了 a 这个变量，但是没有赋值。在执行阶段，当执行到 var a = 2 时，作用域变成了 with 语句内，这时候的 a 被认为访问到了对象 o 的属性 a，所以最终执行的结果，我们得到了 2 和 undefined。</p>
+<p><code>function声明</code>：function 声明的行为，在全局（脚本、模块和函数体），function 声明表现跟 var 相似，不同之处在于，function 声明不但在作用域中加入变量，还会给它赋值。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-built_in">console</span>.log(foo);<br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">foo</span>(<span class="hljs-params"></span>) </span>&#123;&#125;<br></code></pre></td></tr></table></figure>
+
+<p>在声明函数 foo 之前，打印函数 foo,我们可以发现，已经是函数 foo 的值了。</p>
+<p>下面示例不再被提前赋值：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-built_in">console</span>.log(foo); <span class="hljs-comment">// undefined</span><br><span class="hljs-keyword">if</span> (<span class="hljs-literal">true</span>) &#123;<br>  <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">foo</span>(<span class="hljs-params"></span>) </span>&#123;&#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>function 声明出现在 if 等语句中，它仍然作用于脚本、模块和函数体级别，在预处理阶段，仍然会产生变量，它不再被提前赋值。</p>
+<p>上述打印结果为 undefined，声明 function 在预处理阶段仍然发生了作用，在作用域中产生了变量，没有产生赋值，赋值行为发生在了执行阶段。</p>
+<p>出现在 if 等语句中的 function，在 if 创建的作用域中仍然会被提前，产生赋值效果。</p>
+<p><code>class声明</code>：在全局的行为跟 function 和 var 都不一样。</p>
+<p>在 class 声明前使用 class 类名，会抛出错误：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-built_in">console</span>.log(c); <span class="hljs-comment">// c is not defined</span><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">c</span> </span>&#123;&#125;<br></code></pre></td></tr></table></figure>
+
+<p>这个抛错很像是 class 没有预处理，但实际上并非如此。</p>
+<p>复杂一点的例子：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">var</span> c = <span class="hljs-number">1</span>;<br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">foo</span>(<span class="hljs-params"></span>) </span>&#123;<br>  <span class="hljs-built_in">console</span>.log(c);<br>  <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">c</span> </span>&#123;&#125;<br>&#125;<br>foo();<br></code></pre></td></tr></table></figure>
+
+<p>上面的代码，把 class 放进了一个函数体中，在外层作用域中有变量 c。</p>
+<p>执行后，我们看到，仍然抛出了错误，如果去掉 class 声明，则会正常打印出 1，也就是说，出现在后面的 class 声明影响了前面语句的结果。这说明，class 声明也是会被预处理的，它会在作用域中创建变量，并且要求访问它时抛出错误。</p>
+<p>class 的声明作用不会穿透 if 等语句结构，所以只有写在全局环境才会有声明作用。这样的 class 设计比 function 和 var 更符合直觉，而且在遇到一些比较奇怪的用法时，倾向于抛出错误。</p>
+<h4 id="四、指令序言机制"><a href="#四、指令序言机制" class="headerlink" title="四、指令序言机制"></a>四、指令序言机制</h4><blockquote>
+<p>脚本和模块都支持一种特别的语法，指令序言最早是为了 use strict 设计的，它规定了一种给 JavaScript 代码添加元信息的方式。</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-meta">&quot;use strict&quot;</span>;<br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">f</span>(<span class="hljs-params"></span>) </span>&#123;<br>  <span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">this</span>);<br>&#125;<br>f.call(<span class="hljs-literal">null</span>);<br></code></pre></td></tr></table></figure>
+
+<p>null 原封不动地被当做 this 值打印了出来，这是严格模式的特征。</p>
+<p>去掉严格模式，打印结果会变成 global。</p>
+<p>‘use strict’是 JavaScript 标准中规定的唯一一种指令序言，但是设计指令序言的目的是留给 JavaScript 的引擎和实现者一些统一的表达式，在静态规定扫描时指定 JavaScript 代码的一些特性。</p>
+<p>JavaScript 的指令序言是只有一个字符串直接量的表达式语句，它只能出现在脚本、模块和函数体的最前面。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">doSth</span>(<span class="hljs-params"></span>) </span>&#123;<br>  <span class="hljs-comment">//</span><br>&#125;<br>(<span class="hljs-string">&quot;use strict&quot;</span>);<br><span class="hljs-keyword">var</span> a = <span class="hljs-number">1</span>;<br><span class="hljs-comment">// .....</span><br></code></pre></td></tr></table></figure>
+
+<p>‘use strct’没有出现在最前，所以不是指令序言。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-meta">&quot;use strict&quot;</span>; <span class="hljs-comment">// 单引号也是指令序言</span><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">doSth</span>(<span class="hljs-params"></span>) </span>&#123;<br>  <span class="hljs-comment">// ....</span><br>&#125;<br></code></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://issummer.cn/2022/11/26/98-js-string-number-array/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jude">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/11/26/98-js-string-number-array/" class="post-title-link" itemprop="url">98、基于JavaScript开发灵活的数据应用--基本数据处理(一)</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2022-11-26 20:00:00" itemprop="dateCreated datePublished" datetime="2022-11-26T20:00:00+08:00">2022-11-26</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2023-01-30 11:46:46" itemprop="dateModified" datetime="2023-01-30T11:46:46+08:00">2023-01-30</time>
+      </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>现代编程语言中，最基本的数据格式都会是字符串和数字。字符串用于表达人类文明的自然语言，数字用于表达量化世界的各种数值。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2022/11/26/98-js-string-number-array/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://issummer.cn/2022/11/23/97-promise/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jude">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/11/23/97-promise/" class="post-title-link" itemprop="url">97、promise代码为什么比setTimeout先执行？</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2022-11-23 20:00:00" itemprop="dateCreated datePublished" datetime="2022-11-23T20:00:00+08:00">2022-11-23</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2022-12-06 16:10:05" itemprop="dateModified" datetime="2022-12-06T16:10:05+08:00">2022-12-06</time>
+      </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>​ 当拿到一段 JavaScript 代码时，浏览器或者 Node 环境首先要做的就是；传递给 JavaScript 引擎，并且要求它去执行。然而，执行 JavaScript 并非一锤子买卖，宿主环境当遇到一些事件时，会继续把一段代码传递给 JavaScript 引擎去执行，此外，我们可能还会提供 API 给 JavaScript 引擎，比如 setTimeout 这样的 API，它会允许 JavaScript 在特定的时机执行。所以，我们首先应该形成一个感性的认知：一个 JavaScript 引擎会常驻于内存中，它等待着我们（宿主）把 JavaScript 代码或者函数传递给它执行。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2022/11/23/97-promise/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" href="/page/5/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><span class="space">&hellip;</span><a class="page-number" href="/page/26/">26</a><a class="extend next" rel="next" href="/page/7/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+  </nav>
+<script src="/js/comments.js"></script>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

@@ -1,11 +1,214 @@
-<!DOCTYPE html><html class="appearance-auto" lang="zh-CN"><head><meta charset="UTF-8"><title>35、数组方法</title><meta name="description" content="呦呦鹿鸣，食野之苹"><meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, initial-scale=1"><!-- Google Analytics --><!-- End Google Analytics -->
-<!-- Baidu Analytics --><!-- End Baidu Analytics --><link rel="icon" href="/images/favicon.png"><link rel="stylesheet" href="/style/common/bulma.css"><link rel="stylesheet" href="/style/base.css"><link rel="stylesheet" href="/style/common/helper.css"><script src="/js/common.js"></script><link rel="stylesheet" href="/style/post.css"><link rel="stylesheet" href="/style/themes/highlight-theme-light.css"><script src="/js/highlight.pack.js"></script><meta name="description" content="js 常用数组方法整理,包括常用的数组常用方法、高阶函数 forEach、filter、map。
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.1">
 
 
-1、常用数组方法
-点击展示代码
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
 
-1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950// 1、删除数组的最后一项  pop()var fruits = [&amp;quot;Banana&amp;quot;, &amp;quot;Orange&amp;quot;, &amp;quot;Apple&amp;quot;, &amp;quot;Mango&amp;quot;];fruits.pop();console.log(fruits); // &amp;quot;Banana&amp;quot;, &amp;quot;Orange&amp;quot;, &amp;quot;App.."><meta name="generator" content="Hexo 5.4.1"></head><body class="is-flex is-flex-direction-column"><header class="header-widget is-flex-shrink-0 is-hidden-mobile"><div class="container is-fullhd is-flex is-justify-content-space-between is-align-items-center is-full-height"><section class="is-hidden-mobile is-flex-shrink-0"><h2><a href="/">Jude's blog</a></h2></section><h3 class="is-hidden-mobile is-family-serif is-full-height is-flex is-align-items-center is-flex-shrink-0"><div class="is-full-height" id="postTopic"><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">35、数组方法</p><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">点击返回顶部</p></div></h3><aside class="is-flex-shrink-0"><h3 class="is-inline-block"><a href="/">首页</a></h3><h3 class="is-inline-block"><a href="/about">关于</a></h3><h3 class="is-inline-block"><a href="/archives">归档</a></h3></aside></div></header><header class="is-flex header-widget is-flex-shrink-0 is-align-items-center is-justify-content-center is-hidden-tablet"><h3 class="is-inline-block"><a href="/">首页</a></h3><h3 class="is-inline-block"><a href="/about">关于</a></h3><h3 class="is-inline-block"><a href="/archives">归档</a></h3></header><main><main class="container is-max-widescreen content section post-page pt-4 px-4"><div class="columns is-flex-desktop is-justify-content-center is-flex-direction-row-reverse"><div class="column is-3 is-hidden-mobile"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1%E3%80%81%E5%B8%B8%E7%94%A8%E6%95%B0%E7%BB%84%E6%96%B9%E6%B3%95"><span class="toc-text">1、常用数组方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2%E3%80%81%E9%AB%98%E9%98%B6%E5%87%BD%E6%95%B0"><span class="toc-text">2、高阶函数</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1%E3%80%81forEach"><span class="toc-text">1、forEach</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%EF%BC%881%EF%BC%89%E7%A8%80%E7%96%8F%E6%95%B0%E7%BB%84"><span class="toc-text">（1）稀疏数组</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-for-%E5%BE%AA%E7%8E%AF%E8%BD%AC%E6%8D%A2%E6%88%90-forEach"><span class="toc-text">(2)for 循环转换成 forEach</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-thisArg-%E4%BD%BF%E7%94%A8%E7%AE%AD%E5%A4%B4%E5%87%BD%E6%95%B0-thisArg-%E5%8F%82%E6%95%B0%E4%BC%9A%E8%A2%AB%E5%BF%BD%E7%95%A5%EF%BC%8C%E5%9B%A0%E4%B8%BA%E7%AE%AD%E5%A4%B4%E5%87%BD%E6%95%B0%E7%BB%91%E5%AE%9A%E4%BA%86-this-%E5%80%BC"><span class="toc-text">(3)thisArg 使用箭头函数 thisArg 参数会被忽略，因为箭头函数绑定了 this 值</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#4-%E5%AF%B9%E8%B1%A1%E5%A4%8D%E5%88%B6%E5%99%A8%E5%87%BD%E6%95%B0"><span class="toc-text">(4)对象复制器函数</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#5-%E6%95%B0%E7%BB%84%E5%9C%A8%E8%BF%AD%E4%BB%A3%E6%97%B6%E8%A2%AB%E4%BF%AE%E6%94%B9%E4%BA%86%EF%BC%8C%E5%88%99%E5%85%B6%E4%BB%96%E5%85%83%E7%B4%A0%E4%BC%9A%E8%A2%AB%E8%B7%B3%E8%BF%87"><span class="toc-text">(5)数组在迭代时被修改了，则其他元素会被跳过</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#6-promise-%E6%88%96-async-%E5%87%BD%E6%95%B0%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="toc-text">(6)promise 或 async 函数的使用</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2%E3%80%81filter"><span class="toc-text">2、filter</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%EF%BC%881-%E7%AD%9B%E9%80%89%E6%8E%92%E9%99%A4%E6%89%80%E6%9C%89%E8%BE%83%E5%B0%8F%E7%9A%84%E5%80%BC"><span class="toc-text">（1)筛选排除所有较小的值</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E8%BF%87%E6%BB%A4-JSON-%E4%B8%AD%E7%9A%84%E6%97%A0%E6%95%88%E6%9D%A1%E7%9B%AE"><span class="toc-text">(2)过滤 JSON 中的无效条目</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-%E5%9C%A8%E6%95%B0%E7%BB%84%E4%B8%AD%E6%90%9C%E7%B4%A2%EF%BC%9A%E6%A0%B9%E6%8D%AE%E6%90%9C%E7%B4%A2%E6%9D%A1%E4%BB%B6%E6%9D%A5%E8%BF%87%E6%BB%A4%E6%95%B0%E7%BB%84%E5%86%85%E5%AE%B9"><span class="toc-text">(3)在数组中搜索：根据搜索条件来过滤数组内容</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3%E3%80%81map"><span class="toc-text">3、map</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E6%A0%BC%E5%BC%8F%E5%8C%96%E6%95%B0%E7%BB%84%E4%B8%AD%E7%9A%84%E5%AF%B9%E8%B1%A1"><span class="toc-text">(1)格式化数组中的对象</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E4%BD%BF%E7%94%A8%E5%8C%85%E5%90%AB%E4%B8%80%E4%B8%AA%E5%8F%82%E6%95%B0%E7%9A%84%E5%87%BD%E6%95%B0%E6%9D%A5%E6%9E%84%E5%BB%BA%E4%B8%80%E4%B8%AA%E6%95%B0%E5%AD%97%E6%95%B0%E7%BB%84"><span class="toc-text">(2)使用包含一个参数的函数来构建一个数字数组</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#includes%E6%AF%94indexOf%E5%A5%BD%E5%9C%A8%E5%93%AA%E9%87%8C%EF%BC%9F"><span class="toc-text">includes比indexOf好在哪里？</span></a></div><div class="column is-9"><header class="my-4"><a href="/tags/array"><i class="tag post-item-tag">array</i></a></header><h1 class="mt-0 mb-1 is-family-serif" id="postTitle">35、数组方法</h1><time class="has-text-grey" datetime="2021-05-02T12:00:00.000Z">2021-05-02</time><article class="mt-2 post-content"><p>js 常用数组方法整理,包括常用的数组常用方法、高阶函数 forEach、filter、map。</p>
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+
+<meta name="hexo-config" content="{&quot;hostname&quot;:&quot;issummer.cn&quot;,&quot;root&quot;:&quot;/&quot;,&quot;images&quot;:&quot;/images&quot;,&quot;scheme&quot;:&quot;Muse&quot;,&quot;version&quot;:&quot;8.3.0&quot;,&quot;exturl&quot;:false,&quot;sidebar&quot;:{&quot;position&quot;:&quot;left&quot;,&quot;display&quot;:&quot;post&quot;,&quot;padding&quot;:18,&quot;offset&quot;:12},&quot;copycode&quot;:false,&quot;bookmark&quot;:{&quot;enable&quot;:false,&quot;color&quot;:&quot;#222&quot;,&quot;save&quot;:&quot;auto&quot;},&quot;fancybox&quot;:false,&quot;mediumzoom&quot;:false,&quot;lazyload&quot;:false,&quot;pangu&quot;:false,&quot;comments&quot;:{&quot;style&quot;:&quot;tabs&quot;,&quot;active&quot;:null,&quot;storage&quot;:true,&quot;lazyload&quot;:false,&quot;nav&quot;:null},&quot;motion&quot;:{&quot;enable&quot;:true,&quot;async&quot;:false,&quot;transition&quot;:{&quot;post_block&quot;:&quot;fadeIn&quot;,&quot;post_header&quot;:&quot;fadeInDown&quot;,&quot;post_body&quot;:&quot;fadeInDown&quot;,&quot;coll_header&quot;:&quot;fadeInLeft&quot;,&quot;sidebar&quot;:&quot;fadeInUp&quot;}},&quot;prism&quot;:false,&quot;i18n&quot;:{&quot;placeholder&quot;:&quot;搜索...&quot;,&quot;empty&quot;:&quot;没有找到任何搜索结果：${query}&quot;,&quot;hits_time&quot;:&quot;找到 ${hits} 个搜索结果（用时 ${time} 毫秒）&quot;,&quot;hits&quot;:&quot;找到 ${hits} 个搜索结果&quot;}}">
+<meta name="description" content="js 常用数组方法整理,包括常用的数组常用方法、高阶函数 forEach、filter、map。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="35、数组方法">
+<meta property="og:url" content="http://issummer.cn/2021/05/02/35-array/index.html">
+<meta property="og:site_name" content="Jude">
+<meta property="og:description" content="js 常用数组方法整理,包括常用的数组常用方法、高阶函数 forEach、filter、map。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-05-02T12:00:00.000Z">
+<meta property="article:modified_time" content="2022-09-05T07:46:34.547Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="array">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://issummer.cn/2021/05/02/35-array/">
+
+
+
+<meta name="hexo-config-page" content="{&quot;sidebar&quot;:&quot;&quot;,&quot;isHome&quot;:false,&quot;isPost&quot;:true,&quot;lang&quot;:&quot;zh-CN&quot;}">
+<meta name="hexo-config-calendar" content="">
+<title>35、数组方法 | Jude</title><script data-pjax src="/js/load-config.js"></script>
+  
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">Jude</h1>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1%E3%80%81%E5%B8%B8%E7%94%A8%E6%95%B0%E7%BB%84%E6%96%B9%E6%B3%95"><span class="nav-number">1.</span> <span class="nav-text">1、常用数组方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2%E3%80%81%E9%AB%98%E9%98%B6%E5%87%BD%E6%95%B0"><span class="nav-number">2.</span> <span class="nav-text">2、高阶函数</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1%E3%80%81forEach"><span class="nav-number">2.1.</span> <span class="nav-text">1、forEach</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%EF%BC%881%EF%BC%89%E7%A8%80%E7%96%8F%E6%95%B0%E7%BB%84"><span class="nav-number">2.1.1.</span> <span class="nav-text">（1）稀疏数组</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-for-%E5%BE%AA%E7%8E%AF%E8%BD%AC%E6%8D%A2%E6%88%90-forEach"><span class="nav-number">2.1.2.</span> <span class="nav-text">(2)for 循环转换成 forEach</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-thisArg-%E4%BD%BF%E7%94%A8%E7%AE%AD%E5%A4%B4%E5%87%BD%E6%95%B0-thisArg-%E5%8F%82%E6%95%B0%E4%BC%9A%E8%A2%AB%E5%BF%BD%E7%95%A5%EF%BC%8C%E5%9B%A0%E4%B8%BA%E7%AE%AD%E5%A4%B4%E5%87%BD%E6%95%B0%E7%BB%91%E5%AE%9A%E4%BA%86-this-%E5%80%BC"><span class="nav-number">2.1.3.</span> <span class="nav-text">(3)thisArg 使用箭头函数 thisArg 参数会被忽略，因为箭头函数绑定了 this 值</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4-%E5%AF%B9%E8%B1%A1%E5%A4%8D%E5%88%B6%E5%99%A8%E5%87%BD%E6%95%B0"><span class="nav-number">2.1.4.</span> <span class="nav-text">(4)对象复制器函数</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#5-%E6%95%B0%E7%BB%84%E5%9C%A8%E8%BF%AD%E4%BB%A3%E6%97%B6%E8%A2%AB%E4%BF%AE%E6%94%B9%E4%BA%86%EF%BC%8C%E5%88%99%E5%85%B6%E4%BB%96%E5%85%83%E7%B4%A0%E4%BC%9A%E8%A2%AB%E8%B7%B3%E8%BF%87"><span class="nav-number">2.1.5.</span> <span class="nav-text">(5)数组在迭代时被修改了，则其他元素会被跳过</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#6-promise-%E6%88%96-async-%E5%87%BD%E6%95%B0%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="nav-number">2.1.6.</span> <span class="nav-text">(6)promise 或 async 函数的使用</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2%E3%80%81filter"><span class="nav-number">3.</span> <span class="nav-text">2、filter</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%881-%E7%AD%9B%E9%80%89%E6%8E%92%E9%99%A4%E6%89%80%E6%9C%89%E8%BE%83%E5%B0%8F%E7%9A%84%E5%80%BC"><span class="nav-number">3.1.</span> <span class="nav-text">（1)筛选排除所有较小的值</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-%E8%BF%87%E6%BB%A4-JSON-%E4%B8%AD%E7%9A%84%E6%97%A0%E6%95%88%E6%9D%A1%E7%9B%AE"><span class="nav-number">3.2.</span> <span class="nav-text">(2)过滤 JSON 中的无效条目</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-%E5%9C%A8%E6%95%B0%E7%BB%84%E4%B8%AD%E6%90%9C%E7%B4%A2%EF%BC%9A%E6%A0%B9%E6%8D%AE%E6%90%9C%E7%B4%A2%E6%9D%A1%E4%BB%B6%E6%9D%A5%E8%BF%87%E6%BB%A4%E6%95%B0%E7%BB%84%E5%86%85%E5%AE%B9"><span class="nav-number">3.3.</span> <span class="nav-text">(3)在数组中搜索：根据搜索条件来过滤数组内容</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3%E3%80%81map"><span class="nav-number">4.</span> <span class="nav-text">3、map</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E6%A0%BC%E5%BC%8F%E5%8C%96%E6%95%B0%E7%BB%84%E4%B8%AD%E7%9A%84%E5%AF%B9%E8%B1%A1"><span class="nav-number">4.1.</span> <span class="nav-text">(1)格式化数组中的对象</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-%E4%BD%BF%E7%94%A8%E5%8C%85%E5%90%AB%E4%B8%80%E4%B8%AA%E5%8F%82%E6%95%B0%E7%9A%84%E5%87%BD%E6%95%B0%E6%9D%A5%E6%9E%84%E5%BB%BA%E4%B8%80%E4%B8%AA%E6%95%B0%E5%AD%97%E6%95%B0%E7%BB%84"><span class="nav-number">4.2.</span> <span class="nav-text">(2)使用包含一个参数的函数来构建一个数字数组</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#includes%E6%AF%94indexOf%E5%A5%BD%E5%9C%A8%E5%93%AA%E9%87%8C%EF%BC%9F"><span class="nav-number"></span> <span class="nav-text">includes比indexOf好在哪里？</span></a></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">John Doe</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">126</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">34</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://issummer.cn/2021/05/02/35-array/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jude">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          35、数组方法
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-05-02 20:00:00" itemprop="dateCreated datePublished" datetime="2021-05-02T20:00:00+08:00">2021-05-02</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2022-09-05 15:46:34" itemprop="dateModified" datetime="2022-09-05T15:46:34+08:00">2022-09-05</time>
+      </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>js 常用数组方法整理,包括常用的数组常用方法、高阶函数 forEach、filter、map。</p>
 <span id="more"></span>
 
 <h3 id="1、常用数组方法"><a href="#1、常用数组方法" class="headerlink" title="1、常用数组方法"></a>1、常用数组方法</h3><details>
@@ -89,4 +292,78 @@ thisArg:执行callback时，用于this的值
 <h2 id="includes比indexOf好在哪里？"><a href="#includes比indexOf好在哪里？" class="headerlink" title="includes比indexOf好在哪里？"></a>includes比indexOf好在哪里？</h2><blockquote>
 <p>includes可以检测NaN，indexOf不能，includes内部使用了Number.isNaN对NaN进行了匹配</p>
 </blockquote>
-</article><section class="jump-container is-flex is-justify-content-space-between my-6"><!-- em is empty placeholder--><a class="button is-default" href="/2021/05/02/34-tool/" title="34、iTerms、Node版本管理工具、nrm等的使用方法"><i class="iconfont icon-prev mr-2 has-text-grey"></i><span class="has-text-weight-semibold">上一页: 34、iTerms、Node版本管理工具、nrm等的使用方法</span></a><a class="button is-default" href="/2021/04/28/33-time/" title="33、时间格式化"><span class="has-text-weight-semibold">下一页: 33、时间格式化</span><i class="iconfont icon-next ml-2 has-text-grey"></i></a></section></div></div></main></main><footer class="is-flex is-flex-direction-column is-align-items-center is-flex-shrink-0 is-family-serif"><section class="sns-container"><!-- Github--><a title="github" target="_blank" rel="noopener nofollow" href="//github.com/HeyJudeYQ"><i class="iconfont icon-github"></i></a><!-- Ins--><!-- RSS--><!-- 知乎--><a title="zhihu" target="_blank" rel="noopener nofollow" href="//zhihu.com/https://www.zhihu.com/hot"><i class="iconfont icon-zhihu"></i></a><!-- 领英--><!-- 脸书--></section><p><span>Copyright ©</span><span> Jude 2023</span></p><div class="is-flex is-justify-content-center is-flex-wrap-wrap"><p>Powered by Hexo &verbar;&nbsp;</p><p class="is-flex is-justify-content-center"><a title="Hexo theme author" target="_blank" rel="noopener" href="//github.com/haojen">Theme by Haojen&nbsp;</a></p><div style="margin-top: 2px"><a class="github-button" title="github-button" target="_blank" rel="noopener" href="https://github.com/haojen/hexo-theme-Claudia" data-color-scheme="no-preference: light; light: light; dark: dark;" data-show-count="true"></a></div></div><div><span>记住昨日的美好，过好今日的生活，憧憬明天的到来</span></div></footer><script async defer src="https://buttons.github.io/buttons.js"></script><script src="/js/post.js"></script></body></html>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/array/" rel="tag"># array</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2021/04/28/33-time/" rel="prev" title="33、时间格式化">
+                  <i class="fa fa-chevron-left"></i> 33、时间格式化
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2021/05/02/34-tool/" rel="next" title="34、iTerms、Node版本管理工具、nrm等的使用方法">
+                  34、iTerms、Node版本管理工具、nrm等的使用方法 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+<script src="/js/comments.js"></script>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>
