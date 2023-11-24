@@ -1,0 +1,261 @@
+<!DOCTYPE html><html class="appearance-auto" lang="zh-CN"><head><meta charset="UTF-8"><title>103、typescript理解原始类型和对象类型(一)</title><meta name="description" content="呦呦鹿鸣，食野之苹"><meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, initial-scale=1"><!-- Google Analytics --><!-- End Google Analytics -->
+<!-- Baidu Analytics --><!-- End Baidu Analytics --><link rel="icon" href="/images/favicon.png"><link rel="stylesheet" href="/style/common/bulma.css"><link rel="stylesheet" href="/style/base.css"><link rel="stylesheet" href="/style/common/helper.css"><script src="/js/common.js"></script><link rel="stylesheet" href="/style/post.css"><link rel="stylesheet" href="/style/themes/highlight-theme-light.css"><script src="/js/highlight.pack.js"></script><meta name="description" content="
+
+原始类型的类型标注JavaScript 的内置原始类型,除了最常见的 number &amp;#x2F; string &amp;#x2F; boolean &amp;#x2F; null &amp;#x2F; undefined， ECMAScript 2015（ES6）、2020 (ES11) 又分别引入了 2 个新的原始类型：symbol 与 bigint 。在 TypeScript 中它们都有对应的类型注解：
+const name: string = &amp;quot;linbudu&amp;quot;;
+const age: number = 24;
+const male: boolean = false;
+const undef: undefined = undefined;
+const nul: null = null;
+const .."><meta name="generator" content="Hexo 7.0.0"></head><body class="is-flex is-flex-direction-column"><header class="header-widget is-flex-shrink-0 is-hidden-mobile"><div class="container is-fullhd is-flex is-justify-content-space-between is-align-items-center is-full-height"><section class="is-hidden-mobile is-flex-shrink-0"><h2><a href="/">Jude's blog</a></h2></section><h3 class="is-hidden-mobile is-family-serif is-full-height is-flex is-align-items-center is-flex-shrink-0"><div class="is-full-height" id="postTopic"><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">103、typescript理解原始类型和对象类型(一)</p><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">点击返回顶部</p></div></h3><aside class="is-flex-shrink-0"><h3 class="is-inline-block"><a href="/">首页</a></h3><h3 class="is-inline-block"><a href="/about">关于</a></h3><h3 class="is-inline-block"><a href="/archives">归档</a></h3></aside></div></header><header class="is-flex header-widget is-flex-shrink-0 is-align-items-center is-justify-content-center is-hidden-tablet"><h3 class="is-inline-block"><a href="/">首页</a></h3><h3 class="is-inline-block"><a href="/about">关于</a></h3><h3 class="is-inline-block"><a href="/archives">归档</a></h3></header><main><main class="container is-max-widescreen content section post-page pt-4 px-4"><div class="columns is-flex-desktop is-justify-content-center is-flex-direction-row-reverse"><div class="column is-3 is-hidden-mobile"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8E%9F%E5%A7%8B%E7%B1%BB%E5%9E%8B%E7%9A%84%E7%B1%BB%E5%9E%8B%E6%A0%87%E6%B3%A8"><span class="toc-text">原始类型的类型标注</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#null-%E4%B8%8E-undefined"><span class="toc-text">null 与 undefined</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#void"><span class="toc-text">void</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E7%BB%84%E7%9A%84%E7%B1%BB%E5%9E%8B%E6%A0%87%E6%B3%A8"><span class="toc-text">数组的类型标注</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AF%B9%E8%B1%A1%E7%9A%84%E7%B1%BB%E5%9E%8B%E6%A0%87%E6%B3%A8"><span class="toc-text">对象的类型标注</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BF%AE%E9%A5%B0%E6%8E%A5%E5%8F%A3%E5%B1%9E%E6%80%A7"><span class="toc-text">修饰接口属性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#type-%E4%B8%8E-interface"><span class="toc-text">type 与 interface</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#object%E3%80%81Object-%E4%BB%A5%E5%8F%8A"><span class="toc-text">object、Object 以及 { }</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93%E4%B8%8E%E9%A2%84%E5%91%8A"><span class="toc-text">总结与预告</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%89%A9%E5%B1%95%E9%98%85%E8%AF%BB"><span class="toc-text">扩展阅读</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#unique-symbol"><span class="toc-text">unique symbol</span></a></li></ol></li></ol></div><div class="column is-9"><header class="my-4"><a href="/tags/ts"><i class="tag post-item-tag">ts</i></a></header><h1 class="mt-0 mb-1 is-family-serif" id="postTitle">103、typescript理解原始类型和对象类型(一)</h1><time class="has-text-grey" datetime="2022-12-06T12:00:00.000Z">2022-12-06</time><article class="mt-2 post-content"><span id="more"></span>
+
+<h2 id="原始类型的类型标注"><a href="#原始类型的类型标注" class="headerlink" title="原始类型的类型标注"></a>原始类型的类型标注</h2><p><a href="https://link.juejin.cn/?target=https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Data_structures%23%E5%8E%9F%E5%A7%8B%E5%80%BC_primitive_values">JavaScript 的内置原始类型</a>,除了最常见的 number &#x2F; string &#x2F; boolean &#x2F; null &#x2F; undefined， ECMAScript 2015（ES6）、2020 (ES11) 又分别引入了 2 个新的原始类型：symbol 与 bigint 。在 TypeScript 中它们都有对应的类型注解：</p>
+<pre><code class="typescript">const name: string = &quot;linbudu&quot;;
+const age: number = 24;
+const male: boolean = false;
+const undef: undefined = undefined;
+const nul: null = null;
+const obj: object = &#123; name, age, male &#125;;
+const bigintVar1: bigint = 9007199254740991n;
+const bigintVar2: bigint = BigInt(9007199254740991);
+const symbolVar: symbol = Symbol(&quot;unique&quot;);
+</code></pre>
+<p>其中，除了 null 与 undefined 以外，余下的类型基本上可以完全对应到 JavaScript 中的数据类型概念，因此这里我们只对 null 与 undefined 展开介绍。</p>
+<h3 id="null-与-undefined"><a href="#null-与-undefined" class="headerlink" title="null 与 undefined"></a>null 与 undefined</h3><p>在 JavaScript 中，null 与 undefined 分别表示“<strong>这里有值，但是个空值</strong>”和“<strong>这里没有值</strong>”。而在 TypeScript 中，null 与 undefined 类型都是<strong>有具体意义的类型</strong>。也就是说，它们作为类型时，表示的是一个有意义的具体类型值。这两者在没有开启 <code>strictNullChecks</code> 检查的情况下，会<strong>被视作其他类型的子类型</strong>，比如 string 类型会被认为包含了 null 与 undefined 类型：</p>
+<pre><code class="typescript">const tmp1: null = null;
+const tmp2: undefined = undefined;
+
+const tmp3: string = null; // 仅在关闭 strictNullChecks 时成立，下同
+const tmp4: string = undefined;
+</code></pre>
+<p>除了上面介绍的原始类型以及 null、undefined 类型以外，在 TypeScript 中还存在着一个特殊的类型：void，它和 JavaScript 中的 void 同样不是一回事，我们接着往下看。</p>
+<h3 id="void"><a href="#void" class="headerlink" title="void"></a>void</h3><p>你是否看到过以下的 JavaScript 代码呢？</p>
+<pre><code class="typescript">&lt;a href=&quot;javascript:void(0)&quot;&gt;清除缓存&lt;/a&gt;
+</code></pre>
+<p>这里的 <code>void(0)</code> 等价于 <code>void 0</code>，即 <code>void expression</code> 的语法。void 操作符会执行后面跟着的表达式并返回一个 undefined，如你可以使用它来执行一个立即执行函数（IIFE）：</p>
+<pre><code class="typescript">void (function iife() &#123;
+  console.log(&quot;Invoked!&quot;);
+&#125;)();
+</code></pre>
+<p>能这么做是因为，void 操作符强制<strong>将后面的函数声明转化为了表达式</strong>，因此整体其实相当于：<code>void((function iife()&#123;&#125;)())</code>。</p>
+<p>事实上，TypeScript 的原始类型标注中也有 void，但与 JavaScript 中不同的是，这里的 void 用于描述一个内部没有 return 语句，或者没有显式 return 一个值的函数的返回值，如：</p>
+<pre><code class="typescript">function func1() &#123;&#125;
+function func2() &#123;
+  return;
+&#125;
+function func3() &#123;
+  return undefined;
+&#125;
+</code></pre>
+<p>在这里，func1 与 func2 的返回值类型都会被隐式推导为 void，只有显式返回了 undefined 值的 func3 其返回值类型才被推导为了 undefined。但在实际的代码执行中，func1 与 func2 的返回值均是 undefined。</p>
+<blockquote>
+<p>虽然 func3 的返回值类型会被推导为 undefined，但是你仍然可以使用 void 类型进行标注，因为在类型层面 func1、func2、func3 都表示“没有返回一个有意义的值”。</p>
+</blockquote>
+<p>这里可能有点绕，你可以认为 void 表示一个空类型，而 null 与 undefined 都是一个具有意义的实际类型（注意与它们在 JavaScript 中的意义区分）。而 undefined 能够被赋值给 void 类型的变量，就像在 JavaScript 中一个没有返回值的函数会默认返回一个 undefined 。null 类型也可以，但需要在关闭 <code>strictNullChecks</code> 配置的情况下才能成立。</p>
+<pre><code class="typescript">const voidVar1: void = undefined;
+
+const voidVar2: void = null; // 需要关闭 strictNullChecks
+</code></pre>
+<p>到这里，我们了解了 JavaScript 中原始数据类型到 TypeScript 原始类型概念地映射，你应当能感觉到 TypeScript 对 JavaScript 开发者的友好，大部分概念都能比较自然地过渡，下面的数组与对象的类型标注同样如此。</p>
+<h2 id="数组的类型标注"><a href="#数组的类型标注" class="headerlink" title="数组的类型标注"></a>数组的类型标注</h2><p>数组同样是我们最常用的类型之一，在 TypeScript 中有两种方式来声明一个数组类型：</p>
+<pre><code class="typescript">const arr1: string[] = [];
+
+const arr2: Array&lt;string&gt; = [];
+</code></pre>
+<p>这两种方式是完全等价的，但其实更多是以前者为主，如果你将鼠标悬浮在 <code>arr2</code> 上，会发现它显示的类型签名是 <code>string[]</code>。数组是我们在日常开发大量使用的数据结构，但在某些情况下，使用 <strong>元组（Tuple）</strong> 来代替数组要更加妥当，比如一个数组中只存放固定长度的变量，但我们进行了超出长度地访问：</p>
+<pre><code class="typescript">const arr3: string[] = [&quot;lin&quot;, &quot;bu&quot;, &quot;du&quot;];
+
+console.log(arr3[599]);
+</code></pre>
+<p>这种情况肯定是不符合预期的，因为我们能确定这个数组中只有三个成员，并希望在越界访问时给出类型报错。这时我们可以使用元组类型进行类型标注：</p>
+<pre><code class="typescript">const arr4: [string, string, string] = [&quot;lin&quot;, &quot;bu&quot;, &quot;du&quot;];
+
+console.log(arr4[599]);
+</code></pre>
+<p>此时将会产生一个类型错误：**<em>长度为“3”的元组类型“[string, string, string]”在索引“599“处没有元素</em>**。除了同类型的元素以外，元组内部也可以声明多个与其位置强绑定的，不同类型的元素：</p>
+<pre><code class="typescript">const arr5: [string, number, boolean] = [&quot;linbudu&quot;, 599, true];
+</code></pre>
+<p>在这种情况下，对数组合法边界内的索引访问（即 0、1、2）将精确地获得对应位置上的类型。同时元组也支持了在某一个位置上的可选成员：</p>
+<pre><code class="typescript">const arr6: [string, number?, boolean?] = [&quot;linbudu&quot;];
+// 下面这么写也可以
+// const arr6: [string, number?, boolean?] = [&#39;linbudu&#39;, , ,];
+</code></pre>
+<p>对于标记为可选的成员，在 <code>--strictNullCheckes</code> 配置下会被视为一个 <code>string | undefined</code> 的类型。此时元组的长度属性也会发生变化，比如上面的元组 arr6 ，其长度的类型为 <code>1 | 2 | 3</code>：</p>
+<pre><code class="typescript">type TupleLength = typeof arr6.length; // 1 | 2 | 3
+</code></pre>
+<p>也就是说，这个元组的长度可能为 1、2、3。</p>
+<blockquote>
+<p>关于类型别名（type）、类型查询（typeof）以及联合类型，我们会在后面讲到，这里你只需要简单了解即可。</p>
+</blockquote>
+<p>你可能会觉得，元组的可读性实际上并不好。比如对于 <code>[string, number, boolean]</code>来说，你并不能直接知道这三个元素都代表什么，还不如使用对象的形式。而在 TypeScript 4.0 中，有了具名元组（<a href="https://link.juejin.cn/?target=https://github.com/Microsoft/TypeScript/issues/28259">Labeled Tuple Elements</a>）的支持，使得我们可以为元组中的元素打上类似属性的标记：</p>
+<pre><code class="typescript">const arr7: [name: string, age: number, male: boolean] = [&quot;linbudu&quot;, 599, true];
+</code></pre>
+<p>有没有很酷？考虑到某些拼装对象太麻烦，我们完全可以使用具名元组来做简单替换。具名元组可选元素的修饰符将成为以下形式：</p>
+<pre><code class="typescript">const arr7: [name: string, age: number, male?: boolean] = [
+  &quot;linbudu&quot;,
+  599,
+  true,
+];
+</code></pre>
+<p>实际上除了显式地越界访问，还可能存在隐式地越界访问，如通过解构赋值的形式：</p>
+<pre><code class="typescript">const arr1: string[] = [];
+
+const [ele1, ele2, ...rest] = arr1;
+</code></pre>
+<p>对于数组，此时仍然无法检查出是否存在隐式访问，因为类型层面并不知道它到底有多少个元素。但对于元组，隐式的越界访问也能够被揪出来给一个警告：</p>
+<pre><code class="typescript">const arr5: [string, number, boolean] = [&quot;linbudu&quot;, 599, true];
+
+// 长度为 &quot;3&quot; 的元组类型 &quot;[string, number, boolean]&quot; 在索引 &quot;3&quot; 处没有元素。
+const [name, age, male, other] = arr5;
+</code></pre>
+<p>JavaScript 的开发者对元组 Tuple 的概念可能比较陌生，毕竟在 JavaScript 中我们很少声明定长的数组。但使用元组确实能帮助我们进一步提升<strong>数组结构的严谨性</strong>，包括基于位置的类型标注、避免出现越界访问等等。除了通过数组类型提升数组结构的严谨性，TypeScript 中的对象类型也能帮助我们提升对象结构的严谨性。接下来我们就一起来看看。</p>
+<h2 id="对象的类型标注"><a href="#对象的类型标注" class="headerlink" title="对象的类型标注"></a>对象的类型标注</h2><p>作为 JavaScript 中使用最频繁的数据结构，对象的类型标注是我们本节要重点关注的部分。接下来我们会学习如何在 TypeScript 中声明对象、修饰对象属性，以及了解可能存在的使用误区。这些内容能够帮助你建立起对 TypeScript 中立体类型（我们可以理解为前面的原始类型是“<strong>平面类型</strong>”）的了解，正式入门 TypeScript 。</p>
+<p>类似于数组类型，在 TypeScript 中我们也需要特殊的类型标注来描述对象类型，即 interface ，你可以理解为它代表了这个对象对外提供的接口结构。</p>
+<p>首先我们使用 interface 声明一个结构，然后使用这个结构来作为一个对象的类型标注即可：</p>
+<pre><code class="typescript">interface IDescription &#123;
+  name: string;
+  age: number;
+  male: boolean;
+&#125;
+
+const obj1: IDescription = &#123;
+  name: &quot;linbudu&quot;,
+  age: 599,
+  male: true,
+&#125;;
+</code></pre>
+<p>这里的“描述”指：</p>
+<ul>
+<li>每一个属性的值必须<strong>一一对应</strong>到接口的属性类型</li>
+<li>不能有多的属性，也不能有少的属性，包括直接在对象内部声明，或是 <code>obj1.other = &#39;xxx&#39;</code> 这样属性访问赋值的形式</li>
+</ul>
+<p>除了声明属性以及属性的类型以外，我们还可以对属性进行修饰，常见的修饰包括<strong>可选（Optional）</strong> 与 <strong>只读（Readonly）</strong> 这两种。</p>
+<h3 id="修饰接口属性"><a href="#修饰接口属性" class="headerlink" title="修饰接口属性"></a>修饰接口属性</h3><p>类似于上面的元组可选，在接口结构中同样通过 <code>?</code> 来标记一个属性为可选：</p>
+<pre><code class="typescript">interface IDescription &#123;
+  name: string;
+  age: number;
+  male?: boolean;
+  func?: Function;
+&#125;
+
+const obj2: IDescription = &#123;
+  name: &quot;linbudu&quot;,
+  age: 599,
+  male: true,
+  // 无需实现 func 也是合法的
+&#125;;
+</code></pre>
+<p>在这种情况下，即使你在 obj2 中定义了 male 属性，但当你访问 <code>obj2.male</code> 时，它的类型仍然会是 <code>boolean | undefined</code>，因为毕竟这是我们自己定义的类型嘛。</p>
+<p>假设新增一个可选的函数类型属性，然后进行调用：<code>obj2.func()</code> ，此时将会产生一个类型报错：**<em>不能调用可能是未定义的方法</em>**。但可选属性标记不会影响你对这个属性进行赋值，如：</p>
+<pre><code class="typescript">obj2.male = false;
+obj2.func = () =&gt; &#123;&#125;;
+</code></pre>
+<p>即使你对可选属性进行了赋值，TypeScript 仍然会使用<strong>接口的描述为准</strong>进行类型检查，你可以使用类型断言、非空断言或可选链解决（别急，我们在后面会讲到）。</p>
+<p>除了标记一个属性为可选以外，你还可以标记这个属性为只读：<code>readonly</code>。很多同学对这一关键字比较陌生，因为以往 JavaScript 中并没有这一类概念，它的作用是<strong>防止对象的属性被再次赋值</strong>。</p>
+<pre><code class="typescript">interface IDescription &#123;
+  readonly name: string;
+  age: number;
+&#125;
+
+const obj3: IDescription = &#123;
+  name: &quot;linbudu&quot;,
+  age: 599,
+&#125;;
+
+// 无法分配到 &quot;name&quot; ，因为它是只读属性
+obj3.name = &quot;林不渡&quot;;
+</code></pre>
+<p>其实在数组与元组层面也有着只读的修饰，但与对象类型有着两处不同。</p>
+<ul>
+<li>你只能将整个数组&#x2F;元组标记为只读，而不能像对象那样标记某个属性为只读。</li>
+<li>一旦被标记为只读，那这个只读数组&#x2F;元组的类型上，将不再具有 push、pop 等方法（即会修改原数组的方法），因此报错信息也将是<strong>类型 xxx 上不存在属性“push”这种</strong>。这一实现的本质是<strong>只读数组与只读元组的类型实际上变成了 ReadonlyArray，而不再是 Array。</strong></li>
+</ul>
+<h3 id="type-与-interface"><a href="#type-与-interface" class="headerlink" title="type 与 interface"></a>type 与 interface</h3><p>我也知道，很多同学更喜欢用 type（Type Alias，类型别名）来代替接口结构描述对象，而我更推荐的方式是，interface 用来描述<strong>对象、类的结构</strong>，而类型别名用来<strong>将一个函数签名、一组联合类型、一个工具类型等等抽离成一个完整独立的类型</strong>。但大部分场景下接口结构都可以被类型别名所取代，因此，只要你觉得统一使用类型别名让你觉得更整齐，也没什么问题。</p>
+<h3 id="object、Object-以及"><a href="#object、Object-以及" class="headerlink" title="object、Object 以及 { }"></a>object、Object 以及 { }</h3><p><code>object</code>、<code>Object</code> 以及<code>&#123;&#125;</code>（一个空对象）这三者的使用可能也会让部分同学感到困惑，所以我也专门解释下。</p>
+<p>首先是 Object 的使用。被 JavaScript 原型链折磨过的同学应该记得，原型链的顶端是 Object 以及 Function，这也就意味着所有的原始类型与对象类型最终都指向 Object，在 TypeScript 中就表现为 Object 包含了所有的类型：</p>
+<pre><code class="typescript">// 对于 undefined、null、void 0 ，需要关闭 strictNullChecks
+const tmp1: Object = undefined;
+const tmp2: Object = null;
+const tmp3: Object = void 0;
+
+const tmp4: Object = &quot;linbudu&quot;;
+const tmp5: Object = 599;
+const tmp6: Object = &#123; name: &quot;linbudu&quot; &#125;;
+const tmp7: Object = () =&gt; &#123;&#125;;
+const tmp8: Object = [];
+</code></pre>
+<p>和 Object 类似的还有 Boolean、Number、String、Symbol，这几个<strong>装箱类型（Boxed Types）</strong> 同样包含了一些超出预期的类型。以 String 为例，它同样包括 undefined、null、void，以及代表的 <strong>拆箱类型（Unboxed Types）</strong> string，但并不包括其他装箱类型对应的拆箱类型，如 boolean 与 基本对象类型，我们看以下的代码：</p>
+<pre><code class="typescript">const tmp9: String = undefined;
+const tmp10: String = null;
+const tmp11: String = void 0;
+const tmp12: String = &quot;linbudu&quot;;
+
+// 以下不成立，因为不是字符串类型的拆箱类型
+const tmp13: String = 599; // X
+const tmp14: String = &#123; name: &quot;linbudu&quot; &#125;; // X
+const tmp15: String = () =&gt; &#123;&#125;; // X
+const tmp16: String = []; // X
+</code></pre>
+<p><strong>在任何情况下，你都不应该使用这些装箱类型。</strong></p>
+<p>object 的引入就是为了解决对 Object 类型的错误使用，它代表<strong>所有非原始类型的类型，即数组、对象与函数类型这些</strong>：</p>
+<pre><code class="typescript">const tmp17: object = undefined;
+const tmp18: object = null;
+const tmp19: object = void 0;
+
+const tmp20: object = &quot;linbudu&quot;; // X 不成立，值为原始类型
+const tmp21: object = 599; // X 不成立，值为原始类型
+
+const tmp22: object = &#123; name: &quot;linbudu&quot; &#125;;
+const tmp23: object = () =&gt; &#123;&#125;;
+const tmp24: object = [];
+</code></pre>
+<p>最后是<code>&#123;&#125;</code>，一个奇奇怪怪的空对象，如果你了解过字面量类型，可以认为<code>&#123;&#125;</code>就是一个对象字面量类型（对应到字符串字面量类型这样）。否则，你可以认为使用<code>&#123;&#125;</code>作为类型签名就是一个合法的，但<strong>内部无属性定义的空对象</strong>，这类似于 Object（想想 <code>new Object()</code>），它意味着任何非 null &#x2F; undefined 的值：</p>
+<pre><code class="typescript">const tmp25: &#123;&#125; = undefined; // 仅在关闭 strictNullChecks 时成立，下同
+const tmp26: &#123;&#125; = null;
+const tmp27: &#123;&#125; = void 0; // void 0 等价于 undefined
+
+const tmp28: &#123;&#125; = &quot;linbudu&quot;;
+const tmp29: &#123;&#125; = 599;
+const tmp30: &#123;&#125; = &#123; name: &quot;linbudu&quot; &#125;;
+const tmp31: &#123;&#125; = () =&gt; &#123;&#125;;
+const tmp32: &#123;&#125; = [];
+</code></pre>
+<p>虽然能够将其作为变量的类型，但你实际上<strong>无法对这个变量进行任何赋值操作</strong>：</p>
+<pre><code class="typescript">const tmp30: &#123;&#125; = &#123; name: &quot;linbudu&quot; &#125;;
+
+tmp30.age = 18; // X 类型“&#123;&#125;”上不存在属性“age”。
+</code></pre>
+<p>这是因为它就是纯洁的像一张白纸一样的空对象，上面没有任何的属性（除了 toString 这种与生俱来的）。在类型层级一节我们还会再次见到它，不过那个时候它已经被称为“万物的起源”了。</p>
+<p>最后，为了更好地区分 <code>Object</code>、<code>object</code> 以及<code>&#123;&#125;</code>这三个具有迷惑性的类型，我们再做下总结：</p>
+<ul>
+<li>在任何时候都<strong>不要，不要，不要使用</strong> Object 以及类似的装箱类型。</li>
+<li>当你不确定某个变量的具体类型，但能确定它不是原始类型，可以使用 object。但我更推荐进一步区分，也就是使用 <code>Record&lt;string, unknown&gt;</code> 或 <code>Record&lt;string, any&gt;</code> 表示对象，<code>unknown[]</code> 或 <code>any[]</code> 表示数组，<code>(...args: any[]) =&gt; any</code>表示函数这样。</li>
+<li>我们同样要避免使用<code>&#123;&#125;</code>。<code>&#123;&#125;</code>意味着任何非 <code>null / undefined</code> 的值，从这个层面上看，使用它和使用 <code>any</code> 一样恶劣。</li>
+</ul>
+<h2 id="总结与预告"><a href="#总结与预告" class="headerlink" title="总结与预告"></a>总结与预告</h2><p>这一节，我们一起学习了 TypeScript 中原始类型、对象类型、数组（元组）的类型标注，以及对数组的只读、对象类型属性的访问性修饰。这里的知识其实可以分为两类：</p>
+<ul>
+<li>与 JavaScript 概念基本一致的部分，如原始类型与数组类型需要重点掌握，但因为思维方式基本没有变化，所以你可以认为你就是在写<strong>更严格一些的 JavaScript</strong>。</li>
+<li>一些全新的概念，比如元组与 readonly 修饰等，这一部分你可能不会很快适应，需要稍微转换一下思维方式。我建议你可以从现在开始，有意识地在日常开发中去多多使用它们。</li>
+</ul>
+<p>另外，对于 readonly 这一修饰符，JavaScript 开发者可能需要一定的时间来理解和习惯，但它在工程层面确实是非常推荐的一种实践，可以使用只读标记来避免数组和对象被错误修改。当然，TypeScript 目前只能够帮助你在编译时做检查，类型信息在编译后都会被擦除，所以 readonly 并不会在实际运行时报错。</p>
+<p>学习完这一小节后，不妨找出你曾经的 JavaScript 项目，试试用本章学到的知识为这些 JavaScript 代码添加一些类型，再把某些场景下的数组换成元组，为部分对象类型的属性添加 readonly，来感受 TypeScript 代码的严格之美。</p>
+<p>在下一节我们要介绍的字面量类型以及枚举，在某些方面其实可以理解为是原始类型与对象类型的进一步延伸，也同样是日常会被重度使用的语法。在完成下一节的学习后，你就可以开始进一步地改造你的 JavaScript 项目，让那些类型变得更精确一些！</p>
+<h2 id="扩展阅读"><a href="#扩展阅读" class="headerlink" title="扩展阅读"></a>扩展阅读</h2><h3 id="unique-symbol"><a href="#unique-symbol" class="headerlink" title="unique symbol"></a>unique symbol</h3><p>Symbol 在 JavaScript 中代表着一个唯一的值类型，它类似于字符串类型，可以作为对象的属性名，并用于避免错误修改 对象 &#x2F; Class 内部属性的情况。而在 TypeScript 中，symbol 类型并不具有这一特性，一百个具有 symbol 类型的对象，它们的 symbol 类型指的都是 TypeScript 中的同一个类型。为了实现“独一无二”这个特性，TypeScript 中支持了 unique symbol 这一类型声明，它是 symbol 类型的子类型，每一个 unique symbol 类型都是独一无二的。</p>
+<pre><code class="typescript">const uniqueSymbolFoo: unique symbol = Symbol(&quot;linbudu&quot;);
+
+// 类型不兼容
+const uniqueSymbolBar: unique symbol = uniqueSymbolFoo;
+</code></pre>
+<p>在 JavaScript 中，我们可以用 <code>Symbol.for</code> 方法来复用已创建的 Symbol，如 <code>Symbol.for(&quot;linbudu&quot;)</code> 会首先查找全局是否已经有使用 <code>linbudu</code> 作为 key 的 Symbol 注册，如果有，则返回这个 Symbol，否则才会创建新的 Symbol 。</p>
+<p>在 TypeScript 中，如果要引用已创建的 unique symbol 类型，则需要使用类型查询操作符 typeof ：</p>
+<pre><code class="typescript">declare const uniqueSymbolFoo: unique symbol;
+
+const uniqueSymbolBaz: typeof uniqueSymbolFoo = uniqueSymbolFoo;
+</code></pre>
+<blockquote>
+<p>以上代码实际执行时会报错，这是因为 uniqueSymbolFoo 是一个仅存在于类型空间的值，这里只是为了进行示例~</p>
+</blockquote>
+<blockquote>
+<p>这里的 declare、typeof 等使用，都会在后面有详细地讲解。同时 unique symbol 在日常开发的使用非常少见，这里做了解就好~</p>
+</blockquote>
+</article><section class="jump-container is-flex is-justify-content-space-between my-6"><!-- em is empty placeholder--><a class="button is-default" href="/2022/12/07/104-ts/" title="104、typescript字面量类型和枚举(二)"><i class="iconfont icon-prev mr-2 has-text-grey"></i><span class="has-text-weight-semibold">上一页: 104、typescript字面量类型和枚举(二)</span></a><a class="button is-default" href="/2022/12/03/102-deploy/" title="102、项目部署通用方案"><span class="has-text-weight-semibold">下一页: 102、项目部署通用方案</span><i class="iconfont icon-next ml-2 has-text-grey"></i></a></section></div></div></main></main><footer class="is-flex is-flex-direction-column is-align-items-center is-flex-shrink-0 is-family-serif"><section class="sns-container"><!-- Github--><a title="github" target="_blank" rel="noopener nofollow" href="//github.com/Jude"><i class="iconfont icon-github"></i></a><!-- Ins--><!-- RSS--><!-- 知乎--><a title="zhihu" target="_blank" rel="noopener nofollow" href="//zhihu.com/https://www.zhihu.com/hot"><i class="iconfont icon-zhihu"></i></a><!-- 领英--><!-- 脸书--></section><p><span>Copyright ©</span><span> Jude 2023</span></p><div class="is-flex is-justify-content-center is-flex-wrap-wrap"><p>Powered by Hexo &verbar;&nbsp;</p><p class="is-flex is-justify-content-center"><a title="Hexo theme author" target="_blank" rel="noopener" href="//github.com/haojen">Theme by Haojen&nbsp;</a></p><div style="margin-top: 2px"><a class="github-button" title="github-button" target="_blank" rel="noopener" href="https://github.com/haojen/hexo-theme-Claudia" data-color-scheme="no-preference: light; light: light; dark: dark;" data-show-count="true"></a></div></div><div><span>记住昨日的美好，过好今日的生活，憧憬明天的到来</span></div></footer><script async defer src="https://buttons.github.io/buttons.js"></script><script src="/js/post.js"></script></body></html>

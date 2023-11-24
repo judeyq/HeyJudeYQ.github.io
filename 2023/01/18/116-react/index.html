@@ -1,0 +1,410 @@
+<!DOCTYPE html><html class="appearance-auto" lang="zh-CN"><head><meta charset="UTF-8"><title>116、稀土掘金小册-记账本（七）新增账单弹窗封装</title><meta name="description" content="呦呦鹿鸣，食野之苹"><meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, initial-scale=1"><!-- Google Analytics --><!-- End Google Analytics -->
+<!-- Baidu Analytics --><!-- End Baidu Analytics --><link rel="icon" href="/images/favicon.png"><link rel="stylesheet" href="/style/common/bulma.css"><link rel="stylesheet" href="/style/base.css"><link rel="stylesheet" href="/style/common/helper.css"><script src="/js/common.js"></script><link rel="stylesheet" href="/style/post.css"><link rel="stylesheet" href="/style/themes/highlight-theme-light.css"><script src="/js/highlight.pack.js"></script><meta name="description" content="
+
+前言回顾一下上一章节学习的内容。无限滚动列表、弹窗组件的内部控制显隐、工具方法以及常量的提取。若是你开发项目时，在潜意识里，有对这些内容进行封装的思想，那么你已经有模块化、组件化的开发理念了。在大量的工程中得出的实践，将会根深蒂固在你的开发理念里。
+之前，我们是对一个小组件，如时间筛选、类型筛选等小组件进行封装。本章节，我们对一个添加模块进行封装，好处就是你在任何地方，都能使用这个添加组件，对账单进行增加操作。
+我们先来看看本章节要绘制的页面和逻辑：
+
+如上图所示，本章节要实现的需求逻辑，基本上已经绘制在图中。所有的努力，都是为了凑出这几个参数：
+
+账单类型
+账单金额
+账单日期
+账单种类
+备注
+
+然后将这些数据，提交给服务端进行处理，然后存储到数据库，完事。
+正文上述需求整理清楚之后，我们开始本章节的制.."><meta name="generator" content="Hexo 7.0.0"></head><body class="is-flex is-flex-direction-column"><header class="header-widget is-flex-shrink-0 is-hidden-mobile"><div class="container is-fullhd is-flex is-justify-content-space-between is-align-items-center is-full-height"><section class="is-hidden-mobile is-flex-shrink-0"><h2><a href="/">Jude's blog</a></h2></section><h3 class="is-hidden-mobile is-family-serif is-full-height is-flex is-align-items-center is-flex-shrink-0"><div class="is-full-height" id="postTopic"><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">116、稀土掘金小册-记账本（七）新增账单弹窗封装</p><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">点击返回顶部</p></div></h3><aside class="is-flex-shrink-0"><h3 class="is-inline-block"><a href="/">首页</a></h3><h3 class="is-inline-block"><a href="/about">关于</a></h3><h3 class="is-inline-block"><a href="/archives">归档</a></h3></aside></div></header><header class="is-flex header-widget is-flex-shrink-0 is-align-items-center is-justify-content-center is-hidden-tablet"><h3 class="is-inline-block"><a href="/">首页</a></h3><h3 class="is-inline-block"><a href="/about">关于</a></h3><h3 class="is-inline-block"><a href="/archives">归档</a></h3></header><main><main class="container is-max-widescreen content section post-page pt-4 px-4"><div class="columns is-flex-desktop is-justify-content-center is-flex-direction-row-reverse"><div class="column is-3 is-hidden-mobile"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%AD%A3%E6%96%87"><span class="toc-text">正文</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BC%B9%E7%AA%97%E7%BB%84%E4%BB%B6%E5%AE%9E%E7%8E%B0"><span class="toc-text">弹窗组件实现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B4%A6%E5%8D%95%E7%B1%BB%E5%9E%8B%E5%92%8C%E8%B4%A6%E5%8D%95%E6%97%B6%E9%97%B4"><span class="toc-text">账单类型和账单时间</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B4%A6%E5%8D%95%E9%87%91%E9%A2%9D"><span class="toc-text">账单金额</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B4%A6%E5%8D%95%E7%A7%8D%E7%B1%BB"><span class="toc-text">账单种类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%87%E6%B3%A8%E5%BC%B9%E7%AA%97"><span class="toc-text">备注弹窗</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B0%83%E7%94%A8%E4%B8%8A%E4%BC%A0%E8%B4%A6%E5%8D%95%E6%8E%A5%E5%8F%A3"><span class="toc-text">调用上传账单接口</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-text">总结</span></a></li></ol></div><div class="column is-9"><header class="my-4"><a href="/tags/react"><i class="tag post-item-tag">react</i></a></header><h1 class="mt-0 mb-1 is-family-serif" id="postTitle">116、稀土掘金小册-记账本（七）新增账单弹窗封装</h1><time class="has-text-grey" datetime="2023-01-18T12:00:00.000Z">2023-01-18</time><article class="mt-2 post-content"><span id="more"></span>
+
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>回顾一下上一章节学习的内容。无限滚动列表、弹窗组件的内部控制显隐、工具方法以及常量的提取。若是你开发项目时，在潜意识里，有对这些内容进行封装的思想，那么你已经有模块化、组件化的开发理念了。在大量的工程中得出的实践，将会根深蒂固在你的开发理念里。</p>
+<p>之前，我们是对一个小组件，如时间筛选、类型筛选等小组件进行封装。本章节，我们对一个添加模块进行封装，好处就是你在任何地方，都能使用这个添加组件，对账单进行增加操作。</p>
+<p>我们先来看看本章节要绘制的页面和逻辑：</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/349d2f897ff84498a7016596b2e11882~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp" alt="img"></p>
+<p>如上图所示，本章节要实现的需求逻辑，基本上已经绘制在图中。所有的努力，都是为了凑出这几个参数：</p>
+<ul>
+<li>账单类型</li>
+<li>账单金额</li>
+<li>账单日期</li>
+<li>账单种类</li>
+<li>备注</li>
+</ul>
+<p>然后将这些数据，提交给服务端进行处理，然后存储到数据库，完事。</p>
+<h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><p>上述需求整理清楚之后，我们开始本章节的制作环节。</p>
+<h3 id="弹窗组件实现"><a href="#弹窗组件实现" class="headerlink" title="弹窗组件实现"></a>弹窗组件实现</h3><p>先实现点击新增按钮，调出弹窗的功能。首先，在 <code>Home/index.jsx</code> 文件中添加 「新增按钮」，如下所示：</p>
+<pre><code class="js">import CustomIcon from &#39;@/components/CustomIcon&#39;
+...
+const Home = () =&gt; &#123;
+  ...
+  const addToggle = () =&gt; &#123;
+    // do something
+  &#125;
+  ...
+  return &lt;div className=&#123;s.home&#125;&gt;
+    ...
+    &lt;div className=&#123;s.add&#125; onClick=&#123;addToggle&#125;&gt;&lt;CustomIcon type=&#39;tianjia&#39; /&gt;&lt;/div&gt;
+  &lt;/div&gt;
+&#125;
+</code></pre>
+<blockquote>
+<p>文末已为同学们提供下本章节 demo 代码，样式部分不再详细说明。</p>
+</blockquote>
+<p>样式中，注意我给 <code>border</code> 设置的是 <code>1PX</code>，大写的单位，因为这样写的话，<code>postcss-pxtorem</code> 插件就不会将其转化为 <code>rem</code> 单位。</p>
+<p>重启项目之后，刷新浏览器，如下所示：</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/acf8cf59aeed4061b36a5b7359fb42b9~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp" alt="img"></p>
+<p>根据之前实现的弹窗组件，我们再实现一套类似的，在弹窗内控制弹窗组件的显示隐藏，在 <code>components</code> 下新建 <code>PopupAddBill</code> 文件夹，再新建 <code>index.jsx</code> 和 <code>style.module.less</code>，代码如下：</p>
+<pre><code class="js">// PopupAddBill/index.jsx
+import React, &#123; forwardRef, useEffect, useRef, useState &#125; from &quot;react&quot;;
+import PropTypes from &quot;prop-types&quot;;
+import &#123; Popup &#125; from &quot;zarm&quot;;
+
+const PopupAddBill = forwardRef((props, ref) =&gt; &#123;
+  const [show, setShow] = useState(false); // 内部控制弹窗显示隐藏。
+  // 通过 forwardRef 拿到外部传入的 ref，并添加属性，使得父组件可以通过 ref 控制子组件。
+  if (ref) &#123;
+    ref.current = &#123;
+      show: () =&gt; &#123;
+        setShow(true);
+      &#125;,
+      close: () =&gt; &#123;
+        setShow(false);
+      &#125;,
+    &#125;;
+  &#125;
+
+  return (
+    &lt;Popup
+      visible=&#123;show&#125;
+      direction=&quot;bottom&quot;
+      onMaskClick=&#123;() =&gt; setShow(false)&#125;
+      destroy=&#123;false&#125;
+      mountContainer=&#123;() =&gt; document.body&#125;
+    &gt;
+      &lt;div style=&#123;&#123; height: 200, background: "#fff" &#125;&#125;&gt;弹窗&lt;/div&gt;
+    &lt;/Popup&gt;
+  );
+&#125;);
+
+export default PopupAddBill;
+</code></pre>
+<p>写完弹窗组件，当然就得去 <code>Home/index.jsx</code> 中调用：</p>
+<pre><code class="js">// Home/index.jsx
+import PopupAddBill from &#39;@/components/PopupAddBill&#39;
+
+const Home = () =&gt; &#123;
+  ...
+  const addRef = useRef(); // 添加账单 ref
+  ...
+  // 添加账单弹窗
+  const addToggle = () =&gt; &#123;
+    addRef.current &amp;&amp; addRef.current.show()
+  &#125;
+
+  return &lt;div className=&#123;s.home&#125;&gt;
+    ...
+    &lt;PopupAddBill ref=&#123;addRef&#125; /&gt;
+  &lt;/div&gt;
+&#125;
+</code></pre>
+<p>重启浏览器，效果如下：</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/7025a89978114333bdf7cbdb20139482~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp" alt="img"></p>
+<p>此时我们的“地基”已经打好了，接下来我们要在这个基础上给新增账单弹窗“添砖加瓦”。</p>
+<h3 id="账单类型和账单时间"><a href="#账单类型和账单时间" class="headerlink" title="账单类型和账单时间"></a>账单类型和账单时间</h3><p>我们先实现弹窗头部左侧的「支出」和「收入」账单类型切换功能，添加代码如下：</p>
+<pre><code class="js">// components/PopupAddBill/index.jsx
+...
+import cx from &#39;classnames&#39;;
+import &#123; Popup, Icon  &#125; from &#39;zarm&#39;;
+
+import s from &#39;./style.module.less&#39;;
+
+const PopupAddBill = forwardRef((props, ref) =&gt; &#123;
+  ...
+  const [payType, setPayType] = useState(&#39;expense&#39;); // 支出或收入类型
+  ...
+  // 切换收入还是支出
+  const changeType = (type) =&gt; &#123;
+    setPayType(type);
+  &#125;;
+
+  return &lt;Popup
+    visible=&#123;show&#125;
+    direction=&quot;bottom&quot;
+    onMaskClick=&#123;() =&gt; setShow(false)&#125;
+    destroy=&#123;false&#125;
+    mountContainer=&#123;() =&gt; document.body&#125;
+  &gt;
+    &lt;div className=&#123;s.addWrap&#125;&gt;
+      &#123;/* 右上角关闭弹窗 */&#125;
+      &lt;header className=&#123;s.header&#125;&gt;
+        &lt;span className=&#123;s.close&#125; onClick=&#123;() =&gt; setShow(false)&#125;&gt;&lt;Icon type=&quot;wrong&quot; /&gt;&lt;/span&gt;
+      &lt;/header&gt;
+       &#123;/* 「收入」和「支出」类型切换 */&#125;
+      &lt;div className=&#123;s.filter&#125;&gt;
+        &lt;div className=&#123;s.type&#125;&gt;
+          &lt;span onClick=&#123;() =&gt; changeType(&#39;expense&#39;)&#125; className=&#123;cx(&#123; [s.expense]: true, [s.active]: payType == &#39;expense&#39; &#125;)&#125;&gt;支出&lt;/span&gt;
+          &lt;span onClick=&#123;() =&gt; changeType(&#39;income&#39;)&#125; className=&#123;cx(&#123; [s.income]: true, [s.active]: payType == &#39;income&#39; &#125;)&#125;&gt;收入&lt;/span&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/Popup&gt;
+&#125;)
+
+export default PopupAddBill
+</code></pre>
+<p>为了减少代码的重复，上述代码只展示了需要添加的部分，尽量不让大家混淆视听。</p>
+<p>我们定义 <code>expense</code> 为支出，<code>income</code> 为收入，代码中通过 <code>payType</code> 变量，来控制「收入」和「支出」按钮的切换。上述代码视图效果如下所示：</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/bd1f72d07dff4f69af0848e8d2f0696f~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp" alt="img"></p>
+<p>接下来在类型边上添加时间筛选弹窗，此时你将体会到之前提取时间筛选组件是多么的明智。我们继续添加代码：</p>
+<pre><code class="js">import React, &#123; forwardRef, useEffect, useRef, useState &#125; from &#39;react&#39;;
+...
+import dayjs from &#39;dayjs&#39;;
+import PopupDate from &#39;../PopupDate&#39;
+...
+
+const PopupAddBill = forwardRef((props, ref) =&gt; &#123;
+  ...
+  const dateRef = useRef();
+  const [date, setDate] = useState(new Date()); // 日期
+  ...
+  // 日期选择回调
+  const selectDate = (val) =&gt; &#123;
+    setDate(val);
+  &#125;
+
+  return &lt;Popup
+    visible=&#123;show&#125;
+    direction=&quot;bottom&quot;
+    onMaskClick=&#123;() =&gt; setShow(false)&#125;
+    destroy=&#123;false&#125;
+    mountContainer=&#123;() =&gt; document.body&#125;
+  &gt;
+    &lt;div className=&#123;s.addWrap&#125;&gt;
+       &#123;/* 「收入」和「支出」类型切换 */&#125;
+      &lt;div className=&#123;s.filter&#125;&gt;
+        ...
+        &lt;div
+          className=&#123;s.time&#125;
+          onClick=&#123;() =&gt; dateRef.current &amp;&amp; dateRef.current.show()&#125;
+        &gt;&#123;dayjs(date).format(&#39;MM-DD&#39;)&#125; &lt;Icon className=&#123;s.arrow&#125; type=&quot;arrow-bottom&quot; /&gt;&lt;/div&gt;
+      &lt;/div&gt;
+      &lt;PopupDate ref=&#123;dateRef&#125; onSelect=&#123;selectDate&#125; /&gt;
+    &lt;/div&gt;
+  &lt;/Popup&gt;
+&#125;)
+
+export default PopupAddBill
+</code></pre>
+<p>我们引入了公共组件 <code>PopupDate</code>，传入 <code>ref</code> 控制弹窗的显示隐藏，传入 <code>onSelect</code> 获取日期组件选择后回调的值，并通过 <code>setDate</code> 重制 <code>date</code>，触发视图的更新，我们来看浏览器展示效果如下：</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/ee3fa326b74f41ddb0d211e886ca5ccb~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp" alt="img"></p>
+<p>我们通过上述代码，已经创造出了两个值，分别是「账单类型」和「账单日期」，还差「账单金额」 「账单种类」、「备注」。</p>
+<h3 id="账单金额"><a href="#账单金额" class="headerlink" title="账单金额"></a>账单金额</h3><p>本章开头大家也应该看到了，金额输入框是模拟的，也就是说当下面模拟数字键盘点击的时候，我们将返回的数据渲染到进入输入框的位置，下面我们先将金额输入框搭建出来，添加代码如下：</p>
+<pre><code class="js">&lt;div className=&#123;s.money&#125;&gt;
+  &lt;span className=&#123;s.sufix&#125;&gt;¥&lt;/span&gt;
+  &lt;span className=&#123;cx(s.amount, s.animation)&#125;&gt;10&lt;/span&gt;
+&lt;/div&gt;
+</code></pre>
+<blockquote>
+<p>文末已为同学们提供下本章节 demo 代码，样式部分不再详细说明。</p>
+</blockquote>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/15dc48f98c4f42eb9310619510603506~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp" alt="img"></p>
+<p>我们将金额动态化，引入 <code>Zarm</code> 为我们提供的模拟数字键盘组件 <code>Keyboard</code>，代码如下：</p>
+<pre><code class="js">...
+// 监听输入框改变值
+  const handleMoney = (value) =&gt; &#123;
+    value = String(value)
+    // 点击是删除按钮时
+    if (value == &#39;delete&#39;) &#123;
+      let _amount = amount.slice(0, amount.length - 1)
+      setAmount(_amount)
+      return
+    &#125;
+
+    // 点击确认按钮时
+    if (value == &#39;ok&#39;) &#123;
+      // 这里后续将处理添加账单逻辑
+      return
+    &#125;
+
+    // 当输入的值为 &#39;.&#39; 且 已经存在 &#39;.&#39;，则不让其继续字符串相加。
+    if (value == &#39;.&#39; &amp;&amp; amount.includes(&#39;.&#39;)) return
+    // 小数点后保留两位，当超过两位时，不让其字符串继续相加。
+    if (value != &#39;.&#39; &amp;&amp; amount.includes(&#39;.&#39;) &amp;&amp; amount &amp;&amp; amount.split(&#39;.&#39;)[1].length &gt;= 2) return
+    // amount += value
+    setAmount(amount + value)
+  &#125;
+...
+
+&lt;div className=&#123;s.money&#125;&gt;
+  &lt;span className=&#123;s.sufix&#125;&gt;¥&lt;/span&gt;
+  &lt;span className=&#123;cx(s.amount, s.animation)&#125;&gt;&#123;amount&#125;&lt;/span&gt;
+&lt;/div&gt;
+&lt;Keyboard type=&quot;price&quot; onKeyClick=&#123;(value) =&gt; handleMoney(value)&#125; /&gt;
+</code></pre>
+<p>重启项目，浏览器展示如下图所示：</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/0fc90561f73d4b2c921864ebefc2cd2c~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp" alt="img"></p>
+<blockquote>
+<p>这里一个小提示，我在制作项目的过程中，发现一个 Zarm 2.9.0 版本的 bug，Keyboard 组件在点击删除按钮的时候，onKeyClick 方法会反复被执行，于是我降级为 2.8.2 版本，并且去他们的官网提了 issue。</p>
+</blockquote>
+<p>此时「账单金额」也被安排上了。</p>
+<h3 id="账单种类"><a href="#账单种类" class="headerlink" title="账单种类"></a>账单种类</h3><p>账单种类的作用是表示该笔账单的大致用途，我们通过接口从数据库回去账单种类列表，以横向滚动的形式，展示在金额的下面，接下来我们看具体的代码实现：</p>
+<pre><code class="js">...
+import CustomIcon from &#39;../CustomIcon&#39;;
+import &#123; get, typeMap &#125; from &#39;@/utils&#39;;
+
+...
+const [currentType, setCurrentType] = useState(&#123;&#125;); // 当前选中账单类型
+const [expense, setExpense] = useState([]); // 支出类型数组
+const [income, setIncome] = useState([]); // 收入类型数组
+
+useEffect(async () =&gt; &#123;
+  const &#123; data: &#123; list &#125; &#125; = await get(&#39;/api/type/list&#39;);
+  const _expense = list.filter(i =&gt; i.type == 1); // 支出类型
+  const _income = list.filter(i =&gt; i.type == 2); // 收入类型
+  setExpense(_expense);
+  setIncome(_income);
+  setCurrentType(_expense[0]); // 新建账单，类型默认是支出类型数组的第一项
+&#125;, [])
+
+
+...
+&lt;div className=&#123;s.typeWarp&#125;&gt;
+  &lt;div className=&#123;s.typeBody&#125;&gt;
+    &#123;/* 通过 payType 判断，是展示收入账单类型，还是支出账单类型 */&#125;
+    &#123;
+      (payType == &#39;expense&#39; ? expense : income).map(item =&gt; &lt;div onClick=&#123;() =&gt; setCurrentType(item)&#125; key=&#123;item.id&#125; className=&#123;s.typeItem&#125;&gt;
+        &#123;/* 收入和支出的字体颜色，以及背景颜色通过 payType 区分，并且设置高亮 */&#125;
+        &lt;span className=&#123;cx(&#123;[s.iconfontWrap]: true, [s.expense]: payType == &#39;expense&#39;, [s.income]: payType == &#39;income&#39;, [s.active]: currentType.id == item.id&#125;)&#125;&gt;
+          &lt;CustomIcon className=&#123;s.iconfont&#125; type=&#123;typeMap[item.id].icon&#125; /&gt;
+        &lt;/span&gt;
+        &lt;span&gt;&#123;item.name&#125;&lt;/span&gt;
+      &lt;/div&gt;)
+    &#125;
+  &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+<p>注意，在 <code>h5</code> 界面实现横向滚动，和在网页端相比，多了如下属性：</p>
+<pre><code class="css">* &#123;
+  touch-action: pan-x;
+&#125;
+</code></pre>
+<blockquote>
+<p>CSS 属性 touch-action 用于设置触摸屏用户如何操纵元素的区域(例如，浏览器内置的缩放功能)。</p>
+</blockquote>
+<p>如果不设置它，只是通过 <code>overflow-x: auto</code>，无法实现 <code>h5</code> 端的横向滚动的，并且你要在一个 <code>div</code> 容器内设置全局 <code>*</code> 为 <code>touch-action: pan-x;</code>，如果后续遇到类似的问题，大家可以参考我上述做法，这是经过实践验证过的方法。</p>
+<p>我们来看看浏览器的展示效果：</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/9047dbf8d2d44f09ab66fce10dc1ee89~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp" alt="img"></p>
+<h3 id="备注弹窗"><a href="#备注弹窗" class="headerlink" title="备注弹窗"></a>备注弹窗</h3><p>备注虽然不起眼，但是别小看它，它可以在账单类型不足以概括账单时，加以一定的文字描述。</p>
+<p>我们直接将其放置于「账单种类」的下面，代码如下：</p>
+<pre><code class="js">...
+import &#123;  Input  &#125; from &#39;zarm&#39;;
+
+...
+const [remark, setRemark] = useState(&#39;&#39;); // 备注
+const [showRemark, setShowRemark] = useState(false); // 备注输入框展示控制
+
+...
+&lt;div className=&#123;s.remark&#125;&gt;
+  &#123;
+    showRemark ? &lt;Input
+      autoHeight
+      showLength
+      maxLength=&#123;50&#125;
+      type=&quot;text&quot;
+      rows=&#123;3&#125;
+      value=&#123;remark&#125;
+      placeholder=&quot;请输入备注信息&quot;
+      onChange=&#123;(val) =&gt; setRemark(val)&#125;
+      onBlur=&#123;() =&gt; setShowRemark(false)&#125;
+    /&gt; : &lt;span onClick=&#123;() =&gt; setShowRemark(true)&#125;&gt;&#123;remark || &#39;添加备注&#39;&#125;&lt;/span&gt;
+  &#125;
+&lt;/div&gt;
+</code></pre>
+<p><strong>CSS 样式部分</strong></p>
+<pre><code class="css">.remark &#123;
+  padding: 0 24px;
+  padding-bottom: 12px;
+  color: #4b67e2;
+  :global &#123;
+    .za-input--textarea &#123;
+      border: 1px solid #e9e9e9;
+      padding: 10px;
+    &#125;
+  &#125;
+&#125;
+</code></pre>
+<p><code>:global</code> 的使用之前已经有描述过，这里再提醒大家一句，目前项目使用的是 <code>css module</code> 的形式，所以样式名都会被打上 <code>hash</code> 值，我们需要修改没有打 <code>hash</code> 值的 <code>zarm</code> 内部样式，需要通过 <code>:global</code> 方法。</p>
+<p>浏览器展示效果如下：</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/28bec13e3c9444cb8a4fd3779290193f~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp" alt="img"></p>
+<h3 id="调用上传账单接口"><a href="#调用上传账单接口" class="headerlink" title="调用上传账单接口"></a>调用上传账单接口</h3><p>此时我们集齐了五大参数：</p>
+<ul>
+<li>账单类型：payType</li>
+<li>账单金额：amount</li>
+<li>账单日期：date</li>
+<li>账单种类：currentType</li>
+<li>备注：remark</li>
+</ul>
+<p>我们给 <code>Keyboard</code> 的「确定」按钮回调添加方法：</p>
+<pre><code class="js">import &#123; Toast &#125; from &quot;zarm&quot;;
+import &#123; post &#125; from &quot;@/utils&quot;;
+// 监听输入框改变值
+const handleMoney = (value) =&gt; &#123;
+  value = String(value);
+  // 点击是删除按钮时
+  if (value == &quot;delete&quot;) &#123;
+    let _amount = amount.slice(0, amount.length - 1);
+    setAmount(_amount);
+    return;
+  &#125;
+  // 点击确认按钮时
+  if (value == &quot;ok&quot;) &#123;
+    addBill();
+    return;
+  &#125;
+  // 当输入的值为 &#39;.&#39; 且 已经存在 &#39;.&#39;，则不让其继续字符串相加。
+  if (value == &quot;.&quot; &amp;&amp; amount.includes(&quot;.&quot;)) return;
+  // 小数点后保留两位，当超过两位时，不让其字符串继续相加。
+  if (
+    value != &quot;.&quot; &amp;&amp;
+    amount.includes(&quot;.&quot;) &amp;&amp;
+    amount &amp;&amp;
+    amount.split(&quot;.&quot;)[1].length &gt;= 2
+  )
+    return;
+  // amount += value
+  setAmount(amount + value);
+&#125;;
+
+// 添加账单
+const addBill = async () =&gt; &#123;
+  if (!amount) &#123;
+    Toast.show(&quot;请输入具体金额&quot;);
+    return;
+  &#125;
+  const params = &#123;
+    amount: Number(amount).toFixed(2), // 账单金额小数点后保留两位
+    type_id: currentType.id, // 账单种类id
+    type_name: currentType.name, // 账单种类名称
+    date: dayjs(date).unix() * 1000, // 日期传时间戳
+    pay_type: payType == &quot;expense&quot; ? 1 : 2, // 账单类型传 1 或 2
+    remark: remark || &quot;&quot;, // 备注
+  &#125;;
+  const result = await post(&quot;/api/bill/add&quot;, params);
+  // 重制数据
+  setAmount(&quot;&quot;);
+  setPayType(&quot;expense&quot;);
+  setCurrentType(expense[0]);
+  setDate(new Date());
+  setRemark(&quot;&quot;);
+  Toast.show(&quot;添加成功&quot;);
+  setShow(false);
+  if (props.onReload) props.onReload();
+&#125;;
+</code></pre>
+<p><code>onReload</code> 方法为首页账单列表传进来的函数，当添加完账单的时候，执行 <code>onReload</code> 重新获取首页列表数据。</p>
+<pre><code class="js">&lt;PopupAddBill ref=&#123;addRef&#125; onReload=&#123;refreshData&#125; /&gt;
+</code></pre>
+<p>浏览器展示如下所示：</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/8c3fd021a8f8497d8b14ff0c81a53367~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp" alt="img"></p>
+<p>如果如上图所示，恭喜你，你已经成功完成了添加账单的 工作，此时再回头甚至之前写的代码，马上改正一些变量及一些方法的命名，规范化一下代码。</p>
+<p>千万别在后面再去完善，因为很大程度上，到后面你会懒得翻前面写的代码，除非实在是逻辑问题导致的 bug。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>本章节的内容也是非常丰富，我们的所有的努力，就是为了集齐「添加账单」所需要的五大参数。这是很多需求的一个索引，试问前端在调用接口的过程中，不都是做各种努力为了凑齐那几个参数呢？过程很重要，只要流程做得完善，结果自然水到渠成。</p>
+</article><section class="jump-container is-flex is-justify-content-space-between my-6"><!-- em is empty placeholder--><a class="button is-default" href="/2023/01/21/117-react/" title="117、稀土掘金小册-记账本（八） 账单详情"><i class="iconfont icon-prev mr-2 has-text-grey"></i><span class="has-text-weight-semibold">上一页: 117、稀土掘金小册-记账本（八） 账单详情</span></a><a class="button is-default" href="/2023/01/11/115-react/" title="115、稀土掘金小册-记账本（六）账单列表"><span class="has-text-weight-semibold">下一页: 115、稀土掘金小册-记账本（六）账单列表</span><i class="iconfont icon-next ml-2 has-text-grey"></i></a></section></div></div></main></main><footer class="is-flex is-flex-direction-column is-align-items-center is-flex-shrink-0 is-family-serif"><section class="sns-container"><!-- Github--><a title="github" target="_blank" rel="noopener nofollow" href="//github.com/Jude"><i class="iconfont icon-github"></i></a><!-- Ins--><!-- RSS--><!-- 知乎--><a title="zhihu" target="_blank" rel="noopener nofollow" href="//zhihu.com/https://www.zhihu.com/hot"><i class="iconfont icon-zhihu"></i></a><!-- 领英--><!-- 脸书--></section><p><span>Copyright ©</span><span> Jude 2023</span></p><div class="is-flex is-justify-content-center is-flex-wrap-wrap"><p>Powered by Hexo &verbar;&nbsp;</p><p class="is-flex is-justify-content-center"><a title="Hexo theme author" target="_blank" rel="noopener" href="//github.com/haojen">Theme by Haojen&nbsp;</a></p><div style="margin-top: 2px"><a class="github-button" title="github-button" target="_blank" rel="noopener" href="https://github.com/haojen/hexo-theme-Claudia" data-color-scheme="no-preference: light; light: light; dark: dark;" data-show-count="true"></a></div></div><div><span>记住昨日的美好，过好今日的生活，憧憬明天的到来</span></div></footer><script async defer src="https://buttons.github.io/buttons.js"></script><script src="/js/post.js"></script></body></html>

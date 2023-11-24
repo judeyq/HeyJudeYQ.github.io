@@ -1,0 +1,554 @@
+<!DOCTYPE html><html class="appearance-auto" lang="zh-CN"><head><meta charset="UTF-8"><title>109、CSS代码片段：布局、视觉、动画</title><meta name="description" content="呦呦鹿鸣，食野之苹"><meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, initial-scale=1"><!-- Google Analytics --><!-- End Google Analytics -->
+<!-- Baidu Analytics --><!-- End Baidu Analytics --><link rel="icon" href="/images/favicon.png"><link rel="stylesheet" href="/style/common/bulma.css"><link rel="stylesheet" href="/style/base.css"><link rel="stylesheet" href="/style/common/helper.css"><script src="/js/common.js"></script><link rel="stylesheet" href="/style/post.css"><link rel="stylesheet" href="/style/themes/highlight-theme-light.css"><script src="/js/highlight.pack.js"></script><meta name="description" content="css 代码片段
+
+
+一、清除浮动的更好方式(浏览器支持情况：100%)&amp;lt;div class=&amp;quot;clearfix&amp;quot;&amp;gt;
+  &amp;lt;div class=&amp;quot;floated&amp;quot;&amp;gt;float a&amp;lt;/div&amp;gt;
+  &amp;lt;div class=&amp;quot;floated&amp;quot;&amp;gt;float b&amp;lt;/div&amp;gt;
+  &amp;lt;div class=&amp;quot;floated&amp;quot;&amp;gt;float c&amp;lt;/div&amp;gt;
+&amp;lt;/div&amp;gt;
+
+.clearfix &amp;#123;
+  border: solid 1px red;
+&amp;#125;
+.clearfix::after &amp;#123;
+  content: &amp;quot;&amp;q.."><meta name="generator" content="Hexo 7.0.0"></head><body class="is-flex is-flex-direction-column"><header class="header-widget is-flex-shrink-0 is-hidden-mobile"><div class="container is-fullhd is-flex is-justify-content-space-between is-align-items-center is-full-height"><section class="is-hidden-mobile is-flex-shrink-0"><h2><a href="/">Jude's blog</a></h2></section><h3 class="is-hidden-mobile is-family-serif is-full-height is-flex is-align-items-center is-flex-shrink-0"><div class="is-full-height" id="postTopic"><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">109、CSS代码片段：布局、视觉、动画</p><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">点击返回顶部</p></div></h3><aside class="is-flex-shrink-0"><h3 class="is-inline-block"><a href="/">首页</a></h3><h3 class="is-inline-block"><a href="/about">关于</a></h3><h3 class="is-inline-block"><a href="/archives">归档</a></h3></aside></div></header><header class="is-flex header-widget is-flex-shrink-0 is-align-items-center is-justify-content-center is-hidden-tablet"><h3 class="is-inline-block"><a href="/">首页</a></h3><h3 class="is-inline-block"><a href="/about">关于</a></h3><h3 class="is-inline-block"><a href="/archives">归档</a></h3></header><main><main class="container is-max-widescreen content section post-page pt-4 px-4"><div class="columns is-flex-desktop is-justify-content-center is-flex-direction-row-reverse"><div class="column is-3 is-hidden-mobile"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E6%B8%85%E9%99%A4%E6%B5%AE%E5%8A%A8%E7%9A%84%E6%9B%B4%E5%A5%BD%E6%96%B9%E5%BC%8F-%E6%B5%8F%E8%A7%88%E5%99%A8%E6%94%AF%E6%8C%81%E6%83%85%E5%86%B5%EF%BC%9A100"><span class="toc-text">一、清除浮动的更好方式(浏览器支持情况：100%)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E4%B8%8D%E5%8F%98%E5%AE%BD%E9%AB%98%E6%AF%94"><span class="toc-text">二、不变宽高比</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E3%80%81display-table-%E5%B1%85%E4%B8%AD"><span class="toc-text">三、display:table 居中</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%9B%E3%80%81%E5%AD%90%E5%85%83%E7%B4%A0%E5%9D%87%E5%8C%80%E5%88%86%E5%B8%83"><span class="toc-text">四、子元素均匀分布</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%94%E3%80%81%E5%9B%BE%E7%89%87%E5%9C%A8%E5%AE%B9%E5%99%A8%E4%B8%AD%E6%98%BE%E7%A4%BA%E7%9A%84%E6%9B%B4%E8%88%92%E9%80%82"><span class="toc-text">五、图片在容器中显示的更舒适</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%AD%E3%80%81flexbox-%E5%B1%85%E4%B8%AD-%E5%B8%B8%E7%94%A8"><span class="toc-text">六、flexbox 居中(常用)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%83%E3%80%81%E5%B0%86%E5%85%83%E7%B4%A0%E5%9E%82%E7%9B%B4%E5%B1%85%E4%B8%AD%E4%BA%8E%E5%8F%A6%E4%B8%80%E4%B8%AA%E5%85%83%E7%B4%A0"><span class="toc-text">七、将元素垂直居中于另一个元素</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%AB%E3%80%81grid-%E5%B1%85%E4%B8%AD"><span class="toc-text">八、grid 居中</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B9%9D%E3%80%81%E4%BD%BF%E6%9C%80%E5%90%8E%E4%B8%80%E9%A1%B9%E5%8D%A0%E6%BB%A1%E5%89%A9%E4%BD%99%E9%AB%98%E5%BA%A6"><span class="toc-text">九、使最后一项占满剩余高度</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8D%81%E3%80%81%E5%B1%8F%E5%A4%96%E9%9A%90%E8%97%8F%E5%85%83%E7%B4%A0"><span class="toc-text">十、屏外隐藏元素</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8D%81%E4%B8%80%E3%80%81transform-%E5%B1%85%E4%B8%AD%E5%AD%90%E5%85%83%E7%B4%A0"><span class="toc-text">十一、transform 居中子元素</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8D%81%E4%BA%8C%E3%80%81%E5%A4%9A%E8%A1%8C%E6%96%87%E6%9C%AC%E6%88%AA%E6%96%AD%E6%98%BE%E7%A4%BA"><span class="toc-text">十二、多行文本截断显示</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8D%81%E4%B8%89%E3%80%81CSS-%E5%88%97%E8%A1%A8%E8%AE%A1%E6%95%B0%E5%99%A8"><span class="toc-text">十三、CSS 列表计数器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8D%81%E5%9B%9B%E3%80%81%E8%87%AA%E5%AE%9A%E4%B9%89%E6%BB%9A%E5%8A%A8%E6%9D%A1"><span class="toc-text">十四、自定义滚动条</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8D%81%E4%BA%94%E3%80%81%E8%87%AA%E5%AE%9A%E4%B9%89%E6%96%87%E6%9C%AC%E9%80%89%E6%8B%A9%E7%9A%84%E6%A0%B7%E5%BC%8F"><span class="toc-text">十五、自定义文本选择的样式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8D%81%E5%85%AD%E3%80%81Focus-Within-%E4%BC%AA%E7%B1%BB"><span class="toc-text">十六、Focus Within 伪类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8D%81%E4%B8%83%E3%80%81%E6%8C%87%E5%AE%9A%E5%85%83%E7%B4%A0%E7%9A%84%E5%85%A8%E5%B1%8F"><span class="toc-text">十七、指定元素的全屏</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8D%81%E5%85%AB%E3%80%81%EF%BC%9Anot-%E4%BC%AA%E7%B1%BB%E9%80%89%E6%8B%A9%E5%99%A8"><span class="toc-text">十八、：not 伪类选择器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8D%81%E4%B9%9D%E3%80%81%E6%96%91%E9%A9%AC%E6%9D%A1%E7%BA%B9%E5%88%97%E8%A1%A8"><span class="toc-text">十九、斑马条纹列表</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E5%8D%81%E3%80%81%E5%BC%B9%E8%B7%B3-loading-%E5%8A%A8%E7%94%BB"><span class="toc-text">二十、弹跳 loading 动画</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E5%8D%81%E4%B8%80%E3%80%81%E6%8C%89%E9%92%AE%E8%BE%B9%E6%A1%86%E5%8A%A8%E7%94%BB"><span class="toc-text">二十一、按钮边框动画</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E5%8D%81%E4%BA%8C%E3%80%81%E9%AB%98%E5%BA%A6%E8%BF%87%E5%BA%A6"><span class="toc-text">二十二、高度过度</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E5%8D%81%E4%B8%89%E3%80%81%E6%82%AC%E5%81%9C%E9%98%B4%E5%BD%B1%E5%8A%A8%E7%94%BB"><span class="toc-text">二十三、悬停阴影动画</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E5%8D%81%E5%9B%9B%E3%80%81%E6%82%AC%E5%81%9C%E4%B8%8B%E5%88%92%E7%BA%BF%E5%8A%A8%E7%94%BB"><span class="toc-text">二十四、悬停下划线动画</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E5%8D%81%E4%BA%94%E3%80%81%E5%BC%B9%E5%87%BA%E8%8F%9C%E5%8D%95"><span class="toc-text">二十五、弹出菜单</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E5%8D%81%E5%85%AD%E3%80%81%E6%82%AC%E5%81%9C%E6%97%B6%EF%BC%8C%E5%85%84%E5%BC%9F%E5%85%83%E7%B4%A0%E6%B7%A1%E5%8C%96"><span class="toc-text">二十六、悬停时，兄弟元素淡化</span></a></li></ol></div><div class="column is-9"><header class="my-4"><a href="/tags/css"><i class="tag post-item-tag">css</i></a></header><h1 class="mt-0 mb-1 is-family-serif" id="postTitle">109、CSS代码片段：布局、视觉、动画</h1><time class="has-text-grey" datetime="2022-12-20T12:00:00.000Z">2022-12-20</time><article class="mt-2 post-content"><p>css 代码片段</p>
+<span id="more"></span>
+
+<h2 id="一、清除浮动的更好方式-浏览器支持情况：100"><a href="#一、清除浮动的更好方式-浏览器支持情况：100" class="headerlink" title="一、清除浮动的更好方式(浏览器支持情况：100%)"></a>一、清除浮动的更好方式(浏览器支持情况：100%)</h2><pre><code class="html">&lt;div class=&quot;clearfix&quot;&gt;
+  &lt;div class=&quot;floated&quot;&gt;float a&lt;/div&gt;
+  &lt;div class=&quot;floated&quot;&gt;float b&lt;/div&gt;
+  &lt;div class=&quot;floated&quot;&gt;float c&lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+<pre><code class="css">.clearfix &#123;
+  border: solid 1px red;
+&#125;
+.clearfix::after &#123;
+  content: &quot;&quot;;
+  display: block;
+  clear: both;
+&#125;
+.floated &#123;
+  float: left;
+  margin-left: 20px;
+&#125;
+</code></pre>
+<h2 id="二、不变宽高比"><a href="#二、不变宽高比" class="headerlink" title="二、不变宽高比"></a>二、不变宽高比</h2><p>给定宽度可变的元素，它将确保其高度以响应方式保持成比例（即，其宽高比保持不变）。</p>
+<pre><code class="html">&lt;div class=&quot;constant-width-to-height-ratio&quot;&gt;&lt;/div&gt;
+</code></pre>
+<pre><code class="css">.constant-width-to-height-ratio &#123;
+  background: #333;
+  width: 50%;
+&#125;
+.constant-width-to-height-ratio::before &#123;
+  content: &quot;&quot;;
+  padding-top: 100%;
+  float: left;
+&#125;
+.constant-width-to-height-ratio::after &#123;
+  content: &quot;&quot;;
+  display: block;
+  clear: both;
+&#125;
+</code></pre>
+<p>1、width:50% 只设置父级元素的宽度<br>2、::before 为父级元素定义一个伪元素<br>3、padding-top: 100%; 设置伪元素的内上边距，这里的百分比的值是按照宽度计算的，所以会呈现为一个响应式的元素块。<br>4、此方法还允许将内容正常放置在元素内。</p>
+<h2 id="三、display-table-居中"><a href="#三、display-table-居中" class="headerlink" title="三、display:table 居中"></a>三、display:table 居中</h2><p>使用 display:table 替代 flexbox 使子元素在其父元素中水平垂直居中。</p>
+<pre><code class="html">&lt;div class=&quot;container&quot;&gt;
+  &lt;div class=&quot;center&quot;&gt;&lt;span&gt;Centered content&lt;/span&gt;&lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+<pre><code class="css">.container &#123;
+  border: 1px solid #333;
+  height: 250px;
+  width: 250px;
+&#125;
+.center &#123;
+  display: table;
+  height: 100%;
+  width: 100%;
+&#125;
+.center &gt; span &#123;
+  display: table-cell;
+  text-align: center;
+  vertical-align: middle;
+&#125;
+</code></pre>
+<p>display：table 使.center 元素的行为类似于<code>&lt;table&gt;</code> HTML 元素;<br>设置.center 的宽高为 100%，使其填满父元素;<br>display：table-cell, 设置’.center &gt; span’的 table-cell 允许元素表现得像 HTML 元素;<br>text-align: center 使子元素水平居中;<br>vertical-align: middle 使子元素垂直居中;</p>
+<p>外部父级必须有固定的宽高。</p>
+<h2 id="四、子元素均匀分布"><a href="#四、子元素均匀分布" class="headerlink" title="四、子元素均匀分布"></a>四、子元素均匀分布</h2><pre><code class="html">&lt;div class=&quot;evenly-distributed-children&quot;&gt;
+  &lt;p&gt;Item1&lt;/p&gt;
+  &lt;p&gt;Item2&lt;/p&gt;
+  &lt;p&gt;Item3&lt;/p&gt;
+&lt;/div&gt;
+</code></pre>
+<pre><code class="css">.evenly-distributed-children &#123;
+  display: flex;
+  justify-content: space-between;
+&#125;
+</code></pre>
+<p>display: flex :启动 flex 布局</p>
+<p>justify-content: space-between：</p>
+<p>均匀地水平分配子元素。 第一个子元素位于左边缘，而最后一个子元素位于右边缘。 或者，使用 justify-content：space-around 来分配子节点周围的空间，而不是它们之间。</p>
+<h2 id="五、图片在容器中显示的更舒适"><a href="#五、图片在容器中显示的更舒适" class="headerlink" title="五、图片在容器中显示的更舒适"></a>五、图片在容器中显示的更舒适</h2><pre><code class="html">&lt;img class=&quot;image image-contain&quot; src=&quot;https://picsum.photos/600/200&quot; /&gt;
+&lt;img class=&quot;image image-cover&quot; src=&quot;https://picsum.photos/600/200&quot; /&gt;
+</code></pre>
+<pre><code class="css">.image &#123;
+  background: #34495e;
+  border: 1px solid #34495e;
+  width: 200px;
+  height: 200px;
+&#125;
+.image-contain &#123;
+  object-fit: contain;
+  object-position: center;
+&#125;
+.image-cover &#123;
+  object-fit: cover;
+  object-position: right top;
+&#125;
+</code></pre>
+<p>object-fit: contain 容器内显示整个图像，并且保持宽高比<br>object-fit: cover 用图像填充容器，并保持宽高比<br>object-position: [x] [y] 对图像的显示部位进行调整</p>
+<h2 id="六、flexbox-居中-常用"><a href="#六、flexbox-居中-常用" class="headerlink" title="六、flexbox 居中(常用)"></a>六、flexbox 居中(常用)</h2><pre><code class="html">&lt;div class=&quot;flexbox-centering&quot;&gt;&lt;div class=&quot;child&quot;&gt;Centered content.&lt;/div&gt;&lt;/div&gt;
+</code></pre>
+<pre><code class="css">.flexbox-centering &#123;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100px;
+&#125;
+</code></pre>
+<p>display: flex 启用 flex 局部<br>justify-content: center 子元素水平居中<br>align-items: center 子元素垂直居中</p>
+<h2 id="七、将元素垂直居中于另一个元素"><a href="#七、将元素垂直居中于另一个元素" class="headerlink" title="七、将元素垂直居中于另一个元素"></a>七、将元素垂直居中于另一个元素</h2><pre><code class="html">&lt;div class=&quot;ghost-trick&quot;&gt;
+  &lt;div class=&quot;ghosting&quot;&gt;
+    &lt;p&gt;Vertically centered without changing the position property.&lt;/p&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+<pre><code class="css">.ghosting &#123;
+  height: 300px;
+  background: #0ff;
+&#125;
+.ghosting:before &#123;
+  content: &quot;&quot;;
+  display: inline-block;
+  height: 100%;
+  vertical-align: middle;
+&#125;
+p &#123;
+  display: inline-block;
+  vertical-align: middle;
+&#125;
+</code></pre>
+<p>使用 ：before 伪元素的样式垂直对齐内联元素而不更改其 position 属性。</p>
+<h2 id="八、grid-居中"><a href="#八、grid-居中" class="headerlink" title="八、grid 居中"></a>八、grid 居中</h2><pre><code class="html">&lt;div class=&quot;grid-centering&quot;&gt;&lt;div class=&quot;child&quot;&gt;Centered content.&lt;/div&gt;&lt;/div&gt;
+</code></pre>
+<pre><code class="css">.grid-centering &#123;
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  height: 100px;
+&#125;
+</code></pre>
+<p>display: grid 启用网格布局<br>justify-content: center 使子元素水平居中<br>align-items: center 使子元素垂直居中</p>
+<h2 id="九、使最后一项占满剩余高度"><a href="#九、使最后一项占满剩余高度" class="headerlink" title="九、使最后一项占满剩余高度"></a>九、使最后一项占满剩余高度</h2><pre><code class="html">&lt;div class=&quot;container&quot;&gt;
+  &lt;div&gt;Div 1&lt;/div&gt;
+  &lt;div&gt;Div 2&lt;/div&gt;
+  &lt;div&gt;Div 3&lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+<pre><code class="css">html,
+body &#123;
+  height: 100%;
+  margin: 0;
+&#125;
+.container &#123;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+&#125;
+.container &gt; div:last-child &#123;
+  background-color: tomato;
+  flex: 1;
+&#125;
+</code></pre>
+<p>height: 100% 将容器的高度设为视口的高度<br>display: flex 启用 flex<br>flex-direction: column 将项目的顺序设置成从上到下<br>flex-grow: 1 flexbox 会将容器的剩余可用空间应用于最后一个子元素。 父级必须具有视口高度。 flex-grow：1 可以应用于第一个或第二个元素，它将具有所有可用空间。</p>
+<h2 id="十、屏外隐藏元素"><a href="#十、屏外隐藏元素" class="headerlink" title="十、屏外隐藏元素"></a>十、屏外隐藏元素</h2><pre><code class="html">&lt;a class=&quot;button&quot; href=&quot;https://www.baidu.com&quot;&gt;
+  Learn More &lt;span class=&quot;offscreen&quot;&gt; about baidu&lt;/span&gt;
+&lt;/a&gt;
+</code></pre>
+<pre><code class="css">.offscreen &#123;
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+&#125;
+</code></pre>
+<p>删除所有边框<br>使用 clip 隐藏元素<br>设置宽高为 1px<br>使用 margin：-1px 取消元素的高度和宽度<br>隐藏元素的溢出<br>移除所有的 padding<br>绝对定位元素，使其不占用 DOM 中的空间</p>
+<h2 id="十一、transform-居中子元素"><a href="#十一、transform-居中子元素" class="headerlink" title="十一、transform 居中子元素"></a>十一、transform 居中子元素</h2><pre><code class="html">&lt;div class=&quot;parent&quot;&gt;&lt;div class=&quot;child&quot;&gt;Centered content&lt;/div&gt;&lt;/div&gt;
+</code></pre>
+<pre><code class="css">.parent &#123;
+  border: 1px solid #333;
+  height: 250px;
+  position: relative;
+  width: 250px;
+&#125;
+.child &#123;
+  left: 50%;
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+&#125;
+</code></pre>
+<h2 id="十二、多行文本截断显示"><a href="#十二、多行文本截断显示" class="headerlink" title="十二、多行文本截断显示"></a>十二、多行文本截断显示</h2><pre><code class="html">&lt;p class=&quot;truncate-text-multiline&quot;&gt;
+  Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy
+  eirmod tempor invidunt ut labore et.
+&lt;/p&gt;
+</code></pre>
+<pre><code class="css">.truncate-text-multiline &#123;
+  overflow: hidden;
+  display: block;
+  height: 109.2px;
+  margin: 0 auto;
+  font-size: 26px;
+  line-height: 1.4;
+  width: 400px;
+  position: relative;
+&#125;
+.truncate-text-multiline:after &#123;
+  content: &quot;&quot;;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 150px;
+  height: 36.4px;
+  background: linear-gradient(to right, rgba(0, 0, 0, 0), #f5f6f9 50%);
+&#125;
+</code></pre>
+<p>overflow: hidden 防止内容溢出<br>width: 400px 确保元素有尺寸<br>height: 109.2px 计算的高度值，它等于 font-size <em>line-height</em> numberOfLines（在这种情况下为 26 <em>1.4</em> 3 &#x3D; 109.2）<br>height: 36.4px 渐变容器的计算值，它等于 font-size <em>line-height（在这种情况下为 26</em> 1.4 &#x3D; 36.4）<br>background: linear-gradient(to right, rgba(0, 0, 0, 0), #f5f6f9 50% 渐变从 透明到渐变从透明到＃f5f6f9</p>
+<h2 id="十三、CSS-列表计数器"><a href="#十三、CSS-列表计数器" class="headerlink" title="十三、CSS 列表计数器"></a>十三、CSS 列表计数器</h2><pre><code class="html">&lt;ul&gt;
+  &lt;li&gt;List item&lt;/li&gt;
+  &lt;li&gt;List item&lt;/li&gt;
+  &lt;li&gt;
+    List item
+    &lt;ul&gt;
+      &lt;li&gt;List item&lt;/li&gt;
+      &lt;li&gt;List item&lt;/li&gt;
+      &lt;li&gt;List item&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+</code></pre>
+<pre><code class="css">ul &#123;
+  counter-reset: counter;
+&#125;
+li::before &#123;
+  counter-increment: counter;
+  content: counters(counter, &quot;.&quot;) &quot; &quot;;
+&#125;
+</code></pre>
+<p>counter-reset 初始化计数器，该值是计数器的名称。默认情况下，计数器从 0 开始。此属性还可用于将其值更改为任何特定数字。<br>counter-increment 用于可数的元素。 一旦计数器重置初始化，计数器的值可以增加或减少。<br>counter(name, style)显示节计数器的值。通常用于内容属性。此函数可以接收两个参数，第一个作为计数器的名称，第二个参数表示占位内容，例如 3.1 的小数点。<br>CSS 计数器对于制作轮廓列表特别有用，因为计数器的新实例是在子元素中自动创建的。使用 counters（）函数，可以在不同级别的嵌套计数器之间插入分隔文本。</p>
+<h2 id="十四、自定义滚动条"><a href="#十四、自定义滚动条" class="headerlink" title="十四、自定义滚动条"></a>十四、自定义滚动条</h2><pre><code class="html">&lt;div class=&quot;custom-scrollbar&quot;&gt;
+  &lt;p&gt;
+    Lorem ipsum dolor sit amet consectetur adipisicing elit.&lt;br /&gt;
+    Iure id exercitationem nulla qui repellat laborum vitae, &lt;br /&gt;
+    molestias tempora velit natus. Quas, assumenda nisi. &lt;br /&gt;
+    Quisquam enim qui iure, consequatur velit sit?
+  &lt;/p&gt;
+&lt;/div&gt;
+</code></pre>
+<pre><code class="css">.custom-scrollbar &#123;
+  height: 70px;
+  overflow-y: scroll;
+&#125;
+/* To style the document scrollbar, remove `.custom-scrollbar` */
+.custom-scrollbar::-webkit-scrollbar &#123;
+  width: 8px;
+&#125;
+.custom-scrollbar::-webkit-scrollbar-track &#123;
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+&#125;
+.custom-scrollbar::-webkit-scrollbar-thumb &#123;
+  border-radius: 10px;
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
+&#125;
+</code></pre>
+<h2 id="十五、自定义文本选择的样式"><a href="#十五、自定义文本选择的样式" class="headerlink" title="十五、自定义文本选择的样式"></a>十五、自定义文本选择的样式</h2><pre><code class="html">&lt;p class=&quot;custom-text-selection&quot;&gt;Select some of this text.&lt;/p&gt;
+</code></pre>
+<pre><code class="css">::selection &#123;
+  background: aquamarine;
+  color: black;
+&#125;
+.custom-text-selection::selection &#123;
+  background: deeppink;
+  color: white;
+&#125;
+</code></pre>
+<h2 id="十六、Focus-Within-伪类"><a href="#十六、Focus-Within-伪类" class="headerlink" title="十六、Focus Within 伪类"></a>十六、Focus Within 伪类</h2><pre><code class="html">&lt;div class=&quot;focus-within&quot;&gt;
+  &lt;form&gt;
+    &lt;label for=&quot;given_name&quot;&gt;Given Name:&lt;/label&gt;
+    &lt;input id=&quot;given_name&quot; type=&quot;text&quot; /&gt; &lt;br /&gt;
+    &lt;label for=&quot;family_name&quot;&gt;Family Name:&lt;/label&gt;
+    &lt;input id=&quot;family_name&quot; type=&quot;text&quot; /&gt;
+  &lt;/form&gt;
+&lt;/div&gt;
+</code></pre>
+<pre><code class="css">form &#123;
+  border: 3px solid #2d98da;
+  color: #000000;
+  padding: 4px;
+&#125;
+form:focus-within &#123;
+  background: #f7b731;
+  color: #000000;
+&#125;
+</code></pre>
+<p>伪类：：focus-within 将对应的样式应用于父元素（任何子元素被聚焦）。 例如，表单元素内的输入元素。</p>
+<h2 id="十七、指定元素的全屏"><a href="#十七、指定元素的全屏" class="headerlink" title="十七、指定元素的全屏"></a>十七、指定元素的全屏</h2><pre><code class="html">&lt;div class=&quot;container&quot;&gt;
+  &lt;p&gt;
+    &lt;em&gt;Click the button below to enter the element into fullscreen mode. &lt;/em&gt;
+  &lt;/p&gt;
+  &lt;div class=&quot;element&quot; id=&quot;element&quot;&gt;
+    &lt;p&gt;I change color in fullscreen mode!&lt;/p&gt;
+  &lt;/div&gt;
+  &lt;br /&gt;
+  &lt;button
+    onclick=&quot;var el = document.getElementById(&#39;element&#39;); el.requestFullscreen();&quot;
+  &gt;
+    Go Full Screen!
+  &lt;/button&gt;
+&lt;/div&gt;
+</code></pre>
+<pre><code class="css">.container &#123;
+  margin: 40px auto;
+  max-width: 700px;
+&#125;
+.element &#123;
+  padding: 20px;
+  height: 300px;
+  width: 100%;
+  background-color: skyblue;
+&#125;
+.element p &#123;
+  text-align: center;
+  color: white;
+  font-size: 3em;
+&#125;
+.element:-ms-fullscreen p &#123;
+  visibility: visible;
+&#125;
+.element:fullscreen &#123;
+  background-color: #e4708a;
+  width: 100vw;
+  height: 100vh;
+&#125;
+</code></pre>
+<p>:fullscreen 伪类选择器用于选择和设置以全屏模式显示的元素。</p>
+<h2 id="十八、：not-伪类选择器"><a href="#十八、：not-伪类选择器" class="headerlink" title="十八、：not 伪类选择器"></a>十八、：not 伪类选择器</h2><pre><code class="html">&lt;ul class=&quot;css-not-selector-shortcut&quot;&gt;
+  &lt;li&gt;One&lt;/li&gt;
+  &lt;li&gt;Two&lt;/li&gt;
+  &lt;li&gt;Three&lt;/li&gt;
+  &lt;li&gt;Four&lt;/li&gt;
+&lt;/ul&gt;
+</code></pre>
+<pre><code class="css">.css-not-selector-shortcut &#123;
+  display: flex;
+&#125;
+ul &#123;
+  padding-left: 0;
+&#125;
+li &#123;
+  list-style-type: none;
+  margin: 0;
+  padding: 0 0.75rem;
+&#125;
+li:not(:last-child) &#123;
+  border-right: 2px solid #d2d5e4;
+&#125;
+</code></pre>
+<p>li:not(:last-child) 设置除 last：child 之外的所有 li 元素的样式，所以最后一个元素右侧没有 border.</p>
+<h2 id="十九、斑马条纹列表"><a href="#十九、斑马条纹列表" class="headerlink" title="十九、斑马条纹列表"></a>十九、斑马条纹列表</h2><pre><code class="html">&lt;ul&gt;
+  &lt;li&gt;Item 01&lt;/li&gt;
+  &lt;li&gt;Item 02&lt;/li&gt;
+  &lt;li&gt;Item 03&lt;/li&gt;
+  &lt;li&gt;Item 04&lt;/li&gt;
+  &lt;li&gt;Item 05&lt;/li&gt;
+&lt;/ul&gt;
+</code></pre>
+<pre><code class="css">li:nth-child(odd) &#123;
+  background-color: #eee;
+&#125;
+</code></pre>
+<h2 id="二十、弹跳-loading-动画"><a href="#二十、弹跳-loading-动画" class="headerlink" title="二十、弹跳 loading 动画"></a>二十、弹跳 loading 动画</h2><pre><code class="html">&lt;div class=&quot;bouncing-loader&quot;&gt;
+  &lt;div&gt;&lt;/div&gt;
+  &lt;div&gt;&lt;/div&gt;
+  &lt;div&gt;&lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+<pre><code class="css">@keyframes bouncing-loader &#123;
+  to &#123;
+    opacity: 0.1;
+    transform: translate3d(0, -1rem, 0);
+  &#125;
+&#125;
+.bouncing-loader &#123;
+  display: flex;
+  justify-content: center;
+&#125;
+.bouncing-loader &gt; div &#123;
+  width: 1rem;
+  height: 1rem;
+  margin: 3rem 0.2rem;
+  background: #8385aa;
+  border-radius: 50%;
+  animation: bouncing-loader 0.6s infinite alternate;
+&#125;
+.bouncing-loader &gt; div:nth-child(2) &#123;
+  animation-delay: 0.2s;
+&#125;
+.bouncing-loader &gt; div:nth-child(3) &#123;
+  animation-delay: 0.4s;
+&#125;
+</code></pre>
+<h2 id="二十一、按钮边框动画"><a href="#二十一、按钮边框动画" class="headerlink" title="二十一、按钮边框动画"></a>二十一、按钮边框动画</h2><pre><code class="html">&lt;div class=&quot;button-border&quot;&gt;&lt;button class=&quot;button&quot;&gt;Submit&lt;/button&gt;&lt;/div&gt;
+</code></pre>
+<pre><code class="css">.button &#123;
+  background-color: #c47135;
+  border: none;
+  color: #ffffff;
+  outline: none;
+  padding: 12px 40px 10px;
+  position: relative;
+&#125;
+.button:before,
+.button:after &#123;
+  border: 0 solid transparent;
+  transition: all 0.25s;
+  content: &quot;&quot;;
+  height: 24px;
+  position: absolute;
+  width: 24px;
+&#125;
+.button:before &#123;
+  border-top: 2px solid #c47135;
+  left: 0px;
+  top: -5px;
+&#125;
+.button:after &#123;
+  border-bottom: 2px solid #c47135;
+  bottom: -5px;
+  right: 0px;
+&#125;
+.button:hover &#123;
+  background-color: #c47135;
+&#125;
+.button:hover:before,
+.button:hover:after &#123;
+  height: 100%;
+  width: 100%;
+&#125;
+</code></pre>
+<p>before 和：after 伪元素作为在悬停时设置动画的边框。</p>
+<h2 id="二十二、高度过度"><a href="#二十二、高度过度" class="headerlink" title="二十二、高度过度"></a>二十二、高度过度</h2><pre><code class="html">&lt;div class=&quot;trigger&quot;&gt;
+  Hover me to see a height transition.
+  &lt;div class=&quot;el&quot;&gt;content&lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+<pre><code class="css">.el &#123;
+  transition: max-height 0.5s;
+  overflow: hidden;
+  max-height: 0;
+&#125;
+.trigger:hover &gt; .el &#123;
+  max-height: var(--max-height);
+&#125;
+</code></pre>
+<h2 id="二十三、悬停阴影动画"><a href="#二十三、悬停阴影动画" class="headerlink" title="二十三、悬停阴影动画"></a>二十三、悬停阴影动画</h2><pre><code class="html">&lt;p class=&quot;hover-shadow-box-animation&quot;&gt;Box it!&lt;/p&gt;
+</code></pre>
+<pre><code class="css">.hover-shadow-box-animation &#123;
+  display: inline-block;
+  vertical-align: middle;
+  transform: perspective(1px) translateZ(0);
+  box-shadow: 0 0 1px transparent;
+  margin: 10px;
+  transition-duration: 0.3s;
+  transition-property: box-shadow, transform;
+&#125;
+.hover-shadow-box-animation:hover,
+.hover-shadow-box-animation:focus,
+.hover-shadow-box-animation:active &#123;
+  box-shadow: 1px 10px 10px -10px rgba(0, 0, 24, 0.5);
+  transform: scale(1.2);
+&#125;
+</code></pre>
+<h2 id="二十四、悬停下划线动画"><a href="#二十四、悬停下划线动画" class="headerlink" title="二十四、悬停下划线动画"></a>二十四、悬停下划线动画</h2><pre><code class="html">&lt;p class=&quot;hover-underline-box-animation&quot;&gt;Box it!&lt;/p&gt;
+</code></pre>
+<pre><code class="css">.hover-underline-animation &#123;
+  display: inline-block;
+  position: relative;
+  color: #0087ca;
+&#125;
+.hover-underline-animation::after &#123;
+  content: &quot;&quot;;
+  position: absolute;
+  width: 100%;
+  transform: scaleX(0);
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background-color: #0087ca;
+  transform-origin: bottom right;
+  transition: transform 0.25s ease-out;
+&#125;
+.hover-underline-animation:hover::after &#123;
+  transform: scaleX(1);
+  transform-origin: bottom left;
+&#125;
+</code></pre>
+<p>display: inline-block 使 p 成为内联块，以防止下划线跨越整行宽度而不仅仅是文本内容。<br>position: relative 设置父元素为相对定位<br>::after 定义一个伪元素<br>position: absolute 将伪元素脱离文档六，并将其相对于父元素定位<br>width: 100% 确保伪元素和父元素的宽度一致。<br>transform: scaleX(0) 最初将伪元素缩放为 0，因此他是看不见的。<br>bottom: 0 and left: 0 将伪元素放在父元素的左下角。<br>transition: transform 0.25s ease-out 设置动画效果为 ease-out,并且在 0.25 秒内完成。<br>transform-origin: bottom right 变换中心点到父元素的右下角。<br>:hover::after 然后使用 scaleX（1）将宽度转换为 100％，然后将中心点更改为左下角，允许它在悬停时从另一个方向转换出来。</p>
+<h2 id="二十五、弹出菜单"><a href="#二十五、弹出菜单" class="headerlink" title="二十五、弹出菜单"></a>二十五、弹出菜单</h2><pre><code class="html">&lt;div class=&quot;reference&quot; tabindex=&quot;0&quot;&gt;
+  &lt;div class=&quot;popout-menu&quot;&gt;Popout menu&lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+<pre><code class="css">.reference &#123;
+  position: relative;
+  background: tomato;
+  width: 100px;
+  height: 100px;
+&#125;
+.popout-menu &#123;
+  position: absolute;
+  visibility: hidden;
+  left: 100%;
+  background: #333;
+  color: white;
+  padding: 15px;
+&#125;
+.reference:hover &gt; .popout-menu,
+.reference:focus &gt; .popout-menu,
+.reference:focus-within &gt; .popout-menu &#123;
+  visibility: visible;
+&#125;
+</code></pre>
+<p>left: 100% 弹出菜单从左侧偏移其父级宽度的 100％。<br>visibility: hidden<br>.reference:hover &gt; .popout-menu 鼠标悬停时，.popout-menu 显示<br>.reference:focus &gt; .popout-menu 聚焦时，.popout-menu 显示<br>.reference:focus-within &gt; .popout-menu 确保在焦点位于参考范围内时显示弹出窗口。</p>
+<h2 id="二十六、悬停时，兄弟元素淡化"><a href="#二十六、悬停时，兄弟元素淡化" class="headerlink" title="二十六、悬停时，兄弟元素淡化"></a>二十六、悬停时，兄弟元素淡化</h2><pre><code class="html">&lt;div class=&quot;sibling-fade&quot;&gt;
+  &lt;span&gt;Item 1&lt;/span&gt; &lt;span&gt;Item 2&lt;/span&gt; &lt;span&gt;Item 3&lt;/span&gt;
+  &lt;span&gt;Item 4&lt;/span&gt; &lt;span&gt;Item 5&lt;/span&gt; &lt;span&gt;Item 6&lt;/span&gt;
+&lt;/div&gt;
+</code></pre>
+<pre><code class="css">span &#123;
+  padding: 0 1rem;
+  transition: opacity 0.2s;
+&#125;
+.sibling-fade:hover span:not(:hover) &#123;
+  opacity: 0.5;
+&#125;
+</code></pre>
+<p>transition: opacity 0.2s 设置 0.2 秒的淡化动画。<br>.sibling-fade:hover span:not(:hover)当父级悬停时，选择当前未悬停的 span 子项并将其透明度更改为 0.5。</p>
+</article><section class="jump-container is-flex is-justify-content-space-between my-6"><!-- em is empty placeholder--><a class="button is-default" href="/2022/12/30/110-react/" title="110、稀土掘金小册-记账本（一） react hooks"><i class="iconfont icon-prev mr-2 has-text-grey"></i><span class="has-text-weight-semibold">上一页: 110、稀土掘金小册-记账本（一） react hooks</span></a><a class="button is-default" href="/2022/12/15/108-vue3/" title="108、web components和vue+web components"><span class="has-text-weight-semibold">下一页: 108、web components和vue+web components</span><i class="iconfont icon-next ml-2 has-text-grey"></i></a></section></div></div></main></main><footer class="is-flex is-flex-direction-column is-align-items-center is-flex-shrink-0 is-family-serif"><section class="sns-container"><!-- Github--><a title="github" target="_blank" rel="noopener nofollow" href="//github.com/Jude"><i class="iconfont icon-github"></i></a><!-- Ins--><!-- RSS--><!-- 知乎--><a title="zhihu" target="_blank" rel="noopener nofollow" href="//zhihu.com/https://www.zhihu.com/hot"><i class="iconfont icon-zhihu"></i></a><!-- 领英--><!-- 脸书--></section><p><span>Copyright ©</span><span> Jude 2023</span></p><div class="is-flex is-justify-content-center is-flex-wrap-wrap"><p>Powered by Hexo &verbar;&nbsp;</p><p class="is-flex is-justify-content-center"><a title="Hexo theme author" target="_blank" rel="noopener" href="//github.com/haojen">Theme by Haojen&nbsp;</a></p><div style="margin-top: 2px"><a class="github-button" title="github-button" target="_blank" rel="noopener" href="https://github.com/haojen/hexo-theme-Claudia" data-color-scheme="no-preference: light; light: light; dark: dark;" data-show-count="true"></a></div></div><div><span>记住昨日的美好，过好今日的生活，憧憬明天的到来</span></div></footer><script async defer src="https://buttons.github.io/buttons.js"></script><script src="/js/post.js"></script></body></html>

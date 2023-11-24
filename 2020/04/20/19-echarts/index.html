@@ -1,0 +1,268 @@
+<!DOCTYPE html><html class="appearance-auto" lang="zh-CN"><head><meta charset="UTF-8"><title>19、关于echarts官方的一个bug -- sublink跳转问题</title><meta name="description" content="呦呦鹿鸣，食野之苹"><meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, initial-scale=1"><!-- Google Analytics --><!-- End Google Analytics -->
+<!-- Baidu Analytics --><!-- End Baidu Analytics --><link rel="icon" href="/images/favicon.png"><link rel="stylesheet" href="/style/common/bulma.css"><link rel="stylesheet" href="/style/base.css"><link rel="stylesheet" href="/style/common/helper.css"><script src="/js/common.js"></script><link rel="stylesheet" href="/style/post.css"><link rel="stylesheet" href="/style/themes/highlight-theme-light.css"><script src="/js/highlight.pack.js"></script><meta name="description" content="echarts 官方的一个 bug – sublink 跳转的问题。echarts版本号为4.8.0
+
+
+开发百度地图 scatter 散点图时，副标题链接跳转出错（版本号为 4.8.0），在 GitHub 找到issues。bug 介绍，点击副标题无法跳转到指定连接
+this.options = &amp;#123;
+  title: &amp;#123;
+    text: &amp;quot;我是主标题&amp;quot;,
+    subtext: &amp;quot;我是副标题，我可以跳转&amp;quot;,
+    sublink: &amp;quot;https://www.baidu.com&amp;quot;,
+    left: &amp;quot;center&amp;quot;,
+  &amp;#125;,
+&amp;#125;;
+
+1、在 main.js 引入 echart.."><meta name="generator" content="Hexo 7.0.0"></head><body class="is-flex is-flex-direction-column"><header class="header-widget is-flex-shrink-0 is-hidden-mobile"><div class="container is-fullhd is-flex is-justify-content-space-between is-align-items-center is-full-height"><section class="is-hidden-mobile is-flex-shrink-0"><h2><a href="/">Jude's blog</a></h2></section><h3 class="is-hidden-mobile is-family-serif is-full-height is-flex is-align-items-center is-flex-shrink-0"><div class="is-full-height" id="postTopic"><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">19、关于echarts官方的一个bug -- sublink跳转问题</p><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">点击返回顶部</p></div></h3><aside class="is-flex-shrink-0"><h3 class="is-inline-block"><a href="/">首页</a></h3><h3 class="is-inline-block"><a href="/about">关于</a></h3><h3 class="is-inline-block"><a href="/archives">归档</a></h3></aside></div></header><header class="is-flex header-widget is-flex-shrink-0 is-align-items-center is-justify-content-center is-hidden-tablet"><h3 class="is-inline-block"><a href="/">首页</a></h3><h3 class="is-inline-block"><a href="/about">关于</a></h3><h3 class="is-inline-block"><a href="/archives">归档</a></h3></header><main><main class="container is-max-widescreen content section post-page pt-4 px-4"><div class="columns is-flex-desktop is-justify-content-center is-flex-direction-row-reverse"><div class="column is-3 is-hidden-mobile"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#echarts"><span class="toc-text">echarts</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#echarts-%E5%B8%B8%E7%94%A8%E5%B1%9E%E6%80%A7"><span class="toc-text">echarts 常用属性</span></a></li></ol></div><div class="column is-9"><header class="my-4"><a href="/tags/ECharts"><i class="tag post-item-tag">ECharts</i></a></header><h1 class="mt-0 mb-1 is-family-serif" id="postTitle">19、关于echarts官方的一个bug -- sublink跳转问题</h1><time class="has-text-grey" datetime="2020-04-20T12:00:00.000Z">2020-04-20</time><article class="mt-2 post-content"><p>echarts 官方的一个 bug – sublink 跳转的问题。echarts版本号为4.8.0</p>
+<span id="more"></span>
+
+<p>开发百度地图 scatter 散点图时，副标题链接跳转出错（版本号为 4.8.0），在 GitHub 找到<a target="_blank" rel="noopener" href="https://github.com/apache/incubator-echarts/issues/12841">issues</a>。<br>bug 介绍，点击副标题无法跳转到指定连接</p>
+<pre><code class="js">this.options = &#123;
+  title: &#123;
+    text: &quot;我是主标题&quot;,
+    subtext: &quot;我是副标题，我可以跳转&quot;,
+    sublink: &quot;https://www.baidu.com&quot;,
+    left: &quot;center&quot;,
+  &#125;,
+&#125;;
+</code></pre>
+<p>1、在 main.js 引入 echarts 和 vue-echarts，将 echarts 绑定到 Vue 原型，引入 vue-echarts 通过 vue.component()进行组件注册</p>
+<blockquote>
+<p>将 echarts 绑定到 Vue 原型上，可以减少代码量，开发过程中需要使用 echarts 里面提供的方法，如果没有全局引入的话，需要在每个使用 echarts 的页面都需要手动引入。将 vue-echarts 使用组件注册后，提供了属性绑定的方式渲染图表就不需要通过调用 echart 的方法了。</p>
+</blockquote>
+<h2 id="echarts"><a href="#echarts" class="headerlink" title="echarts"></a>echarts</h2><p>1、echarts 的绘图流程</p>
+<pre><code class="js">// 1、引入echarts js库
+&lt;script src=&quot;https://cdn.bootcdn.net/ajax/libs/echarts/4.8.0/echarts.min.js&quot;&gt;&lt;/script&gt;
+</code></pre>
+<pre><code class="html">&lt;!-- 2、DOM容器 设置宽高（注意）  --&gt;
+&lt;div id=&quot;charts&quot; style=&quot;width:800px;height:600px&quot;&gt;&lt;/div&gt;
+</code></pre>
+<pre><code class="js">// 3、获取渲染DOM对象
+const chartDom = document.getElementById(&quot;charts&quot;);
+// 4、初始化echarts对象
+const chart = echarts.init(chartDom);
+// 5、配置option参数  调用setOption完成渲染
+chart.setOption(&#123;
+  title: &#123;
+    text: &quot;Echarts 示例&quot;,
+  &#125;,
+  xAxis: &#123;
+    data: [&quot;食品&quot;, &quot;数码&quot;, &quot;服饰&quot;, &quot;箱包&quot;],
+  &#125;,
+  yAxis: &#123;&#125;,
+  // 系列： 包括图表的类型 包括：line bar pie等
+  series: &#123;
+    type: &quot;bar&quot;,
+    data: [&quot;100&quot;, &quot;120&quot;, &quot;40&quot;, &quot;160&quot;],
+  &#125;,
+&#125;);
+</code></pre>
+<p>2、dataset: 数据集</p>
+<blockquote>
+<p>ECharts 4 开始支持了 数据集（dataset）组件用于单独的数据集声明，从而数据可以单独管理，被多个组件复用，并且可以自由指定数据到视觉的映射</p>
+</blockquote>
+<details>
+<summary>点击展示代码</summary>
+
+<pre><code class="js">const chartDom = document.getElementById(&quot;chart&quot;);
+const chart = echarts.init(chartDom);
+const option = &#123;
+  xAxis: &#123;
+    type: &quot;category&quot;,
+  &#125;,
+  yAxis: &#123;&#125;,
+  dataset: &#123;
+    source: [
+      [&quot;1季度&quot;, 80, 100, &quot;分类1&quot;, 50],
+      [&quot;2季度&quot;, 81, 122, &quot;分类1&quot;, 60],
+      [&quot;3季度&quot;, 76, 90, &quot;分类1&quot;, 55],
+      [&quot;4季度&quot;, 65, 123, &quot;分类1&quot;, 70],
+    ],
+  &#125;,
+  // 系列
+  series: [
+    // 系列 0
+    &#123;
+      type: &quot;pie&quot;,
+      center: [&quot;65%&quot;, 60],
+      radius: 35,
+      encode: &#123;
+        itemName: 3,
+        value: 4,
+      &#125;,
+    &#125;,
+    // 系列 1
+    &#123;
+      type: &quot;line&quot;,
+      encode: &#123;
+        x: 0,
+        y: 2,
+      &#125;,
+    &#125;,
+    // 系列 2
+    &#123;
+      type: &quot;bar&quot;,
+      encode: &#123;
+        x: 0,
+        y: 1,
+      &#125;,
+    &#125;,
+  ],
+&#125;;
+chart.setOption(option);
+</code></pre>
+</details>
+
+<p>3、基本组件</p>
+<blockquote>
+<p>echarts 基本组件：title、坐标系的 X（xAxis）轴 Y(yAxis）轴、tooltip 提示框、toolbox 工具栏等</p>
+</blockquote>
+<p>4、定位</p>
+<pre><code class="js">// 大多数组件都提供了定位属性，我们可以采用类似 CSS absolute 的定位属性来控制组件的位置 left right height bottom的值可以是数值或者百分比
+var option = &#123;
+  grid: &#123;
+    left: 120,
+    right: &quot;30%&quot;,
+    height: &quot;40%&quot;,
+    bottom: 100,
+  &#125;,
+&#125;;
+</code></pre>
+<h2 id="echarts-常用属性"><a href="#echarts-常用属性" class="headerlink" title="echarts 常用属性"></a>echarts 常用属性</h2><p>（1）使用 ECharts 绘图后没有图像（这个问题会经常出现，一定要设置宽度高度！！！）</p>
+<blockquote>
+<p>ECharts 绘图后没有任何报错，但是没有图像。可以检查容器是否设置了宽高。因为 ECharts 不会设置默认宽高，如果容器没有设置宽高，则不会展示;如果使用的是 v-chart 则没有这个问题，因为 v-chart 默认了 600*400 的宽高。</p>
+</blockquote>
+<p>（2）使用 element-ui 的按需引入</p>
+<blockquote>
+<p>安装<code>vue add element</code>，后续会提示是全部引入或者按需引入，选择按需引入，在 App.vue 中会增加一些 element-ui 的示例代码，后续删除。项目目录会增加一个 plugin 文件夹</p>
+</blockquote>
+<blockquote>
+<p>注意：按需引入组件后，再删除 App.vue 以及 view 文件夹内、component 文件夹内的不需要的内容。</p>
+</blockquote>
+<pre><code class="js">// main.js
+import &quot;./plugins/element.js&quot;;
+</code></pre>
+<pre><code class="js">// element.js
+import Vue from &quot;vue&quot;;
+import &#123; Card, Col, Row &#125; from &quot;element-ui&quot;;
+
+Vue.use(Card);
+Vue.use(Col);
+Vue.use(Row);
+</code></pre>
+<p>（3）vue 使用 echarts</p>
+<pre><code class="js">// main.js 引入echarts 挂载到Vue实例
+import ECharts from &quot;echarts&quot;;
+Vue.prototype.$echarts = ECharts;
+</code></pre>
+<p>（4）echarts 的常用属性</p>
+<blockquote>
+<p>1、隐藏线条 - listStyle</p>
+</blockquote>
+<pre><code class="js">listStyle: &#123;
+  width: 0;
+&#125;
+</code></pre>
+<blockquote>
+<p>2、隐藏数据点 - itemStyle</p>
+</blockquote>
+<pre><code class="js">itemStyle: &#123;
+  opacity: 0;
+&#125;
+</code></pre>
+<blockquote>
+<p>3、折线图填充面积区域颜色 - areaStyle</p>
+</blockquote>
+<pre><code class="js">areaStyle: &#123;
+  color: &quot;purple&quot;;
+&#125;
+</code></pre>
+<blockquote>
+<p>4、折线图平滑显示 - smooth</p>
+</blockquote>
+<pre><code class="js">smooth: true;
+</code></pre>
+<blockquote>
+<p>5、柱状图聚合 - stack</p>
+</blockquote>
+<pre><code class="js">series: [
+  &#123;
+    type: &quot;bar&quot;,
+    stack: &quot;总量&quot;,
+    data: [100],
+  &#125;,
+  &#123;
+    type: &quot;bar&quot;,
+    stack: &quot;总量&quot;,
+    data: [250],
+  &#125;,
+];
+</code></pre>
+<blockquote>
+<p>6、自定义绘图(重点)</p>
+</blockquote>
+<pre><code class="js">&#123;
+  type: &#39;custom&#39;,
+  stack: &#39;总量&#39;,
+  data: [100],
+  renderItem: (params, api) =&gt; &#123;
+    //  console.log(params,api);
+    const value = api.value(0)
+    const endPoint = api.coord([value, 0])
+    return &#123;
+      type: &#39;group&#39;,
+      position: endPoint,
+      children: [&#123;
+        type: &#39;path&#39;,
+        shape: &#123;
+          d: &#39;M1024 255.996 511.971 767.909 0 255.996 1024 255.996z&#39;,// 这里是svg里面的d
+          x: -5,
+          y: -20,
+          width: 10,
+          height: 10,
+          layout: &#39;cover&#39;
+        &#125;,
+        style: &#123;
+          fill: &#39;#45c946&#39;
+        &#125;
+      &#125;, &#123;
+        type: &#39;path&#39;,
+        shape: &#123;
+          d: &#39;M0 767.909l512.029-511.913L1024 767.909 0 767.909z&#39;,
+          x: -5,
+          y: 10,
+          width: 10,
+          height: 10,
+          layout: &#39;cover&#39;
+        &#125;,
+        style: &#123;
+          fill: &#39;#45c946&#39;
+        &#125;
+      &#125;]
+    &#125;
+  &#125;
+&#125;
+</code></pre>
+<blockquote>
+<p>7、xAxis x 轴</p>
+</blockquote>
+<pre><code class="js">// 消除x轴两侧边距
+boundaryGap: false
+// 柱状图宽度
+barWidth: &#39;60%&#39;
+barWidth: 10
+// 条形图 type设置方法
+xAxis: &#123;
+  type: &#39;value&#39;
+&#125;,
+yAxis: &#123;
+  type: &#39;category&#39;
+&#125;
+</code></pre>
+<blockquote>
+<p>8、echarts 类目轴和非类目轴</p>
+</blockquote>
+<blockquote>
+<p>类目轴的意思就是坐标轴上的展示信息是否是数据连贯，非类目轴就是除了标签类型为类目的其他坐标轴，有 时间（time），数值（value），对数（log）3 种。标签类型为类目是指 type:category</p>
+</blockquote>
+<p>坐标轴两边留白策略，类目轴和非类目轴的设置和表现不一样。类目轴中  boundaryGap  可以配置为  true  和  false。默认为  true，这时候刻度只是作为分隔线，标签和数据点都会在两个刻度之间的带(band)中间。非类目轴，包括时间，数值，对数轴，boundaryGap 是一个两个值的数组，分别表示数据最小值和最大值的延伸范围，可以直接设置数值或者相对的百分比，在设置  min  和  max  后无效。</p>
+</article><section class="jump-container is-flex is-justify-content-space-between my-6"><!-- em is empty placeholder--><a class="button is-default" href="/2020/04/23/20-axios/" title="20、axios的封装"><i class="iconfont icon-prev mr-2 has-text-grey"></i><span class="has-text-weight-semibold">上一页: 20、axios的封装</span></a><a class="button is-default" href="/2020/04/10/18-canvas/" title="18、如何使用canvas压缩图片？"><span class="has-text-weight-semibold">下一页: 18、如何使用canvas压缩图片？</span><i class="iconfont icon-next ml-2 has-text-grey"></i></a></section></div></div></main></main><footer class="is-flex is-flex-direction-column is-align-items-center is-flex-shrink-0 is-family-serif"><section class="sns-container"><!-- Github--><a title="github" target="_blank" rel="noopener nofollow" href="//github.com/Jude"><i class="iconfont icon-github"></i></a><!-- Ins--><!-- RSS--><!-- 知乎--><a title="zhihu" target="_blank" rel="noopener nofollow" href="//zhihu.com/https://www.zhihu.com/hot"><i class="iconfont icon-zhihu"></i></a><!-- 领英--><!-- 脸书--></section><p><span>Copyright ©</span><span> Jude 2023</span></p><div class="is-flex is-justify-content-center is-flex-wrap-wrap"><p>Powered by Hexo &verbar;&nbsp;</p><p class="is-flex is-justify-content-center"><a title="Hexo theme author" target="_blank" rel="noopener" href="//github.com/haojen">Theme by Haojen&nbsp;</a></p><div style="margin-top: 2px"><a class="github-button" title="github-button" target="_blank" rel="noopener" href="https://github.com/haojen/hexo-theme-Claudia" data-color-scheme="no-preference: light; light: light; dark: dark;" data-show-count="true"></a></div></div><div><span>记住昨日的美好，过好今日的生活，憧憬明天的到来</span></div></footer><script async defer src="https://buttons.github.io/buttons.js"></script><script src="/js/post.js"></script></body></html>

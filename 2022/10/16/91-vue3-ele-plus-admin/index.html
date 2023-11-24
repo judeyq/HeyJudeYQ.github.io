@@ -1,0 +1,237 @@
+<!DOCTYPE html><html class="appearance-auto" lang="zh-CN"><head><meta charset="UTF-8"><title>91、使用vue3+element-plus写后台管理系统：（一）</title><meta name="description" content="呦呦鹿鸣，食野之苹"><meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, initial-scale=1"><!-- Google Analytics --><!-- End Google Analytics -->
+<!-- Baidu Analytics --><!-- End Baidu Analytics --><link rel="icon" href="/images/favicon.png"><link rel="stylesheet" href="/style/common/bulma.css"><link rel="stylesheet" href="/style/base.css"><link rel="stylesheet" href="/style/common/helper.css"><script src="/js/common.js"></script><link rel="stylesheet" href="/style/post.css"><link rel="stylesheet" href="/style/themes/highlight-theme-light.css"><script src="/js/highlight.pack.js"></script><meta name="description" content="创建项目及代码格式提交规范（备注：遇见 2 个坑：yarn 问题、git cz 提交空格问题）
+
+
+一、vue-cli 创建项目vue-cli 版本应当大于 4.5.13
+升级 vue-cli
+npm update -g @vue/cli
+
+创建项目
+vue create vue3-admin
+
+// 进入模板选择
+Vue CLI v4.5.13
+? Please pick a preset:
+  Default ([Vue 2] babel, eslint)
+  Default (Vue 3) ([Vue 3] babel, eslint)
+&amp;gt; Manually select features  // 选择手动配置
+// ---------------------------------------.."><meta name="generator" content="Hexo 7.0.0"></head><body class="is-flex is-flex-direction-column"><header class="header-widget is-flex-shrink-0 is-hidden-mobile"><div class="container is-fullhd is-flex is-justify-content-space-between is-align-items-center is-full-height"><section class="is-hidden-mobile is-flex-shrink-0"><h2><a href="/">Jude's blog</a></h2></section><h3 class="is-hidden-mobile is-family-serif is-full-height is-flex is-align-items-center is-flex-shrink-0"><div class="is-full-height" id="postTopic"><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">91、使用vue3+element-plus写后台管理系统：（一）</p><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">点击返回顶部</p></div></h3><aside class="is-flex-shrink-0"><h3 class="is-inline-block"><a href="/">首页</a></h3><h3 class="is-inline-block"><a href="/about">关于</a></h3><h3 class="is-inline-block"><a href="/archives">归档</a></h3></aside></div></header><header class="is-flex header-widget is-flex-shrink-0 is-align-items-center is-justify-content-center is-hidden-tablet"><h3 class="is-inline-block"><a href="/">首页</a></h3><h3 class="is-inline-block"><a href="/about">关于</a></h3><h3 class="is-inline-block"><a href="/archives">归档</a></h3></header><main><main class="container is-max-widescreen content section post-page pt-4 px-4"><div class="columns is-flex-desktop is-justify-content-center is-flex-direction-row-reverse"><div class="column is-3 is-hidden-mobile"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81vue-cli-%E5%88%9B%E5%BB%BA%E9%A1%B9%E7%9B%AE"><span class="toc-text">一、vue-cli 创建项目</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81ESLint-%E5%92%8C-Prettier-%E8%A7%A3%E5%86%B3%E4%BB%A3%E7%A0%81%E6%A0%BC%E5%BC%8F%E9%97%AE%E9%A2%98"><span class="toc-text">二、ESLint 和 Prettier 解决代码格式问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E3%80%81git-%E6%8F%90%E4%BA%A4%E8%A7%84%E8%8C%83"><span class="toc-text">三、git 提交规范</span></a></li></ol></div><div class="column is-9"><header class="my-4"><a href="/tags/vue3"><i class="tag post-item-tag">vue3</i></a></header><h1 class="mt-0 mb-1 is-family-serif" id="postTitle">91、使用vue3+element-plus写后台管理系统：（一）</h1><time class="has-text-grey" datetime="2022-10-16T12:00:00.000Z">2022-10-16</time><article class="mt-2 post-content"><p>创建项目及代码格式提交规范（备注：遇见 2 个坑：yarn 问题、git cz 提交空格问题）</p>
+<span id="more"></span>
+
+<h2 id="一、vue-cli-创建项目"><a href="#一、vue-cli-创建项目" class="headerlink" title="一、vue-cli 创建项目"></a>一、vue-cli 创建项目</h2><p>vue-cli 版本应当大于 4.5.13</p>
+<p>升级 vue-cli</p>
+<pre><code class="shell">npm update -g @vue/cli
+</code></pre>
+<p>创建项目</p>
+<pre><code class="shell">vue create vue3-admin
+
+// 进入模板选择
+Vue CLI v4.5.13
+? Please pick a preset:
+  Default ([Vue 2] babel, eslint)
+  Default (Vue 3) ([Vue 3] babel, eslint)
+&gt; Manually select features  // 选择手动配置
+// ----------------------------------------------------------
+? Check the features needed for your project:
+ (*) Choose Vue version // 选择 vue 版本
+ (*) Babel // 使用 babel
+ ( ) TypeScript // 不使用 ts
+ ( ) Progressive Web App (PWA) Support // 不使用 PWA
+ (*) Router // 添加 vue-router
+ (*) Vuex // 添加 vuex
+&gt;(*) CSS Pre-processors // 使用 css 预处理器
+ (*) Linter / Formatter // 代码格式化
+ ( ) Unit Testing // 不配置测试
+ ( ) E2E Testing  // // 不配置测试
+// ----------------------------------------------------------
+ Choose a version of Vue.js that you want to start the project with
+  2.x
+&gt; 3.x // 选择 vue 3.0 版本
+// ----------------------------------------------------------
+ Use history mode for router? (Requires proper server setup for index fallback in production) (Y/n) n // 不使用 history模式 的路由
+// ----------------------------------------------------------
+ ? Pick a CSS pre-processor (PostCSS, Autoprefixer and CSS Modules are supported by default):
+&gt; Sass/SCSS (with dart-sass) // 使用基于 dart-sass 的 scss 预处理器
+  Sass/SCSS (with node-sass)
+  Less
+  Stylus
+// ----------------------------------------------------------
+? Pick a linter / formatter config:
+  ESLint with error prevention only
+  ESLint + Airbnb config
+&gt; ESLint + Standard config // 使用 ESLint 标准代码格式化方案
+  ESLint + Prettier
+// ----------------------------------------------------------
+? Pick additional lint features:
+ (*) Lint on save //
+&gt;(*) Lint and fix on commit  // 保存时 &amp;&amp; 提交时，都进行 lint
+// ----------------------------------------------------------
+? Where do you prefer placing config for Babel, ESLint, etc.? (Use arrow keys)
+&gt; In dedicated config files // 单独的配置文件
+  In package.json
+// ----------------------------------------------------------
+ Save this as a preset for future projects? (y/N) n // 不存储预设
+</code></pre>
+<p>进入项目，然后启动项目</p>
+<p><code>创建项目这里的坑</code>:<a href="mailto:&#x6a;&#x65;&#x73;&#116;&#45;&#119;&#111;&#114;&#107;&#x65;&#114;&#64;&#x32;&#x38;&#46;&#49;&#x2e;&#51;">&#x6a;&#x65;&#x73;&#116;&#45;&#119;&#111;&#114;&#107;&#x65;&#114;&#64;&#x32;&#x38;&#46;&#49;&#x2e;&#51;</a>: The engine “node” is incompatible with this module. Expe</p>
+<blockquote>
+<p>解决方法： yarn config set ignore-engines true</p>
+</blockquote>
+<h2 id="二、ESLint-和-Prettier-解决代码格式问题"><a href="#二、ESLint-和-Prettier-解决代码格式问题" class="headerlink" title="二、ESLint 和 Prettier 解决代码格式问题"></a>二、ESLint 和 Prettier 解决代码格式问题</h2><p>创建项目时，已经选择了 eslint，配置文件为.eslintrc.js</p>
+<p>vscode 下载<code>prettier</code>插件，创建.prettierrc 文件，配置如下：</p>
+<pre><code class="js">&#123;
+  // 不尾随分号
+  &quot;semi&quot;: false,
+  // 使用单引号
+  &quot;singleQuote&quot;: true,
+  // 多行逗号分割的语法中，最后一行不加逗号
+  &quot;trailingComma&quot;: &quot;none&quot;
+&#125;
+</code></pre>
+<p>vscode 设置中，搜索<code>Format On Save</code>,然后勾选<code>在保存时格式化文件。</code></p>
+<p>还要解决一个问题就是 eslint 和 prettier 的冲突问题，例如 created 钩子函数后面会有一个空格，prettier 会将空格去掉</p>
+<p>解决方法：</p>
+<pre><code class="js">// .eslintrc.js  rules规则下添加
+&#39;space-before-function-paren&#39;: &#39;off&#39;
+</code></pre>
+<h2 id="三、git-提交规范"><a href="#三、git-提交规范" class="headerlink" title="三、git 提交规范"></a>三、git 提交规范</h2><p>1、全局安装 commitizen</p>
+<pre><code class="shell">npm install -g commitizen@4.2.4
+</code></pre>
+<p>2、安装并配置 cz-customizable</p>
+<pre><code class="shell">npm i cz-customizable@6.3.0 --save-dev
+</code></pre>
+<p>配置：</p>
+<pre><code class="js">// package.json
+&quot;config&quot;:&#123;
+  &quot;commitizen&quot;: &#123;
+    &quot;path&quot;: &quot;node_modules/cz-customizable&quot;
+  &#125;
+&#125;
+</code></pre>
+<p>3、根目录下创建.cz-config.js 自定义提示文件</p>
+<pre><code class="js">module.exports = &#123;
+  // 可选类型
+  types: [
+    &#123; value: &quot;feat&quot;, name: &quot;feat:     新功能&quot; &#125;,
+    &#123; value: &quot;fix&quot;, name: &quot;fix:      修复&quot; &#125;,
+    &#123; value: &quot;docs&quot;, name: &quot;docs:     文档变更&quot; &#125;,
+    &#123; value: &quot;style&quot;, name: &quot;style:    代码格式(不影响代码运行的变动)&quot; &#125;,
+    &#123;
+      value: &quot;refactor&quot;,
+      name: &quot;refactor: 重构(既不是增加feature，也不是修复bug)&quot;,
+    &#125;,
+    &#123; value: &quot;perf&quot;, name: &quot;perf:     性能优化&quot; &#125;,
+    &#123; value: &quot;test&quot;, name: &quot;test:     增加测试&quot; &#125;,
+    &#123; value: &quot;chore&quot;, name: &quot;chore:    构建过程或辅助工具的变动&quot; &#125;,
+    &#123; value: &quot;revert&quot;, name: &quot;revert:   回退&quot; &#125;,
+    &#123; value: &quot;build&quot;, name: &quot;build:    打包&quot; &#125;,
+  ],
+  // 消息步骤
+  messages: &#123;
+    type: &quot;请选择提交类型:&quot;,
+    customScope: &quot;请输入修改范围(可选):&quot;,
+    subject: &quot;请简要描述提交(必填):&quot;,
+    body: &quot;请输入详细描述(可选):&quot;,
+    footer: &quot;请输入要关闭的issue(可选):&quot;,
+    confirmCommit: &quot;确认使用以上信息提交？(y/n/e/h)&quot;,
+  &#125;,
+  // 跳过问题
+  skipQuestions: [&quot;body&quot;, &quot;footer&quot;],
+  // subject文字长度默认是72
+  subjectLimit: 72,
+&#125;;
+</code></pre>
+<p>4、使用 git cz 代替 git commit</p>
+<p>5、git hooks 校验提交信息</p>
+<p>2 个工具的的使用：</p>
+<blockquote>
+<ol>
+<li><a target="_blank" rel="noopener" href="https://github.com/conventional-changelog/commitlint">commitlint</a>：用于检查提交信息</li>
+</ol>
+</blockquote>
+<blockquote>
+<ol start="2">
+<li><a target="_blank" rel="noopener" href="https://github.com/typicode/husky">husky</a>：是<code>git hooks</code>工具</li>
+</ol>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>npm 版本大于 7.x</p>
+</blockquote>
+</blockquote>
+<p>5.1 安装 commitlint</p>
+<pre><code class="shell">npm install --save-dev @commitlint/config-conventional@12.1.4 @commitlint/cli@12.1.4
+</code></pre>
+<p>5.2 创建 commitlint.config.js(编码格式为 UTF-8)</p>
+<pre><code class="js">module.exports = &#123;
+  // 继承的规则
+  extends: [&quot;@commitlint/config-conventional&quot;],
+  // 定义规则类型
+  rules: &#123;
+    // type 类型定义，表示 git 提交的 type 必须在以下类型范围内
+    &quot;type-enum&quot;: [
+      2,
+      &quot;always&quot;,
+      [
+        &quot;feat&quot;, // 新功能 feature
+        &quot;fix&quot;, // 修复 bug
+        &quot;docs&quot;, // 文档注释
+        &quot;style&quot;, // 代码格式(不影响代码运行的变动)
+        &quot;refactor&quot;, // 重构(既不增加新功能，也不是修复bug)
+        &quot;perf&quot;, // 性能优化
+        &quot;test&quot;, // 增加测试
+        &quot;chore&quot;, // 构建过程或辅助工具的变动
+        &quot;revert&quot;, // 回退
+        &quot;build&quot;, // 打包
+      ],
+    ],
+    // subject 大小写不做校验
+    &quot;subject-case&quot;: [0],
+  &#125;,
+&#125;;
+</code></pre>
+<p>5.3 安装 husky</p>
+<pre><code class="shell">npm install husky@7.0.1 --save-dev
+// 启动hooks，生成.husky
+npx husky install
+
+// 在 `package.json` 中生成 `prepare` 指令（ **需要 npm &gt; 7.0 版本** ）
+npm set-script prepare &quot;husky install&quot;
+
+// 执行 `prepare` 指令
+npm run prepare
+// 添加 `commitlint` 的 `hook` 到 `husky`中，并指令在 `commit-msg` 的 `hooks` 下执行 `npx --no-install commitlint --edit &quot;$1&quot;` 指令
+
+npx husky add .husky/commit-msg &#39;npx --no-install commitlint --edit &quot;$1&quot;&#39;
+</code></pre>
+<p>不符合规范的将不能提交</p>
+<p>5.4 通过 pre-commit 检测提交时代码规范</p>
+<pre><code class="shell">// 执行
+npx husky add .husky/pre-commit &quot;npx eslint --ext .js,.vue src&quot;
+ // 添加 `commit` 时的 `hook` （`npx eslint --ext .js,.vue src` 会在执行到该 hook 时运行
+// 上面操作会在.husky文件下生成pre-commit
+</code></pre>
+<blockquote>
+<p>vscode 提交<br>源代码管理 -&gt; stage all changes -&gt; git cz -&gt; 选择提交类型 -&gt; git push</p>
+</blockquote>
+<p><img src="https://cdn.staticaly.com/gh/HeyJudeYQ/Image-Host@master/20221116/githook.6nw71q0vos40.png" alt="git cz"></p>
+<p><code>这里有个坑：</code></p>
+<blockquote>
+<p>在<code>请简要描述提交（必填）</code> 这一步填写信息时，需要加一个空格</p>
+</blockquote>
+<p>5.5 lint-staged 自动修复格式错误(无需安装，创建项目时自带)</p>
+<pre><code class="js">// package.json
+&quot;lint-staged&quot;: &#123;
+    &quot;src/**/*.&#123;js,vue&#125;&quot;: [
+      &quot;eslint --fix&quot;,
+      &quot;git add&quot;
+    ]
+  &#125;
+</code></pre>
+<p>修改 <code>.husky/pre-commit</code> 文件</p>
+<pre><code class="js">#!/bin/sh
+. &quot;$(dirname &quot;$0&quot;)/_/husky.sh&quot;
+
+npx lint-staged
+</code></pre>
+</article><section class="jump-container is-flex is-justify-content-space-between my-6"><!-- em is empty placeholder--><a class="button is-default" href="/2022/11/07/92-vue3-ele-plus-admin/" title="92、使用vue3+element-plus写后台管理系统：（二）"><i class="iconfont icon-prev mr-2 has-text-grey"></i><span class="has-text-weight-semibold">上一页: 92、使用vue3+element-plus写后台管理系统：（二）</span></a><a class="button is-default" href="/2022/08/15/90-relativeTime/" title="90、相对时间及时间国际化的处理"><span class="has-text-weight-semibold">下一页: 90、相对时间及时间国际化的处理</span><i class="iconfont icon-next ml-2 has-text-grey"></i></a></section></div></div></main></main><footer class="is-flex is-flex-direction-column is-align-items-center is-flex-shrink-0 is-family-serif"><section class="sns-container"><!-- Github--><a title="github" target="_blank" rel="noopener nofollow" href="//github.com/Jude"><i class="iconfont icon-github"></i></a><!-- Ins--><!-- RSS--><!-- 知乎--><a title="zhihu" target="_blank" rel="noopener nofollow" href="//zhihu.com/https://www.zhihu.com/hot"><i class="iconfont icon-zhihu"></i></a><!-- 领英--><!-- 脸书--></section><p><span>Copyright ©</span><span> Jude 2023</span></p><div class="is-flex is-justify-content-center is-flex-wrap-wrap"><p>Powered by Hexo &verbar;&nbsp;</p><p class="is-flex is-justify-content-center"><a title="Hexo theme author" target="_blank" rel="noopener" href="//github.com/haojen">Theme by Haojen&nbsp;</a></p><div style="margin-top: 2px"><a class="github-button" title="github-button" target="_blank" rel="noopener" href="https://github.com/haojen/hexo-theme-Claudia" data-color-scheme="no-preference: light; light: light; dark: dark;" data-show-count="true"></a></div></div><div><span>记住昨日的美好，过好今日的生活，憧憬明天的到来</span></div></footer><script async defer src="https://buttons.github.io/buttons.js"></script><script src="/js/post.js"></script></body></html>
