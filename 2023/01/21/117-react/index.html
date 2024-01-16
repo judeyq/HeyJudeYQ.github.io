@@ -8,7 +8,7 @@
 封装公用头部组件
 复用添加账单弹窗组件
 
-正文开始公用头部在 components 目录下新建 Header 目录，老规矩，添加两个文件 index.jsx 和 style.module.less.."><meta name="generator" content="Hexo 7.0.0"></head><body class="is-flex is-flex-direction-column"><header class="header-widget is-flex-shrink-0 is-hidden-mobile"><div class="container is-fullhd is-flex is-justify-content-space-between is-align-items-center is-full-height"><section class="is-hidden-mobile is-flex-shrink-0"><h2><a href="/">Jude's blog</a></h2></section><h3 class="is-hidden-mobile is-family-serif is-full-height is-flex is-align-items-center is-flex-shrink-0"><div class="is-full-height" id="postTopic"><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">117、稀土掘金小册-记账本（八） 账单详情</p><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">点击返回顶部</p></div></h3><aside class="is-flex-shrink-0"><h3 class="is-inline-block"><a href="/">首页</a></h3><h3 class="is-inline-block"><a href="/about">关于</a></h3><h3 class="is-inline-block"><a href="/archives">归档</a></h3></aside></div></header><header class="is-flex header-widget is-flex-shrink-0 is-align-items-center is-justify-content-center is-hidden-tablet"><h3 class="is-inline-block"><a href="/">首页</a></h3><h3 class="is-inline-block"><a href="/about">关于</a></h3><h3 class="is-inline-block"><a href="/archives">归档</a></h3></header><main><main class="container is-max-widescreen content section post-page pt-4 px-4"><div class="columns is-flex-desktop is-justify-content-center is-flex-direction-row-reverse"><div class="column is-3 is-hidden-mobile"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-text">前言</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9F%A5%E8%AF%86%E7%82%B9"><span class="toc-text">知识点</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%AD%A3%E6%96%87%E5%BC%80%E5%A7%8B"><span class="toc-text">正文开始</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%AC%E7%94%A8%E5%A4%B4%E9%83%A8"><span class="toc-text">公用头部</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B4%A6%E5%8D%95%E6%98%8E%E7%BB%86"><span class="toc-text">账单明细</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-text">总结</span></a></li></ol></div><div class="column is-9"><header class="my-4"><a href="/tags/react"><i class="tag post-item-tag">react</i></a></header><h1 class="mt-0 mb-1 is-family-serif" id="postTitle">117、稀土掘金小册-记账本（八） 账单详情</h1><time class="has-text-grey" datetime="2023-01-21T12:00:00.000Z">2023-01-21</time><article class="mt-2 post-content"><span id="more"></span>
+正文开始公用头部在 components 目录下新建 Header 目录，老规矩，添加两个文件 index.jsx 和 style.module.less.."><meta name="generator" content="Hexo 4.2.1"></head><body class="is-flex is-flex-direction-column"><header class="header-widget is-flex-shrink-0 is-hidden-mobile"><div class="container is-fullhd is-flex is-justify-content-space-between is-align-items-center is-full-height"><section class="is-hidden-mobile is-flex-shrink-0"><h2><a href="/">Jude's blog</a></h2></section><h3 class="is-hidden-mobile is-family-serif is-full-height is-flex is-align-items-center is-flex-shrink-0"><div class="is-full-height" id="postTopic"><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">117、稀土掘金小册-记账本（八） 账单详情</p><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">点击返回顶部</p></div></h3><aside class="is-flex-shrink-0"><h3 class="is-inline-block"><a href="/">首页</a></h3><h3 class="is-inline-block"><a href="/about">关于</a></h3><h3 class="is-inline-block"><a href="/archives">归档</a></h3></aside></div></header><header class="is-flex header-widget is-flex-shrink-0 is-align-items-center is-justify-content-center is-hidden-tablet"><h3 class="is-inline-block"><a href="/">首页</a></h3><h3 class="is-inline-block"><a href="/about">关于</a></h3><h3 class="is-inline-block"><a href="/archives">归档</a></h3></header><main><main class="container is-max-widescreen content section post-page pt-4 px-4"><div class="columns is-flex-desktop is-justify-content-center is-flex-direction-row-reverse"><div class="column is-3 is-hidden-mobile"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#前言"><span class="toc-text">前言</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#知识点"><span class="toc-text">知识点</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#正文开始"><span class="toc-text">正文开始</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#公用头部"><span class="toc-text">公用头部</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#账单明细"><span class="toc-text">账单明细</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结"><span class="toc-text">总结</span></a></li></ol></div><div class="column is-9"><header class="my-4"><a href="/tags/react"><i class="tag post-item-tag">react</i></a></header><h1 class="mt-0 mb-1 is-family-serif" id="postTitle">117、稀土掘金小册-记账本（八） 账单详情</h1><time class="has-text-grey" datetime="2023-01-21T12:00:00.000Z">2023-01-21</time><article class="mt-2 post-content"><a id="more"></a>
 
 <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>账单模块还剩最后一个小节，账单详情。账单详情页要做的事情有两个，一个是编辑当前账单操作，另一个是删除当前账单操作，我们先来观察完成后页面结构，如下所示：</p>
 <p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/cd8a2c4723fb4bbdbde0695d55e6bd92~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp" alt="img"></p>
@@ -19,212 +19,34 @@
 </ul>
 <h2 id="正文开始"><a href="#正文开始" class="headerlink" title="正文开始"></a>正文开始</h2><h3 id="公用头部"><a href="#公用头部" class="headerlink" title="公用头部"></a>公用头部</h3><p>在 <code>components</code> 目录下新建 <code>Header</code> 目录，老规矩，添加两个文件 <code>index.jsx</code> 和 <code>style.module.less</code>。</p>
 <p>为 <code>Header/index.jsx</code> 添加代码如下：</p>
-<pre><code class="js">import React from &quot;react&quot;;
-import PropTypes from &quot;prop-types&quot;;
-import &#123; useNavigate &#125; from &quot;react-router-dom&quot;;
-import &#123; NavBar, Icon &#125; from &quot;zarm&quot;;
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">"react"</span>;<br><span class="hljs-keyword">import</span> PropTypes <span class="hljs-keyword">from</span> <span class="hljs-string">"prop-types"</span>;<br><span class="hljs-keyword">import</span> &#123; useNavigate &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">"react-router-dom"</span>;<br><span class="hljs-keyword">import</span> &#123; NavBar, Icon &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">"zarm"</span>;<br><br><span class="hljs-keyword">import</span> s <span class="hljs-keyword">from</span> <span class="hljs-string">"./style.module.less"</span>;<br><br><span class="hljs-keyword">const</span> Header = <span class="hljs-function">(<span class="hljs-params">&#123; title = <span class="hljs-string">""</span> &#125;</span>) =&gt;</span> &#123;<br>  <span class="hljs-keyword">const</span> navigateTo = useNavigate();<br>  <span class="hljs-keyword">return</span> (<br>    &lt;div className=&#123;s.headerWarp&#125;&gt;<br>      &lt;div className=&#123;s.block&#125;&gt;<br>        &lt;NavBar<br>          className=&#123;s.header&#125;<br>          left=&#123;<br>            &lt;Icon<br>              type=<span class="hljs-string">"arrow-left"</span><br>              theme=<span class="hljs-string">"primary"</span><br>              onClick=&#123;() =&gt; navigateTo(<span class="hljs-number">-1</span>)&#125;<br>            /&gt;<br>          &#125;<br>          title=&#123;title&#125;<br>        /&gt;<br>      &lt;<span class="hljs-regexp">/div&gt;</span><br><span class="hljs-regexp">    &lt;/</span>div&gt;<br>  );<br>&#125;;<br><br>Header.propTypes = &#123;<br>  title: PropTypes.string, <span class="hljs-comment">// 标题</span><br>&#125;;<br><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> Header;<br></code></pre></td></tr></table></figure>
 
-import s from &quot;./style.module.less&quot;;
-
-const Header = (&#123; title = &quot;&quot; &#125;) =&gt; &#123;
-  const navigateTo = useNavigate();
-  return (
-    &lt;div className=&#123;s.headerWarp&#125;&gt;
-      &lt;div className=&#123;s.block&#125;&gt;
-        &lt;NavBar
-          className=&#123;s.header&#125;
-          left=&#123;
-            &lt;Icon
-              type=&quot;arrow-left&quot;
-              theme=&quot;primary&quot;
-              onClick=&#123;() =&gt; navigateTo(-1)&#125;
-            /&gt;
-          &#125;
-          title=&#123;title&#125;
-        /&gt;
-      &lt;/div&gt;
-    &lt;/div&gt;
-  );
-&#125;;
-
-Header.propTypes = &#123;
-  title: PropTypes.string, // 标题
-&#125;;
-
-export default Header;
-</code></pre>
 <p>我们采用 <code>Zarm</code> 组件库为我们提供的 <code>NavBar</code> 组件，实现头部的组件布局。为左边的返回箭头添加一个事件，<code>navigateTo(-1)</code> 的作用是路由返回事件，它不会触发浏览器的刷新，而是改变浏览器的地址栏，让组件匹配地址栏对应的地址组件。</p>
 <p>还有一点要提醒大家，写公用组件一定要写 <code>PropTypes</code>，这是让其他使用该组件的同事知道，你这个组件接受的参数有哪些，以及每个参数的作用是什么，都要注释清楚，这才是一个好的公用组件。我见过很多同事写公用组件都不写 <code>PropTypes</code>，这让使用者非常头大。</p>
 <p><strong>CSS 样式代码</strong></p>
-<pre><code class="css">.header-warp &#123;
-  border-bottom: 1px solid #e9e9e9;
-  .block &#123;
-    width: 100%;
-    height: 46px;
-    :global &#123;
-      .za-nav-bar__title &#123;
-        font-size: 14px;
-        color: rgba(0, 0, 0, 0.9);
-      &#125;
-      .za-icon--arrow-left &#123;
-        font-size: 20px;
-      &#125;
-    &#125;
-  &#125;
-  .header &#123;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    .more &#123;
-      font-size: 20px;
-    &#125;
-  &#125;
-&#125;
-</code></pre>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-selector-class">.header-warp</span> &#123;<br>  <span class="hljs-attribute">border-bottom</span>: <span class="hljs-number">1px</span> solid <span class="hljs-number">#e9e9e9</span>;<br>  .block &#123;<br>    <span class="hljs-selector-tag">width</span>: 100%;<br>    <span class="hljs-selector-tag">height</span>: 46<span class="hljs-selector-tag">px</span>;<br>    <span class="hljs-selector-pseudo">:global</span> &#123;<br>      .za-nav-bar__title &#123;<br>        <span class="hljs-selector-tag">font-size</span>: 14<span class="hljs-selector-tag">px</span>;<br>        <span class="hljs-selector-tag">color</span>: <span class="hljs-selector-tag">rgba</span>(0, 0, 0, 0<span class="hljs-selector-class">.9</span>);<br>      &#125;<br>      <span class="hljs-selector-class">.za-icon--arrow-left</span> &#123;<br>        <span class="hljs-attribute">font-size</span>: <span class="hljs-number">20px</span>;<br>      &#125;<br>    &#125;<br>  &#125;<br>  <span class="hljs-selector-class">.header</span> &#123;<br>    <span class="hljs-attribute">position</span>: fixed;<br>    <span class="hljs-attribute">top</span>: <span class="hljs-number">0</span>;<br>    <span class="hljs-attribute">left</span>: <span class="hljs-number">0</span>;<br>    <span class="hljs-attribute">width</span>: <span class="hljs-number">100%</span>;<br>    .more &#123;<br>      <span class="hljs-selector-tag">font-size</span>: 20<span class="hljs-selector-tag">px</span>;<br>    &#125;<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
 <p>完成上述代码之后，我们需要在 <code>container/Detail/index.jsx</code> 下引入这个公用头部，代码如下：</p>
-<pre><code class="js">import React from &quot;react&quot;;
-import Header from &quot;@/components/Header&quot;;
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">"react"</span>;<br><span class="hljs-keyword">import</span> Header <span class="hljs-keyword">from</span> <span class="hljs-string">"@/components/Header"</span>;<br><br><span class="hljs-keyword">import</span> s <span class="hljs-keyword">from</span> <span class="hljs-string">"./style.module.less"</span>;<br><br><span class="hljs-keyword">const</span> Detail = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> &#123;<br>  <span class="hljs-keyword">return</span> (<br>    &lt;div className=&#123;s.detail&#125;&gt;<br>      &lt;Header title=<span class="hljs-string">"账单详情"</span> /&gt;<br>    &lt;<span class="hljs-regexp">/div&gt;</span><br><span class="hljs-regexp">  );</span><br><span class="hljs-regexp">&#125;;</span><br><span class="hljs-regexp"></span><br><span class="hljs-regexp">export default Detail;</span><br></code></pre></td></tr></table></figure>
 
-import s from &quot;./style.module.less&quot;;
-
-const Detail = () =&gt; &#123;
-  return (
-    &lt;div className=&#123;s.detail&#125;&gt;
-      &lt;Header title=&quot;账单详情&quot; /&gt;
-    &lt;/div&gt;
-  );
-&#125;;
-
-export default Detail;
-</code></pre>
 <p>效果如下所示：</p>
 <p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/4711827eba5141a2822bbde2237032d9~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp" alt="img"></p>
 <h3 id="账单明细"><a href="#账单明细" class="headerlink" title="账单明细"></a>账单明细</h3><p>接下来，我们通过列表页传入的浏览器查询字符串，通俗的将就是浏览器地址栏上的参数，来获取该笔账单的详情，如下所示：</p>
-<pre><code class="js">// container/Detail/index.jsx
-import React, &#123; useEffect, useState &#125; from &quot;react&quot;;
-import &#123; useLocation &#125; from &quot;react-router-dom&quot;;
-import qs from &quot;query-string&quot;;
-import Header from &quot;@/components/Header&quot;;
-import &#123; get &#125; from &quot;@/utils&quot;;
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-comment">// container/Detail/index.jsx</span><br><span class="hljs-keyword">import</span> React, &#123; useEffect, useState &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">"react"</span>;<br><span class="hljs-keyword">import</span> &#123; useLocation &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">"react-router-dom"</span>;<br><span class="hljs-keyword">import</span> qs <span class="hljs-keyword">from</span> <span class="hljs-string">"query-string"</span>;<br><span class="hljs-keyword">import</span> Header <span class="hljs-keyword">from</span> <span class="hljs-string">"@/components/Header"</span>;<br><span class="hljs-keyword">import</span> &#123; <span class="hljs-keyword">get</span> &#125; from "@/utils";<br><br>import s from "./style.module.less";<br><br>const Detail = () =&gt; &#123;<br>  <span class="hljs-keyword">const</span> location = useLocation(); <span class="hljs-comment">// 获取 locaton 实例，我们可以通过打印查看内部都有些什么内容。</span><br>  <span class="hljs-keyword">const</span> &#123; id &#125; = qs.parse(location.search);<br><br>  <span class="hljs-keyword">const</span> [detail, setDetail] = useState(&#123;&#125;);<br><br>  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"location"</span>, location);<br><br>  useEffect(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> &#123;<br>    getDetail();<br>  &#125;, []);<br><br>  <span class="hljs-keyword">const</span> getDetail = <span class="hljs-keyword">async</span> () =&gt; &#123;<br>    <span class="hljs-keyword">const</span> &#123; data &#125; = <span class="hljs-keyword">await</span> <span class="hljs-keyword">get</span>(`/api/bill/detail?id=$&#123;id&#125;<span class="hljs-string">`);</span><br><span class="hljs-string">    setDetail(data);</span><br><span class="hljs-string">  &#125;;</span><br><span class="hljs-string">  return (</span><br><span class="hljs-string">    &lt;div className=&#123;s.detail&#125;&gt;</span><br><span class="hljs-string">      &lt;Header title="账单详情" /&gt;</span><br><span class="hljs-string">    &lt;/div&gt;</span><br><span class="hljs-string">  );</span><br><span class="hljs-string">&#125;;</span><br><span class="hljs-string"></span><br><span class="hljs-string">export default Detail;</span><br></code></pre></td></tr></table></figure>
 
-import s from &quot;./style.module.less&quot;;
-
-const Detail = () =&gt; &#123;
-  const location = useLocation(); // 获取 locaton 实例，我们可以通过打印查看内部都有些什么内容。
-  const &#123; id &#125; = qs.parse(location.search);
-
-  const [detail, setDetail] = useState(&#123;&#125;);
-
-  console.log(&quot;location&quot;, location);
-
-  useEffect(() =&gt; &#123;
-    getDetail();
-  &#125;, []);
-
-  const getDetail = async () =&gt; &#123;
-    const &#123; data &#125; = await get(`/api/bill/detail?id=$&#123;id&#125;`);
-    setDetail(data);
-  &#125;;
-  return (
-    &lt;div className=&#123;s.detail&#125;&gt;
-      &lt;Header title=&quot;账单详情&quot; /&gt;
-    &lt;/div&gt;
-  );
-&#125;;
-
-export default Detail;
-</code></pre>
 <p>我们先来看看，浏览器控制台打印出的 <code>location</code> 如下所示：</p>
 <p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/8ec916d9afd2477680bd98f0ac24a052~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp" alt="img"></p>
 <p>可以看到，我们想要的参数在 <code>search</code> 属性中，我想把 <code>?id=917</code> 转换成 <code>json</code> 键值对的形式，如：</p>
-<pre><code class="json">&#123;
-  &quot;id&quot;: 917
-&#125;
-</code></pre>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs json">&#123;<br>  <span class="hljs-attr">"id"</span>: <span class="hljs-number">917</span><br>&#125;<br></code></pre></td></tr></table></figure>
+
 <p>所以我通过 <code>npm install query-string</code> 引入了查询字符串解析的一个插件，通过如下方式：</p>
-<pre><code class="js">qs.parse(location.search);
-</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs js">qs.parse(location.search);<br></code></pre></td></tr></table></figure>
+
 <p>可以将浏览器查询参数变成一个对象形式，所以我们在代码中可以通过 <code>const</code> 的解构，将 <code>id</code> 取出。最后通过 <code>get</code> 方法请求详情接口：</p>
 <p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/fa5910c717994f729e744328c2cf2517~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp" alt="img"></p>
 <p>接下来，我们给账单明细部分布局，并且将数据接入，代码如下所示：</p>
-<pre><code class="js">import React, &#123; useEffect, useState &#125; from &quot;react&quot;;
-import &#123; useLocation &#125; from &quot;react-router-dom&quot;;
-import qs from &quot;query-string&quot;;
-import dayjs from &quot;dayjs&quot;;
-import cx from &quot;classnames&quot;;
-import Header from &quot;@/components/Header&quot;;
-import CustomIcon from &quot;@/components/CustomIcon&quot;;
-import &#123; get, typeMap &#125; from &quot;@/utils&quot;;
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">import</span> React, &#123; useEffect, useState &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">"react"</span>;<br><span class="hljs-keyword">import</span> &#123; useLocation &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">"react-router-dom"</span>;<br><span class="hljs-keyword">import</span> qs <span class="hljs-keyword">from</span> <span class="hljs-string">"query-string"</span>;<br><span class="hljs-keyword">import</span> dayjs <span class="hljs-keyword">from</span> <span class="hljs-string">"dayjs"</span>;<br><span class="hljs-keyword">import</span> cx <span class="hljs-keyword">from</span> <span class="hljs-string">"classnames"</span>;<br><span class="hljs-keyword">import</span> Header <span class="hljs-keyword">from</span> <span class="hljs-string">"@/components/Header"</span>;<br><span class="hljs-keyword">import</span> CustomIcon <span class="hljs-keyword">from</span> <span class="hljs-string">"@/components/CustomIcon"</span>;<br><span class="hljs-keyword">import</span> &#123; <span class="hljs-keyword">get</span>, typeMap &#125; from "@/utils";<br><br>import s from "./style.module.less";<br><br>const Detail = () =&gt; &#123;<br>  <span class="hljs-keyword">const</span> location = useLocation(); <span class="hljs-comment">// 路由 location 实例</span><br>  <span class="hljs-keyword">const</span> &#123; id &#125; = qs.parse(location.search); <span class="hljs-comment">// 查询字符串反序列化</span><br><br>  <span class="hljs-keyword">const</span> [detail, setDetail] = useState(&#123;&#125;); <span class="hljs-comment">// 订单详情数据</span><br><br>  useEffect(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> &#123;<br>    getDetail();<br>  &#125;, []);<br><br>  <span class="hljs-keyword">const</span> getDetail = <span class="hljs-keyword">async</span> () =&gt; &#123;<br>    <span class="hljs-keyword">const</span> &#123; data &#125; = <span class="hljs-keyword">await</span> <span class="hljs-keyword">get</span>(`/api/bill/detail?id=$&#123;id&#125;<span class="hljs-string">`);</span><br><span class="hljs-string">    setDetail(data);</span><br><span class="hljs-string">  &#125;;</span><br><span class="hljs-string">  return (</span><br><span class="hljs-string">    &lt;div className=&#123;s.detail&#125;&gt;</span><br><span class="hljs-string">      &lt;Header title="账单详情" /&gt;</span><br><span class="hljs-string">      &lt;div className=&#123;s.card&#125;&gt;</span><br><span class="hljs-string">        &lt;div className=&#123;s.type&#125;&gt;</span><br><span class="hljs-string">          &#123;/* 通过 pay_type 属性，判断是收入或指出，给出不同的颜色*/&#125;</span><br><span class="hljs-string">          &lt;span</span><br><span class="hljs-string">            className=&#123;cx(&#123;</span><br><span class="hljs-string">              [s.expense]: detail.pay_type == 1,</span><br><span class="hljs-string">              [s.income]: detail.pay_type == 2,</span><br><span class="hljs-string">            &#125;)&#125;</span><br><span class="hljs-string">          &gt;</span><br><span class="hljs-string">            &#123;/* typeMap 是我们事先约定好的 icon 列表 */&#125;</span><br><span class="hljs-string">            &lt;CustomIcon</span><br><span class="hljs-string">              className=&#123;s.iconfont&#125;</span><br><span class="hljs-string">              type=&#123;detail.type_id ? typeMap[detail.type_id].icon : 1&#125;</span><br><span class="hljs-string">            /&gt;</span><br><span class="hljs-string">          &lt;/span&gt;</span><br><span class="hljs-string">          &lt;span&gt;&#123;detail.type_name || ""&#125;&lt;/span&gt;</span><br><span class="hljs-string">        &lt;/div&gt;</span><br><span class="hljs-string">        &#123;detail.pay_type == 1 ? (</span><br><span class="hljs-string">          &lt;div className=&#123;cx(s.amount, s.expense)&#125;&gt;-&#123;detail.amount&#125;&lt;/div&gt;</span><br><span class="hljs-string">        ) : (</span><br><span class="hljs-string">          &lt;div className=&#123;cx(s.amount, s.incom)&#125;&gt;+&#123;detail.amount&#125;&lt;/div&gt;</span><br><span class="hljs-string">        )&#125;</span><br><span class="hljs-string">        &lt;div className=&#123;s.info&#125;&gt;</span><br><span class="hljs-string">          &lt;div className=&#123;s.time&#125;&gt;</span><br><span class="hljs-string">            &lt;span&gt;记录时间&lt;/span&gt;</span><br><span class="hljs-string">            &lt;span&gt;&#123;dayjs(Number(detail.date)).format("YYYY-MM-DD HH:mm")&#125;&lt;/span&gt;</span><br><span class="hljs-string">          &lt;/div&gt;</span><br><span class="hljs-string">          &lt;div className=&#123;s.remark&#125;&gt;</span><br><span class="hljs-string">            &lt;span&gt;备注&lt;/span&gt;</span><br><span class="hljs-string">            &lt;span&gt;&#123;detail.remark || "-"&#125;&lt;/span&gt;</span><br><span class="hljs-string">          &lt;/div&gt;</span><br><span class="hljs-string">        &lt;/div&gt;</span><br><span class="hljs-string">        &lt;div className=&#123;s.operation&#125;&gt;</span><br><span class="hljs-string">          &lt;span&gt;</span><br><span class="hljs-string">            &lt;CustomIcon type="shanchu" /&gt;</span><br><span class="hljs-string">            删除</span><br><span class="hljs-string">          &lt;/span&gt;</span><br><span class="hljs-string">          &lt;span&gt;</span><br><span class="hljs-string">            &lt;CustomIcon type="tianjia" /&gt;</span><br><span class="hljs-string">            编辑</span><br><span class="hljs-string">          &lt;/span&gt;</span><br><span class="hljs-string">        &lt;/div&gt;</span><br><span class="hljs-string">      &lt;/div&gt;</span><br><span class="hljs-string">    &lt;/div&gt;</span><br><span class="hljs-string">  );</span><br><span class="hljs-string">&#125;;</span><br><span class="hljs-string"></span><br><span class="hljs-string">export default Detail;</span><br></code></pre></td></tr></table></figure>
 
-import s from &quot;./style.module.less&quot;;
-
-const Detail = () =&gt; &#123;
-  const location = useLocation(); // 路由 location 实例
-  const &#123; id &#125; = qs.parse(location.search); // 查询字符串反序列化
-
-  const [detail, setDetail] = useState(&#123;&#125;); // 订单详情数据
-
-  useEffect(() =&gt; &#123;
-    getDetail();
-  &#125;, []);
-
-  const getDetail = async () =&gt; &#123;
-    const &#123; data &#125; = await get(`/api/bill/detail?id=$&#123;id&#125;`);
-    setDetail(data);
-  &#125;;
-  return (
-    &lt;div className=&#123;s.detail&#125;&gt;
-      &lt;Header title=&quot;账单详情&quot; /&gt;
-      &lt;div className=&#123;s.card&#125;&gt;
-        &lt;div className=&#123;s.type&#125;&gt;
-          &#123;/* 通过 pay_type 属性，判断是收入或指出，给出不同的颜色*/&#125;
-          &lt;span
-            className=&#123;cx(&#123;
-              [s.expense]: detail.pay_type == 1,
-              [s.income]: detail.pay_type == 2,
-            &#125;)&#125;
-          &gt;
-            &#123;/* typeMap 是我们事先约定好的 icon 列表 */&#125;
-            &lt;CustomIcon
-              className=&#123;s.iconfont&#125;
-              type=&#123;detail.type_id ? typeMap[detail.type_id].icon : 1&#125;
-            /&gt;
-          &lt;/span&gt;
-          &lt;span&gt;&#123;detail.type_name || &quot;&quot;&#125;&lt;/span&gt;
-        &lt;/div&gt;
-        &#123;detail.pay_type == 1 ? (
-          &lt;div className=&#123;cx(s.amount, s.expense)&#125;&gt;-&#123;detail.amount&#125;&lt;/div&gt;
-        ) : (
-          &lt;div className=&#123;cx(s.amount, s.incom)&#125;&gt;+&#123;detail.amount&#125;&lt;/div&gt;
-        )&#125;
-        &lt;div className=&#123;s.info&#125;&gt;
-          &lt;div className=&#123;s.time&#125;&gt;
-            &lt;span&gt;记录时间&lt;/span&gt;
-            &lt;span&gt;&#123;dayjs(Number(detail.date)).format(&quot;YYYY-MM-DD HH:mm&quot;)&#125;&lt;/span&gt;
-          &lt;/div&gt;
-          &lt;div className=&#123;s.remark&#125;&gt;
-            &lt;span&gt;备注&lt;/span&gt;
-            &lt;span&gt;&#123;detail.remark || &quot;-&quot;&#125;&lt;/span&gt;
-          &lt;/div&gt;
-        &lt;/div&gt;
-        &lt;div className=&#123;s.operation&#125;&gt;
-          &lt;span&gt;
-            &lt;CustomIcon type=&quot;shanchu&quot; /&gt;
-            删除
-          &lt;/span&gt;
-          &lt;span&gt;
-            &lt;CustomIcon type=&quot;tianjia&quot; /&gt;
-            编辑
-          &lt;/span&gt;
-        &lt;/div&gt;
-      &lt;/div&gt;
-    &lt;/div&gt;
-  );
-&#125;;
-
-export default Detail;
-</code></pre>
 <blockquote>
 <p>文末已为同学们提供下本章节 demo 代码，样式部分不再详细说明。</p>
 </blockquote>
@@ -232,115 +54,22 @@ export default Detail;
 <p>浏览器展示效果如下：</p>
 <p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/9ccc8d4d2fb343878c22bb37f3949673~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp" alt="img"></p>
 <p>我们还需为底部的两个按钮添加事件。首先，为删除按钮添加删除事件：</p>
-<pre><code class="js">import &#123; useLocation, useNavigate &#125; from &#39;react-router-dom&#39;;
-import &#123; get, post, typeMap &#125; from &#39;@/utils&#39;;
-import &#123; Modal, Toast &#125; from &#39;zarm&#39;;
-...
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">import</span> &#123; useLocation, useNavigate &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">'react-router-dom'</span>;<br><span class="hljs-keyword">import</span> &#123; <span class="hljs-keyword">get</span>, post, typeMap &#125; from '@/utils';<br>import &#123; Modal, Toast &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">'zarm'</span>;<br>...<br><br><span class="hljs-keyword">const</span> navigateTo = useNavigate();<br><br><span class="hljs-comment">// 删除方法</span><br><span class="hljs-keyword">const</span> deleteDetail = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> &#123;<br>  Modal.confirm(&#123;<br>    title: <span class="hljs-string">'删除'</span>,<br>    content: <span class="hljs-string">'确认删除账单？'</span>,<br>    onOk: <span class="hljs-keyword">async</span> () =&gt; &#123;<br>      <span class="hljs-keyword">const</span> &#123; data &#125; = <span class="hljs-keyword">await</span> post(<span class="hljs-string">'/api/bill/delete'</span>, &#123; id &#125;)<br>      Toast.show(<span class="hljs-string">'删除成功'</span>)<br>      navigateTo(<span class="hljs-number">-1</span>)<br>    &#125;,<br>  &#125;);<br>&#125;<br></code></pre></td></tr></table></figure>
 
-const navigateTo = useNavigate();
-
-// 删除方法
-const deleteDetail = () =&gt; &#123;
-  Modal.confirm(&#123;
-    title: &#39;删除&#39;,
-    content: &#39;确认删除账单？&#39;,
-    onOk: async () =&gt; &#123;
-      const &#123; data &#125; = await post(&#39;/api/bill/delete&#39;, &#123; id &#125;)
-      Toast.show(&#39;删除成功&#39;)
-      navigateTo(-1)
-    &#125;,
-  &#125;);
-&#125;
-</code></pre>
 <p>这里我们利用 <code>Zarm</code> 组件提供的 <code>Modal</code> 组件，该组件提供了调用方法的形式唤起弹窗，我们利用这个属性 为「删除」加一个二次确认的形式，避免误触按钮。</p>
 <p>效果如下所示：</p>
 <p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/c7f1edbbe9d147e39ffd28d9b0a0ab1c~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp" alt="img"></p>
 <p>最麻烦的编辑事件处理，我们先来明确一下思路。在点击「编辑」按钮之后，我们会唤起之前写好的「添加账单天窗」，然后将账单 <code>detail</code> 参数通过 <code>props</code> 传递给弹窗组件，组件在接收到 <code>detail</code> 时，将信息初始化给弹窗给的相应参数。</p>
 <p>我们来看代码的实现，首先在 <code>Detail/index.jsx</code> 内添加代码：</p>
-<pre><code class="js">import React, &#123; useEffect, useState, useRef &#125; from &#39;react&#39;;
-import PopupAddBill from &#39;@/components/PopupAddBill&#39;;
-...
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">import</span> React, &#123; useEffect, useState, useRef &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>;<br><span class="hljs-keyword">import</span> PopupAddBill <span class="hljs-keyword">from</span> <span class="hljs-string">'@/components/PopupAddBill'</span>;<br>...<br><br><span class="hljs-keyword">const</span> editRef = useRef();<br>...<br>&lt;div className=&#123;s.operation&#125;&gt;<br>  &lt;span onClick=&#123;deleteDetail&#125;&gt;<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">CustomIcon</span> <span class="hljs-attr">type</span>=<span class="hljs-string">'shanchu'</span> /&gt;</span></span>删除&lt;<span class="hljs-regexp">/span&gt;</span><br><span class="hljs-regexp">  &lt;span onClick=&#123;() =&gt; editRef.current &amp;&amp; editRef.current.show()&#125;&gt;&lt;CustomIcon type='tianjia' /</span>&gt;编辑&lt;<span class="hljs-regexp">/span&gt;</span><br><span class="hljs-regexp">&lt;/</span>div&gt;<br>...<br>&lt;PopupAddBill ref=&#123;editRef&#125; detail=&#123;detail&#125; onReload=&#123;getDetail&#125; /&gt;<br></code></pre></td></tr></table></figure>
 
-const editRef = useRef();
-...
-&lt;div className=&#123;s.operation&#125;&gt;
-  &lt;span onClick=&#123;deleteDetail&#125;&gt;&lt;CustomIcon type=&#39;shanchu&#39; /&gt;删除&lt;/span&gt;
-  &lt;span onClick=&#123;() =&gt; editRef.current &amp;&amp; editRef.current.show()&#125;&gt;&lt;CustomIcon type=&#39;tianjia&#39; /&gt;编辑&lt;/span&gt;
-&lt;/div&gt;
-...
-&lt;PopupAddBill ref=&#123;editRef&#125; detail=&#123;detail&#125; onReload=&#123;getDetail&#125; /&gt;
-</code></pre>
 <p>尝试点击编辑按钮：</p>
 <p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/2e946a44ae224128ae356abc36d990eb~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp" alt="img"></p>
 <p>紧接着，我们修改 <code>PopupAddBill</code> 组件，如下所示：</p>
-<pre><code class="js">const PopupAddBill = forwardRef((&#123; detail = &#123;&#125;, onReload &#125;, ref) =&gt; &#123;
-  ...
-  const id = detail &amp;&amp; detail.id // 外部传进来的账单详情 id
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">const</span> PopupAddBill = forwardRef(<span class="hljs-function">(<span class="hljs-params">&#123; detail = &#123;&#125;, onReload &#125;, ref</span>) =&gt;</span> &#123;<br>  ...<br>  <span class="hljs-keyword">const</span> id = detail &amp;&amp; detail.id <span class="hljs-comment">// 外部传进来的账单详情 id</span><br><br>  useEffect(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> &#123;<br>    <span class="hljs-keyword">if</span> (detail.id) &#123;<br>      setPayType(detail.pay_type == <span class="hljs-number">1</span> ? <span class="hljs-string">'expense'</span> : <span class="hljs-string">'income'</span>)<br>      setCurrentType(&#123;<br>        id: detail.type_id,<br>        name: detail.type_name<br>      &#125;)<br>      setRemark(detail.remark)<br>      setAmount(detail.amount)<br>      setDate(dayjs(<span class="hljs-built_in">Number</span>(detail.date)).$d)<br>    &#125;<br>  &#125;, [detail])<br><br>  ...<br><br>  useEffect(<span class="hljs-keyword">async</span> () =&gt; &#123;<br>    <span class="hljs-keyword">const</span> &#123; <span class="hljs-attr">data</span>: &#123; list &#125; &#125; = <span class="hljs-keyword">await</span> <span class="hljs-keyword">get</span>('/api/type/list');<br>    const _expense = list.filter(i =&gt; i.type == 1); // 支出类型<br>    const _income = list.filter(i =&gt; i.type == 2); // 收入类型<br>    setExpense(_expense);<br>    setIncome(_income);<br>      // 没有 id 的情况下，说明是新建账单。<br>    if (!id) &#123;<br>      setCurrentType(_expense[<span class="hljs-number">0</span>]);<br>    &#125;;<br>  &#125;, []);<br><br>  ...<br><br>  <span class="hljs-comment">// 添加账单</span><br>  <span class="hljs-keyword">const</span> addBill = <span class="hljs-keyword">async</span> () =&gt; &#123;<br>    <span class="hljs-keyword">if</span> (!amount) &#123;<br>      Toast.show(<span class="hljs-string">'请输入具体金额'</span>)<br>      <span class="hljs-keyword">return</span><br>    &#125;<br>    <span class="hljs-keyword">const</span> params = &#123;<br>      amount: <span class="hljs-built_in">Number</span>(amount).toFixed(<span class="hljs-number">2</span>),<br>      type_id: currentType.id,<br>      type_name: currentType.name,<br>      date: dayjs(date).unix() * <span class="hljs-number">1000</span>,<br>      pay_type: payType == <span class="hljs-string">'expense'</span> ? <span class="hljs-number">1</span> : <span class="hljs-number">2</span>,<br>      remark: remark || <span class="hljs-string">''</span><br>    &#125;<br>    <span class="hljs-keyword">if</span> (id) &#123;<br>      params.id = id;<br>      <span class="hljs-comment">// 如果有 id 需要调用详情更新接口</span><br>      <span class="hljs-keyword">const</span> result = <span class="hljs-keyword">await</span> post(<span class="hljs-string">'/api/bill/update'</span>, params);<br>      Toast.show(<span class="hljs-string">'修改成功'</span>);<br>    &#125; <span class="hljs-keyword">else</span> &#123;<br>      <span class="hljs-keyword">const</span> result = <span class="hljs-keyword">await</span> post(<span class="hljs-string">'/api/bill/add'</span>, params);<br>      setAmount(<span class="hljs-string">''</span>);<br>      setPayType(<span class="hljs-string">'expense'</span>);<br>      setCurrentType(expense[<span class="hljs-number">0</span>]);<br>      setDate(<span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>());<br>      setRemark(<span class="hljs-string">''</span>);<br>      Toast.show(<span class="hljs-string">'添加成功'</span>);<br>    &#125;<br>    setShow(<span class="hljs-literal">false</span>);<br>    <span class="hljs-keyword">if</span> (onReload) onReload();<br>  &#125;<br>&#125;)<br></code></pre></td></tr></table></figure>
 
-  useEffect(() =&gt; &#123;
-    if (detail.id) &#123;
-      setPayType(detail.pay_type == 1 ? &#39;expense&#39; : &#39;income&#39;)
-      setCurrentType(&#123;
-        id: detail.type_id,
-        name: detail.type_name
-      &#125;)
-      setRemark(detail.remark)
-      setAmount(detail.amount)
-      setDate(dayjs(Number(detail.date)).$d)
-    &#125;
-  &#125;, [detail])
-
-  ...
-
-  useEffect(async () =&gt; &#123;
-    const &#123; data: &#123; list &#125; &#125; = await get(&#39;/api/type/list&#39;);
-    const _expense = list.filter(i =&gt; i.type == 1); // 支出类型
-    const _income = list.filter(i =&gt; i.type == 2); // 收入类型
-    setExpense(_expense);
-    setIncome(_income);
-      // 没有 id 的情况下，说明是新建账单。
-    if (!id) &#123;
-      setCurrentType(_expense[0]);
-    &#125;;
-  &#125;, []);
-
-  ...
-
-  // 添加账单
-  const addBill = async () =&gt; &#123;
-    if (!amount) &#123;
-      Toast.show(&#39;请输入具体金额&#39;)
-      return
-    &#125;
-    const params = &#123;
-      amount: Number(amount).toFixed(2),
-      type_id: currentType.id,
-      type_name: currentType.name,
-      date: dayjs(date).unix() * 1000,
-      pay_type: payType == &#39;expense&#39; ? 1 : 2,
-      remark: remark || &#39;&#39;
-    &#125;
-    if (id) &#123;
-      params.id = id;
-      // 如果有 id 需要调用详情更新接口
-      const result = await post(&#39;/api/bill/update&#39;, params);
-      Toast.show(&#39;修改成功&#39;);
-    &#125; else &#123;
-      const result = await post(&#39;/api/bill/add&#39;, params);
-      setAmount(&#39;&#39;);
-      setPayType(&#39;expense&#39;);
-      setCurrentType(expense[0]);
-      setDate(new Date());
-      setRemark(&#39;&#39;);
-      Toast.show(&#39;添加成功&#39;);
-    &#125;
-    setShow(false);
-    if (onReload) onReload();
-  &#125;
-&#125;)
-</code></pre>
 <p>首先，通过 <code>setXXX</code> 将 <code>detail</code> 的数据依次设置初始值；其次，账单种类需要判断是否是编辑或是新建；最后，修改添加账单按钮，如果是「编辑」操作，给 <code>params</code> 参数添加一个 <code>id</code>，并且调用的接口变成 <code>/api/bill/update</code>。</p>
 <p>完成上述操作之后，我们查看浏览器操作情况如下所示：</p>
 <p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/c97d70e0092747cb8c78da25cf17c576~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp" alt="img"></p>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>本小节我们学习了如何封装内页的头部组件，以及如何将之前的「新增」复用给「编辑」操作，可以以这个为一个思考点，用发散的思维去复制这样的模式，是否其他的新增和编辑操作，也可以这么实现。</p>
-</article><section class="jump-container is-flex is-justify-content-space-between my-6"><!-- em is empty placeholder--><a class="button is-default" href="/2023/01/28/118-react/" title="118、稀土掘金小册-记账本（九） 账单可视化"><i class="iconfont icon-prev mr-2 has-text-grey"></i><span class="has-text-weight-semibold">上一页: 118、稀土掘金小册-记账本（九） 账单可视化</span></a><a class="button is-default" href="/2023/01/18/116-react/" title="116、稀土掘金小册-记账本（七）新增账单弹窗封装"><span class="has-text-weight-semibold">下一页: 116、稀土掘金小册-记账本（七）新增账单弹窗封装</span><i class="iconfont icon-next ml-2 has-text-grey"></i></a></section></div></div></main></main><footer class="is-flex is-flex-direction-column is-align-items-center is-flex-shrink-0 is-family-serif"><section class="sns-container"><!-- Github--><a title="github" target="_blank" rel="noopener nofollow" href="//github.com/Jude"><i class="iconfont icon-github"></i></a><!-- Ins--><!-- RSS--><!-- 知乎--><a title="zhihu" target="_blank" rel="noopener nofollow" href="//zhihu.com/https://www.zhihu.com/hot"><i class="iconfont icon-zhihu"></i></a><!-- 领英--><!-- 脸书--></section><p><span>Copyright ©</span><span> Jude 2023</span></p><div class="is-flex is-justify-content-center is-flex-wrap-wrap"><p>Powered by Hexo &verbar;&nbsp;</p><p class="is-flex is-justify-content-center"><a title="Hexo theme author" target="_blank" rel="noopener" href="//github.com/haojen">Theme by Haojen&nbsp;</a></p><div style="margin-top: 2px"><a class="github-button" title="github-button" target="_blank" rel="noopener" href="https://github.com/haojen/hexo-theme-Claudia" data-color-scheme="no-preference: light; light: light; dark: dark;" data-show-count="true"></a></div></div><div><span>记住昨日的美好，过好今日的生活，憧憬明天的到来</span></div></footer><script async defer src="https://buttons.github.io/buttons.js"></script><script src="/js/post.js"></script></body></html>
+</article><section class="jump-container is-flex is-justify-content-space-between my-6"><!-- em is empty placeholder--><a class="button is-default" href="/2023/01/28/118-react/" title="118、稀土掘金小册-记账本（九） 账单可视化"><i class="iconfont icon-prev mr-2 has-text-grey"></i><span class="has-text-weight-semibold">上一页: 118、稀土掘金小册-记账本（九） 账单可视化</span></a><a class="button is-default" href="/2023/01/18/116-react/" title="116、稀土掘金小册-记账本（七）新增账单弹窗封装"><span class="has-text-weight-semibold">下一页: 116、稀土掘金小册-记账本（七）新增账单弹窗封装</span><i class="iconfont icon-next ml-2 has-text-grey"></i></a></section></div></div></main></main><footer class="is-flex is-flex-direction-column is-align-items-center is-flex-shrink-0 is-family-serif"><section class="sns-container"><!-- Github--><a title="github" target="_blank" rel="noopener nofollow" href="//github.com/Jude"><i class="iconfont icon-github"></i></a><!-- Ins--><!-- RSS--><!-- 知乎--><a title="zhihu" target="_blank" rel="noopener nofollow" href="//zhihu.com/https://www.zhihu.com/hot"><i class="iconfont icon-zhihu"></i></a><!-- 领英--><!-- 脸书--></section><p><span>Copyright ©</span><span> Jude 2024</span></p><div class="is-flex is-justify-content-center is-flex-wrap-wrap"><p>Powered by Hexo &verbar;&nbsp;</p><p class="is-flex is-justify-content-center"><a title="Hexo theme author" href="//github.com/haojen" target="_blank" rel="noopener">Theme by Haojen&nbsp;</a></p><div style="margin-top: 2px"><a class="github-button" title="github-button" href="https://github.com/haojen/hexo-theme-Claudia" target="_blank" rel="noopener" data-color-scheme="no-preference: light; light: light; dark: dark;" data-show-count="true"></a></div></div><div><span>记住昨日的美好，过好今日的生活，憧憬明天的到来</span></div></footer><script async defer src="https://buttons.github.io/buttons.js"></script><script src="/js/post.js"></script></body></html>

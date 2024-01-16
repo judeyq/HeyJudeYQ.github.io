@@ -3,129 +3,31 @@
 
 
 Custom elements（自定义元素）：JavaScript API，允许定义 custom elements 及其行为，然后可以在我们的用户界面中按照需要使用它们。
-Shadow DOM（影子 DOM）：JavaScript API，用于将封装的“影子”DOM 树附加到元素（与主文档 DOM 分开呈现）并控制其关联的功能。通过这种方式，开发者可以保持元素的功能私有，这样它们就可以被脚本化和样式化，.."><meta name="generator" content="Hexo 7.0.0"></head><body class="is-flex is-flex-direction-column"><header class="header-widget is-flex-shrink-0 is-hidden-mobile"><div class="container is-fullhd is-flex is-justify-content-space-between is-align-items-center is-full-height"><section class="is-hidden-mobile is-flex-shrink-0"><h2><a href="/">Jude's blog</a></h2></section><h3 class="is-hidden-mobile is-family-serif is-full-height is-flex is-align-items-center is-flex-shrink-0"><div class="is-full-height" id="postTopic"><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">108、web components和vue+web components</p><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">点击返回顶部</p></div></h3><aside class="is-flex-shrink-0"><h3 class="is-inline-block"><a href="/">首页</a></h3><h3 class="is-inline-block"><a href="/about">关于</a></h3><h3 class="is-inline-block"><a href="/archives">归档</a></h3></aside></div></header><header class="is-flex header-widget is-flex-shrink-0 is-align-items-center is-justify-content-center is-hidden-tablet"><h3 class="is-inline-block"><a href="/">首页</a></h3><h3 class="is-inline-block"><a href="/about">关于</a></h3><h3 class="is-inline-block"><a href="/archives">归档</a></h3></header><main><main class="container is-max-widescreen content section post-page pt-4 px-4"><div class="columns is-flex-desktop is-justify-content-center is-flex-direction-row-reverse"><div class="column is-3 is-hidden-mobile"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81web-components-%E7%A4%BA%E4%BE%8B%EF%BC%9A"><span class="toc-text">一、web components 示例：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81vue-%E4%BD%BF%E7%94%A8%E8%87%AA%E5%AE%9A%E4%B9%89%E7%BB%84%E4%BB%B6"><span class="toc-text">二、vue 使用自定义组件</span></a></li></ol></div><div class="column is-9"><header class="my-4"><a href="/tags/vue"><i class="tag post-item-tag">vue</i></a></header><h1 class="mt-0 mb-1 is-family-serif" id="postTitle">108、web components和vue+web components</h1><time class="has-text-grey" datetime="2022-12-15T12:00:00.000Z">2022-12-15</time><article class="mt-2 post-content"><p>Web Components 提供了基于原生支持的、对视图层的封装能力，可以让单个组件相关的 javaScript、css、html 模板运行在以 html 标签为界限的局部环境中，不会影响到全局，组件间也不会相互影响 。 再简单来说：就是提供了我们自定义标签的能力，并且提供了标签内完整的生命周期 。</p>
-<span id="more"></span>
+Shadow DOM（影子 DOM）：JavaScript API，用于将封装的“影子”DOM 树附加到元素（与主文档 DOM 分开呈现）并控制其关联的功能。通过这种方式，开发者可以保持元素的功能私有，这样它们就可以被脚本化和样式化，.."><meta name="generator" content="Hexo 4.2.1"></head><body class="is-flex is-flex-direction-column"><header class="header-widget is-flex-shrink-0 is-hidden-mobile"><div class="container is-fullhd is-flex is-justify-content-space-between is-align-items-center is-full-height"><section class="is-hidden-mobile is-flex-shrink-0"><h2><a href="/">Jude's blog</a></h2></section><h3 class="is-hidden-mobile is-family-serif is-full-height is-flex is-align-items-center is-flex-shrink-0"><div class="is-full-height" id="postTopic"><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">108、web components和vue+web components</p><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">点击返回顶部</p></div></h3><aside class="is-flex-shrink-0"><h3 class="is-inline-block"><a href="/">首页</a></h3><h3 class="is-inline-block"><a href="/about">关于</a></h3><h3 class="is-inline-block"><a href="/archives">归档</a></h3></aside></div></header><header class="is-flex header-widget is-flex-shrink-0 is-align-items-center is-justify-content-center is-hidden-tablet"><h3 class="is-inline-block"><a href="/">首页</a></h3><h3 class="is-inline-block"><a href="/about">关于</a></h3><h3 class="is-inline-block"><a href="/archives">归档</a></h3></header><main><main class="container is-max-widescreen content section post-page pt-4 px-4"><div class="columns is-flex-desktop is-justify-content-center is-flex-direction-row-reverse"><div class="column is-3 is-hidden-mobile"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#一、web-components-示例："><span class="toc-text">一、web components 示例：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二、vue-使用自定义组件"><span class="toc-text">二、vue 使用自定义组件</span></a></li></ol></div><div class="column is-9"><header class="my-4"><a href="/tags/vue"><i class="tag post-item-tag">vue</i></a></header><h1 class="mt-0 mb-1 is-family-serif" id="postTitle">108、web components和vue+web components</h1><time class="has-text-grey" datetime="2022-12-15T12:00:00.000Z">2022-12-15</time><article class="mt-2 post-content"><p>Web Components 提供了基于原生支持的、对视图层的封装能力，可以让单个组件相关的 javaScript、css、html 模板运行在以 html 标签为界限的局部环境中，不会影响到全局，组件间也不会相互影响 。 再简单来说：就是提供了我们自定义标签的能力，并且提供了标签内完整的生命周期 。</p>
+<a id="more"></a>
 
 <p>Custom elements（自定义元素）：JavaScript API，允许定义 custom elements 及其行为，然后可以在我们的用户界面中按照需要使用它们。</p>
 <p>Shadow DOM（影子 DOM）：JavaScript API，用于将封装的“影子”DOM 树附加到元素（与主文档 DOM 分开呈现）并控制其关联的功能。通过这种方式，开发者可以保持元素的功能私有，这样它们就可以被脚本化和样式化，而不用担心与文档的其他部分发生冲突。</p>
 <p>HTML templates（HTML 模板）：和元素使开发者可以编写与 HTML 结构类似的组件和样式。然后它们可以作为自定义元素结构的基础被多次重用。</p>
 <h2 id="一、web-components-示例："><a href="#一、web-components-示例：" class="headerlink" title="一、web components 示例："></a>一、web components 示例：</h2><p>btn.js</p>
-<pre><code class="js">class Btn extends HTMLElement &#123;
-  constructor() &#123;
-    super();
-    const shadowDom = this.attachShadow(&#123; mode: &quot;open&quot; &#125;);
-    this.p = this.h(&quot;p&quot;);
-    this.p.innerText = &quot;jude&quot;;
-    this.p.setAttribute(
-      &quot;style&quot;,
-      &quot;width:100px;height:100px;border:1px solid #999;background:yellowgreen&quot;
-    );
-    shadowDom.appendChild(this.p);
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Btn</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">HTMLElement</span> </span>&#123;<br>  <span class="hljs-keyword">constructor</span>() &#123;<br>    <span class="hljs-keyword">super</span>();<br>    <span class="hljs-keyword">const</span> shadowDom = <span class="hljs-keyword">this</span>.attachShadow(&#123; <span class="hljs-attr">mode</span>: <span class="hljs-string">"open"</span> &#125;);<br>    <span class="hljs-keyword">this</span>.p = <span class="hljs-keyword">this</span>.h(<span class="hljs-string">"p"</span>);<br>    <span class="hljs-keyword">this</span>.p.innerText = <span class="hljs-string">"jude"</span>;<br>    <span class="hljs-keyword">this</span>.p.setAttribute(<br>      <span class="hljs-string">"style"</span>,<br>      <span class="hljs-string">"width:100px;height:100px;border:1px solid #999;background:yellowgreen"</span><br>    );<br>    shadowDom.appendChild(<span class="hljs-keyword">this</span>.p);<br><br>    <span class="hljs-comment">// tempalte</span><br>    <span class="hljs-keyword">this</span>.template = <span class="hljs-keyword">this</span>.h(<span class="hljs-string">"template"</span>);<br>    <span class="hljs-keyword">this</span>.template.innerHTML = <span class="hljs-string">`</span><br><span class="hljs-string">      &lt;style&gt;</span><br><span class="hljs-string">        div&#123;</span><br><span class="hljs-string">          width:50px;</span><br><span class="hljs-string">          height:50px;</span><br><span class="hljs-string">          background:green;</span><br><span class="hljs-string">        &#125;</span><br><span class="hljs-string">      &lt;/style&gt;</span><br><span class="hljs-string">      &lt;div&gt;</span><br><span class="hljs-string">      我是template,上面的样式会被隔离</span><br><span class="hljs-string">      &lt;/div&gt;</span><br><span class="hljs-string">`</span>;<br>    shadowDom.appendChild(<span class="hljs-keyword">this</span>.template.content.cloneNode(<span class="hljs-literal">true</span>));<br>  &#125;<br>  h(el) &#123;<br>    <span class="hljs-keyword">return</span> <span class="hljs-built_in">document</span>.createElement(el);<br>  &#125;<br>  <span class="hljs-comment">// 生命周期</span><br>  <span class="hljs-comment">// 当自定义元素第一次被连接到文档DOM时被调用</span><br>  connectedCallback() &#123;<br>    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"连接调用"</span>);<br>  &#125;<br>  <span class="hljs-comment">// 当自定义元素与文档DOM断开连接时被调用</span><br>  disconnectedCallback() &#123;<br>    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"断开调用"</span>);<br>  &#125;<br>  <span class="hljs-comment">// 当自定义元素被移动到新文档时被调用</span><br>  adoptedCallback() &#123;<br>    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"移动时调用"</span>);<br>  &#125;<br>  <span class="hljs-comment">// 当自定义元素的第一个属性被增加、移除或者更改时被调用</span><br>  attributeChangedCallback(attrName, oldVal, newVal) &#123;<br>    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"改变调用"</span>, attrName, oldVal, newVal);<br>  &#125;<br>&#125;<br><br><span class="hljs-built_in">window</span>.customElements.define(<span class="hljs-string">"yu-btn"</span>, Btn);<br></code></pre></td></tr></table></figure>
 
-    // tempalte
-    this.template = this.h(&quot;template&quot;);
-    this.template.innerHTML = `
-      &lt;style&gt;
-        div&#123;
-          width:50px;
-          height:50px;
-          background:green;
-        &#125;
-      &lt;/style&gt;
-      &lt;div&gt;
-      我是template,上面的样式会被隔离
-      &lt;/div&gt;
-`;
-    shadowDom.appendChild(this.template.content.cloneNode(true));
-  &#125;
-  h(el) &#123;
-    return document.createElement(el);
-  &#125;
-  // 生命周期
-  // 当自定义元素第一次被连接到文档DOM时被调用
-  connectedCallback() &#123;
-    console.log(&quot;连接调用&quot;);
-  &#125;
-  // 当自定义元素与文档DOM断开连接时被调用
-  disconnectedCallback() &#123;
-    console.log(&quot;断开调用&quot;);
-  &#125;
-  // 当自定义元素被移动到新文档时被调用
-  adoptedCallback() &#123;
-    console.log(&quot;移动时调用&quot;);
-  &#125;
-  // 当自定义元素的第一个属性被增加、移除或者更改时被调用
-  attributeChangedCallback(attrName, oldVal, newVal) &#123;
-    console.log(&quot;改变调用&quot;, attrName, oldVal, newVal);
-  &#125;
-&#125;
-
-window.customElements.define(&quot;yu-btn&quot;, Btn);
-</code></pre>
 <blockquote>
 <p>这里存在一个问题，如果使用 window.customElements.define(“btn”, Btn)，会报错：Uncaught DOMException: Failed to execute ‘define’ on ‘CustomElementRegistry’: “btn” is not a valid custom element name,修改一下 name 即可</p>
 </blockquote>
 <p>index.html</p>
-<pre><code class="html">&lt;!DOCTYPE html&gt;
-&lt;html lang=&quot;en&quot;&gt;
-  &lt;head&gt;
-    &lt;meta charset=&quot;UTF-8&quot; /&gt;
-    &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;IE=edge&quot; /&gt;
-    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot; /&gt;
-    &lt;title&gt;Document&lt;/title&gt;
-    &lt;script src=&quot;./btn.js&quot;&gt;&lt;/script&gt;
-  &lt;/head&gt;
-  &lt;body&gt;
-    &lt;yu-btn&gt;&lt;/yu-btn&gt;
-  &lt;/body&gt;
-&lt;/html&gt;
-</code></pre>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-meta">&lt;!DOCTYPE <span class="hljs-meta-keyword">html</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">html</span> <span class="hljs-attr">lang</span>=<span class="hljs-string">"en"</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">charset</span>=<span class="hljs-string">"UTF-8"</span> /&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">http-equiv</span>=<span class="hljs-string">"X-UA-Compatible"</span> <span class="hljs-attr">content</span>=<span class="hljs-string">"IE=edge"</span> /&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"viewport"</span> <span class="hljs-attr">content</span>=<span class="hljs-string">"width=device-width, initial-scale=1.0"</span> /&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">title</span>&gt;</span>Document<span class="hljs-tag">&lt;/<span class="hljs-name">title</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"./btn.js"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span><br>  <span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">yu-btn</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">yu-btn</span>&gt;</span><br>  <span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
 <h2 id="二、vue-使用自定义组件"><a href="#二、vue-使用自定义组件" class="headerlink" title="二、vue 使用自定义组件"></a>二、vue 使用自定义组件</h2><p>defineCustomElement</p>
 <p>首先需要告知 vue 这是一个自定义组件，跳过组件检查</p>
-<pre><code class="ts">/*vite config ts 配置*/
-vue(&#123;
-  template: &#123;
-    compilerOptions: &#123;
-      isCustomElement: (tag) =&gt; tag.includes(&quot;yu-&quot;),
-    &#125;,
-  &#125;,
-&#125;);
-</code></pre>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs ts"><span class="hljs-comment">/*vite config ts 配置*/</span><br>vue(&#123;<br>  template: &#123;<br>    compilerOptions: &#123;<br>      isCustomElement: <span class="hljs-function">(<span class="hljs-params">tag</span>) =&gt;</span> tag.includes(<span class="hljs-string">"yu-"</span>),<br>    &#125;,<br>  &#125;,<br>&#125;);<br></code></pre></td></tr></table></figure>
+
 <p>父组件：</p>
 <blockquote>
 <p>这里需要注意，传递参数 如果是对象需要序列化 他是作用于 标签上的</p>
 </blockquote>
-<pre><code class="vue">&lt;template&gt;
-  &lt;div&gt;
-    &lt;yu-btn :title=&quot;JSON.stringify(name)&quot;&gt;&lt;/yu-btn&gt;
-  &lt;/div&gt;
-&lt;/template&gt;
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs vue">&lt;template&gt;<br>  &lt;div&gt;<br>    &lt;yu-btn :title&#x3D;&quot;JSON.stringify(name)&quot;&gt;&lt;&#x2F;yu-btn&gt;<br>  &lt;&#x2F;div&gt;<br>&lt;&#x2F;template&gt;<br><br>&lt;script setup lang&#x3D;&quot;ts&quot;&gt;<br>import &#123; ref, reactive, defineCustomElement &#125; from &quot;vue&quot;;<br>&#x2F;&#x2F;自定义元素模式  要开启这个模式，只需要将你的组件文件以 .ce.vue 结尾即可<br>import customVueVue from &quot;.&#x2F;components&#x2F;custom-vue.ce.vue&quot;;<br>const Btn &#x3D; defineCustomElement(customVueVue);<br>customElements.define(&quot;yu-btn&quot;, Btn);<br><br>const name &#x3D; ref(&#123; a: 1 &#125;);<br>&lt;&#x2F;script&gt;<br><br>&lt;style scoped lang&#x3D;&quot;less&quot;&gt;&lt;&#x2F;style&gt;<br></code></pre></td></tr></table></figure>
 
-&lt;script setup lang=&quot;ts&quot;&gt;
-import &#123; ref, reactive, defineCustomElement &#125; from &quot;vue&quot;;
-//自定义元素模式  要开启这个模式，只需要将你的组件文件以 .ce.vue 结尾即可
-import customVueVue from &quot;./components/custom-vue.ce.vue&quot;;
-const Btn = defineCustomElement(customVueVue);
-customElements.define(&quot;yu-btn&quot;, Btn);
-
-const name = ref(&#123; a: 1 &#125;);
-&lt;/script&gt;
-
-&lt;style scoped lang=&quot;less&quot;&gt;&lt;/style&gt;
-</code></pre>
 <p>子组件：</p>
-<pre><code class="vue">&lt;template&gt;
-  &lt;div&gt;title: &#123;&#123; title &#125;&#125;&lt;/div&gt;
-&lt;/template&gt;
-
-&lt;script setup lang=&quot;ts&quot;&gt;
-import &#123; ref, reactive &#125; from &quot;vue&quot;;
-
-defineProps&lt;&#123;
-  title: string;
-&#125;&gt;();
-&lt;/script&gt;
-
-&lt;style scoped lang=&quot;less&quot;&gt;&lt;/style&gt;
-</code></pre>
-</article><section class="jump-container is-flex is-justify-content-space-between my-6"><!-- em is empty placeholder--><a class="button is-default" href="/2022/12/20/109-css/" title="109、CSS代码片段：布局、视觉、动画"><i class="iconfont icon-prev mr-2 has-text-grey"></i><span class="has-text-weight-semibold">上一页: 109、CSS代码片段：布局、视觉、动画</span></a><a class="button is-default" href="/2022/12/13/107-mysql/" title="107、Mac的MySQL无法启动"><span class="has-text-weight-semibold">下一页: 107、Mac的MySQL无法启动</span><i class="iconfont icon-next ml-2 has-text-grey"></i></a></section></div></div></main></main><footer class="is-flex is-flex-direction-column is-align-items-center is-flex-shrink-0 is-family-serif"><section class="sns-container"><!-- Github--><a title="github" target="_blank" rel="noopener nofollow" href="//github.com/Jude"><i class="iconfont icon-github"></i></a><!-- Ins--><!-- RSS--><!-- 知乎--><a title="zhihu" target="_blank" rel="noopener nofollow" href="//zhihu.com/https://www.zhihu.com/hot"><i class="iconfont icon-zhihu"></i></a><!-- 领英--><!-- 脸书--></section><p><span>Copyright ©</span><span> Jude 2023</span></p><div class="is-flex is-justify-content-center is-flex-wrap-wrap"><p>Powered by Hexo &verbar;&nbsp;</p><p class="is-flex is-justify-content-center"><a title="Hexo theme author" target="_blank" rel="noopener" href="//github.com/haojen">Theme by Haojen&nbsp;</a></p><div style="margin-top: 2px"><a class="github-button" title="github-button" target="_blank" rel="noopener" href="https://github.com/haojen/hexo-theme-Claudia" data-color-scheme="no-preference: light; light: light; dark: dark;" data-show-count="true"></a></div></div><div><span>记住昨日的美好，过好今日的生活，憧憬明天的到来</span></div></footer><script async defer src="https://buttons.github.io/buttons.js"></script><script src="/js/post.js"></script></body></html>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs vue">&lt;template&gt;<br>  &lt;div&gt;title: &#123;&#123; title &#125;&#125;&lt;&#x2F;div&gt;<br>&lt;&#x2F;template&gt;<br><br>&lt;script setup lang&#x3D;&quot;ts&quot;&gt;<br>import &#123; ref, reactive &#125; from &quot;vue&quot;;<br><br>defineProps&lt;&#123;<br>  title: string;<br>&#125;&gt;();<br>&lt;&#x2F;script&gt;<br><br>&lt;style scoped lang&#x3D;&quot;less&quot;&gt;&lt;&#x2F;style&gt;<br></code></pre></td></tr></table></figure>
+</article><section class="jump-container is-flex is-justify-content-space-between my-6"><!-- em is empty placeholder--><a class="button is-default" href="/2022/12/20/109-css/" title="109、CSS代码片段：布局、视觉、动画"><i class="iconfont icon-prev mr-2 has-text-grey"></i><span class="has-text-weight-semibold">上一页: 109、CSS代码片段：布局、视觉、动画</span></a><a class="button is-default" href="/2022/12/13/107-mysql/" title="107、Mac的MySQL无法启动"><span class="has-text-weight-semibold">下一页: 107、Mac的MySQL无法启动</span><i class="iconfont icon-next ml-2 has-text-grey"></i></a></section></div></div></main></main><footer class="is-flex is-flex-direction-column is-align-items-center is-flex-shrink-0 is-family-serif"><section class="sns-container"><!-- Github--><a title="github" target="_blank" rel="noopener nofollow" href="//github.com/Jude"><i class="iconfont icon-github"></i></a><!-- Ins--><!-- RSS--><!-- 知乎--><a title="zhihu" target="_blank" rel="noopener nofollow" href="//zhihu.com/https://www.zhihu.com/hot"><i class="iconfont icon-zhihu"></i></a><!-- 领英--><!-- 脸书--></section><p><span>Copyright ©</span><span> Jude 2024</span></p><div class="is-flex is-justify-content-center is-flex-wrap-wrap"><p>Powered by Hexo &verbar;&nbsp;</p><p class="is-flex is-justify-content-center"><a title="Hexo theme author" href="//github.com/haojen" target="_blank" rel="noopener">Theme by Haojen&nbsp;</a></p><div style="margin-top: 2px"><a class="github-button" title="github-button" href="https://github.com/haojen/hexo-theme-Claudia" target="_blank" rel="noopener" data-color-scheme="no-preference: light; light: light; dark: dark;" data-show-count="true"></a></div></div><div><span>记住昨日的美好，过好今日的生活，憧憬明天的到来</span></div></footer><script async defer src="https://buttons.github.io/buttons.js"></script><script src="/js/post.js"></script></body></html>

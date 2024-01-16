@@ -7,40 +7,30 @@
 父组件传给子组件
 
 父子组件交互，props和$emit
-// child
-props:&amp;#123;msg:String&amp;#125;
-// parent
-&amp;lt;HelloWorld msg=&amp;quot;hello vue&amp;quot; /&amp;gt;
+1234// childprops:&amp;#123;msg:String&amp;#125;// parent&amp;lt;HelloWorld msg=&quot;hello vue&quot; /&amp;gt;
 
 2、自定义事件
 
 子传父
 
-//child
-this.$emit(&amp;#39;add&amp;#39;,good)
-// parent
-&amp;lt;Cart @add=&amp;quot;cartAdd($event)&amp;quot;&amp;gt;.."><meta name="generator" content="Hexo 7.0.0"></head><body class="is-flex is-flex-direction-column"><header class="header-widget is-flex-shrink-0 is-hidden-mobile"><div class="container is-fullhd is-flex is-justify-content-space-between is-align-items-center is-full-height"><section class="is-hidden-mobile is-flex-shrink-0"><h2><a href="/">Jude's blog</a></h2></section><h3 class="is-hidden-mobile is-family-serif is-full-height is-flex is-align-items-center is-flex-shrink-0"><div class="is-full-height" id="postTopic"><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">27、vue组件化实践之组件通信（一）</p><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">点击返回顶部</p></div></h3><aside class="is-flex-shrink-0"><h3 class="is-inline-block"><a href="/">首页</a></h3><h3 class="is-inline-block"><a href="/about">关于</a></h3><h3 class="is-inline-block"><a href="/archives">归档</a></h3></aside></div></header><header class="is-flex header-widget is-flex-shrink-0 is-align-items-center is-justify-content-center is-hidden-tablet"><h3 class="is-inline-block"><a href="/">首页</a></h3><h3 class="is-inline-block"><a href="/about">关于</a></h3><h3 class="is-inline-block"><a href="/archives">归档</a></h3></header><main><main class="container is-max-widescreen content section post-page pt-4 px-4"><div class="columns is-flex-desktop is-justify-content-center is-flex-direction-row-reverse"><div class="column is-3 is-hidden-mobile"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E7%BB%84%E4%BB%B6%E9%80%9A%E4%BF%A1%E5%B8%B8%E7%94%A8%E6%96%B9%E5%BC%8F"><span class="toc-text">一、组件通信常用方式</span></a></li></ol></div><div class="column is-9"><header class="my-4"><a href="/tags/vue"><i class="tag post-item-tag">vue</i></a></header><h1 class="mt-0 mb-1 is-family-serif" id="postTitle">27、vue组件化实践之组件通信（一）</h1><time class="has-text-grey" datetime="2021-02-19T16:00:00.000Z">2021-02-20</time><article class="mt-2 post-content"><p>vue组件系统提供了一种抽象，让我们可以使用独立可复用的组件来构建大型应用，任意类型的应用界 面都可以抽象为一个组件树。组件化能提高开发效率，方便重复使用，简化调试步骤，提升项目可维护性，便于多人协同开发。</p>
-<span id="more"></span>
+1234//childthis.$emit('add',good)// parent&amp;lt;Cart @add=&quot;cartAdd($event)&quot;&amp;gt;&amp;lt;/Cart&amp;gt;
+
+3、eventBus事.."><meta name="generator" content="Hexo 4.2.1"></head><body class="is-flex is-flex-direction-column"><header class="header-widget is-flex-shrink-0 is-hidden-mobile"><div class="container is-fullhd is-flex is-justify-content-space-between is-align-items-center is-full-height"><section class="is-hidden-mobile is-flex-shrink-0"><h2><a href="/">Jude's blog</a></h2></section><h3 class="is-hidden-mobile is-family-serif is-full-height is-flex is-align-items-center is-flex-shrink-0"><div class="is-full-height" id="postTopic"><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">27、vue组件化实践之组件通信（一）</p><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">点击返回顶部</p></div></h3><aside class="is-flex-shrink-0"><h3 class="is-inline-block"><a href="/">首页</a></h3><h3 class="is-inline-block"><a href="/about">关于</a></h3><h3 class="is-inline-block"><a href="/archives">归档</a></h3></aside></div></header><header class="is-flex header-widget is-flex-shrink-0 is-align-items-center is-justify-content-center is-hidden-tablet"><h3 class="is-inline-block"><a href="/">首页</a></h3><h3 class="is-inline-block"><a href="/about">关于</a></h3><h3 class="is-inline-block"><a href="/archives">归档</a></h3></header><main><main class="container is-max-widescreen content section post-page pt-4 px-4"><div class="columns is-flex-desktop is-justify-content-center is-flex-direction-row-reverse"><div class="column is-3 is-hidden-mobile"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#一、组件通信常用方式"><span class="toc-text">一、组件通信常用方式</span></a></li></ol></div><div class="column is-9"><header class="my-4"><a href="/tags/vue"><i class="tag post-item-tag">vue</i></a></header><h1 class="mt-0 mb-1 is-family-serif" id="postTitle">27、vue组件化实践之组件通信（一）</h1><time class="has-text-grey" datetime="2021-02-19T16:00:00.000Z">2021-02-20</time><article class="mt-2 post-content"><p>vue组件系统提供了一种抽象，让我们可以使用独立可复用的组件来构建大型应用，任意类型的应用界 面都可以抽象为一个组件树。组件化能提高开发效率，方便重复使用，简化调试步骤，提升项目可维护性，便于多人协同开发。</p>
+<a id="more"></a>
 
 <h3 id="一、组件通信常用方式"><a href="#一、组件通信常用方式" class="headerlink" title="一、组件通信常用方式"></a>一、组件通信常用方式</h3><p>1、props</p>
 <blockquote>
 <p>父组件传给子组件</p>
 </blockquote>
 <p>父子组件交互，props和$emit</p>
-<pre><code class="js">// child
-props:&#123;msg:String&#125;
-// parent
-&lt;HelloWorld msg=&quot;hello vue&quot; /&gt;
-</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-comment">// child</span><br>props:&#123;<span class="hljs-attr">msg</span>:<span class="hljs-built_in">String</span>&#125;<br><span class="hljs-comment">// parent</span><br>&lt;HelloWorld msg=<span class="hljs-string">"hello vue"</span> /&gt;<br></code></pre></td></tr></table></figure>
+
 <p>2、自定义事件</p>
 <blockquote>
 <p>子传父</p>
 </blockquote>
-<pre><code class="js">//child
-this.$emit(&#39;add&#39;,good)
-// parent
-&lt;Cart @add=&quot;cartAdd($event)&quot;&gt;&lt;/Cart&gt;
-</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-comment">//child</span><br><span class="hljs-keyword">this</span>.$emit(<span class="hljs-string">'add'</span>,good)<br><span class="hljs-comment">// parent</span><br>&lt;Cart @add=<span class="hljs-string">"cartAdd($event)"</span>&gt;&lt;<span class="hljs-regexp">/Cart&gt;</span><br></code></pre></td></tr></table></figure>
+
 <p>3、eventBus事件总线</p>
 <blockquote>
 <p>任意两个组件之间的传值常用事件总线或者vuex</p>
@@ -49,39 +39,28 @@ this.$emit(&#39;add&#39;,good)
 <blockquote>
 <p>兄弟组件之间通信可通过共同父辈搭桥，$parent或$root</p>
 </blockquote>
-<pre><code class="js">// brother1
-this.$parent.$on(&#39;foo&#39;,handle)
-// brother2
-this.$parent.$emit(&#39;foo&#39;)
-</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-comment">// brother1</span><br><span class="hljs-keyword">this</span>.$parent.$on(<span class="hljs-string">'foo'</span>,handle)<br><span class="hljs-comment">// brother2</span><br><span class="hljs-keyword">this</span>.$parent.$emit(<span class="hljs-string">'foo'</span>)<br></code></pre></td></tr></table></figure>
+
 <p>5、$children</p>
 <blockquote>
 <p>父组件可通过$children访问子组件实现父子通信</p>
 </blockquote>
-<pre><code class="js">// parent
-this.$children[0].xx=&#39;xxx&#39;
-</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-comment">// parent</span><br><span class="hljs-keyword">this</span>.$children[<span class="hljs-number">0</span>].xx=<span class="hljs-string">'xxx'</span><br></code></pre></td></tr></table></figure>
+
 <p>6、$attrs、$listeners</p>
 <blockquote>
 <p>包含了父作用域中不作为 prop 被识别 (且获取) 的特性绑定 ( class 和 style 除外)。当一个组件没有 声明任何 prop 时，这里会包含所有父作用域的绑定 ( class 和 style 除外)，并且可以通过 v- bind&#x3D;”$attrs” 传入内部组件——在创建高级别的组件时非常有用。</p>
 </blockquote>
-<pre><code class="js">// child:未在props中声明foo
-&lt;p&gt;&#123;&#123;$attrs.foo&#125;&#125;&lt;/p&gt;
-// parent
-&lt;HelloWorld foo=&quot;foo&quot;&gt;
-</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-comment">// child:未在props中声明foo</span><br>&lt;p&gt;&#123;&#123;$attrs.foo&#125;&#125;&lt;<span class="hljs-regexp">/p&gt;</span><br><span class="hljs-regexp">/</span><span class="hljs-regexp">/ parent</span><br><span class="hljs-regexp">&lt;HelloWorld foo="foo"&gt;</span><br></code></pre></td></tr></table></figure>
+
 <p>7、refs</p>
 <blockquote>
 <p>获取子节点引用</p>
 </blockquote>
-<pre><code class="js">// parent
-&lt;HelloWorld ref=&quot;wrap&quot;&gt;
-mounted()&#123;
-    this.$refs.wrap.xx = &quot;xxx&quot;
-&#125;
-</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-comment">// parent</span><br>&lt;HelloWorld ref=<span class="hljs-string">"wrap"</span>&gt;<br>mounted()&#123;<br>    <span class="hljs-keyword">this</span>.$refs.wrap.xx = <span class="hljs-string">"xxx"</span><br>&#125;<br></code></pre></td></tr></table></figure>
+
 <p>8、provide&#x2F;inject</p>
 <blockquote>
 <p>能够实现祖先和后代之间的传值</p>
 </blockquote>
-</article><section class="jump-container is-flex is-justify-content-space-between my-6"><!-- em is empty placeholder--><a class="button is-default" href="/2021/02/24/28-vue-component2/" title="28、vue组件化实践之插槽（二）"><i class="iconfont icon-prev mr-2 has-text-grey"></i><span class="has-text-weight-semibold">上一页: 28、vue组件化实践之插槽（二）</span></a><a class="button is-default" href="/2021/02/14/26-v-for-index/" title="26、关于v-for的key值为什么不能是index？"><span class="has-text-weight-semibold">下一页: 26、关于v-for的key值为什么不能是index？</span><i class="iconfont icon-next ml-2 has-text-grey"></i></a></section></div></div></main></main><footer class="is-flex is-flex-direction-column is-align-items-center is-flex-shrink-0 is-family-serif"><section class="sns-container"><!-- Github--><a title="github" target="_blank" rel="noopener nofollow" href="//github.com/Jude"><i class="iconfont icon-github"></i></a><!-- Ins--><!-- RSS--><!-- 知乎--><a title="zhihu" target="_blank" rel="noopener nofollow" href="//zhihu.com/https://www.zhihu.com/hot"><i class="iconfont icon-zhihu"></i></a><!-- 领英--><!-- 脸书--></section><p><span>Copyright ©</span><span> Jude 2023</span></p><div class="is-flex is-justify-content-center is-flex-wrap-wrap"><p>Powered by Hexo &verbar;&nbsp;</p><p class="is-flex is-justify-content-center"><a title="Hexo theme author" target="_blank" rel="noopener" href="//github.com/haojen">Theme by Haojen&nbsp;</a></p><div style="margin-top: 2px"><a class="github-button" title="github-button" target="_blank" rel="noopener" href="https://github.com/haojen/hexo-theme-Claudia" data-color-scheme="no-preference: light; light: light; dark: dark;" data-show-count="true"></a></div></div><div><span>记住昨日的美好，过好今日的生活，憧憬明天的到来</span></div></footer><script async defer src="https://buttons.github.io/buttons.js"></script><script src="/js/post.js"></script></body></html>
+</article><section class="jump-container is-flex is-justify-content-space-between my-6"><!-- em is empty placeholder--><a class="button is-default" href="/2021/02/24/28-vue-component2/" title="28、vue组件化实践之插槽（二）"><i class="iconfont icon-prev mr-2 has-text-grey"></i><span class="has-text-weight-semibold">上一页: 28、vue组件化实践之插槽（二）</span></a><a class="button is-default" href="/2021/02/14/26-v-for-index/" title="26、关于v-for的key值为什么不能是index？"><span class="has-text-weight-semibold">下一页: 26、关于v-for的key值为什么不能是index？</span><i class="iconfont icon-next ml-2 has-text-grey"></i></a></section></div></div></main></main><footer class="is-flex is-flex-direction-column is-align-items-center is-flex-shrink-0 is-family-serif"><section class="sns-container"><!-- Github--><a title="github" target="_blank" rel="noopener nofollow" href="//github.com/Jude"><i class="iconfont icon-github"></i></a><!-- Ins--><!-- RSS--><!-- 知乎--><a title="zhihu" target="_blank" rel="noopener nofollow" href="//zhihu.com/https://www.zhihu.com/hot"><i class="iconfont icon-zhihu"></i></a><!-- 领英--><!-- 脸书--></section><p><span>Copyright ©</span><span> Jude 2024</span></p><div class="is-flex is-justify-content-center is-flex-wrap-wrap"><p>Powered by Hexo &verbar;&nbsp;</p><p class="is-flex is-justify-content-center"><a title="Hexo theme author" href="//github.com/haojen" target="_blank" rel="noopener">Theme by Haojen&nbsp;</a></p><div style="margin-top: 2px"><a class="github-button" title="github-button" href="https://github.com/haojen/hexo-theme-Claudia" target="_blank" rel="noopener" data-color-scheme="no-preference: light; light: light; dark: dark;" data-show-count="true"></a></div></div><div><span>记住昨日的美好，过好今日的生活，憧憬明天的到来</span></div></footer><script async defer src="https://buttons.github.io/buttons.js"></script><script src="/js/post.js"></script></body></html>

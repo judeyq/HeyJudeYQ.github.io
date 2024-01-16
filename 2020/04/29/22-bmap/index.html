@@ -6,153 +6,23 @@
 LBS 云服务提供海量位置数据的实时存储功能，JavaScript API 支持将用户上传到 LBS 云里的位置数据实时渲染成图层
 
 1、安装 vue-baidu-map
-npm install vue-baidu-map
+1npm install vue-baidu-map
 
 2、具体业务代码如下:
-&amp;lt;baidu-map
-  id=&amp;quot;container&amp;quot;
-  :scroll-wheel-zoom=&amp;quot;true&amp;quot;
-  :zoom=&amp;quot;zoom&amp;quot;
-  center=&amp;quot;上海&amp;quot;
-  :ak=&amp;quot;selfKey&amp;quot;
-  inertial-dragging
-  @ready=&amp;quot;mapReady&amp;quot;
-&amp;gt;
-&amp;lt;/baidu.."><meta name="generator" content="Hexo 7.0.0"></head><body class="is-flex is-flex-direction-column"><header class="header-widget is-flex-shrink-0 is-hidden-mobile"><div class="container is-fullhd is-flex is-justify-content-space-between is-align-items-center is-full-height"><section class="is-hidden-mobile is-flex-shrink-0"><h2><a href="/">Jude's blog</a></h2></section><h3 class="is-hidden-mobile is-family-serif is-full-height is-flex is-align-items-center is-flex-shrink-0"><div class="is-full-height" id="postTopic"><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">22、百度地图LBS云检索</p><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">点击返回顶部</p></div></h3><aside class="is-flex-shrink-0"><h3 class="is-inline-block"><a href="/">首页</a></h3><h3 class="is-inline-block"><a href="/about">关于</a></h3><h3 class="is-inline-block"><a href="/archives">归档</a></h3></aside></div></header><header class="is-flex header-widget is-flex-shrink-0 is-align-items-center is-justify-content-center is-hidden-tablet"><h3 class="is-inline-block"><a href="/">首页</a></h3><h3 class="is-inline-block"><a href="/about">关于</a></h3><h3 class="is-inline-block"><a href="/archives">归档</a></h3></header><main><main class="container is-max-widescreen content section post-page pt-4 px-4"><div class="columns is-flex-desktop is-justify-content-center is-flex-direction-row-reverse"><div class="column is-3 is-hidden-mobile is-hidden"></div><div class="column is-9"><header class="my-4"><a href="/tags/bmap"><i class="tag post-item-tag">bmap</i></a></header><h1 class="mt-0 mb-1 is-family-serif" id="postTitle">22、百度地图LBS云检索</h1><time class="has-text-grey" datetime="2020-04-29T12:00:00.000Z">2020-04-29</time><article class="mt-2 post-content"><p>百度地图自定义叠加层</p>
-<span id="more"></span>
+123456789101112131415&amp;lt;baidu-map  id=&quot;container&quot;  :scroll-wheel-zoom=&quot;true&quot;  :zoom=&quot;zoom&quot;  center=&quot;上海&quot;  :ak=&quot;selfKey&quot;  inertial-dragging  @ready=&quot;mapReady&quot;&amp;gt;&amp;lt;/baidu-map&amp;gt;&amp;lt;div class=&quot;menu-search&quot;&amp;gt;  &amp;lt;el.."><meta name="generator" content="Hexo 4.2.1"></head><body class="is-flex is-flex-direction-column"><header class="header-widget is-flex-shrink-0 is-hidden-mobile"><div class="container is-fullhd is-flex is-justify-content-space-between is-align-items-center is-full-height"><section class="is-hidden-mobile is-flex-shrink-0"><h2><a href="/">Jude's blog</a></h2></section><h3 class="is-hidden-mobile is-family-serif is-full-height is-flex is-align-items-center is-flex-shrink-0"><div class="is-full-height" id="postTopic"><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">22、百度地图LBS云检索</p><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">点击返回顶部</p></div></h3><aside class="is-flex-shrink-0"><h3 class="is-inline-block"><a href="/">首页</a></h3><h3 class="is-inline-block"><a href="/about">关于</a></h3><h3 class="is-inline-block"><a href="/archives">归档</a></h3></aside></div></header><header class="is-flex header-widget is-flex-shrink-0 is-align-items-center is-justify-content-center is-hidden-tablet"><h3 class="is-inline-block"><a href="/">首页</a></h3><h3 class="is-inline-block"><a href="/about">关于</a></h3><h3 class="is-inline-block"><a href="/archives">归档</a></h3></header><main><main class="container is-max-widescreen content section post-page pt-4 px-4"><div class="columns is-flex-desktop is-justify-content-center is-flex-direction-row-reverse"><div class="column is-3 is-hidden-mobile is-hidden"></div><div class="column is-9"><header class="my-4"><a href="/tags/bmap"><i class="tag post-item-tag">bmap</i></a></header><h1 class="mt-0 mb-1 is-family-serif" id="postTitle">22、百度地图LBS云检索</h1><time class="has-text-grey" datetime="2020-04-29T12:00:00.000Z">2020-04-29</time><article class="mt-2 post-content"><p>百度地图自定义叠加层</p>
+<a id="more"></a>
 
 <blockquote>
 <p>LBS 云服务提供海量位置数据的实时存储功能，JavaScript API 支持将用户上传到 LBS 云里的位置数据实时渲染成图层</p>
 </blockquote>
 <p>1、安装 vue-baidu-map</p>
-<pre><code class="bash">npm install vue-baidu-map
-</code></pre>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">npm install vue-baidu-map<br></code></pre></td></tr></table></figure>
+
 <p>2、具体业务代码如下:</p>
-<pre><code class="html">&lt;baidu-map
-  id=&quot;container&quot;
-  :scroll-wheel-zoom=&quot;true&quot;
-  :zoom=&quot;zoom&quot;
-  center=&quot;上海&quot;
-  :ak=&quot;selfKey&quot;
-  inertial-dragging
-  @ready=&quot;mapReady&quot;
-&gt;
-&lt;/baidu-map&gt;
-&lt;div class=&quot;menu-search&quot;&gt;
-  &lt;el-input placeholder=&quot;请输入站点名称&quot; v-model=&quot;site_name&quot; clearable&gt;
-    &lt;el-button slot=&quot;append&quot; icon=&quot;el-icon-search&quot; @click=&quot;search&quot;&gt;&lt;/el-button&gt;
-  &lt;/el-input&gt;
-&lt;/div&gt;
-</code></pre>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">baidu-map</span></span><br><span class="hljs-tag">  <span class="hljs-attr">id</span>=<span class="hljs-string">"container"</span></span><br><span class="hljs-tag">  <span class="hljs-attr">:scroll-wheel-zoom</span>=<span class="hljs-string">"true"</span></span><br><span class="hljs-tag">  <span class="hljs-attr">:zoom</span>=<span class="hljs-string">"zoom"</span></span><br><span class="hljs-tag">  <span class="hljs-attr">center</span>=<span class="hljs-string">"上海"</span></span><br><span class="hljs-tag">  <span class="hljs-attr">:ak</span>=<span class="hljs-string">"selfKey"</span></span><br><span class="hljs-tag">  <span class="hljs-attr">inertial-dragging</span></span><br><span class="hljs-tag">  @<span class="hljs-attr">ready</span>=<span class="hljs-string">"mapReady"</span></span><br><span class="hljs-tag">&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">baidu-map</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"menu-search"</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">el-input</span> <span class="hljs-attr">placeholder</span>=<span class="hljs-string">"请输入站点名称"</span> <span class="hljs-attr">v-model</span>=<span class="hljs-string">"site_name"</span> <span class="hljs-attr">clearable</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">el-button</span> <span class="hljs-attr">slot</span>=<span class="hljs-string">"append"</span> <span class="hljs-attr">icon</span>=<span class="hljs-string">"el-icon-search"</span> @<span class="hljs-attr">click</span>=<span class="hljs-string">"search"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">el-button</span>&gt;</span><br>  <span class="hljs-tag">&lt;/<span class="hljs-name">el-input</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
 <details>
 <summary>点我展开js代码</summary>
 
-<pre><code class="js">&lt;script&gt;
-// 在组件中引入vue-baidu-map
-import BaiduMap from &quot;vue-baidu-map/components/map/Map.vue&quot;;
-export default&#123;
-    components:&#123;BaiduMap&#125;,
-    data()&#123;
-        return&#123;
-            site_name:&#39;&#39;,
-            center:&#123;lng:121.532325,lat:31.232742&#125;,
-            selfKey:&#39;QloR7bQpWed3VDLbtcxi2NmgUcvXxcbx&#39;,
-            point:&#39;&#39;,
-            zoom:15
-        &#125;
-    &#125;,
-    mounted()&#123;
-        this.mapReady()
-    &#125;,
-    methods:&#123;
-        mapReady()&#123;
-            var map = new BMap.Map(&quot;container&quot;)
-            map.centerAndZoom(new BMap.Point(this.center.lng,ths.center.lat),10)
-            map.enableScrollWheelZoom()
-                  /**
-       *params   q:检索关键字
-       *params   tags：空格分割的多字符
-       *params   filter:过滤条件
-       */
-            var customLayer;
-            customLayer = new BMap.CustomLayer(&#123;
-                geotableId: 183323,
-                q: &quot;&quot;,
-                tags: &quot;&quot;,
-                filter: &quot;&quot;,
-            &#125;);
-            map.addTileLayer(customLayer);
-            // 热点图层
-            customLayer.addEventListener(&quot;onhotspotclick&quot;, callback);
-            function callback(e) &#123;
-                var customPoi = e.customPoi;
-                var content =
-                    &#39;&lt;p style=&quot;margin:0;line-height:40px;&quot;&gt;地址：&#39; +
-                     customPoi.address +
-                    &quot;&lt;br/&gt;&quot; +
-                    &#39;&lt;a style=&quot;color:#3398DB&quot; href=&quot;./monitor/index&quot;&gt;查看橇装站点实时监控画面&lt;/a&gt;&#39; +
-                    &quot;&lt;/p&gt;&quot;;
-                var BMapLib = window.BMapLib;
-                var searchInfoWindow = new BMapLib.SearchInfoWindow(map, content, &#123;
-                        title: customPoi.title,
-                        width: 200,
-                        height: 100,
-                        panel: &quot;panel&quot;,
-                        enableAutoPan: true,
-                        enableSendToPhone: false,
-                        searchTypes: [],
-                &#125;);
-                var point = new BMap.Point(customPoi.point.lng, customPoi.point.lat);
-                searchInfoWindow.open(point);
-            &#125;
-        &#125;,
-          search() &#123;
-                var map = new BMap.Map(&quot;container&quot;);
-                map.centerAndZoom(new BMap.Point(this.center.lng, this.center.lat), 10);
-                map.enableScrollWheelZoom();
-                var customLayer;
-                customLayer = new BMap.CustomLayer(&#123;
-                    geotableId: 183323,
-                    q: this.site_name || &quot;新西北物流园&quot;,
-                    tags: &quot;&quot;,
-                    filter: &quot;&quot;,
-                &#125;);
-                // 添加自定义图层
-                map.addTileLayer(customLayer);
-
-                // var mapDom = document.getElementById(&quot;container&quot;)
-                // mapDom.addEventListener(&quot;click&quot;, function () &#123;
-                //   window.location.href = &quot;./monitor/index&quot;;
-                // &#125;);
-                // 热点图层
-                customLayer.addEventListener(&quot;onhotspotclick&quot;, callback);
-                function callback(e) &#123;
-                    var customPoi = e.customPoi;
-                    var content =
-                    &#39;&lt;p style=&quot;margin:0;line-height:40px;&quot;&gt;地址：&#39; +
-                    customPoi.address +
-                    &quot;&lt;br/&gt;&quot; +
-                    &#39;&lt;a style=&quot;color:#3398DB&quot; href=&quot;./monitor/index&quot;&gt;查看橇装站点实时监控画面&lt;/a&gt;&#39; +
-                    &quot;&lt;/p&gt;&quot;;
-                    var BMapLib = window.BMapLib;
-                    // console.log(&quot;BMapLib&quot;, BMapLib);
-                    var searchInfoWindow = new BMapLib.SearchInfoWindow(map, content, &#123;
-                    title: customPoi.title,
-                    width: 200,
-                    height: 100,
-                    panel: &quot;panel&quot;,
-                    enableAutoPan: true,
-                    enableSendToPhone: false,
-                    searchTypes: [],
-                    &#125;);
-                    var point = new BMap.Point(customPoi.point.lng, customPoi.point.lat);
-                    searchInfoWindow.open(point);
-                &#125;
-    &#125;,
-    &#125;
-&#125;
-&lt;/script&gt;
-
-&lt;/details&gt;
-</code></pre>
-</article><section class="jump-container is-flex is-justify-content-space-between my-6"><!-- em is empty placeholder--><a class="button is-default" href="/2020/04/30/23-bmap-animate/" title="23、百度地图动画（轨迹动画）"><i class="iconfont icon-prev mr-2 has-text-grey"></i><span class="has-text-weight-semibold">上一页: 23、百度地图动画（轨迹动画）</span></a><a class="button is-default" href="/2020/04/28/21-v-charts/" title="21、v-charts的options"><span class="has-text-weight-semibold">下一页: 21、v-charts的options</span><i class="iconfont icon-next ml-2 has-text-grey"></i></a></section></div></div></main></main><footer class="is-flex is-flex-direction-column is-align-items-center is-flex-shrink-0 is-family-serif"><section class="sns-container"><!-- Github--><a title="github" target="_blank" rel="noopener nofollow" href="//github.com/Jude"><i class="iconfont icon-github"></i></a><!-- Ins--><!-- RSS--><!-- 知乎--><a title="zhihu" target="_blank" rel="noopener nofollow" href="//zhihu.com/https://www.zhihu.com/hot"><i class="iconfont icon-zhihu"></i></a><!-- 领英--><!-- 脸书--></section><p><span>Copyright ©</span><span> Jude 2023</span></p><div class="is-flex is-justify-content-center is-flex-wrap-wrap"><p>Powered by Hexo &verbar;&nbsp;</p><p class="is-flex is-justify-content-center"><a title="Hexo theme author" target="_blank" rel="noopener" href="//github.com/haojen">Theme by Haojen&nbsp;</a></p><div style="margin-top: 2px"><a class="github-button" title="github-button" target="_blank" rel="noopener" href="https://github.com/haojen/hexo-theme-Claudia" data-color-scheme="no-preference: light; light: light; dark: dark;" data-show-count="true"></a></div></div><div><span>记住昨日的美好，过好今日的生活，憧憬明天的到来</span></div></footer><script async defer src="https://buttons.github.io/buttons.js"></script><script src="/js/post.js"></script></body></html>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br></pre></td><td class="code"><pre><code class="hljs js">&lt;script&gt;<br><span class="hljs-comment">// 在组件中引入vue-baidu-map</span><br><span class="hljs-keyword">import</span> BaiduMap <span class="hljs-keyword">from</span> <span class="hljs-string">"vue-baidu-map/components/map/Map.vue"</span>;<br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span>&#123;<br>    components:&#123;BaiduMap&#125;,<br>    data()&#123;<br>        <span class="hljs-keyword">return</span>&#123;<br>            site_name:<span class="hljs-string">''</span>,<br>            center:&#123;<span class="hljs-attr">lng</span>:<span class="hljs-number">121.532325</span>,<span class="hljs-attr">lat</span>:<span class="hljs-number">31.232742</span>&#125;,<br>            selfKey:<span class="hljs-string">'QloR7bQpWed3VDLbtcxi2NmgUcvXxcbx'</span>,<br>            point:<span class="hljs-string">''</span>,<br>            zoom:<span class="hljs-number">15</span><br>        &#125;<br>    &#125;,<br>    mounted()&#123;<br>        <span class="hljs-keyword">this</span>.mapReady()<br>    &#125;,<br>    methods:&#123;<br>        mapReady()&#123;<br>            <span class="hljs-keyword">var</span> map = <span class="hljs-keyword">new</span> BMap.Map(<span class="hljs-string">"container"</span>)<br>            map.centerAndZoom(<span class="hljs-keyword">new</span> BMap.Point(<span class="hljs-keyword">this</span>.center.lng,ths.center.lat),<span class="hljs-number">10</span>)<br>            map.enableScrollWheelZoom()<br>                  <span class="hljs-comment">/**</span><br><span class="hljs-comment">       *params   q:检索关键字</span><br><span class="hljs-comment">       *params   tags：空格分割的多字符</span><br><span class="hljs-comment">       *params   filter:过滤条件</span><br><span class="hljs-comment">       */</span><br>            <span class="hljs-keyword">var</span> customLayer;<br>            customLayer = <span class="hljs-keyword">new</span> BMap.CustomLayer(&#123;<br>                geotableId: <span class="hljs-number">183323</span>,<br>                q: <span class="hljs-string">""</span>,<br>                tags: <span class="hljs-string">""</span>,<br>                filter: <span class="hljs-string">""</span>,<br>            &#125;);<br>            map.addTileLayer(customLayer);<br>            <span class="hljs-comment">// 热点图层</span><br>            customLayer.addEventListener(<span class="hljs-string">"onhotspotclick"</span>, callback);<br>            <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">callback</span>(<span class="hljs-params">e</span>) </span>&#123;<br>                <span class="hljs-keyword">var</span> customPoi = e.customPoi;<br>                <span class="hljs-keyword">var</span> content =<br>                    <span class="hljs-string">'&lt;p style="margin:0;line-height:40px;"&gt;地址：'</span> +<br>                     customPoi.address +<br>                    <span class="hljs-string">"&lt;br/&gt;"</span> +<br>                    <span class="hljs-string">'&lt;a style="color:#3398DB" href="./monitor/index"&gt;查看橇装站点实时监控画面&lt;/a&gt;'</span> +<br>                    <span class="hljs-string">"&lt;/p&gt;"</span>;<br>                <span class="hljs-keyword">var</span> BMapLib = <span class="hljs-built_in">window</span>.BMapLib;<br>                <span class="hljs-keyword">var</span> searchInfoWindow = <span class="hljs-keyword">new</span> BMapLib.SearchInfoWindow(map, content, &#123;<br>                        title: customPoi.title,<br>                        width: <span class="hljs-number">200</span>,<br>                        height: <span class="hljs-number">100</span>,<br>                        panel: <span class="hljs-string">"panel"</span>,<br>                        enableAutoPan: <span class="hljs-literal">true</span>,<br>                        enableSendToPhone: <span class="hljs-literal">false</span>,<br>                        searchTypes: [],<br>                &#125;);<br>                <span class="hljs-keyword">var</span> point = <span class="hljs-keyword">new</span> BMap.Point(customPoi.point.lng, customPoi.point.lat);<br>                searchInfoWindow.open(point);<br>            &#125;<br>        &#125;,<br>          search() &#123;<br>                <span class="hljs-keyword">var</span> map = <span class="hljs-keyword">new</span> BMap.Map(<span class="hljs-string">"container"</span>);<br>                map.centerAndZoom(<span class="hljs-keyword">new</span> BMap.Point(<span class="hljs-keyword">this</span>.center.lng, <span class="hljs-keyword">this</span>.center.lat), <span class="hljs-number">10</span>);<br>                map.enableScrollWheelZoom();<br>                <span class="hljs-keyword">var</span> customLayer;<br>                customLayer = <span class="hljs-keyword">new</span> BMap.CustomLayer(&#123;<br>                    geotableId: <span class="hljs-number">183323</span>,<br>                    q: <span class="hljs-keyword">this</span>.site_name || <span class="hljs-string">"新西北物流园"</span>,<br>                    tags: <span class="hljs-string">""</span>,<br>                    filter: <span class="hljs-string">""</span>,<br>                &#125;);<br>                <span class="hljs-comment">// 添加自定义图层</span><br>                map.addTileLayer(customLayer);<br><br>                <span class="hljs-comment">// var mapDom = document.getElementById("container")</span><br>                <span class="hljs-comment">// mapDom.addEventListener("click", function () &#123;</span><br>                <span class="hljs-comment">//   window.location.href = "./monitor/index";</span><br>                <span class="hljs-comment">// &#125;);</span><br>                <span class="hljs-comment">// 热点图层</span><br>                customLayer.addEventListener(<span class="hljs-string">"onhotspotclick"</span>, callback);<br>                <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">callback</span>(<span class="hljs-params">e</span>) </span>&#123;<br>                    <span class="hljs-keyword">var</span> customPoi = e.customPoi;<br>                    <span class="hljs-keyword">var</span> content =<br>                    <span class="hljs-string">'&lt;p style="margin:0;line-height:40px;"&gt;地址：'</span> +<br>                    customPoi.address +<br>                    <span class="hljs-string">"&lt;br/&gt;"</span> +<br>                    <span class="hljs-string">'&lt;a style="color:#3398DB" href="./monitor/index"&gt;查看橇装站点实时监控画面&lt;/a&gt;'</span> +<br>                    <span class="hljs-string">"&lt;/p&gt;"</span>;<br>                    <span class="hljs-keyword">var</span> BMapLib = <span class="hljs-built_in">window</span>.BMapLib;<br>                    <span class="hljs-comment">// console.log("BMapLib", BMapLib);</span><br>                    <span class="hljs-keyword">var</span> searchInfoWindow = <span class="hljs-keyword">new</span> BMapLib.SearchInfoWindow(map, content, &#123;<br>                    title: customPoi.title,<br>                    width: <span class="hljs-number">200</span>,<br>                    height: <span class="hljs-number">100</span>,<br>                    panel: <span class="hljs-string">"panel"</span>,<br>                    enableAutoPan: <span class="hljs-literal">true</span>,<br>                    enableSendToPhone: <span class="hljs-literal">false</span>,<br>                    searchTypes: [],<br>                    &#125;);<br>                    <span class="hljs-keyword">var</span> point = <span class="hljs-keyword">new</span> BMap.Point(customPoi.point.lng, customPoi.point.lat);<br>                    searchInfoWindow.open(point);<br>                &#125;<br>    &#125;,<br>    &#125;<br>&#125;<br>&lt;<span class="hljs-regexp">/script&gt;</span><br><span class="hljs-regexp"></span><br><span class="hljs-regexp">&lt;/</span>details&gt;<br></code></pre></td></tr></table></figure>
+</article><section class="jump-container is-flex is-justify-content-space-between my-6"><!-- em is empty placeholder--><a class="button is-default" href="/2020/04/30/23-bmap-animate/" title="23、百度地图动画（轨迹动画）"><i class="iconfont icon-prev mr-2 has-text-grey"></i><span class="has-text-weight-semibold">上一页: 23、百度地图动画（轨迹动画）</span></a><a class="button is-default" href="/2020/04/28/21-v-charts/" title="21、v-charts的options"><span class="has-text-weight-semibold">下一页: 21、v-charts的options</span><i class="iconfont icon-next ml-2 has-text-grey"></i></a></section></div></div></main></main><footer class="is-flex is-flex-direction-column is-align-items-center is-flex-shrink-0 is-family-serif"><section class="sns-container"><!-- Github--><a title="github" target="_blank" rel="noopener nofollow" href="//github.com/Jude"><i class="iconfont icon-github"></i></a><!-- Ins--><!-- RSS--><!-- 知乎--><a title="zhihu" target="_blank" rel="noopener nofollow" href="//zhihu.com/https://www.zhihu.com/hot"><i class="iconfont icon-zhihu"></i></a><!-- 领英--><!-- 脸书--></section><p><span>Copyright ©</span><span> Jude 2024</span></p><div class="is-flex is-justify-content-center is-flex-wrap-wrap"><p>Powered by Hexo &verbar;&nbsp;</p><p class="is-flex is-justify-content-center"><a title="Hexo theme author" href="//github.com/haojen" target="_blank" rel="noopener">Theme by Haojen&nbsp;</a></p><div style="margin-top: 2px"><a class="github-button" title="github-button" href="https://github.com/haojen/hexo-theme-Claudia" target="_blank" rel="noopener" data-color-scheme="no-preference: light; light: light; dark: dark;" data-show-count="true"></a></div></div><div><span>记住昨日的美好，过好今日的生活，憧憬明天的到来</span></div></footer><script async defer src="https://buttons.github.io/buttons.js"></script><script src="/js/post.js"></script></body></html>

@@ -9,7 +9,7 @@
 注册页面
 我们的系统是面向多用户的，换句话说也就是一个纯正的 C 端项目，任何人都可以通过网站，注册一个新的账号。接下来开始注册页面的编写。
 首先新建 Login 文件夹，在文件夹内添加两个文件 index.jsx 和 style.module.less，我们先把注册页面的静态页面切出来，首先给 index.jsx 添加如下代码：
-import React from &amp;quot;react&amp;quot;;.."><meta name="generator" content="Hexo 7.0.0"></head><body class="is-flex is-flex-direction-column"><header class="header-widget is-flex-shrink-0 is-hidden-mobile"><div class="container is-fullhd is-flex is-justify-content-space-between is-align-items-center is-full-height"><section class="is-hidden-mobile is-flex-shrink-0"><h2><a href="/">Jude's blog</a></h2></section><h3 class="is-hidden-mobile is-family-serif is-full-height is-flex is-align-items-center is-flex-shrink-0"><div class="is-full-height" id="postTopic"><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">114、稀土掘金小册-记账本（五）登录注册</p><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">点击返回顶部</p></div></h3><aside class="is-flex-shrink-0"><h3 class="is-inline-block"><a href="/">首页</a></h3><h3 class="is-inline-block"><a href="/about">关于</a></h3><h3 class="is-inline-block"><a href="/archives">归档</a></h3></aside></div></header><header class="is-flex header-widget is-flex-shrink-0 is-align-items-center is-justify-content-center is-hidden-tablet"><h3 class="is-inline-block"><a href="/">首页</a></h3><h3 class="is-inline-block"><a href="/about">关于</a></h3><h3 class="is-inline-block"><a href="/archives">归档</a></h3></header><main><main class="container is-max-widescreen content section post-page pt-4 px-4"><div class="columns is-flex-desktop is-justify-content-center is-flex-direction-row-reverse"><div class="column is-3 is-hidden-mobile"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-text">前言</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9F%A5%E8%AF%86%E7%82%B9"><span class="toc-text">知识点</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B3%A8%E5%86%8C%E9%A1%B5%E9%9D%A2"><span class="toc-text">注册页面</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%99%BB%E5%BD%95%E9%A1%B5%E9%9D%A2"><span class="toc-text">登录页面</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-text">总结</span></a></li></ol></div><div class="column is-9"><header class="my-4"><a href="/tags/react"><i class="tag post-item-tag">react</i></a></header><h1 class="mt-0 mb-1 is-family-serif" id="postTitle">114、稀土掘金小册-记账本（五）登录注册</h1><time class="has-text-grey" datetime="2023-01-08T12:00:00.000Z">2023-01-08</time><article class="mt-2 post-content"><span id="more"></span>
+123456789import React from &quot;react&quot;;i.."><meta name="generator" content="Hexo 4.2.1"></head><body class="is-flex is-flex-direction-column"><header class="header-widget is-flex-shrink-0 is-hidden-mobile"><div class="container is-fullhd is-flex is-justify-content-space-between is-align-items-center is-full-height"><section class="is-hidden-mobile is-flex-shrink-0"><h2><a href="/">Jude's blog</a></h2></section><h3 class="is-hidden-mobile is-family-serif is-full-height is-flex is-align-items-center is-flex-shrink-0"><div class="is-full-height" id="postTopic"><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">114、稀土掘金小册-记账本（五）登录注册</p><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">点击返回顶部</p></div></h3><aside class="is-flex-shrink-0"><h3 class="is-inline-block"><a href="/">首页</a></h3><h3 class="is-inline-block"><a href="/about">关于</a></h3><h3 class="is-inline-block"><a href="/archives">归档</a></h3></aside></div></header><header class="is-flex header-widget is-flex-shrink-0 is-align-items-center is-justify-content-center is-hidden-tablet"><h3 class="is-inline-block"><a href="/">首页</a></h3><h3 class="is-inline-block"><a href="/about">关于</a></h3><h3 class="is-inline-block"><a href="/archives">归档</a></h3></header><main><main class="container is-max-widescreen content section post-page pt-4 px-4"><div class="columns is-flex-desktop is-justify-content-center is-flex-direction-row-reverse"><div class="column is-3 is-hidden-mobile"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#前言"><span class="toc-text">前言</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#知识点"><span class="toc-text">知识点</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#注册页面"><span class="toc-text">注册页面</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#登录页面"><span class="toc-text">登录页面</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结"><span class="toc-text">总结</span></a></li></ol></div><div class="column is-9"><header class="my-4"><a href="/tags/react"><i class="tag post-item-tag">react</i></a></header><h1 class="mt-0 mb-1 is-family-serif" id="postTitle">114、稀土掘金小册-记账本（五）登录注册</h1><time class="has-text-grey" datetime="2023-01-08T12:00:00.000Z">2023-01-08</time><article class="mt-2 post-content"><a id="more"></a>
 
 <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>上一章节我们实现了底部导航栏，并且创建了三个主页面，这三个页面是需要展示底部导航栏，而我们本章节要制作的「登录注册页面」便是不需要底部导航栏的单独页面。</p>
 <blockquote>
@@ -19,198 +19,58 @@ import React from &amp;quot;react&amp;quot;;.."><meta name="generator" content="
 <h2 id="注册页面"><a href="#注册页面" class="headerlink" title="注册页面"></a>注册页面</h2><p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/8ff7150ab666463faf49a280bded1d9b~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp" alt="img"></p>
 <p>我们的系统是面向多用户的，换句话说也就是一个纯正的 C 端项目，任何人都可以通过网站，注册一个新的账号。接下来开始注册页面的编写。</p>
 <p>首先新建 <code>Login</code> 文件夹，在文件夹内添加两个文件 <code>index.jsx</code> 和 <code>style.module.less</code>，我们先把注册页面的静态页面切出来，首先给 <code>index.jsx</code> 添加如下代码：</p>
-<pre><code class="js">import React from &quot;react&quot;;
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">"react"</span>;<br><br><span class="hljs-keyword">import</span> s <span class="hljs-keyword">from</span> <span class="hljs-string">"./style.module.less"</span>;<br><br><span class="hljs-keyword">const</span> Login = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> &#123;<br>  <span class="hljs-keyword">return</span> <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&#123;s.auth&#125;</span>&gt;</span>注册<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>;<br>&#125;;<br><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> Login;<br></code></pre></td></tr></table></figure>
 
-import s from &quot;./style.module.less&quot;;
-
-const Login = () =&gt; &#123;
-  return &lt;div className=&#123;s.auth&#125;&gt;注册&lt;/div&gt;;
-&#125;;
-
-export default Login;
-</code></pre>
 <p>为它添加一个路由配置，打开 <code>router/index.js</code> 添加如下：</p>
-<pre><code class="js">import Login from &#39;@/container/Login&#39;
-...
-&#123;
-  path: &quot;/login&quot;,
-  component: Login
-&#125;
-</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">import</span> Login <span class="hljs-keyword">from</span> <span class="hljs-string">'@/container/Login'</span><br>...<br>&#123;<br>  path: <span class="hljs-string">"/login"</span>,<br>  component: Login<br>&#125;<br></code></pre></td></tr></table></figure>
+
 <p>重启项目，如下所示代表登录注册页面创建成功了：</p>
 <p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/70072a5101314b52a83e7675deb6a205~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp" alt="img"></p>
 <p>接下来为 <code>Login/index.jsx</code> 添加静态页面代码：</p>
-<pre><code class="js">import React from &quot;react&quot;;
-import &#123; Cell, Input, Button, Checkbox &#125; from &quot;zarm&quot;;
-import CustomIcon from &quot;@/components/CustomIcon&quot;;
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">"react"</span>;<br><span class="hljs-keyword">import</span> &#123; Cell, Input, Button, Checkbox &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">"zarm"</span>;<br><span class="hljs-keyword">import</span> CustomIcon <span class="hljs-keyword">from</span> <span class="hljs-string">"@/components/CustomIcon"</span>;<br><br><span class="hljs-keyword">import</span> s <span class="hljs-keyword">from</span> <span class="hljs-string">"./style.module.less"</span>;<br><br><span class="hljs-keyword">const</span> Login = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> &#123;<br>  <span class="hljs-keyword">return</span> (<br>    &lt;div className=&#123;s.auth&#125;&gt;<br>      &lt;div className=&#123;s.head&#125; /&gt;<br>      &lt;div className=&#123;s.tab&#125;&gt;<br>        &lt;span&gt;注册&lt;<span class="hljs-regexp">/span&gt;</span><br><span class="hljs-regexp">      &lt;/</span>div&gt;<br>      &lt;div className=&#123;s.form&#125;&gt;<br>        &lt;Cell icon=&#123;&lt;CustomIcon type=<span class="hljs-string">"zhanghao"</span> /&gt;&#125;&gt;<br>          &lt;Input clearable type=<span class="hljs-string">"text"</span> placeholder=<span class="hljs-string">"请输入账号"</span> /&gt;<br>        &lt;<span class="hljs-regexp">/Cell&gt;</span><br><span class="hljs-regexp">        &lt;Cell icon=&#123;&lt;CustomIcon type="mima" /</span>&gt;&#125;&gt;<br>          &lt;Input clearable type=<span class="hljs-string">"password"</span> placeholder=<span class="hljs-string">"请输入密码"</span> /&gt;<br>        &lt;<span class="hljs-regexp">/Cell&gt;</span><br><span class="hljs-regexp">        &lt;Cell icon=&#123;&lt;CustomIcon type="mima" /</span>&gt;&#125;&gt;<br>          &lt;Input clearable type=<span class="hljs-string">"text"</span> placeholder=<span class="hljs-string">"请输入验证码"</span> /&gt;<br>        &lt;<span class="hljs-regexp">/Cell&gt;</span><br><span class="hljs-regexp">      &lt;/</span>div&gt;<br>      &lt;div className=&#123;s.operation&#125;&gt;<br>        &lt;div className=&#123;s.agree&#125;&gt;<br>          &lt;Checkbox /&gt;<br>          &lt;label className=<span class="hljs-string">"text-light"</span>&gt;<br>            阅读并同意&lt;a&gt;《掘掘手札条款》&lt;<span class="hljs-regexp">/a&gt;</span><br><span class="hljs-regexp">          &lt;/</span>label&gt;<br>        &lt;<span class="hljs-regexp">/div&gt;</span><br><span class="hljs-regexp">        &lt;Button block theme="primary"&gt;</span><br><span class="hljs-regexp">          注册</span><br><span class="hljs-regexp">        &lt;/</span>Button&gt;<br>      &lt;<span class="hljs-regexp">/div&gt;</span><br><span class="hljs-regexp">    &lt;/</span>div&gt;<br>  );<br>&#125;;<br><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> Login;<br></code></pre></td></tr></table></figure>
 
-import s from &quot;./style.module.less&quot;;
-
-const Login = () =&gt; &#123;
-  return (
-    &lt;div className=&#123;s.auth&#125;&gt;
-      &lt;div className=&#123;s.head&#125; /&gt;
-      &lt;div className=&#123;s.tab&#125;&gt;
-        &lt;span&gt;注册&lt;/span&gt;
-      &lt;/div&gt;
-      &lt;div className=&#123;s.form&#125;&gt;
-        &lt;Cell icon=&#123;&lt;CustomIcon type=&quot;zhanghao&quot; /&gt;&#125;&gt;
-          &lt;Input clearable type=&quot;text&quot; placeholder=&quot;请输入账号&quot; /&gt;
-        &lt;/Cell&gt;
-        &lt;Cell icon=&#123;&lt;CustomIcon type=&quot;mima&quot; /&gt;&#125;&gt;
-          &lt;Input clearable type=&quot;password&quot; placeholder=&quot;请输入密码&quot; /&gt;
-        &lt;/Cell&gt;
-        &lt;Cell icon=&#123;&lt;CustomIcon type=&quot;mima&quot; /&gt;&#125;&gt;
-          &lt;Input clearable type=&quot;text&quot; placeholder=&quot;请输入验证码&quot; /&gt;
-        &lt;/Cell&gt;
-      &lt;/div&gt;
-      &lt;div className=&#123;s.operation&#125;&gt;
-        &lt;div className=&#123;s.agree&#125;&gt;
-          &lt;Checkbox /&gt;
-          &lt;label className=&quot;text-light&quot;&gt;
-            阅读并同意&lt;a&gt;《掘掘手札条款》&lt;/a&gt;
-          &lt;/label&gt;
-        &lt;/div&gt;
-        &lt;Button block theme=&quot;primary&quot;&gt;
-          注册
-        &lt;/Button&gt;
-      &lt;/div&gt;
-    &lt;/div&gt;
-  );
-&#125;;
-
-export default Login;
-</code></pre>
 <blockquote>
 <p>文末已为同学们提供下本章节 demo 代码，样式部分不再详细说明。</p>
 </blockquote>
 <p>上述代码中，关键部分是账号输入、密码输入、验证码输入，这三个输入框是需要获取数据作为接口的参数提交上去的。</p>
 <p>很多时候，服务端没有开发好接口的时候，我们前端要做的任务就是先还原 <code>UI</code> 稿，把该切的页面都切出来，并且预留好需要给接口提交的数据交互，比如上述三个输入框。</p>
-<p>样式编写部分，要注意的一点是 <code>:global</code> 这个关键词。由于我们采用的是 <code>CSS Module</code> 的形式进行开发，也就是你在页面中声明的类名都会根据当前页面，打一个唯一的 <code>hash</code> 值，比如我们页面中声明的 <code>className=&#123;s.form&#125;</code>，最终在浏览器中显示的是这样的：</p>
+<p>样式编写部分，要注意的一点是 <code>:global</code> 这个关键词。由于我们采用的是 <code>CSS Module</code> 的形式进行开发，也就是你在页面中声明的类名都会根据当前页面，打一个唯一的 <code>hash</code> 值，比如我们页面中声明的 <code>className={s.form}</code>，最终在浏览器中显示的是这样的：</p>
 <p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/bab558e802d84ccd8c0b4273fe1e6174~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp" alt="img"></p>
 <p><code>_form_kpur3_30</code> 是已经被编译过的样式，这样做的目的是避免和别的页面的样式重名，这是目前样式管理的一个诟病，当多人参与项目开发的时候，很难做到不污染全局样式名称，除非很小心的命名样式名称。</p>
 <p>所以经过编译之后，想要修改 <code>.form</code> 下的 <code>.za-cell</code>，如下写法，将无法修改成功：</p>
-<pre><code class="css">.form &#123;
-  .za-cell &#123;
-    color: red;
-  &#125;
-&#125;
-</code></pre>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-selector-class">.form</span> &#123;<br>  .za-cell &#123;<br>    <span class="hljs-selector-tag">color</span>: <span class="hljs-selector-tag">red</span>;<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
 <p>原因是，上述写法，<code>.za-cell</code> 会被编译加上 <code>hash</code>，组件库 <code>Zarm</code> 内的 <code>dom</code> 类名还是叫 <code>za-cell</code>，如上图所示。所以为了不加 <code>hash</code>，就需要这样操作：</p>
-<pre><code class="css">.form &#123;
-  :global &#123;
-    .za-cell &#123;
-      color: red;
-    &#125;
-  &#125;
-&#125;
-</code></pre>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-selector-class">.form</span> &#123;<br>  :global &#123;<br>    <span class="hljs-selector-class">.za-cell</span> &#123;<br>      <span class="hljs-attribute">color</span>: red;<br>    &#125;<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
 <p>这样 <code>.za-cell</code> 就不会被加上 <code>hash</code>，如下图所示：</p>
 <p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/580f03ce2daf4f4488edd73c9a1efae6~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp" alt="img"></p>
 <p>完成上述页面布局之后，你会看到这样一个效果：</p>
 <p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/2933714025354b66ac111139397aa2d0~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp" alt="img"></p>
 <p>少了一个验证码，我们使用插件 <code>react-captcha-code</code>，我们通过 <code>npm</code> 下载它：</p>
-<pre><code class="bash">npm i react-captcha-code -S
-</code></pre>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">npm i react-captcha-code -S<br></code></pre></td></tr></table></figure>
+
 <p>在代码中引入：</p>
-<pre><code class="js">...
-import Captcha from &quot;react-captcha-code&quot;
-...
-&lt;Input
-  clearable
-  type=&quot;text&quot;
-  placeholder=&quot;请输入验证码&quot;
-  onChange=&#123;(value) =&gt; setVerify(value)&#125;
-/&gt;
-&lt;Captcha charNum=&#123;4&#125; /&gt;
-</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs js">...<br><span class="hljs-keyword">import</span> Captcha <span class="hljs-keyword">from</span> <span class="hljs-string">"react-captcha-code"</span><br>...<br>&lt;Input<br>  clearable<br>  type=<span class="hljs-string">"text"</span><br>  placeholder=<span class="hljs-string">"请输入验证码"</span><br>  onChange=&#123;(value) =&gt; setVerify(value)&#125;<br>/&gt;<br>&lt;Captcha charNum=&#123;<span class="hljs-number">4</span>&#125; /&gt;<br></code></pre></td></tr></table></figure>
+
 <p>浏览器展示如下所示：</p>
 <p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/aa07ed8b505a421bb3d9120ba8741cac~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp" alt="img"></p>
 <p>此时我们已经切完注册页面需要的内容。</p>
 <p>我们给页面加上相应的逻辑，首先是账号、密码、验证码：</p>
-<pre><code class="js">...
-const [username, setUsername] = useState(&#39;&#39;); // 账号
-const [password, setPassword] = useState(&#39;&#39;); // 密码
-const [verify, setVerify] = useState(&#39;&#39;); // 验证码
-...
-&lt;Input
-  clearable
-  type=&quot;text&quot;
-  placeholder=&quot;请输入账号&quot;
-  onChange=&#123;(value) =&gt; setUsername(value)&#125;
-/&gt;
-...
-&lt;Input
-  clearable
-  type=&quot;password&quot;
-  placeholder=&quot;请输入密码&quot;
-  onChange=&#123;(value) =&gt; setPassword(value)&#125;
-/&gt;
-...
-&lt;Input
-  clearable
-  type=&quot;text&quot;
-  placeholder=&quot;请输入验证码&quot;
-  onChange=&#123;(value) =&gt; setVerify(value)&#125;
-/&gt;
-</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs js">...<br><span class="hljs-keyword">const</span> [username, setUsername] = useState(<span class="hljs-string">''</span>); <span class="hljs-comment">// 账号</span><br><span class="hljs-keyword">const</span> [password, setPassword] = useState(<span class="hljs-string">''</span>); <span class="hljs-comment">// 密码</span><br><span class="hljs-keyword">const</span> [verify, setVerify] = useState(<span class="hljs-string">''</span>); <span class="hljs-comment">// 验证码</span><br>...<br>&lt;Input<br>  clearable<br>  type=<span class="hljs-string">"text"</span><br>  placeholder=<span class="hljs-string">"请输入账号"</span><br>  onChange=&#123;(value) =&gt; setUsername(value)&#125;<br>/&gt;<br>...<br>&lt;Input<br>  clearable<br>  type=<span class="hljs-string">"password"</span><br>  placeholder=<span class="hljs-string">"请输入密码"</span><br>  onChange=&#123;(value) =&gt; setPassword(value)&#125;<br>/&gt;<br>...<br>&lt;Input<br>  clearable<br>  type=<span class="hljs-string">"text"</span><br>  placeholder=<span class="hljs-string">"请输入验证码"</span><br>  onChange=&#123;(value) =&gt; setVerify(value)&#125;<br>/&gt;<br></code></pre></td></tr></table></figure>
+
 <p>当输入框内容修改的时候，<code>onChange</code> 会被触发，接受的回调函数参数，便是变化的输入值，此时我们将其保存在声明的变量中。</p>
 <p>我们输入的验证码是需要和验证码图片里的验证码匹配的，所以我们还需要拿到图片里的验证码，我们作如下操作：</p>
-<pre><code class="js">import React, &#123; useCallback &#125; from &#39;react&#39;
-...
-const [captcha, setCaptcha] = useState(&#39;&#39;); // 验证码变化后存储值
-//  验证码变化，回调方法
-const handleChange = useCallback((captcha) =&gt; &#123;
-  console.log(&#39;captcha&#39;, captcha)
-  setCaptcha(captcha)
-&#125;, []);
-...
-&lt;Captcha charNum=&#123;4&#125; onChange=&#123;handleChange&#125; /&gt;
-</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">import</span> React, &#123; useCallback &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span><br>...<br><span class="hljs-keyword">const</span> [captcha, setCaptcha] = useState(<span class="hljs-string">''</span>); <span class="hljs-comment">// 验证码变化后存储值</span><br><span class="hljs-comment">//  验证码变化，回调方法</span><br><span class="hljs-keyword">const</span> handleChange = useCallback(<span class="hljs-function">(<span class="hljs-params">captcha</span>) =&gt;</span> &#123;<br>  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'captcha'</span>, captcha)<br>  setCaptcha(captcha)<br>&#125;, []);<br>...<br>&lt;Captcha charNum=&#123;<span class="hljs-number">4</span>&#125; onChange=&#123;handleChange&#125; /&gt;<br></code></pre></td></tr></table></figure>
+
 <p>当验证码变化的时候，便能获取到相应的值。修改完上述代码，我们不妨测试一下：</p>
 <p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/68459ab851c941ee92f3fcdaf6f758a6~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp" alt="img"></p>
 <p>到此，注册需要的参数都有了，我们开始编写注册方法：</p>
-<pre><code class="js">import &#123; Cell, Input, Button, Checkbox, Toast &#125; from &#39;zarm&#39;
-import &#123; post &#125; from &#39;@/utils&#39;
-...
-const onSubmit = async () =&gt; &#123;
-  if (!username) &#123;
-    Toast.show(&#39;请输入账号&#39;)
-    return
-  &#125;
-  if (!password) &#123;
-    Toast.show(&#39;请输入密码&#39;)
-    return
-  &#125;
-  if (!verify) &#123;
-    Toast.show(&#39;请输入验证码&#39;)
-    return
-  &#125;;
-  if (verify != captcha) &#123;
-    Toast.show(&#39;验证码错误&#39;)
-    return
-  &#125;;
-  try &#123;
-    const &#123; data &#125; = await post(&#39;/api/user/register&#39;, &#123;
-      username,
-      password
-    &#125;);
-    Toast.show(&#39;注册成功&#39;);
-  &#125; catch (error) &#123;
-    Toast.show(&#39;系统错误&#39;);
-  &#125;
-&#125;;
-...
-&lt;Button onClick=&#123;onSubmit&#125; block theme=&quot;primary&quot;&gt;注册&lt;/Button&gt;
-</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">import</span> &#123; Cell, Input, Button, Checkbox, Toast &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">'zarm'</span><br><span class="hljs-keyword">import</span> &#123; post &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">'@/utils'</span><br>...<br><span class="hljs-keyword">const</span> onSubmit = <span class="hljs-keyword">async</span> () =&gt; &#123;<br>  <span class="hljs-keyword">if</span> (!username) &#123;<br>    Toast.show(<span class="hljs-string">'请输入账号'</span>)<br>    <span class="hljs-keyword">return</span><br>  &#125;<br>  <span class="hljs-keyword">if</span> (!password) &#123;<br>    Toast.show(<span class="hljs-string">'请输入密码'</span>)<br>    <span class="hljs-keyword">return</span><br>  &#125;<br>  <span class="hljs-keyword">if</span> (!verify) &#123;<br>    Toast.show(<span class="hljs-string">'请输入验证码'</span>)<br>    <span class="hljs-keyword">return</span><br>  &#125;;<br>  <span class="hljs-keyword">if</span> (verify != captcha) &#123;<br>    Toast.show(<span class="hljs-string">'验证码错误'</span>)<br>    <span class="hljs-keyword">return</span><br>  &#125;;<br>  <span class="hljs-keyword">try</span> &#123;<br>    <span class="hljs-keyword">const</span> &#123; data &#125; = <span class="hljs-keyword">await</span> post(<span class="hljs-string">'/api/user/register'</span>, &#123;<br>      username,<br>      password<br>    &#125;);<br>    Toast.show(<span class="hljs-string">'注册成功'</span>);<br>  &#125; <span class="hljs-keyword">catch</span> (error) &#123;<br>    Toast.show(<span class="hljs-string">'系统错误'</span>);<br>  &#125;<br>&#125;;<br>...<br>&lt;Button onClick=&#123;onSubmit&#125; block theme=<span class="hljs-string">"primary"</span>&gt;注册&lt;<span class="hljs-regexp">/Button&gt;</span><br></code></pre></td></tr></table></figure>
+
 <p>上述代码中，因为我们使用的是 <code>async await</code> 做异步处理，所以需要通过 <code>try catch</code> 来捕获异步处理过程中出现的错误，如果使用 <code>Promise</code> 的回调函数，则无需使用 <code>try catch</code>，改动如下：</p>
-<pre><code class="js">post(&quot;/api/user/register&quot;, &#123;
-  username,
-  password,
-&#125;).then((res) =&gt; &#123;
-  // do something
-&#125;);
-</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs js">post(<span class="hljs-string">"/api/user/register"</span>, &#123;<br>  username,<br>  password,<br>&#125;).then(<span class="hljs-function">(<span class="hljs-params">res</span>) =&gt;</span> &#123;<br>  <span class="hljs-comment">// do something</span><br>&#125;);<br></code></pre></td></tr></table></figure>
+
 <p>尝试使用之前注册过的用户名，注册一个账号：</p>
 <p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/c4e36ba2f6724445a821b444dda9643f~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp" alt="img"></p>
 <p>服务端给出正确的报错，我们再用一个未注册过的用户名：</p>
@@ -218,46 +78,8 @@ const onSubmit = async () =&gt; &#123;
 <p>此时我们大致将注册功能实现了。这里我不再展开讲样式部分，因为这样会使得文章中出现过多的重复代码，不以阅读，大家尽量根据标签的类名去查找 <code>css</code> 样式部分。</p>
 <h2 id="登录页面"><a href="#登录页面" class="headerlink" title="登录页面"></a>登录页面</h2><p>登录页面的逻辑我们直接做到同一个页面中，通过一个 <code>type</code> 参数作为判断条件，判断当前状态是登录页面或是注册页面。</p>
 <p>话不多说我们添加代码如下：</p>
-<pre><code class="js">...
-import cx from &#39;classnames&#39;
-...
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><code class="hljs js">...<br><span class="hljs-keyword">import</span> cx <span class="hljs-keyword">from</span> <span class="hljs-string">'classnames'</span><br>...<br><br><span class="hljs-keyword">const</span> Login = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> &#123;<br>  ...<br>  <span class="hljs-keyword">const</span> [type, setType] = useState(<span class="hljs-string">'login'</span>); <span class="hljs-comment">// 登录注册类型</span><br><br>  <span class="hljs-keyword">return</span> <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&#123;s.auth&#125;</span>&gt;</span></span><br><span class="xml">    ...</span><br>    &lt;div className=&#123;s.tab&#125;&gt;<br>      &lt;span className=&#123;cx(&#123; [s.avtive]: type == 'login' &#125;)&#125; onClick=&#123;() =&gt; setType('login')&#125;&gt;登录&lt;/span&gt;<br>      &lt;span className=&#123;cx(&#123; [s.avtive]: type == 'register' &#125;)&#125; onClick=&#123;() =&gt; setType('register')&#125;&gt;注册&lt;/span&gt;<br><span class="xml">    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span><br><span class="xml">  <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span><br>  &lt;div className=&#123;s.form&#125;&gt;<br>    ...<br>    &#123;<br>      type == <span class="hljs-string">'register'</span> ? <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">Cell</span> <span class="hljs-attr">icon</span>=<span class="hljs-string">&#123;</span>&lt;<span class="hljs-attr">CustomIcon</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"mima"</span> /&gt;</span>&#125;&gt;</span><br>        &lt;Input<br>          clearable<br>          type="text"<br>          placeholder="请输入验证码"<br>          onChange=&#123;(value) =&gt; setVerify(value)&#125;<br><span class="xml">        /&gt;</span><br><span class="xml">        <span class="hljs-tag">&lt;<span class="hljs-name">Captcha</span> <span class="hljs-attr">ref</span>=<span class="hljs-string">&#123;captchaRef&#125;</span> <span class="hljs-attr">charNum</span>=<span class="hljs-string">&#123;4&#125;</span> <span class="hljs-attr">onChange</span>=<span class="hljs-string">&#123;handleChange&#125;</span> /&gt;</span></span><br><span class="xml">      <span class="hljs-tag">&lt;/<span class="hljs-name">Cell</span>&gt;</span></span> : <span class="hljs-literal">null</span><br>    &#125;<br>  &lt;<span class="hljs-regexp">/div&gt;</span><br><span class="hljs-regexp">  &lt;div className=&#123;s.operation&#125;&gt;</span><br><span class="hljs-regexp">    &#123;</span><br><span class="hljs-regexp">      type == 'register' ? &lt;div className=&#123;s.agree&#125;&gt;</span><br><span class="hljs-regexp">        &lt;Checkbox /</span>&gt;<br>        &lt;label className=<span class="hljs-string">"text-light"</span>&gt;阅读并同意&lt;a&gt;《掘掘手札条款》&lt;<span class="hljs-regexp">/a&gt;&lt;/</span>label&gt;<br>      &lt;<span class="hljs-regexp">/div&gt; : null</span><br><span class="hljs-regexp">    &#125;</span><br><span class="hljs-regexp">    &lt;Button onClick=&#123;onSubmit&#125; block theme="primary"&gt;&#123;type == 'login' ? '登录' : '注册'&#125;&lt;/</span>Button&gt;<br>  &lt;<span class="hljs-regexp">/div&gt;</span><br><span class="hljs-regexp">&#125;</span><br></code></pre></td></tr></table></figure>
 
-const Login = () =&gt; &#123;
-  ...
-  const [type, setType] = useState(&#39;login&#39;); // 登录注册类型
-
-  return &lt;div className=&#123;s.auth&#125;&gt;
-    ...
-    &lt;div className=&#123;s.tab&#125;&gt;
-      &lt;span className=&#123;cx(&#123; [s.avtive]: type == &#39;login&#39; &#125;)&#125; onClick=&#123;() =&gt; setType(&#39;login&#39;)&#125;&gt;登录&lt;/span&gt;
-      &lt;span className=&#123;cx(&#123; [s.avtive]: type == &#39;register&#39; &#125;)&#125; onClick=&#123;() =&gt; setType(&#39;register&#39;)&#125;&gt;注册&lt;/span&gt;
-    &lt;/div&gt;
-  &lt;/div&gt;
-  &lt;div className=&#123;s.form&#125;&gt;
-    ...
-    &#123;
-      type == &#39;register&#39; ? &lt;Cell icon=&#123;&lt;CustomIcon type=&quot;mima&quot; /&gt;&#125;&gt;
-        &lt;Input
-          clearable
-          type=&quot;text&quot;
-          placeholder=&quot;请输入验证码&quot;
-          onChange=&#123;(value) =&gt; setVerify(value)&#125;
-        /&gt;
-        &lt;Captcha ref=&#123;captchaRef&#125; charNum=&#123;4&#125; onChange=&#123;handleChange&#125; /&gt;
-      &lt;/Cell&gt; : null
-    &#125;
-  &lt;/div&gt;
-  &lt;div className=&#123;s.operation&#125;&gt;
-    &#123;
-      type == &#39;register&#39; ? &lt;div className=&#123;s.agree&#125;&gt;
-        &lt;Checkbox /&gt;
-        &lt;label className=&quot;text-light&quot;&gt;阅读并同意&lt;a&gt;《掘掘手札条款》&lt;/a&gt;&lt;/label&gt;
-      &lt;/div&gt; : null
-    &#125;
-    &lt;Button onClick=&#123;onSubmit&#125; block theme=&quot;primary&quot;&gt;&#123;type == &#39;login&#39; ? &#39;登录&#39; : &#39;注册&#39;&#125;&lt;/Button&gt;
-  &lt;/div&gt;
-&#125;
-</code></pre>
 <blockquote>
 <p>注意，如果引入了新的工具包，请自行安装，如上述代码就需要安装 classnames。可以通过 npm i classnames -S 指令</p>
 </blockquote>
@@ -267,47 +89,8 @@ const Login = () =&gt; &#123;
 <p>其次，当 <code>type == &#39;register&#39;</code> 的时候，才把验证码展示出来，因为登录这边咱们就不设置验证码，只在注册的时候显示。</p>
 <p>最后是事件的判断，如果 <code>type == &#39;login&#39;</code>，则按钮文案显示为 <code>登录</code>，否则为 <code>注册</code>。</p>
 <p>此时点击触发的 <code>onSubmit</code> 事件也很关键，同样需要通过 <code>type</code> 判断是登录还是注册，修改代码如下：</p>
-<pre><code class="js">const onSubmit = async () =&gt; &#123;
-  if (!username) &#123;
-    Toast.show(&quot;请输入账号&quot;);
-    return;
-  &#125;
-  if (!password) &#123;
-    Toast.show(&quot;请输入密码&quot;);
-    return;
-  &#125;
-  try &#123;
-    // 判断是否是登录状态
-    if (type == &quot;login&quot;) &#123;
-      // 执行登录接口，获取 token
-      const &#123; data &#125; = await post(&quot;/api/user/login&quot;, &#123;
-        username,
-        password,
-      &#125;);
-      // 将 token 写入 localStorage
-      localStorage.setItem(&quot;token&quot;, data.token);
-    &#125; else &#123;
-      if (!verify) &#123;
-        Toast.show(&quot;请输入验证码&quot;);
-        return;
-      &#125;
-      if (verify != captcha) &#123;
-        Toast.show(&quot;验证码错误&quot;);
-        return;
-      &#125;
-      const &#123; data &#125; = await post(&quot;/api/user/register&quot;, &#123;
-        username,
-        password,
-      &#125;);
-      Toast.show(&quot;注册成功&quot;);
-      // 注册成功，自动将 tab 切换到 login 状态
-      setType(&quot;login&quot;);
-    &#125;
-  &#125; catch (error) &#123;
-    Toast.show(&quot;系统错误&quot;);
-  &#125;
-&#125;;
-</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">const</span> onSubmit = <span class="hljs-keyword">async</span> () =&gt; &#123;<br>  <span class="hljs-keyword">if</span> (!username) &#123;<br>    Toast.show(<span class="hljs-string">"请输入账号"</span>);<br>    <span class="hljs-keyword">return</span>;<br>  &#125;<br>  <span class="hljs-keyword">if</span> (!password) &#123;<br>    Toast.show(<span class="hljs-string">"请输入密码"</span>);<br>    <span class="hljs-keyword">return</span>;<br>  &#125;<br>  <span class="hljs-keyword">try</span> &#123;<br>    <span class="hljs-comment">// 判断是否是登录状态</span><br>    <span class="hljs-keyword">if</span> (type == <span class="hljs-string">"login"</span>) &#123;<br>      <span class="hljs-comment">// 执行登录接口，获取 token</span><br>      <span class="hljs-keyword">const</span> &#123; data &#125; = <span class="hljs-keyword">await</span> post(<span class="hljs-string">"/api/user/login"</span>, &#123;<br>        username,<br>        password,<br>      &#125;);<br>      <span class="hljs-comment">// 将 token 写入 localStorage</span><br>      localStorage.setItem(<span class="hljs-string">"token"</span>, data.token);<br>    &#125; <span class="hljs-keyword">else</span> &#123;<br>      <span class="hljs-keyword">if</span> (!verify) &#123;<br>        Toast.show(<span class="hljs-string">"请输入验证码"</span>);<br>        <span class="hljs-keyword">return</span>;<br>      &#125;<br>      <span class="hljs-keyword">if</span> (verify != captcha) &#123;<br>        Toast.show(<span class="hljs-string">"验证码错误"</span>);<br>        <span class="hljs-keyword">return</span>;<br>      &#125;<br>      <span class="hljs-keyword">const</span> &#123; data &#125; = <span class="hljs-keyword">await</span> post(<span class="hljs-string">"/api/user/register"</span>, &#123;<br>        username,<br>        password,<br>      &#125;);<br>      Toast.show(<span class="hljs-string">"注册成功"</span>);<br>      <span class="hljs-comment">// 注册成功，自动将 tab 切换到 login 状态</span><br>      setType(<span class="hljs-string">"login"</span>);<br>    &#125;<br>  &#125; <span class="hljs-keyword">catch</span> (error) &#123;<br>    Toast.show(<span class="hljs-string">"系统错误"</span>);<br>  &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
+
 <p>由于登录注册的账号和密码是同一参数，我们这边就直接复用了逻辑，并通过 <code>type</code> 判断调用哪一个接口。</p>
 <p>重启项目，验证登录接口是否成功，如果成功则会返回 <code>token</code> 信息，如下图所示：</p>
 <p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/79260001863b4fcc9f9d52522a7732fb~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp" alt="img"></p>
@@ -315,4 +98,4 @@ const Login = () =&gt; &#123;
 <p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/0cac2dd5459b4fab8ccb7bb476719944~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp" alt="img"></p>
 <p>保存 <code>token</code> 的形式有很多，你可以引入状态管理插件来对这些数据进行存储，但是这里我们对其进行简单处理，减少项目多余的负担，保证课程的完成度。有时候，成功的将课程完成，也是一种成就感。</p>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>到此，我们的登录注册页面算是完成了，我们拿到的 <code>token</code> 是有时效性的，我在后台设置的是 24 小时的时效，如果过期了，请求其他接口时，就会报错，从而通过逻辑判断重新回到登录页面。下一章节，我会详细分析这块内容。</p>
-</article><section class="jump-container is-flex is-justify-content-space-between my-6"><!-- em is empty placeholder--><a class="button is-default" href="/2023/01/11/115-react/" title="115、稀土掘金小册-记账本（六）账单列表"><i class="iconfont icon-prev mr-2 has-text-grey"></i><span class="has-text-weight-semibold">上一页: 115、稀土掘金小册-记账本（六）账单列表</span></a><a class="button is-default" href="/2023/01/05/113-react/" title="113、稀土掘金小册-记账本（四）底部导航栏"><span class="has-text-weight-semibold">下一页: 113、稀土掘金小册-记账本（四）底部导航栏</span><i class="iconfont icon-next ml-2 has-text-grey"></i></a></section></div></div></main></main><footer class="is-flex is-flex-direction-column is-align-items-center is-flex-shrink-0 is-family-serif"><section class="sns-container"><!-- Github--><a title="github" target="_blank" rel="noopener nofollow" href="//github.com/Jude"><i class="iconfont icon-github"></i></a><!-- Ins--><!-- RSS--><!-- 知乎--><a title="zhihu" target="_blank" rel="noopener nofollow" href="//zhihu.com/https://www.zhihu.com/hot"><i class="iconfont icon-zhihu"></i></a><!-- 领英--><!-- 脸书--></section><p><span>Copyright ©</span><span> Jude 2023</span></p><div class="is-flex is-justify-content-center is-flex-wrap-wrap"><p>Powered by Hexo &verbar;&nbsp;</p><p class="is-flex is-justify-content-center"><a title="Hexo theme author" target="_blank" rel="noopener" href="//github.com/haojen">Theme by Haojen&nbsp;</a></p><div style="margin-top: 2px"><a class="github-button" title="github-button" target="_blank" rel="noopener" href="https://github.com/haojen/hexo-theme-Claudia" data-color-scheme="no-preference: light; light: light; dark: dark;" data-show-count="true"></a></div></div><div><span>记住昨日的美好，过好今日的生活，憧憬明天的到来</span></div></footer><script async defer src="https://buttons.github.io/buttons.js"></script><script src="/js/post.js"></script></body></html>
+</article><section class="jump-container is-flex is-justify-content-space-between my-6"><!-- em is empty placeholder--><a class="button is-default" href="/2023/01/11/115-react/" title="115、稀土掘金小册-记账本（六）账单列表"><i class="iconfont icon-prev mr-2 has-text-grey"></i><span class="has-text-weight-semibold">上一页: 115、稀土掘金小册-记账本（六）账单列表</span></a><a class="button is-default" href="/2023/01/05/113-react/" title="113、稀土掘金小册-记账本（四）底部导航栏"><span class="has-text-weight-semibold">下一页: 113、稀土掘金小册-记账本（四）底部导航栏</span><i class="iconfont icon-next ml-2 has-text-grey"></i></a></section></div></div></main></main><footer class="is-flex is-flex-direction-column is-align-items-center is-flex-shrink-0 is-family-serif"><section class="sns-container"><!-- Github--><a title="github" target="_blank" rel="noopener nofollow" href="//github.com/Jude"><i class="iconfont icon-github"></i></a><!-- Ins--><!-- RSS--><!-- 知乎--><a title="zhihu" target="_blank" rel="noopener nofollow" href="//zhihu.com/https://www.zhihu.com/hot"><i class="iconfont icon-zhihu"></i></a><!-- 领英--><!-- 脸书--></section><p><span>Copyright ©</span><span> Jude 2024</span></p><div class="is-flex is-justify-content-center is-flex-wrap-wrap"><p>Powered by Hexo &verbar;&nbsp;</p><p class="is-flex is-justify-content-center"><a title="Hexo theme author" href="//github.com/haojen" target="_blank" rel="noopener">Theme by Haojen&nbsp;</a></p><div style="margin-top: 2px"><a class="github-button" title="github-button" href="https://github.com/haojen/hexo-theme-Claudia" target="_blank" rel="noopener" data-color-scheme="no-preference: light; light: light; dark: dark;" data-show-count="true"></a></div></div><div><span>记住昨日的美好，过好今日的生活，憧憬明天的到来</span></div></footer><script async defer src="https://buttons.github.io/buttons.js"></script><script src="/js/post.js"></script></body></html>

@@ -2,475 +2,53 @@
 <!-- Baidu Analytics --><!-- End Baidu Analytics --><link rel="icon" href="/images/favicon.png"><link rel="stylesheet" href="/style/common/bulma.css"><link rel="stylesheet" href="/style/base.css"><link rel="stylesheet" href="/style/common/helper.css"><script src="/js/common.js"></script><link rel="stylesheet" href="/style/post.css"><link rel="stylesheet" href="/style/themes/highlight-theme-light.css"><script src="/js/highlight.pack.js"></script><meta name="description" content="后台管理系统中，通常有这样的需求:将当前 table 表格导出&amp;#x2F;导入 Excel 表格，实现方式通常为后端主导（后端使用插件，前端通过点击事件生成一个 a 标签，导出 Excel 表格）、前端主导（使用 xlsx、file-saver、script-loader 插件封装工具函数，通过点击事件，获取当前页面后台返回的表格数据)。
 
 
-一、前端导出 Excel 表格的实现1、安装 pluginnpm install file-saver script-loader xlsx --save
+一、前端导出 Excel 表格的实现1、安装 plugin1npm install file-saver script-loader xlsx --save
 
 2、Export2Excel 工具函数
 点我展示代码
 
-import &amp;#123; saveAs &amp;#125; from &amp;quot;file-saver&amp;quot;;
-import XLSX from &amp;quo.."><meta name="generator" content="Hexo 7.0.0"></head><body class="is-flex is-flex-direction-column"><header class="header-widget is-flex-shrink-0 is-hidden-mobile"><div class="container is-fullhd is-flex is-justify-content-space-between is-align-items-center is-full-height"><section class="is-hidden-mobile is-flex-shrink-0"><h2><a href="/">Jude's blog</a></h2></section><h3 class="is-hidden-mobile is-family-serif is-full-height is-flex is-align-items-center is-flex-shrink-0"><div class="is-full-height" id="postTopic"><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">51、Vue项目中前端导出/导入Excel表格的实现</p><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">点击返回顶部</p></div></h3><aside class="is-flex-shrink-0"><h3 class="is-inline-block"><a href="/">首页</a></h3><h3 class="is-inline-block"><a href="/about">关于</a></h3><h3 class="is-inline-block"><a href="/archives">归档</a></h3></aside></div></header><header class="is-flex header-widget is-flex-shrink-0 is-align-items-center is-justify-content-center is-hidden-tablet"><h3 class="is-inline-block"><a href="/">首页</a></h3><h3 class="is-inline-block"><a href="/about">关于</a></h3><h3 class="is-inline-block"><a href="/archives">归档</a></h3></header><main><main class="container is-max-widescreen content section post-page pt-4 px-4"><div class="columns is-flex-desktop is-justify-content-center is-flex-direction-row-reverse"><div class="column is-3 is-hidden-mobile"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E5%89%8D%E7%AB%AF%E5%AF%BC%E5%87%BA-Excel-%E8%A1%A8%E6%A0%BC%E7%9A%84%E5%AE%9E%E7%8E%B0"><span class="toc-text">一、前端导出 Excel 表格的实现</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1%E3%80%81%E5%AE%89%E8%A3%85-plugin"><span class="toc-text">1、安装 plugin</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2%E3%80%81Export2Excel-%E5%B7%A5%E5%85%B7%E5%87%BD%E6%95%B0"><span class="toc-text">2、Export2Excel 工具函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3%E3%80%81%E5%AF%BC%E5%87%BA%E5%87%BD%E6%95%B0"><span class="toc-text">3、导出函数</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E5%89%8D%E7%AB%AF%E5%AF%BC%E5%85%A5-Excel-%E7%9A%84%E5%AE%9E%E7%8E%B0"><span class="toc-text">二、前端导入 Excel 的实现</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1%E3%80%81ant-design-vue-%E4%B8%8A%E4%BC%A0%E7%BB%84%E4%BB%B6%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="toc-text">1、ant-design-vue 上传组件的使用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2%E3%80%81%E5%AF%BC%E5%85%A5%E5%87%BD%E6%95%B0"><span class="toc-text">2、导入函数</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E3%80%81table-%E5%AD%90%E7%BB%84%E4%BB%B6"><span class="toc-text">三、table 子组件</span></a></li></ol></div><div class="column is-9"><header class="my-4"><a href="/tags/vue"><i class="tag post-item-tag">vue</i></a></header><h1 class="mt-0 mb-1 is-family-serif" id="postTitle">51、Vue项目中前端导出/导入Excel表格的实现</h1><time class="has-text-grey" datetime="2022-01-14T16:00:00.000Z">2022-01-15</time><article class="mt-2 post-content"><p>后台管理系统中，通常有这样的需求:将当前 table 表格导出&#x2F;导入 Excel 表格，实现方式通常为后端主导（后端使用插件，前端通过点击事件生成一个 a 标签，导出 Excel 表格）、前端主导（使用 xlsx、file-saver、script-loader 插件封装工具函数，通过点击事件，获取当前页面后台返回的表格数据)。</p>
-<span id="more"></span>
+12345678910111213141516171819202122232425262728293031323334353637383940414243.."><meta name="generator" content="Hexo 4.2.1"></head><body class="is-flex is-flex-direction-column"><header class="header-widget is-flex-shrink-0 is-hidden-mobile"><div class="container is-fullhd is-flex is-justify-content-space-between is-align-items-center is-full-height"><section class="is-hidden-mobile is-flex-shrink-0"><h2><a href="/">Jude's blog</a></h2></section><h3 class="is-hidden-mobile is-family-serif is-full-height is-flex is-align-items-center is-flex-shrink-0"><div class="is-full-height" id="postTopic"><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">51、Vue项目中前端导出/导入Excel表格的实现</p><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">点击返回顶部</p></div></h3><aside class="is-flex-shrink-0"><h3 class="is-inline-block"><a href="/">首页</a></h3><h3 class="is-inline-block"><a href="/about">关于</a></h3><h3 class="is-inline-block"><a href="/archives">归档</a></h3></aside></div></header><header class="is-flex header-widget is-flex-shrink-0 is-align-items-center is-justify-content-center is-hidden-tablet"><h3 class="is-inline-block"><a href="/">首页</a></h3><h3 class="is-inline-block"><a href="/about">关于</a></h3><h3 class="is-inline-block"><a href="/archives">归档</a></h3></header><main><main class="container is-max-widescreen content section post-page pt-4 px-4"><div class="columns is-flex-desktop is-justify-content-center is-flex-direction-row-reverse"><div class="column is-3 is-hidden-mobile"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#一、前端导出-Excel-表格的实现"><span class="toc-text">一、前端导出 Excel 表格的实现</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1、安装-plugin"><span class="toc-text">1、安装 plugin</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2、Export2Excel-工具函数"><span class="toc-text">2、Export2Excel 工具函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3、导出函数"><span class="toc-text">3、导出函数</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二、前端导入-Excel-的实现"><span class="toc-text">二、前端导入 Excel 的实现</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1、ant-design-vue-上传组件的使用"><span class="toc-text">1、ant-design-vue 上传组件的使用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2、导入函数"><span class="toc-text">2、导入函数</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#三、table-子组件"><span class="toc-text">三、table 子组件</span></a></li></ol></div><div class="column is-9"><header class="my-4"><a href="/tags/vue"><i class="tag post-item-tag">vue</i></a></header><h1 class="mt-0 mb-1 is-family-serif" id="postTitle">51、Vue项目中前端导出/导入Excel表格的实现</h1><time class="has-text-grey" datetime="2022-01-14T16:00:00.000Z">2022-01-15</time><article class="mt-2 post-content"><p>后台管理系统中，通常有这样的需求:将当前 table 表格导出&#x2F;导入 Excel 表格，实现方式通常为后端主导（后端使用插件，前端通过点击事件生成一个 a 标签，导出 Excel 表格）、前端主导（使用 xlsx、file-saver、script-loader 插件封装工具函数，通过点击事件，获取当前页面后台返回的表格数据)。</p>
+<a id="more"></a>
 
-<h2 id="一、前端导出-Excel-表格的实现"><a href="#一、前端导出-Excel-表格的实现" class="headerlink" title="一、前端导出 Excel 表格的实现"></a>一、前端导出 Excel 表格的实现</h2><h3 id="1、安装-plugin"><a href="#1、安装-plugin" class="headerlink" title="1、安装 plugin"></a>1、安装 plugin</h3><pre><code class="shell">npm install file-saver script-loader xlsx --save
-</code></pre>
+<h2 id="一、前端导出-Excel-表格的实现"><a href="#一、前端导出-Excel-表格的实现" class="headerlink" title="一、前端导出 Excel 表格的实现"></a>一、前端导出 Excel 表格的实现</h2><h3 id="1、安装-plugin"><a href="#1、安装-plugin" class="headerlink" title="1、安装 plugin"></a>1、安装 plugin</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">npm install file-saver script-loader xlsx --save<br></code></pre></td></tr></table></figure>
+
 <h3 id="2、Export2Excel-工具函数"><a href="#2、Export2Excel-工具函数" class="headerlink" title="2、Export2Excel 工具函数"></a>2、Export2Excel 工具函数</h3><details>
 <summary>点我展示代码</summary>
 
-<pre><code class="js">import &#123; saveAs &#125; from &quot;file-saver&quot;;
-import XLSX from &quot;xlsx&quot;;
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">import</span> &#123; saveAs &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">"file-saver"</span>;<br><span class="hljs-keyword">import</span> XLSX <span class="hljs-keyword">from</span> <span class="hljs-string">"xlsx"</span>;<br><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">generateArray</span>(<span class="hljs-params">table</span>) </span>&#123;<br>  <span class="hljs-keyword">var</span> out = [];<br>  <span class="hljs-keyword">var</span> rows = table.querySelectorAll(<span class="hljs-string">"tr"</span>);<br>  <span class="hljs-keyword">var</span> ranges = [];<br>  <span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> R = <span class="hljs-number">0</span>; R &lt; rows.length; ++R) &#123;<br>    <span class="hljs-keyword">var</span> outRow = [];<br>    <span class="hljs-keyword">var</span> row = rows[R];<br>    <span class="hljs-keyword">var</span> columns = row.querySelectorAll(<span class="hljs-string">"td"</span>);<br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> C = <span class="hljs-number">0</span>; C &lt; columns.length; ++C) &#123;<br>      <span class="hljs-keyword">var</span> cell = columns[C];<br>      <span class="hljs-keyword">var</span> colspan = cell.getAttribute(<span class="hljs-string">"colspan"</span>);<br>      <span class="hljs-keyword">var</span> rowspan = cell.getAttribute(<span class="hljs-string">"rowspan"</span>);<br>      <span class="hljs-keyword">var</span> cellValue = cell.innerText;<br>      <span class="hljs-keyword">if</span> (cellValue !== <span class="hljs-string">""</span> &amp;&amp; cellValue == +cellValue) cellValue = +cellValue;<br><br>      <span class="hljs-comment">//Skip ranges</span><br>      ranges.forEach(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">range</span>) </span>&#123;<br>        <span class="hljs-keyword">if</span> (<br>          R &gt;= range.s.r &amp;&amp;<br>          R &lt;= range.e.r &amp;&amp;<br>          outRow.length &gt;= range.s.c &amp;&amp;<br>          outRow.length &lt;= range.e.c<br>        ) &#123;<br>          <span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> i = <span class="hljs-number">0</span>; i &lt;= range.e.c - range.s.c; ++i) outRow.push(<span class="hljs-literal">null</span>);<br>        &#125;<br>      &#125;);<br><br>      <span class="hljs-comment">//Handle Row Span</span><br>      <span class="hljs-keyword">if</span> (rowspan || colspan) &#123;<br>        rowspan = rowspan || <span class="hljs-number">1</span>;<br>        colspan = colspan || <span class="hljs-number">1</span>;<br>        ranges.push(&#123;<br>          s: &#123;<br>            r: R,<br>            c: outRow.length,<br>          &#125;,<br>          e: &#123;<br>            r: R + rowspan - <span class="hljs-number">1</span>,<br>            c: outRow.length + colspan - <span class="hljs-number">1</span>,<br>          &#125;,<br>        &#125;);<br>      &#125;<br><br>      <span class="hljs-comment">//Handle Value</span><br>      outRow.push(cellValue !== <span class="hljs-string">""</span> ? cellValue : <span class="hljs-literal">null</span>);<br><br>      <span class="hljs-comment">//Handle Colspan</span><br>      <span class="hljs-keyword">if</span> (colspan) <span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> k = <span class="hljs-number">0</span>; k &lt; colspan - <span class="hljs-number">1</span>; ++k) outRow.push(<span class="hljs-literal">null</span>);<br>    &#125;<br>    out.push(outRow);<br>  &#125;<br>  <span class="hljs-keyword">return</span> [out, ranges];<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">datenum</span>(<span class="hljs-params">v, date1904</span>) </span>&#123;<br>  <span class="hljs-keyword">if</span> (date1904) v += <span class="hljs-number">1462</span>;<br>  <span class="hljs-keyword">var</span> epoch = <span class="hljs-built_in">Date</span>.parse(v);<br>  <span class="hljs-keyword">return</span> (epoch - <span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>(<span class="hljs-built_in">Date</span>.UTC(<span class="hljs-number">1899</span>, <span class="hljs-number">11</span>, <span class="hljs-number">30</span>))) / (<span class="hljs-number">24</span> * <span class="hljs-number">60</span> * <span class="hljs-number">60</span> * <span class="hljs-number">1000</span>);<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">sheet_from_array_of_arrays</span>(<span class="hljs-params">data, opts</span>) </span>&#123;<br>  <span class="hljs-keyword">var</span> ws = &#123;&#125;;<br>  <span class="hljs-keyword">var</span> range = &#123;<br>    s: &#123;<br>      c: <span class="hljs-number">10000000</span>,<br>      r: <span class="hljs-number">10000000</span>,<br>    &#125;,<br>    e: &#123;<br>      c: <span class="hljs-number">0</span>,<br>      r: <span class="hljs-number">0</span>,<br>    &#125;,<br>  &#125;;<br>  <span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> R = <span class="hljs-number">0</span>; R != data.length; ++R) &#123;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> C = <span class="hljs-number">0</span>; C != data[R].length; ++C) &#123;<br>      <span class="hljs-keyword">if</span> (range.s.r &gt; R) range.s.r = R;<br>      <span class="hljs-keyword">if</span> (range.s.c &gt; C) range.s.c = C;<br>      <span class="hljs-keyword">if</span> (range.e.r &lt; R) range.e.r = R;<br>      <span class="hljs-keyword">if</span> (range.e.c &lt; C) range.e.c = C;<br>      <span class="hljs-keyword">var</span> cell = &#123;<br>        v: data[R][C],<br>      &#125;;<br>      <span class="hljs-keyword">if</span> (cell.v == <span class="hljs-literal">null</span>) <span class="hljs-keyword">continue</span>;<br>      <span class="hljs-keyword">var</span> cell_ref = XLSX.utils.encode_cell(&#123;<br>        c: C,<br>        r: R,<br>      &#125;);<br><br>      <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> cell.v === <span class="hljs-string">"number"</span>) cell.t = <span class="hljs-string">"n"</span>;<br>      <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> cell.v === <span class="hljs-string">"boolean"</span>) cell.t = <span class="hljs-string">"b"</span>;<br>      <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (cell.v <span class="hljs-keyword">instanceof</span> <span class="hljs-built_in">Date</span>) &#123;<br>        cell.t = <span class="hljs-string">"n"</span>;<br>        cell.z = XLSX.SSF._table[<span class="hljs-number">14</span>];<br>        cell.v = datenum(cell.v);<br>      &#125; <span class="hljs-keyword">else</span> cell.t = <span class="hljs-string">"s"</span>;<br><br>      ws[cell_ref] = cell;<br>    &#125;<br>  &#125;<br>  <span class="hljs-keyword">if</span> (range.s.c &lt; <span class="hljs-number">10000000</span>) ws[<span class="hljs-string">"!ref"</span>] = XLSX.utils.encode_range(range);<br>  <span class="hljs-keyword">return</span> ws;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Workbook</span>(<span class="hljs-params"></span>) </span>&#123;<br>  <span class="hljs-keyword">if</span> (!(<span class="hljs-keyword">this</span> <span class="hljs-keyword">instanceof</span> Workbook)) <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> Workbook();<br>  <span class="hljs-keyword">this</span>.SheetNames = [];<br>  <span class="hljs-keyword">this</span>.Sheets = &#123;&#125;;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">s2ab</span>(<span class="hljs-params">s</span>) </span>&#123;<br>  <span class="hljs-keyword">var</span> buf = <span class="hljs-keyword">new</span> <span class="hljs-built_in">ArrayBuffer</span>(s.length);<br>  <span class="hljs-keyword">var</span> view = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Uint8Array</span>(buf);<br>  <span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> i = <span class="hljs-number">0</span>; i != s.length; ++i) view[i] = s.charCodeAt(i) &amp; <span class="hljs-number">0xff</span>;<br>  <span class="hljs-keyword">return</span> buf;<br>&#125;<br><br><span class="hljs-keyword">export</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">export_table_to_excel</span>(<span class="hljs-params">id</span>) </span>&#123;<br>  <span class="hljs-keyword">var</span> theTable = <span class="hljs-built_in">document</span>.getElementById(id);<br>  <span class="hljs-keyword">var</span> oo = generateArray(theTable);<br>  <span class="hljs-keyword">var</span> ranges = oo[<span class="hljs-number">1</span>];<br><br>  <span class="hljs-comment">/* original data */</span><br>  <span class="hljs-keyword">var</span> data = oo[<span class="hljs-number">0</span>];<br>  <span class="hljs-keyword">var</span> ws_name = <span class="hljs-string">"SheetJS"</span>;<br><br>  <span class="hljs-keyword">var</span> wb = <span class="hljs-keyword">new</span> Workbook(),<br>    ws = sheet_from_array_of_arrays(data);<br><br>  <span class="hljs-comment">/* add ranges to worksheet */</span><br>  <span class="hljs-comment">// ws['!cols'] = ['apple', 'banan'];</span><br>  ws[<span class="hljs-string">"!merges"</span>] = ranges;<br><br>  <span class="hljs-comment">/* add worksheet to workbook */</span><br>  wb.SheetNames.push(ws_name);<br>  wb.Sheets[ws_name] = ws;<br><br>  <span class="hljs-keyword">var</span> wbout = XLSX.write(wb, &#123;<br>    bookType: <span class="hljs-string">"xlsx"</span>,<br>    bookSST: <span class="hljs-literal">false</span>,<br>    type: <span class="hljs-string">"binary"</span>,<br>  &#125;);<br><br>  saveAs(<br>    <span class="hljs-keyword">new</span> Blob([s2ab(wbout)], &#123;<br>      type: <span class="hljs-string">"application/octet-stream"</span>,<br>    &#125;),<br>    <span class="hljs-string">"test.xlsx"</span><br>  );<br>&#125;<br><br><span class="hljs-keyword">export</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">export_json_to_excel</span>(<span class="hljs-params">&#123;</span></span><br><span class="hljs-function"><span class="hljs-params">  multiHeader = [],</span></span><br><span class="hljs-function"><span class="hljs-params">  header,</span></span><br><span class="hljs-function"><span class="hljs-params">  data,</span></span><br><span class="hljs-function"><span class="hljs-params">  filename,</span></span><br><span class="hljs-function"><span class="hljs-params">  merges = [],</span></span><br><span class="hljs-function"><span class="hljs-params">  autoWidth = true,</span></span><br><span class="hljs-function"><span class="hljs-params">  bookType = <span class="hljs-string">"xlsx"</span>,</span></span><br><span class="hljs-function"><span class="hljs-params">&#125; = &#123;&#125;</span>) </span>&#123;<br>  <span class="hljs-comment">/* original data */</span><br>  filename = filename || <span class="hljs-string">"excel-list"</span>;<br>  data = [...data];<br>  data.unshift(header);<br><br>  <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = multiHeader.length - <span class="hljs-number">1</span>; i &gt; <span class="hljs-number">-1</span>; i--) &#123;<br>    data.unshift(multiHeader[i]);<br>  &#125;<br><br>  <span class="hljs-keyword">var</span> ws_name = <span class="hljs-string">"SheetJS"</span>;<br>  <span class="hljs-keyword">var</span> wb = <span class="hljs-keyword">new</span> Workbook(),<br>    ws = sheet_from_array_of_arrays(data);<br><br>  <span class="hljs-keyword">if</span> (merges.length &gt; <span class="hljs-number">0</span>) &#123;<br>    <span class="hljs-keyword">if</span> (!ws[<span class="hljs-string">"!merges"</span>]) ws[<span class="hljs-string">"!merges"</span>] = [];<br>    merges.forEach(<span class="hljs-function">(<span class="hljs-params">item</span>) =&gt;</span> &#123;<br>      ws[<span class="hljs-string">"!merges"</span>].push(XLSX.utils.decode_range(item));<br>    &#125;);<br>  &#125;<br><br>  <span class="hljs-keyword">if</span> (autoWidth) &#123;<br>    <span class="hljs-comment">/*设置worksheet每列的最大宽度*/</span><br>    <span class="hljs-keyword">const</span> colWidth = data.map(<span class="hljs-function">(<span class="hljs-params">row</span>) =&gt;</span><br>      row.map(<span class="hljs-function">(<span class="hljs-params">val</span>) =&gt;</span> &#123;<br>        <span class="hljs-comment">/*先判断是否为null/undefined*/</span><br>        <span class="hljs-keyword">if</span> (val == <span class="hljs-literal">null</span>) &#123;<br>          <span class="hljs-keyword">return</span> &#123;<br>            wch: <span class="hljs-number">10</span>,<br>          &#125;;<br>        &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (val.toString().charCodeAt(<span class="hljs-number">0</span>) &gt; <span class="hljs-number">255</span>) &#123;<br>          <span class="hljs-comment">/*再判断是否为中文*/</span><br>          <span class="hljs-keyword">return</span> &#123;<br>            wch: val.toString().length * <span class="hljs-number">2</span>,<br>          &#125;;<br>        &#125; <span class="hljs-keyword">else</span> &#123;<br>          <span class="hljs-keyword">return</span> &#123;<br>            wch: val.toString().length,<br>          &#125;;<br>        &#125;<br>      &#125;)<br>    );<br>    <span class="hljs-comment">/*以第一行为初始值*/</span><br>    <span class="hljs-keyword">let</span> result = colWidth[<span class="hljs-number">0</span>];<br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">1</span>; i &lt; colWidth.length; i++) &#123;<br>      <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> j = <span class="hljs-number">0</span>; j &lt; colWidth[i].length; j++) &#123;<br>        <span class="hljs-keyword">if</span> (result[j][<span class="hljs-string">"wch"</span>] &lt; colWidth[i][j][<span class="hljs-string">"wch"</span>]) &#123;<br>          result[j][<span class="hljs-string">"wch"</span>] = colWidth[i][j][<span class="hljs-string">"wch"</span>];<br>        &#125;<br>      &#125;<br>    &#125;<br>    ws[<span class="hljs-string">"!cols"</span>] = result;<br>  &#125;<br><br>  <span class="hljs-comment">/* add worksheet to workbook */</span><br>  wb.SheetNames.push(ws_name);<br>  wb.Sheets[ws_name] = ws;<br><br>  <span class="hljs-keyword">var</span> wbout = XLSX.write(wb, &#123;<br>    bookType: bookType,<br>    bookSST: <span class="hljs-literal">false</span>,<br>    type: <span class="hljs-string">"binary"</span>,<br>  &#125;);<br>  saveAs(<br>    <span class="hljs-keyword">new</span> Blob([s2ab(wbout)], &#123;<br>      type: <span class="hljs-string">"application/octet-stream"</span>,<br>    &#125;),<br>    <span class="hljs-string">`<span class="hljs-subst">$&#123;filename&#125;</span>.<span class="hljs-subst">$&#123;bookType&#125;</span>`</span><br>  );<br>&#125;<br></code></pre></td></tr></table></figure>
 
-function generateArray(table) &#123;
-  var out = [];
-  var rows = table.querySelectorAll(&quot;tr&quot;);
-  var ranges = [];
-  for (var R = 0; R &lt; rows.length; ++R) &#123;
-    var outRow = [];
-    var row = rows[R];
-    var columns = row.querySelectorAll(&quot;td&quot;);
-    for (var C = 0; C &lt; columns.length; ++C) &#123;
-      var cell = columns[C];
-      var colspan = cell.getAttribute(&quot;colspan&quot;);
-      var rowspan = cell.getAttribute(&quot;rowspan&quot;);
-      var cellValue = cell.innerText;
-      if (cellValue !== &quot;&quot; &amp;&amp; cellValue == +cellValue) cellValue = +cellValue;
-
-      //Skip ranges
-      ranges.forEach(function (range) &#123;
-        if (
-          R &gt;= range.s.r &amp;&amp;
-          R &lt;= range.e.r &amp;&amp;
-          outRow.length &gt;= range.s.c &amp;&amp;
-          outRow.length &lt;= range.e.c
-        ) &#123;
-          for (var i = 0; i &lt;= range.e.c - range.s.c; ++i) outRow.push(null);
-        &#125;
-      &#125;);
-
-      //Handle Row Span
-      if (rowspan || colspan) &#123;
-        rowspan = rowspan || 1;
-        colspan = colspan || 1;
-        ranges.push(&#123;
-          s: &#123;
-            r: R,
-            c: outRow.length,
-          &#125;,
-          e: &#123;
-            r: R + rowspan - 1,
-            c: outRow.length + colspan - 1,
-          &#125;,
-        &#125;);
-      &#125;
-
-      //Handle Value
-      outRow.push(cellValue !== &quot;&quot; ? cellValue : null);
-
-      //Handle Colspan
-      if (colspan) for (var k = 0; k &lt; colspan - 1; ++k) outRow.push(null);
-    &#125;
-    out.push(outRow);
-  &#125;
-  return [out, ranges];
-&#125;
-
-function datenum(v, date1904) &#123;
-  if (date1904) v += 1462;
-  var epoch = Date.parse(v);
-  return (epoch - new Date(Date.UTC(1899, 11, 30))) / (24 * 60 * 60 * 1000);
-&#125;
-
-function sheet_from_array_of_arrays(data, opts) &#123;
-  var ws = &#123;&#125;;
-  var range = &#123;
-    s: &#123;
-      c: 10000000,
-      r: 10000000,
-    &#125;,
-    e: &#123;
-      c: 0,
-      r: 0,
-    &#125;,
-  &#125;;
-  for (var R = 0; R != data.length; ++R) &#123;
-    for (var C = 0; C != data[R].length; ++C) &#123;
-      if (range.s.r &gt; R) range.s.r = R;
-      if (range.s.c &gt; C) range.s.c = C;
-      if (range.e.r &lt; R) range.e.r = R;
-      if (range.e.c &lt; C) range.e.c = C;
-      var cell = &#123;
-        v: data[R][C],
-      &#125;;
-      if (cell.v == null) continue;
-      var cell_ref = XLSX.utils.encode_cell(&#123;
-        c: C,
-        r: R,
-      &#125;);
-
-      if (typeof cell.v === &quot;number&quot;) cell.t = &quot;n&quot;;
-      else if (typeof cell.v === &quot;boolean&quot;) cell.t = &quot;b&quot;;
-      else if (cell.v instanceof Date) &#123;
-        cell.t = &quot;n&quot;;
-        cell.z = XLSX.SSF._table[14];
-        cell.v = datenum(cell.v);
-      &#125; else cell.t = &quot;s&quot;;
-
-      ws[cell_ref] = cell;
-    &#125;
-  &#125;
-  if (range.s.c &lt; 10000000) ws[&quot;!ref&quot;] = XLSX.utils.encode_range(range);
-  return ws;
-&#125;
-
-function Workbook() &#123;
-  if (!(this instanceof Workbook)) return new Workbook();
-  this.SheetNames = [];
-  this.Sheets = &#123;&#125;;
-&#125;
-
-function s2ab(s) &#123;
-  var buf = new ArrayBuffer(s.length);
-  var view = new Uint8Array(buf);
-  for (var i = 0; i != s.length; ++i) view[i] = s.charCodeAt(i) &amp; 0xff;
-  return buf;
-&#125;
-
-export function export_table_to_excel(id) &#123;
-  var theTable = document.getElementById(id);
-  var oo = generateArray(theTable);
-  var ranges = oo[1];
-
-  /* original data */
-  var data = oo[0];
-  var ws_name = &quot;SheetJS&quot;;
-
-  var wb = new Workbook(),
-    ws = sheet_from_array_of_arrays(data);
-
-  /* add ranges to worksheet */
-  // ws[&#39;!cols&#39;] = [&#39;apple&#39;, &#39;banan&#39;];
-  ws[&quot;!merges&quot;] = ranges;
-
-  /* add worksheet to workbook */
-  wb.SheetNames.push(ws_name);
-  wb.Sheets[ws_name] = ws;
-
-  var wbout = XLSX.write(wb, &#123;
-    bookType: &quot;xlsx&quot;,
-    bookSST: false,
-    type: &quot;binary&quot;,
-  &#125;);
-
-  saveAs(
-    new Blob([s2ab(wbout)], &#123;
-      type: &quot;application/octet-stream&quot;,
-    &#125;),
-    &quot;test.xlsx&quot;
-  );
-&#125;
-
-export function export_json_to_excel(&#123;
-  multiHeader = [],
-  header,
-  data,
-  filename,
-  merges = [],
-  autoWidth = true,
-  bookType = &quot;xlsx&quot;,
-&#125; = &#123;&#125;) &#123;
-  /* original data */
-  filename = filename || &quot;excel-list&quot;;
-  data = [...data];
-  data.unshift(header);
-
-  for (let i = multiHeader.length - 1; i &gt; -1; i--) &#123;
-    data.unshift(multiHeader[i]);
-  &#125;
-
-  var ws_name = &quot;SheetJS&quot;;
-  var wb = new Workbook(),
-    ws = sheet_from_array_of_arrays(data);
-
-  if (merges.length &gt; 0) &#123;
-    if (!ws[&quot;!merges&quot;]) ws[&quot;!merges&quot;] = [];
-    merges.forEach((item) =&gt; &#123;
-      ws[&quot;!merges&quot;].push(XLSX.utils.decode_range(item));
-    &#125;);
-  &#125;
-
-  if (autoWidth) &#123;
-    /*设置worksheet每列的最大宽度*/
-    const colWidth = data.map((row) =&gt;
-      row.map((val) =&gt; &#123;
-        /*先判断是否为null/undefined*/
-        if (val == null) &#123;
-          return &#123;
-            wch: 10,
-          &#125;;
-        &#125; else if (val.toString().charCodeAt(0) &gt; 255) &#123;
-          /*再判断是否为中文*/
-          return &#123;
-            wch: val.toString().length * 2,
-          &#125;;
-        &#125; else &#123;
-          return &#123;
-            wch: val.toString().length,
-          &#125;;
-        &#125;
-      &#125;)
-    );
-    /*以第一行为初始值*/
-    let result = colWidth[0];
-    for (let i = 1; i &lt; colWidth.length; i++) &#123;
-      for (let j = 0; j &lt; colWidth[i].length; j++) &#123;
-        if (result[j][&quot;wch&quot;] &lt; colWidth[i][j][&quot;wch&quot;]) &#123;
-          result[j][&quot;wch&quot;] = colWidth[i][j][&quot;wch&quot;];
-        &#125;
-      &#125;
-    &#125;
-    ws[&quot;!cols&quot;] = result;
-  &#125;
-
-  /* add worksheet to workbook */
-  wb.SheetNames.push(ws_name);
-  wb.Sheets[ws_name] = ws;
-
-  var wbout = XLSX.write(wb, &#123;
-    bookType: bookType,
-    bookSST: false,
-    type: &quot;binary&quot;,
-  &#125;);
-  saveAs(
-    new Blob([s2ab(wbout)], &#123;
-      type: &quot;application/octet-stream&quot;,
-    &#125;),
-    `$&#123;filename&#125;.$&#123;bookType&#125;`
-  );
-&#125;
-</code></pre>
 </details>
 
 <h3 id="3、导出函数"><a href="#3、导出函数" class="headerlink" title="3、导出函数"></a>3、导出函数</h3><p>a-button 为 ant-design-vue 的 button 组件</p>
-<pre><code class="html">&lt;a-button
-  type=&quot;primary&quot;
-  icon=&quot;export&quot;
-  class=&quot;select-bottom&quot;
-  :loading=&quot;exportLoading&quot;
-  @click=&quot;handleExport&quot;
-  &gt;导出
-&lt;/a-button&gt;
-</code></pre>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">a-button</span></span><br><span class="hljs-tag">  <span class="hljs-attr">type</span>=<span class="hljs-string">"primary"</span></span><br><span class="hljs-tag">  <span class="hljs-attr">icon</span>=<span class="hljs-string">"export"</span></span><br><span class="hljs-tag">  <span class="hljs-attr">class</span>=<span class="hljs-string">"select-bottom"</span></span><br><span class="hljs-tag">  <span class="hljs-attr">:loading</span>=<span class="hljs-string">"exportLoading"</span></span><br><span class="hljs-tag">  @<span class="hljs-attr">click</span>=<span class="hljs-string">"handleExport"</span></span><br><span class="hljs-tag">  &gt;</span>导出<br><span class="hljs-tag">&lt;/<span class="hljs-name">a-button</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
 <p>handleExport 导出函数</p>
 <blockquote>
 <p>1、点击导出按钮，去加载在 vendor 文件夹中的 Export2Excel 模块<br>2、import 方法执行完毕返回一个 promise 对象，在 then 方法中我们可以拿到使用的模块对象（excel）<br>3、Excel 导出参数部分的 data，是一个严格的二维数组，header 为导出的数据表头，filename 为导出的文件名，bookType 为导出文件类型，autoWidth 为单元格是否要自适应宽度。</p>
 </blockquote>
-<pre><code class="js">handleExport() &#123;
-    //由于是前端导出，所以只能导出当前页的数据
-    this.exportLoading = true;
-      import(&#39;@/vendor/Export2Excel&#39;).then(excel =&gt; &#123;
-        const header = [],
-          filterVal = [];
-        this.tableHead.forEach(item =&gt; &#123;
-          if (item.title != &#39;操作&#39; &amp;&amp; item.title != &#39;序号&#39;) &#123;
-            header.push(item.title);
-            filterVal.push(item.dataIndex);
-          &#125;
-        &#125;);
-        const data = formatJson(this.tableData, filterVal);
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs js">handleExport() &#123;<br>    <span class="hljs-comment">//由于是前端导出，所以只能导出当前页的数据</span><br>    <span class="hljs-keyword">this</span>.exportLoading = <span class="hljs-literal">true</span>;<br>      <span class="hljs-keyword">import</span>(<span class="hljs-string">'@/vendor/Export2Excel'</span>).then(<span class="hljs-function"><span class="hljs-params">excel</span> =&gt;</span> &#123;<br>        <span class="hljs-keyword">const</span> header = [],<br>          filterVal = [];<br>        <span class="hljs-keyword">this</span>.tableHead.forEach(<span class="hljs-function"><span class="hljs-params">item</span> =&gt;</span> &#123;<br>          <span class="hljs-keyword">if</span> (item.title != <span class="hljs-string">'操作'</span> &amp;&amp; item.title != <span class="hljs-string">'序号'</span>) &#123;<br>            header.push(item.title);<br>            filterVal.push(item.dataIndex);<br>          &#125;<br>        &#125;);<br>        <span class="hljs-keyword">const</span> data = formatJson(<span class="hljs-keyword">this</span>.tableData, filterVal);<br><br>        excel.export_json_to_excel(&#123;<br>          header,<br>          data,<br>          filename: <span class="hljs-string">'表单统计'</span><br>        &#125;);<br>        <span class="hljs-keyword">this</span>.exportLoading = <span class="hljs-literal">false</span>;<br>      &#125;);<br>    &#125;<br></code></pre></td></tr></table></figure>
 
-        excel.export_json_to_excel(&#123;
-          header,
-          data,
-          filename: &#39;表单统计&#39;
-        &#125;);
-        this.exportLoading = false;
-      &#125;);
-    &#125;
-</code></pre>
-<h2 id="二、前端导入-Excel-的实现"><a href="#二、前端导入-Excel-的实现" class="headerlink" title="二、前端导入 Excel 的实现"></a>二、前端导入 Excel 的实现</h2><h3 id="1、ant-design-vue-上传组件的使用"><a href="#1、ant-design-vue-上传组件的使用" class="headerlink" title="1、ant-design-vue 上传组件的使用"></a>1、ant-design-vue 上传组件的使用</h3><pre><code class="html">&lt;div class=&quot;file-wrapper relative&quot;&gt;
-  &lt;input
-    ref=&quot;excel-upload&quot;
-    type=&quot;file&quot;
-    accept=&quot;.xlsx, .xls&quot;
-    @change=&quot;handleChange&quot;
-    style=&quot;display:none&quot;
-  /&gt;
-  &lt;a-button
-    type=&quot;primary&quot;
-    icon=&quot;file-excel&quot;
-    size=&quot;large&quot;
-    style=&quot;z-index:99&quot;
-    @click=&quot;handleUpload&quot;
-    :loading=&quot;loading&quot;
-  &gt;
-    上传Excel
-  &lt;/a-button&gt;
-  &lt;p class=&quot;text&quot;&gt;请选择Excel上传 支持(xlsx,xls)格式&lt;/p&gt;
-&lt;/div&gt;
-&lt;!-- table组件 tableData:[]  tableHead:[] --&gt;
-&lt;a-card
-  :hoverable=&quot;true&quot;
-  :bordered=&quot;false&quot;
-  v-if=&quot;tableHead.length &gt; 0&quot;
-  style=&quot;margin-top:30px&quot;
-&gt;
-  &lt;standard-table
-    :pagination=&quot;false&quot;
-    :tableData=&quot;tableData&quot;
-    :tableHead=&quot;tableHead&quot;
-  /&gt;
-&lt;/a-card&gt;
-</code></pre>
+<h2 id="二、前端导入-Excel-的实现"><a href="#二、前端导入-Excel-的实现" class="headerlink" title="二、前端导入 Excel 的实现"></a>二、前端导入 Excel 的实现</h2><h3 id="1、ant-design-vue-上传组件的使用"><a href="#1、ant-design-vue-上传组件的使用" class="headerlink" title="1、ant-design-vue 上传组件的使用"></a>1、ant-design-vue 上传组件的使用</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"file-wrapper relative"</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">input</span></span><br><span class="hljs-tag">    <span class="hljs-attr">ref</span>=<span class="hljs-string">"excel-upload"</span></span><br><span class="hljs-tag">    <span class="hljs-attr">type</span>=<span class="hljs-string">"file"</span></span><br><span class="hljs-tag">    <span class="hljs-attr">accept</span>=<span class="hljs-string">".xlsx, .xls"</span></span><br><span class="hljs-tag">    @<span class="hljs-attr">change</span>=<span class="hljs-string">"handleChange"</span></span><br><span class="hljs-tag">    <span class="hljs-attr">style</span>=<span class="hljs-string">"display:none"</span></span><br><span class="hljs-tag">  /&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">a-button</span></span><br><span class="hljs-tag">    <span class="hljs-attr">type</span>=<span class="hljs-string">"primary"</span></span><br><span class="hljs-tag">    <span class="hljs-attr">icon</span>=<span class="hljs-string">"file-excel"</span></span><br><span class="hljs-tag">    <span class="hljs-attr">size</span>=<span class="hljs-string">"large"</span></span><br><span class="hljs-tag">    <span class="hljs-attr">style</span>=<span class="hljs-string">"z-index:99"</span></span><br><span class="hljs-tag">    @<span class="hljs-attr">click</span>=<span class="hljs-string">"handleUpload"</span></span><br><span class="hljs-tag">    <span class="hljs-attr">:loading</span>=<span class="hljs-string">"loading"</span></span><br><span class="hljs-tag">  &gt;</span><br>    上传Excel<br>  <span class="hljs-tag">&lt;/<span class="hljs-name">a-button</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">p</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"text"</span>&gt;</span>请选择Excel上传 支持(xlsx,xls)格式<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br><span class="hljs-comment">&lt;!-- table组件 tableData:[]  tableHead:[] --&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">a-card</span></span><br><span class="hljs-tag">  <span class="hljs-attr">:hoverable</span>=<span class="hljs-string">"true"</span></span><br><span class="hljs-tag">  <span class="hljs-attr">:bordered</span>=<span class="hljs-string">"false"</span></span><br><span class="hljs-tag">  <span class="hljs-attr">v-if</span>=<span class="hljs-string">"tableHead.length &gt; 0"</span></span><br><span class="hljs-tag">  <span class="hljs-attr">style</span>=<span class="hljs-string">"margin-top:30px"</span></span><br><span class="hljs-tag">&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">standard-table</span></span><br><span class="hljs-tag">    <span class="hljs-attr">:pagination</span>=<span class="hljs-string">"false"</span></span><br><span class="hljs-tag">    <span class="hljs-attr">:tableData</span>=<span class="hljs-string">"tableData"</span></span><br><span class="hljs-tag">    <span class="hljs-attr">:tableHead</span>=<span class="hljs-string">"tableHead"</span></span><br><span class="hljs-tag">  /&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">a-card</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
 <!-- 样式 -->
 
-<pre><code class="css">.file-wrapper &#123;
-  width: 100%;
-  height: 350px;
-  line-height: 350px;
-  text-align: center;
-  background: #e6ecf4;
-  .text &#123;
-    position: absolute;
-    top: 50px;
-    left: 50%;
-    transform: translateX(-50%);
-  &#125;
-&#125;
-</code></pre>
-<h3 id="2、导入函数"><a href="#2、导入函数" class="headerlink" title="2、导入函数"></a>2、导入函数</h3><pre><code class="js">// 引入xlsx table组件
-import XLSX from &quot;xlsx&quot;;
-import standardTable from &quot;@/components/standardTable/index&quot;;
-</code></pre>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-selector-class">.file-wrapper</span> &#123;<br>  <span class="hljs-attribute">width</span>: <span class="hljs-number">100%</span>;<br>  <span class="hljs-attribute">height</span>: <span class="hljs-number">350px</span>;<br>  <span class="hljs-attribute">line-height</span>: <span class="hljs-number">350px</span>;<br>  <span class="hljs-attribute">text-align</span>: center;<br>  <span class="hljs-attribute">background</span>: <span class="hljs-number">#e6ecf4</span>;<br>  .text &#123;<br>    <span class="hljs-selector-tag">position</span>: <span class="hljs-selector-tag">absolute</span>;<br>    <span class="hljs-selector-tag">top</span>: 50<span class="hljs-selector-tag">px</span>;<br>    <span class="hljs-selector-tag">left</span>: 50%;<br>    <span class="hljs-selector-tag">transform</span>: <span class="hljs-selector-tag">translateX</span>(<span class="hljs-selector-tag">-50</span>%);<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h3 id="2、导入函数"><a href="#2、导入函数" class="headerlink" title="2、导入函数"></a>2、导入函数</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-comment">// 引入xlsx table组件</span><br><span class="hljs-keyword">import</span> XLSX <span class="hljs-keyword">from</span> <span class="hljs-string">"xlsx"</span>;<br><span class="hljs-keyword">import</span> standardTable <span class="hljs-keyword">from</span> <span class="hljs-string">"@/components/standardTable/index"</span>;<br></code></pre></td></tr></table></figure>
+
 <details>
 <summary>点我展示代码</summary>
 
-<pre><code class="js">    handleChange(e) &#123;
-      const file = e.target.files[0];
-      if (!file) return;
-      //判断格式
-      if (!this.isExcel(file)) &#123;
-        this.$message.warning(&#39;只能选择xlxs,xls文件&#39;);
-        return;
-      &#125;
-      //判断大小
-      if (file.size / 1024 / 1024 &gt; 1) &#123;
-        this.$message.warning(&#39;上传文件大小不能超过1M&#39;);
-        return;
-      &#125;
-      this.loading = true;
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br></pre></td><td class="code"><pre><code class="hljs js">handleChange(e) &#123;<br>  <span class="hljs-keyword">const</span> file = e.target.files[<span class="hljs-number">0</span>];<br>  <span class="hljs-keyword">if</span> (!file) <span class="hljs-keyword">return</span>;<br>  <span class="hljs-comment">//判断格式</span><br>  <span class="hljs-keyword">if</span> (!<span class="hljs-keyword">this</span>.isExcel(file)) &#123;<br>    <span class="hljs-keyword">this</span>.$message.warning(<span class="hljs-string">'只能选择xlxs,xls文件'</span>);<br>    <span class="hljs-keyword">return</span>;<br>  &#125;<br>  <span class="hljs-comment">//判断大小</span><br>  <span class="hljs-keyword">if</span> (file.size / <span class="hljs-number">1024</span> / <span class="hljs-number">1024</span> &gt; <span class="hljs-number">1</span>) &#123;<br>    <span class="hljs-keyword">this</span>.$message.warning(<span class="hljs-string">'上传文件大小不能超过1M'</span>);<br>    <span class="hljs-keyword">return</span>;<br>  &#125;<br>  <span class="hljs-keyword">this</span>.loading = <span class="hljs-literal">true</span>;<br><br>  <span class="hljs-keyword">const</span> reader = <span class="hljs-keyword">new</span> FileReader();<br>  reader.readAsArrayBuffer(file);<br>  reader.onload = <span class="hljs-function"><span class="hljs-params">e</span> =&gt;</span> &#123;<br>    <span class="hljs-keyword">const</span> data = e.target.result;<br>    <span class="hljs-keyword">const</span> workbook = XLSX.read(data, &#123; <span class="hljs-attr">type</span>: <span class="hljs-string">'array'</span> &#125;);<br>    <span class="hljs-keyword">const</span> firstSheetName = workbook.SheetNames[<span class="hljs-number">0</span>];<br>    <span class="hljs-keyword">const</span> worksheet = workbook.Sheets[firstSheetName];<br><br>    setTimeout(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> &#123;<br>      <span class="hljs-keyword">this</span>.loading = <span class="hljs-literal">false</span>;<br>      <span class="hljs-keyword">const</span> head = <span class="hljs-keyword">this</span>.getHeaderRow(worksheet);<br>      <span class="hljs-keyword">this</span>.tableHead = head.map(<span class="hljs-function"><span class="hljs-params">item</span> =&gt;</span> &#123;<br>        <span class="hljs-keyword">return</span> &#123;<br>          title: item,<br>          dataIndex: item<br>        &#125;;<br>      &#125;);<br>      <span class="hljs-keyword">const</span> tableData = XLSX.utils.sheet_to_json(worksheet);<br>      tableData.forEach(<span class="hljs-function"><span class="hljs-params">item</span> =&gt;</span> &#123;<br>        item.id = <span class="hljs-built_in">parseInt</span>(<span class="hljs-built_in">Math</span>.random(<span class="hljs-number">0</span>, <span class="hljs-number">1</span>) * <span class="hljs-number">10000</span>);<br>      &#125;);<br>      <span class="hljs-keyword">this</span>.tableData = tableData;<br>    &#125;, <span class="hljs-number">500</span>);<br>  &#125;;<br>&#125;,<br><br>generateData(&#123; header, results &#125;) &#123;<br>  <span class="hljs-keyword">this</span>.excelData.header = header;<br>  <span class="hljs-keyword">this</span>.excelData.results = results;<br>  <span class="hljs-keyword">this</span>.onSuccess &amp;&amp; <span class="hljs-keyword">this</span>.onSuccess(<span class="hljs-keyword">this</span>.excelData);<br>&#125;,<br><br><span class="hljs-comment">//获取表头</span><br>getHeaderRow(sheet) &#123;<br>  <span class="hljs-keyword">const</span> headers = [];<br>  <span class="hljs-keyword">const</span> range = XLSX.utils.decode_range(sheet[<span class="hljs-string">'!ref'</span>]);<br>  <span class="hljs-keyword">let</span> C;<br>  <span class="hljs-keyword">const</span> R = range.s.r;<br><br>  <span class="hljs-keyword">for</span> (C = range.s.c; C &lt;= range.e.c; ++C) &#123;<br>    <span class="hljs-keyword">const</span> cell = sheet[XLSX.utils.encode_cell(&#123; <span class="hljs-attr">c</span>: C, <span class="hljs-attr">r</span>: R &#125;)];<br>    <span class="hljs-keyword">let</span> hdr = <span class="hljs-string">'UNKNOWN '</span> + C;<br>    <span class="hljs-keyword">if</span> (cell &amp;&amp; cell.t) hdr = XLSX.utils.format_cell(cell);<br>    headers.push(hdr);<br>  &#125;<br>  <span class="hljs-keyword">return</span> headers;<br>&#125;,<br><br>handleUpload() &#123;<br>  <span class="hljs-keyword">this</span>.$refs[<span class="hljs-string">'excel-upload'</span>].click();<br>&#125;,<br><span class="hljs-comment">// 文件类型</span><br>isExcel(file) &#123;<br>  <span class="hljs-keyword">return</span> <span class="hljs-regexp">/\.(xlsx|xls|csv)$/</span>.test(file.name);<br>&#125;<br></code></pre></td></tr></table></figure>
 
-      const reader = new FileReader();
-      reader.readAsArrayBuffer(file);
-      reader.onload = e =&gt; &#123;
-        const data = e.target.result;
-        const workbook = XLSX.read(data, &#123; type: &#39;array&#39; &#125;);
-        const firstSheetName = workbook.SheetNames[0];
-        const worksheet = workbook.Sheets[firstSheetName];
-
-        setTimeout(() =&gt; &#123;
-          this.loading = false;
-          const head = this.getHeaderRow(worksheet);
-          this.tableHead = head.map(item =&gt; &#123;
-            return &#123;
-              title: item,
-              dataIndex: item
-            &#125;;
-          &#125;);
-          const tableData = XLSX.utils.sheet_to_json(worksheet);
-          tableData.forEach(item =&gt; &#123;
-            item.id = parseInt(Math.random(0, 1) * 10000);
-          &#125;);
-          this.tableData = tableData;
-        &#125;, 500);
-      &#125;;
-    &#125;,
-
-    generateData(&#123; header, results &#125;) &#123;
-      this.excelData.header = header;
-      this.excelData.results = results;
-      this.onSuccess &amp;&amp; this.onSuccess(this.excelData);
-    &#125;,
-
-    //获取表头
-    getHeaderRow(sheet) &#123;
-      const headers = [];
-      const range = XLSX.utils.decode_range(sheet[&#39;!ref&#39;]);
-      let C;
-      const R = range.s.r;
-
-      for (C = range.s.c; C &lt;= range.e.c; ++C) &#123;
-        const cell = sheet[XLSX.utils.encode_cell(&#123; c: C, r: R &#125;)];
-        let hdr = &#39;UNKNOWN &#39; + C;
-        if (cell &amp;&amp; cell.t) hdr = XLSX.utils.format_cell(cell);
-        headers.push(hdr);
-      &#125;
-      return headers;
-    &#125;,
-
-    handleUpload() &#123;
-      this.$refs[&#39;excel-upload&#39;].click();
-    &#125;,
-    // 文件类型
-    isExcel(file) &#123;
-      return /\.(xlsx|xls|csv)$/.test(file.name);
-    &#125;
-</code></pre>
 </details>
 
 <h2 id="三、table-子组件"><a href="#三、table-子组件" class="headerlink" title="三、table 子组件"></a>三、table 子组件</h2><details>
 <summary>点我展示代码</summary>
 
-<pre><code class="html">&lt;div class=&quot;tableCommon-wrapper&quot;&gt;
-  &lt;a-table
-    :columns=&quot;tableHead&quot;
-    :dataSource=&quot;tableData&quot;
-    :loading=&quot;loading&quot;
-    :pagination=&quot;pagination&quot;
-    :row-selection=&quot;rowSelection&quot;
-    @change=&quot;handleTableChange&quot;
-    rowKey=&quot;id&quot;
-    :scroll=&quot;scroll&quot;
-  &gt;
-    &lt;template
-      slot-scope=&quot;text, record, index&quot;
-      :slot=&quot;slot&quot;
-      v-for=&quot;slot in Object.keys($scopedSlots).filter(key =&gt; key !== &#39;expandedRowRender&#39;)&quot;
-    &gt;
-      &lt;slot :name=&quot;slot&quot; v-bind=&quot;&#123; text, record, index &#125;&quot;&gt;&lt;/slot&gt;
-    &lt;/template&gt;
-  &lt;/a-table&gt;
-&lt;/div&gt;
-</code></pre>
-<pre><code class="js">export default &#123;
-  name: &quot;standardTable&quot;,
-  props: &#123;
-    tableHead: &#123;
-      type: Array,
-      required: true,
-    &#125;,
-    tableData: &#123;
-      type: Array,
-      required: true,
-    &#125;,
-    loading: &#123;
-      type: Boolean,
-      default: false,
-    &#125;,
-    pagination: &#123;
-      type: Boolean | Object,
-    &#125;,
-    rowSelection: &#123;
-      type: Object,
-    &#125;,
-    scroll: &#123;
-      type: Object,
-    &#125;,
-  &#125;,
-  methods: &#123;
-    handleTableChange(val) &#123;
-      this.$emit(&quot;changeCurrent&quot;, val.current);
-    &#125;,
-  &#125;,
-&#125;;
-</code></pre>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"tableCommon-wrapper"</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">a-table</span></span><br><span class="hljs-tag">    <span class="hljs-attr">:columns</span>=<span class="hljs-string">"tableHead"</span></span><br><span class="hljs-tag">    <span class="hljs-attr">:dataSource</span>=<span class="hljs-string">"tableData"</span></span><br><span class="hljs-tag">    <span class="hljs-attr">:loading</span>=<span class="hljs-string">"loading"</span></span><br><span class="hljs-tag">    <span class="hljs-attr">:pagination</span>=<span class="hljs-string">"pagination"</span></span><br><span class="hljs-tag">    <span class="hljs-attr">:row-selection</span>=<span class="hljs-string">"rowSelection"</span></span><br><span class="hljs-tag">    @<span class="hljs-attr">change</span>=<span class="hljs-string">"handleTableChange"</span></span><br><span class="hljs-tag">    <span class="hljs-attr">rowKey</span>=<span class="hljs-string">"id"</span></span><br><span class="hljs-tag">    <span class="hljs-attr">:scroll</span>=<span class="hljs-string">"scroll"</span></span><br><span class="hljs-tag">  &gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">template</span></span><br><span class="hljs-tag">      <span class="hljs-attr">slot-scope</span>=<span class="hljs-string">"text, record, index"</span></span><br><span class="hljs-tag">      <span class="hljs-attr">:slot</span>=<span class="hljs-string">"slot"</span></span><br><span class="hljs-tag">      <span class="hljs-attr">v-for</span>=<span class="hljs-string">"slot in Object.keys($scopedSlots).filter(key =&gt; key !== 'expandedRowRender')"</span></span><br><span class="hljs-tag">    &gt;</span><br>      <span class="hljs-tag">&lt;<span class="hljs-name">slot</span> <span class="hljs-attr">:name</span>=<span class="hljs-string">"slot"</span> <span class="hljs-attr">v-bind</span>=<span class="hljs-string">"&#123; text, record, index &#125;"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">slot</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">template</span>&gt;</span><br>  <span class="hljs-tag">&lt;/<span class="hljs-name">a-table</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> &#123;<br>  name: <span class="hljs-string">"standardTable"</span>,<br>  props: &#123;<br>    tableHead: &#123;<br>      type: <span class="hljs-built_in">Array</span>,<br>      required: <span class="hljs-literal">true</span>,<br>    &#125;,<br>    tableData: &#123;<br>      type: <span class="hljs-built_in">Array</span>,<br>      required: <span class="hljs-literal">true</span>,<br>    &#125;,<br>    loading: &#123;<br>      type: <span class="hljs-built_in">Boolean</span>,<br>      <span class="hljs-keyword">default</span>: <span class="hljs-literal">false</span>,<br>    &#125;,<br>    pagination: &#123;<br>      type: <span class="hljs-built_in">Boolean</span> | <span class="hljs-built_in">Object</span>,<br>    &#125;,<br>    rowSelection: &#123;<br>      type: <span class="hljs-built_in">Object</span>,<br>    &#125;,<br>    scroll: &#123;<br>      type: <span class="hljs-built_in">Object</span>,<br>    &#125;,<br>  &#125;,<br>  methods: &#123;<br>    handleTableChange(val) &#123;<br>      <span class="hljs-keyword">this</span>.$emit(<span class="hljs-string">"changeCurrent"</span>, val.current);<br>    &#125;,<br>  &#125;,<br>&#125;;<br></code></pre></td></tr></table></figure>
+
 </details>
-</article><section class="jump-container is-flex is-justify-content-space-between my-6"><!-- em is empty placeholder--><a class="button is-default" href="/2022/01/19/52-webrtc/" title="52、WebRTC音视频"><i class="iconfont icon-prev mr-2 has-text-grey"></i><span class="has-text-weight-semibold">上一页: 52、WebRTC音视频</span></a><a class="button is-default" href="/2022/01/13/50-count-to/" title="50、CountTo:数字动态滚动"><span class="has-text-weight-semibold">下一页: 50、CountTo:数字动态滚动</span><i class="iconfont icon-next ml-2 has-text-grey"></i></a></section></div></div></main></main><footer class="is-flex is-flex-direction-column is-align-items-center is-flex-shrink-0 is-family-serif"><section class="sns-container"><!-- Github--><a title="github" target="_blank" rel="noopener nofollow" href="//github.com/Jude"><i class="iconfont icon-github"></i></a><!-- Ins--><!-- RSS--><!-- 知乎--><a title="zhihu" target="_blank" rel="noopener nofollow" href="//zhihu.com/https://www.zhihu.com/hot"><i class="iconfont icon-zhihu"></i></a><!-- 领英--><!-- 脸书--></section><p><span>Copyright ©</span><span> Jude 2023</span></p><div class="is-flex is-justify-content-center is-flex-wrap-wrap"><p>Powered by Hexo &verbar;&nbsp;</p><p class="is-flex is-justify-content-center"><a title="Hexo theme author" target="_blank" rel="noopener" href="//github.com/haojen">Theme by Haojen&nbsp;</a></p><div style="margin-top: 2px"><a class="github-button" title="github-button" target="_blank" rel="noopener" href="https://github.com/haojen/hexo-theme-Claudia" data-color-scheme="no-preference: light; light: light; dark: dark;" data-show-count="true"></a></div></div><div><span>记住昨日的美好，过好今日的生活，憧憬明天的到来</span></div></footer><script async defer src="https://buttons.github.io/buttons.js"></script><script src="/js/post.js"></script></body></html>
+</article><section class="jump-container is-flex is-justify-content-space-between my-6"><!-- em is empty placeholder--><a class="button is-default" href="/2022/01/19/52-webrtc/" title="52、WebRTC音视频"><i class="iconfont icon-prev mr-2 has-text-grey"></i><span class="has-text-weight-semibold">上一页: 52、WebRTC音视频</span></a><a class="button is-default" href="/2022/01/13/50-count-to/" title="50、CountTo:数字动态滚动"><span class="has-text-weight-semibold">下一页: 50、CountTo:数字动态滚动</span><i class="iconfont icon-next ml-2 has-text-grey"></i></a></section></div></div></main></main><footer class="is-flex is-flex-direction-column is-align-items-center is-flex-shrink-0 is-family-serif"><section class="sns-container"><!-- Github--><a title="github" target="_blank" rel="noopener nofollow" href="//github.com/Jude"><i class="iconfont icon-github"></i></a><!-- Ins--><!-- RSS--><!-- 知乎--><a title="zhihu" target="_blank" rel="noopener nofollow" href="//zhihu.com/https://www.zhihu.com/hot"><i class="iconfont icon-zhihu"></i></a><!-- 领英--><!-- 脸书--></section><p><span>Copyright ©</span><span> Jude 2024</span></p><div class="is-flex is-justify-content-center is-flex-wrap-wrap"><p>Powered by Hexo &verbar;&nbsp;</p><p class="is-flex is-justify-content-center"><a title="Hexo theme author" href="//github.com/haojen" target="_blank" rel="noopener">Theme by Haojen&nbsp;</a></p><div style="margin-top: 2px"><a class="github-button" title="github-button" href="https://github.com/haojen/hexo-theme-Claudia" target="_blank" rel="noopener" data-color-scheme="no-preference: light; light: light; dark: dark;" data-show-count="true"></a></div></div><div><span>记住昨日的美好，过好今日的生活，憧憬明天的到来</span></div></footer><script async defer src="https://buttons.github.io/buttons.js"></script><script src="/js/post.js"></script></body></html>

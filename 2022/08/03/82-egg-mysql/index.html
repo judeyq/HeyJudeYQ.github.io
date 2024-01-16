@@ -5,212 +5,73 @@
 一、安装MySQL版本选择MySQL 8.0.20  Mac Intel 版本
 安装过程设置密码：0987654321
 此时在terminal输入命令：
-mysql -u root -p
+1mysql -u root -p
 
 Commod not found
 1、termina进入 路径：&amp;#x2F;usr&amp;#x2F;local&amp;#x2F;mysql&amp;#x2F;bin  查看目录是否有mysql
 如果存在，在此路径下执行：vim ~&amp;#x2F;.bash_profile
 打开后，输入 i 键，进入编辑，在.bash_profile中添加mysql&amp;#x2F;bin的目录，完成后，ESC退出编辑，输入：wq回车保存
-PATH=$PA.."><meta name="generator" content="Hexo 7.0.0"></head><body class="is-flex is-flex-direction-column"><header class="header-widget is-flex-shrink-0 is-hidden-mobile"><div class="container is-fullhd is-flex is-justify-content-space-between is-align-items-center is-full-height"><section class="is-hidden-mobile is-flex-shrink-0"><h2><a href="/">Jude's blog</a></h2></section><h3 class="is-hidden-mobile is-family-serif is-full-height is-flex is-align-items-center is-flex-shrink-0"><div class="is-full-height" id="postTopic"><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">82、egg-mysql的增删改查</p><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">点击返回顶部</p></div></h3><aside class="is-flex-shrink-0"><h3 class="is-inline-block"><a href="/">首页</a></h3><h3 class="is-inline-block"><a href="/about">关于</a></h3><h3 class="is-inline-block"><a href="/archives">归档</a></h3></aside></div></header><header class="is-flex header-widget is-flex-shrink-0 is-align-items-center is-justify-content-center is-hidden-tablet"><h3 class="is-inline-block"><a href="/">首页</a></h3><h3 class="is-inline-block"><a href="/about">关于</a></h3><h3 class="is-inline-block"><a href="/archives">归档</a></h3></header><main><main class="container is-max-widescreen content section post-page pt-4 px-4"><div class="columns is-flex-desktop is-justify-content-center is-flex-direction-row-reverse"><div class="column is-3 is-hidden-mobile"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E5%AE%89%E8%A3%85MySQL"><span class="toc-text">一、安装MySQL</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81egg-js%E5%AE%89%E8%A3%85egg-mysql%E6%8F%92%E4%BB%B6"><span class="toc-text">二、egg.js安装egg-mysql插件</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1%E3%80%81%E5%AE%89%E8%A3%85egg-mysql%E5%8F%8A%E6%8F%92%E4%BB%B6%E9%85%8D%E7%BD%AE"><span class="toc-text">1、安装egg-mysql及插件配置</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2%E3%80%81%E4%BF%AE%E6%94%B9-service-home-js"><span class="toc-text">2、修改 service&#x2F;home.js</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3%E3%80%81%E4%BF%AE%E6%94%B9controller-home-js%E4%B8%AD%E7%9A%84user%E6%96%B9%E6%B3%95"><span class="toc-text">3、修改controller&#x2F;home.js中的user方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4%E3%80%81%E8%B7%AF%E7%94%B1%E9%85%8D%E7%BD%AE"><span class="toc-text">4、路由配置</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E6%96%B0%E5%A2%9E%E6%8E%A5%E5%8F%A3"><span class="toc-text">三、新增接口</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%9B%E3%80%81%E7%BC%96%E8%BE%91%E6%8E%A5%E5%8F%A3"><span class="toc-text">四、编辑接口</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%94%E3%80%81%E5%88%A0%E9%99%A4%E6%8E%A5%E5%8F%A3"><span class="toc-text">五、删除接口</span></a></li></ol></div><div class="column is-9"><header class="my-4"><a href="/tags/egg"><i class="tag post-item-tag">egg</i></a></header><h1 class="mt-0 mb-1 is-family-serif" id="postTitle">82、egg-mysql的增删改查</h1><time class="has-text-grey" datetime="2022-08-03T12:00:00.000Z">2022-08-03</time><article class="mt-2 post-content"><p>MySQL安装成功后，在egg项目中安装egg-mysql插件，配置完成后，编写查询、新增、删除、编辑接口。</p>
-<span id="more"></span>
+1PATH&amp;#.."><meta name="generator" content="Hexo 4.2.1"></head><body class="is-flex is-flex-direction-column"><header class="header-widget is-flex-shrink-0 is-hidden-mobile"><div class="container is-fullhd is-flex is-justify-content-space-between is-align-items-center is-full-height"><section class="is-hidden-mobile is-flex-shrink-0"><h2><a href="/">Jude's blog</a></h2></section><h3 class="is-hidden-mobile is-family-serif is-full-height is-flex is-align-items-center is-flex-shrink-0"><div class="is-full-height" id="postTopic"><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">82、egg-mysql的增删改查</p><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">点击返回顶部</p></div></h3><aside class="is-flex-shrink-0"><h3 class="is-inline-block"><a href="/">首页</a></h3><h3 class="is-inline-block"><a href="/about">关于</a></h3><h3 class="is-inline-block"><a href="/archives">归档</a></h3></aside></div></header><header class="is-flex header-widget is-flex-shrink-0 is-align-items-center is-justify-content-center is-hidden-tablet"><h3 class="is-inline-block"><a href="/">首页</a></h3><h3 class="is-inline-block"><a href="/about">关于</a></h3><h3 class="is-inline-block"><a href="/archives">归档</a></h3></header><main><main class="container is-max-widescreen content section post-page pt-4 px-4"><div class="columns is-flex-desktop is-justify-content-center is-flex-direction-row-reverse"><div class="column is-3 is-hidden-mobile"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#一、安装MySQL"><span class="toc-text">一、安装MySQL</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二、egg-js安装egg-mysql插件"><span class="toc-text">二、egg.js安装egg-mysql插件</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1、安装egg-mysql及插件配置"><span class="toc-text">1、安装egg-mysql及插件配置</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2、修改-service-home-js"><span class="toc-text">2、修改 service&#x2F;home.js</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3、修改controller-home-js中的user方法"><span class="toc-text">3、修改controller&#x2F;home.js中的user方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4、路由配置"><span class="toc-text">4、路由配置</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#三、新增接口"><span class="toc-text">三、新增接口</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#四、编辑接口"><span class="toc-text">四、编辑接口</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#五、删除接口"><span class="toc-text">五、删除接口</span></a></li></ol></div><div class="column is-9"><header class="my-4"><a href="/tags/egg"><i class="tag post-item-tag">egg</i></a></header><h1 class="mt-0 mb-1 is-family-serif" id="postTitle">82、egg-mysql的增删改查</h1><time class="has-text-grey" datetime="2022-08-03T12:00:00.000Z">2022-08-03</time><article class="mt-2 post-content"><p>MySQL安装成功后，在egg项目中安装egg-mysql插件，配置完成后，编写查询、新增、删除、编辑接口。</p>
+<a id="more"></a>
 
 <h2 id="一、安装MySQL"><a href="#一、安装MySQL" class="headerlink" title="一、安装MySQL"></a>一、安装MySQL</h2><p>版本选择MySQL 8.0.20  Mac Intel 版本</p>
 <p>安装过程设置密码：0987654321</p>
 <p>此时在terminal输入命令：</p>
-<pre><code>mysql -u root -p
-</code></pre>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plain">mysql -u root -p<br></code></pre></td></tr></table></figure>
+
 <p>Commod not found</p>
 <p>1、termina进入 路径：&#x2F;usr&#x2F;local&#x2F;mysql&#x2F;bin  查看目录是否有mysql</p>
 <p>如果存在，在此路径下执行：vim ~&#x2F;.bash_profile</p>
 <p>打开后，输入 i 键，进入编辑，在.bash_profile中添加mysql&#x2F;bin的目录，完成后，ESC退出编辑，输入：wq回车保存</p>
-<pre><code>PATH=$PATH:/usr/local/mysql/bin
-</code></pre>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plain">PATH&#x3D;$PATH:&#x2F;usr&#x2F;local&#x2F;mysql&#x2F;bin<br></code></pre></td></tr></table></figure>
+
 <p>2、输入source  ~&#x2F;.bash_profile      使配置生效</p>
 <p>3、指令登录数据库：mysql -u root -p   输入密码：0987654321</p>
 <p>4、开启服务：mysql.server start</p>
-<h2 id="二、egg-js安装egg-mysql插件"><a href="#二、egg-js安装egg-mysql插件" class="headerlink" title="二、egg.js安装egg-mysql插件"></a>二、egg.js安装egg-mysql插件</h2><h4 id="1、安装egg-mysql及插件配置"><a href="#1、安装egg-mysql及插件配置" class="headerlink" title="1、安装egg-mysql及插件配置"></a>1、安装egg-mysql及插件配置</h4><pre><code class="shell">npm install egg-mysql
+<h2 id="二、egg-js安装egg-mysql插件"><a href="#二、egg-js安装egg-mysql插件" class="headerlink" title="二、egg.js安装egg-mysql插件"></a>二、egg.js安装egg-mysql插件</h2><h4 id="1、安装egg-mysql及插件配置"><a href="#1、安装egg-mysql及插件配置" class="headerlink" title="1、安装egg-mysql及插件配置"></a>1、安装egg-mysql及插件配置</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">npm install egg-mysql<br></code></pre></td></tr></table></figure>
 
-</code></pre>
 <p>config&#x2F;plugin.js</p>
-<pre><code class="js">&#39;use strict&#39;;
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-meta">'use strict'</span>;<br><br><span class="hljs-comment">/** <span class="hljs-doctag">@type </span>Egg.EggPlugin */</span><br><span class="hljs-built_in">module</span>.exports = &#123;<br>  ejs: &#123;<br>    enable: <span class="hljs-literal">true</span>,<br>    package: <span class="hljs-string">'egg-view-ejs'</span><br>  &#125;,<br>  mysql: &#123;<br>    enable: <span class="hljs-literal">true</span>,<br>    package: <span class="hljs-string">'egg-mysql'</span><br>  &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
 
-/** @type Egg.EggPlugin */
-module.exports = &#123;
-  ejs: &#123;
-    enable: true,
-    package: &#39;egg-view-ejs&#39;
-  &#125;,
-  mysql: &#123;
-    enable: true,
-    package: &#39;egg-mysql&#39;
-  &#125;
-&#125;;
-</code></pre>
 <p>config&#x2F;plugin-default.js</p>
-<pre><code class="js">exports.mysql = &#123;
-  // 单数据库信息配置
-  client: &#123;
-    // host
-    host: &#39;localhost&#39;,
-    // 端口号
-    port: &#39;3306&#39;,
-    // 用户名
-    user: &#39;root&#39;,
-    // 密码
-    password: &#39;数据库密码&#39;, // 初始化密码，没设置的可以不写
-    // 数据库名
-    database: &#39;test&#39;, // 我们新建的数据库名称
-  &#125;,
-  // 是否加载到 app 上，默认开启
-  app: true,
-  // 是否加载到 agent 上，默认关闭
-  agent: false,
-&#125;;
-</code></pre>
-<h4 id="2、修改-service-home-js"><a href="#2、修改-service-home-js" class="headerlink" title="2、修改 service/home.js"></a>2、修改 <code>service/home.js</code></h4><pre><code class="js">&#39;use strict&#39;;
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs js">exports.mysql = &#123;<br>  <span class="hljs-comment">// 单数据库信息配置</span><br>  client: &#123;<br>    <span class="hljs-comment">// host</span><br>    host: <span class="hljs-string">'localhost'</span>,<br>    <span class="hljs-comment">// 端口号</span><br>    port: <span class="hljs-string">'3306'</span>,<br>    <span class="hljs-comment">// 用户名</span><br>    user: <span class="hljs-string">'root'</span>,<br>    <span class="hljs-comment">// 密码</span><br>    password: <span class="hljs-string">'数据库密码'</span>, <span class="hljs-comment">// 初始化密码，没设置的可以不写</span><br>    <span class="hljs-comment">// 数据库名</span><br>    database: <span class="hljs-string">'test'</span>, <span class="hljs-comment">// 我们新建的数据库名称</span><br>  &#125;,<br>  <span class="hljs-comment">// 是否加载到 app 上，默认开启</span><br>  app: <span class="hljs-literal">true</span>,<br>  <span class="hljs-comment">// 是否加载到 agent 上，默认关闭</span><br>  agent: <span class="hljs-literal">false</span>,<br>&#125;;<br></code></pre></td></tr></table></figure>
 
-const Service = require(&#39;egg&#39;).Service;
+<h4 id="2、修改-service-home-js"><a href="#2、修改-service-home-js" class="headerlink" title="2、修改 service/home.js"></a>2、修改 <code>service/home.js</code></h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-meta">'use strict'</span>;<br><br><span class="hljs-keyword">const</span> Service = <span class="hljs-built_in">require</span>(<span class="hljs-string">'egg'</span>).Service;<br><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">HomeService</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Service</span> </span>&#123;<br>  <span class="hljs-keyword">async</span> user() &#123;<br>    <span class="hljs-keyword">const</span> &#123; ctx, app &#125; = <span class="hljs-keyword">this</span>;<br>    <span class="hljs-keyword">const</span> QUERY_STR = <span class="hljs-string">'id, name'</span>;<br>    <span class="hljs-keyword">let</span> sql = <span class="hljs-string">`select <span class="hljs-subst">$&#123;QUERY_STR&#125;</span> from list`</span>; <span class="hljs-comment">// 获取 id 的 sql 语句</span><br>    <span class="hljs-keyword">try</span> &#123;<br>      <span class="hljs-keyword">const</span> result = <span class="hljs-keyword">await</span> app.mysql.query(sql); <span class="hljs-comment">// mysql 实例已经挂载到 app 对象下，可以通过 app.mysql 获取到。</span><br>      <span class="hljs-keyword">return</span> result;<br>    &#125; <span class="hljs-keyword">catch</span> (error) &#123;<br>      <span class="hljs-built_in">console</span>.log(error);<br>      <span class="hljs-keyword">return</span> <span class="hljs-literal">null</span>;<br>    &#125;<br>  &#125;<br>&#125;<br><span class="hljs-built_in">module</span>.exports = HomeService;<br></code></pre></td></tr></table></figure>
 
-class HomeService extends Service &#123;
-  async user() &#123;
-    const &#123; ctx, app &#125; = this;
-    const QUERY_STR = &#39;id, name&#39;;
-    let sql = `select $&#123;QUERY_STR&#125; from list`; // 获取 id 的 sql 语句
-    try &#123;
-      const result = await app.mysql.query(sql); // mysql 实例已经挂载到 app 对象下，可以通过 app.mysql 获取到。
-      return result;
-    &#125; catch (error) &#123;
-      console.log(error);
-      return null;
-    &#125;
-  &#125;
-&#125;
-module.exports = HomeService;
-</code></pre>
-<h4 id="3、修改controller-home-js中的user方法"><a href="#3、修改controller-home-js中的user方法" class="headerlink" title="3、修改controller&#x2F;home.js中的user方法"></a>3、修改controller&#x2F;home.js中的user方法</h4><pre><code class="js">async user() &#123;
-  const &#123; ctx &#125; = this;
-  const result = await ctx.service.home.user();
-  ctx.body = result
-&#125;
-</code></pre>
-<h4 id="4、路由配置"><a href="#4、路由配置" class="headerlink" title="4、路由配置"></a>4、路由配置</h4><pre><code class="js">router.get(&#39;/user&#39;, controller.home.user);
-</code></pre>
+<h4 id="3、修改controller-home-js中的user方法"><a href="#3、修改controller-home-js中的user方法" class="headerlink" title="3、修改controller&#x2F;home.js中的user方法"></a>3、修改controller&#x2F;home.js中的user方法</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">async</span> user() &#123;<br>  <span class="hljs-keyword">const</span> &#123; ctx &#125; = <span class="hljs-keyword">this</span>;<br>  <span class="hljs-keyword">const</span> result = <span class="hljs-keyword">await</span> ctx.service.home.user();<br>  ctx.body = result<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h4 id="4、路由配置"><a href="#4、路由配置" class="headerlink" title="4、路由配置"></a>4、路由配置</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs js">router.get(<span class="hljs-string">'/user'</span>, controller.home.user);<br></code></pre></td></tr></table></figure>
+
 <h2 id="三、新增接口"><a href="#三、新增接口" class="headerlink" title="三、新增接口"></a>三、新增接口</h2><p>在 <code>service/home.js</code> 下新建一个函数 <code>addUser</code></p>
-<pre><code class="js">// 新增
-async addUser(name) &#123;
-  const &#123; ctx, app &#125; = this;
-  try &#123;
-    const result = await app.mysql.insert(&#39;list&#39;, &#123; name &#125;); // 给 list 表，新增一条数据
-    return result;
-  &#125; catch (error) &#123;
-    console.log(error);
-    return null;
-  &#125;
-&#125;
-</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-comment">// 新增</span><br><span class="hljs-keyword">async</span> addUser(name) &#123;<br>  <span class="hljs-keyword">const</span> &#123; ctx, app &#125; = <span class="hljs-keyword">this</span>;<br>  <span class="hljs-keyword">try</span> &#123;<br>    <span class="hljs-keyword">const</span> result = <span class="hljs-keyword">await</span> app.mysql.insert(<span class="hljs-string">'list'</span>, &#123; name &#125;); <span class="hljs-comment">// 给 list 表，新增一条数据</span><br>    <span class="hljs-keyword">return</span> result;<br>  &#125; <span class="hljs-keyword">catch</span> (error) &#123;<br>    <span class="hljs-built_in">console</span>.log(error);<br>    <span class="hljs-keyword">return</span> <span class="hljs-literal">null</span>;<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
 <p>再为 <code>controller/home.js</code> 添加一个 <code>addUser</code> 方法</p>
-<pre><code class="js">async addUser() &#123;
-  const &#123; ctx &#125; = this;
-  const &#123; name &#125; = ctx.request.body;
-  try &#123;
-    const result = await ctx.service.home.addUser(name);
-    ctx.body = &#123;
-      code: 200,
-      msg: &#39;添加成功&#39;,
-      data: null
-    &#125;
-  &#125; catch (error) &#123;
-    ctx.body = &#123;
-      code: 500,
-      msg: &#39;添加失败&#39;,
-      data: null
-    &#125;
-  &#125;
-&#125;
-</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">async</span> addUser() &#123;<br>  <span class="hljs-keyword">const</span> &#123; ctx &#125; = <span class="hljs-keyword">this</span>;<br>  <span class="hljs-keyword">const</span> &#123; name &#125; = ctx.request.body;<br>  <span class="hljs-keyword">try</span> &#123;<br>    <span class="hljs-keyword">const</span> result = <span class="hljs-keyword">await</span> ctx.service.home.addUser(name);<br>    ctx.body = &#123;<br>      code: <span class="hljs-number">200</span>,<br>      msg: <span class="hljs-string">'添加成功'</span>,<br>      data: <span class="hljs-literal">null</span><br>    &#125;<br>  &#125; <span class="hljs-keyword">catch</span> (error) &#123;<br>    ctx.body = &#123;<br>      code: <span class="hljs-number">500</span>,<br>      msg: <span class="hljs-string">'添加失败'</span>,<br>      data: <span class="hljs-literal">null</span><br>    &#125;<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
 <p>配置路由</p>
-<pre><code class="js">router.post(&#39;/add_user&#39;, controller.home.addUser);
-</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs js">router.post(<span class="hljs-string">'/add_user'</span>, controller.home.addUser);<br></code></pre></td></tr></table></figure>
+
 <p>这个post请求需要使用postman测试接口是否成功。</p>
 <h2 id="四、编辑接口"><a href="#四、编辑接口" class="headerlink" title="四、编辑接口"></a>四、编辑接口</h2><p>通过 <code>/user</code> 拿到了列表数据，我们可以通过 <code>id</code> 定位某条数据，去修改它的 <code>name</code> 属性。</p>
 <p><code>/service/home.js</code>，添加编辑操作</p>
-<pre><code class="js">// 编辑
-async editUser(id, name) &#123;
-  const &#123; ctx, app &#125; = this;
-  try &#123;
-    let result = await app.mysql.update(&#39;list&#39;, &#123; name &#125;, &#123;
-      where: &#123;
-        id
-      &#125;
-    &#125;);
-    return result;
-  &#125; catch (error) &#123;
-    console.log(error);
-    return null;
-  &#125;
-&#125;
-</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-comment">// 编辑</span><br><span class="hljs-keyword">async</span> editUser(id, name) &#123;<br>  <span class="hljs-keyword">const</span> &#123; ctx, app &#125; = <span class="hljs-keyword">this</span>;<br>  <span class="hljs-keyword">try</span> &#123;<br>    <span class="hljs-keyword">let</span> result = <span class="hljs-keyword">await</span> app.mysql.update(<span class="hljs-string">'list'</span>, &#123; name &#125;, &#123;<br>      where: &#123;<br>        id<br>      &#125;<br>    &#125;);<br>    <span class="hljs-keyword">return</span> result;<br>  &#125; <span class="hljs-keyword">catch</span> (error) &#123;<br>    <span class="hljs-built_in">console</span>.log(error);<br>    <span class="hljs-keyword">return</span> <span class="hljs-literal">null</span>;<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
 <p><code>/controller/home.js</code> 添加如下代码：</p>
-<pre><code class="js">// 编辑
-async editUser() &#123;
-  const &#123; ctx &#125; = this;
-  const &#123; id, name &#125; = ctx.request.body;
-  try &#123;
-    const result = await ctx.service.home.editUser(id, name);
-    ctx.body = &#123;
-      code: 200,
-      msg: &#39;添加成功&#39;,
-      data: null
-    &#125;
-  &#125; catch (error) &#123;
-    ctx.body = &#123;
-      code: 500,
-      msg: &#39;添加失败&#39;,
-      data: null
-    &#125;
-  &#125;
-&#125;
-</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-comment">// 编辑</span><br><span class="hljs-keyword">async</span> editUser() &#123;<br>  <span class="hljs-keyword">const</span> &#123; ctx &#125; = <span class="hljs-keyword">this</span>;<br>  <span class="hljs-keyword">const</span> &#123; id, name &#125; = ctx.request.body;<br>  <span class="hljs-keyword">try</span> &#123;<br>    <span class="hljs-keyword">const</span> result = <span class="hljs-keyword">await</span> ctx.service.home.editUser(id, name);<br>    ctx.body = &#123;<br>      code: <span class="hljs-number">200</span>,<br>      msg: <span class="hljs-string">'添加成功'</span>,<br>      data: <span class="hljs-literal">null</span><br>    &#125;<br>  &#125; <span class="hljs-keyword">catch</span> (error) &#123;<br>    ctx.body = &#123;<br>      code: <span class="hljs-number">500</span>,<br>      msg: <span class="hljs-string">'添加失败'</span>,<br>      data: <span class="hljs-literal">null</span><br>    &#125;<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
 <p>配置路由：</p>
-<pre><code class="js">router.post(&#39;/edit_user&#39;, controller.home.editUser);
-</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs js">router.post(<span class="hljs-string">'/edit_user'</span>, controller.home.editUser);<br></code></pre></td></tr></table></figure>
+
 <p>post请求需要使用postman工具测试接口</p>
 <h2 id="五、删除接口"><a href="#五、删除接口" class="headerlink" title="五、删除接口"></a>五、删除接口</h2><p>在 <code>/service/home.js</code> 添加删除接口</p>
-<pre><code class="js">// 删除
-async deleteUser(id) &#123;
-  const &#123; ctx, app &#125; = this;
-  try &#123;
-    let result = await app.mysql.delete(&#39;list&#39;, &#123; id &#125;);
-    return result;
-  &#125; catch (error) &#123;
-    console.log(error);
-    return null;
-  &#125;
-&#125;
-</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-comment">// 删除</span><br><span class="hljs-keyword">async</span> deleteUser(id) &#123;<br>  <span class="hljs-keyword">const</span> &#123; ctx, app &#125; = <span class="hljs-keyword">this</span>;<br>  <span class="hljs-keyword">try</span> &#123;<br>    <span class="hljs-keyword">let</span> result = <span class="hljs-keyword">await</span> app.mysql.delete(<span class="hljs-string">'list'</span>, &#123; id &#125;);<br>    <span class="hljs-keyword">return</span> result;<br>  &#125; <span class="hljs-keyword">catch</span> (error) &#123;<br>    <span class="hljs-built_in">console</span>.log(error);<br>    <span class="hljs-keyword">return</span> <span class="hljs-literal">null</span>;<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
 <p><code>/controller/home.js</code> 添加相应的控制器方法</p>
-<pre><code class="js">// 删除
-async deleteUser() &#123;
-  const &#123; ctx &#125; = this;
-  const &#123; id &#125; = ctx.request.body;
-  try &#123;
-    const result = await ctx.service.home.deleteUser(id);
-    ctx.body = &#123;
-      code: 200,
-      msg: &#39;删除成功&#39;,
-      data: null
-    &#125;
-  &#125; catch (error) &#123;
-    ctx.body = &#123;
-      code: 500,
-      msg: &#39;删除失败&#39;,
-      data: null
-    &#125;
-  &#125;
-&#125;
-</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-comment">// 删除</span><br><span class="hljs-keyword">async</span> deleteUser() &#123;<br>  <span class="hljs-keyword">const</span> &#123; ctx &#125; = <span class="hljs-keyword">this</span>;<br>  <span class="hljs-keyword">const</span> &#123; id &#125; = ctx.request.body;<br>  <span class="hljs-keyword">try</span> &#123;<br>    <span class="hljs-keyword">const</span> result = <span class="hljs-keyword">await</span> ctx.service.home.deleteUser(id);<br>    ctx.body = &#123;<br>      code: <span class="hljs-number">200</span>,<br>      msg: <span class="hljs-string">'删除成功'</span>,<br>      data: <span class="hljs-literal">null</span><br>    &#125;<br>  &#125; <span class="hljs-keyword">catch</span> (error) &#123;<br>    ctx.body = &#123;<br>      code: <span class="hljs-number">500</span>,<br>      msg: <span class="hljs-string">'删除失败'</span>,<br>      data: <span class="hljs-literal">null</span><br>    &#125;<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
 <p>添加相应路由：</p>
-<pre><code class="js">// router.js
-router.post(&#39;/delete_user&#39;, controller.home.deleteUser);
-</code></pre>
-</article><section class="jump-container is-flex is-justify-content-space-between my-6"><!-- em is empty placeholder--><a class="button is-default" href="/2022/08/03/83-egg-jwt/" title="83、egg-jwt用户鉴权、注册、登录及中间件"><i class="iconfont icon-prev mr-2 has-text-grey"></i><span class="has-text-weight-semibold">上一页: 83、egg-jwt用户鉴权、注册、登录及中间件</span></a><a class="button is-default" href="/2022/08/02/81-egg.js/" title="81、egg.js(二)"><span class="has-text-weight-semibold">下一页: 81、egg.js(二)</span><i class="iconfont icon-next ml-2 has-text-grey"></i></a></section></div></div></main></main><footer class="is-flex is-flex-direction-column is-align-items-center is-flex-shrink-0 is-family-serif"><section class="sns-container"><!-- Github--><a title="github" target="_blank" rel="noopener nofollow" href="//github.com/Jude"><i class="iconfont icon-github"></i></a><!-- Ins--><!-- RSS--><!-- 知乎--><a title="zhihu" target="_blank" rel="noopener nofollow" href="//zhihu.com/https://www.zhihu.com/hot"><i class="iconfont icon-zhihu"></i></a><!-- 领英--><!-- 脸书--></section><p><span>Copyright ©</span><span> Jude 2023</span></p><div class="is-flex is-justify-content-center is-flex-wrap-wrap"><p>Powered by Hexo &verbar;&nbsp;</p><p class="is-flex is-justify-content-center"><a title="Hexo theme author" target="_blank" rel="noopener" href="//github.com/haojen">Theme by Haojen&nbsp;</a></p><div style="margin-top: 2px"><a class="github-button" title="github-button" target="_blank" rel="noopener" href="https://github.com/haojen/hexo-theme-Claudia" data-color-scheme="no-preference: light; light: light; dark: dark;" data-show-count="true"></a></div></div><div><span>记住昨日的美好，过好今日的生活，憧憬明天的到来</span></div></footer><script async defer src="https://buttons.github.io/buttons.js"></script><script src="/js/post.js"></script></body></html>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-comment">// router.js</span><br>router.post(<span class="hljs-string">'/delete_user'</span>, controller.home.deleteUser);<br></code></pre></td></tr></table></figure>
+
+
+
+</article><section class="jump-container is-flex is-justify-content-space-between my-6"><!-- em is empty placeholder--><a class="button is-default" href="/2022/08/03/83-egg-jwt/" title="83、egg-jwt用户鉴权、注册、登录及中间件"><i class="iconfont icon-prev mr-2 has-text-grey"></i><span class="has-text-weight-semibold">上一页: 83、egg-jwt用户鉴权、注册、登录及中间件</span></a><a class="button is-default" href="/2022/08/02/81-egg.js/" title="81、egg.js(二)"><span class="has-text-weight-semibold">下一页: 81、egg.js(二)</span><i class="iconfont icon-next ml-2 has-text-grey"></i></a></section></div></div></main></main><footer class="is-flex is-flex-direction-column is-align-items-center is-flex-shrink-0 is-family-serif"><section class="sns-container"><!-- Github--><a title="github" target="_blank" rel="noopener nofollow" href="//github.com/Jude"><i class="iconfont icon-github"></i></a><!-- Ins--><!-- RSS--><!-- 知乎--><a title="zhihu" target="_blank" rel="noopener nofollow" href="//zhihu.com/https://www.zhihu.com/hot"><i class="iconfont icon-zhihu"></i></a><!-- 领英--><!-- 脸书--></section><p><span>Copyright ©</span><span> Jude 2024</span></p><div class="is-flex is-justify-content-center is-flex-wrap-wrap"><p>Powered by Hexo &verbar;&nbsp;</p><p class="is-flex is-justify-content-center"><a title="Hexo theme author" href="//github.com/haojen" target="_blank" rel="noopener">Theme by Haojen&nbsp;</a></p><div style="margin-top: 2px"><a class="github-button" title="github-button" href="https://github.com/haojen/hexo-theme-Claudia" target="_blank" rel="noopener" data-color-scheme="no-preference: light; light: light; dark: dark;" data-show-count="true"></a></div></div><div><span>记住昨日的美好，过好今日的生活，憧憬明天的到来</span></div></footer><script async defer src="https://buttons.github.io/buttons.js"></script><script src="/js/post.js"></script></body></html>

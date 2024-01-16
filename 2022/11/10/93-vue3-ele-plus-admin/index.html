@@ -3,99 +3,30 @@
 
 
 一、配置环境变量及封装 axios 模块在跟目录下创建.env.development .env.production 2 个文件
-// .env.development
-ENV = &amp;quot;development&amp;quot;;
-VUE_APP_BASE_API = &amp;quot;/api&amp;quot;;
-
-// .env.production
-ENV = &amp;quot;production&amp;quot;;
-VUE_APP_BASE_APIU = &amp;quot;/prod-api&amp;quot;;
+1234567// .env.developmentENV = &quot;development&quot;;VUE_APP_BASE_API = &quot;/api&quot;;// .env.productionENV = &quot;production&quot;;VUE_APP_BASE_APIU = &quot;/prod-api&quot;;
 
 axios 的封装 utils 下创建 request.js
-import axios from &amp;quot.."><meta name="generator" content="Hexo 7.0.0"></head><body class="is-flex is-flex-direction-column"><header class="header-widget is-flex-shrink-0 is-hidden-mobile"><div class="container is-fullhd is-flex is-justify-content-space-between is-align-items-center is-full-height"><section class="is-hidden-mobile is-flex-shrink-0"><h2><a href="/">Jude's blog</a></h2></section><h3 class="is-hidden-mobile is-family-serif is-full-height is-flex is-align-items-center is-flex-shrink-0"><div class="is-full-height" id="postTopic"><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">93、使用vue3+element-plus写后台管理系统：（三）</p><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">点击返回顶部</p></div></h3><aside class="is-flex-shrink-0"><h3 class="is-inline-block"><a href="/">首页</a></h3><h3 class="is-inline-block"><a href="/about">关于</a></h3><h3 class="is-inline-block"><a href="/archives">归档</a></h3></aside></div></header><header class="is-flex header-widget is-flex-shrink-0 is-align-items-center is-justify-content-center is-hidden-tablet"><h3 class="is-inline-block"><a href="/">首页</a></h3><h3 class="is-inline-block"><a href="/about">关于</a></h3><h3 class="is-inline-block"><a href="/archives">归档</a></h3></header><main><main class="container is-max-widescreen content section post-page pt-4 px-4"><div class="columns is-flex-desktop is-justify-content-center is-flex-direction-row-reverse"><div class="column is-3 is-hidden-mobile"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E9%85%8D%E7%BD%AE%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E5%8F%8A%E5%B0%81%E8%A3%85-axios-%E6%A8%A1%E5%9D%97"><span class="toc-text">一、配置环境变量及封装 axios 模块</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E5%B0%81%E8%A3%85%E7%99%BB%E5%BD%95%E8%AF%B7%E6%B1%82%E5%8A%A8%E4%BD%9C"><span class="toc-text">二、封装登录请求动作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E6%9C%AC%E5%9C%B0%E7%BC%93%E5%AD%98%E7%9A%84%E5%A4%84%E7%90%86"><span class="toc-text">三、本地缓存的处理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80-%E3%80%81localStorage"><span class="toc-text">(一)、localStorage</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8C-%E3%80%81vuex-%E5%A4%84%E7%90%86-token"><span class="toc-text">(二)、vuex 处理 token</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%9B%E3%80%81%E5%93%8D%E5%BA%94%E6%95%B0%E6%8D%AE%E7%9A%84%E7%BB%9F%E4%B8%80%E5%A4%84%E7%90%86"><span class="toc-text">四、响应数据的统一处理</span></a></li></ol></div><div class="column is-9"><header class="my-4"><a href="/tags/vue3"><i class="tag post-item-tag">vue3</i></a></header><h1 class="mt-0 mb-1 is-family-serif" id="postTitle">93、使用vue3+element-plus写后台管理系统：（三）</h1><time class="has-text-grey" datetime="2022-11-10T12:00:00.000Z">2022-11-10</time><article class="mt-2 post-content"><p>包括配置环境变量封装 axios、接口请求模块、vuex 登录请求动作、保存服务端的 token、登录鉴权</p>
-<span id="more"></span>
+1234567import axios from &quot;axios&quot;;const service = axios.create(.."><meta name="generator" content="Hexo 4.2.1"></head><body class="is-flex is-flex-direction-column"><header class="header-widget is-flex-shrink-0 is-hidden-mobile"><div class="container is-fullhd is-flex is-justify-content-space-between is-align-items-center is-full-height"><section class="is-hidden-mobile is-flex-shrink-0"><h2><a href="/">Jude's blog</a></h2></section><h3 class="is-hidden-mobile is-family-serif is-full-height is-flex is-align-items-center is-flex-shrink-0"><div class="is-full-height" id="postTopic"><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">93、使用vue3+element-plus写后台管理系统：（三）</p><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">点击返回顶部</p></div></h3><aside class="is-flex-shrink-0"><h3 class="is-inline-block"><a href="/">首页</a></h3><h3 class="is-inline-block"><a href="/about">关于</a></h3><h3 class="is-inline-block"><a href="/archives">归档</a></h3></aside></div></header><header class="is-flex header-widget is-flex-shrink-0 is-align-items-center is-justify-content-center is-hidden-tablet"><h3 class="is-inline-block"><a href="/">首页</a></h3><h3 class="is-inline-block"><a href="/about">关于</a></h3><h3 class="is-inline-block"><a href="/archives">归档</a></h3></header><main><main class="container is-max-widescreen content section post-page pt-4 px-4"><div class="columns is-flex-desktop is-justify-content-center is-flex-direction-row-reverse"><div class="column is-3 is-hidden-mobile"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#一、配置环境变量及封装-axios-模块"><span class="toc-text">一、配置环境变量及封装 axios 模块</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二、封装登录请求动作"><span class="toc-text">二、封装登录请求动作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#三、本地缓存的处理"><span class="toc-text">三、本地缓存的处理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#一-、localStorage"><span class="toc-text">(一)、localStorage</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#二-、vuex-处理-token"><span class="toc-text">(二)、vuex 处理 token</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#四、响应数据的统一处理"><span class="toc-text">四、响应数据的统一处理</span></a></li></ol></div><div class="column is-9"><header class="my-4"><a href="/tags/vue3"><i class="tag post-item-tag">vue3</i></a></header><h1 class="mt-0 mb-1 is-family-serif" id="postTitle">93、使用vue3+element-plus写后台管理系统：（三）</h1><time class="has-text-grey" datetime="2022-11-10T12:00:00.000Z">2022-11-10</time><article class="mt-2 post-content"><p>包括配置环境变量封装 axios、接口请求模块、vuex 登录请求动作、保存服务端的 token、登录鉴权</p>
+<a id="more"></a>
 
 <h2 id="一、配置环境变量及封装-axios-模块"><a href="#一、配置环境变量及封装-axios-模块" class="headerlink" title="一、配置环境变量及封装 axios 模块"></a>一、配置环境变量及封装 axios 模块</h2><p>在跟目录下创建.env.development .env.production 2 个文件</p>
-<pre><code class="js">// .env.development
-ENV = &quot;development&quot;;
-VUE_APP_BASE_API = &quot;/api&quot;;
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-comment">// .env.development</span><br>ENV = <span class="hljs-string">"development"</span>;<br>VUE_APP_BASE_API = <span class="hljs-string">"/api"</span>;<br><br><span class="hljs-comment">// .env.production</span><br>ENV = <span class="hljs-string">"production"</span>;<br>VUE_APP_BASE_APIU = <span class="hljs-string">"/prod-api"</span>;<br></code></pre></td></tr></table></figure>
 
-// .env.production
-ENV = &quot;production&quot;;
-VUE_APP_BASE_APIU = &quot;/prod-api&quot;;
-</code></pre>
 <p>axios 的封装 utils 下创建 request.js</p>
-<pre><code class="js">import axios from &quot;axios&quot;;
-const service = axios.create(&#123;
-  baseURL: process.env.VUE_APP_BASE_API,
-  timeout: 5000,
-&#125;);
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">import</span> axios <span class="hljs-keyword">from</span> <span class="hljs-string">"axios"</span>;<br><span class="hljs-keyword">const</span> service = axios.create(&#123;<br>  baseURL: process.env.VUE_APP_BASE_API,<br>  timeout: <span class="hljs-number">5000</span>,<br>&#125;);<br><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> service;<br></code></pre></td></tr></table></figure>
 
-export default service;
-</code></pre>
 <h2 id="二、封装登录请求动作"><a href="#二、封装登录请求动作" class="headerlink" title="二、封装登录请求动作"></a>二、封装登录请求动作</h2><p>根目录下的 src 下创建 api 文件夹，<code>touch sys.js</code></p>
-<pre><code class="js">import request from &quot;@/utils/request&quot;;
-export const login = (data) =&gt; &#123;
-  return request(&#123;
-    url: &quot;/sys/login&quot;,
-    method: &quot;PSOT&quot;,
-    data,
-  &#125;);
-&#125;;
-</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">import</span> request <span class="hljs-keyword">from</span> <span class="hljs-string">"@/utils/request"</span>;<br><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> login = <span class="hljs-function">(<span class="hljs-params">data</span>) =&gt;</span> &#123;<br>  <span class="hljs-keyword">return</span> request(&#123;<br>    url: <span class="hljs-string">"/sys/login"</span>,<br>    method: <span class="hljs-string">"PSOT"</span>,<br>    data,<br>  &#125;);<br>&#125;;<br></code></pre></td></tr></table></figure>
+
 <p>将登录请求的动作封装到 vuex 的 action 中，在<code>store</code>文件夹下创建 modules 文件夹，在 modules 下<code>touch user.js</code>模块（此模块用于处理所有和用户相关的内容）</p>
 <blockquote>
 <p>安装 md5 插件，加密登录密码 yarn add md5</p>
 </blockquote>
-<pre><code class="js">// user.js
-import &#123; login &#125; from &#39;@/api/sys&#39;
-import md5 from &#39;md5&#39;
-export default &#123;
-  namespaced: true,
-  state: () =&gt; (&#123;&#125;),
-  mutations: &#123;&#125;,
-  actions: &#123;
-    login(context, userInfo) &#123;
-      const &#123; username, password &#125; = userInfo
-      return new Promise((resolve, reject) =&gt; &#123;
-        login(&#123;
-          username,
-          password: md5(password)
-        &#125;)
-          .then(data =&gt; &#123;
-            resolve()
-          &#125;)
-          .catch(err =&gt; &#123;
-            reject(err)
-          &#125;)
-      &#125;)
-    &#125;
-  &#125;
-&#125;
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-comment">// user.js</span><br><span class="hljs-keyword">import</span> &#123; login &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">'@/api/sys'</span><br><span class="hljs-keyword">import</span> md5 <span class="hljs-keyword">from</span> <span class="hljs-string">'md5'</span><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> &#123;<br>  namespaced: <span class="hljs-literal">true</span>,<br>  state: <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> (&#123;&#125;),<br>  mutations: &#123;&#125;,<br>  actions: &#123;<br>    login(context, userInfo) &#123;<br>      <span class="hljs-keyword">const</span> &#123; username, password &#125; = userInfo<br>      <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Promise</span>(<span class="hljs-function">(<span class="hljs-params">resolve, reject</span>) =&gt;</span> &#123;<br>        login(&#123;<br>          username,<br>          password: md5(password)<br>        &#125;)<br>          .then(<span class="hljs-function"><span class="hljs-params">data</span> =&gt;</span> &#123;<br>            resolve()<br>          &#125;)<br>          .catch(<span class="hljs-function"><span class="hljs-params">err</span> =&gt;</span> &#123;<br>            reject(err)<br>          &#125;)<br>      &#125;)<br>    &#125;<br>  &#125;<br>&#125;<br><br><span class="hljs-comment">// 在store/index.js中注册</span><br><span class="hljs-keyword">import</span> &#123; createStore &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">'vuex'</span><br><span class="hljs-keyword">import</span> user <span class="hljs-keyword">from</span> <span class="hljs-string">'./modules/user.js'</span><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> createStore(&#123;<br>  modules:&#123;<br>    user<br>  &#125;<br>&#125;)<br></code></pre></td></tr></table></figure>
 
-// 在store/index.js中注册
-import &#123; createStore &#125; from &#39;vuex&#39;
-import user from &#39;./modules/user.js&#39;
-export default createStore(&#123;
-  modules:&#123;
-    user
-  &#125;
-&#125;)
-</code></pre>
 <p>在登录页，触发定义的 action，此时存在一个问题就是，我们当前请求的接口不存在，需要使用 devServer 代理</p>
-<pre><code class="js">// vue.config.js
-module.exports = &#123;
-  devService: &#123;
-    proxy: &#123;
-      &quot;/api&quot;: &#123;
-        // 要代理的服务器地址， 不需要写api
-        target: &quot;https://api.xxx.com&quot;,
-        changeOrigin: true, // 是否跨域
-      &#125;,
-    &#125;,
-  &#125;,
-&#125;;
-</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-comment">// vue.config.js</span><br><span class="hljs-built_in">module</span>.exports = &#123;<br>  devService: &#123;<br>    proxy: &#123;<br>      <span class="hljs-string">"/api"</span>: &#123;<br>        <span class="hljs-comment">// 要代理的服务器地址， 不需要写api</span><br>        target: <span class="hljs-string">"https://api.xxx.com"</span>,<br>        changeOrigin: <span class="hljs-literal">true</span>, <span class="hljs-comment">// 是否跨域</span><br>      &#125;,<br>    &#125;,<br>  &#125;,<br>&#125;;<br></code></pre></td></tr></table></figure>
+
 <p>重启项目，再次点击登录，就可以跳转到首页了。</p>
 <h2 id="三、本地缓存的处理"><a href="#三、本地缓存的处理" class="headerlink" title="三、本地缓存的处理"></a>三、本地缓存的处理</h2><p>登录成功之后，前端会拿到后端返回的 token,我们需要将 token 进行缓存</p>
 <p>缓存的 2 种方式：</p>
@@ -104,101 +35,14 @@ module.exports = &#123;
 </blockquote>
 <p>localStorage 可以方便实现自动登录功能<br>保存在 vuex 中是为了后面在其他位置进行使用</p>
 <h3 id="一-、localStorage"><a href="#一-、localStorage" class="headerlink" title="(一)、localStorage"></a>(一)、localStorage</h3><p>在 utils 文件夹下，新建 storage..js<br>1、封装 4 个方法</p>
-<pre><code class="js">/**
- * 存储数据
- */
-export const setItem = (key, value) =&gt; &#123;
-  // 将数组、对象类型的数据转化为 JSON 字符串进行存储
-  if (typeof value === &quot;object&quot;) &#123;
-    value = JSON.stringify(value);
-  &#125;
-  window.localStorage.setItem(key, value);
-&#125;;
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * 存储数据</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> setItem = <span class="hljs-function">(<span class="hljs-params">key, value</span>) =&gt;</span> &#123;<br>  <span class="hljs-comment">// 将数组、对象类型的数据转化为 JSON 字符串进行存储</span><br>  <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> value === <span class="hljs-string">"object"</span>) &#123;<br>    value = <span class="hljs-built_in">JSON</span>.stringify(value);<br>  &#125;<br>  <span class="hljs-built_in">window</span>.localStorage.setItem(key, value);<br>&#125;;<br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * 获取数据</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> getItem = <span class="hljs-function">(<span class="hljs-params">key</span>) =&gt;</span> &#123;<br>  <span class="hljs-keyword">const</span> data = <span class="hljs-built_in">window</span>.localStorage.getItem(key);<br>  <span class="hljs-keyword">try</span> &#123;<br>    <span class="hljs-keyword">return</span> <span class="hljs-built_in">JSON</span>.parse(data);<br>  &#125; <span class="hljs-keyword">catch</span> (err) &#123;<br>    <span class="hljs-keyword">return</span> data;<br>  &#125;<br>&#125;;<br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * 删除数据</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> removeItem = <span class="hljs-function">(<span class="hljs-params">key</span>) =&gt;</span> &#123;<br>  <span class="hljs-built_in">window</span>.localStorage.removeItem(key);<br>&#125;;<br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * 删除所有数据</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> removeAllItem = <span class="hljs-function">(<span class="hljs-params">key</span>) =&gt;</span> &#123;<br>  <span class="hljs-built_in">window</span>.localStorage.clear();<br>&#125;;<br></code></pre></td></tr></table></figure>
 
-/**
- * 获取数据
- */
-export const getItem = (key) =&gt; &#123;
-  const data = window.localStorage.getItem(key);
-  try &#123;
-    return JSON.parse(data);
-  &#125; catch (err) &#123;
-    return data;
-  &#125;
-&#125;;
-
-/**
- * 删除数据
- */
-export const removeItem = (key) =&gt; &#123;
-  window.localStorage.removeItem(key);
-&#125;;
-
-/**
- * 删除所有数据
- */
-export const removeAllItem = (key) =&gt; &#123;
-  window.localStorage.clear();
-&#125;;
-</code></pre>
 <h3 id="二-、vuex-处理-token"><a href="#二-、vuex-处理-token" class="headerlink" title="(二)、vuex 处理 token"></a>(二)、vuex 处理 token</h3><p>在 store 的 user.js 中</p>
-<pre><code class="js">import &#123; login &#125; from &#39;@/api/sys&#39;
-import md5 from &#39;md5&#39;
-import &#123; setItem, getItem &#125; from &#39;@/utils/storage&#39;
-// 常量目录 export const TOKEN = &#39;token&#39;
-import &#123; TOKEN &#125; from &#39;@/constant&#39;
-export default &#123;
-  namespaced: true,
-  state: () =&gt; (&#123;
-    token: getItem(TOKEN) || &#39;&#39;
-  &#125;),
-  mutations: &#123;
-    setToken(state, token) &#123;
-      state.token = token
-      setItem(TOKEN, token)
-    &#125;
-  &#125;,
-  actions: &#123;
-    login(context, userInfo) &#123;
-      ...
-          .then(data =&gt; &#123;
-            this.commit(&#39;user/setToken&#39;, data.data.data.token)
-            resolve()
-          &#125;)
-          ...
-      &#125;)
-    &#125;
-  &#125;
-&#125;
-</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">import</span> &#123; login &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">'@/api/sys'</span><br><span class="hljs-keyword">import</span> md5 <span class="hljs-keyword">from</span> <span class="hljs-string">'md5'</span><br><span class="hljs-keyword">import</span> &#123; setItem, getItem &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">'@/utils/storage'</span><br><span class="hljs-comment">// 常量目录 export const TOKEN = 'token'</span><br><span class="hljs-keyword">import</span> &#123; TOKEN &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">'@/constant'</span><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> &#123;<br>  namespaced: <span class="hljs-literal">true</span>,<br>  state: <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> (&#123;<br>    token: getItem(TOKEN) || <span class="hljs-string">''</span><br>  &#125;),<br>  mutations: &#123;<br>    setToken(state, token) &#123;<br>      state.token = token<br>      setItem(TOKEN, token)<br>    &#125;<br>  &#125;,<br>  actions: &#123;<br>    login(context, userInfo) &#123;<br>      ...<br>          .then(<span class="hljs-function"><span class="hljs-params">data</span> =&gt;</span> &#123;<br>            <span class="hljs-keyword">this</span>.commit(<span class="hljs-string">'user/setToken'</span>, data.data.data.token)<br>            resolve()<br>          &#125;)<br>          ...<br>      &#125;)<br>    &#125;<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
 <h2 id="四、响应数据的统一处理"><a href="#四、响应数据的统一处理" class="headerlink" title="四、响应数据的统一处理"></a>四、响应数据的统一处理</h2><p>上面这一行代码<code>this.commit(&#39;user/setToken&#39;, data.data.data.token)</code>，需要使用 data.data.data.token，书写方式不美观。</p>
-<pre><code class="js">import axios from &#39;axios&#39;
-import &#123; ElMessage &#125; from &#39;element-plus&#39;
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">import</span> axios <span class="hljs-keyword">from</span> <span class="hljs-string">'axios'</span><br><span class="hljs-keyword">import</span> &#123; ElMessage &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">'element-plus'</span><br><br>...<br><span class="hljs-comment">// 响应拦截器</span><br>service.interceptors.response.use(<br>  response =&gt; &#123;<br>    <span class="hljs-keyword">const</span> &#123; success, message, data &#125; = response.data<br>    <span class="hljs-comment">//   要根据success的成功与否决定下面的操作</span><br>    <span class="hljs-keyword">if</span> (success) &#123;<br>      <span class="hljs-keyword">return</span> data<br>    &#125; <span class="hljs-keyword">else</span> &#123;<br>      <span class="hljs-comment">// 业务错误</span><br>      ElMessage.error(message) <span class="hljs-comment">// 提示错误消息</span><br>      <span class="hljs-keyword">return</span> <span class="hljs-built_in">Promise</span>.reject(<span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(message))<br>    &#125;<br>  &#125;,<br>  error =&gt; &#123;<br>    <span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> 将来处理 token 超时问题</span><br>    ElMessage.error(error.message) <span class="hljs-comment">// 提示错误信息</span><br>    <span class="hljs-keyword">return</span> <span class="hljs-built_in">Promise</span>.reject(error)<br>  &#125;<br>)<br><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> service<br></code></pre></td></tr></table></figure>
 
-...
-// 响应拦截器
-service.interceptors.response.use(
-  response =&gt; &#123;
-    const &#123; success, message, data &#125; = response.data
-    //   要根据success的成功与否决定下面的操作
-    if (success) &#123;
-      return data
-    &#125; else &#123;
-      // 业务错误
-      ElMessage.error(message) // 提示错误消息
-      return Promise.reject(new Error(message))
-    &#125;
-  &#125;,
-  error =&gt; &#123;
-    // TODO: 将来处理 token 超时问题
-    ElMessage.error(error.message) // 提示错误信息
-    return Promise.reject(error)
-  &#125;
-)
-
-export default service
-</code></pre>
 <p>上面的代码简写为：</p>
-<pre><code class="js">this.commit(&quot;user/setToken&quot;, data.token);
-</code></pre>
-</article><section class="jump-container is-flex is-justify-content-space-between my-6"><!-- em is empty placeholder--><a class="button is-default" href="/2022/11/19/94-vue3-ele-plus-admin/" title="94、使用vue3+element-plus写后台管理系统：（四）"><i class="iconfont icon-prev mr-2 has-text-grey"></i><span class="has-text-weight-semibold">上一页: 94、使用vue3+element-plus写后台管理系统：（四）</span></a><a class="button is-default" href="/2022/11/07/92-vue3-ele-plus-admin/" title="92、使用vue3+element-plus写后台管理系统：（二）"><span class="has-text-weight-semibold">下一页: 92、使用vue3+element-plus写后台管理系统：（二）</span><i class="iconfont icon-next ml-2 has-text-grey"></i></a></section></div></div></main></main><footer class="is-flex is-flex-direction-column is-align-items-center is-flex-shrink-0 is-family-serif"><section class="sns-container"><!-- Github--><a title="github" target="_blank" rel="noopener nofollow" href="//github.com/Jude"><i class="iconfont icon-github"></i></a><!-- Ins--><!-- RSS--><!-- 知乎--><a title="zhihu" target="_blank" rel="noopener nofollow" href="//zhihu.com/https://www.zhihu.com/hot"><i class="iconfont icon-zhihu"></i></a><!-- 领英--><!-- 脸书--></section><p><span>Copyright ©</span><span> Jude 2023</span></p><div class="is-flex is-justify-content-center is-flex-wrap-wrap"><p>Powered by Hexo &verbar;&nbsp;</p><p class="is-flex is-justify-content-center"><a title="Hexo theme author" target="_blank" rel="noopener" href="//github.com/haojen">Theme by Haojen&nbsp;</a></p><div style="margin-top: 2px"><a class="github-button" title="github-button" target="_blank" rel="noopener" href="https://github.com/haojen/hexo-theme-Claudia" data-color-scheme="no-preference: light; light: light; dark: dark;" data-show-count="true"></a></div></div><div><span>记住昨日的美好，过好今日的生活，憧憬明天的到来</span></div></footer><script async defer src="https://buttons.github.io/buttons.js"></script><script src="/js/post.js"></script></body></html>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">this</span>.commit(<span class="hljs-string">"user/setToken"</span>, data.token);<br></code></pre></td></tr></table></figure>
+</article><section class="jump-container is-flex is-justify-content-space-between my-6"><!-- em is empty placeholder--><a class="button is-default" href="/2022/11/19/94-vue3-ele-plus-admin/" title="94、使用vue3+element-plus写后台管理系统：（四）"><i class="iconfont icon-prev mr-2 has-text-grey"></i><span class="has-text-weight-semibold">上一页: 94、使用vue3+element-plus写后台管理系统：（四）</span></a><a class="button is-default" href="/2022/11/07/92-vue3-ele-plus-admin/" title="92、使用vue3+element-plus写后台管理系统：（二）"><span class="has-text-weight-semibold">下一页: 92、使用vue3+element-plus写后台管理系统：（二）</span><i class="iconfont icon-next ml-2 has-text-grey"></i></a></section></div></div></main></main><footer class="is-flex is-flex-direction-column is-align-items-center is-flex-shrink-0 is-family-serif"><section class="sns-container"><!-- Github--><a title="github" target="_blank" rel="noopener nofollow" href="//github.com/Jude"><i class="iconfont icon-github"></i></a><!-- Ins--><!-- RSS--><!-- 知乎--><a title="zhihu" target="_blank" rel="noopener nofollow" href="//zhihu.com/https://www.zhihu.com/hot"><i class="iconfont icon-zhihu"></i></a><!-- 领英--><!-- 脸书--></section><p><span>Copyright ©</span><span> Jude 2024</span></p><div class="is-flex is-justify-content-center is-flex-wrap-wrap"><p>Powered by Hexo &verbar;&nbsp;</p><p class="is-flex is-justify-content-center"><a title="Hexo theme author" href="//github.com/haojen" target="_blank" rel="noopener">Theme by Haojen&nbsp;</a></p><div style="margin-top: 2px"><a class="github-button" title="github-button" href="https://github.com/haojen/hexo-theme-Claudia" target="_blank" rel="noopener" data-color-scheme="no-preference: light; light: light; dark: dark;" data-show-count="true"></a></div></div><div><span>记住昨日的美好，过好今日的生活，憧憬明天的到来</span></div></footer><script async defer src="https://buttons.github.io/buttons.js"></script><script src="/js/post.js"></script></body></html>
