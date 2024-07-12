@@ -4,6 +4,25 @@
   
     
     <entry>
+      <title>133、typora破解</title>
+      <link href="/2023/04/14/133-typora/"/>
+      <url>/2023/04/14/133-typora/</url>
+      
+        <content type="html"><![CDATA[<p>如何解决打开 typora 显示未激活弹窗？</p><a id="more"></a><h2 id="解决方式"><a href="#解决方式" class="headerlink" title="解决方式"></a>解决方式</h2><p>打开访达 – 应用程序 – typora – Contents – Resources – TypeMark – page-dist – static – js – LicenseIndex.180dd4c7.e167f021.chunk.js</p><p>打开“LicenseIndex.180dd4c7.e167f021.chunk.js”文件，conmand + f 搜索“hasActived” ,输入 hasActivated&#x3D;”true”&#x3D;&#x3D;e.hasActivated 将它改为 hasActivated&#x3D;”true”&#x3D;&#x3D;”true”</p><p>重新打开 typora，就不会显示未激活的弹窗了。</p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> typora </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>132、内置工具类型</title>
       <link href="/2023/04/12/132-ts/"/>
       <url>/2023/04/12/132-ts/</url>
